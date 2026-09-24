@@ -1,0 +1,44 @@
+# File: cloud-pricing.yml
+# Purpose: Single dated source of truth for cloud API pricing used in every cost comparison.
+# Project: sparkbench | Date: 2026-07-12
+#
+# Overview: C-03 of the Release 1.3 critical review found the repo's cloud prices materially
+# wrong and the units mixed (per-word / per-token / per-task). This file pins the vendors'
+# OFFICIAL published prices (per the review's 2026-07-12 primary-source spot check), in USD
+# per 1M tokens, split input/output. All cost figures in the report set must be generated from
+# this file - never hand-typed. Currency is converted ONCE using the stated fx rate + date.
+# ANY price change is a dated update here, not a silent edit elsewhere.
+
+meta:
+  source_check_date: 2026-07-12
+  provenance: "vendor official model/pricing pages, spot-checked in the R1.3 critical review (C-03, external spot-check sources)"
+  currency_base: USD
+  fx_usd_to_eur: 0.87617360    # confirmed Alastair 2026-07-12: mid-market 1 USD = 0.87617360 EUR at 15:29 UTC
+  fx_date: 2026-07-12
+  fx_source: "mid-market rate, 15:29 UTC 2026-07-12 (Alastair)"
+  unit: per_1M_tokens
+  note: "provider routing behind OpenRouter was not pinned per-request; prices are the model vendors' list prices"
+
+models:
+  gpt-5.4-mini:
+    tier: cheap
+    provider: OpenAI
+    input_usd_per_1m: 0.75
+    output_usd_per_1m: 4.50
+  gpt-5.6-sol:
+    tier: frontier
+    provider: OpenAI
+    input_usd_per_1m: 5.00
+    output_usd_per_1m: 30.00
+  mistral-large-2512:
+    tier: eu
+    provider: Mistral
+    label: "Mistral Large 3"
+    region: EU
+    input_usd_per_1m: 0.50
+    output_usd_per_1m: 1.50
+
+# Task-cost formula (C-03 acceptance test): every cloud total must resolve to
+#   task_cost = input_tokens * input_rate + output_tokens * output_rate
+# then convert USD -> EUR once with fx_usd_to_eur. No table compares words on one side
+# with tokens on the other.

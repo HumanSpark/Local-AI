@@ -1,0 +1,16 @@
+=== coding eval: e105-q8-0 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q8_0.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 24576, 'needed': 24909, 'ctx': 32768, 'headroom': 7859}
+  [1/8] glob_match             pass             11269 tok, 1487.77s  
+  [2/8] round_decimal          pass             4516 tok, 591.97s  
+  [3/8] kmerge                 pass             6118 tok, 802.73s  
+  [4/8] wrap                   pass             5913 tok, 775.88s  
+  [5/8] sliding_median         wrong_answer     16349 tok, 2170.69s  AssertionError
+  [6/8] apply_patch            pass             8352 tok, 1100.13s  
+  [7/8] interval_map           pass             13082 tok, 1731.0s  
+  [8/8] parse_csv              pass             7204 tok, 946.76s  
+
+e105-q8-0: 7/8 passed  by_tier={'expert': {'pass': 7, 'total': 8}}
+outcomes: {'pass': 7, 'wrong_answer': 1}
+written: results/raw/e105/e105-q8-0.json

@@ -1,0 +1,16 @@
+=== coding eval: e104-gsqrco-iq3s (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-GSQ-RCO-IQ3_S-mtp.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 24576, 'needed': 24909, 'ctx': 32768, 'headroom': 7859}
+  [1/8] glob_match             wrong_answer     10721 tok, 700.41s  AssertionError
+  [2/8] round_decimal          pass             5160 tok, 333.77s  
+  [3/8] kmerge                 error            2538 tok, 163.64s  TypeError: _Entry() takes no arguments
+  [4/8] wrap                   pass             11095 tok, 725.08s  
+  [5/8] sliding_median         wrong_answer     9750 tok, 634.43s  AssertionError
+  [6/8] apply_patch            pass             11182 tok, 735.44s  
+  [7/8] interval_map           wrong_answer     19648 tok, 1314.77s  AssertionError
+  [8/8] parse_csv              pass             5213 tok, 338.75s  
+
+e104-gsqrco-iq3s: 4/8 passed  by_tier={'expert': {'pass': 4, 'total': 8}}
+outcomes: {'error': 1, 'pass': 4, 'wrong_answer': 3}
+written: results/raw/e104/e104-gsqrco-iq3s.json

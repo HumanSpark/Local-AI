@@ -1,0 +1,20 @@
+2026-09-06T11:10:57+01:00 waiting for pid 2472196 and llama-server to exit
+2026-09-06T11:36:42+01:00 GPU clear, starting /home/agent-spark/sparkbench/tools/e113_aider_repaired_tasks.sh
+server pid 2476417, waiting for health
+full-offload gate OK: 132 layers, 0 on CPU
+served model id: /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf
+T1-bugfix-root-collection: valid - verify fails first (rc=1)
+T2-tdd-serving-discovery: valid - verify fails first (rc=2)
+T3-multifile-optional-dep: valid - verify fails first (rc=1)
+
+all 3 preconditions valid.
+[1/3] T1-bugfix-root-collection (small bug fix (single file)) - starting
+[1/3] T1-bugfix-root-collection -> pass in 74.2s (first-turn TTFB 11.4689s, 1 requests, files ['pytest.ini'])
+[2/3] T2-tdd-serving-discovery (test-driven change (test written first, held read-only)) - starting
+[2/3] T2-tdd-serving-discovery -> pass in 517.5s (first-turn TTFB 19.4481s, 3 requests, files ['tools/sparkrouter_discovery.py'])
+[3/3] T3-multifile-optional-dep (bounded multi-file change (2 files)) - starting
+[3/3] T3-multifile-optional-dep -> fail in 424.8s (first-turn TTFB 18.2876s, 2 requests, files ['tests/test_auth_sidecar.py', 'tests/test_kokoro_gateway.py'])
+
+2/3 passed. wrote /home/agent-spark/sparkbench/results/raw/e113/e113-aider-repaired.json
+2026-09-06T11:53:47+01:00 E113 rc=1
+2026-09-06T11:53:47+01:00 /home/agent-spark/sparkbench/tools/e113_aider_repaired_tasks.sh finished rc=1

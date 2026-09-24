@@ -1,0 +1,62 @@
+[11:43:32] PAUSE gateway for MoA batch
+[11:43:38] === PROPOSER mistral-24b ===
+[11:43:43]   server healthy after 3s
+[11:44:24]   mistral-24b/draft-client-letter-delay 42s
+[11:45:10]   mistral-24b/summarise-agreement-plain 46s
+[11:45:48]   mistral-24b/extract-engagement-terms 37s
+[11:46:37]   mistral-24b/attendance-note 49s
+[11:47:44]   mistral-24b/review-flag-clauses 67s
+[11:48:09]   mistral-24b/client-email-chase 24s
+[11:49:03]   mistral-24b/explain-terms-plain 54s
+[11:49:28]   mistral-24b/status-update 25s
+[11:50:13]   mistral-24b/engagement-letter-draft 45s
+[11:50:28]   mistral-24b/decline-conflict 14s
+[11:50:30] === PROPOSER qwen3-30b ===
+[11:50:36]   server healthy after 4s
+[11:50:43]   qwen3-30b/draft-client-letter-delay 7s
+[11:50:54]   qwen3-30b/summarise-agreement-plain 11s
+[11:51:02]   qwen3-30b/extract-engagement-terms 9s
+[11:51:19]   qwen3-30b/attendance-note 17s
+[11:51:33]   qwen3-30b/review-flag-clauses 14s
+[11:51:40]   qwen3-30b/client-email-chase 7s
+[11:51:55]   qwen3-30b/explain-terms-plain 15s
+[11:52:03]   qwen3-30b/status-update 8s
+[11:52:18]   qwen3-30b/engagement-letter-draft 15s
+[11:52:21]   qwen3-30b/decline-conflict 3s
+[11:52:23] === PROPOSER glm-4.7-flash ===
+[11:52:29]   server healthy after 4s
+[11:53:03]   glm-4.7-flash/draft-client-letter-delay 34s
+[11:53:35]   glm-4.7-flash/summarise-agreement-plain 32s
+[11:54:04]   glm-4.7-flash/extract-engagement-terms 29s
+[11:54:41]   glm-4.7-flash/attendance-note 37s
+[11:55:31]   glm-4.7-flash/review-flag-clauses 50s
+[11:56:15]   glm-4.7-flash/client-email-chase 44s
+[11:56:49]   glm-4.7-flash/explain-terms-plain 34s
+[11:57:07]   glm-4.7-flash/status-update 18s
+[11:57:34]   glm-4.7-flash/engagement-letter-draft 27s
+[11:57:47]   glm-4.7-flash/decline-conflict 13s
+[11:57:50] === AGGREGATOR mistral-24b-agg ===
+[11:57:55]   server healthy after 3s
+[11:58:46]   agg/draft-client-letter-delay 51s
+[11:59:44]   agg/summarise-agreement-plain 59s
+[12:00:30]   agg/extract-engagement-terms 46s
+[12:01:32]   agg/attendance-note 62s
+[12:02:46]   agg/review-flag-clauses 73s
+[12:03:14]   agg/client-email-chase 29s
+[12:04:39]   agg/explain-terms-plain 85s
+[12:05:23]   agg/status-update 44s
+[12:06:20]   agg/engagement-letter-draft 57s
+[12:06:38]   agg/decline-conflict 18s
+[12:06:41]   judging (frontier)...
+
+=== MIXTURE-OF-AGENTS (local stable, frontier-judged) ===
+  arm                    use  faith  compl  tone  overall
+  moa_aggregated        2.70   3.50   3.80  4.40     3.55
+  prop_mistral-24b      3.00   3.90   3.70  4.40     3.65
+  prop_qwen3-30b        2.70   3.40   4.00  4.40     3.38
+  prop_glm-4.7-flash    2.70   3.50   3.50  4.20     3.42
+  --> MoA usability 2.70 vs best single proposer 3.00 (-0.30)
+  reference: local plateau ~3.0-3.4 | frontier gpt-5.6-sol ~4.37
+[12:08:49] MOA BATCH DONE (rc=0)
+[12:08:49] RESTORE gateway
+active

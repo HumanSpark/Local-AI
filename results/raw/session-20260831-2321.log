@@ -1,0 +1,22 @@
+[2026-08-31T23:21:58+01:00] === session queue: tools/queue-e94-ctx.txt ===
+[2026-08-31T23:21:58+01:00]   queued: E94-h3-fast-alone
+[2026-08-31T23:21:58+01:00]   queued: E94-ctx98304-fill
+[2026-08-31T23:21:58+01:00]   queued: E94-ctx131072-fill
+[2026-08-31T23:21:58+01:00]   queued: E94-ctx262144-fill
+[2026-08-31T23:21:58+01:00] === opening the session window (ONE window for the whole queue) ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+FAIL: llama-server still running after stop: 1808113 
+hint: check 'systemctl --user status llama-gateway.service' as spark-infer; something outside the unit may have started it
+[2026-08-31T23:22:28+01:00] note: 'down' exit code ignored; verifying state instead
+[2026-08-31T23:22:29+01:00] FATAL: llama-server still running after 'down' - refusing to take the box
+[2026-08-31T23:22:29+01:00] === closing the session window (exit rc=1) ===
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T23:22:29+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1808113 1809193 
+[2026-08-31T23:22:29+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T23:22:29+01:00] session finished, rc=1

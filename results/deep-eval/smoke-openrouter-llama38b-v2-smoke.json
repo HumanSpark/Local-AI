@@ -1,0 +1,480 @@
+{
+  "evalId": "eval-CnX-2026-07-11T07:46:18",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-07-11T07:46:18.054Z",
+    "prompts": [
+      {
+        "id": "7827e1b81a7532e41ab48809b2ad8f920ea172e263867835d1074b769c521ca9",
+        "raw": "{{prelude}}{{task}}",
+        "label": "{{prelude}}{{task}}",
+        "provider": "openai:chat",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 1,
+          "testErrorCount": 0,
+          "assertPassCount": 1,
+          "assertFailCount": 1,
+          "totalLatencyMs": 1088,
+          "tokenUsage": {
+            "prompt": 300,
+            "completion": 7,
+            "cached": 0,
+            "total": 307,
+            "numRequests": 2,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "error": "Expected output to contain \"£18,750\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Expected output to contain \"£18,750\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to contain \"£18,750\"",
+              "assertion": {
+                "type": "icontains",
+                "value": "£18,750"
+              }
+            }
+          ]
+        },
+        "id": "4c75a69a-7414-4246-816b-9a046ba39e23",
+        "latencyMs": 311,
+        "namedScores": {},
+        "prompt": {
+          "raw": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\nCONSULTING SERVICES AGREEMENT\n\nThis Agreement is entered into as of 15 July 2026 between HumanSpark Consulting Ltd. (\"Service Provider\") and Westbrook Associates Ltd. (\"Client\").\n\nPARTIES AND SERVICES:\nThe Service Provider agrees to provide strategic technology consulting services for the period from 1 August 2026 to 31 October 2026. The engagement is based at the Client's offices in London and covers digital transformation assessment, cloud infrastructure evaluation, and team capability development.\n\nFEES AND PAYMENT:\nThe total fee for this engagement is £18,750, inclusive of VAT at 20%. Payment is due within 30 days of invoice. The Service Provider will invoice on a monthly basis for work completed.\n\nTERMINATION:\nEither party may terminate this agreement with 14 days' written notice. Upon termination, the Client shall pay for all work completed and reasonable expenses incurred to the date of notice.\n\nCONFIDENTIALITY:\nBoth parties agree to maintain confidentiality regarding proprietary business information shared during the engagement. This obligation continues for 12 months after the agreement concludes.\n\nSIGNATURES:\nBy signing below, both parties acknowledge and agree to the terms outlined in this Agreement.",
+          "label": "{{prelude}}{{task}}",
+          "config": {}
+        },
+        "promptId": "7827e1b81a7532e41ab48809b2ad8f920ea172e263867835d1074b769c521ca9",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "£22,500",
+          "tokenUsage": {
+            "total": 272,
+            "prompt": 268,
+            "completion": 4,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 311,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 07:46:18 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783755978-RNU4yjSKMX8lYyAM6f04"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "smoke-extract-contract-fee",
+          "vars": {
+            "prelude": "",
+            "task": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\n{{doc}}",
+            "doc": "file://data/smoke-contract-excerpt.txt"
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "£18,750"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 268,
+          "completion": 4,
+          "cached": 0,
+          "total": 272,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "prelude": "",
+          "task": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\n{{doc}}",
+          "doc": "file://data/smoke-contract-excerpt.txt"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 07:46:18 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783755978-RNU4yjSKMX8lYyAM6f04"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "true"
+              }
+            }
+          ]
+        },
+        "id": "56dfa3a9-a817-425d-a1e9-4b444f6912da",
+        "latencyMs": 777,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'",
+          "label": "{{prelude}}{{task}}",
+          "config": {}
+        },
+        "promptId": "7827e1b81a7532e41ab48809b2ad8f920ea172e263867835d1074b769c521ca9",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "True.",
+          "tokenUsage": {
+            "total": 35,
+            "prompt": 32,
+            "completion": 3,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 777,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 07:46:18 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783755978-0t9DQQZvuK7vl71i8IGH"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "smoke-format-one-word",
+          "vars": {
+            "prelude": "",
+            "task": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'"
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "true"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 32,
+          "completion": 3,
+          "cached": 0,
+          "total": 35,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "prelude": "",
+          "task": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 07:46:18 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783755978-0t9DQQZvuK7vl71i8IGH"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 1,
+      "failures": 1,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 300,
+        "completion": 7,
+        "cached": 0,
+        "total": 307,
+        "numRequests": 2,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 818,
+      "evaluationDurationMs": 818
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "deep-eval smoke test - extraction + format constraint",
+    "prompts": [
+      "{{prelude}}{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "openai:chat",
+        "config": {
+          "apiBaseUrl": "https://openrouter.ai/api/v1",
+          "apiKeyEnvar": "[REDACTED]",
+          "model": "meta-llama/llama-3.1-8b-instruct",
+          "temperature": 0,
+          "max_tokens": 100
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "smoke-extract-contract-fee",
+        "vars": {
+          "task": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\n{{doc}}",
+          "doc": "file://data/smoke-contract-excerpt.txt"
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "£18,750"
+          }
+        ]
+      },
+      {
+        "description": "smoke-format-one-word",
+        "vars": {
+          "task": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'"
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "true"
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "defaultTest": {
+      "vars": {
+        "prelude": ""
+      },
+      "assert": [],
+      "options": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "/home/agent-spark/sparkbench/results/deep-eval/smoke-openrouter-llama38b-v2-smoke.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.17",
+    "nodeVersion": "v24.18.0",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2026-07-11T07:46:18.910Z",
+    "evaluationCreatedAt": "2026-07-11T07:46:18.054Z"
+  },
+  "vars": [
+    "prelude",
+    "task",
+    "doc"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": false
+  }
+}

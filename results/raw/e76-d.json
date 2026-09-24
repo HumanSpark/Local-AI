@@ -1,0 +1,524 @@
+{
+  "meta": {
+    "label": "d",
+    "arm": "D - draft reviewed by a second model, every item",
+    "bank": "abstain",
+    "bank_version": "e76-v1-2026-08-20",
+    "drafts_from": "results/raw/e76-a.json",
+    "draft_label": "a",
+    "pack": "s",
+    "reasoning_effort": "medium",
+    "max_tokens": 2048,
+    "review_prompt": "You are checking a colleague's draft answer against the source documents below. The draft may be correct, or it may contain a confident mistake.\n\nDo ONE of these:\n  - reply 'ACCEPT' followed by nothing else, if the draft is correct;\n  - reply 'CORRECT:' followed by the corrected answer, if it is wrong;\n  - reply 'ABSTAIN' followed by nothing else, if the documents do not settle the question.\n\nCheck every figure, name and date against the documents. Do not accept a claim you cannot find.\n\n{pack}\n\n=====\n\nQUESTION: {q}\n\nDRAFT ANSWER: {draft}",
+    "started_at": "2026-08-20T14:54:44+0100",
+    "kernel": "7.0.0-29-generic",
+    "rule9_contended": true,
+    "timings_void": "sparkrelay gateway resident on the GPU; wall times recorded for completeness and never quoted"
+  },
+  "records": [
+    {
+      "id": "K01",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two different amdgpu-related failures are described in this material. For EACH, state the VRAM figure observed, and say whether a hard power cycle was required.",
+      "draft": "**Failure 1: amdgpu SDMA-suballocator deadlock (memory-edge-deadlock.md)**  \n- **VRAM figure observed:** Exactly **2.00 GiB** (2,147,483,648 B)  \n- **Hard power cycle required:** Yes  \n\n**Failure 2: gpt-oss-120b decode hang (2026-08-19-gptoss120b-decode-hang.md)**  \n- **VRAM figure observed:** **1.90 GiB**, never parked  \n- **Hard power cycle required:** No (process was killed normally with `pkill`)",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "**Failure 1: amdgpu SDMA-suballocator deadlock (memory-edge-deadlock.md)**  \n- **VRAM figure observed:** Exactly **2.00 GiB** (2,147,483,648 B)  \n- **Hard power cycle required:** Yes  \n\n**Failure 2: gpt-oss-120b decode hang (2026-08-19-gptoss120b-decode-hang.md)**  \n- **VRAM figure observed:** **1.90 GiB**, never parked  \n- **Hard power cycle required:** No (process was killed normally with `pkill`)",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 79.69,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 364,
+        "prompt_tokens": 15224,
+        "total_tokens": 15588,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "answer_chars": 402
+    },
+    {
+      "id": "K02",
+      "category": "implication",
+      "pack": "s",
+      "question": "A colleague proposes a monitor that raises an alarm whenever the llama-server process is in D (uninterruptible) state. Using this material, explain why that is a defect rather than a useful alarm.",
+      "draft": "The proposed monitor is a defect because it would raise a false alarm during normal model loading. According to the documents, a `D` state process with `wchan` of `folio_wait_bit_common` is **normal** while reading a large model from disk \u2014 this is an ordinary page-cache wait, not a deadlock. The monitor would incorrectly flag this as a problem, training operators to ignore alarms. This is explicitly identified as a defect in the `decode-hang` document, where a check script initially reported `SUSPICIOUS` throughout normal loading due to this exact issue. The correct behavior is to allow `D` state during disk reads, and only alarm on the specific deadlock fingerprint (e.g., `wchan` = `drm_suballoc_new`, VRAM parked at 2.00 GiB, etc.).",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The proposed monitor is a defect because it would raise a false alarm during normal model loading. According to the documents, a `D` state process with `wchan` of `folio_wait_bit_common` is **normal** while reading a large model from disk \u2014 this is an ordinary page-cache wait, not a deadlock. The monitor would incorrectly flag this as a problem, training operators to ignore alarms. This is explicitly identified as a defect in the `decode-hang` document, where a check script initially reported `SUSPICIOUS` throughout normal loading due to this exact issue. The correct behavior is to allow `D` state during disk reads, and only alarm on the specific deadlock fingerprint (e.g., `wchan` = `drm_suballoc_new`, VRAM parked at 2.00 GiB, etc.).",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 26.62,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 588,
+        "prompt_tokens": 15259,
+        "total_tokens": 15847,
+        "prompt_tokens_details": {
+          "cached_tokens": 14708
+        }
+      },
+      "answer_chars": 744
+    },
+    {
+      "id": "K03",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs how many GPU consumers may run at once, and what does that rule say a contended measurement is?",
+      "draft": "Rule 9 governs how many GPU consumers may run at once.\n\nIt says: **One GPU consumer at a time** \u2014 a contended number is **VOID, not noisy**.\n\nSpecifically, the rule states that any second consumer (another `llama-bench`, another `llama-server`, or the sparkrelay gateway) makes **both measurements void**. A contended result is **deleted, not archived**, unless kept as evidence for a finding \u2014 and then it must be labelled as such.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "Rule 9 governs how many GPU consumers may run at once.\n\nIt says: **One GPU consumer at a time** \u2014 a contended number is **VOID, not noisy**.\n\nSpecifically, the rule states that any second consumer (another `llama-bench`, another `llama-server`, or the sparkrelay gateway) makes **both measurements void**. A contended result is **deleted, not archived**, unless kept as evidence for a finding \u2014 and then it must be labelled as such.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 19.95,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 479,
+        "prompt_tokens": 15180,
+        "total_tokens": 15659,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 432
+    },
+    {
+      "id": "K04",
+      "category": "implication",
+      "pack": "s",
+      "question": "The harness rules forbid re-creating the deadlock's known triggers during routine benching. Name the ONE trigger this material describes as confirmed, and say what the operative mechanism is said to be.",
+      "draft": "The ONE confirmed trigger described in the material is: **running heavy disk I/O concurrently with a near-edge GPU model load**.\n\nThe operative mechanism is said to be: **memory pressure from concurrent I/O evicting model pages faster than they load, causing the total footprint to exceed 128 GB RAM, which starves the amdgpu driver's small-buffer suballocator during VM page-table setup**.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The ONE confirmed trigger described in the material is: **running heavy disk I/O concurrently with a near-edge GPU model load**.\n\nThe operative mechanism is said to be: **memory pressure from concurrent I/O evicting model pages faster than they load, causing the total footprint to exceed 128 GB RAM, which starves the amdgpu driver's small-buffer suballocator during VM page-table setup**.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 25.33,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 612,
+        "prompt_tokens": 15171,
+        "total_tokens": 15783,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 390
+    },
+    {
+      "id": "K15",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two models were given the same deterministic date calculator. Give the before-and-after score for EACH of them.",
+      "draft": "Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 29.29,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 664,
+        "prompt_tokens": 15199,
+        "total_tokens": 15863,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 395
+    },
+    {
+      "id": "K16",
+      "category": "implication",
+      "pack": "s",
+      "question": "A third experimental condition was run to isolate WHY offering a tool changed a model's behaviour. Describe that condition and state what it showed.",
+      "draft": "The third condition tested whether offering a tool changed a model's behaviour *without actually attaching the tool*. The model was told the tools existed, but they were not attached to the session.\n\nThis condition showed **no change in behaviour** compared to the baseline (no tool offered). The model did not make any tool calls, and its answers remained unchanged. This proved that the change in behaviour observed when the tool was *attached* was due to the tool being present in the prompt context, not merely the knowledge that tools were available.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The third condition tested whether offering a tool changed a model's behaviour *without actually attaching the tool*. The model was told the tools existed, but they were not attached to the session.\n\nThis condition showed **no change in behaviour** compared to the baseline (no tool offered). The model did not make any tool calls, and its answers remained unchanged. This proved that the change in behaviour observed when the tool was *attached* was due to the tool being present in the prompt context, not merely the knowledge that tools were available.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 23.97,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 539,
+        "prompt_tokens": 15184,
+        "total_tokens": 15723,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 555
+    },
+    {
+      "id": "K17",
+      "category": "compare",
+      "pack": "s",
+      "question": "On twenty ordinary questions containing no dates at all, what happened to the everyday model once tools were attached? Give the score change and the number of tool calls.",
+      "draft": "On twenty ordinary questions containing no dates at all, the everyday model dropped from **14 out of 20 to 11 out of 20** once tools were attached. It made **68 tool calls** on questions about retainers and liability caps.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "On twenty ordinary questions containing no dates at all, the everyday model dropped from **14 out of 20 to 11 out of 20** once tools were attached. It made **68 tool calls** on questions about retainers and liability caps.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 8.77,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 152,
+        "prompt_tokens": 15137,
+        "total_tokens": 15289,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 222
+    },
+    {
+      "id": "K18",
+      "category": "recommend",
+      "pack": "s",
+      "question": "What practical consequence does this material draw for a service that offers tools on every request by default? State the price and the form it is paid in.",
+      "draft": "The practical consequence of offering tools on every request by default is that the service pays a price of up to **three questions in twenty** being answered incorrectly, and this cost is paid in the form of **no answer at all**, rather than a wrong one. This occurs because the mere presence of tools in the prompt changes model behavior, causing the model to make unnecessary tool calls and sometimes fail to produce any answer, even on questions unrelated to the tool's function.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The practical consequence of offering tools on every request by default is that the service pays a price of up to **three questions in twenty** being answered incorrectly, and this cost is paid in the form of **no answer at all**, rather than a wrong one. This occurs because the mere presence of tools in the prompt changes model behavior, causing the model to make unnecessary tool calls and sometimes fail to produce any answer, even on questions unrelated to the tool's function.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 57.49,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 1266,
+        "prompt_tokens": 15173,
+        "total_tokens": 16439,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 483
+    },
+    {
+      "id": "K19",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs model downloads, and what is the name of the file each download must be recorded in before first use?",
+      "draft": "Rule 4 governs model downloads.\n\nEach download must be recorded in the file `manifests/MANIFEST.md` before first use.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "Rule 4 governs model downloads.\n\nEach download must be recorded in the file `manifests/MANIFEST.md` before first use.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 9.56,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 187,
+        "prompt_tokens": 15106,
+        "total_tokens": 15293,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 117
+    },
+    {
+      "id": "K05",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Based only on this material, what is the measured per-load probability that gpt-oss-120b will hang? Give the figure.",
+      "draft": "The measured per-load probability that gpt-oss-120b will hang is **1 in 1**, based on the single observed incident on 2026-08-19, where the model hung during decode after a complete load. This is the only recorded instance of a hang for this model in the provided documents.",
+      "review_raw": "CORRECT: The documents do not give a precise per-load probability figure. The qwen38-report (2026-08-19) states: \"The very first time we loaded this model it hung and produced nothing, and we still do not know why. It has behaved on every load since - more than a dozen now.\" This means 1 hang out of more than 13 total loads (1 + \"more than a dozen\" successful loads), giving a probability of less than 1/13. The exact figure cannot be stated because \"more than a dozen\" is not a precise count. The draft's claim of \"1 in 1\" is contradicted by the explicit statement of more than a dozen subsequent successful loads.",
+      "action": "correct",
+      "answer": "The documents do not give a precise per-load probability figure. The qwen38-report (2026-08-19) states: \"The very first time we loaded this model it hung and produced nothing, and we still do not know why. It has behaved on every load since - more than a dozen now.\" This means 1 hang out of more than 13 total loads (1 + \"more than a dozen\" successful loads), giving a probability of less than 1/13. The exact figure cannot be stated because \"more than a dozen\" is not a precise count. The draft's claim of \"1 in 1\" is contradicted by the explicit statement of more than a dozen subsequent successful loads.",
+      "changed": true,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 65.22,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 1228,
+        "prompt_tokens": 15151,
+        "total_tokens": 16379,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 608
+    },
+    {
+      "id": "K20",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What does it cost, in euros per year, to run this hardware? Answer from this material only.",
+      "draft": "The provided documents do not contain any information about the cost of running the hardware in euros per year.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The provided documents do not contain any information about the cost of running the hardware in euros per year.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 25.61,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 372,
+        "prompt_tokens": 15091,
+        "total_tokens": 15463,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 111
+    },
+    {
+      "id": "U01",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What is the memory clock speed of this machine's unified RAM, in MT/s, and what peak memory bandwidth does that give? Answer from this material only.",
+      "draft": "The provided documents do not contain information about the memory clock speed of the machine's unified RAM in MT/s or the peak memory bandwidth it provides.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The provided documents do not contain information about the memory clock speed of the machine's unified RAM in MT/s or the peak memory bandwidth it provides.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 15.83,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 237,
+        "prompt_tokens": 15111,
+        "total_tokens": 15348,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 157
+    },
+    {
+      "id": "U02",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Which Ubuntu release and which kernel version is this machine running? Give both, from this material only.",
+      "draft": "The documents provided do not specify the Ubuntu release or the kernel version running on the machine.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The documents provided do not specify the Ubuntu release or the kernel version running on the machine.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 18.46,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 372,
+        "prompt_tokens": 15088,
+        "total_tokens": 15460,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 102
+    },
+    {
+      "id": "U03",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "How many engineer-hours were spent diagnosing the amdgpu deadlock across all recorded instances? Give the figure.",
+      "draft": "The documents do not provide a specific figure for the total engineer-hours spent diagnosing the amdgpu deadlock across all recorded instances.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The documents do not provide a specific figure for the total engineer-hours spent diagnosing the amdgpu deadlock across all recorded instances.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 18.06,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 350,
+        "prompt_tokens": 15098,
+        "total_tokens": 15448,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 143
+    },
+    {
+      "id": "U04",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Is this hardware still under manufacturer warranty, and would a fault that needs a hard power cycle be covered? Answer from this material only.",
+      "draft": "The provided documents do not contain any information about the hardware's manufacturer warranty status or whether a fault requiring a hard power cycle would be covered under warranty. Therefore, based on the material given, it is not possible to determine if the hardware is still under warranty or if such a fault would be covered.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The provided documents do not contain any information about the hardware's manufacturer warranty status or whether a fault requiring a hard power cycle would be covered under warranty. Therefore, based on the material given, it is not possible to determine if the hardware is still under warranty or if such a fault would be covered.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 22.4,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 460,
+        "prompt_tokens": 15137,
+        "total_tokens": 15597,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 333
+    },
+    {
+      "id": "U05",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What GPU edge temperature was recorded at the moment of the deadlock? Give the figure in degrees Celsius.",
+      "draft": "The documents do not mention any GPU edge temperature being recorded at the moment of the deadlock. There is no information provided about temperature readings, either in degrees Celsius or otherwise, during the amdgpu SDMA-suballocator deadlock incidents described in the documents.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The documents do not mention any GPU edge temperature being recorded at the moment of the deadlock. There is no information provided about temperature readings, either in degrees Celsius or otherwise, during the amdgpu SDMA-suballocator deadlock incidents described in the documents.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 17.98,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 324,
+        "prompt_tokens": 15120,
+        "total_tokens": 15444,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 283
+    },
+    {
+      "id": "U06",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "How many people work on this benchmarking programme? Give the number, from this material only.",
+      "draft": "The material mentions only two individuals by name: Alastair and the benchmarking assistant. No other people are explicitly named or referenced in the documents provided.\n\nTherefore, based on the information given, **2 people** work on this benchmarking programme.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The material mentions only two individuals by name: Alastair and the benchmarking assistant. No other people are explicitly named or referenced in the documents provided.\n\nTherefore, based on the information given, **2 people** work on this benchmarking programme.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 42.39,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 834,
+        "prompt_tokens": 15120,
+        "total_tokens": 15954,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 264
+    },
+    {
+      "id": "U07",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "How much free disk space does this machine have, and what kind of drive holds the model files? Answer from this material only.",
+      "draft": "The documents do not specify the amount of free disk space on the machine or the type of drive that holds the model files.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The documents do not specify the amount of free disk space on the machine or the type of drive that holds the model files.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 17.59,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 329,
+        "prompt_tokens": 15101,
+        "total_tokens": 15430,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 122
+    },
+    {
+      "id": "U08",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Under what licence is gpt-oss-120b distributed, and does that licence permit commercial use? Answer from this material only.",
+      "draft": "The provided documents do not contain any information about the licence under which gpt-oss-120b is distributed, nor do they state whether that licence permits commercial use.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The provided documents do not contain any information about the licence under which gpt-oss-120b is distributed, nor do they state whether that licence permits commercial use.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 19.12,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 401,
+        "prompt_tokens": 15115,
+        "total_tokens": 15516,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 175
+    },
+    {
+      "id": "U09",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What is this machine's peak power draw, in watts, while loading a large model? Give the figure.",
+      "draft": "The provided documents do not contain information about the machine's peak power draw in watts while loading a large model.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The provided documents do not contain information about the machine's peak power draw in watts while loading a large model.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 11.93,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 218,
+        "prompt_tokens": 15094,
+        "total_tokens": 15312,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 123
+    },
+    {
+      "id": "U10",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Which Python version do the harness scripts require? Give the version, from this material only.",
+      "draft": "The provided documents do not specify the required Python version for the harness scripts.",
+      "review_raw": "ACCEPT",
+      "action": "accept",
+      "answer": "The provided documents do not specify the required Python version for the harness scripts.",
+      "changed": false,
+      "outcome": "completed",
+      "error": null,
+      "wall_s": 10.34,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 201,
+        "prompt_tokens": 15083,
+        "total_tokens": 15284,
+        "prompt_tokens_details": {
+          "cached_tokens": 14743
+        }
+      },
+      "answer_chars": 90
+    }
+  ]
+}

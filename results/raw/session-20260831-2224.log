@@ -1,0 +1,14 @@
+[2026-08-31T22:24:57+01:00] === session queue: tools/queue-2026-08-31.txt ===
+[2026-08-31T22:24:57+01:00]   queued: E99-A-kwaipilot-l4-off
+[2026-08-31T22:24:57+01:00]   queued: E99-C-nemotron-l4-off
+[2026-08-31T22:24:57+01:00]   queued: E99-B-kwaipilot-expert-off
+[2026-08-31T22:24:57+01:00] === opening the session window (ONE window for the whole queue) ===
+[2026-08-31T22:24:57+01:00] --- [1] E99-A-kwaipilot-l4-off ---
+[2026-08-31T22:24:57+01:00] DRY-RUN: would run: python3 tools/run_ps_eval.py --model /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf --label e99-A-kwaipilot-l4-off --out results/raw/e99/e99-A-kwaipilot-l4-off.json --tier l4 --thinking off --ctx 32768 --max-tokens 16384 --server-extra "-fa on -ctk q8_0 -ctv q8_0"
+[2026-08-31T22:24:57+01:00] --- [2] E99-C-nemotron-l4-off ---
+[2026-08-31T22:24:57+01:00] DRY-RUN: would run: python3 tools/run_ps_eval.py --model /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf --label e99-C-nemotron-l4-off --out results/raw/e99/e99-C-nemotron-l4-off.json --tier l4 --thinking off --ctx 32768 --max-tokens 16384 --server-extra "-fa on -ctk q8_0 -ctv q8_0"
+[2026-08-31T22:24:57+01:00] --- [3] E99-B-kwaipilot-expert-off ---
+[2026-08-31T22:24:57+01:00] DRY-RUN: would run: python3 tools/run_coding_eval.py --model /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf --label e99-B-kwaipilot-expert-off --out results/raw/e99/e99-B-kwaipilot-expert-off.json --task-set expert --thinking off --ctx 32768 --max-tokens 16384
+[2026-08-31T22:24:57+01:00] === session done: 3 arms in 0s ===
+[2026-08-31T22:24:57+01:00] every arm exited 0
+[2026-08-31T22:24:57+01:00] session finished, rc=0

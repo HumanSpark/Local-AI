@@ -1,0 +1,82 @@
+{
+  "label": "e61-gptoss120b-bisect",
+  "model": "/opt/models/staging/gpt-oss-120b-mxfp4-00001-of-00003.gguf",
+  "ctx": 32768,
+  "timeout": 180.0,
+  "server_extra": "",
+  "utc": "2026-08-19T06:34:07Z",
+  "verdict": "NO rung stalled. The original failure is INTERMITTENT rather than deterministic - it is not reproduced by any condition on this ladder. Report as intermittent; do NOT report the original run as explained.",
+  "first_stall_rung": null,
+  "rungs": [
+    {
+      "rung": 1,
+      "why": "the smoke test, reproduced",
+      "prompt": null,
+      "max_tokens": 32,
+      "prompt_chars": 34,
+      "stalled": false,
+      "error": null,
+      "ttft_s": 0.88,
+      "total_s": 1.41,
+      "chunks": 31,
+      "content_chars": 0,
+      "reasoning_chars": 130
+    },
+    {
+      "rung": 2,
+      "why": "is the ANSWER BUDGET the trigger?",
+      "prompt": null,
+      "max_tokens": 4096,
+      "prompt_chars": 34,
+      "stalled": false,
+      "error": null,
+      "ttft_s": 0.16,
+      "total_s": 1.26,
+      "chunks": 54,
+      "content_chars": 5,
+      "reasoning_chars": 234
+    },
+    {
+      "rung": 3,
+      "why": "is PROMPT SIZE the trigger?",
+      "prompt": null,
+      "max_tokens": 32,
+      "prompt_chars": 4042,
+      "stalled": false,
+      "error": null,
+      "ttft_s": 2.44,
+      "total_s": 2.98,
+      "chunks": 31,
+      "content_chars": 0,
+      "reasoning_chars": 159
+    },
+    {
+      "rung": 4,
+      "why": "real pack, cheap answer",
+      "prompt": null,
+      "max_tokens": 32,
+      "prompt_chars": 13393,
+      "stalled": false,
+      "error": null,
+      "ttft_s": 8.57,
+      "total_s": 9.13,
+      "chunks": 31,
+      "content_chars": 0,
+      "reasoning_chars": 149
+    },
+    {
+      "rung": 5,
+      "why": "the failing condition, in full",
+      "prompt": null,
+      "max_tokens": 4096,
+      "prompt_chars": 13393,
+      "stalled": false,
+      "error": null,
+      "ttft_s": 0.15,
+      "total_s": 6.4,
+      "chunks": 305,
+      "content_chars": 134,
+      "reasoning_chars": 921
+    }
+  ]
+}

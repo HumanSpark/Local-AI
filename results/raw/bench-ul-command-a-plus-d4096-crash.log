@@ -1,0 +1,40 @@
+File: bench-ul-command-a-plus-d4096-crash.log
+Purpose: Preserve error output from d=4096 benchmark failure
+Project: sparkbench | Date: 2026-07-09
+#
+# Overview: llama-bench crashed at d=4096 context depth during inference.
+# Error was captured from tool output when run_step8_leg.sh attempted
+# the benchmark invocation. Exit code 134 = SIGABRT.
+
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1151) (radv) | uma: 1 | fp16: 1 | bf16: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: KHR_coopmat
+radv/amdgpu: Not enough memory for command submission.
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(+0x1c1ab)[0x754a0e34e1ab]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(ggml_print_backtrace+0x21c)[0x754a0e34e62c]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(+0x2fb3f)[0x754a0e361b3f]
+/lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb0da)[0x754a0e4bb0da]
+/lib/x86_64-linux-gnu/libstdc++.so.6(_ZSt10unexpectedv+0x0)[0x754a0e4a5a55]
+/lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb391)[0x754a0e4bb391]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-vulkan.so.0(+0x69611)[0x754a0ae69611]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-vulkan.so.0(+0xcaea8)[0x754a0aecaea8]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-vulkan.so.0(+0xcb2d4)[0x754a0aecb2d4]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(ggml_backend_sched_graph_compute_async+0x3ea)[0x754a0e36bb2a]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(_ZN13llama_context13graph_computeEP11ggml_cgraphb+0xa1)[0x754a0d6ea721]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(_ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status+0x11a)[0x754a0d6ee86a]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x390)[0x754a0d6f5310]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(llama_decode+0xf)[0x754a0d6f6f9f]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama-bench-impl.so(+0x1b991)[0x754a0e709991]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama-bench-impl.so(_Z11llama_benchiPPc+0xe17)[0x754a0e718887]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x754a0e02a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x754a0e02a28b]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/llama-bench(+0x12a5)[0x5f7ce190e2a5]
+terminate called after throwing an instance of 'vk::DeviceLostError'
+  what():  vk::Queue::submit: ErrorDeviceLost
+tools/run_step8_leg.sh: line 50: 59279 Aborted                 (core dumped) "$BENCH_BIN" "$@" > "$out"
+
+Key observations:
+- Primary error: "radv/amdgpu: Not enough memory for command submission."
+- Exception type: vk::DeviceLostError (Vulkan memory exhaustion)
+- Exit code: 134 (SIGABRT, signal 6 - abnormal termination)
+- Stack trace confirms Vulkan backend at ggml-vulkan.so
+- Context: d=4096 depth benchmark invocation, after d=0 completed

@@ -1,0 +1,100 @@
+E98 exited; starting session queue at 2026-08-31T22:32:21+01:00
+[2026-08-31T22:32:21+01:00] === session queue: tools/queue-2026-08-31.txt ===
+[2026-08-31T22:32:21+01:00]   queued: E99-A-kwaipilot-l4-off
+[2026-08-31T22:32:21+01:00]   queued: E99-C-nemotron-l4-off
+[2026-08-31T22:32:21+01:00]   queued: E99-B-kwaipilot-expert-off
+[2026-08-31T22:32:21+01:00] === opening the session window (ONE window for the whole queue) ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T22:32:21+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T22:32:21+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T22:32:21+01:00] --- [1] E99-A-kwaipilot-l4-off ---
+=== PS eval L4: e99-A-kwaipilot-l4-off (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 82, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2648, 'max_tokens': 16384, 'needed': 19032, 'ctx': 32768, 'headroom': 13736}
+  [1/15] P1  statutory_period wrong             cite=ok 3.55s  31 October 2026
+  [2/15] P2  statutory_period wrong             cite=ok 1.19s  31 March 2026
+  [3/15] P3  statutory_period off_by_calendar   cite=ok 1.33s  13 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 1.29s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    wrong             cite=ok 15.82s  488.87
+  [6/15] N1  notice_period    off_by_calendar   cite=ok 1.31s  12 November 2026
+  [7/15] N2  notice_period    wrong             cite=ok 1.45s  12 November 2026
+  [8/15] F1  fee_basis        wrong             cite=ok 1.16s  100,800
+  [9/15] S1  survival         correct           cite=ok 1.21s  (d)
+  [10/15] D1  defect_find      correct           cite=ok 1.42s  (d)
+  [11/15] D2  defect_find      correct           cite=ok 1.13s  4
+  [12/15] D3  defect_find      correct           cite=ok 1.21s  650000
+  [13/15] X1  defect_absent    correct           cite=ok 1.13s  NO
+  [14/15] X2  defect_absent    correct           cite=ok 0.98s  NO
+  [15/15] U1  underspecified   correct           cite=ok 0.88s  NOT_IN_PACK
+
+e99-A-kwaipilot-l4-off: 8/15 correct, citations 15/15
+OVER-CLAIM 0/1 | STALE 0/0 | PREMATURE 0
+by_category: {'statutory_period': {'correct': 0, 'total': 3}, 'breach_clock': {'correct': 1, 'total': 1}, 'interest_calc': {'correct': 0, 'total': 1}, 'notice_period': {'correct': 0, 'total': 2}, 'fee_basis': {'correct': 0, 'total': 1}, 'survival': {'correct': 1, 'total': 1}, 'defect_find': {'correct': 3, 'total': 3}, 'defect_absent': {'correct': 2, 'total': 2}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 8, 'off_by_calendar': 2, 'wrong': 5}
+written: results/raw/e99/e99-A-kwaipilot-l4-off.json
+[2026-08-31T22:33:01+01:00] [1] E99-A-kwaipilot-l4-off rc=0 wall=40s
+[2026-08-31T22:33:01+01:00] --- [2] E99-C-nemotron-l4-off ---
+=== PS eval L4: e99-C-nemotron-l4-off (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2726, 'max_tokens': 16384, 'needed': 19110, 'ctx': 32768, 'headroom': 13658}
+  [1/15] P1  statutory_period wrong             cite=ok 4.14s  31 January 2026
+  [2/15] P2  statutory_period wrong             cite=ok 1.47s  31 August 2026
+  [3/15] P3  statutory_period wrong             cite=ok 1.53s  27 August 2026
+  [4/15] B1  breach_clock     wrong             cite=no 1.56s  3 April 2026 at 16:30
+  [5/15] I1  interest_calc    wrong             cite=ok 2.04s  118.40
+  [6/15] N1  notice_period    wrong             cite=ok 1.68s  31 August 2026
+  [7/15] N2  notice_period    wrong             cite=ok 1.66s  31 August 2026
+  [8/15] F1  fee_basis        wrong             cite=ok 1.52s  108000
+  [9/15] S1  survival         correct           cite=no 1.51s  d
+  [10/15] D1  defect_find      correct           cite=ok 1.59s  (d)
+  [11/15] D2  defect_find      correct           cite=ok 1.53s  4
+  [12/15] D3  defect_find      wrong             cite=ok 1.61s  150000
+  [13/15] X1  defect_absent    wrong             cite=ok 1.53s  YES
+  [14/15] X2  defect_absent    wrong             cite=ok 1.56s  YES
+  [15/15] U1  underspecified   correct           cite=ok 1.31s  NOT_IN_PACK
+
+e99-C-nemotron-l4-off: 4/15 correct, citations 13/15
+OVER-CLAIM 0/1 | STALE 0/0 | PREMATURE 0
+by_category: {'statutory_period': {'correct': 0, 'total': 3}, 'breach_clock': {'correct': 0, 'total': 1}, 'interest_calc': {'correct': 0, 'total': 1}, 'notice_period': {'correct': 0, 'total': 2}, 'fee_basis': {'correct': 0, 'total': 1}, 'survival': {'correct': 1, 'total': 1}, 'defect_find': {'correct': 2, 'total': 3}, 'defect_absent': {'correct': 0, 'total': 2}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 4, 'wrong': 11}
+written: results/raw/e99/e99-C-nemotron-l4-off.json
+[2026-08-31T22:33:31+01:00] [2] E99-C-nemotron-l4-off rc=0 wall=30s
+[2026-08-31T22:33:31+01:00] --- [3] E99-B-kwaipilot-expert-off ---
+=== coding eval: e99-B-kwaipilot-expert-off (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 82, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 16384, 'needed': 16717, 'ctx': 32768, 'headroom': 16051}
+  [1/8] glob_match             wrong_answer     957 tok, 14.66s  AssertionError
+  [2/8] round_decimal          wrong_answer     268 tok, 4.44s  AssertionError
+  [3/8] kmerge                 pass             187 tok, 3.19s  
+  [4/8] wrap                   wrong_answer     1045 tok, 16.02s  AssertionError
+  [5/8] sliding_median         pass             180 tok, 3.12s  
+  [6/8] apply_patch            error            2004 tok, 30.58s  ValueError: Path does not exist: /a
+  [7/8] interval_map           wrong_answer     599 tok, 9.41s  AssertionError
+  [8/8] parse_csv              wrong_answer     878 tok, 13.58s  AssertionError
+
+e99-B-kwaipilot-expert-off: 2/8 passed  by_tier={'expert': {'pass': 2, 'total': 8}}
+outcomes: {'error': 1, 'pass': 2, 'wrong_answer': 5}
+written: results/raw/e99/e99-B-kwaipilot-expert-off.json
+[2026-08-31T22:35:11+01:00] [3] E99-B-kwaipilot-expert-off rc=0 wall=100s
+[2026-08-31T22:35:11+01:00] === session done: 3 arms in 170s ===
+[2026-08-31T22:35:11+01:00] every arm exited 0
+[2026-08-31T22:35:11+01:00] === closing the session window (exit rc=0) ===
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T22:35:11+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1801912 
+[2026-08-31T22:35:11+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T22:35:11+01:00] session finished, rc=0

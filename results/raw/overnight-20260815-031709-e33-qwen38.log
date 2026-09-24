@@ -1,0 +1,22 @@
+=== coding eval: e33-qwen38 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+  [1/15] rle_encode             pass             328 tok, 28.56s  
+  [2/15] is_balanced            pass             217 tok, 20.18s  
+  [3/15] merge_intervals        pass             569 tok, 48.76s  
+  [4/15] parse_semver           truncated        8192 tok, 672.39s  hit max_tokens=8192
+  [5/15] top_k_frequent         pass             481 tok, 41.77s  
+  [6/15] spiral_order           pass             2446 tok, 200.8s  
+  [7/15] group_anagrams         pass             456 tok, 39.66s  
+  [8/15] normalize_path         truncated        8192 tok, 674.12s  hit max_tokens=8192
+  [9/15] roman_roundtrip        truncated        8192 tok, 673.97s  hit max_tokens=8192
+  [10/15] longest_valid_parens   pass             709 tok, 60.1s  
+  [11/15] lru_cache              error            1674 tok, 138.06s  NameError: name 'Node' is not defined. Did you mean: 'self.Node'?
+  [12/15] word_break             truncated        8192 tok, 673.8s  hit max_tokens=8192
+  [13/15] topo_schedule          pass             1432 tok, 118.59s  
+  [14/15] min_window             pass             2547 tok, 209.09s  
+  [15/15] eval_expr              truncated        8192 tok, 674.58s  hit max_tokens=8192
+
+e33-qwen38: 9/15 passed  by_tier={'easy': {'pass': 2, 'total': 2}, 'medium': {'pass': 4, 'total': 7}, 'hard': {'pass': 3, 'total': 6}}
+outcomes: {'error': 1, 'pass': 9, 'truncated': 5}
+written: /home/agent-spark/sparkbench/results/raw/e33-20260815-031709-qwen38.json

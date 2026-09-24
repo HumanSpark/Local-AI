@@ -1,0 +1,14 @@
+=== coding eval: c1-greedy-medium (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 124, 'max_tokens': 8192, 'needed': 8316, 'ctx': 16384, 'headroom': 8068}
+  [1/6] normalize_path         pass             1251 tok, 102.47s  
+  [2/6] roman_roundtrip        pass             1970 tok, 161.77s  
+  [3/6] longest_valid_parens   pass             861 tok, 71.63s  
+  [4/6] word_break             pass             2938 tok, 240.84s  
+  [5/6] min_window             pass             1603 tok, 131.9s  
+  [6/6] eval_expr              pass             2571 tok, 211.31s  
+
+c1-greedy-medium: 6/6 passed  by_tier={'medium': {'pass': 2, 'total': 2}, 'hard': {'pass': 4, 'total': 4}}
+outcomes: {'pass': 6}
+written: results/raw/e101/c1-greedy-medium.json

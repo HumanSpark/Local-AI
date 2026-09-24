@@ -1,0 +1,43 @@
+[
+  {
+    "name": "T1-bugfix-root-collection",
+    "kind": "small bug fix (single file)",
+    "base": "HEAD",
+    "seed": "mkdir -p llama.cpp/scripts/snapdragon/qdc/tests && printf 'import pytest\\nfrom appium import webdriver\\n\\n\\n@pytest.fixture\\ndef driver():\\n    return webdriver\\n' > llama.cpp/scripts/snapdragon/qdc/tests/conftest.py && printf 'def test_vendored():\\n    assert True\\n' > llama.cpp/scripts/snapdragon/qdc/tests/test_vendored.py",
+    "files": [
+      "pytest.ini"
+    ],
+    "instruction": "Running `python3 -m pytest` from the repository root fails immediately with `ModuleNotFoundError: No module named 'appium'`, because pytest descends into the vendored third-party `llama.cpp/` directory and imports `llama.cpp/scripts/snapdragon/qdc/tests/conftest.py`. That vendored tree is not ours and must never be collected. Create `pytest.ini` at the repository root so that a bare `python3 -m pytest` collects only this project's own `tests/` directory and never descends into `llama.cpp/`. Take care to use the section header that `pytest.ini` itself requires. Do not change any other file.",
+    "verify": "out=$(python3 -m pytest --collect-only -q 2>&1); printf '%s\\n' \"$out\" | tail -6; if printf '%s' \"$out\" | grep -q 'appium'; then exit 1; fi; exit 0",
+    "seed_why": "Precondition still VALID as of 2026-09-06: pytest.ini is absent at HEAD and the seeded vendored conftest makes a bare pytest collection abort on appium. E109's T1 outcome was a genuine `fail`, not invalid-precondition."
+  },
+  {
+    "name": "T2-tdd-serving-discovery",
+    "kind": "test-driven change (test written first, held read-only)",
+    "base": "HEAD",
+    "keep_worktree": true,
+    "seed": "mkdir -p tests tools && cp /home/agent-spark/sparkbench/tests/test_sparkrouter_discovery.py tests/test_sparkrouter_discovery.py && rm -f tools/sparkrouter_discovery.py",
+    "read_files": [
+      "tests/test_sparkrouter_discovery.py"
+    ],
+    "files": [
+      "tools/sparkrouter_discovery.py"
+    ],
+    "instruction": "The test file tests/test_sparkrouter_discovery.py already exists and is the specification. It is read-only: do not edit it. Create tools/sparkrouter_discovery.py so every test in it passes. Read the test carefully - it defines two public functions. `parse_serving_flags(cmdline: str) -> dict[str, str | bool]` splits a llama-server command line into a flag map: a flag followed by a non-flag token maps to that token as a string, a flag followed by another flag (or by nothing) maps to True, the leading binary path is not a flag, and an empty or whitespace-only cmdline raises ValueError whose message contains the word 'hint'. `describe(models: dict, props: dict, cmdline: str) -> dict` returns a dict with keys: model_id, n_ctx, n_ctx_train, build_info, total_slots, aider_model (the model_id prefixed with 'openai/'), flags (the parsed flag map), slots_explicit (True only when -np is present), and consistent (True when props['model_path'] equals the -m value from the cmdline). If models['data'] is empty it raises LookupError whose message contains the word 'hint'. Add `from __future__ import annotations`, full type hints on both public functions, and a file header comment. Run nothing; just write the file.",
+    "verify": "python3 -m pytest tests/test_sparkrouter_discovery.py -q 2>&1 | tail -12",
+    "seed_why": "tools/sparkrouter_discovery.py is TRACKED at HEAD - the task was completed and committed, so without the rm the verify passes before Aider runs and the task scores invalid-precondition (E109, 2026-09-05)."
+  },
+  {
+    "name": "T3-multifile-optional-dep",
+    "kind": "bounded multi-file change (2 files)",
+    "base": "HEAD",
+    "files": [
+      "tests/test_auth_sidecar.py",
+      "tests/test_kokoro_gateway.py"
+    ],
+    "instruction": "Running `python3 -m pytest tests/ --collect-only` aborts with two collection errors: tests/test_auth_sidecar.py and tests/test_kokoro_gateway.py both import fastapi at module level, and fastapi is not installed on this machine. Two files failing to import must not stop the other 731 tests from being collected. Change both files so that when fastapi is unavailable the whole module is SKIPPED cleanly instead of erroring, using `pytest.importorskip` with a reason explaining that fastapi is required. The importorskip call must come before any fastapi import, and the original `from fastapi.testclient import TestClient` line must be removed in favour of obtaining TestClient after the skip check. When fastapi IS installed the tests must run exactly as they do now - do not delete, weaken or change any test logic, and do not wrap imports in try/except. Change only those two files.",
+    "verify": "bash /home/agent-spark/sparkbench/tools/e90/verify_t3.sh",
+    "seed": "git show ad35406~1:tests/test_auth_sidecar.py > tests/test_auth_sidecar.py && git show ad35406~1:tests/test_kokoro_gateway.py > tests/test_kokoro_gateway.py",
+    "seed_why": "ad35406 landed the importorskip fix, so HEAD already satisfies the verify. The seed restores the two pre-fix BLOBS by sha - immutable, unlike a grep over the current text. ad35406 is the only commit to touch either file since, so the restored files still define the same test functions verify_t3.sh's gate 2 counts at HEAD."
+  }
+]

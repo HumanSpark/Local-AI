@@ -1,0 +1,239 @@
+{
+  "label": "e65-opus-subagent-l3n0",
+  "tier": "l3",
+  "distractors": 0,
+  "provider": "claude-code-subagent",
+  "model": "opus (Claude Code session model - NOT version-pinned)",
+  "requested_model_alias": "opus",
+  "harness": "Claude Code Agent tool, subagent_type=general-purpose, one fresh context-free subagent per question, no wrapper around the prompt",
+  "prompt_identical_to": "results/raw/e62-20260819-gptoss120b-l3n0-repeat.json",
+  "pack_chars": 13221,
+  "harness_caveats": [
+    "MODEL VERSION IS NOT PINNED. The Agent tool's model enum is sonnet/opus/haiku/fable and resolves to the running Claude Code session's model. It cannot select a specific Opus release, so this arm cannot answer a question about one and must not be labelled as if it did.",
+    "NO TOKEN ACCOUNTING. The transport exposes no prompt_tokens, completion_tokens or reasoning_chars, so F90's output-volume rule cannot be applied to this arm.",
+    "WALL TIME IS NOT A LATENCY MEASUREMENT. It includes subagent scheduling and orchestration, is measured under concurrency, and has no serving config behind it. Recorded for completeness only.",
+    "REASONING CONFIG UNDECLARED AND UNCONTROLLED - the opposite of what Rule 8 / F39 require of a serving config.",
+    "Contamination guard: the answer keys live in spikes/ps-eval/questions_*.py and subagents have repo tool access. tool_uses is recorded per question; a non-zero value anywhere invalidates the run."
+  ],
+  "correct": 12,
+  "total": 12,
+  "citation_valid": 12,
+  "by_category": {
+    "date_effective": {
+      "correct": 3,
+      "total": 3
+    },
+    "revocation": {
+      "correct": 2,
+      "total": 2
+    },
+    "precedence": {
+      "correct": 2,
+      "total": 2
+    },
+    "multihop": {
+      "correct": 3,
+      "total": 3
+    },
+    "exhaustive": {
+      "correct": 1,
+      "total": 1
+    },
+    "underspecified": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 12
+  },
+  "latency_note": "orchestration wall time, not model latency",
+  "wall_s": {
+    "median": 7.85,
+    "min": 4.7,
+    "max": 33.45
+  },
+  "total_tool_uses": 0,
+  "results": [
+    {
+      "id": "D1",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 2.1; AMD-1 (which increased the retainer to EUR 46,500 with effect from 1 January 2025, meaning the original EUR 42,000 applied in September 2024)",
+      "answer": "EUR 42,000",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42460,
+      "tool_uses": 0,
+      "wall_s": 7.85
+    },
+    {
+      "id": "D2",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 4.1",
+      "answer": "EUR 500,000",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42465,
+      "tool_uses": 0,
+      "wall_s": 7.85
+    },
+    {
+      "id": "D3",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, Clause 2.1",
+      "answer": "EUR 51,000",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42464,
+      "tool_uses": 0,
+      "wall_s": 5.22
+    },
+    {
+      "id": "V1",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 5.2, as amended by AMD-3, paragraph 1 (effective 1 January 2026)",
+      "answer": "24 months",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42467,
+      "tool_uses": 0,
+      "wall_s": 9.83
+    },
+    {
+      "id": "V2",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, paragraph 3",
+      "answer": "YES",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42456,
+      "tool_uses": 0,
+      "wall_s": 5.07
+    },
+    {
+      "id": "P1",
+      "category": "precedence",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "SIDE-1 para 1 and POL-3.1 P-4.2",
+      "answer": "6 months",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42441,
+      "tool_uses": 0,
+      "wall_s": 33.45
+    },
+    {
+      "id": "P2",
+      "category": "precedence",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 6.1. Although Northwind's Policy (POL-3.1, P-2.3) requires response within 1 business day for critical queries, SIDE-1 paragraph 2 expressly excludes service levels from the Policy's override of the Agreement. Response times are service level provisions under MSA-2024 Clause 6, so the Agreement's 2 Business Days requirement governs.",
+      "answer": "2 Business Days",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42433,
+      "tool_uses": 0,
+      "wall_s": 15.81
+    },
+    {
+      "id": "M1",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 2.1; AMD-1, Clause 1 (effective 1 January 2025)",
+      "answer": "EUR 378,000",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42479,
+      "tool_uses": 0,
+      "wall_s": 6.84
+    },
+    {
+      "id": "M2",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-1 clauses 1 and 2, AMD-3 clause 2; MSA clause 2.1",
+      "answer": "EUR 445,500",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42470,
+      "tool_uses": 0,
+      "wall_s": 11.04
+    },
+    {
+      "id": "M3",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-2 Clause 4.1 (liability cap of EUR 1,250,000) and AMD-3 Clause 2 (monthly retainer of EUR 51,000 effective 1 April 2026)",
+      "answer": "24.5",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42448,
+      "tool_uses": 0,
+      "wall_s": 7.22
+    },
+    {
+      "id": "N1",
+      "category": "exhaustive",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "(d)",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42521,
+      "tool_uses": 0,
+      "wall_s": 4.7
+    },
+    {
+      "id": "Z1",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": null,
+      "prompt_tokens": null,
+      "reasoning_chars": null,
+      "subagent_tokens": 42428,
+      "tool_uses": 0,
+      "wall_s": 10.66
+    }
+  ]
+}

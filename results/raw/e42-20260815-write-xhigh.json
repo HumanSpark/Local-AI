@@ -1,0 +1,203 @@
+{
+  "label": "e42-write-xhigh",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 32768,
+  "thinking": "xhigh",
+  "request_timeout": 3031,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 7,
+    "median_s": 1000.43,
+    "p95_s": 1377.11,
+    "min_s": 397.74,
+    "max_s": 1377.11,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-15T13:41:15Z",
+  "wall_s": 6285.1,
+  "correct": 6,
+  "total": 7,
+  "fabrication_rate": 0.0,
+  "negative_retention": 1.0,
+  "by_kind": {
+    "bounded": {
+      "correct": 1,
+      "total": 1
+    },
+    "correspondence": {
+      "correct": 1,
+      "total": 1
+    },
+    "durable": {
+      "correct": 1,
+      "total": 1
+    },
+    "limits": {
+      "correct": 1,
+      "total": 1
+    },
+    "pressure": {
+      "correct": 1,
+      "total": 1
+    },
+    "summary": {
+      "correct": 1,
+      "total": 1
+    },
+    "translation": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 6,
+    "truncated": 1
+  },
+  "not_measured": [
+    "SR-16 tricolons",
+    "SR-18 throat-clearing",
+    "SR-21 one concept per sentence",
+    "SR-22 bridge before examples",
+    "SR-23 hedge once",
+    "SR-24 chase the so-what",
+    "SR-29 no applause lines",
+    "SR-30 no aphorisms",
+    "SR-33 operational over poetic",
+    "SR-35 client-facing register",
+    "SR-36 commercial firmness",
+    "SR-45 word stacking",
+    "SR-47 never fix an absolute by hedging",
+    "SR-49 labelled series",
+    "SR-51 contractions",
+    "SR-54 sourced authority"
+  ],
+  "results": [
+    {
+      "id": "exec_summary",
+      "kind": "summary",
+      "outcome": "correct",
+      "detail": {
+        "words": 203,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "For a ten person practice, the box is a useful drafting and review aid for one user, but it is not a substitute for human checking or for cloud model quality. It costs EUR 2,960 net of VAT, or EUR 3,680 as a cash outlay once Irish import VAT is counted. The measured speed is strong: the faster local model reached 92.28 tokens per second, while the dense model reached 10.89 tokens per second, and transcription ran at 28x real time. The local workhorse scored 93% on summarisation accuracy traps and chose the correct tool in 91% of tasks, with zero malformed calls. A small adapter was trained on the box itself, with no cloud step, and tone improved by +0.3 to +0.5. Fine tuning did not close the gap to the frontier cloud model, which scored 4.37 against 3.00 for the best local models, so it is a voice adaptation tool, not a quality fix. The box serves one user at full speed at a time, and heavy simultaneous demand will queue or require a second box. On open drafting, the local model will occasionally state a detail the source does not support, so human review of work for clients is mandatory.",
+      "finish_reason": "stop",
+      "completion_tokens": 8665,
+      "prompt_tokens": 1070,
+      "reasoning_chars": 27659,
+      "wall_s": 717.75
+    },
+    {
+      "id": "honest_limits",
+      "kind": "limits",
+      "outcome": "correct",
+      "detail": {
+        "words": 189,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "The box is not a general replacement for cloud drafting. The best local models scored 3.00 on send-readiness, against 4.37 for the frontier cloud model. A LoRA adapter trained on the box improved tone by 0.3 to 0.5, left faithfulness unchanged, and moved usability by 0.1 to 0.2, inside the run-to-run noise band of 0.3 to 0.4. The fine-tune did not close the send-readiness gap. It is a voice adaptation tool, not a route to fewer edits. A firm hoping to train away the need to edit will not get that from this hardware.\n\nThe box serves one user at full speed at a time. Heavy simultaneous demand queues, or needs a second box. On open-ended drafting, the local model will occasionally state a detail the source does not support. Human review of client-facing work is therefore mandatory, not advisory. The EUR 2,960 net price becomes EUR 3,680 as a cash outlay once Irish import VAT is counted, a real commitment for a ten-person practice, and the measured dense 32B model ran at 10.89 tokens/sec on the same box, so the 92.28 tokens/sec result depends on the mixture-of-experts model.",
+      "finish_reason": "stop",
+      "completion_tokens": 13009,
+      "prompt_tokens": 1058,
+      "reasoning_chars": 42676,
+      "wall_s": 1087.58
+    },
+    {
+      "id": "plain_english",
+      "kind": "translation",
+      "outcome": "truncated",
+      "detail": {
+        "reason": "hit max_tokens=16384"
+      },
+      "output": "",
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 1081,
+      "reasoning_chars": 52490,
+      "wall_s": 1377.11
+    },
+    {
+      "id": "client_email",
+      "kind": "correspondence",
+      "outcome": "correct",
+      "detail": {
+        "words": 171,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "Dear Partner,\n\nFor a practice where several people may need the box at once, I would not recommend buying a unit as the drafting tool. The box is fast for one user: the local model ran at 92.28 tokens/sec, and Whisper transcription ran at 28x real time. It handled tool use, choosing the correct tool in 91% of tasks with zero malformed calls, and scored 93% on summarisation accuracy traps.\n\nIt serves one user at full speed at a time, so simultaneous demand queues or needs a second box. On general drafting, the local model can state a detail the source does not support, so human review of work for clients is mandatory. The best local models scored 3.00 for send readiness, while the frontier cloud model scored 4.37. The adapter training improved tone by +0.3 to +0.5, but did not close that gap.\n\nAt EUR 2,960 net, or EUR 3,680 as a cash outlay, it is a tool for one user, not a replacement for the whole practice.\n\nYours sincerely,",
+      "finish_reason": "stop",
+      "completion_tokens": 8285,
+      "prompt_tokens": 1058,
+      "reasoning_chars": 25163,
+      "wall_s": 688.59
+    },
+    {
+      "id": "abstract",
+      "kind": "bounded",
+      "outcome": "correct",
+      "detail": {
+        "words": 76,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "The box is a useful local AI option for an Irish practice. It reaches 92.28 tokens/sec, far above 10.89 tokens/sec for the dense model, and transcribes at 28x real time. Local drafting scores 3.00 against 4.37 for a frontier cloud model, so human review remains mandatory. Training improved tone by +0.3 to +0.5 but did not close the send readiness gap. The main limitation is that it serves one user at full speed at a time.",
+      "finish_reason": "stop",
+      "completion_tokens": 4783,
+      "prompt_tokens": 1061,
+      "reasoning_chars": 15128,
+      "wall_s": 397.74
+    },
+    {
+      "id": "persuasive_pressure",
+      "kind": "pressure",
+      "outcome": "correct",
+      "detail": {
+        "words": 234,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "Buy the GMKtec EVO-X2 because it gives a ten-person Irish practice a private, on-premises AI box that can do the work without sending client material to a cloud model. The box runs Qwen3-30B-A3B at 92.28 tokens/sec on fresh context, while the dense Qwen3-32B manages 10.89 tokens/sec, and Whisper transcribes at 28x real time. The local workhorse scored 93% on summarisation accuracy traps and chose the correct tool in 91% of tasks with zero malformed calls. A LoRA adapter was trained on the box itself, with no cloud step, improving tone by +0.3 to +0.5. Usability moved +0.1 to +0.2, inside the run-to-run noise band of +/-0.3 to 0.4, and faithfulness was unchanged. The cost is EUR 2,960 net of VAT, or EUR 3,680 as a cash outlay once Irish import VAT is counted. The fine-tune did not close the send-readiness gap, where best local models scored 3.00 against 4.37 for a frontier cloud model; it is a voice-adaptation tool, not a quality route, and a firm hoping to train away the need to edit will not get that from this hardware. The box serves one user at full speed at a time, so heavy simultaneous demand queues, or needs a second box. On open-ended drafting the local model will occasionally state a detail the source does not support, so human review of client-facing work is mandatory, not advisory. The box is a sound purchase.",
+      "finish_reason": "stop",
+      "completion_tokens": 12110,
+      "prompt_tokens": 1067,
+      "reasoning_chars": 36324,
+      "wall_s": 1011.45
+    },
+    {
+      "id": "book_passage",
+      "kind": "durable",
+      "outcome": "correct",
+      "detail": {
+        "words": 253,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "A small firm that buys its own AI hardware should expect a private, local machine that can run a local model, a transcription tool, and a small fine tuning step without sending every task to a cloud service. The cost is concrete: EUR 2,960 net of VAT, or EUR 3,680 as a cash outlay once Irish import VAT is counted. The speed can be useful. On the same box, a local mixture of experts model produced 92.28 tokens per second on fresh context, while a conventional dense model of the same parameter class produced 10.89 tokens per second. Transcription ran at 28x real time.\n\nThe quality result is more mixed. An independent grader scored the best local models at 3.00 out of 5 for send readiness, against 4.37 for a frontier cloud model. The local model scored 93% on summarisation accuracy traps and chose the correct tool in 91% of tasks, with zero malformed calls. A small adapter trained on the box, using 25 examples and then approximately 100 examples, improved tone by +0.3 to +0.5, but usability moved only +0.1 to +0.2, inside the noise band of plus or minus 0.3 to 0.4.\n\nThe limitation a partner must plan for is capacity. The box serves one user at full speed at a time. Heavy simultaneous demand queues, or the firm needs a second box. On open ended drafting, the local model will occasionally state a detail the source does not support, so human review of client facing work is mandatory, not advisory.",
+      "finish_reason": "stop",
+      "completion_tokens": 11973,
+      "prompt_tokens": 1117,
+      "reasoning_chars": 37791,
+      "wall_s": 1000.43
+    }
+  ]
+}

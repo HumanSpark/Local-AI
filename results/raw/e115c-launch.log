@@ -1,0 +1,34 @@
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8119 --no-webui -v --reasoning-effort medium
+A1-rep1: full-offload gate OK, 132 layers
+  A1-rep1 counting    reasoning_chars=   633 completion_tokens=  509 41.9s
+  A1-rep1 scheduling  reasoning_chars=  1248 completion_tokens=  746 62.01s
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8119 --no-webui -v --reasoning-effort medium
+A1-rep2: full-offload gate OK, 132 layers
+  A1-rep2 counting    reasoning_chars=   633 completion_tokens=  509 41.93s
+  A1-rep2 scheduling  reasoning_chars=  1248 completion_tokens=  746 62.0s
+
+cross-restart identity: {
+  "counting": {
+    "identical": true,
+    "rep1": [
+      633,
+      509
+    ],
+    "rep2": [
+      633,
+      509
+    ]
+  },
+  "scheduling": {
+    "identical": true,
+    "rep1": [
+      1248,
+      746
+    ],
+    "rep2": [
+      1248,
+      746
+    ]
+  }
+}
+written: results/raw/e115/e115c-determinism.json

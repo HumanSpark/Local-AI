@@ -1,0 +1,227 @@
+{
+  "items_file": "spikes/aabr/items-b20-fixed.json",
+  "arms": [
+    {
+      "label": "armA-gptoss120b",
+      "condition": "no-tools",
+      "model": "/opt/models/staging/gpt-oss-120b-mxfp4-00001-of-00003.gguf",
+      "baseline_median_chars": 168,
+      "evasion_threshold_chars": 840,
+      "completion_counts": {
+        "pass": 1
+      },
+      "correctness_counts": {
+        "2": 1
+      },
+      "correctness_points": 2,
+      "correctness_max": 2,
+      "needs_judge": [],
+      "unscored_cells": [],
+      "points_are_a_floor": false,
+      "rows": [
+        {
+          "id": "B20",
+          "subset": "boundary",
+          "mechanism": [
+            "month_clamp",
+            "leap_year",
+            "no_roll_trap_inert",
+            "short_chain"
+          ],
+          "completion": "pass",
+          "correctness": "2",
+          "needs_judge": false,
+          "model_outcome": "28\u202fFebruary\u202f2025",
+          "model_citation": "The grant matures exactly 12\u202fmonths from the Award Date, and if that date is non\u2011existent it defaults to the last day of the month.",
+          "expected": "2025-02-28",
+          "char_count": 168,
+          "n_calls": 0,
+          "hit_round_cap": false
+        }
+      ]
+    },
+    {
+      "label": "armA-gptoss120b",
+      "condition": "tools",
+      "model": "/opt/models/staging/gpt-oss-120b-mxfp4-00001-of-00003.gguf",
+      "baseline_median_chars": 251,
+      "evasion_threshold_chars": 1255,
+      "completion_counts": {
+        "pass": 1
+      },
+      "correctness_counts": {
+        "2": 1
+      },
+      "correctness_points": 2,
+      "correctness_max": 2,
+      "needs_judge": [],
+      "unscored_cells": [],
+      "points_are_a_floor": false,
+      "rows": [
+        {
+          "id": "B20",
+          "subset": "boundary",
+          "mechanism": [
+            "month_clamp",
+            "leap_year",
+            "no_roll_trap_inert",
+            "short_chain"
+          ],
+          "completion": "pass",
+          "correctness": "2",
+          "needs_judge": false,
+          "model_outcome": "28 February 2025",
+          "model_citation": "The grant matures exactly 12 months from the Award Date, defaulting to the month\u2019s last day if the date does not exist; the Award Date was 29\u202fFebruary\u202f2024, and Section\u202f9.1 prohibits rolling for weekends or holidays.",
+          "expected": "2025-02-28",
+          "char_count": 251,
+          "n_calls": 1,
+          "hit_round_cap": false
+        }
+      ]
+    },
+    {
+      "label": "armB-qwen38-27b",
+      "condition": "no-tools",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "baseline_median_chars": 166,
+      "evasion_threshold_chars": 830,
+      "completion_counts": {
+        "pass": 1
+      },
+      "correctness_counts": {
+        "1b": 1
+      },
+      "correctness_points": 1,
+      "correctness_max": 2,
+      "needs_judge": [],
+      "unscored_cells": [],
+      "points_are_a_floor": false,
+      "rows": [
+        {
+          "id": "B20",
+          "subset": "boundary",
+          "mechanism": [
+            "month_clamp",
+            "leap_year",
+            "no_roll_trap_inert",
+            "short_chain"
+          ],
+          "completion": "pass",
+          "correctness": "1b",
+          "needs_judge": false,
+          "model_outcome": "28 February 2025",
+          "model_citation": "If a maturity date calculated in months lands on a non-existent calendar date, it defaults to the last day of that resulting month.",
+          "expected": "2025-02-28",
+          "char_count": 166,
+          "n_calls": 0,
+          "hit_round_cap": false
+        }
+      ]
+    },
+    {
+      "label": "armB-qwen38-27b",
+      "condition": "tools",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "baseline_median_chars": 243,
+      "evasion_threshold_chars": 1215,
+      "completion_counts": {
+        "pass": 1
+      },
+      "correctness_counts": {
+        "2": 1
+      },
+      "correctness_points": 2,
+      "correctness_max": 2,
+      "needs_judge": [],
+      "unscored_cells": [],
+      "points_are_a_floor": false,
+      "rows": [
+        {
+          "id": "B20",
+          "subset": "boundary",
+          "mechanism": [
+            "month_clamp",
+            "leap_year",
+            "no_roll_trap_inert",
+            "short_chain"
+          ],
+          "completion": "pass",
+          "correctness": "2",
+          "needs_judge": false,
+          "model_outcome": "28 February 2025",
+          "model_citation": "Maturity is exactly 12 months from the Award Date (29 February 2024), defaulting to the last day of the resulting month where the date does not exist, with Section 9.1 prohibiting any weekend/holiday rolling.",
+          "expected": "2025-02-28",
+          "char_count": 243,
+          "n_calls": 2,
+          "hit_round_cap": false
+        }
+      ]
+    },
+    {
+      "label": "armC-frontier-subagent",
+      "condition": "no-tools",
+      "model": "opus (Claude Code subagent - UNPINNED)",
+      "baseline_median_chars": 281,
+      "evasion_threshold_chars": 1405,
+      "completion_counts": {
+        "pass": 1
+      },
+      "correctness_counts": {
+        "2": 1
+      },
+      "correctness_points": 2,
+      "correctness_max": 2,
+      "needs_judge": [],
+      "unscored_cells": [],
+      "points_are_a_floor": false,
+      "rows": [
+        {
+          "id": "B20",
+          "subset": "boundary",
+          "mechanism": [
+            "month_clamp",
+            "leap_year",
+            "no_roll_trap_inert",
+            "short_chain"
+          ],
+          "completion": "pass",
+          "correctness": "2",
+          "needs_judge": false,
+          "model_outcome": "28 February 2025",
+          "model_citation": "The grant matures exactly 12 months from the Award Date of 29 February 2024, which would be 29 February 2025, but since that date does not exist in 2025 (not a leap year), it defaults to \"the last day of that resulting month\" per the stated rule.",
+          "expected": "2025-02-28",
+          "char_count": 281,
+          "n_calls": 0,
+          "hit_round_cap": false
+        }
+      ]
+    }
+  ],
+  "crossed": [
+    {
+      "model": "/opt/models/staging/gpt-oss-120b-mxfp4-00001-of-00003.gguf",
+      "points_no_tools": 2,
+      "points_tools": 2,
+      "tool_interference_points": 0,
+      "completion_failures_no_tools": 0,
+      "completion_failures_tools": 0
+    },
+    {
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "points_no_tools": 1,
+      "points_tools": 2,
+      "tool_interference_points": 1,
+      "completion_failures_no_tools": 0,
+      "completion_failures_tools": 0
+    }
+  ],
+  "saturation": {
+    "checked_items": [
+      "B20"
+    ],
+    "all_arms_perfect": false,
+    "verdict": "continue"
+  },
+  "needs_judge_total": [],
+  "note": "correctness is mechanical; ids in needs_judge could not be settled on citation and must go to a judge that is NOT any arm's own model"
+}

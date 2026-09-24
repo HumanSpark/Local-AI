@@ -1,0 +1,126 @@
+{
+  "label": "e39-qwen3coder-expert",
+  "model": "/opt/models/staging/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 24576,
+  "ctx": 32768,
+  "thinking": "default",
+  "request_timeout": 4396,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 6.31,
+    "p95_s": 17.29,
+    "min_s": 3.25,
+    "max_s": 17.29,
+    "under_10s": 6,
+    "under_30s": 8
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-15T22:25:56Z",
+  "wall_s": 66.0,
+  "passed": 3,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 3,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "pass": 3,
+    "wrong_answer": 5
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 1115,
+      "prompt_tokens": 249,
+      "reasoning_chars": 0,
+      "wall_s": 13.17
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 516,
+      "prompt_tokens": 223,
+      "reasoning_chars": 0,
+      "wall_s": 6.33
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 301,
+      "prompt_tokens": 128,
+      "reasoning_chars": 0,
+      "wall_s": 3.73
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError: (['xx', 'x', 'x'], 4, ['xx', 'x x'], ['xx x', 'x'])",
+      "finish_reason": "stop",
+      "completion_tokens": 397,
+      "prompt_tokens": 186,
+      "reasoning_chars": 0,
+      "wall_s": 4.9
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 257,
+      "prompt_tokens": 142,
+      "reasoning_chars": 0,
+      "wall_s": 3.25
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1417,
+      "prompt_tokens": 330,
+      "reasoning_chars": 0,
+      "wall_s": 17.29
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError: assigning the default removes the run",
+      "finish_reason": "stop",
+      "completion_tokens": 510,
+      "prompt_tokens": 229,
+      "reasoning_chars": 0,
+      "wall_s": 6.31
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 495,
+      "prompt_tokens": 219,
+      "reasoning_chars": 0,
+      "wall_s": 6.08
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1151) (radv) | uma: 1 | fp16: 1 | bf16: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: KHR_coopmat
+radv/amdgpu: Not enough memory for command submission.
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(+0x1c1ab)[0x778ffb13a1ab]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(ggml_print_backtrace+0x21c)[0x778ffb13a62c]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(+0x2fb3f)[0x778ffb14db3f]
+/lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb0da)[0x778ffaebb0da]
+/lib/x86_64-linux-gnu/libstdc++.so.6(_ZSt10unexpectedv+0x0)[0x778ffaea5a55]
+/lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb391)[0x778ffaebb391]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-vulkan.so.0(+0x69611)[0x778ff7869611]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-vulkan.so.0(+0xcaea8)[0x778ff78caea8]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-vulkan.so.0(+0xcb2d4)[0x778ff78cb2d4]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libggml-base.so.0(ggml_backend_sched_graph_compute_async+0x805)[0x778ffb157f45]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(_ZN13llama_context13graph_computeEP11ggml_cgraphb+0xa1)[0x778ffa0ea721]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(_ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status+0x11a)[0x778ffa0ee86a]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x390)[0x778ffa0f5310]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama.so.0(llama_decode+0xf)[0x778ffa0f6f9f]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama-bench-impl.so(+0x1b991)[0x778ffb258991]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/libllama-bench-impl.so(_Z11llama_benchiPPc+0xe17)[0x778ffb267887]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x778ffaa2a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x778ffaa2a28b]
+/home/agent-spark/sparkbench/llama.cpp/build/bin/llama-bench(+0x12a5)[0x598cd7cac2a5]
+terminate called after throwing an instance of 'vk::DeviceLostError'
+  what():  vk::Queue::submit: ErrorDeviceLost
+tools/run_step8_leg.sh: line 50: 80212 Aborted                 (core dumped) "$BENCH_BIN" "$@" > "$out"

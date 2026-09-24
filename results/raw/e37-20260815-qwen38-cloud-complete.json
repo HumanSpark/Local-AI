@@ -1,0 +1,313 @@
+{
+  "label": "e37-qwen38-cloud-complete",
+  "tier": "l1",
+  "model": "qwen/qwen3.8-27b",
+  "provider": "openrouter",
+  "max_tokens": 4096,
+  "ctx": 16384,
+  "server_bin": null,
+  "cloud_spend": {
+    "calls": 19,
+    "calls_with_provider_reported_cost": 19,
+    "prompt_tokens": 56507,
+    "completion_tokens": 5945,
+    "usd_total": 0.0445,
+    "usd_provider_reported": 0.0445,
+    "usd_estimated_from_table": 0.0,
+    "note": "OpenRouter reports per-call cost and is authoritative; Mistral does not, so its share is estimated from a hand-maintained 2026-08 price table. Token counts are authoritative throughout."
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-15T08:32:33Z",
+  "wall_s": 2151.0,
+  "pack_chars": 10741,
+  "correct": 19,
+  "total": 20,
+  "citation_valid": 19,
+  "over_claims": 0,
+  "over_claim_rate": 0.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "retrieval": {
+      "correct": 4,
+      "total": 5
+    },
+    "supersession": {
+      "correct": 4,
+      "total": 4
+    },
+    "computation": {
+      "correct": 4,
+      "total": 4
+    },
+    "conflict": {
+      "correct": 3,
+      "total": 3
+    },
+    "unanswerable": {
+      "correct": 4,
+      "total": 4
+    }
+  },
+  "outcome_counts": {
+    "correct": 19,
+    "transport_failed": 1
+  },
+  "results": [
+    {
+      "id": "R1",
+      "category": "retrieval",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 4.1",
+      "answer": "EUR 500,000",
+      "finish_reason": "stop",
+      "completion_tokens": 149,
+      "prompt_tokens": 2987,
+      "reasoning_chars": 394,
+      "wall_s": 20.28
+    },
+    {
+      "id": "R2",
+      "category": "retrieval",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 2.3",
+      "answer": "30 days",
+      "finish_reason": "stop",
+      "completion_tokens": 171,
+      "prompt_tokens": 2963,
+      "reasoning_chars": 504,
+      "wall_s": 22.38
+    },
+    {
+      "id": "R3",
+      "category": "retrieval",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 7.2",
+      "answer": "The Chief Financial Officer",
+      "finish_reason": "stop",
+      "completion_tokens": 345,
+      "prompt_tokens": 2964,
+      "reasoning_chars": 1444,
+      "wall_s": 25.06
+    },
+    {
+      "id": "R4",
+      "category": "retrieval",
+      "outcome": "transport_failed",
+      "citation_ok": false,
+      "detail": "openrouter call failed after 6 attempts: HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"qwen/qwen3.8-27b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"AkashML\",\"is_byok\":false,\"provide. hint: a 429/503 here is the UPSTREAM provider, not this harness - an arm that stops early leaves transport_failed rows that must never be read as wrong answers",
+      "wall_s": 938.42
+    },
+    {
+      "id": "R5",
+      "category": "retrieval",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 5.4",
+      "answer": "48 hours",
+      "finish_reason": "stop",
+      "completion_tokens": 124,
+      "prompt_tokens": 2966,
+      "reasoning_chars": 367,
+      "wall_s": 5.79
+    },
+    {
+      "id": "S1",
+      "category": "supersession",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-1, clause 1",
+      "answer": "EUR 46,500 per month, exclusive of VAT",
+      "finish_reason": "stop",
+      "completion_tokens": 218,
+      "prompt_tokens": 2971,
+      "reasoning_chars": 587,
+      "wall_s": 18.3
+    },
+    {
+      "id": "S2",
+      "category": "supersession",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-2, clause 2",
+      "answer": "120 days",
+      "finish_reason": "stop",
+      "completion_tokens": 381,
+      "prompt_tokens": 2977,
+      "reasoning_chars": 1090,
+      "wall_s": 16.66
+    },
+    {
+      "id": "S3",
+      "category": "supersession",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-2 clause 1",
+      "answer": "EUR 1,250,000",
+      "finish_reason": "stop",
+      "completion_tokens": 319,
+      "prompt_tokens": 2965,
+      "reasoning_chars": 867,
+      "wall_s": 19.76
+    },
+    {
+      "id": "S4",
+      "category": "supersession",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-2 clause 3 (replacing MSA clause 5.2)",
+      "answer": "12 months",
+      "finish_reason": "stop",
+      "completion_tokens": 212,
+      "prompt_tokens": 2971,
+      "reasoning_chars": 600,
+      "wall_s": 9.46
+    },
+    {
+      "id": "C1",
+      "category": "computation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "FIN-SUMMARY, quarterly financial summary table",
+      "answer": "EUR 32,960,000",
+      "finish_reason": "stop",
+      "completion_tokens": 324,
+      "prompt_tokens": 2978,
+      "reasoning_chars": 697,
+      "wall_s": 15.18
+    },
+    {
+      "id": "C2",
+      "category": "computation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "FIN-SUMMARY, table and N.3",
+      "answer": "19.2%",
+      "finish_reason": "stop",
+      "completion_tokens": 523,
+      "prompt_tokens": 2977,
+      "reasoning_chars": 1174,
+      "wall_s": 28.02
+    },
+    {
+      "id": "C3",
+      "category": "computation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "FIN-SUMMARY",
+      "answer": "14.1%",
+      "finish_reason": "stop",
+      "completion_tokens": 367,
+      "prompt_tokens": 2982,
+      "reasoning_chars": 829,
+      "wall_s": 20.57
+    },
+    {
+      "id": "C4",
+      "category": "computation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "FIN-SUMMARY, 2025 Q1 and 2025 Q2 rows and N.3",
+      "answer": "19.6%",
+      "finish_reason": "stop",
+      "completion_tokens": 405,
+      "prompt_tokens": 2982,
+      "reasoning_chars": 967,
+      "wall_s": 27.12
+    },
+    {
+      "id": "X1",
+      "category": "conflict",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "POL-3.1 P-4.2; AMD-2 clause 3",
+      "answer": "NO, 6 months (internal policy) and 12 months (Agreement as amended)",
+      "finish_reason": "stop",
+      "completion_tokens": 463,
+      "prompt_tokens": 2985,
+      "reasoning_chars": 1659,
+      "wall_s": 51.68
+    },
+    {
+      "id": "X2",
+      "category": "conflict",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "BM-EXTRACTS Extract 2 6.1; FIN-SUMMARY 2025 Q1 and 2025 Q2",
+      "answer": "NO, 21.4% vs 19.6%",
+      "finish_reason": "stop",
+      "completion_tokens": 1017,
+      "prompt_tokens": 2995,
+      "reasoning_chars": 2582,
+      "wall_s": 139.41
+    },
+    {
+      "id": "X3",
+      "category": "conflict",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "POL-3.1 P-2.3; MSA-2024 6.1",
+      "answer": "NO; internal policy requires 1 business day, Agreement requires 2 Business Days",
+      "finish_reason": "stop",
+      "completion_tokens": 379,
+      "prompt_tokens": 2988,
+      "reasoning_chars": 1291,
+      "wall_s": 24.2
+    },
+    {
+      "id": "U1",
+      "category": "unanswerable",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 92,
+      "prompt_tokens": 2963,
+      "reasoning_chars": 377,
+      "wall_s": 5.63
+    },
+    {
+      "id": "U2",
+      "category": "unanswerable",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 170,
+      "prompt_tokens": 2961,
+      "reasoning_chars": 667,
+      "wall_s": 8.14
+    },
+    {
+      "id": "U3",
+      "category": "unanswerable",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 101,
+      "prompt_tokens": 2970,
+      "reasoning_chars": 372,
+      "wall_s": 6.73
+    },
+    {
+      "id": "U4",
+      "category": "unanswerable",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 185,
+      "prompt_tokens": 2962,
+      "reasoning_chars": 716,
+      "wall_s": 12.4
+    }
+  ]
+}

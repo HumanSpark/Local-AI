@@ -1,0 +1,239 @@
+{
+  "label": "e118-nemotron-l3-low",
+  "tier": "l3",
+  "distractors": 9,
+  "thinking": "low",
+  "sampler": null,
+  "model": "/opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 49152,
+  "request_timeout": 3031,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server",
+  "server_extra": "-fa on -ctk q8_0 -ctv q8_0",
+  "rule9_breach_acknowledged": false,
+  "rule9_busy_gpu": [],
+  "cloud_spend": null,
+  "latency": {
+    "n": 12,
+    "median_s": 29.03,
+    "p95_s": 273.08,
+    "min_s": 12.41,
+    "max_s": 273.08,
+    "under_10s": 0,
+    "under_30s": 7
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-09-06T22:10:09Z",
+  "wall_s": 651.4,
+  "pack_chars": 93920,
+  "context_preflight": {
+    "longest_prompt_tokens": 21295,
+    "max_tokens": 16384,
+    "needed": 37679,
+    "ctx": 49152,
+    "headroom": 11473
+  },
+  "correct": 8,
+  "total": 12,
+  "citation_valid": 7,
+  "over_claims": 1,
+  "over_claim_rate": 1.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "date_effective": {
+      "correct": 3,
+      "total": 3
+    },
+    "revocation": {
+      "correct": 2,
+      "total": 2
+    },
+    "precedence": {
+      "correct": 1,
+      "total": 2
+    },
+    "multihop": {
+      "correct": 2,
+      "total": 3
+    },
+    "exhaustive": {
+      "correct": 0,
+      "total": 1
+    },
+    "underspecified": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 8,
+    "format_error": 1,
+    "over_applied": 1,
+    "over_claim": 1,
+    "stale_value": 1
+  },
+  "results": [
+    {
+      "id": "D1",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 2.1",
+      "answer": "42000",
+      "finish_reason": "stop",
+      "completion_tokens": 793,
+      "prompt_tokens": 21265,
+      "reasoning_chars": 2508,
+      "wall_s": 40.6
+    },
+    {
+      "id": "D2",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, clause 4.1",
+      "answer": "500000",
+      "finish_reason": "stop",
+      "completion_tokens": 1898,
+      "prompt_tokens": 21264,
+      "reasoning_chars": 6113,
+      "wall_s": 32.78
+    },
+    {
+      "id": "D3",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, Clause 2.1",
+      "answer": "51,000",
+      "finish_reason": "stop",
+      "completion_tokens": 1247,
+      "prompt_tokens": 21265,
+      "reasoning_chars": 3902,
+      "wall_s": 21.93
+    },
+    {
+      "id": "V1",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 5.2",
+      "answer": "24",
+      "finish_reason": "stop",
+      "completion_tokens": 1026,
+      "prompt_tokens": 21270,
+      "reasoning_chars": 3515,
+      "wall_s": 18.34
+    },
+    {
+      "id": "V2",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 4.2",
+      "answer": "YES",
+      "finish_reason": "stop",
+      "completion_tokens": 861,
+      "prompt_tokens": 21257,
+      "reasoning_chars": 2992,
+      "wall_s": 15.58
+    },
+    {
+      "id": "P1",
+      "category": "precedence",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "POL-3.1 P-4.2",
+      "answer": "6 months",
+      "finish_reason": "stop",
+      "completion_tokens": 5697,
+      "prompt_tokens": 21244,
+      "reasoning_chars": 25286,
+      "wall_s": 96.12
+    },
+    {
+      "id": "P2",
+      "category": "precedence",
+      "outcome": "over_applied",
+      "citation_ok": false,
+      "citation": "POL-3.1 P-2.3",
+      "answer": "1 business day",
+      "finish_reason": "stop",
+      "completion_tokens": 1444,
+      "prompt_tokens": 21235,
+      "reasoning_chars": 6073,
+      "wall_s": 25.27
+    },
+    {
+      "id": "M1",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 2.1",
+      "answer": "378000",
+      "finish_reason": "stop",
+      "completion_tokens": 1302,
+      "prompt_tokens": 21281,
+      "reasoning_chars": 4067,
+      "wall_s": 22.94
+    },
+    {
+      "id": "M2",
+      "category": "multihop",
+      "outcome": "stale_value",
+      "citation_ok": false,
+      "citation": "MSA-2024, Clause 2.1 (as amended by Amendment No. 1)",
+      "answer": "139500",
+      "finish_reason": "stop",
+      "completion_tokens": 3489,
+      "prompt_tokens": 21272,
+      "reasoning_chars": 11143,
+      "wall_s": 59.13
+    },
+    {
+      "id": "M3",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": false,
+      "citation": "MSA-2024 Clause 4.1",
+      "answer": "24.5",
+      "finish_reason": "stop",
+      "completion_tokens": 16190,
+      "prompt_tokens": 21250,
+      "reasoning_chars": 66293,
+      "wall_s": 273.08
+    },
+    {
+      "id": "N1",
+      "category": "exhaustive",
+      "outcome": "format_error",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "stop",
+      "completion_tokens": 661,
+      "prompt_tokens": 21311,
+      "reasoning_chars": 2699,
+      "wall_s": 12.41
+    },
+    {
+      "id": "Z1",
+      "category": "underspecified",
+      "outcome": "over_claim",
+      "citation_ok": false,
+      "citation": "MSA-2024 clause 6.3",
+      "answer": "No, VAT is not chargeable on a service credit issued under clause 6.3",
+      "finish_reason": "stop",
+      "completion_tokens": 1674,
+      "prompt_tokens": 21230,
+      "reasoning_chars": 6616,
+      "wall_s": 29.03
+    }
+  ],
+  "truncated": 0,
+  "truncation_gate": "PASS",
+  "transport_failed": 0,
+  "transport_gate": "PASS"
+}

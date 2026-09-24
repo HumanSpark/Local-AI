@@ -1,0 +1,16 @@
+=== coding eval: e106s1-incumbent-sampled-s202 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 24576, 'needed': 24909, 'ctx': 32768, 'headroom': 7859}
+  [1/8] glob_match             wrong_answer     7264 tok, 596.17s  AssertionError
+  [2/8] round_decimal          pass             5700 tok, 467.79s  
+  [3/8] kmerge                 pass             2191 tok, 179.82s  
+  [4/8] wrap                   pass             8329 tok, 685.72s  
+  [5/8] sliding_median         wrong_answer     20371 tok, 1712.7s  AssertionError
+  [6/8] apply_patch            pass             11270 tok, 933.31s  
+  [7/8] interval_map           pass             20730 tok, 1744.3s  
+  [8/8] parse_csv              error            9274 tok, 765.38s  IndexError: string index out of range
+
+e106s1-incumbent-sampled-s202: 5/8 passed  by_tier={'expert': {'pass': 5, 'total': 8}}
+outcomes: {'error': 1, 'pass': 5, 'wrong_answer': 2}
+written: results/raw/e106/e106s1-incumbent-sampled-s202.json

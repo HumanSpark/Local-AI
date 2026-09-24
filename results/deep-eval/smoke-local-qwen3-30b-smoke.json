@@ -1,0 +1,444 @@
+{
+  "evalId": "eval-ymY-2026-07-11T07:44:15",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-07-11T07:44:15.923Z",
+    "prompts": [
+      {
+        "id": "7827e1b81a7532e41ab48809b2ad8f920ea172e263867835d1074b769c521ca9",
+        "raw": "{{prelude}}{{task}}",
+        "label": "{{prelude}}{{task}}",
+        "provider": "openai:chat:local-model",
+        "metrics": {
+          "score": 2,
+          "testPassCount": 2,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 2,
+          "assertFailCount": 0,
+          "totalLatencyMs": 1105,
+          "tokenUsage": {
+            "prompt": 310,
+            "completion": 10,
+            "cached": 0,
+            "total": 320,
+            "numRequests": 2,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "£18,750"
+              }
+            }
+          ]
+        },
+        "id": "1d1986de-c7f8-419d-b035-8a6ce0ee23c9",
+        "latencyMs": 588,
+        "namedScores": {},
+        "prompt": {
+          "raw": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\nCONSULTING SERVICES AGREEMENT\n\nThis Agreement is entered into as of 15 July 2026 between HumanSpark Consulting Ltd. (\"Service Provider\") and Westbrook Associates Ltd. (\"Client\").\n\nPARTIES AND SERVICES:\nThe Service Provider agrees to provide strategic technology consulting services for the period from 1 August 2026 to 31 October 2026. The engagement is based at the Client's offices in London and covers digital transformation assessment, cloud infrastructure evaluation, and team capability development.\n\nFEES AND PAYMENT:\nThe total fee for this engagement is £18,750, inclusive of VAT at 20%. Payment is due within 30 days of invoice. The Service Provider will invoice on a monthly basis for work completed.\n\nTERMINATION:\nEither party may terminate this agreement with 14 days' written notice. Upon termination, the Client shall pay for all work completed and reasonable expenses incurred to the date of notice.\n\nCONFIDENTIALITY:\nBoth parties agree to maintain confidentiality regarding proprietary business information shared during the engagement. This obligation continues for 12 months after the agreement concludes.\n\nSIGNATURES:\nBy signing below, both parties acknowledge and agree to the terms outlined in this Agreement.",
+          "label": "{{prelude}}{{task}}",
+          "config": {}
+        },
+        "promptId": "7827e1b81a7532e41ab48809b2ad8f920ea172e263867835d1074b769c521ca9",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "£18,750",
+          "tokenUsage": {
+            "total": 289,
+            "prompt": 281,
+            "completion": 8,
+            "numRequests": 1
+          },
+          "cached": false,
+          "latencyMs": 588,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "668",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "smoke-extract-contract-fee",
+          "vars": {
+            "prelude": "",
+            "task": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\n{{doc}}",
+            "doc": "file://data/smoke-contract-excerpt.txt"
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "£18,750"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 281,
+          "completion": 8,
+          "cached": 0,
+          "total": 289,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "prelude": "",
+          "task": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\n{{doc}}",
+          "doc": "file://data/smoke-contract-excerpt.txt"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "668",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "true"
+              }
+            }
+          ]
+        },
+        "id": "a1ab12b7-6842-4fbc-9325-111f52ed422e",
+        "latencyMs": 517,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'",
+          "label": "{{prelude}}{{task}}",
+          "config": {}
+        },
+        "promptId": "7827e1b81a7532e41ab48809b2ad8f920ea172e263867835d1074b769c521ca9",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "True",
+          "tokenUsage": {
+            "total": 31,
+            "prompt": 29,
+            "completion": 2,
+            "numRequests": 1
+          },
+          "cached": false,
+          "latencyMs": 517,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "663",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "smoke-format-one-word",
+          "vars": {
+            "prelude": "",
+            "task": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'"
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "true"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 29,
+          "completion": 2,
+          "cached": 0,
+          "total": 31,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "prelude": "",
+          "task": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "663",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 2,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 310,
+        "completion": 10,
+        "cached": 0,
+        "total": 320,
+        "numRequests": 2,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 621,
+      "evaluationDurationMs": 621
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "deep-eval smoke test - extraction + format constraint",
+    "prompts": [
+      "{{prelude}}{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "openai:chat:local-model",
+        "config": {
+          "apiBaseUrl": "http://127.0.0.1:8100/v1",
+          "apiKey": "[REDACTED]",
+          "temperature": 0,
+          "max_tokens": 100
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "smoke-extract-contract-fee",
+        "vars": {
+          "task": "From the contract excerpt below, what is the total fee amount including VAT? Answer with just the amount.\n\n{{doc}}",
+          "doc": "file://data/smoke-contract-excerpt.txt"
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "£18,750"
+          }
+        ]
+      },
+      {
+        "description": "smoke-format-one-word",
+        "vars": {
+          "task": "Is the following statement true or false? Answer with exactly one word: 'London is located in England.'"
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "true"
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "defaultTest": {
+      "vars": {
+        "prelude": ""
+      },
+      "assert": [],
+      "options": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "/home/agent-spark/sparkbench/results/deep-eval/smoke-local-qwen3-30b-smoke.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.17",
+    "nodeVersion": "v24.18.0",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2026-07-11T07:44:16.574Z",
+    "evaluationCreatedAt": "2026-07-11T07:44:15.923Z"
+  },
+  "vars": [
+    "prelude",
+    "task",
+    "doc"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": false
+  }
+}

@@ -1,0 +1,14 @@
+=== coding eval: c2-medium-minp000-s103 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 124, 'max_tokens': 8192, 'needed': 8316, 'ctx': 16384, 'headroom': 8068}
+  [1/6] normalize_path         pass             1762 tok, 143.8s  
+  [2/6] roman_roundtrip        pass             2317 tok, 189.68s  
+  [3/6] longest_valid_parens   pass             868 tok, 72.0s  
+  [4/6] word_break             pass             2534 tok, 207.19s  
+  [5/6] min_window             pass             1010 tok, 83.52s  
+  [6/6] eval_expr              pass             2723 tok, 223.02s  
+
+c2-medium-minp000-s103: 6/6 passed  by_tier={'medium': {'pass': 2, 'total': 2}, 'hard': {'pass': 4, 'total': 4}}
+outcomes: {'pass': 6}
+written: results/raw/e101/c2-medium-minp000-s103.json

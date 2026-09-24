@@ -1,0 +1,375 @@
+{
+  "meta": {
+    "label": "gptoss",
+    "pack": "m",
+    "pack_chars": 140526,
+    "pack_docs": [
+      "memory-edge-deadlock",
+      "decode-hang",
+      "harness-rules",
+      "qwen38-report",
+      "routing-guide",
+      "rd-programme"
+    ],
+    "measured_prompt_tokens": 35944,
+    "ctx": 65536,
+    "max_tokens": 1024,
+    "system": "You are answering questions about the documents supplied below. Answer from those documents only. If the documents do not settle a question, say so explicitly rather than guessing. Be specific: give figures, names and dates exactly as they appear. Keep answers under 200 words.",
+    "tools_offered": false,
+    "started_at": "2026-08-19T23:17:03+0100",
+    "kernel": "7.0.0-28-generic"
+  },
+  "records": [
+    {
+      "id": "K06",
+      "category": "conflict",
+      "pack": "m",
+      "question": "This material contains advice that explicitly corrects an earlier recommendation. Identify which recommendation was corrected, and state what the correction was based on.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Recommendation that was corrected**  \n- **Original advice:**\u202f*\u201cAdd the `--jinja` flag (or be sure it is present) because a missing `--jinja` disables tool\u2011use on this box.\u201d* \u2013 this appeared in the early documentation of the dead\u2011lock\u2011prevention rule (Rule\u202f5 of **HARNESS\u2011RULES.md**) and in the earlier **routing\u2011guide** entry that warned operators to add `--jinja` to avoid tool\u2011use failures.\n\n**What the correction was**  \n- The advice was **retracted** and replaced with the statement that **`--jinja` is a no\u2011op on the current build** \u2013 the flag is already enabled by default, so its presence or absence does not affect tool\u2011use behaviour.\n\n**What the correction is based on**  \n- A dedicated control experiment (see `results/tool\u2011use/jinja\u2011default\u2011control.md`, dated\u202f2026\u201107\u201117) showed that toggling the flag made **no observable difference** in tool\u2011use performance. Consequently the earlier claim that the flag needed to be set was proven false and formally retracted in the documentation.",
+      "ttft_s": 123.83,
+      "wall_s": 140.49,
+      "reasoning_chars": 1777,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 643,
+        "prompt_tokens": 36049,
+        "total_tokens": 36692,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "prompt_tokens": 36049,
+      "completion_tokens": 643,
+      "answer_chars": 997,
+      "hit_token_cap": false,
+      "within_30s": false,
+      "within_40s": false
+    },
+    {
+      "id": "K07",
+      "category": "recommend",
+      "pack": "m",
+      "question": "A client needs a statutory deadline counted across a calendar. Which model does this material tell you to use, and which does it explicitly tell you NOT to use for this?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Use:**\u202f**Qwen\u202f3.8\u201127B** \u2013 the routing guide (2026\u201107\u201116) explicitly recommends Qwen\u202f3.8\u201127B for any task that requires \u201ca DEADLINE, an interest figure, or any date counted across a calendar.\u201d  \n\n**Do\u202fnot\u202fuse:**\u202f**the workhorse model (Qwen\u201130B\u2011A3B, the \u201cworkhorse\u201d)** \u2013 the same guide states \u201cDo\u202fnot\u202fuse the workhorse\u201d for statutory\u2011deadline/date\u2011counting work because it fails to count time correctly (0\u202f/\u202f8 correct on the walked\u2011period test).  \n\n*Source:*\u202fdocs/HARNESS\u2011RULES.md, \u201cWork out a DEADLINE, an interest figure, or any date counted across a calendar\u201d row.",
+      "ttft_s": 2.97,
+      "wall_s": 13.97,
+      "reasoning_chars": 1013,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 422,
+        "prompt_tokens": 36056,
+        "total_tokens": 36478,
+        "prompt_tokens_details": {
+          "cached_tokens": 35532
+        }
+      },
+      "prompt_tokens": 36056,
+      "completion_tokens": 422,
+      "answer_chars": 567,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K08",
+      "category": "compare",
+      "pack": "m",
+      "question": "For a batch of hard coding problems, this material recommends a model and a specific setting. State the wall-time ratio against the alternative it is compared with, and both absolute wall-time figures.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "",
+      "ttft_s": 0.86,
+      "wall_s": 27.64,
+      "reasoning_chars": 3591,
+      "finish_reason": "length",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 36060,
+        "total_tokens": 37084,
+        "prompt_tokens_details": {
+          "cached_tokens": 36019
+        }
+      },
+      "prompt_tokens": 36060,
+      "completion_tokens": 1024,
+      "answer_chars": 0,
+      "hit_token_cap": true,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K09",
+      "category": "implication",
+      "pack": "m",
+      "question": "This material identifies gpt-oss-120b as the strongest candidate for difficult work on one axis, while placing an operational restriction on it. State the restriction and the reason given for it.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Restriction** \u2013\u202fWhen gpt\u2011oss\u2011120b (\u2248\u202f60\u202fGiB\u2011plus weights) is being loaded you must **not run any heavy disk\u2011I/O at the same time and you must be present to power\u2011cycle the machine if the load stalls**.  \n\n**Why** \u2013\u202fThe dead\u2011lock fingerprint (see *memory\u2011edge\u2011deadlock.md*) shows that loading a near\u2011edge model while the system is under memory pressure (total RAM usage >\u202f128\u202fGB, most easily caused by concurrent large file\u2011hashes, downloads, backups, etc.) starves the amdgpu driver\u2019s small\u2011buffer suballocator. The wedged process becomes an uninterruptible D\u2011state task (`drm_suballoc_new`) that **SIGKILL cannot kill and a graceful `sudo reboot` stalls**; the only way to recover is a **hard physical power\u2011cycle**. Therefore the operational rule is to avoid concurrent heavy I/O during the load and to have an operator (Alastair) physically present to power\u2011cycle if the load ever hangs.",
+      "ttft_s": 0.9,
+      "wall_s": 18.32,
+      "reasoning_chars": 1802,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 665,
+        "prompt_tokens": 36061,
+        "total_tokens": 36726,
+        "prompt_tokens_details": {
+          "cached_tokens": 36018
+        }
+      },
+      "prompt_tokens": 36061,
+      "completion_tokens": 665,
+      "answer_chars": 892,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K10",
+      "category": "conflict",
+      "pack": "m",
+      "question": "Does this material recommend Mistral-Small-24B for tool calls whose behaviour depends on a condition? Answer yes or no and give the supporting figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Yes.**  \n\nThe routing guide states that *\u201cMistral\u2019s\u202f75\u202f% is template\u2011confounded by the chain category; **excluding chains it is\u202f96\u202f%**, the strongest single\u2011tool and conditional model tested \u2013 but only after supplying a tool template by hand.\u201d* (docs/HARNESS\u2011RULES.md).",
+      "ttft_s": 3.0,
+      "wall_s": 27.5,
+      "reasoning_chars": 3536,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 930,
+        "prompt_tokens": 36054,
+        "total_tokens": 36984,
+        "prompt_tokens_details": {
+          "cached_tokens": 35532
+        }
+      },
+      "prompt_tokens": 36054,
+      "completion_tokens": 930,
+      "answer_chars": 271,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K11",
+      "category": "summarise",
+      "pack": "m",
+      "question": "Summarise, in no more than four sentences, why this material argues that a latency figure on its own cannot be interpreted.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents state that a raw latency number is meaningless unless it is known that the model actually produced a **completed, correct answer** \u2013 otherwise the timing could be for a hung, truncated, or irrelevant generation (see the metric correction in\u202f*rd\u2011programme*\u202f2026\u201108\u201119, \u201cA latency number is interpretable only after establishing that the response completed the task\u201d).\u202fToken\u2011count is required as a diagnostic of non\u2011answering, and the primary metric must be **success\u2011at\u2011deadline** (whether the answer arrived within the pre\u2011registered deadline) with a secondary conditional TTCA reported alongside it (same section).\u202fConsequently, latency must be paired with a success flag and token statistics; without those, the figure can hide failures such as the decode\u2011hang or deadlock cases described elsewhere (e.g.,\u202f*decode\u2011hang*\u202f2026\u201108\u201119).\u202fThus the material argues that latency alone cannot be interpreted because it does not convey answer quality or completion.",
+      "ttft_s": 2.82,
+      "wall_s": 16.83,
+      "reasoning_chars": 1549,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 532,
+        "prompt_tokens": 36048,
+        "total_tokens": 36580,
+        "prompt_tokens_details": {
+          "cached_tokens": 35537
+        }
+      },
+      "prompt_tokens": 36048,
+      "completion_tokens": 532,
+      "answer_chars": 971,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K14",
+      "category": "draft",
+      "pack": "m",
+      "question": "Draft a short note (5 sentences maximum) to a colleague who wants to run a large model benchmark while a big download is in progress. Tell them whether to proceed and why, citing the specific risk.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Don\u2019t start the benchmark while the download is running.\u202fLoading a\u202f\u2265\u202f60\u202fGiB model under memory pressure from concurrent heavy I/O can trigger the amdgpu SDMA\u2011suballocator deadlock (wchan\u202f=\u202f`drm_suballoc_new`, D\u2011state, unkillable, only a hard power\u2011cycle clears it).\u202fThe box will wedge and a graceful reboot will stall, so the risk is a complete, un\u2011recoverable kernel lock\u2011up.\u202fWait for the download to finish, then run the benchmark.\u202fThis avoids the known deadlock that has already required physical intervention on sparkmax.",
+      "ttft_s": 0.88,
+      "wall_s": 8.07,
+      "reasoning_chars": 574,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 276,
+        "prompt_tokens": 36063,
+        "total_tokens": 36339,
+        "prompt_tokens_details": {
+          "cached_tokens": 36019
+        }
+      },
+      "prompt_tokens": 36063,
+      "completion_tokens": 276,
+      "answer_chars": 525,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K21",
+      "category": "recommend",
+      "pack": "m",
+      "question": "For creating a Word document or driving office tools agentically, which model does this material recommend, and which model does it say refuses the task outright?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Recommendation:**\u202fUse **Qwen\u202f3\u201130B\u2011A3B** (the \u201cworkhorse\u201d model) for creating a Word document or driving office\u2011tool actions agentically.  \n\n**Refusal:**\u202fThe **Mistral\u2011Small\u201124B\u2011Q4** model is recorded as outright refusing that task.  \n\n*Source \u2013\u202frouting\u2011guide (docs/HARNESS\u2011RULES.md), \u201cCreate a Word doc / drive office tools / agentic file work\u201d row.*",
+      "ttft_s": 0.67,
+      "wall_s": 8.6,
+      "reasoning_chars": 798,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 305,
+        "prompt_tokens": 36052,
+        "total_tokens": 36357,
+        "prompt_tokens_details": {
+          "cached_tokens": 36019
+        }
+      },
+      "prompt_tokens": 36052,
+      "completion_tokens": 305,
+      "answer_chars": 353,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K22",
+      "category": "implication",
+      "pack": "m",
+      "question": "For a long advisory session with documents arriving as you go, which model is recommended? State the specific risk this material says changes over a long session - and say explicitly whether accuracy decayed.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Recommended model:** **Qwen\u202f3.8\u201127B**  \n\n**Why:** In the routing\u2011matrix table the entry for \u201cA long advisory session \u2013 many turns, documents arriving as you go\u201d lists **Qwen\u202f3.8\u201127B** as the chosen model and shows all risk scores at **0.0** (no observed degradation)\u3010routing\u2011guide\u3011.\n\n**Specific risk that changes over a long session:**  \nThe only noted behavioural shift is for the \u201cworkhorse\u201d (Qwen\u202f3\u201130B\u2011A3B). The guide says *\u201cThe workhorse loses willingness to contradict you over a long session.\u201d*\u3010routing\u2011guide\u3011. This is a change in attitude, not a loss of factual accuracy.\n\n**Accuracy decay:** No \u2013 the risk metrics for Qwen\u202f3.8\u201127B are all zero, indicating that its accuracy did **not** decay during long advisory sessions.",
+      "ttft_s": 0.87,
+      "wall_s": 20.15,
+      "reasoning_chars": 2035,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 732,
+        "prompt_tokens": 36060,
+        "total_tokens": 36792,
+        "prompt_tokens_details": {
+          "cached_tokens": 36020
+        }
+      },
+      "prompt_tokens": 36060,
+      "completion_tokens": 732,
+      "answer_chars": 733,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K23",
+      "category": "conflict",
+      "pack": "m",
+      "question": "One model is described as the strongest on a document/knowledge evaluation whose strength then failed to carry over to agentic coding work. Name that model, and say what the material tells you to use instead for interactive coding.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Model:** **Qwen3\u201130B\u2011A3B** \u2013 the \u201cworkhorse\u201d that topped the 10\u2011model document/knowledge benchmark.  \n\n**What to use instead for interactive coding:** the material recommends switching to **Qwen3\u2011Coder\u201130B**, which is the only model shown to succeed on the real\u2011repository coding tasks.",
+      "ttft_s": 0.87,
+      "wall_s": 14.83,
+      "reasoning_chars": 1759,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 533,
+        "prompt_tokens": 36066,
+        "total_tokens": 36599,
+        "prompt_tokens_details": {
+          "cached_tokens": 36019
+        }
+      },
+      "prompt_tokens": 36066,
+      "completion_tokens": 533,
+      "answer_chars": 288,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K24",
+      "category": "implication",
+      "pack": "m",
+      "question": "If a model must fit in under 5 GiB, which one does this material recommend, and what are the TWO limits it names?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Model:**\u202fThe only model the documents point to that fits under a 5\u202fGiB RAM budget is **Qwen\u20113\u202f8B** (the GGUF is listed as **4.68\u202fGiB**).\n\n**Two limits the material calls out for Qwen\u20113\u202f8B**\n\n1. **Speed limit** \u2013 it is *significantly slower on short\u2011question workloads* than the larger MoE workhorse (e.g.\u202f9.46\u202fs vs\u202f5.48\u202fs on a",
+      "ttft_s": 2.84,
+      "wall_s": 29.77,
+      "reasoning_chars": 3106,
+      "finish_reason": "length",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 36050,
+        "total_tokens": 37074,
+        "prompt_tokens_details": {
+          "cached_tokens": 35532
+        }
+      },
+      "prompt_tokens": 36050,
+      "completion_tokens": 1024,
+      "answer_chars": 328,
+      "hit_token_cap": true,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K25",
+      "category": "summarise",
+      "pack": "m",
+      "question": "The R&D PROGRAMME document (not the harness rules) sets out a primary and a secondary metric that must always be reported together. Name both, and say why the secondary one cannot be quoted alone.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Primary metric:** **`success\u2011at\u2011deadline`** \u2013 the share of items that reach a correct, completed answer within the pre\u2011registered wall\u2011clock deadline.  \n\n**Secondary metric:** **`conditional TTCA`** \u2013 the median (and p95) time\u2011to\u2011correct\u2011answer **computed only over the successful cases**.  \n\n**Why the secondary can\u2019t be quoted alone:**\u202fConditional TTCA is undefined for wrong answers or hangs (it would be \u201cinfinite\u201d or simply omitted). Reporting it without the success\u2011at\u2011deadline figure hides how many requests failed or never finished, giving a misleading impression of performance. The two must be presented together so the latency numbers are interpreted in the context of the actual success rate.",
+      "ttft_s": 3.07,
+      "wall_s": 20.8,
+      "reasoning_chars": 2521,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 674,
+        "prompt_tokens": 36063,
+        "total_tokens": 36737,
+        "prompt_tokens_details": {
+          "cached_tokens": 35533
+        }
+      },
+      "prompt_tokens": 36063,
+      "completion_tokens": 674,
+      "answer_chars": 706,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K26",
+      "category": "draft",
+      "pack": "m",
+      "question": "Draft a short note (5 sentences maximum) to a colleague who is about to put a single tokens-per-second figure in a client report. Tell them what is wrong with that and what to report instead.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Don\u2019t put a raw \u201ctokens\u2011per\u2011second\u201d number in the report \u2013 it tells you nothing about whether the model actually finished the task.\u202fA latency figure only makes sense once you\u2019ve confirmed the response was complete and correct (see the \u201csuccess\u2011at\u2011deadline\u201d metric in the R&D plan).\u202fInstead report the wall\u2011clock time **and** whether the answer was finished, plus the total tokens generated as a diagnostic of non\u2011answering.\u202fIf the answer failed or hung, note that instead of a speed figure.\u202fThis gives the client a meaningful picture of performance, not a misleading throughput number.",
+      "ttft_s": 2.83,
+      "wall_s": 26.79,
+      "reasoning_chars": 3309,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 910,
+        "prompt_tokens": 36063,
+        "total_tokens": 36973,
+        "prompt_tokens_details": {
+          "cached_tokens": 35546
+        }
+      },
+      "prompt_tokens": 36063,
+      "completion_tokens": 910,
+      "answer_chars": 585,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    }
+  ]
+}

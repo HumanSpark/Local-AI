@@ -1,0 +1,283 @@
+{
+  "label": "e54b-workhorse",
+  "tier": "l4",
+  "distractors": null,
+  "thinking": "default",
+  "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 16384,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "server_extra": "",
+  "cloud_spend": null,
+  "latency": {
+    "n": 15,
+    "median_s": 0.61,
+    "p95_s": 2.82,
+    "min_s": 0.36,
+    "max_s": 2.82,
+    "under_10s": 15,
+    "under_30s": 15
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-17T14:14:07Z",
+  "wall_s": 14.9,
+  "pack_chars": 10029,
+  "context_preflight": {
+    "longest_prompt_tokens": 2575,
+    "max_tokens": 4096,
+    "needed": 6671,
+    "ctx": 16384,
+    "headroom": 9713
+  },
+  "correct": 6,
+  "total": 15,
+  "citation_valid": 13,
+  "over_claims": 1,
+  "over_claim_rate": 1.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "statutory_period": {
+      "correct": 0,
+      "total": 3
+    },
+    "breach_clock": {
+      "correct": 0,
+      "total": 1
+    },
+    "interest_calc": {
+      "correct": 0,
+      "total": 1
+    },
+    "notice_period": {
+      "correct": 0,
+      "total": 2
+    },
+    "fee_basis": {
+      "correct": 0,
+      "total": 1
+    },
+    "survival": {
+      "correct": 1,
+      "total": 1
+    },
+    "defect_find": {
+      "correct": 3,
+      "total": 3
+    },
+    "defect_absent": {
+      "correct": 2,
+      "total": 2
+    },
+    "underspecified": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 6,
+    "off_by_calendar": 2,
+    "over_claim": 1,
+    "wrong": 5,
+    "wrong_trigger": 1
+  },
+  "results": [
+    {
+      "id": "P1",
+      "category": "statutory_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-DP, C.1",
+      "answer": "30 October 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 25,
+      "prompt_tokens": 2514,
+      "reasoning_chars": 0,
+      "wall_s": 2.82
+    },
+    {
+      "id": "P2",
+      "category": "statutory_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-DP, C.1",
+      "answer": "2 March 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 24,
+      "prompt_tokens": 2505,
+      "reasoning_chars": 0,
+      "wall_s": 0.51
+    },
+    {
+      "id": "P3",
+      "category": "statutory_period",
+      "outcome": "wrong_trigger",
+      "citation_ok": true,
+      "citation": "STAT-LIM, clause 1 and 2",
+      "answer": "2 March 2029",
+      "finish_reason": "stop",
+      "completion_tokens": 27,
+      "prompt_tokens": 2491,
+      "reasoning_chars": 0,
+      "wall_s": 0.49
+    },
+    {
+      "id": "B1",
+      "category": "breach_clock",
+      "outcome": "off_by_calendar",
+      "citation_ok": true,
+      "citation": "STAT-DP, B and C.3",
+      "answer": "5 April 2026 at 14:30",
+      "finish_reason": "stop",
+      "completion_tokens": 33,
+      "prompt_tokens": 2493,
+      "reasoning_chars": 0,
+      "wall_s": 0.64
+    },
+    {
+      "id": "I1",
+      "category": "interest_calc",
+      "outcome": "wrong",
+      "citation_ok": false,
+      "citation": "STAT-LP",
+      "answer": "107.56",
+      "finish_reason": "stop",
+      "completion_tokens": 19,
+      "prompt_tokens": 2521,
+      "reasoning_chars": 0,
+      "wall_s": 0.51
+    },
+    {
+      "id": "N1",
+      "category": "notice_period",
+      "outcome": "off_by_calendar",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 2.2",
+      "answer": "31 October 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 30,
+      "prompt_tokens": 2506,
+      "reasoning_chars": 0,
+      "wall_s": 0.63
+    },
+    {
+      "id": "N2",
+      "category": "notice_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 2.2",
+      "answer": "31 October 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 30,
+      "prompt_tokens": 2493,
+      "reasoning_chars": 0,
+      "wall_s": 0.61
+    },
+    {
+      "id": "F1",
+      "category": "fee_basis",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 1.2",
+      "answer": "100,800",
+      "finish_reason": "stop",
+      "completion_tokens": 29,
+      "prompt_tokens": 2499,
+      "reasoning_chars": 0,
+      "wall_s": 0.61
+    },
+    {
+      "id": "S1",
+      "category": "survival",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 3.2",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 22,
+      "prompt_tokens": 2538,
+      "reasoning_chars": 0,
+      "wall_s": 0.56
+    },
+    {
+      "id": "D1",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "SUB-KILBEG, clause 5",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 19,
+      "prompt_tokens": 2583,
+      "reasoning_chars": 0,
+      "wall_s": 0.57
+    },
+    {
+      "id": "D2",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 8; SUB-KILB, clause 4",
+      "answer": "4",
+      "finish_reason": "stop",
+      "completion_tokens": 30,
+      "prompt_tokens": 2499,
+      "reasoning_chars": 0,
+      "wall_s": 0.62
+    },
+    {
+      "id": "D3",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 8; SUB-KILB, clause 5",
+      "answer": "650000",
+      "finish_reason": "stop",
+      "completion_tokens": 35,
+      "prompt_tokens": 2502,
+      "reasoning_chars": 0,
+      "wall_s": 0.69
+    },
+    {
+      "id": "X1",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, Clause 8; SUB-KILBEG, Clause 6",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 30,
+      "prompt_tokens": 2513,
+      "reasoning_chars": 0,
+      "wall_s": 0.64
+    },
+    {
+      "id": "X2",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 8",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 20,
+      "prompt_tokens": 2513,
+      "reasoning_chars": 0,
+      "wall_s": 0.5
+    },
+    {
+      "id": "U1",
+      "category": "underspecified",
+      "outcome": "over_claim",
+      "citation_ok": false,
+      "citation": "STAT-LP paragraph 5",
+      "answer": "No",
+      "finish_reason": "stop",
+      "completion_tokens": 16,
+      "prompt_tokens": 2484,
+      "reasoning_chars": 0,
+      "wall_s": 0.36
+    }
+  ]
+}

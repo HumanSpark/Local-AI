@@ -1,0 +1,60 @@
+{
+  "label": "armB-qwen38-27b",
+  "condition": "tools",
+  "schema_version": "v2",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "items_file": "spikes/aabr/items-b20-fixed.json",
+  "n_items": 1,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 132,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 2,
+  "round_cap_hits": 0,
+  "wall_s": 52.75,
+  "note": "transcript only - scoring is score_aabr.py over this file",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 28 February 2025\nCITATION: Maturity is exactly 12 months from the Award Date (29 February 2024), defaulting to the last day of the resulting month where the date does not exist, with Section 9.1 prohibiting any weekend/holiday rolling.",
+      "char_count": 243,
+      "char_count_all_rounds": 243,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-02-29",
+            "months": 12
+          },
+          "result": "2025-02-28"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-02-28"
+          },
+          "result": "2025-02-28"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 48.56,
+      "id": "B20",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "no_roll_trap_inert",
+        "short_chain"
+      ]
+    }
+  ]
+}

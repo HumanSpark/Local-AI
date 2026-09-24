@@ -1,0 +1,215 @@
+{
+  "label": "e38-workhorse-local",
+  "tier": "l2",
+  "distractors": null,
+  "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 16384,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-15T09:20:10Z",
+  "wall_s": 13.6,
+  "pack_chars": 13221,
+  "correct": 5,
+  "total": 12,
+  "citation_valid": 6,
+  "over_claims": 1,
+  "over_claim_rate": 1.0,
+  "stale_values": 0,
+  "premature_values": 1,
+  "by_category": {
+    "date_effective": {
+      "correct": 2,
+      "total": 3
+    },
+    "revocation": {
+      "correct": 2,
+      "total": 2
+    },
+    "precedence": {
+      "correct": 0,
+      "total": 2
+    },
+    "multihop": {
+      "correct": 0,
+      "total": 3
+    },
+    "exhaustive": {
+      "correct": 1,
+      "total": 1
+    },
+    "underspecified": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 5,
+    "over_applied": 1,
+    "over_claim": 1,
+    "precedence_missed": 1,
+    "premature": 1,
+    "wrong": 3
+  },
+  "results": [
+    {
+      "id": "D1",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 2.1",
+      "answer": "42,000",
+      "finish_reason": "stop",
+      "completion_tokens": 29,
+      "prompt_tokens": 3450,
+      "reasoning_chars": 0,
+      "wall_s": 4.0
+    },
+    {
+      "id": "D2",
+      "category": "date_effective",
+      "outcome": "premature",
+      "citation_ok": false,
+      "citation": "AMD-2 clause 4.1",
+      "answer": "1,250,000",
+      "finish_reason": "stop",
+      "completion_tokens": 27,
+      "prompt_tokens": 3453,
+      "reasoning_chars": 0,
+      "wall_s": 0.52
+    },
+    {
+      "id": "D3",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, Clause 2.1",
+      "answer": "51,000",
+      "finish_reason": "stop",
+      "completion_tokens": 25,
+      "prompt_tokens": 3450,
+      "reasoning_chars": 0,
+      "wall_s": 0.49
+    },
+    {
+      "id": "V1",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": false,
+      "citation": "AMD-2, clause 5.2",
+      "answer": "24",
+      "finish_reason": "stop",
+      "completion_tokens": 21,
+      "prompt_tokens": 3465,
+      "reasoning_chars": 0,
+      "wall_s": 0.52
+    },
+    {
+      "id": "V2",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, clause 4.2",
+      "answer": "YES",
+      "finish_reason": "stop",
+      "completion_tokens": 19,
+      "prompt_tokens": 3450,
+      "reasoning_chars": 0,
+      "wall_s": 0.42
+    },
+    {
+      "id": "P1",
+      "category": "precedence",
+      "outcome": "precedence_missed",
+      "citation_ok": false,
+      "citation": "AMD-3, clause 5.2",
+      "answer": "24 months",
+      "finish_reason": "stop",
+      "completion_tokens": 22,
+      "prompt_tokens": 3457,
+      "reasoning_chars": 0,
+      "wall_s": 0.53
+    },
+    {
+      "id": "P2",
+      "category": "precedence",
+      "outcome": "over_applied",
+      "citation_ok": false,
+      "citation": "POL-3.1 P-2.3",
+      "answer": "1",
+      "finish_reason": "stop",
+      "completion_tokens": 21,
+      "prompt_tokens": 3454,
+      "reasoning_chars": 0,
+      "wall_s": 0.44
+    },
+    {
+      "id": "M1",
+      "category": "multihop",
+      "outcome": "wrong",
+      "citation_ok": false,
+      "citation": "MSA-2, AMD-1",
+      "answer": "504000",
+      "finish_reason": "stop",
+      "completion_tokens": 24,
+      "prompt_tokens": 3464,
+      "reasoning_chars": 0,
+      "wall_s": 0.56
+    },
+    {
+      "id": "M2",
+      "category": "multihop",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "AMD-3, clause 2.1",
+      "answer": "1,224,000",
+      "finish_reason": "stop",
+      "completion_tokens": 28,
+      "prompt_tokens": 3457,
+      "reasoning_chars": 0,
+      "wall_s": 0.54
+    },
+    {
+      "id": "M3",
+      "category": "multihop",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "AMD-3, clause 4.1",
+      "answer": "24.6",
+      "finish_reason": "stop",
+      "completion_tokens": 23,
+      "prompt_tokens": 3465,
+      "reasoning_chars": 0,
+      "wall_s": 0.55
+    },
+    {
+      "id": "N1",
+      "category": "exhaustive",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 11,
+      "prompt_tokens": 3527,
+      "reasoning_chars": 0,
+      "wall_s": 0.48
+    },
+    {
+      "id": "Z1",
+      "category": "underspecified",
+      "outcome": "over_claim",
+      "citation_ok": false,
+      "citation": "MSA-2, clause 6.3",
+      "answer": "No",
+      "finish_reason": "stop",
+      "completion_tokens": 20,
+      "prompt_tokens": 3443,
+      "reasoning_chars": 0,
+      "wall_s": 0.42
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "meta": {
+    "label": "qwen38",
+    "bank": "kw",
+    "pack": "s",
+    "item_packs": [
+      "s"
+    ],
+    "pack_chars": 55665,
+    "pack_docs": [
+      "memory-edge-deadlock",
+      "decode-hang",
+      "harness-rules",
+      "qwen38-report"
+    ],
+    "measured_prompt_tokens": 14970,
+    "ctx": 32768,
+    "max_tokens": 1024,
+    "system": "You are answering questions about the documents supplied below. Answer from those documents only. If the documents do not settle a question, say so explicitly rather than guessing. Be specific: give figures, names and dates exactly as they appear. Keep answers under 200 words.",
+    "tools_offered": false,
+    "started_at": "2026-08-28T18:37:32+0100",
+    "kernel": "7.0.0-29-generic"
+  },
+  "records": [
+    {
+      "id": "K01",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two different amdgpu-related failures are described in this material. For EACH, state the VRAM figure observed, and say whether a hard power cycle was required.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "- **amdgpu SDMA-suballocator deadlock** (`docs/memory-edge-deadlock.md`): VRAM used **parks at exactly 2.00 GiB (2,147,483,648 B)**. A **hard power cycle was required**; `SIGKILL` was ineffective and graceful reboot stalled.\n\n- **gpt-oss-120b decode hang** (`docs/2026-08-19-gptoss120b-decode-hang.md`): VRAM observed at **1.90 GiB, never parked**. A **hard power cycle was not required**; the process was killed normally and GTT memory was reclaimed.",
+      "ttft_s": 63.41,
+      "wall_s": 90.92,
+      "reasoning_chars": 1651,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 610,
+        "prompt_tokens": 15059,
+        "total_tokens": 15669,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "prompt_tokens": 15059,
+      "completion_tokens": 610,
+      "answer_chars": 451,
+      "hit_token_cap": false,
+      "within_30s": false,
+      "within_40s": false
+    },
+    {
+      "id": "K02",
+      "category": "implication",
+      "pack": "s",
+      "question": "A colleague proposes a monitor that raises an alarm whenever the llama-server process is in D (uninterruptible) state. Using this material, explain why that is a defect rather than a useful alarm.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "",
+      "ttft_s": 3.57,
+      "wall_s": 50.75,
+      "reasoning_chars": 4143,
+      "finish_reason": "length",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 15066,
+        "total_tokens": 16090,
+        "prompt_tokens_details": {
+          "cached_tokens": 14543
+        }
+      },
+      "prompt_tokens": 15066,
+      "completion_tokens": 1024,
+      "answer_chars": 0,
+      "hit_token_cap": true,
+      "within_30s": false,
+      "within_40s": false
+    },
+    {
+      "id": "K03",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs how many GPU consumers may run at once, and what does that rule say a contended measurement is?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Rule 9 governs it: \u201cOne GPU consumer at a time.\u201d It says a contended measurement is **void, not noisy** \u2014 any second GPU consumer makes both measurements void because neither process can say what share it got.",
+      "ttft_s": 3.35,
+      "wall_s": 11.59,
+      "reasoning_chars": 561,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 177,
+        "prompt_tokens": 15053,
+        "total_tokens": 15230,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15053,
+      "completion_tokens": 177,
+      "answer_chars": 209,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K04",
+      "category": "implication",
+      "pack": "s",
+      "question": "The harness rules forbid re-creating the deadlock's known triggers during routine benching. Name the ONE trigger this material describes as confirmed, and say what the operative mechanism is said to be.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The **one confirmed trigger** is **running heavy disk I/O concurrently with a near-edge GPU model load** (a >~60 GiB load), as in **F24** and reproduced in **Run 1b/C1**.\n\nThe **operative mechanism** is not disk I/O itself, but **memory pressure**: the concurrent I/O\u2019s file-cache reads compete with the model for the page cache, pushing total RAM usage over the **128 GB** ceiling. Model pages are evicted and re-read, so the GPU backend gets its first buffer but cannot get the rest resident. The amdgpu VM-update SDMA path then starves in the small-buffer suballocator \u2014 `drm_suballoc_new` \u2014 and deadlocks.",
+      "ttft_s": 3.34,
+      "wall_s": 28.02,
+      "reasoning_chars": 1659,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 550,
+        "prompt_tokens": 15064,
+        "total_tokens": 15614,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15064,
+      "completion_tokens": 550,
+      "answer_chars": 609,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K05",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Based only on this material, what is the measured per-load probability that gpt-oss-120b will hang? Give the figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents do not state a measured per-load probability for a gpt-oss-120b hang.\n\nThey record only:\n\n- one hang, on the first load;\n- \u201cmore than a dozen\u201d later loads that behaved.\n\nThat supports only an imprecise observed frequency of **1 in more than 13 loads**, i.e. **< 1/13** or **< 7.7%**, but no exact measured probability is given.",
+      "ttft_s": 3.35,
+      "wall_s": 57.5,
+      "reasoning_chars": 3773,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 1018,
+        "prompt_tokens": 15056,
+        "total_tokens": 16074,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15056,
+      "completion_tokens": 1018,
+      "answer_chars": 341,
+      "hit_token_cap": false,
+      "within_30s": false,
+      "within_40s": false
+    },
+    {
+      "id": "K15",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two models were given the same deterministic date calculator. Give the before-and-after score for EACH of them.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "",
+      "ttft_s": 3.3,
+      "wall_s": 50.59,
+      "reasoning_chars": 3828,
+      "finish_reason": "length",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 15047,
+        "total_tokens": 16071,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15047,
+      "completion_tokens": 1024,
+      "answer_chars": 0,
+      "hit_token_cap": true,
+      "within_30s": false,
+      "within_40s": false
+    },
+    {
+      "id": "K16",
+      "category": "implication",
+      "pack": "s",
+      "question": "A third experimental condition was run to isolate WHY offering a tool changed a model's behaviour. Describe that condition and state what it showed.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The third condition **told the model that the tools existed, but did not actually attach them**.\n\nIt showed that this condition **changed nothing**. The behavioural change therefore came from the **attachment itself**\u2014the tool descriptions being written into the prompt the model reads\u2014not merely from the model being told that tools were available. In other words, offering a tool can alter behaviour on every request, even on requests where the tool is never called.",
+      "ttft_s": 3.36,
+      "wall_s": 28.74,
+      "reasoning_chars": 2237,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 528,
+        "prompt_tokens": 15053,
+        "total_tokens": 15581,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15053,
+      "completion_tokens": 528,
+      "answer_chars": 468,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K17",
+      "category": "compare",
+      "pack": "s",
+      "question": "On twenty ordinary questions containing no dates at all, what happened to the everyday model once tools were attached? Give the score change and the number of tool calls.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "On the twenty ordinary questions with no dates, the everyday model dropped from **14 out of 20 to 11 out of 20** once tools were attached, and it made **68 tool calls**.",
+      "ttft_s": 3.36,
+      "wall_s": 11.82,
+      "reasoning_chars": 627,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 211,
+        "prompt_tokens": 15058,
+        "total_tokens": 15269,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15058,
+      "completion_tokens": 211,
+      "answer_chars": 169,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K18",
+      "category": "recommend",
+      "pack": "s",
+      "question": "What practical consequence does this material draw for a service that offers tools on every request by default? State the price and the form it is paid in.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The material concludes that **offering tools by default is not free**: any route that attaches tools to every request pays a cost on every request, even when the tool is never used.\n\nFor the everyday model handling about **91% of traffic**, the measured price was **up to three questions in twenty** (it dropped from **14/20 to 11/20** when tools were attached, made **68 tool calls**, and produced **no answer on five questions**).\n\nThe cost is paid as **no answer rather than a wrong answer**, which the report calls the more expensive failure for someone waiting. Therefore, tools should be **attached per route, never globally**.",
+      "ttft_s": 3.36,
+      "wall_s": 23.52,
+      "reasoning_chars": 1226,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 429,
+        "prompt_tokens": 15056,
+        "total_tokens": 15485,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15056,
+      "completion_tokens": 429,
+      "answer_chars": 633,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K19",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs model downloads, and what is the name of the file each download must be recorded in before first use?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Rule 4: \u201cModel downloads are explicit and manifest-recorded.\u201d Each download must be recorded in **`manifests/MANIFEST.md`** before first use.",
+      "ttft_s": 3.36,
+      "wall_s": 9.94,
+      "reasoning_chars": 505,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 151,
+        "prompt_tokens": 15053,
+        "total_tokens": 15204,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15053,
+      "completion_tokens": 151,
+      "answer_chars": 141,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K20",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What does it cost, in euros per year, to run this hardware? Answer from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied material does not state the cost, in euros per year, of running this hardware. It describes the sparkmax machine, model benchmarks, deadlock risks, and operational rules, but it contains no annual running-cost figure for the hardware. The only euro amount mentioned is \u201cEUR 27,600,\u201d which appears as a document-corpus figure in a test-design rule, not as a hardware cost.",
+      "ttft_s": 3.29,
+      "wall_s": 17.31,
+      "reasoning_chars": 682,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 247,
+        "prompt_tokens": 15047,
+        "total_tokens": 15294,
+        "prompt_tokens_details": {
+          "cached_tokens": 14550
+        }
+      },
+      "prompt_tokens": 15047,
+      "completion_tokens": 247,
+      "answer_chars": 384,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    }
+  ]
+}

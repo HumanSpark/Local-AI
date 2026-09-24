@@ -1,0 +1,229 @@
+{
+  "label": "e61-glm47flash-l3n0-budget16k",
+  "tier": "l3",
+  "distractors": 0,
+  "thinking": "default",
+  "model": "/opt/models/staging/GLM-4.7-Flash-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 32768,
+  "request_timeout": 3031,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "server_extra": "",
+  "cloud_spend": null,
+  "latency": {
+    "n": 12,
+    "median_s": 28.95,
+    "p95_s": 366.6,
+    "min_s": 15.57,
+    "max_s": 366.6,
+    "under_10s": 0,
+    "under_30s": 8
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-19T06:12:56Z",
+  "wall_s": 1001.2,
+  "pack_chars": 13221,
+  "context_preflight": {
+    "longest_prompt_tokens": 3331,
+    "max_tokens": 16384,
+    "needed": 19715,
+    "ctx": 32768,
+    "headroom": 13053
+  },
+  "correct": 10,
+  "total": 12,
+  "citation_valid": 10,
+  "over_claims": 0,
+  "over_claim_rate": 0.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "date_effective": {
+      "correct": 3,
+      "total": 3
+    },
+    "revocation": {
+      "correct": 2,
+      "total": 2
+    },
+    "precedence": {
+      "correct": 1,
+      "total": 2
+    },
+    "multihop": {
+      "correct": 3,
+      "total": 3
+    },
+    "exhaustive": {
+      "correct": 1,
+      "total": 1
+    },
+    "underspecified": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 10,
+    "truncated": 2
+  },
+  "results": [
+    {
+      "id": "D1",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, 2.1",
+      "answer": "EUR 42,000",
+      "finish_reason": "stop",
+      "completion_tokens": 1162,
+      "prompt_tokens": 3289,
+      "reasoning_chars": 3956,
+      "wall_s": 24.44
+    },
+    {
+      "id": "D2",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 4.1",
+      "answer": "EUR 500,000",
+      "finish_reason": "stop",
+      "completion_tokens": 1357,
+      "prompt_tokens": 3288,
+      "reasoning_chars": 4604,
+      "wall_s": 23.26
+    },
+    {
+      "id": "D3",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, Clause 2.1",
+      "answer": "EUR 51,000",
+      "finish_reason": "stop",
+      "completion_tokens": 1006,
+      "prompt_tokens": 3289,
+      "reasoning_chars": 3277,
+      "wall_s": 17.08
+    },
+    {
+      "id": "V1",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 Clause 5.2",
+      "answer": "24 months",
+      "finish_reason": "stop",
+      "completion_tokens": 1946,
+      "prompt_tokens": 3295,
+      "reasoning_chars": 7178,
+      "wall_s": 33.91
+    },
+    {
+      "id": "V2",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, Paragraph 3",
+      "answer": "YES",
+      "finish_reason": "stop",
+      "completion_tokens": 898,
+      "prompt_tokens": 3284,
+      "reasoning_chars": 3227,
+      "wall_s": 15.57
+    },
+    {
+      "id": "P1",
+      "category": "precedence",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 3273,
+      "reasoning_chars": 68016,
+      "wall_s": 365.71
+    },
+    {
+      "id": "P2",
+      "category": "precedence",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 6.1",
+      "answer": "2 Business Days",
+      "finish_reason": "stop",
+      "completion_tokens": 1373,
+      "prompt_tokens": 3266,
+      "reasoning_chars": 5380,
+      "wall_s": 26.02
+    },
+    {
+      "id": "M1",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 Clause 2.1; AMD-1 Clause 2.1",
+      "answer": "EUR 378,000",
+      "finish_reason": "stop",
+      "completion_tokens": 1640,
+      "prompt_tokens": 3304,
+      "reasoning_chars": 5172,
+      "wall_s": 28.95
+    },
+    {
+      "id": "M2",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-1 Clause 2.1; AMD-3 Clause 2.1",
+      "answer": "EUR 445,500",
+      "finish_reason": "stop",
+      "completion_tokens": 2328,
+      "prompt_tokens": 3296,
+      "reasoning_chars": 7341,
+      "wall_s": 41.2
+    },
+    {
+      "id": "M3",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-2 Clause 4.1; AMD-3 Clause 2.1",
+      "answer": "24.5",
+      "finish_reason": "stop",
+      "completion_tokens": 1661,
+      "prompt_tokens": 3278,
+      "reasoning_chars": 5242,
+      "wall_s": 29.19
+    },
+    {
+      "id": "N1",
+      "category": "exhaustive",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "(d)",
+      "finish_reason": "stop",
+      "completion_tokens": 1077,
+      "prompt_tokens": 3336,
+      "reasoning_chars": 3850,
+      "wall_s": 19.03
+    },
+    {
+      "id": "Z1",
+      "category": "underspecified",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 3261,
+      "reasoning_chars": 65662,
+      "wall_s": 366.6
+    }
+  ]
+}

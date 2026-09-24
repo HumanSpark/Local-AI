@@ -1,0 +1,96 @@
+[2026-08-31T23:38:50+01:00] === session queue: tools/queue-night.txt ===
+[2026-08-31T23:38:50+01:00]   queued: E94-ceiling-098304
+[2026-08-31T23:38:50+01:00]   queued: E94-ceiling-131072
+[2026-08-31T23:38:50+01:00]   queued: E94-ceiling-262144
+[2026-08-31T23:38:50+01:00] === opening the session window (ONE window for the whole queue) ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T23:38:51+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T23:38:51+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T23:38:51+01:00] --- [1] E94-ceiling-098304 ---
+=== E94 residency: ctx=98,304 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 98304 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       2.66s  GTT=58.34 GiB
+  warm smart     13.98s  GTT=67.52 GiB
+  warm code       0.13s  GTT=67.53 GiB
+GTT with all 3 resident: 67.53 GiB (delta 62.51)
+  solo fast   walls=[0.723, 0.612, 0.612] min=0.612
+  solo smart  walls=[8.35, 8.255, 8.08] min=8.08
+  solo code   walls=[0.755, 0.632, 0.607] min=0.607
+  switch fast   -> smart  wall=8.07s solo_min=8.08s excess=-0.011s
+  switch fast   -> code   wall=0.63s solo_min=0.61s excess=+0.023s
+  switch smart  -> fast   wall=0.63s solo_min=0.61s excess=+0.014s
+  switch smart  -> code   wall=0.64s solo_min=0.61s excess=+0.031s
+  switch code   -> fast   wall=0.62s solo_min=0.61s excess=+0.006s
+  switch code   -> smart  wall=8.08s solo_min=8.08s excess=+0.003s
+=== context ceiling: alias=fast allocated_ctx=98,304 ===
+  top     98,116 tok -> SERVED  734.2s  200
+
+no ceiling below the allocation: 98,116 tokens served
+written: /home/agent-spark/sparkbench/results/raw/e94/ceiling-ctx98304-fast.json
+=== context ceiling: alias=smart allocated_ctx=98,304 ===
+  top     98,116 tok -> SERVED  755.9s  200
+
+no ceiling below the allocation: 98,116 tokens served
+written: /home/agent-spark/sparkbench/results/raw/e94/ceiling-ctx98304-smart.json
+=== context ceiling: alias=code allocated_ctx=98,304 ===
+  top     98,116 tok -> SERVED  759.73s  200
+
+no ceiling below the allocation: 98,116 tokens served
+written: /home/agent-spark/sparkbench/results/raw/e94/ceiling-ctx98304-code.json
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx98304-all.json
+[2026-09-01T00:17:45+01:00] [1] E94-ceiling-098304 rc=0 wall=2334s
+[2026-09-01T00:17:45+01:00] --- [2] E94-ceiling-131072 ---
+=== E94 residency: ctx=131,072 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 131072 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       3.15s  GTT=59.97 GiB
+  warm smart      4.98s  GTT=71.93 GiB
+  warm code       0.14s  GTT=71.93 GiB
+GTT with all 3 resident: 71.93 GiB (delta 66.91)
+  solo fast   walls=[0.724, 0.61, 0.61] min=0.61
+  solo smart  walls=[8.378, 8.238, 8.066] min=8.066
+  solo code   walls=[0.763, 0.635, 0.627] min=0.627
+  switch fast   -> smart  wall=8.05s solo_min=8.07s excess=-0.018s
+  switch fast   -> code   wall=0.63s solo_min=0.63s excess=+0.006s
+  switch smart  -> fast   wall=0.65s solo_min=0.61s excess=+0.037s
+  switch smart  -> code   wall=0.63s solo_min=0.63s excess=+0.003s
+  switch code   -> fast   wall=0.65s solo_min=0.61s excess=+0.037s
+  switch code   -> smart  wall=8.07s solo_min=8.07s excess=+0.005s
+=== context ceiling: alias=fast allocated_ctx=131,072 ===
+  top    130,852 tok -> SERVED  1280.92s  200
+
+no ceiling below the allocation: 130,852 tokens served
+written: /home/agent-spark/sparkbench/results/raw/e94/ceiling-ctx131072-fast.json
+=== context ceiling: alias=smart allocated_ctx=131,072 ===
+  top    130,852 tok -> SERVED  1161.29s  200
+
+no ceiling below the allocation: 130,852 tokens served
+written: /home/agent-spark/sparkbench/results/raw/e94/ceiling-ctx131072-smart.json
+=== context ceiling: alias=code allocated_ctx=131,072 ===
+  top    130,852 tok -> SERVED  1324.95s  200
+
+no ceiling below the allocation: 130,852 tokens served
+written: /home/agent-spark/sparkbench/results/raw/e94/ceiling-ctx131072-code.json
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx131072-all.json
+[2026-09-01T01:21:49+01:00] [2] E94-ceiling-131072 rc=0 wall=3844s
+[2026-09-01T01:21:49+01:00] --- [3] E94-ceiling-262144 ---
+[2026-09-01T01:33:15+01:00] === closing the session window (exit rc=143) ===
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-09-01T01:33:15+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1828802 1828834 1828843 1828846 1831508 
+[2026-09-01T01:33:15+01:00] relay restored, VERIFIED: llama-server is running
+[2026-09-01T01:33:15+01:00] session finished, rc=143

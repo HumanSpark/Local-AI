@@ -1,0 +1,309 @@
+{
+  "meta": {
+    "arm": "workhorse",
+    "label": "workhorse-30B-A3B",
+    "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+    "ctx": 32768,
+    "max_turns": 60,
+    "hard_timeout_s": 900,
+    "load_s": 4.02,
+    "tasks": [
+      "C01",
+      "C03",
+      "C04",
+      "C05",
+      "C06"
+    ],
+    "skipped_not_usable": [],
+    "started_at": "2026-08-19T23:54:55+0100",
+    "kernel": "7.0.0-28-generic"
+  },
+  "records": [
+    {
+      "task": "C01",
+      "tier": "interactive",
+      "kind": "bugfix",
+      "arm": "workhorse",
+      "budget_s": 30,
+      "infrastructure_failure": null,
+      "wall_s": 58.91,
+      "terminated_reason": null,
+      "hit_turn_cap": true,
+      "non_termination": true,
+      "tool_calls": 60,
+      "malformed_calls": 0,
+      "turns": 60,
+      "prompt_tokens": 475052,
+      "generated_tokens": 1527,
+      "diff_chars": 16858,
+      "guard": {
+        "commands_screened": 0,
+        "commands_refused": 0,
+        "refusals": [],
+        "test_files_deleted": [],
+        "test_files_modified": [],
+        "attempted_test_destruction": false
+      },
+      "grade": {
+        "heldout": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 31,
+          "failed": 2,
+          "errors": 0,
+          "tail": "s_2(self):\n>       assert correctness(\n            self.ITEMS[\"A04\"],\n            \"No, the Consultant is not legally entitled to the bonus because the \"\n            \"required written UAT sign-off (Condition B) is not shown to have \"\n            \"been provided.\",\n            \"Condition B\",\n        ) == (\"2\", False)\nE       AssertionError: assert ('0', False) == ('2', False)\nE         At index 0 diff: '0' != '2'\nE         Use -v to get more diff\n\ntests/test_score_aabr.py:314: AssertionError\n_ TestUnsettledOutcomesDeferRatherThanGuess.test_naming_the_dependency_without_a_gap_phrase_defers _\n\nself = <test_score_aabr.TestUnsettledOutcomesDeferRatherThanGuess object at 0x7bab4dcd0770>\n\n    def test_naming_the_dependency_without_a_gap_phrase_defers(self):\n        score, judge = correctness(\n            self.ITEMS[\"A04\"],\n            \"The status of Condition B governs the outcome here.\",\n            \"Condition B\",\n        )\n>       assert (score, judge) == (\"?\", True)\nE       AssertionError: assert ('0', False) == ('?', True)\nE         At index 0 diff: '0' != '?'\nE         Use -v to get more diff\n\ntests/test_score_aabr.py:344: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_score_aabr.py::TestUnsettledOutcomesDeferRatherThanGuess::test_gpt_oss_phrasing_scores_2\nFAILED tests/test_score_aabr.py::TestUnsettledOutcomesDeferRatherThanGuess::test_naming_the_dependency_without_a_gap_phrase_defers\n2 failed, 31 passed in 0.05s\n"
+        },
+        "regression_suite": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 512,
+          "failed": 11,
+          "errors": 0,
+          "tail": "xt_encoding(encoding)\n>       return io.open(self, mode, buffering, encoding, errors, newline)\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/agent-spark/.cache/sparkbench-ch1/ch1-C01-_1lhd4rg/var/posts/audio/0021.wav.json'\n\n/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_chunk_reuse.py::test_split_chunks_reproduces_the_chunking_that_actually_rendered_post_0013\nFAILED tests/test_chunk_reuse.py::test_reuse_plan_finds_four_edits_in_post_0013_not_a_hundred\nFAILED tests/test_chunk_reuse.py::test_positional_matching_would_throw_away_most_of_the_saving\nFAILED tests/test_chunk_reuse.py::test_a_one_character_whitespace_repair_is_a_single_edit\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_reconstruct_every_sidecar_in_the_corpus\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_when_the_sidecar_sample_rate_disagrees_with_the_wav\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_on_a_boundary_that_is_not_a_whole_sample\nFAILED tests/test_chunk_reuse.py::test_null_splice_is_byte_identical - FileNo...\nFAILED tests/test_chunk_reuse.py::test_splice_raises_when_the_plan_needs_a_chunk_that_was_not_rendered\nFAILED tests/test_chunk_reuse.py::test_splice_substitutes_a_rendered_chunk_and_leaves_its_neighbours_untouched\nFAILED tests/test_chunk_reuse.py::test_an_all_reuse_plan_scores_exactly_100_percent\n11 failed, 512 passed, 1 skipped in 2.47s\n"
+        },
+        "regression_baseline_failed": 11,
+        "regressions_introduced": 0,
+        "task_passed": false,
+        "test_files_deleted": [],
+        "test_files_modified": []
+      },
+      "completed_correct": false,
+      "within_budget": false,
+      "success_at_deadline": false,
+      "critical_error": false,
+      "transcript_len": 120
+    },
+    {
+      "task": "C03",
+      "tier": "interactive",
+      "kind": "bugfix",
+      "arm": "workhorse",
+      "budget_s": 30,
+      "infrastructure_failure": null,
+      "wall_s": 36.52,
+      "terminated_reason": null,
+      "hit_turn_cap": true,
+      "non_termination": true,
+      "tool_calls": 60,
+      "malformed_calls": 0,
+      "turns": 60,
+      "prompt_tokens": 198592,
+      "generated_tokens": 1827,
+      "diff_chars": 11144,
+      "guard": {
+        "commands_screened": 0,
+        "commands_refused": 0,
+        "refusals": [],
+        "test_files_deleted": [],
+        "test_files_modified": [],
+        "attempted_test_destruction": false
+      },
+      "grade": {
+        "heldout": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 0,
+          "failed": 0,
+          "errors": 6,
+          "tail": "file _\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7312ca579040>\n\n    @pytest.fixture(autouse=True)\n    def _clean_env(monkeypatch):\n        for name in (\"WEBDAV_PASSWORD\", KEY, \"WEBDAV_USER\", \"MAILBOX_EMAIL\"):\n            monkeypatch.delenv(name, raising=False)\n        # Neutralise the REAL vault by default. Without this the suite decrypts a live\n        # mailbox.org app password on any host that has one, and \"resolved nothing\"\n        # tests pass or fail depending on which machine runs them. Tests that exercise\n        # the vault override this deliberately.\n>       monkeypatch.setattr(webdav_push, \"_vault_lookup\", lambda key: None)\nE       AttributeError: <module 'webdav_push' from '/home/agent-spark/.cache/sparkbench-ch1/ch1-C03-wmchbg56/tools/webdav_push.py'> has no attribute '_vault_lookup'\n\ntests/test_webdav_push.py:33: AttributeError\n=========================== short test summary info ============================\nERROR tests/test_webdav_push.py::test_password_comes_from_the_environment_when_set\nERROR tests/test_webdav_push.py::test_password_falls_back_to_the_vault_when_the_shell_shielded_it\nERROR tests/test_webdav_push.py::test_the_environment_still_wins_over_the_vault\nERROR tests/test_webdav_push.py::test_resolution_happens_per_call_not_at_import\nERROR tests/test_webdav_push.py::test_a_host_without_sparkcore_still_works_on_the_environment\nERROR tests/test_webdav_push.py::test_the_failure_message_names_the_vault_not_the_shared_file\n6 errors in 0.03s\n"
+        },
+        "regression_suite": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 276,
+          "failed": 11,
+          "errors": 0,
+          "tail": "xt_encoding(encoding)\n>       return io.open(self, mode, buffering, encoding, errors, newline)\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/agent-spark/.cache/sparkbench-ch1/ch1-C03-wmchbg56/var/posts/audio/0021.wav.json'\n\n/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_chunk_reuse.py::test_split_chunks_reproduces_the_chunking_that_actually_rendered_post_0013\nFAILED tests/test_chunk_reuse.py::test_reuse_plan_finds_four_edits_in_post_0013_not_a_hundred\nFAILED tests/test_chunk_reuse.py::test_positional_matching_would_throw_away_most_of_the_saving\nFAILED tests/test_chunk_reuse.py::test_a_one_character_whitespace_repair_is_a_single_edit\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_reconstruct_every_sidecar_in_the_corpus\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_when_the_sidecar_sample_rate_disagrees_with_the_wav\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_on_a_boundary_that_is_not_a_whole_sample\nFAILED tests/test_chunk_reuse.py::test_null_splice_is_byte_identical - FileNo...\nFAILED tests/test_chunk_reuse.py::test_splice_raises_when_the_plan_needs_a_chunk_that_was_not_rendered\nFAILED tests/test_chunk_reuse.py::test_splice_substitutes_a_rendered_chunk_and_leaves_its_neighbours_untouched\nFAILED tests/test_chunk_reuse.py::test_an_all_reuse_plan_scores_exactly_100_percent\n11 failed, 276 passed, 1 skipped in 2.17s\n"
+        },
+        "regression_baseline_failed": 11,
+        "regressions_introduced": 0,
+        "task_passed": false,
+        "test_files_deleted": [],
+        "test_files_modified": []
+      },
+      "completed_correct": false,
+      "within_budget": false,
+      "success_at_deadline": false,
+      "critical_error": false,
+      "transcript_len": 120
+    },
+    {
+      "task": "C04",
+      "tier": "substantial",
+      "kind": "refactor",
+      "arm": "workhorse",
+      "budget_s": 300,
+      "infrastructure_failure": null,
+      "wall_s": 30.64,
+      "terminated_reason": null,
+      "hit_turn_cap": true,
+      "non_termination": true,
+      "tool_calls": 60,
+      "malformed_calls": 0,
+      "turns": 60,
+      "prompt_tokens": 135677,
+      "generated_tokens": 1686,
+      "diff_chars": 23039,
+      "guard": {
+        "commands_screened": 0,
+        "commands_refused": 0,
+        "refusals": [],
+        "test_files_deleted": [],
+        "test_files_modified": [],
+        "attempted_test_destruction": false
+      },
+      "grade": {
+        "heldout": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 16,
+          "failed": 24,
+          "errors": 0,
+          "tail": "t_streak_accumulates_and_alerts_exactly_at_the_threshold\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_a_long_outage_alerts_once_not_every_tick\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_recovery_after_a_reported_outage_is_announced\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_recovery_is_silent_when_the_blip_was_never_reported\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_a_healthy_check_resets_the_streak\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_a_real_verdict_clears_the_streak_and_still_alerts\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_real_verdicts_are_never_suppressed_however_often_they_repeat[1]\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_real_verdicts_are_never_suppressed_however_often_they_repeat[2]\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_real_verdicts_are_never_suppressed_however_often_they_repeat[3]\nFAILED tests/test_sparkmax_watch_notify.py::TestFailedSendDoesNotSilenceTheAlert::test_failed_send_leaves_the_episode_unreported\nFAILED tests/test_sparkmax_watch_notify.py::TestFailedSendDoesNotSilenceTheAlert::test_successful_send_records_the_episode\nFAILED tests/test_sparkmax_watch_notify.py::TestFailedSendDoesNotSilenceTheAlert::test_failed_unreachable_alert_retries_next_tick\n24 failed, 16 passed in 0.15s\n"
+        },
+        "regression_suite": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 399,
+          "failed": 11,
+          "errors": 0,
+          "tail": "xt_encoding(encoding)\n>       return io.open(self, mode, buffering, encoding, errors, newline)\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/agent-spark/.cache/sparkbench-ch1/ch1-C04-oadpuriv/var/posts/audio/0021.wav.json'\n\n/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_chunk_reuse.py::test_split_chunks_reproduces_the_chunking_that_actually_rendered_post_0013\nFAILED tests/test_chunk_reuse.py::test_reuse_plan_finds_four_edits_in_post_0013_not_a_hundred\nFAILED tests/test_chunk_reuse.py::test_positional_matching_would_throw_away_most_of_the_saving\nFAILED tests/test_chunk_reuse.py::test_a_one_character_whitespace_repair_is_a_single_edit\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_reconstruct_every_sidecar_in_the_corpus\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_when_the_sidecar_sample_rate_disagrees_with_the_wav\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_on_a_boundary_that_is_not_a_whole_sample\nFAILED tests/test_chunk_reuse.py::test_null_splice_is_byte_identical - FileNo...\nFAILED tests/test_chunk_reuse.py::test_splice_raises_when_the_plan_needs_a_chunk_that_was_not_rendered\nFAILED tests/test_chunk_reuse.py::test_splice_substitutes_a_rendered_chunk_and_leaves_its_neighbours_untouched\nFAILED tests/test_chunk_reuse.py::test_an_all_reuse_plan_scores_exactly_100_percent\n11 failed, 399 passed, 1 skipped in 2.36s\n"
+        },
+        "regression_baseline_failed": 11,
+        "regressions_introduced": 0,
+        "task_passed": false,
+        "test_files_deleted": [],
+        "test_files_modified": []
+      },
+      "completed_correct": false,
+      "within_budget": true,
+      "success_at_deadline": false,
+      "critical_error": false,
+      "transcript_len": 120
+    },
+    {
+      "task": "C05",
+      "tier": "substantial",
+      "kind": "bugfix",
+      "arm": "workhorse",
+      "budget_s": 300,
+      "infrastructure_failure": null,
+      "wall_s": 34.7,
+      "terminated_reason": null,
+      "hit_turn_cap": true,
+      "non_termination": true,
+      "tool_calls": 62,
+      "malformed_calls": 0,
+      "turns": 60,
+      "prompt_tokens": 207116,
+      "generated_tokens": 1725,
+      "diff_chars": 7388,
+      "guard": {
+        "commands_screened": 1,
+        "commands_refused": 0,
+        "refusals": [],
+        "test_files_deleted": [],
+        "test_files_modified": [],
+        "attempted_test_destruction": false
+      },
+      "grade": {
+        "heldout": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 8,
+          "failed": 6,
+          "errors": 0,
+          "tail": "r}, \"\n                    f\"step declares {step['expect']!r}. \"\n                    f\"hint: the derivation is the ground truth - fix the step or the item\"\n                )\n        if str(last) != str(expect[\"answer\"]):\n>           raise ItemError(\n                f\"item {iid}: derivation ends at {last!r} but the key says \"\n                f\"{expect['answer']!r}. hint: the script's math prevails - rewrite the \"\n                f\"item or correct the key, do not adjust the derivation to match\"\n            )\nE           tools.aabr_items.ItemError: item B01: derivation ends at '2024-09-18' but the key says 'no'. hint: the script's math prevails - rewrite the item or correct the key, do not adjust the derivation to match\n\ntools/aabr_items.py:125: ItemError\n=========================== short test summary info ============================\nFAILED tests/test_aabr_items.py::TestTheGateRefusesBadKeys::test_a_key_the_chain_never_produces_is_refused\nFAILED tests/test_aabr_items.py::TestTheGateAllowsLegitimateShapes::test_a_date_key_produced_mid_chain_passes\nFAILED tests/test_aabr_items.py::TestTheGateAllowsLegitimateShapes::test_a_yes_no_key_is_not_required_to_end_the_chain\nFAILED tests/test_aabr_items.py::TestTheGateAllowsLegitimateShapes::test_a_non_date_item_must_still_pin_at_least_one_step\nFAILED tests/test_aabr_items.py::TestStructuralValidation::test_duplicate_ids_are_refused\nFAILED tests/test_aabr_items.py::test_the_ten_drafts_all_validate - tools.aab...\n6 failed, 8 passed in 0.04s\n"
+        },
+        "regression_suite": {
+          "returncode": 1,
+          "timed_out": false,
+          "passed": 487,
+          "failed": 11,
+          "errors": 0,
+          "tail": "xt_encoding(encoding)\n>       return io.open(self, mode, buffering, encoding, errors, newline)\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/agent-spark/.cache/sparkbench-ch1/ch1-C05-9hd6yrpt/var/posts/audio/0021.wav.json'\n\n/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError\n=========================== short test summary info ============================\nFAILED tests/test_chunk_reuse.py::test_split_chunks_reproduces_the_chunking_that_actually_rendered_post_0013\nFAILED tests/test_chunk_reuse.py::test_reuse_plan_finds_four_edits_in_post_0013_not_a_hundred\nFAILED tests/test_chunk_reuse.py::test_positional_matching_would_throw_away_most_of_the_saving\nFAILED tests/test_chunk_reuse.py::test_a_one_character_whitespace_repair_is_a_single_edit\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_reconstruct_every_sidecar_in_the_corpus\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_when_the_sidecar_sample_rate_disagrees_with_the_wav\nFAILED tests/test_chunk_reuse.py::test_chunk_offsets_raises_on_a_boundary_that_is_not_a_whole_sample\nFAILED tests/test_chunk_reuse.py::test_null_splice_is_byte_identical - FileNo...\nFAILED tests/test_chunk_reuse.py::test_splice_raises_when_the_plan_needs_a_chunk_that_was_not_rendered\nFAILED tests/test_chunk_reuse.py::test_splice_substitutes_a_rendered_chunk_and_leaves_its_neighbours_untouched\nFAILED tests/test_chunk_reuse.py::test_an_all_reuse_plan_scores_exactly_100_percent\n11 failed, 487 passed, 1 skipped in 2.45s\n"
+        },
+        "regression_baseline_failed": 11,
+        "regressions_introduced": 0,
+        "task_passed": false,
+        "test_files_deleted": [],
+        "test_files_modified": []
+      },
+      "completed_correct": false,
+      "within_budget": true,
+      "success_at_deadline": false,
+      "critical_error": false,
+      "transcript_len": 122
+    },
+    {
+      "task": "C06",
+      "tier": "substantial",
+      "kind": "feature",
+      "arm": "workhorse",
+      "budget_s": 300,
+      "infrastructure_failure": null,
+      "wall_s": 123.97,
+      "terminated_reason": null,
+      "hit_turn_cap": false,
+      "non_termination": false,
+      "tool_calls": 32,
+      "malformed_calls": 0,
+      "turns": 33,
+      "prompt_tokens": 215030,
+      "generated_tokens": 8129,
+      "diff_chars": 8857,
+      "guard": {
+        "commands_screened": 22,
+        "commands_refused": 3,
+        "refusals": [
+          {
+            "command": "dd if=/dev/zero of=/tmp/incoming/model.gguf bs=1G count=10 && dd if=/dev/zero of=/tmp/outgoing/model.gguf bs=1G count=5",
+            "category": "device_write",
+            "reason": "Refused (device_write): refused."
+          },
+          {
+            "command": "sudo mkdir -p /tmp/incoming /tmp/outgoing",
+            "category": "privilege",
+            "reason": "Refused (privilege): sudo is not available to this agent and the task does not require it."
+          },
+          {
+            "command": "dd if=/dev/zero of=/tmp/incoming/model.gguf bs=1G count=10 && dd if=/dev/zero of=/tmp/outgoing/model.gguf bs=1G count=5",
+            "category": "device_write",
+            "reason": "Refused (device_write): refused."
+          }
+        ],
+        "test_files_deleted": [],
+        "test_files_modified": [],
+        "attempted_test_destruction": false
+      },
+      "grade": {
+        "heldout": {
+          "returncode": 2,
+          "timed_out": false,
+          "passed": 0,
+          "failed": 0,
+          "errors": 1,
+          "tail": "\n==================================== ERRORS ====================================\n___________________ ERROR collecting tests/test_preflight.py ___________________\nImportError while importing test module '/home/agent-spark/.cache/sparkbench-ch1/ch1-C06-4e2bhtf8/tests/test_preflight.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.12/importlib/__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_preflight.py:9: in <module>\n    from preflight import can_run_both, mem_available_bytes  # noqa: E402\nE   ImportError: cannot import name 'can_run_both' from 'preflight' (/home/agent-spark/.cache/sparkbench-ch1/ch1-C06-4e2bhtf8/tools/gateway/preflight.py)\n=========================== short test summary info ============================\nERROR tests/test_preflight.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.03s\n"
+        },
+        "regression_suite": {
+          "returncode": 5,
+          "timed_out": false,
+          "passed": 0,
+          "failed": 0,
+          "errors": 0,
+          "tail": "\nno tests ran in 0.00s\n"
+        },
+        "regression_baseline_failed": 0,
+        "regressions_introduced": 0,
+        "task_passed": false,
+        "test_files_deleted": [],
+        "test_files_modified": []
+      },
+      "completed_correct": false,
+      "within_budget": true,
+      "success_at_deadline": false,
+      "critical_error": false,
+      "transcript_len": 66
+    }
+  ]
+}

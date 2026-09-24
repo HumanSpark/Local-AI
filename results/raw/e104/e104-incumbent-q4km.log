@@ -1,0 +1,16 @@
+=== coding eval: e104-incumbent-q4km (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 24576, 'needed': 24909, 'ctx': 32768, 'headroom': 7859}
+  [1/8] glob_match             pass             13836 tok, 1149.65s  
+  [2/8] round_decimal          pass             6279 tok, 516.23s  
+  [3/8] kmerge                 pass             4692 tok, 384.74s  
+  [4/8] wrap                   pass             2386 tok, 195.74s  
+  [5/8] sliding_median         wrong_answer     15400 tok, 1284.26s  AssertionError: 1
+  [6/8] apply_patch            pass             10439 tok, 864.52s  
+  [7/8] interval_map           pass             14916 tok, 1243.0s  
+  [8/8] parse_csv              pass             6848 tok, 563.37s  
+
+e104-incumbent-q4km: 7/8 passed  by_tier={'expert': {'pass': 7, 'total': 8}}
+outcomes: {'pass': 7, 'wrong_answer': 1}
+written: results/raw/e104/e104-incumbent-q4km.json

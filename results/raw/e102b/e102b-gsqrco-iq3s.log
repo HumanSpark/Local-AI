@@ -1,0 +1,23 @@
+=== coding eval: e102b-gsqrco-iq3s (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-GSQ-RCO-IQ3_S-mtp.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 124, 'max_tokens': 8192, 'needed': 8316, 'ctx': 16384, 'headroom': 8068}
+  [1/15] rle_encode             pass             493 tok, 32.18s  
+  [2/15] is_balanced            pass             516 tok, 34.53s  
+  [3/15] merge_intervals        pass             796 tok, 52.24s  
+  [4/15] parse_semver           pass             1515 tok, 98.06s  
+  [5/15] top_k_frequent         pass             594 tok, 39.49s  
+  [6/15] spiral_order           pass             1024 tok, 66.76s  
+  [7/15] group_anagrams         pass             835 tok, 54.9s  
+  [8/15] normalize_path         pass             2606 tok, 168.3s  
+  [9/15] roman_roundtrip        error            4560 tok, 293.5s  ValueError: 'LVIII' is not a valid Roman numeral
+  [10/15] longest_valid_parens   pass             617 tok, 41.04s  
+  [11/15] lru_cache              pass             1423 tok, 92.55s  
+  [12/15] word_break             pass             3818 tok, 245.51s  
+  [13/15] topo_schedule          pass             1298 tok, 84.3s  
+  [14/15] min_window             pass             907 tok, 59.26s  
+  [15/15] eval_expr              pass             2378 tok, 153.7s  
+
+e102b-gsqrco-iq3s: 14/15 passed  by_tier={'easy': {'pass': 2, 'total': 2}, 'medium': {'pass': 6, 'total': 7}, 'hard': {'pass': 6, 'total': 6}}
+outcomes: {'error': 1, 'pass': 14}
+written: results/raw/e102b/e102b-gsqrco-iq3s.json

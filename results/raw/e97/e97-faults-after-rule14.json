@@ -1,0 +1,210 @@
+{
+  "experiment": "E97",
+  "prereg": "results/e97-prereg.md",
+  "utc": "2026-08-31T20:29:54Z",
+  "kernel": "7.0.0-29-generic",
+  "runner_under_test": "/home/agent-spark/sparkbench/tools/run_ps_eval.py",
+  "tier": "l1",
+  "timings_void": "every timing here is void by declaration - --allow-busy-gpu, no GPU used, fake server",
+  "faults_run": 7,
+  "requirements_breached": 3,
+  "breached_faults": [
+    "truncation",
+    "malformed",
+    "interrupt"
+  ],
+  "predictions_wrong": [
+    "truncation"
+  ],
+  "results": [
+    {
+      "fault": "none",
+      "prereg_number": 0,
+      "description": "healthy fake server - the positive control",
+      "required_red": false,
+      "predicted_red": false,
+      "exit_code": 0,
+      "went_red": false,
+      "score_emitted": true,
+      "score": {
+        "correct": 1,
+        "total": 20
+      },
+      "truncation_gate": "PASS",
+      "outcome_counts": {
+        "correct": 1,
+        "over_claim": 4,
+        "wrong": 15
+      },
+      "result_file": "/home/agent-spark/sparkbench/results/raw/e97/e97-none.json",
+      "wall_s": 2.1,
+      "stderr_tail": [
+        "WARNING: --request-timeout 60s is below the 385s needed for max_tokens=512 at 6.0 tok/s. Generations that use the full budget will fail as transport_failed, not truncated, and will produce no data. This destroyed the E33 re-run on 2026-08-15.",
+        "WARNING: llama-server running (pids: ['1789377']) and --allow-busy-gpu was passed. EVERY TIMING IN THIS RUN IS VOID (Rule 9). Correctness is not a contended quantity."
+      ],
+      "verdict": "REQUIREMENT MET"
+    },
+    {
+      "fault": "truncation",
+      "prereg_number": 1,
+      "description": "finish_reason=length with empty content on every item",
+      "required_red": true,
+      "predicted_red": true,
+      "exit_code": 3,
+      "went_red": true,
+      "score_emitted": true,
+      "score": {
+        "correct": 0,
+        "total": 20
+      },
+      "truncation_gate": "FAIL",
+      "outcome_counts": {
+        "truncated": 20
+      },
+      "result_file": "/home/agent-spark/sparkbench/results/raw/e97/e97-truncation.json",
+      "wall_s": 2.1,
+      "stderr_tail": [
+        "    max_tokens=512. These are NOT misses - they were never answered.",
+        "    hint: raise --max-tokens (and --ctx to fit it). Check the chat template honours",
+        "    any effort flag before reaching for one: a template that ignores reasoning_effort",
+        "    makes --thinking inert while the result file records it as applied.",
+        "    Refusing to report a score. Pass --allow-truncation to record it anyway,",
+        "    in which case the truncated items are declared in the result file."
+      ],
+      "verdict": "REQUIREMENT BREACHED"
+    },
+    {
+      "fault": "malformed",
+      "prereg_number": 2,
+      "description": "HTTP 200 whose JSON body has no choices key",
+      "required_red": true,
+      "predicted_red": false,
+      "exit_code": 4,
+      "went_red": true,
+      "score_emitted": true,
+      "score": {
+        "correct": 0,
+        "total": 20
+      },
+      "truncation_gate": "PASS",
+      "outcome_counts": {
+        "transport_failed": 20
+      },
+      "result_file": "/home/agent-spark/sparkbench/results/raw/e97/e97-malformed.json",
+      "wall_s": 2.1,
+      "stderr_tail": [
+        "    distinct errors: [\"'choices'\"]",
+        "    hint: check the server is still alive (a mid-run death leaves the rest of the",
+        "    bank unanswered), then --request-timeout against --max-tokens. E33's re-run was",
+        "    destroyed exactly this way and reported no data at all.",
+        "    Refusing to report a score. Pass --allow-transport-failures to record it",
+        "    anyway, in which case the unanswered items are declared in the result file."
+      ],
+      "verdict": "REQUIREMENT BREACHED"
+    },
+    {
+      "fault": "empty",
+      "prereg_number": 3,
+      "description": "HTTP 200, content is the empty string, finish_reason=stop",
+      "required_red": false,
+      "predicted_red": false,
+      "exit_code": 0,
+      "went_red": false,
+      "score_emitted": true,
+      "score": {
+        "correct": 0,
+        "total": 20
+      },
+      "truncation_gate": "PASS",
+      "outcome_counts": {
+        "format_error": 20
+      },
+      "result_file": "/home/agent-spark/sparkbench/results/raw/e97/e97-empty.json",
+      "wall_s": 2.1,
+      "stderr_tail": [
+        "WARNING: --request-timeout 60s is below the 385s needed for max_tokens=512 at 6.0 tok/s. Generations that use the full budget will fail as transport_failed, not truncated, and will produce no data. This destroyed the E33 re-run on 2026-08-15.",
+        "WARNING: llama-server running (pids: ['1789377']) and --allow-busy-gpu was passed. EVERY TIMING IN THIS RUN IS VOID (Rule 9). Correctness is not a contended quantity."
+      ],
+      "verdict": "REQUIREMENT MET"
+    },
+    {
+      "fault": "missing_output",
+      "prereg_number": 4,
+      "description": "--out under a path whose parent is a FILE, so the directory cannot be made",
+      "required_red": true,
+      "predicted_red": true,
+      "exit_code": 1,
+      "went_red": true,
+      "score_emitted": false,
+      "score": null,
+      "truncation_gate": null,
+      "outcome_counts": null,
+      "result_file": null,
+      "wall_s": 0.1,
+      "stderr_tail": [
+        "             ^^^^^^",
+        "  File \"/home/agent-spark/sparkbench/tools/run_ps_eval.py\", line 432, in main",
+        "    out_path.parent.mkdir(parents=True, exist_ok=True)",
+        "  File \"/usr/lib/python3.12/pathlib.py\", line 1313, in mkdir",
+        "    os.mkdir(self, mode)",
+        "NotADirectoryError: [Errno 20] Not a directory: '/home/agent-spark/sparkbench/results/raw/e97/not-a-directory/cannot-exist'"
+      ],
+      "verdict": "REQUIREMENT MET"
+    },
+    {
+      "fault": "interrupt",
+      "prereg_number": 5,
+      "description": "server exits after answering 3 of the bank's items",
+      "required_red": true,
+      "predicted_red": false,
+      "exit_code": 4,
+      "went_red": true,
+      "score_emitted": true,
+      "score": {
+        "correct": 1,
+        "total": 20
+      },
+      "truncation_gate": "PASS",
+      "outcome_counts": {
+        "correct": 1,
+        "transport_failed": 17,
+        "wrong": 2
+      },
+      "result_file": "/home/agent-spark/sparkbench/results/raw/e97/e97-interrupt.json",
+      "wall_s": 2.1,
+      "stderr_tail": [
+        "    distinct errors: ['<urlopen error [Errno 111] Connection refused>', 'Remote end closed connection without response']",
+        "    hint: check the server is still alive (a mid-run death leaves the rest of the",
+        "    bank unanswered), then --request-timeout against --max-tokens. E33's re-run was",
+        "    destroyed exactly this way and reported no data at all.",
+        "    Refusing to report a score. Pass --allow-transport-failures to record it",
+        "    anyway, in which case the unanswered items are declared in the result file."
+      ],
+      "verdict": "REQUIREMENT BREACHED"
+    },
+    {
+      "fault": "scorer_exception",
+      "prereg_number": 6,
+      "description": "the grader raises on item R1",
+      "required_red": true,
+      "predicted_red": true,
+      "exit_code": 1,
+      "went_red": true,
+      "score_emitted": false,
+      "score": null,
+      "truncation_gate": null,
+      "outcome_counts": null,
+      "result_file": null,
+      "wall_s": 2.1,
+      "stderr_tail": [
+        "  File \"/home/agent-spark/sparkbench/tools/run_ps_eval.py\", line 507, in main",
+        "    outcome = grade(q, answer)",
+        "              ^^^^^^^^^^^^^^^^",
+        "  File \"/home/agent-spark/sparkbench/tools/e97/sitecustomize.py\", line 58, in _grade_with_injected_fault",
+        "    raise RuntimeError(",
+        "RuntimeError: E97 injected scorer fault on item R1. hint: this is a deliberate fault injection, not a real defect"
+      ],
+      "verdict": "REQUIREMENT MET"
+    }
+  ]
+}

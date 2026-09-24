@@ -1,0 +1,45 @@
+0.00.029.537 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.029.761 I srv          init: The UI is disabled
+0.00.029.762 I srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+0.00.029.867 W srv  llama_server: -----------------
+0.00.029.868 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.029.868 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.029.869 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.029.869 W srv  llama_server: -----------------
+0.00.031.091 I srv    load_model: loading model '/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf'
+0.00.338.813 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.02.610.900 I cmn          init: llama threadpool init, n_threads = 16
+0.02.735.027 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 32768, kv_unified = 'false'
+0.02.741.177 I srv  llama_server: model loaded
+0.02.741.183 I srv  llama_server: listening on http://127.0.0.1:8100
+0.03.927.026 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.03.927.099 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.03.927.118 E srv    send_error: task id = 0, error: request (40741 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.927.125 I slot      release: id  0 | task 0 | stop processing: n_tokens = 0, truncated = 0
+0.03.927.129 W srv          stop: cancel task, id_task = 0
+0.03.935.053 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78812129907
+0.03.935.128 I slot launch_slot_: id  0 | task 5 | processing task, is_child = 0
+0.03.935.140 E srv    send_error: task id = 5, error: request (40727 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.935.146 I slot      release: id  0 | task 5 | stop processing: n_tokens = 0, truncated = 0
+0.03.935.151 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78812137928
+0.03.935.161 W srv          stop: cancel task, id_task = 5
+0.03.935.194 I slot launch_slot_: id  0 | task 3 | processing task, is_child = 0
+0.03.935.209 E srv    send_error: task id = 3, error: request (40759 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.935.212 I slot      release: id  0 | task 3 | stop processing: n_tokens = 0, truncated = 0
+0.03.935.219 W srv          stop: cancel task, id_task = 3
+0.03.935.224 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78812137994
+0.03.935.268 I slot launch_slot_: id  0 | task 4 | processing task, is_child = 0
+0.03.935.273 E srv    send_error: task id = 4, error: request (40759 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.935.275 I slot      release: id  0 | task 4 | stop processing: n_tokens = 0, truncated = 0
+0.03.935.291 W srv          stop: cancel task, id_task = 4
+0.04.044.118 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78812138056
+0.04.044.271 I slot launch_slot_: id  0 | task 12 | processing task, is_child = 0
+0.04.044.288 E srv    send_error: task id = 12, error: request (40757 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.04.044.293 I slot      release: id  0 | task 12 | stop processing: n_tokens = 0, truncated = 0
+0.04.044.309 W srv          stop: cancel task, id_task = 12
+0.04.049.715 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78812247076
+0.04.049.767 I slot launch_slot_: id  0 | task 15 | processing task, is_child = 0
+0.04.049.772 E srv    send_error: task id = 15, error: request (40752 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.04.049.774 I slot      release: id  0 | task 15 | stop processing: n_tokens = 0, truncated = 0
+0.04.049.788 W srv          stop: cancel task, id_task = 15
+0.04.160.695 I srv    operator(): operator(): cleaning up before exit...

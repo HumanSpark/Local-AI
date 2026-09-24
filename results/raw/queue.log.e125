@@ -1,0 +1,40 @@
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8127 --no-webui -v
+workhorse: gate OK 98 layers
+  workhorse  greeting      tok=   31 wall=   0.46s
+  workhorse  factual       tok=    8 wall=   0.19s
+  workhorse  definition    tok=   67 wall=   0.86s
+  workhorse  rewrite       tok=   12 wall=   0.26s
+  workhorse  extract       tok=    9 wall=   0.23s
+  workhorse  arith         tok=  141 wall=   1.66s
+  workhorse  light_reason  tok=   35 wall=   0.57s
+  workhorse  code_snippet  tok=    5 wall=   0.17s
+  workhorse  summarise     tok=   28 wall=   0.49s
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8127 --no-webui -v
+nemotron: gate OK 106 layers
+  nemotron   greeting      tok=  174 wall=   3.32s
+  nemotron   factual       tok=   33 wall=    1.4s
+  nemotron   definition    tok=   90 wall=   2.31s
+  nemotron   rewrite       tok=   69 wall=   2.01s
+  nemotron   extract       tok=  105 wall=    2.6s
+  nemotron   arith         tok=  205 wall=   4.06s
+  nemotron   light_reason  tok=  175 wall=   3.68s
+  nemotron   code_snippet  tok=  209 wall=   4.12s
+  nemotron   summarise     tok=   49 wall=   1.77s
+
+summary: {
+  "workhorse": {
+    "median_wall_s": 0.46,
+    "max_wall_s": 1.66,
+    "median_completion_tokens": 28,
+    "total_wall_s": 4.9
+  },
+  "nemotron": {
+    "median_wall_s": 2.6,
+    "max_wall_s": 4.12,
+    "median_completion_tokens": 105,
+    "total_wall_s": 25.3
+  },
+  "ratio_wall_median": 5.65,
+  "ratio_tokens_median": 3.75
+}
+written: /home/agent-spark/sparkbench/results/raw/e125/e125-perceived-latency.json

@@ -1,0 +1,3788 @@
+{
+  "evalId": "eval-R1W-2026-07-11T11:19:31",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-07-11T11:19:31.049Z",
+    "prompts": [
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "openai:chat:local-model",
+        "metrics": {
+          "score": 22,
+          "testPassCount": 22,
+          "testFailCount": 2,
+          "testErrorCount": 0,
+          "assertPassCount": 29,
+          "assertFailCount": 2,
+          "totalLatencyMs": 339179,
+          "tokenUsage": {
+            "prompt": 992,
+            "completion": 7061,
+            "cached": 0,
+            "total": 8053,
+            "numRequests": 24,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 87,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const bullets = output.match(/^(?:[-•*]|\\d+\\.)\\s/gm) || [];\nreturn bullets.length === 3;\n"
+              }
+            }
+          ]
+        },
+        "id": "17d15d47-b5c5-4bce-bc06-c81ec189a1d2",
+        "latencyMs": 2402,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "- Draft and circulate draft lease agreement for client review by Friday, 12 April 2024.  \n- Schedule follow-up meeting with client and surveyor to discuss property survey findings by Tuesday, 9 April 2024.  \n- Compile list of required due diligence documents for the property transaction and send to client by Thursday, 11 April 2024.",
+          "tokenUsage": {
+            "total": 113,
+            "prompt": 30,
+            "completion": 83,
+            "numRequests": 1
+          },
+          "cached": false,
+          "latencyMs": 2402,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "996",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "exact-bullets-3-action-items",
+          "vars": {
+            "task": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const bullets = output.match(/^(?:[-•*]|\\d+\\.)\\s/gm) || [];\nreturn bullets.length === 3;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 30,
+          "completion": 83,
+          "cached": 0,
+          "total": 113,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "996",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const paragraphs = output.split(/\\n\\n+/).filter(p => p.trim().length > 0);\nreturn paragraphs.length === 2;\n"
+              }
+            }
+          ]
+        },
+        "id": "a14b6a1c-985f-45ce-8d90-0ccc966cd3c7",
+        "latencyMs": 6554,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "The case of Smith v Jones Ltd. involves a contractual dispute between the plaintiff, Smith, and the defendant, Jones Ltd. Smith claims that Jones Ltd. breached their supply agreement dated 1 May 2025 by delivering goods three weeks late and providing goods of substandard quality. As a result, Smith seeks £15,000 in damages to compensate for losses incurred due to the delay and defective products. Jones Ltd. denies any liability, arguing that the delay was due to unforeseen supply chain disruptions beyond their control and that the goods met the agreed quality standards.\n\nKey facts include that the supply agreement clearly stipulated a delivery date of 1 June 2025, which was not met, with goods delivered on 22 June 2025. Smith provided photographic evidence and expert reports indicating that the goods failed to meet the specified quality criteria, including material durability and dimensional accuracy. Jones Ltd. submitted evidence of a shipping delay caused by a port strike, claiming it constituted a force majeure event. The court must determine whether the delay was excusable, whether the goods were indeed defective, and whether Smith suffered quantifiable losses as a direct result of the breach.",
+          "tokenUsage": {
+            "total": 334,
+            "prompt": 89,
+            "completion": 245,
+            "numRequests": 1
+          },
+          "cached": false,
+          "latencyMs": 6554,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "1892",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "exact-paragraphs-2-case-summary",
+          "vars": {
+            "task": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const paragraphs = output.split(/\\n\\n+/).filter(p => p.trim().length > 0);\nreturn paragraphs.length === 2;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 89,
+          "completion": 245,
+          "cached": 0,
+          "total": 334,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "1892",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const bullets = output.match(/^(?:[-•*]|\\d+\\.)\\s/gm) || [];\nreturn bullets.length === 4;\n"
+              }
+            }
+          ]
+        },
+        "id": "233720a1-bd6f-41d7-8aa1-a8f626302949",
+        "latencyMs": 6928,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "- **Delivery Delay Risk**: The supplier may fail to deliver within the 30-day window, potentially disrupting the buyer’s operations, especially if the goods are time-sensitive.\n\n- **Cancellation Without Penalty Risk**: While the buyer can cancel after 45 days of delay, the supplier may still incur costs (e.g., production, materials) without recourse, creating financial exposure for the supplier.\n\n- **Ownership and Risk Transfer Risk**: Goods remain the supplier’s property until full payment, but the buyer is responsible for insurance during transit—creating a gap where the buyer bears financial risk for goods they do not yet own.\n\n- **Insurance Responsibility Misalignment Risk**: The buyer is liable for insurance during transit, but if the goods are damaged or lost, the supplier may still retain ownership, potentially leading to disputes over claims and liability.",
+          "tokenUsage": {
+            "total": 239,
+            "prompt": 72,
+            "completion": 167,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 6928,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "1560",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "exact-bullets-4-contract-risks",
+          "vars": {
+            "task": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const bullets = output.match(/^(?:[-•*]|\\d+\\.)\\s/gm) || [];\nreturn bullets.length === 4;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 72,
+          "completion": 167,
+          "cached": 0,
+          "total": 239,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "1560",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 100 && words <= 150;\n"
+              }
+            }
+          ]
+        },
+        "id": "4279904c-f8c6-4f4b-b9d8-c24a46126401",
+        "latencyMs": 11837,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "Client instructed solicitors on 1 June 2026 regarding a dispute with a supplier over defective goods. The goods were delivered on 15 June 2026, but upon inspection, the client identified significant quality issues on 22 June 2026, prompting a formal complaint. The supplier declined a full refund, offering only a partial credit, which the client deemed inadequate. The client estimates a financial loss of £8,500 due to the defective goods, including costs of replacement, lost business, and remedial work. The client seeks full reimbursement of the purchase price, plus additional damages for breach of contract and consequential losses. Legal action is being considered to enforce contractual rights under the Sale of Goods Act 1979, particularly regarding fitness for purpose and satisfactory quality. The case hinges on proving the goods failed to meet contractual standards and that the client acted promptly in raising the issue.",
+          "tokenUsage": {
+            "total": 294,
+            "prompt": 104,
+            "completion": 190,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 11837,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "1611",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "word-range-100-150-case-summary",
+          "vars": {
+            "task": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 100 && words <= 150;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 104,
+          "completion": 190,
+          "cached": 0,
+          "total": 294,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "1611",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 200 && words <= 300;\n"
+              }
+            }
+          ]
+        },
+        "id": "477e427c-2850-4dae-b3d4-68bcfc81319d",
+        "latencyMs": 15981,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "[Your Name]  \n[Your Address]  \n[City, State, ZIP Code]  \n[Email Address]  \n[Phone Number]  \n[Date]\n\n[Contractor’s Full Name]  \n[Contractor’s Company Name, if applicable]  \n[Contractor’s Address]  \n[City, State, ZIP Code]\n\nSubject: Formal Demand for Payment of Outstanding Invoice – [Invoice Number/Project Name]\n\nDear [Contractor’s Name],\n\nThis letter serves as a formal demand for payment of the outstanding balance of $[Amount] (USD), arising from the completion of work under our agreement dated [Date of Agreement], for the project titled “[Project Name/Description]” (the “Project”). \n\nDespite your completion of the agreed-upon work on [Date of Completion], as confirmed by our signed acceptance certificate dated [Date of Acceptance], the final payment of $[Amount] remains unpaid. This constitutes a material breach of the terms outlined in our contract, specifically Section [X] regarding payment timelines, which stipulates that payment is due within thirty (30) days of project completion and acceptance.\n\nWe have made multiple attempts to resolve this matter amicably, including follow-up communications on [List Dates of Previous Attempts], but no payment has been received. As such, we hereby demand full payment of the outstanding amount of $[Amount] within ten (10) calendar days from the date of this letter, by no later than [Deadline Date – e.g., October 25, 2024].\n\nFailure to remit payment by the deadline will leave us no choice but to pursue all available legal remedies, including but not limited to filing a claim in small claims court or engaging legal counsel to recover the debt, along with any applicable interest, late fees, and legal costs.\n\nPlease remit payment via [preferred method: e.g., certified check, bank transfer] to the address above or as otherwise specified in our original contract.\n\nSincerely,  \n[Your Full Name]  \n[Your Signature, if sending by mail]  \n\nEnclosure: Copy of Invoice # [Number], Acceptance Certificate",
+          "tokenUsage": {
+            "total": 475,
+            "prompt": 44,
+            "completion": 431,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 15981,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "2686",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "word-range-200-300-demand-letter",
+          "vars": {
+            "task": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 200 && words <= 300;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 44,
+          "completion": 431,
+          "cached": 0,
+          "total": 475,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "2686",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;\n"
+              }
+            }
+          ]
+        },
+        "id": "ab0f822d-05d2-4182-afa4-4a7b175f5b93",
+        "latencyMs": 7798,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "**Client Summary:**  \nMatter Type: Commercial Lease Dispute  \nKey Issue: Tenant alleges landlord failed to maintain premises, resulting in operational disruptions and financial loss; landlord disputes liability.  \nNext Step: Exchange of expert reports on property condition and repair costs by June 10, 2024.  \nTimeline Expectation: Mediation scheduled for July 15, 2024; resolution anticipated within 60 days post-mediation.",
+          "tokenUsage": {
+            "total": 131,
+            "prompt": 36,
+            "completion": 95,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 7798,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "1101",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "word-range-50-75-client-brief",
+          "vars": {
+            "task": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "tokenUsage": {
+          "prompt": 36,
+          "completion": 95,
+          "cached": 0,
+          "total": 131,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "1101",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Date"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Recipient"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Subject"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Conclusion"
+              }
+            }
+          ]
+        },
+        "id": "56cdb60c-02f8-49a7-bc56-adedd789085c",
+        "latencyMs": 25614,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "[Your Company Letterhead]  \n[Your Company Name]  \n[Company Address]  \n[City, State, ZIP Code]  \n[Phone Number] | [Email Address] | [Website URL]  \n\nDate: April 5, 2024  \n\nRecipient:  \nMs. Elena Rodriguez  \nClient Relations Manager  \nGreenfield Solutions Inc.  \n123 Innovation Drive  \nSan Francisco, CA 94105  \n\nSubject Line: Update on Project Phoenix Timeline and Next Steps  \n\nDear Ms. Rodriguez,  \n\n**Introduction**  \nThank you for the continued partnership and collaboration on Project Phoenix. We appreciate your team’s dedication and responsiveness throughout the development phase. This letter serves to provide a comprehensive update on the current status of the project, outline upcoming milestones, and confirm next steps to ensure we remain aligned and on track for a successful launch.  \n\n**Project Status Overview**  \nAs of today, the development phase is 85% complete. Key deliverables achieved include:  \n- Finalization of the user interface (UI) design and user experience (UX) flow  \n- Integration of the core analytics engine  \n- Successful completion of internal testing across all major platforms  \n\nWe have identified and resolved 98% of the bugs reported during the testing phase. The remaining issues are minor and are being addressed with a focus on performance optimization and cross-browser compatibility.  \n\n**Updated Timeline**  \nBased on our current progress, we are confident in the following revised project timeline:  \n- Final Testing & QA: April 15, 2024  \n- Client Review & Feedback Session: April 18, 2024  \n- Final Adjustments & Approval: April 22, 2024  \n- Project Launch: April 25, 2024  \n\nWe will send a formal launch readiness report by April 20, 2024, to confirm all systems are stable and ready for deployment.  \n\n**Next Steps & Action Items**  \nTo ensure a smooth transition into the final phase, we kindly request the following from your team:  \n1. Confirm availability for the feedback session on April 18.  \n2. Provide any additional user requirements or feature tweaks by April 10, 2024.  \n3. Designate a primary point of contact for the final review and approval process.  \n\n**Support & Communication**  \nOur project manager, James Carter, will be your main liaison moving forward. He will coordinate all updates and schedule check-ins as needed. For urgent matters, please contact him directly at james.carter@yourcompany.com or (555) 123-4567.  \n\n**Conclusion**  \nWe are excited about the progress made on Project Phoenix and are confident that with our continued collaboration, we will deliver a high-performing, user-centric solution on schedule. Thank you for your trust and partnership. We look forward to your feedback and to celebrating the successful launch together.  \n\nWarm regards,  \n\n[Your Full Name]  \nProject Director  \n[Your Company Name]  \n[Email Address] | [Phone Number]  \n\nEnclosures:  \n- Project Phoenix – Status Report (Q2 2024)  \n- Revised Milestone Timeline (PDF)  \n\n[Optional: Signature Line]  \n_________________________  \n[Your Handwritten or Digital Signature]",
+          "tokenUsage": {
+            "total": 728,
+            "prompt": 40,
+            "completion": 688,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 25614,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "3763",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sections-client-letter-4-required",
+          "vars": {
+            "task": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections."
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "Date"
+            },
+            {
+              "type": "icontains",
+              "value": "Recipient"
+            },
+            {
+              "type": "icontains",
+              "value": "Subject"
+            },
+            {
+              "type": "icontains",
+              "value": "Conclusion"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "tokenUsage": {
+          "prompt": 40,
+          "completion": 688,
+          "cached": 0,
+          "total": 728,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "3763",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Issue"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Analysis"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Conclusion"
+              }
+            }
+          ]
+        },
+        "id": "215b0e5e-b2cd-4644-9143-9446082ec900",
+        "latencyMs": 29283,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "**Legal Memorandum**\n\n**To:** [Client Name or Supervising Attorney]  \n**From:** [Your Name], Legal Intern  \n**Date:** [Current Date]  \n**Re:** Legal Analysis of [Case Name or Issue, e.g., \"Employment Discrimination Claim Under Title VII\"]\n\n---\n\n### **Issue**\n\nWhether the plaintiff, Jane Doe, has stated a valid claim for employment discrimination under Title VII of the Civil Rights Act of 1964, based on her assertion that she was terminated due to her gender, and whether the employer’s proffered reason for termination—poor performance—constitutes a legitimate, non-discriminatory justification.\n\n---\n\n### **Analysis**\n\nTitle VII of the Civil Rights Act of 1964 prohibits employment discrimination based on race, color, religion, sex, or national origin. To establish a prima facie case of gender-based discrimination in termination, the plaintiff must demonstrate:\n\n1. She is a member of a protected class (i.e., female);\n2. She was qualified for her position;\n3. She suffered an adverse employment action (i.e., termination); and\n4. The adverse action occurred under circumstances giving rise to an inference of discrimination (e.g., the position was filled by a person outside the protected class, or the employer treated similarly situated employees of a different gender more favorably).\n\nHere, the plaintiff, Jane Doe, is female, thus satisfying the first prong. She was employed as a marketing coordinator with a documented history of satisfactory performance reviews, including a positive evaluation six months prior to termination, which supports her qualification for the role—satisfying the second prong. The third prong is met as she was terminated on June 15, 2024, constituting an adverse employment action.\n\nThe fourth prong hinges on whether the circumstances surrounding her termination suggest discriminatory intent. The employer claims the termination was due to “consistent underperformance,” citing three performance reviews with declining scores and a failure to meet quarterly campaign targets. However, the plaintiff alleges that two male colleagues in similar roles received similar performance issues but were not terminated, and one was even promoted. This disparity, if proven, may support an inference of discrimination under the McDonnell Douglas burden-shifting framework.\n\nUnder McDonnell Douglas Corp. v. Green, 411 U.S. 792 (1973), once the plaintiff establishes a prima facie case, the burden shifts to the employer to articulate a legitimate, non-discriminatory reason for the adverse action. The employer has done so by citing performance deficiencies. The burden then returns to the plaintiff to show that the employer’s stated reason is pretextual—i.e., a mere cover-up for discrimination.\n\nEvidence of disparate treatment—such as the male colleagues receiving less severe consequences despite similar performance issues—may support a finding of pretext. Additionally, the timing of the termination (shortly after the plaintiff filed a complaint about gender bias in team assignments) may further support an inference of retaliatory motive under Title VII’s anti-retaliation provision, 42 U.S.C. § 2000e-3(a).\n\nCourts have held that even if an employer provides a legitimate reason, a plaintiff may still prevail if the reason is shown to be false or pretextual. See Texas Dept. of Community Affairs v. Burdine, 450 U.S. 248 (1981). The plaintiff’s evidence, while not yet fully developed, raises sufficient questions of fact to survive a motion to dismiss or summary judgment at this stage.\n\n---\n\n### **Conclusion**\n\nBased on the foregoing analysis, Jane Doe has stated a prima facie case of gender-based employment discrimination under Title VII. The employer’s proffered reason—poor performance—may be legitimate, but the plaintiff has raised sufficient evidence of disparate treatment and timing to suggest that the reason could be pretextual. Therefore, the claim should not be dismissed at this stage. The matter should proceed to discovery to allow for a full evaluation of the evidence, including performance records, personnel decisions, and witness testimony, to determine whether discrimination occurred. It is recommended that the plaintiff pursue her claim and prepare for potential discovery and motion practice.",
+          "tokenUsage": {
+            "total": 892,
+            "prompt": 26,
+            "completion": 866,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 29283,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "5013",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sections-legal-memo-3-required",
+          "vars": {
+            "task": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion."
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "Issue"
+            },
+            {
+              "type": "icontains",
+              "value": "Analysis"
+            },
+            {
+              "type": "icontains",
+              "value": "Conclusion"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "tokenUsage": {
+          "prompt": 26,
+          "completion": 866,
+          "cached": 0,
+          "total": 892,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "5013",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Scope"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Fees"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Confidentiality"
+              }
+            }
+          ]
+        },
+        "id": "188e9c41-3f3e-435c-8312-dbdf5612b4ac",
+        "latencyMs": 60187,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "**ENGAGEMENT LETTER**\n\n**Date:** [Insert Date]  \n**To:** [Client Name], [Client Title], [Client Company]  \n**From:** [Your Name/Company Name], [Your Title]  \n**Subject:** Engagement for [Brief Description of Services, e.g., Legal Advisory Services, Financial Consulting, Marketing Strategy Development]\n\n---\n\n### 1. **Introduction**\n\nThis Engagement Letter (\"Letter\") sets forth the terms and conditions under which [Your Company Name] (\"Firm\") will provide professional services to [Client Name] (\"Client\") for the purpose of [briefly describe the objective, e.g., advising on corporate restructuring, preparing financial statements, developing a digital marketing campaign].\n\nThis Letter constitutes a binding agreement between the parties and supersedes any prior discussions, representations, or agreements, whether oral or written.\n\n---\n\n### 2. **Scope of Work**\n\nThe Firm agrees to perform the following services (the \"Services\") for the Client:\n\n- [List specific tasks or deliverables, e.g.,  \n  • Conduct a comprehensive review of the Client’s current financial statements and internal controls.  \n  • Prepare and deliver a detailed report outlining findings and recommendations for process improvement.  \n  • Provide quarterly advisory sessions to discuss financial performance and strategic planning.  \n  • Deliver a final strategy presentation and implementation roadmap.]\n\nThe Services will be performed in accordance with generally accepted professional standards and applicable laws and regulations. The Client agrees to provide timely access to all necessary information, documents, personnel, and resources required to complete the Services.\n\n**Exclusions:**  \nThe following are expressly excluded from the Scope of Work unless otherwise agreed in writing:  \n- Any litigation, regulatory investigations, or tax audits.  \n- Services related to the preparation of tax returns or filings.  \n- Implementation of recommendations (unless specifically included in a separate agreement).\n\nThe Firm reserves the right to modify the Scope of Work upon mutual written agreement. Any changes to the Scope of Work may result in adjustments to the Fees (as outlined in Section 3).\n\n---\n\n### 3. **Fees**\n\n#### 3.1. **Fee Structure**  \nThe Client agrees to pay the Firm the following fees for the Services:\n\n- **Fixed Fee:** [Amount] for the entire engagement, payable as follows:  \n  • 50% upon signing this Letter (non-refundable).  \n  • 30% upon delivery of the draft report.  \n  • 20% upon final delivery and acceptance of the final report.\n\n- **Alternative Option (if applicable):**  \n  • Hourly Rate: [Rate] per hour, with time recorded in 15-minute increments.  \n  • Estimated total hours: [Number] (subject to change based on project scope).  \n  • Invoices will be issued monthly and are due within 15 days of receipt.\n\n#### 3.2. **Expenses**  \nThe Client will be responsible for reimbursing the Firm for reasonable out-of-pocket expenses incurred in connection with the Services, including but not limited to travel, lodging, research materials, and third-party fees. Such expenses must be pre-approved in writing by the Client, except in emergencies.\n\n#### 3.3. **Late Payments**  \nAll unpaid invoices are subject to a late fee of 1.5% per month (or the maximum rate permitted by law) on the outstanding balance. The Client remains responsible for all collection costs, including legal fees, if payment is not made within 30 days of the due date.\n\n#### 3.4. **Taxes**  \nAll fees and expenses are exclusive of applicable sales, use, or other taxes, which the Client agrees to pay.\n\n---\n\n### 4. **Confidentiality**\n\n#### 4.1. **Definition of Confidential Information**  \n\"Confidential Information\" means all non-public information disclosed by either party to the other in connection with this engagement, including but not limited to business plans, financial data, customer lists, technical information, and any other proprietary or sensitive information, whether disclosed orally, in writing, electronically, or visually.\n\n#### 4.2. **Obligations of the Recipient**  \nThe receiving party agrees to:  \n- Use the Confidential Information solely for the purpose of performing the Services under this Letter.  \n- Protect the Confidential Information with the same degree of care as it uses for its own sensitive information (but no less than reasonable care).  \n- Disclose the Confidential Information only to employees, contractors, or advisors who need to know and who are bound by confidentiality obligations at least as protective as those in this Letter.\n\n#### 4.3. **Exclusions**  \nConfidential Information does not include information that:  \n- Is or becomes publicly known through no fault of the receiving party.  \n- Was lawfully known to the receiving party prior to disclosure.  \n- Is independently developed without use of the disclosing party’s Confidential Information.  \n- Is rightfully received from a third party without restriction.\n\n#### 4.4. **Duration**  \nThe confidentiality obligations shall survive for a period of [e.g., five (5)] years from the date of disclosure, or longer if required by law or regulation.\n\n#### 4.5. **Return or Destruction**  \nUpon termination of this engagement or upon the Client’s written request, the Firm shall promptly return or destroy all Confidential Information (including copies, notes, and summaries), except for one archival copy retained for legal or compliance purposes.\n\n---\n\n### 5. **Term and Termination**\n\nThis engagement shall commence on [Start Date] and continue until [End Date] or until the completion of the Scope of Work, whichever occurs first. Either party may terminate this engagement with 15 days’ written notice. Upon termination, the Client shall pay for all Services rendered and expenses incurred up to the termination date.\n\n---\n\n### 6. **Limitation of Liability**\n\nThe Firm’s total liability to the Client for any claim arising out of or related to this engagement shall not exceed the total fees paid by the Client under this Letter. The Firm shall not be liable for any indirect, incidental, consequential, or punitive damages, including loss of profits or business opportunities.\n\n---\n\n### 7. **Governing Law and Dispute Resolution**\n\nThis Letter shall be governed by and construed in accordance with the laws of the State of [State], without regard to its conflict of laws principles. Any dispute arising under this Letter shall be resolved through binding arbitration in [City, State] under the rules of the American Arbitration Association. The prevailing party in any dispute shall be entitled to recover reasonable attorney’s fees and costs.\n\n---\n\n### 8. **Miscellaneous**\n\n- **Entire Agreement:** This Letter constitutes the entire agreement between the parties and supersedes all prior agreements or understandings.\n- **Amendments:** Any changes to this Letter must be in writing and signed by both parties.\n- **Notices:** All notices shall be in writing and sent to the addresses listed above (or as updated in writing).\n- **Assignment:** Neither party may assign this Letter without the prior written consent of the other party.\n- **Severability:** If any provision of this Letter is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.\n\n---\n\n**IN WITNESS WHEREOF**, the parties have executed this Engagement Letter as of the date first written above.\n\n---\n\n**[Your Company Name]**  \nBy: ___________________________  \nName: [Your Full Name]  \nTitle: [Your Title]  \nDate: _________________________\n\n---\n\n**[Client Name]**  \nBy: ___________________________  \nName: [Client’s Full Name]  \nTitle: [Client’s Title]  \nDate: _________________________\n\n---\n\n*Note: This is a template and should be reviewed by legal counsel before use.*",
+          "tokenUsage": {
+            "total": 1630,
+            "prompt": 33,
+            "completion": 1597,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 4
+            }
+          },
+          "cached": false,
+          "latencyMs": 60187,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "8642",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sections-engagement-letter-3-required",
+          "vars": {
+            "task": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow."
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "Scope"
+            },
+            {
+              "type": "icontains",
+              "value": "Fees"
+            },
+            {
+              "type": "icontains",
+              "value": "Confidentiality"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "tokenUsage": {
+          "prompt": 33,
+          "completion": 1597,
+          "cached": 0,
+          "total": 1630,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 4,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "8642",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!output.toLowerCase().includes('liable')\n"
+              }
+            }
+          ]
+        },
+        "id": "005e895c-e6ff-433e-8327-6ee662db18a6",
+        "latencyMs": 24891,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "Potential exposure arises when a party’s actions or omissions create a foreseeable risk of harm, and a plaintiff demonstrates a direct causal link between the conduct and resulting damages. Courts assess whether the conduct breached a legal duty, whether the harm was reasonably foreseeable, and whether the injury falls within the scope of the risk. Exposure may result in financial responsibility for damages, including compensatory and, in some cases, punitive awards.",
+          "tokenUsage": {
+            "total": 114,
+            "prompt": 30,
+            "completion": 84,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 5
+            }
+          },
+          "cached": false,
+          "latencyMs": 24891,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "1145",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "forbidden-word-liable",
+          "vars": {
+            "task": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "!output.toLowerCase().includes('liable')\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "tokenUsage": {
+          "prompt": 30,
+          "completion": 84,
+          "cached": 0,
+          "total": 114,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 5,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "1145",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!output.toLowerCase().includes('unfortunately')\n"
+              }
+            }
+          ]
+        },
+        "id": "04743350-18d5-4192-8bf7-7f6bcf5d0095",
+        "latencyMs": 12078,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "The case has experienced a brief delay due to additional documentation requirements. We’re actively working to resolve this and expect resolution within the next week. Your patience is appreciated as we ensure all materials are thoroughly prepared for submission.",
+          "tokenUsage": {
+            "total": 74,
+            "prompt": 30,
+            "completion": 44,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 12078,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "925",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "forbidden-word-unfortunately",
+          "vars": {
+            "task": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "!output.toLowerCase().includes('unfortunately')\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 10,
+        "tokenUsage": {
+          "prompt": 30,
+          "completion": 44,
+          "cached": 0,
+          "total": 74,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "925",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "!output.toLowerCase().includes('due to')\n"
+              }
+            }
+          ]
+        },
+        "id": "a4cd5e6e-68d2-4339-a563-12db3858a817",
+        "latencyMs": 4827,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "The contract ended because one party failed to deliver services as agreed. Breaches occurred repeatedly, despite warnings. The other party could not continue operations without reliable performance. Termination was necessary to protect business interests and ensure compliance with contractual obligations.",
+          "tokenUsage": {
+            "total": 79,
+            "prompt": 31,
+            "completion": 48,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 4827,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "975",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "forbidden-word-due-to",
+          "vars": {
+            "task": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "!output.toLowerCase().includes('due to')\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 11,
+        "tokenUsage": {
+          "prompt": 31,
+          "completion": 48,
+          "cached": 0,
+          "total": 79,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "975",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\nconst hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\nconst hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\nconst hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;",
+              "assertion": {
+                "type": "javascript",
+                "value": "const hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;\n"
+              }
+            }
+          ]
+        },
+        "id": "e6db89f9-63d4-45e1-9653-a4332f541f45",
+        "latencyMs": 25597,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "An efficient client intake process in a UK law firm is essential for ensuring compliance, enhancing client experience, and streamlining operations. To achieve this, the process should be structured, systematic, and aligned with regulatory requirements such as those set by the Solicitors Regulation Authority (SRA). Below is a comprehensive guide on how to organise the client intake process efficiently:\n\n1. **Clear Initial Contact and Triage**  \n   - Establish a dedicated intake team or assign a specific solicitor or paralegal to manage incoming enquiries.  \n   - Use a centralised system (e.g., a client relationship management (CRM) tool or practice management software) to log all initial contacts—whether by phone, email, or online form.  \n   - Implement a triage protocol to assess the nature of the enquiry, urgency, and potential for fee-earning work. This helps prioritise responses and allocate cases appropriately.\n\n2. **Standardised Intake Forms**  \n   - Develop and use standardised digital intake forms tailored to different practice areas (e.g., family law, conveyancing, corporate law).  \n   - Include essential information such as client name, contact details, case type, relevant dates, and a brief summary of the issue.  \n   - Ensure forms are accessible via the firm’s website and mobile-friendly to encourage completion.\n\n3. **Compliance and Due Diligence Checks**  \n   - Conduct mandatory client due diligence (CDD) in accordance with the Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017.  \n   - Collect and verify client identification (e.g., passport, driving licence) and proof of address.  \n   - Perform sanctions and adverse media checks using approved third-party services.  \n   - Store all documentation securely in compliance with the Data Protection Act 2018 and the UK GDPR.\n\n4. **Conflict of Interest Screening**  \n   - Integrate automated conflict checks into the intake system to compare new clients against existing client databases.  \n   - Promptly flag any potential conflicts and escalate them to a senior solicitor for review.  \n   - Document all conflict checks and decisions for audit purposes.\n\n5. **Client Engagement and Consent**  \n   - Provide a clear, concise client engagement letter outlining the scope of work, fees, payment terms, and expected timelines.  \n   - Use electronic signature tools (e.g., DocuSign) to obtain client consent efficiently and securely.  \n   - Ensure clients understand their rights and responsibilities, including the right to complain and access their data.\n\n6. **Case Assignment and Workflow Integration**  \n   - Assign the case to the most suitable solicitor or team based on expertise, workload, and availability.  \n   - Input all case details into the firm’s practice management system to trigger automated workflows, reminders, and task assignments.  \n   - Set up initial milestones and deadlines to ensure timely progression.\n\n7. **Communication and Onboarding**  \n   - Send a welcome email or letter confirming the client’s engagement, introducing the assigned solicitor, and outlining next steps.  \n   - Provide access to a secure client portal where documents can be uploaded, shared, and viewed.  \n   - Schedule an initial consultation (in person, by video call, or telephone) promptly to build rapport and clarify expectations.\n\n8. **Ongoing Monitoring and Review**  \n   - Regularly review the intake process to identify bottlenecks, errors, or client feedback.  \n   - Conduct quarterly audits of intake records to ensure compliance and data accuracy.  \n   - Train staff on updates to regulations, software, and best practices.\n\n9. **Technology and Automation**  \n   - Invest in integrated software solutions that combine CRM, case management, document automation, and billing.  \n   - Use templates for standard letters, forms, and contracts to reduce manual input and errors.  \n   - Automate reminders for document submissions, compliance checks, and follow-ups.\n\n10. **Client Feedback and Continuous Improvement**  \n   - After the initial stages, solicit feedback on the intake experience to identify areas for improvement.  \n   - Use insights to refine processes, enhance client communication, and boost satisfaction.\n\nBy implementing these steps, a UK law firm can create a client intake process that is efficient, compliant, client-focused, and scalable—laying a strong foundation for successful case management and long-term client relationships.",
+          "tokenUsage": {
+            "total": 918,
+            "prompt": 28,
+            "completion": 890,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 25597,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "5234",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "uk-spelling-organised",
+          "vars": {
+            "task": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 12,
+        "tokenUsage": {
+          "prompt": 28,
+          "completion": 890,
+          "cached": 0,
+          "total": 918,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "5234",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const hasRealised = output.toLowerCase().includes('realised');\nconst hasRealized = output.toLowerCase().includes('realized');\nreturn hasRealised && !hasRealized;\n"
+              }
+            }
+          ]
+        },
+        "id": "7c93ace3-cb89-4259-8d0d-9adc3d1f4d0d",
+        "latencyMs": 29352,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Explain what the client should have realised before signing the agreement. Use only UK English spelling.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "Before signing the agreement, the client should have realised several key points to ensure they fully understood their obligations and rights. They should have recognised the legal binding nature of the document, meaning that once signed, they are committed to fulfilling the terms outlined. It was important for them to carefully review all clauses, particularly those relating to payment terms, delivery schedules, termination conditions, and any penalties for breach. They should have understood the scope of services or goods being provided and confirmed that the agreement accurately reflected the agreed-upon arrangements. Additionally, the client should have considered whether they had sufficient time to seek independent legal advice, especially if the agreement was complex or involved significant financial or legal commitments. Awareness of any exclusions of liability, dispute resolution mechanisms, and governing law clauses would also have been essential. Ultimately, the client should have realised that signing without proper understanding could lead to unintended consequences, financial loss, or legal disputes.",
+          "tokenUsage": {
+            "total": 211,
+            "prompt": 27,
+            "completion": 184,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 29352,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "1803",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "uk-spelling-realised",
+          "vars": {
+            "task": "Explain what the client should have realised before signing the agreement. Use only UK English spelling."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const hasRealised = output.toLowerCase().includes('realised');\nconst hasRealized = output.toLowerCase().includes('realized');\nreturn hasRealised && !hasRealized;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 13,
+        "tokenUsage": {
+          "prompt": 27,
+          "completion": 184,
+          "cached": 0,
+          "total": 211,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Explain what the client should have realised before signing the agreement. Use only UK English spelling."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "1803",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\nconst hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\nconst hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\nconst hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;",
+              "assertion": {
+                "type": "javascript",
+                "value": "const hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;\n"
+              }
+            }
+          ]
+        },
+        "id": "4bdca2d5-88b8-4bb9-b174-b7471e81d1f7",
+        "latencyMs": 53937,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "Certainly. Below is a detailed analysis of contractual obligations and compliance requirements, using UK English spelling and adhering to standard legal and commercial principles applicable in the United Kingdom.\n\n---\n\n**Analysis of Contractual Obligations and Compliance Requirements (UK English)**\n\n1. **Definition and Nature of Contractual Obligations**\n\nContractual obligations arise from legally binding agreements between two or more parties. Under UK law, a valid contract requires the following elements: offer, acceptance, consideration, intention to create legal relations, and, where applicable, certainty of terms. Once formed, each party is bound to perform their respective duties as stipulated in the agreement.\n\nObligations may be express (clearly stated in the contract) or implied (inferred from the nature of the relationship, custom, or statutory provisions). Implied terms may include the duty of good faith (particularly in certain types of contracts such as employment or agency), the obligation to perform with reasonable skill and care (under the Supply of Goods and Services Act 1982), and the duty to act in a manner consistent with the contract’s purpose.\n\n2. **Key Contractual Obligations**\n\n- **Performance of Duties**: Each party must perform their obligations in accordance with the terms of the contract, including timelines, quality standards, and delivery requirements. Failure to perform (breach) may result in liability for damages or termination rights.\n\n- **Payment Obligations**: Where payment is due, the contracting party must pay the agreed sum at the specified time and in the agreed manner. Late payment may attract interest under the Late Payment of Commercial Debts (Interest) Act 1998.\n\n- **Confidentiality**: Many contracts include confidentiality clauses requiring parties to protect sensitive information. Breach of confidentiality may lead to injunctions or claims for damages.\n\n- **Non-Compete and Non-Solicitation Clauses**: These are common in employment and service contracts. Their enforceability is assessed under UK law, particularly in light of the principles established in *Curtis v Chemical Cleaning & Dyeing Co Ltd* [1951] and *Morgan v Morgan* [2000], which require such clauses to be reasonable in scope, duration, and geographical reach.\n\n- **Termination Clauses**: Contracts often include provisions for termination, either by notice, for cause (e.g., material breach), or on specific events (e.g., insolvency). Termination must be carried out in accordance with the contract terms and any statutory requirements.\n\n3. **Compliance Requirements**\n\nCompliance with legal, regulatory, and industry-specific standards is integral to fulfilling contractual obligations. Key areas of compliance in the UK include:\n\n- **Data Protection (UK GDPR and Data Protection Act 2018)**: Where contracts involve the processing of personal data, parties must comply with the UK General Data Protection Regulation (UK GDPR) and the Data Protection Act 2018. This includes ensuring lawful basis for processing, implementing appropriate technical and organisational measures, and fulfilling data subject rights. Contracts involving data processing must include appropriate data processing agreements (DPAs), particularly under Article 28 of the UK GDPR.\n\n- **Health and Safety at Work (Health and Safety at Work etc. Act 1974)**: Contractors must comply with health and safety obligations, particularly in construction, manufacturing, and service delivery. Failure to do so may result in civil liability and criminal prosecution.\n\n- **Employment Law**: Where contracts involve employees or contractors, compliance with the Employment Rights Act 1996, the Equality Act 2010, and the Working Time Regulations 1998 is essential. Misclassification of workers (e.g., treating a worker as self-employed when they are an employee) can lead to significant liabilities.\n\n- **Consumer Rights Act 2015**: If the contract is with a consumer, the supplier must ensure that goods and services are of satisfactory quality, fit for purpose, and as described. Breach of these statutory rights may entitle the consumer to remedies such as repair, replacement, or refund.\n\n- **Anti-Bribery and Corruption (Bribery Act 2010)**: Contracts involving public or international dealings must include anti-bribery clauses. The UK Bribery Act 2010 imposes strict liability on organisations for failing to prevent bribery by associated persons. Contracts should include provisions requiring due diligence, reporting mechanisms, and compliance training.\n\n- **Environmental Regulations**: Contracts in sectors such as construction, manufacturing, or logistics must comply with environmental laws, including the Environmental Protection Act 1990, the Climate Change Act 2008, and relevant EU-derived legislation retained in UK law post-Brexit.\n\n4. **Enforcement and Remedies**\n\nIf a party fails to meet their contractual obligations or compliance requirements, the other party may pursue remedies under UK law, including:\n\n- **Damages**: To compensate for financial loss resulting from the breach.\n- **Specific Performance**: A court order requiring the breaching party to perform their obligations (rarely granted for personal services).\n- **Injunctions**: To prevent ongoing or future breaches, particularly in cases involving confidentiality or intellectual property.\n- **Termination**: Where the breach is material or fundamental, the innocent party may terminate the contract.\n\n5. **Best Practices for Compliance and Risk Mitigation**\n\n- Conduct thorough due diligence before entering into contracts.\n- Include clear, unambiguous terms and defined performance metrics.\n- Regularly review contracts for compliance with evolving legislation.\n- Maintain records of compliance activities (e.g., data processing records, training logs).\n- Seek legal advice when drafting or amending contracts, particularly in regulated sectors.\n\n---\n\n**Conclusion**\n\nIn the UK, contractual obligations are enforceable under common law and statutory frameworks. Compliance with legal and regulatory requirements is not merely a matter of good practice—it is a fundamental component of contract performance. Failure to comply may result in financial penalties, reputational damage, and legal action. Therefore, parties must ensure that their contractual arrangements are both legally sound and aligned with current UK legislation, particularly in areas such as data protection, employment law, and anti-corruption.\n\nBy proactively addressing contractual obligations and compliance requirements, organisations can mitigate risk, foster trust, and ensure sustainable business relationships.\n\n--- \n\n*This analysis is intended for general informational purposes and does not constitute legal advice.*",
+          "tokenUsage": {
+            "total": 1324,
+            "prompt": 24,
+            "completion": 1300,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 53937,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "7542",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "uk-spelling-analyse",
+          "vars": {
+            "task": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 14,
+        "tokenUsage": {
+          "prompt": 24,
+          "completion": 1300,
+          "cached": 0,
+          "total": 1324,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "7542",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  return typeof j.name === 'string' && j.name.length > 0 &&\n         typeof j.date_instructed === 'string' && j.date_instructed.length > 0 &&\n         typeof j.matter_code === 'string' && j.matter_code.length > 0;\n} catch (e) {\n  return false;\n}\n"
+              }
+            }
+          ]
+        },
+        "id": "1bf7b63c-b7be-42e0-bb59-d838994424e1",
+        "latencyMs": 7066,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "{\n  \"name\": \"Sarah Thompson\",\n  \"date_instructed\": \"2023-10-15\",\n  \"matter_code\": \"MAT20231015001\"\n}",
+          "tokenUsage": {
+            "total": 90,
+            "prompt": 41,
+            "completion": 49,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 7066,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "788",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "json-output-client-record",
+          "vars": {
+            "task": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  return typeof j.name === 'string' && j.name.length > 0 &&\n         typeof j.date_instructed === 'string' && j.date_instructed.length > 0 &&\n         typeof j.matter_code === 'string' && j.matter_code.length > 0;\n} catch (e) {\n  return false;\n}\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 15,
+        "tokenUsage": {
+          "prompt": 41,
+          "completion": 49,
+          "cached": 0,
+          "total": 90,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "788",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  return typeof j.hours === 'number' && j.hours > 0 &&\n         typeof j.description === 'string' && j.description.length > 0 &&\n         typeof j.rate === 'number' && j.rate > 0;\n} catch (e) {\n  return false;\n}\n"
+              }
+            }
+          ]
+        },
+        "id": "951f2c39-c8ab-4be7-a27b-8f01da7a44ce",
+        "latencyMs": 3228,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "{\n  \"hours\": 7.5,\n  \"description\": \"Developed and tested new user authentication module\",\n  \"rate\": 65.0\n}",
+          "tokenUsage": {
+            "total": 82,
+            "prompt": 46,
+            "completion": 36,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 5
+            }
+          },
+          "cached": false,
+          "latencyMs": 3228,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "787",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "json-output-time-entry",
+          "vars": {
+            "task": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  return typeof j.hours === 'number' && j.hours > 0 &&\n         typeof j.description === 'string' && j.description.length > 0 &&\n         typeof j.rate === 'number' && j.rate > 0;\n} catch (e) {\n  return false;\n}\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 16,
+        "tokenUsage": {
+          "prompt": 46,
+          "completion": 36,
+          "cached": 0,
+          "total": 82,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 5,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "787",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  const validStatuses = ['open', 'closed', 'pending'];\n  return typeof j.client_name === 'string' && j.client_name.length > 0 &&\n         typeof j.matter_type === 'string' && j.matter_type.length > 0 &&\n         typeof j.status === 'string' && validStatuses.includes(j.status);\n} catch (e) {\n  return false;\n}\n"
+              }
+            }
+          ]
+        },
+        "id": "2a1a4a1a-fae2-421b-9dcf-82ef87fbdded",
+        "latencyMs": 3663,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "{\n  \"client_name\": \"Greenfield Environmental Solutions\",\n  \"matter_type\": \"Environmental Compliance Audit\",\n  \"status\": \"open\"\n}",
+          "tokenUsage": {
+            "total": 80,
+            "prompt": 49,
+            "completion": 31,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 5
+            }
+          },
+          "cached": false,
+          "latencyMs": 3663,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "812",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "json-output-matter-summary",
+          "vars": {
+            "task": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  const validStatuses = ['open', 'closed', 'pending'];\n  return typeof j.client_name === 'string' && j.client_name.length > 0 &&\n         typeof j.matter_type === 'string' && j.matter_type.length > 0 &&\n         typeof j.status === 'string' && validStatuses.includes(j.status);\n} catch (e) {\n  return false;\n}\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 17,
+        "tokenUsage": {
+          "prompt": 49,
+          "completion": 31,
+          "cached": 0,
+          "total": 80,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 5,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "812",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+              }
+            }
+          ]
+        },
+        "id": "777246c3-afa5-4393-818b-e91aa0783a47",
+        "latencyMs": 2596,
+        "namedScores": {},
+        "prompt": {
+          "raw": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "28 July 2026",
+          "tokenUsage": {
+            "total": 64,
+            "prompt": 55,
+            "completion": 9,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 2596,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "678",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "date-format-court-deadline",
+          "vars": {
+            "task": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 18,
+        "tokenUsage": {
+          "prompt": 55,
+          "completion": 9,
+          "cached": 0,
+          "total": 64,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "678",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+              }
+            }
+          ]
+        },
+        "id": "b75bd3c2-c125-476b-8d42-a249a2dbde24",
+        "latencyMs": 1825,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "15 March 2026",
+          "tokenUsage": {
+            "total": 38,
+            "prompt": 29,
+            "completion": 9,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 1825,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "679",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "date-format-contract-signature-date",
+          "vars": {
+            "task": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 19,
+        "tokenUsage": {
+          "prompt": 29,
+          "completion": 9,
+          "cached": 0,
+          "total": 38,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "679",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+              }
+            }
+          ]
+        },
+        "id": "355e3bad-44bd-4f9f-8573-42a25331f4b7",
+        "latencyMs": 1258,
+        "namedScores": {},
+        "prompt": {
+          "raw": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "25 July 2026",
+          "tokenUsage": {
+            "total": 50,
+            "prompt": 41,
+            "completion": 9,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 1258,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "679",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "date-format-payment-deadline",
+          "vars": {
+            "task": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 20,
+        "tokenUsage": {
+          "prompt": 41,
+          "completion": 9,
+          "cached": 0,
+          "total": 50,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "679",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+              }
+            }
+          ]
+        },
+        "id": "6e092317-48cc-4db1-ac62-e50878db9b04",
+        "latencyMs": 984,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "Yes",
+          "tokenUsage": {
+            "total": 30,
+            "prompt": 28,
+            "completion": 2,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 3
+            }
+          },
+          "cached": false,
+          "latencyMs": 984,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "648",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "one-word-conflict-disclosure",
+          "vars": {
+            "task": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 21,
+        "tokenUsage": {
+          "prompt": 28,
+          "completion": 2,
+          "cached": 0,
+          "total": 30,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 3,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "648",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+              }
+            }
+          ]
+        },
+        "id": "cf66a65b-2925-43b4-a289-a3c5445253f9",
+        "latencyMs": 783,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "Yes",
+          "tokenUsage": {
+            "total": 29,
+            "prompt": 27,
+            "completion": 2,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 10
+            }
+          },
+          "cached": false,
+          "latencyMs": 783,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "657",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "one-word-liability-assessment",
+          "vars": {
+            "task": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 22,
+        "tokenUsage": {
+          "prompt": 27,
+          "completion": 2,
+          "cached": 0,
+          "total": 29,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 10,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "657",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+              }
+            }
+          ]
+        },
+        "id": "e7bf9350-ee4b-4296-abb1-8ab634137764",
+        "latencyMs": 510,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat:local-model",
+          "label": ""
+        },
+        "response": {
+          "output": "High",
+          "tokenUsage": {
+            "total": 34,
+            "prompt": 32,
+            "completion": 2,
+            "numRequests": 1,
+            "completionDetails": {
+              "cacheReadInputTokens": 10
+            }
+          },
+          "cached": false,
+          "latencyMs": 510,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "",
+                "content-length": "647",
+                "content-type": "application/json; charset=utf-8",
+                "keep-alive": "timeout=5, max=100",
+                "server": "llama.cpp"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "one-word-client-priority",
+          "vars": {
+            "task": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 23,
+        "tokenUsage": {
+          "prompt": 32,
+          "completion": 2,
+          "cached": 0,
+          "total": 34,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 10,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "",
+              "content-length": "647",
+              "content-type": "application/json; charset=utf-8",
+              "keep-alive": "timeout=5, max=100",
+              "server": "llama.cpp"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 22,
+      "failures": 2,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 992,
+        "completion": 7061,
+        "cached": 0,
+        "total": 8053,
+        "numRequests": 24,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 87,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 100073,
+      "evaluationDurationMs": 100073
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "sparkbench instruction-following suite - 24 solicitor-realistic constraint tests",
+    "prompts": [
+      "{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "openai:chat:local-model",
+        "config": {
+          "apiBaseUrl": "http://127.0.0.1:8100/v1",
+          "apiKey": "[REDACTED]",
+          "temperature": 0,
+          "max_tokens": 8192
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "exact-bullets-3-action-items",
+        "vars": {
+          "task": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const bullets = output.match(/^(?:[-•*]|\\d+\\.)\\s/gm) || [];\nreturn bullets.length === 3;\n"
+          }
+        ]
+      },
+      {
+        "description": "exact-paragraphs-2-case-summary",
+        "vars": {
+          "task": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const paragraphs = output.split(/\\n\\n+/).filter(p => p.trim().length > 0);\nreturn paragraphs.length === 2;\n"
+          }
+        ]
+      },
+      {
+        "description": "exact-bullets-4-contract-risks",
+        "vars": {
+          "task": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const bullets = output.match(/^(?:[-•*]|\\d+\\.)\\s/gm) || [];\nreturn bullets.length === 4;\n"
+          }
+        ]
+      },
+      {
+        "description": "word-range-100-150-case-summary",
+        "vars": {
+          "task": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 100 && words <= 150;\n"
+          }
+        ]
+      },
+      {
+        "description": "word-range-200-300-demand-letter",
+        "vars": {
+          "task": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 200 && words <= 300;\n"
+          }
+        ]
+      },
+      {
+        "description": "word-range-50-75-client-brief",
+        "vars": {
+          "task": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;\n"
+          }
+        ]
+      },
+      {
+        "description": "sections-client-letter-4-required",
+        "vars": {
+          "task": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections."
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "Date"
+          },
+          {
+            "type": "icontains",
+            "value": "Recipient"
+          },
+          {
+            "type": "icontains",
+            "value": "Subject"
+          },
+          {
+            "type": "icontains",
+            "value": "Conclusion"
+          }
+        ]
+      },
+      {
+        "description": "sections-legal-memo-3-required",
+        "vars": {
+          "task": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion."
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "Issue"
+          },
+          {
+            "type": "icontains",
+            "value": "Analysis"
+          },
+          {
+            "type": "icontains",
+            "value": "Conclusion"
+          }
+        ]
+      },
+      {
+        "description": "sections-engagement-letter-3-required",
+        "vars": {
+          "task": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow."
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "Scope"
+          },
+          {
+            "type": "icontains",
+            "value": "Fees"
+          },
+          {
+            "type": "icontains",
+            "value": "Confidentiality"
+          }
+        ]
+      },
+      {
+        "description": "forbidden-word-liable",
+        "vars": {
+          "task": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "!output.toLowerCase().includes('liable')\n"
+          }
+        ]
+      },
+      {
+        "description": "forbidden-word-unfortunately",
+        "vars": {
+          "task": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "!output.toLowerCase().includes('unfortunately')\n"
+          }
+        ]
+      },
+      {
+        "description": "forbidden-word-due-to",
+        "vars": {
+          "task": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "!output.toLowerCase().includes('due to')\n"
+          }
+        ]
+      },
+      {
+        "description": "uk-spelling-organised",
+        "vars": {
+          "task": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;\n"
+          }
+        ]
+      },
+      {
+        "description": "uk-spelling-realised",
+        "vars": {
+          "task": "Explain what the client should have realised before signing the agreement. Use only UK English spelling."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const hasRealised = output.toLowerCase().includes('realised');\nconst hasRealized = output.toLowerCase().includes('realized');\nreturn hasRealised && !hasRealized;\n"
+          }
+        ]
+      },
+      {
+        "description": "uk-spelling-analyse",
+        "vars": {
+          "task": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;\n"
+          }
+        ]
+      },
+      {
+        "description": "json-output-client-record",
+        "vars": {
+          "task": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  return typeof j.name === 'string' && j.name.length > 0 &&\n         typeof j.date_instructed === 'string' && j.date_instructed.length > 0 &&\n         typeof j.matter_code === 'string' && j.matter_code.length > 0;\n} catch (e) {\n  return false;\n}\n"
+          }
+        ]
+      },
+      {
+        "description": "json-output-time-entry",
+        "vars": {
+          "task": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  return typeof j.hours === 'number' && j.hours > 0 &&\n         typeof j.description === 'string' && j.description.length > 0 &&\n         typeof j.rate === 'number' && j.rate > 0;\n} catch (e) {\n  return false;\n}\n"
+          }
+        ]
+      },
+      {
+        "description": "json-output-matter-summary",
+        "vars": {
+          "task": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const m = output.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\nconst s = m ? m[1].trim() : output.trim();\ntry {\n  const j = JSON.parse(s);\n  const validStatuses = ['open', 'closed', 'pending'];\n  return typeof j.client_name === 'string' && j.client_name.length > 0 &&\n         typeof j.matter_type === 'string' && j.matter_type.length > 0 &&\n         typeof j.status === 'string' && validStatuses.includes(j.status);\n} catch (e) {\n  return false;\n}\n"
+          }
+        ]
+      },
+      {
+        "description": "date-format-court-deadline",
+        "vars": {
+          "task": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+          }
+        ]
+      },
+      {
+        "description": "date-format-contract-signature-date",
+        "vars": {
+          "task": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+          }
+        ]
+      },
+      {
+        "description": "date-format-payment-deadline",
+        "vars": {
+          "task": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "/\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output)\n"
+          }
+        ]
+      },
+      {
+        "description": "one-word-conflict-disclosure",
+        "vars": {
+          "task": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+          }
+        ]
+      },
+      {
+        "description": "one-word-liability-assessment",
+        "vars": {
+          "task": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+          }
+        ]
+      },
+      {
+        "description": "one-word-client-priority",
+        "vars": {
+          "task": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "defaultTest": {
+      "vars": {},
+      "assert": [],
+      "options": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "/home/agent-spark/sparkbench/results/deep-eval/e29-q8_0-instruction-following.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.17",
+    "nodeVersion": "v24.18.0",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2026-07-11T11:21:11.311Z",
+    "evaluationCreatedAt": "2026-07-11T11:19:31.049Z"
+  },
+  "vars": [
+    "task"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": false
+  }
+}

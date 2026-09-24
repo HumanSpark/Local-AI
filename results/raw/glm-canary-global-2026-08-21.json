@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "purpose": "operational canary - deployment validation, NOT a capability result",
+    "endpoint": "https://api.mistral.ai/v1/chat/completions",
+    "model_requested": "zai-glm-5-2",
+    "max_tokens": 256,
+    "started_at": "2026-08-21T01:52:19+0100",
+    "price_usd_per_1m": [
+      1.4,
+      4.4
+    ],
+    "usd_total_est": 0.000588,
+    "prompts_are_literals_in_this_file": true
+  },
+  "records": [
+    {
+      "probe": "echo",
+      "prompt": "Reply with exactly: canary ok",
+      "model_requested": "zai-glm-5-2",
+      "model_served": "zai-glm-5-2",
+      "request_id": "fdceeb93adb14a7294795304b3ee3f3c",
+      "http_request_id": "a2e5a762dcc17dcf-DUB",
+      "latency_s": 0.312,
+      "prompt_tokens": 13,
+      "completion_tokens": 4,
+      "finish_reason": "stop",
+      "usd_est": 3.6e-05,
+      "answer": "canary ok"
+    },
+    {
+      "probe": "arithmetic",
+      "prompt": "A meeting runs from 09:15 to 11:45. How many minutes is that? Answer with the number only.",
+      "model_requested": "zai-glm-5-2",
+      "model_served": "zai-glm-5-2",
+      "request_id": "c0458ac12237438189e7bc5762768bb1",
+      "http_request_id": "a2e5a764a9df6146-DUB",
+      "latency_s": 0.354,
+      "prompt_tokens": 32,
+      "completion_tokens": 2,
+      "finish_reason": "stop",
+      "usd_est": 5.4e-05,
+      "answer": "150"
+    },
+    {
+      "probe": "summarise",
+      "prompt": "Summarise in one sentence: 'The committee met on Tuesday, reviewed three tenders, and deferred the decision to the following month pending legal advice.'",
+      "model_requested": "zai-glm-5-2",
+      "model_served": "zai-glm-5-2",
+      "request_id": "5da43991041b4a6b84204110a80a106c",
+      "http_request_id": "a2e5a766ef5a8063-DUB",
+      "latency_s": 0.412,
+      "prompt_tokens": 37,
+      "completion_tokens": 24,
+      "finish_reason": "stop",
+      "usd_est": 0.000157,
+      "answer": "Following their Tuesday meeting, the committee reviewed three tenders but deferred a decision until next month to await legal advice."
+    },
+    {
+      "probe": "structured",
+      "prompt": "Return a JSON object with keys 'status' and 'count', where status is the string 'ok' and count is the integer 3. Return only the JSON.",
+      "model_requested": "zai-glm-5-2",
+      "model_served": "zai-glm-5-2",
+      "request_id": "8f32a16314304e0b92657c3d14009248",
+      "http_request_id": "a2e5a7697f9289e5-DUB",
+      "latency_s": 0.314,
+      "prompt_tokens": 40,
+      "completion_tokens": 21,
+      "finish_reason": "stop",
+      "usd_est": 0.000148,
+      "answer": "```json\n{\n  \"status\": \"ok\",\n  \"count\": 3\n}\n```"
+    },
+    {
+      "probe": "abstention",
+      "prompt": "What was the exact attendance figure at the 1961 Zorbulon Municipal Gala? If you do not know, say so plainly.",
+      "model_requested": "zai-glm-5-2",
+      "model_served": "zai-glm-5-2",
+      "request_id": "c90d86399d9f4c09a78787e229d93833",
+      "http_request_id": "a2e5a76b6e352981-DUB",
+      "latency_s": 4.233,
+      "prompt_tokens": 34,
+      "completion_tokens": 33,
+      "finish_reason": "stop",
+      "usd_est": 0.000193,
+      "answer": "I do not know the exact attendance figure for the 1961 Zorbulon Municipal Gala, as I do not have any information about this specific event."
+    }
+  ]
+}

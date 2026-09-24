@@ -1,0 +1,58 @@
+2026-09-06T12:42:16+01:00 waiting for pid 2487231 and llama-server to exit
+2026-09-06T12:44:36+01:00 GPU clear, starting /tmp/claude-1001/-home-agent-spark-sparkbench/3eff468e-8198-49ca-90f8-81b91adf4476/scratchpad/run_e116.sh
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8120 --no-webui -v
+full-offload gate OK, 132 layers
+  greeting      xhigh   reasoning_chars=   349 completion_tokens=  102   stop   10.16s
+  greeting      medium  reasoning_chars=   479 completion_tokens=  147   stop   13.64s
+  greeting      low     reasoning_chars=   144 completion_tokens=   73   stop    8.63s
+  factual       xhigh   reasoning_chars=    52 completion_tokens=   21   stop    4.27s
+  factual       medium  reasoning_chars=   294 completion_tokens=  105   stop   10.31s
+  factual       low     reasoning_chars=   199 completion_tokens=   89   stop    9.67s
+  definition    xhigh   reasoning_chars=   384 completion_tokens=  137   stop   13.63s
+  definition    medium  reasoning_chars=   493 completion_tokens=  177   stop   16.09s
+  definition    low     reasoning_chars=   351 completion_tokens=  137   stop   13.73s
+  rewrite       xhigh   reasoning_chars=   270 completion_tokens=   79   stop    9.22s
+  rewrite       medium  reasoning_chars=   494 completion_tokens=  133   stop   12.54s
+  rewrite       low     reasoning_chars=   437 completion_tokens=  122   stop   12.58s
+  extract       xhigh   reasoning_chars=   394 completion_tokens=  116   stop   11.95s
+  extract       medium  reasoning_chars=   223 completion_tokens=   72   stop    7.72s
+  extract       low     reasoning_chars=   221 completion_tokens=   70   stop    8.49s
+  arith         xhigh   reasoning_chars=    97 completion_tokens=   58   stop    7.55s
+  arith         medium  reasoning_chars=   237 completion_tokens=  182   stop   16.44s
+  arith         low     reasoning_chars=   192 completion_tokens=  144   stop   14.33s
+  light_reason  xhigh   reasoning_chars=    83 completion_tokens=   54   stop    6.96s
+  light_reason  medium  reasoning_chars=   165 completion_tokens=   89   stop     9.1s
+  light_reason  low     reasoning_chars=   220 completion_tokens=   99   stop   10.78s
+  code_snippet  xhigh   reasoning_chars=  1676 completion_tokens=  484   stop   41.56s
+  code_snippet  medium  reasoning_chars=   824 completion_tokens=  230   stop   20.37s
+  code_snippet  low     reasoning_chars=   171 completion_tokens=   55   stop    7.21s
+  summarise     xhigh   reasoning_chars=   257 completion_tokens=   82   stop    9.53s
+  summarise     medium  reasoning_chars=   372 completion_tokens=  108   stop   10.59s
+  summarise     low     reasoning_chars=   235 completion_tokens=   68   stop    8.12s
+
+summary: {
+  "xhigh": {
+    "total_completion_tokens": 1133,
+    "median_completion_tokens": 82,
+    "total_wall_s": 114.8,
+    "hit_cap": 0
+  },
+  "medium": {
+    "total_completion_tokens": 1243,
+    "median_completion_tokens": 133,
+    "total_wall_s": 116.8,
+    "hit_cap": 0
+  },
+  "low": {
+    "total_completion_tokens": 857,
+    "median_completion_tokens": 89,
+    "total_wall_s": 93.5,
+    "hit_cap": 0
+  }
+}
+ratios vs xhigh: {
+  "medium_over_xhigh_tokens": 1.097,
+  "low_over_xhigh_tokens": 0.756
+}
+written: results/raw/e116/e116-short-turn-effort.json
+2026-09-06T12:50:06+01:00 /tmp/claude-1001/-home-agent-spark-sparkbench/3eff468e-8198-49ca-90f8-81b91adf4476/scratchpad/run_e116.sh finished rc=0

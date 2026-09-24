@@ -1,0 +1,186 @@
+[2026-08-31T17:46:39+01:00] === preflight ===
+version: 0.3.0-dev (build 1047, commit daef7b687)
+built with GNU 13.3.0 for Linux x86_64
+[2026-08-31T17:46:39+01:00] preflight OK
+[2026-08-31T17:46:39+01:00] === opening maintenance window ===
+[2026-08-31T17:46:39+01:00] --- llama-bench: qwen38-27b-dense ---
+[2026-08-31T17:46:39+01:00] DRY-RUN: would bench qwen38-27b-dense
+[2026-08-31T17:46:39+01:00] --- llama-bench: nemotron-nano ---
+[2026-08-31T17:46:39+01:00] DRY-RUN: would bench nemotron-nano
+[2026-08-31T17:46:39+01:00] --- llama-bench: kwaipilot ---
+[2026-08-31T17:46:39+01:00] DRY-RUN: would bench kwaipilot
+[2026-08-31T17:46:39+01:00] --- nemotron-nano / l4 / effort=default / ctx=16384 ---
+[2026-08-31T17:46:39+01:00] DRY-RUN: would run nemotron-nano l4
+[2026-08-31T17:46:39+01:00] --- nemotron-nano / l3 / effort=default / ctx=32768 ---
+[2026-08-31T17:46:39+01:00] DRY-RUN: would run nemotron-nano l3
+[2026-08-31T17:46:39+01:00] --- kwaipilot / expert coding bank / effort=default ---
+[2026-08-31T17:46:39+01:00] DRY-RUN: would run kwaipilot expert
+[2026-08-31T17:46:39+01:00] --- kwaipilot / l4 / effort=default / ctx=16384 ---
+[2026-08-31T17:46:39+01:00] DRY-RUN: would run kwaipilot l4
+[2026-08-31T17:46:39+01:00] === E92 arms done in 0s; raw in /home/agent-spark/sparkbench/results/raw/e92 ===
+[2026-08-31T17:46:39+01:00] E92 finished, rc=0
+[2026-08-31T17:46:48+01:00] === preflight ===
+version: 0.3.0-dev (build 1047, commit daef7b687)
+built with GNU 13.3.0 for Linux x86_64
+[2026-08-31T17:46:48+01:00] preflight OK
+[2026-08-31T17:46:48+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T17:46:48+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T17:46:48+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T17:46:48+01:00] --- llama-bench: qwen38-27b-dense ---
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1151) (radv) | uma: 1 | fp16: 1 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: KHR_coopmat
+| model                          |       size |     params | backend    | ngl |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --------------: | -------------------: |
+| qwen35 27B Q4_K - Medium       |  15.65 GiB |    27.32 B | Vulkan     |  -1 |           pp512 |       294.57 ± 13.63 |
+| qwen35 27B Q4_K - Medium       |  15.65 GiB |    27.32 B | Vulkan     |  -1 |           tg128 |         12.59 ± 0.00 |
+| qwen35 27B Q4_K - Medium       |  15.65 GiB |    27.32 B | Vulkan     |  -1 |   pp512 @ d4096 |       235.48 ± 10.49 |
+| qwen35 27B Q4_K - Medium       |  15.65 GiB |    27.32 B | Vulkan     |  -1 |   tg128 @ d4096 |         12.32 ± 0.00 |
+| qwen35 27B Q4_K - Medium       |  15.65 GiB |    27.32 B | Vulkan     |  -1 |   pp512 @ d8192 |       221.19 ± 10.00 |
+| qwen35 27B Q4_K - Medium       |  15.65 GiB |    27.32 B | Vulkan     |  -1 |   tg128 @ d8192 |         12.12 ± 0.00 |
+
+build: daef7b687 (1047)
+[2026-08-31T17:51:08+01:00] bench qwen38-27b-dense rc=0 wall=260s -> /home/agent-spark/sparkbench/results/raw/e92/e92-qwen38-27b-dense-bench.md
+[2026-08-31T17:51:08+01:00] --- llama-bench: nemotron-nano ---
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1151) (radv) | uma: 1 | fp16: 1 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: KHR_coopmat
+| model                          |       size |     params | backend    | ngl |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --------------: | -------------------: |
+| nemotron_h_moe 31B.A3.5B Q4_K - Medium |  22.96 GiB |    31.58 B | Vulkan     |  -1 |           pp512 |       1006.26 ± 5.50 |
+| nemotron_h_moe 31B.A3.5B Q4_K - Medium |  22.96 GiB |    31.58 B | Vulkan     |  -1 |           tg128 |         64.52 ± 0.81 |
+| nemotron_h_moe 31B.A3.5B Q4_K - Medium |  22.96 GiB |    31.58 B | Vulkan     |  -1 |   pp512 @ d4096 |       890.83 ± 18.74 |
+| nemotron_h_moe 31B.A3.5B Q4_K - Medium |  22.96 GiB |    31.58 B | Vulkan     |  -1 |   tg128 @ d4096 |         63.56 ± 0.12 |
+| nemotron_h_moe 31B.A3.5B Q4_K - Medium |  22.96 GiB |    31.58 B | Vulkan     |  -1 |   pp512 @ d8192 |       847.54 ± 11.91 |
+| nemotron_h_moe 31B.A3.5B Q4_K - Medium |  22.96 GiB |    31.58 B | Vulkan     |  -1 |   tg128 @ d8192 |         63.19 ± 0.16 |
+
+build: daef7b687 (1047)
+[2026-08-31T17:52:13+01:00] bench nemotron-nano rc=0 wall=65s -> /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-bench.md
+[2026-08-31T17:52:13+01:00] --- llama-bench: kwaipilot ---
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1151) (radv) | uma: 1 | fp16: 1 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: KHR_coopmat
+| model                          |       size |     params | backend    | ngl |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  19.91 GiB |    34.66 B | Vulkan     |  -1 |           pp512 |        984.04 ± 9.13 |
+| qwen35moe 35B.A3B Q4_K - Medium |  19.91 GiB |    34.66 B | Vulkan     |  -1 |           tg128 |         70.00 ± 0.04 |
+| qwen35moe 35B.A3B Q4_K - Medium |  19.91 GiB |    34.66 B | Vulkan     |  -1 |   pp512 @ d4096 |        836.91 ± 4.40 |
+| qwen35moe 35B.A3B Q4_K - Medium |  19.91 GiB |    34.66 B | Vulkan     |  -1 |   tg128 @ d4096 |         66.23 ± 0.41 |
+| qwen35moe 35B.A3B Q4_K - Medium |  19.91 GiB |    34.66 B | Vulkan     |  -1 |   pp512 @ d8192 |        793.63 ± 5.03 |
+| qwen35moe 35B.A3B Q4_K - Medium |  19.91 GiB |    34.66 B | Vulkan     |  -1 |   tg128 @ d8192 |         64.45 ± 0.17 |
+
+build: daef7b687 (1047)
+[2026-08-31T17:53:18+01:00] bench kwaipilot rc=0 wall=65s -> /home/agent-spark/sparkbench/results/raw/e92/e92-kwaipilot-bench.md
+[2026-08-31T17:53:18+01:00] --- nemotron-nano / l4 / effort=default / ctx=16384 ---
+=== PS eval L4: e92-nemotron-nano (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2726, 'max_tokens': 4096, 'needed': 6822, 'ctx': 16384, 'headroom': 9562}
+  [1/15] P1  statutory_period correct           cite=ok 32.69s  28 February 2026
+  [2/15] P2  statutory_period truncated         cite=no 67.31s  None
+  [3/15] P3  statutory_period correct           cite=ok 20.04s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 15.7s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    truncated         cite=no 67.43s  None
+  [6/15] N1  notice_period    correct           cite=ok 30.32s  30 November 2026
+  [7/15] N2  notice_period    truncated         cite=no 67.37s  None
+  [8/15] F1  fee_basis        correct           cite=ok 45.8s  106800
+  [9/15] S1  survival         correct           cite=no 10.49s  d
+  [10/15] D1  defect_find      correct           cite=ok 41.85s  d
+  [11/15] D2  defect_find      correct           cite=ok 18.81s  4
+  [12/15] D3  defect_find      correct           cite=ok 15.45s  650000
+  [13/15] X1  defect_absent    correct           cite=ok 17.36s  NO
+  [14/15] X2  defect_absent    correct           cite=no 9.16s  NO
+  [15/15] U1  underspecified   correct           cite=ok 9.65s  NOT_IN_PACK
+
+e92-nemotron-nano: 12/15 correct, citations 10/15
+OVER-CLAIM 0/1 | STALE 0/0 | PREMATURE 0
+by_category: {'statutory_period': {'correct': 2, 'total': 3}, 'breach_clock': {'correct': 1, 'total': 1}, 'interest_calc': {'correct': 0, 'total': 1}, 'notice_period': {'correct': 1, 'total': 2}, 'fee_basis': {'correct': 1, 'total': 1}, 'survival': {'correct': 1, 'total': 1}, 'defect_find': {'correct': 3, 'total': 3}, 'defect_absent': {'correct': 2, 'total': 2}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 12, 'truncated': 3}
+written: /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-l4.json
+[2026-08-31T18:01:11+01:00] nemotron-nano/l4 rc=0 wall=473s -> /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-l4.json
+[2026-08-31T18:01:11+01:00] --- nemotron-nano / l3 / effort=default / ctx=32768 ---
+=== PS eval L3: e92-nemotron-nano (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 21295, 'max_tokens': 4096, 'needed': 25391, 'ctx': 32768, 'headroom': 7377}
+  [1/12] D1  date_effective   correct           cite=ok 40.67s  42000
+  [2/12] D2  date_effective   correct           cite=ok 32.81s  500000
+  [3/12] D3  date_effective   correct           cite=ok 21.97s  51,000
+  [4/12] V1  revocation       correct           cite=ok 18.43s  24
+  [5/12] V2  revocation       correct           cite=ok 15.57s  YES
+  [6/12] P1  precedence       truncated         cite=no 69.46s  None
+  [7/12] P2  precedence       over_applied      cite=no 25.24s  1 business day
+  [8/12] M1  multihop         correct           cite=ok 23.02s  378000
+  [9/12] M2  multihop         stale_value       cite=no 59.36s  139500
+  [10/12] M3  multihop         truncated         cite=no 69.49s  None
+  [11/12] N1  exhaustive       format_error      cite=no 12.43s  None
+  [12/12] Z1  underspecified   over_claim        cite=no 29.0s  No, VAT is not chargeable on a service credit issu
+
+e92-nemotron-nano: 6/12 correct, citations 6/12
+OVER-CLAIM 1/1 | STALE 0/5 | PREMATURE 0
+by_category: {'date_effective': {'correct': 3, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 0, 'total': 2}, 'multihop': {'correct': 1, 'total': 3}, 'exhaustive': {'correct': 0, 'total': 1}, 'underspecified': {'correct': 0, 'total': 1}}
+outcomes: {'correct': 6, 'format_error': 1, 'over_applied': 1, 'over_claim': 1, 'stale_value': 1, 'truncated': 2}
+written: /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-l3.json
+[2026-08-31T18:08:13+01:00] nemotron-nano/l3 rc=0 wall=422s -> /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-l3.json
+[2026-08-31T18:08:13+01:00] --- kwaipilot / expert coding bank / effort=default ---
+=== coding eval: e92-kwaipilot (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 82, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 8192, 'needed': 8525, 'ctx': 16384, 'headroom': 7859}
+  [1/8] glob_match             truncated        8192 tok, 126.54s  hit max_tokens=8192
+  [2/8] round_decimal          truncated        8192 tok, 126.65s  hit max_tokens=8192
+  [3/8] kmerge                 error            292 tok, 4.78s  TypeError: 'list' object is not an iterator
+  [4/8] wrap                   truncated        8192 tok, 126.58s  hit max_tokens=8192
+  [5/8] sliding_median         truncated        8192 tok, 126.52s  hit max_tokens=8192
+  [6/8] apply_patch            truncated        8192 tok, 126.82s  hit max_tokens=8192
+  [7/8] interval_map           truncated        8192 tok, 126.7s  hit max_tokens=8192
+  [8/8] parse_csv              truncated        8192 tok, 126.68s  hit max_tokens=8192
+
+e92-kwaipilot: 0/8 passed  by_tier={'expert': {'pass': 0, 'total': 8}}
+outcomes: {'error': 1, 'truncated': 7}
+written: /home/agent-spark/sparkbench/results/raw/e92/e92-kwaipilot-expert.json
+[2026-08-31T18:23:09+01:00] kwaipilot/expert rc=0 wall=896s -> /home/agent-spark/sparkbench/results/raw/e92/e92-kwaipilot-expert.json
+[2026-08-31T18:23:09+01:00] --- kwaipilot / l4 / effort=default / ctx=16384 ---
+=== PS eval L4: e92-kwaipilot (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 82, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2648, 'max_tokens': 4096, 'needed': 6744, 'ctx': 16384, 'headroom': 9640}
+  [1/15] P1  statutory_period correct           cite=ok 6.41s  28 February 2026
+  [2/15] P2  statutory_period correct           cite=ok 5.52s  30 April 2026
+  [3/15] P3  statutory_period correct           cite=ok 4.99s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 2.95s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    wrong             cite=ok 8.24s  EUR 150.49
+  [6/15] N1  notice_period    off_by_calendar   cite=ok 3.89s  31 October 2026
+  [7/15] N2  notice_period    truncated         cite=no 63.52s  None
+  [8/15] F1  fee_basis        correct           cite=ok 4.46s  EUR 106,800
+  [9/15] S1  survival         correct           cite=ok 2.74s  (d)
+  [10/15] D1  defect_find      correct           cite=ok 6.07s  (d)
+  [11/15] D2  defect_find      correct           cite=ok 4.2s  4
+  [12/15] D3  defect_find      correct           cite=ok 2.81s  650,000
+  [13/15] X1  defect_absent    correct           cite=ok 7.46s  NO
+  [14/15] X2  defect_absent    correct           cite=ok 3.42s  NO
+  [15/15] U1  underspecified   correct           cite=ok 2.8s  NOT_IN_PACK
+
+e92-kwaipilot: 12/15 correct, citations 14/15
+OVER-CLAIM 0/1 | STALE 0/0 | PREMATURE 0
+by_category: {'statutory_period': {'correct': 3, 'total': 3}, 'breach_clock': {'correct': 1, 'total': 1}, 'interest_calc': {'correct': 0, 'total': 1}, 'notice_period': {'correct': 0, 'total': 2}, 'fee_basis': {'correct': 1, 'total': 1}, 'survival': {'correct': 1, 'total': 1}, 'defect_find': {'correct': 3, 'total': 3}, 'defect_absent': {'correct': 2, 'total': 2}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 12, 'off_by_calendar': 1, 'truncated': 1, 'wrong': 1}
+written: /home/agent-spark/sparkbench/results/raw/e92/e92-kwaipilot-l4.json
+[2026-08-31T18:25:22+01:00] kwaipilot/l4 rc=0 wall=133s -> /home/agent-spark/sparkbench/results/raw/e92/e92-kwaipilot-l4.json
+[2026-08-31T18:25:22+01:00] === E92 arms done in 2314s; raw in /home/agent-spark/sparkbench/results/raw/e92 ===
+[2026-08-31T18:25:22+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T18:25:23+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1761017 
+[2026-08-31T18:25:23+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T18:25:23+01:00] E92 finished, rc=0

@@ -1,0 +1,22 @@
+=== coding eval: e33-coder30b (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 98, 'devices': ['Vulkan0']}
+  [1/15] rle_encode             pass             109 tok, 1.47s  
+  [2/15] is_balanced            pass             94 tok, 1.3s  
+  [3/15] merge_intervals        pass             172 tok, 2.21s  
+  [4/15] parse_semver           pass             280 tok, 3.42s  
+  [5/15] top_k_frequent         pass             145 tok, 1.89s  
+  [6/15] spiral_order           pass             255 tok, 3.16s  
+  [7/15] group_anagrams         pass             246 tok, 3.06s  
+  [8/15] normalize_path         wrong_answer     255 tok, 3.2s  AssertionError
+  [9/15] roman_roundtrip        pass             447 tok, 5.44s  
+  [10/15] longest_valid_parens   pass             245 tok, 3.08s  
+  [11/15] lru_cache              pass             210 tok, 2.7s  
+  [12/15] word_break             pass             209 tok, 2.66s  
+  [13/15] topo_schedule          pass             370 tok, 4.51s  
+  [14/15] min_window             pass             312 tok, 3.85s  
+  [15/15] eval_expr              pass             618 tok, 7.45s  
+
+e33-coder30b: 14/15 passed  by_tier={'easy': {'pass': 2, 'total': 2}, 'medium': {'pass': 6, 'total': 7}, 'hard': {'pass': 6, 'total': 6}}
+outcomes: {'pass': 14, 'wrong_answer': 1}
+written: /home/agent-spark/sparkbench/results/raw/e33-20260815-031709-coder30b.json

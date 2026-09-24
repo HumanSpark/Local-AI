@@ -1,0 +1,105 @@
+[2026-08-31T23:24:13+01:00] === session queue: tools/queue-e94-ctx.txt ===
+[2026-08-31T23:24:13+01:00]   queued: E94-h3-fast-alone
+[2026-08-31T23:24:13+01:00]   queued: E94-ctx98304-fill
+[2026-08-31T23:24:13+01:00]   queued: E94-ctx131072-fill
+[2026-08-31T23:24:13+01:00]   queued: E94-ctx262144-fill
+[2026-08-31T23:24:13+01:00] === opening the session window (ONE window for the whole queue) ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T23:24:13+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T23:24:13+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T23:24:13+01:00] --- [1] E94-h3-fast-alone ---
+FAILED: HTTPError: HTTP Error 400: Bad Request
+=== E94 residency: ctx=98,304 per model, 1 models: ['fast'] ===
+GTT baseline before load: 5.02 GiB
+control preset (fast): /home/agent-spark/sparkbench/results/raw/e94/preset-fast.ini
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/results/raw/e94/preset-fast.ini --models-max 1 -c 98304 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['fast']
+  warm fast       2.30s  GTT=25.70 GiB
+GTT with all 1 resident: 25.70 GiB (delta 20.69)
+  solo fast   walls=[0.722, 0.612, 0.609] min=0.609
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx98304-fast.json
+[2026-08-31T23:24:19+01:00] [1] E94-h3-fast-alone rc=1 wall=6s - UNEXPECTED
+[2026-08-31T23:24:19+01:00] --- [2] E94-ctx98304-fill ---
+FAILED: HTTPError: HTTP Error 400: Bad Request
+=== E94 residency: ctx=98,304 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 98304 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       2.57s  GTT=58.34 GiB
+  warm smart      4.55s  GTT=67.52 GiB
+  warm code       0.13s  GTT=67.53 GiB
+GTT with all 3 resident: 67.53 GiB (delta 62.51)
+  solo fast   walls=[0.706, 0.596, 0.592] min=0.592
+  solo smart  walls=[8.282, 8.177, 8.015] min=8.015
+  solo code   walls=[0.76, 0.632, 0.603] min=0.603
+  switch fast   -> smart  wall=7.99s solo_min=8.02s excess=-0.021s
+  switch fast   -> code   wall=0.60s solo_min=0.60s excess=-0.006s
+  switch smart  -> fast   wall=0.62s solo_min=0.59s excess=+0.029s
+  switch smart  -> code   wall=0.62s solo_min=0.60s excess=+0.017s
+  switch code   -> fast   wall=0.61s solo_min=0.59s excess=+0.022s
+  switch code   -> smart  wall=8.03s solo_min=8.02s excess=+0.013s
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx98304-all.json
+[2026-08-31T23:25:32+01:00] [2] E94-ctx98304-fill rc=1 wall=73s - UNEXPECTED
+[2026-08-31T23:25:32+01:00] --- [3] E94-ctx131072-fill ---
+FAILED: HTTPError: HTTP Error 400: Bad Request
+=== E94 residency: ctx=131,072 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 131072 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       3.03s  GTT=59.97 GiB
+  warm smart      4.15s  GTT=71.93 GiB
+  warm code       0.13s  GTT=71.93 GiB
+GTT with all 3 resident: 71.93 GiB (delta 66.91)
+  solo fast   walls=[0.721, 0.611, 0.597] min=0.597
+  solo smart  walls=[8.331, 8.185, 8.015] min=8.015
+  solo code   walls=[0.761, 0.634, 0.609] min=0.609
+  switch fast   -> smart  wall=7.99s solo_min=8.02s excess=-0.026s
+  switch fast   -> code   wall=0.63s solo_min=0.61s excess=+0.019s
+  switch smart  -> fast   wall=0.62s solo_min=0.60s excess=+0.025s
+  switch smart  -> code   wall=0.64s solo_min=0.61s excess=+0.029s
+  switch code   -> fast   wall=0.60s solo_min=0.60s excess=-0.001s
+  switch code   -> smart  wall=8.01s solo_min=8.02s excess=-0.006s
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx131072-all.json
+[2026-08-31T23:26:46+01:00] [3] E94-ctx131072-fill rc=1 wall=74s - UNEXPECTED
+[2026-08-31T23:26:46+01:00] --- [4] E94-ctx262144-fill ---
+FAILED: HTTPError: HTTP Error 400: Bad Request
+=== E94 residency: ctx=262,144 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 262144 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       4.21s  GTT=66.80 GiB
+  warm smart     14.85s  GTT=89.89 GiB
+  warm code       0.14s  GTT=89.89 GiB
+GTT with all 3 resident: 89.89 GiB (delta 84.87)
+  solo fast   walls=[0.728, 0.616, 0.612] min=0.612
+  solo smart  walls=[8.339, 8.183, 8.021] min=8.021
+  solo code   walls=[0.759, 0.634, 0.615] min=0.615
+  switch fast   -> smart  wall=8.01s solo_min=8.02s excess=-0.016s
+  switch fast   -> code   wall=0.61s solo_min=0.61s excess=+0.000s
+  switch smart  -> fast   wall=0.64s solo_min=0.61s excess=+0.025s
+  switch smart  -> code   wall=0.62s solo_min=0.61s excess=+0.001s
+  switch code   -> fast   wall=0.64s solo_min=0.61s excess=+0.027s
+  switch code   -> smart  wall=8.02s solo_min=8.02s excess=-0.004s
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx262144-all.json
+[2026-08-31T23:28:13+01:00] [4] E94-ctx262144-fill rc=1 wall=87s - UNEXPECTED
+[2026-08-31T23:28:13+01:00] === session done: 4 arms in 240s ===
+[2026-08-31T23:28:13+01:00] arms that did not exit 0: E94-h3-fast-alone(rc1) E94-ctx98304-fill(rc1) E94-ctx131072-fill(rc1) E94-ctx262144-fill(rc1)
+[2026-08-31T23:28:13+01:00] === closing the session window (exit rc=0) ===
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T23:28:13+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1811265 
+[2026-08-31T23:28:13+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T23:28:13+01:00] session finished, rc=0

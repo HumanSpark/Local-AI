@@ -1,0 +1,369 @@
+# File: claims.yml
+# Purpose: Claims registry - the single source of published numbers. Generated from the canonical
+#          claims in tools/build_claims_json.py; do not hand-edit (regenerate via build_data_package.py).
+# Release: 4.0 | run_window: 3-17 July 2026 | data_freeze: 2026-07-17
+#
+# Contract: every number on the public Report page must exist here as a claim id. Status is one of
+# active | superseded | retracted. Evidence paths are package-relative and completeness-checked.
+
+claims:
+  - id: C-LOCAL-SUMM-001
+    statement: "Local workhorse (Qwen3-30B-A3B) scored 93.3% on the document-summarisation suite."
+    value: 93.3
+    unit: "percent"
+    confidence_interval: [78.7, 98.2]
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-LOCAL-IF-001
+    statement: "Local workhorse scored 87.5% on the structured instruction-following suite."
+    value: 87.5
+    unit: "percent"
+    confidence_interval: [69.0, 95.7]
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-LOCAL-SUMM-4B
+    statement: "The small local model (Qwen3-4B) scored 96.7% on the summarisation suite."
+    value: 96.7
+    unit: "percent"
+    confidence_interval: [83.3, 99.4]
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-CLOUD-SUMM-FRONTIER
+    statement: "Frontier cloud (gpt-5.6-sol) scored 90.0% on the summarisation suite; cheap cloud (gpt-5.4-mini) 93.3%."
+    value: 90.0
+    unit: "percent"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-CLOUD-IF-FRONTIER
+    statement: "Frontier cloud (gpt-5.6-sol) scored 75.0% on instruction-following; cheap cloud (gpt-5.4-mini) 100%."
+    value: 75.0
+    unit: "percent"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-CAPABILITY-PARITY-001
+    statement: "On fact-checkable document benchmarks (summarisation, extraction) local was competitive with the tested cloud comparator; a harder send-readiness test tells the fuller story (see C-QUALITY-SENDREADY-001)."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/frontier-eval.md
+  - id: C-SPEED-WORKHORSE-P1
+    statement: "Workhorse fresh-context generation speed is about 92 tokens per second (baseline)."
+    value: 92.3
+    unit: "tokens_per_second"
+    confidence_interval: [91.1, 93.5]
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-CAPABILITY-TRANSCRIPTION-001
+    statement: "Meeting transcription (Whisper) runs at about 28 times real time - a one-hour meeting in roughly two minutes."
+    value: 28.0
+    unit: "times_real_time"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/capability-probes.md
+  - id: C-COST-MARGINAL-P1
+    statement: "Marginal electricity cost per 1M output tokens: about EUR 0.09 single-user, EUR 0.04 batched (sustained 72.8 t/s basis)."
+    value: 0.09
+    unit: "eur_per_1m_output_tokens"
+    confidence_interval: [0.04, 0.09]
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-HARDWARE-SPEC-001
+    statement: "Hardware is a GMKtec EVO-X2 (Ryzen AI Max+ 395, 128 GB unified memory): EUR 2,960 net, about EUR 3,680 cash outlay including Irish import VAT."
+    value: 3680
+    unit: "eur_cash_outlay"
+    confidence_interval: null
+    status: active
+    evidence:
+      - manifests/MANIFEST.md
+  - id: C-COMPRESS-MMLU-FLAT
+    statement: "Knowledge (MMLU) stays flat within confidence intervals from the 8-bit baseline down to about 2-bit; the first clear drop is at 1-bit ternary."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - reports/integrated-technical-results-v2.md
+  - id: C-COMPRESS-SUMM-FLAT
+    statement: "Document-task accuracy is unchanged across every quantisation rung down to the ternary floor (suite ceiling)."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - reports/integrated-technical-results-v2.md
+  - id: C-COMPRESS-SPEED-CURVE
+    statement: "A Q2-class build generates about 1.7 times faster than the 8-bit baseline (61 to 106 tokens/sec) at one-third the file size."
+    value: 1.7
+    unit: "times_speedup"
+    confidence_interval: null
+    status: active
+    evidence:
+      - reports/integrated-technical-results-v2.md
+  - id: C-LONGCTX-USABLE
+    statement: "Interactive long-context ceiling is about 48,000 tokens on the Vulkan stack, extending to 64,000 on a ROCm serving build."
+    value: 48000
+    unit: "tokens"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-LONGCTX-ACCURACY
+    statement: "Retrieval accuracy holds (6 of 6 needle probes) out to 80,000-plus tokens; beyond the interactive ceiling the constraint is speed, not correctness."
+    value: 100.0
+    unit: "percent_retrieval_accuracy"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-REASONING-TOKEN-TAX-CLOUD
+    statement: "Reasoning-emitter models generate roughly 3 to 12 times more tokens, for lower quality on structured output."
+    value: 3.5
+    unit: "times_token_overhead"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-REASONING-TOKEN-TAX-LOCAL
+    statement: "Local reasoning-emitter models pay the same 3-12x token tax and are not suited to structured document work."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-RELIABILITY-12K-P1
+    statement: "Every model in the fleet scored at least 83% on 12,000-token document work; accuracy holds even on the smaller models."
+    value: 83.0
+    unit: "percent"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-CAPACITY-TIERING-001
+    statement: "Everyday models (4-30 GB) are safe under all tested load; models over about 60 GB can deadlock under heavy concurrent disk I/O."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-OP-GUIDANCE-ROCM-LEVER
+    statement: "A ROCm serving build lifts the interactive long-context ceiling from 48,000 to 64,000 tokens (64K first answer 3m17s against 6m43s on Vulkan), measured just after the data freeze."
+    value: null
+    unit: "operational_guidance"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-CONCURRENCY-SMALL-TEAM-P1
+    statement: "One box comfortably serves a small team of 3-5 with intermittent use, and about four concurrent users is its best point: aggregate throughput peaks there at roughly 121 tokens per second, giving each user about 39 tokens per second - faster than anyone reads. Beyond that it does not keep improving; at sixteen concurrent users aggregate FALLS to about 109 tokens per second and each user drops to about 8. A single user is unaffected."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-ARCH-MOE-ADVANTAGE
+    statement: "At the same size, quantisation and model family, the mixture-of-experts architecture generates about 8.5 times faster (and prefills about 5.8 times faster) than the dense equivalent - architecture matters more than size."
+    value: 8.5
+    unit: "times_faster_generation"
+    confidence_interval: null
+    status: active
+    evidence:
+      - reports/integrated-technical-results-v2.md
+  - id: C-PREFILL-ROCM-VULKAN
+    statement: "On a ROCm serving build, prompt processing (prefill) reaches about 8.08 times the Vulkan speed at depth - the lever behind the extended interactive long-context ceiling."
+    value: 8.08
+    unit: "times_faster_prefill"
+    confidence_interval: null
+    status: active
+    evidence:
+      - reports/integrated-technical-results-v2.md
+  - id: C-CONCURRENCY-MOE-SCALING
+    statement: "With sixteen people asking sixteen different questions at once, the MoE workhorse delivers about 1.53 times the throughput of a single user - not the 2.66 times a same-question benchmark suggests. Mixture-of-Experts models route each token to a few specialists, so when concurrent requests differ the machine must fetch far more of the model per step. Conventional dense models do not behave this way (no measurable penalty), and a single user is unaffected either way."
+    value: 1.53
+    unit: "times_throughput_1_to_16_distinct_users"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-COMPRESS-SIZE-RANGE
+    statement: "The workhorse file shrinks from 30.25 GiB at the 8-bit baseline (Q8_0) to 10.49 GiB at Q2-class and 7.54 GiB at 1-bit ternary."
+    value: 30.25
+    unit: "gib_8bit_baseline_to_7p54_ternary"
+    confidence_interval: null
+    status: active
+    evidence:
+      - reports/integrated-technical-results-v2.md
+  - id: C-COST-BREAKEVEN-FRONTIER
+    statement: "The box pays back on running cost only against the frontier tier, above about 81 tasks per day; never against the cheap or EU cloud tiers at a small firm's volume."
+    value: 81
+    unit: "tasks_per_day"
+    confidence_interval: null
+    status: active
+    evidence:
+      - tools/cost_model.py
+  - id: C-COST-PER-TASK-RATIO
+    statement: "Per document task, local electricity is about 338 times cheaper than the frontier cloud tier, 51 times cheaper than cheap cloud, and 32 times cheaper than EU cloud."
+    value: 338
+    unit: "times_cheaper_than_frontier_per_task"
+    confidence_interval: null
+    status: active
+    evidence:
+      - tools/cost_model.py
+  - id: C-COST-TCO-3YEAR
+    statement: "Three-year total cost of ownership: about EUR 3,683 local (hardware-dominated) against about EUR 85 (EU) to EUR 907 (frontier) for cloud at roughly 5,000 document tasks a year."
+    value: 3683
+    unit: "eur_three_year_local"
+    confidence_interval: null
+    status: active
+    evidence:
+      - tools/cost_model.py
+  - id: C-POWER-DRAW-P1
+    statement: "Measured package power: about 4 W idle, 81 W under single-user inference, 83 W at sixteen concurrent users, with peaks of 93-107 W; wall draw is roughly 10-25 W higher (estimated, not plug-meter measured)."
+    value: 81
+    unit: "watts_package_single_user"
+    confidence_interval: null
+    status: active
+    evidence:
+      - reports/integrated-technical-results-v2.md
+  - id: C-CLOUD-CHEAP-IF-BEST
+    statement: "The cheap cloud tier (gpt-5.4-mini) scored 100% on the instruction-following suite, ahead of the frontier's 75% - but this suite is a saturated format-compliance floor that does not separate capable models; on real drafting the frontier (gpt-5.6-sol) is clearly best. Read as 'the cheap tier clears the floor', not 'the cheap tier is better'."
+    value: 100.0
+    unit: "percent_instruction_following"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-REASONING-NONRECOVERY
+    statement: "Reasoning-emitter models did not recover to direct-model performance on structured output even at a generous 8,192-token budget - a pre-registered prediction that missed, published as measured."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-LONGCTX-FIRST-ANSWER
+    statement: "First-answer latency climbs with document length: about 30 seconds at 16K tokens, 95 seconds at 32K, 3.5 minutes at 48K, and 14 minutes at 80K; follow-up questions return in seconds."
+    value: 206
+    unit: "seconds_first_answer_at_48k"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/experiments.md
+  - id: C-CODING-DEFAULT
+    statement: "For local coding, Qwen3-Coder-30B is the recommended default (GLM-4.7-Flash as fallback); the document-suite workhorse is not suited to agentic coding - benchmark strength did not transfer."
+    value: null
+    unit: "operational_guidance"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/plans/2026-07-12-coding-screen-10-realproject-results.md
+  - id: C-QUALITY-SENDREADY-001
+    statement: "On a real-work send-readiness test (would a professional send the draft, graded 1-5 by an independent frontier model over ten solicitor/accountant tasks), the best local models rate about 3.0 - a usable first draft that needs a real edit - against the frontier's about 4.4. Getting facts right on a benchmark is not the same as being send-ready."
+    value: 3.0
+    unit: "send_readiness_1_to_5"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-QUALITY-GROUNDED-001
+    statement: "Local output is strongest - close to send-ready, facts exact - on grounded tasks like extracting terms and summarising a document, which is precisely the confidential document work the box is for; it is weakest on open-ended drafting, where faithfulness is the limit and human review catches it."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-QUALITY-CEILING-001
+    statement: "No stock model or training-free technique closed the send-readiness gap: bigger models, reasoning models, the model checking its own work, showing it good examples in the prompt, and pooling several models all left local drafting at about the same level. Raw capability, not configuration, is the limit."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-FINETUNE-VOICE-001
+    statement: "A house-style fine-tune trained on the box on your own examples reliably teaches the model your firm's voice and register (a consistent tone lift across two runs, no loss of factual faithfulness), but does not raise the send-readiness score itself, and a five-times-larger training set did not change that. It is a voice-adaptation lever, not a way to remove the edit."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-TRAINING-ONBOX-001
+    statement: "The box can train a model, not only run one: a house-style adapter was trained end-to-end on the machine itself (generate examples, train, serve) with no cloud step and nothing leaving the building - the strongest form of owning your capability."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-TOOLUSE-DOC-001
+    statement: "Given office tools (create a Word document, send an email, add a reminder, look up a client), the workhorse (Qwen3-30B-Instruct) called the correct tool on 91% of a broad 22-task suite (5 runs each) with zero malformed calls, producing real .docx files, and correctly answered plain questions in text without over-calling a tool. Tool use / document creation is real and reliable on the right model. (F38, experiments E32-E33.)"
+    value: 91
+    unit: "percent_correct_tool_call"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-TOOLUSE-SERVING-001
+    statement: "Out-of-the-box tool-use support is serving-config dependent, not just model dependent: on the same llama.cpp build the workhorse and gpt-oss-20b emit clean tool calls immediately, Mistral-Small-3.1 silently refuses until supplied a tool template its GGUF does not ship, and Qwen3-Coder leaks its native call format as unparseable text about 5% of the time. Choose a tool-use model by measured parse-reliability on your own stack, not by reputation. (F38, E33.)"
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-TOOLUSE-CONDITIONAL-001
+    statement: "Reasoning inside a tool call is unreliable for most local models: told to mark a document urgent only when a balance exceeded a threshold, the Qwen family and gpt-oss applied the flag unconditionally; Mistral was the exception. The mechanical step (make the file, send the message) is dependable; the judgement inside it still needs a human check. (F38, E33.)"
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-TRANSCRIPTION-WER-001
+    statement: "On the standard read-speech benchmark (LibriSpeech test-clean, human transcripts), local Whisper large-v3-turbo transcribes at a 2.40% word error rate, matching the published figure for the model - which validates the measurement harness as well as the number. The smaller model is worse (3.35%), and the larger model is about 28% more accurate on real meeting audio too: our own hypothesis that smaller models might transcribe better was tested and refuted. This is clean read speech, the easy case; it is the model comparison and a harness check, not a meeting-accuracy figure. (F45, E42/E45.)"
+    value: 2.4
+    unit: "percent_word_error_rate"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/transcription/e45-true-wer.md
+  - id: C-TRANSCRIPTION-SILENCE-VAD-001
+    statement: "Voice-activity detection is mandatory, not optional, for Whisper transcription: without it the model fabricates about two invented utterances per minute of silence (97% of them the phrase 'Thank you.'), and voice-activity detection removes them completely (zero across 72 test conditions). This is a well-documented failure mode in the literature, reproduced here, not a discovery. One reframing is ours: counted by volume the smaller model hallucinates more, but counted by HARM the larger model is about five times worse, because it invents grammatical speech a reader cannot distinguish from a real utterance while the smaller model labels the gap as blank. (F44, E41.)"
+    value: null
+    unit: "operational_guidance"
+    confidence_interval: null
+    status: active
+    evidence:
+      - docs/FINDINGS.md
+  - id: C-TARGET-SPEAKER-001
+    statement: "Asking 'is this the host speaking or someone else' - a binary question - is far more tractable than full speaker diarisation and is what meeting intelligence actually needs. From a single ~4-minute voiceprint of the host, the system tags 97.2% of transcript lines correctly as host-versus-other across four real calls (a separate enrollment recording, so genuine cross-session performance). The difficulty inverts against general diarisation: more people in the room makes the binary question easier, not harder. General diarisation is the harder problem and a specialist tool (pyannote) still beats ours roughly three-to-one on it; the reframe to the host-versus-other question is what makes the product work. (F46, E50.)"
+    value: 97.2
+    unit: "percent_segment_attribution"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/diarisation/e50-target-speaker.md
+  - id: C-DIARISATION-FARFIELD-001
+    statement: "An on-prem meeting box does not need a headset per person: on the standard meeting corpus a single distant table microphone came within about one diarisation-error point of close-talk headsets (21.1% versus 20.2%), against a predicted eight-point penalty. Replacing a naive energy gate with a real voice-activity detector was what closed most of the gap, nearly halving the error. (F46, E44.)"
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/diarisation/e44-vad-fix.md

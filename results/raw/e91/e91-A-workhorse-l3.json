@@ -1,0 +1,235 @@
+{
+  "label": "e91-A-workhorse",
+  "tier": "l3",
+  "distractors": 9,
+  "thinking": "default",
+  "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 32768,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server",
+  "server_extra": "-fa on -ctk q8_0 -ctv q8_0",
+  "rule9_breach_acknowledged": false,
+  "rule9_busy_gpu": [],
+  "cloud_spend": null,
+  "latency": {
+    "n": 12,
+    "median_s": 0.84,
+    "p95_s": 46.97,
+    "min_s": 0.7,
+    "max_s": 46.97,
+    "under_10s": 11,
+    "under_30s": 11
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-08-31T16:06:04Z",
+  "wall_s": 60.4,
+  "pack_chars": 93920,
+  "context_preflight": {
+    "longest_prompt_tokens": 20564,
+    "max_tokens": 4096,
+    "needed": 24660,
+    "ctx": 32768,
+    "headroom": 8108
+  },
+  "correct": 4,
+  "total": 12,
+  "citation_valid": 7,
+  "over_claims": 1,
+  "over_claim_rate": 1.0,
+  "stale_values": 0,
+  "premature_values": 2,
+  "by_category": {
+    "date_effective": {
+      "correct": 1,
+      "total": 3
+    },
+    "revocation": {
+      "correct": 2,
+      "total": 2
+    },
+    "precedence": {
+      "correct": 0,
+      "total": 2
+    },
+    "multihop": {
+      "correct": 0,
+      "total": 3
+    },
+    "exhaustive": {
+      "correct": 1,
+      "total": 1
+    },
+    "underspecified": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 4,
+    "over_applied": 1,
+    "over_claim": 1,
+    "precedence_missed": 1,
+    "premature": 2,
+    "wrong": 3
+  },
+  "results": [
+    {
+      "id": "D1",
+      "category": "date_effective",
+      "outcome": "premature",
+      "citation_ok": false,
+      "citation": "AMD-1",
+      "answer": "46,500",
+      "finish_reason": "stop",
+      "completion_tokens": 19,
+      "prompt_tokens": 20527,
+      "reasoning_chars": 0,
+      "wall_s": 46.97
+    },
+    {
+      "id": "D2",
+      "category": "date_effective",
+      "outcome": "premature",
+      "citation_ok": false,
+      "citation": "AMD-2",
+      "answer": "1,250,000",
+      "finish_reason": "stop",
+      "completion_tokens": 22,
+      "prompt_tokens": 20527,
+      "reasoning_chars": 0,
+      "wall_s": 0.73
+    },
+    {
+      "id": "D3",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3, clause 2.1",
+      "answer": "51,000",
+      "finish_reason": "stop",
+      "completion_tokens": 25,
+      "prompt_tokens": 20527,
+      "reasoning_chars": 0,
+      "wall_s": 0.78
+    },
+    {
+      "id": "V1",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 5.2",
+      "answer": "24",
+      "finish_reason": "stop",
+      "completion_tokens": 24,
+      "prompt_tokens": 20533,
+      "reasoning_chars": 0,
+      "wall_s": 0.84
+    },
+    {
+      "id": "V2",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, clause 4.2",
+      "answer": "YES",
+      "finish_reason": "stop",
+      "completion_tokens": 23,
+      "prompt_tokens": 20520,
+      "reasoning_chars": 0,
+      "wall_s": 0.92
+    },
+    {
+      "id": "P1",
+      "category": "precedence",
+      "outcome": "precedence_missed",
+      "citation_ok": false,
+      "citation": "MSA-2024, AMD-3",
+      "answer": "24 months",
+      "finish_reason": "stop",
+      "completion_tokens": 24,
+      "prompt_tokens": 20509,
+      "reasoning_chars": 0,
+      "wall_s": 0.84
+    },
+    {
+      "id": "P2",
+      "category": "precedence",
+      "outcome": "over_applied",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 6.2",
+      "answer": "1",
+      "finish_reason": "stop",
+      "completion_tokens": 23,
+      "prompt_tokens": 20500,
+      "reasoning_chars": 0,
+      "wall_s": 0.79
+    },
+    {
+      "id": "M1",
+      "category": "multihop",
+      "outcome": "wrong",
+      "citation_ok": false,
+      "citation": "MSA-2024, AMD-1",
+      "answer": "504,000",
+      "finish_reason": "stop",
+      "completion_tokens": 28,
+      "prompt_tokens": 20544,
+      "reasoning_chars": 0,
+      "wall_s": 1.06
+    },
+    {
+      "id": "M2",
+      "category": "multihop",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "AMD-3, MSA-2",
+      "answer": "1,224,000",
+      "finish_reason": "stop",
+      "completion_tokens": 27,
+      "prompt_tokens": 20534,
+      "reasoning_chars": 0,
+      "wall_s": 0.87
+    },
+    {
+      "id": "M3",
+      "category": "multihop",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "MSA-2024, AMD-3",
+      "answer": "24.6",
+      "finish_reason": "stop",
+      "completion_tokens": 25,
+      "prompt_tokens": 20514,
+      "reasoning_chars": 0,
+      "wall_s": 0.85
+    },
+    {
+      "id": "N1",
+      "category": "exhaustive",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 11,
+      "prompt_tokens": 20572,
+      "reasoning_chars": 0,
+      "wall_s": 0.84
+    },
+    {
+      "id": "Z1",
+      "category": "underspecified",
+      "outcome": "over_claim",
+      "citation_ok": false,
+      "citation": "MSA-2024 clause 6.3",
+      "answer": "No",
+      "finish_reason": "stop",
+      "completion_tokens": 22,
+      "prompt_tokens": 20495,
+      "reasoning_chars": 0,
+      "wall_s": 0.7
+    }
+  ]
+}

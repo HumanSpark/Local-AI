@@ -1,0 +1,1027 @@
+{
+  "label": "armB-qwen38-27b",
+  "condition": "tools",
+  "schema_version": "v2",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "items_file": "spikes/aabr/items-40.json",
+  "n_items": 30,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 132,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 53,
+  "round_cap_hits": 0,
+  "wall_s": 3030.11,
+  "note": "transcript only - scoring is score_aabr.py over this file",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 29 February 2024\nCITATION: The Lock-Up Period expires exactly 6 months after the IPO Date (31 August 2023); no weekend or holiday rolls apply.",
+      "char_count": 150,
+      "char_count_all_rounds": 302,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2023-08-31",
+            "months": 6
+          },
+          "result": "2024-02-29"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-02-29"
+          },
+          "result": "Thursday"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 150.4,
+      "id": "B06",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Wednesday, 17 January 2024\nCITATION: \"A party has exactly 5 business days from the Date of Discovery to report an incident. The Date of Discovery was Wednesday, 10 January 2024.\"",
+      "char_count": 186,
+      "char_count_all_rounds": 186,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-01-10",
+            "days": 5
+          },
+          "result": "2024-01-17"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 49.72,
+      "id": "B07",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Thursday, 23 May 2024\nCITATION: Statute: deadline falling on a weekend or public holiday rolls backward to the immediately preceding business day (26 May 2024 is a Sunday; 25 May is a Saturday; 24 May is a public holiday)",
+      "char_count": 229,
+      "char_count_all_rounds": 460,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2024-05-26",
+            "direction": "backward",
+            "holidays": [
+              "2024-05-24",
+              "2024-05-27"
+            ]
+          },
+          "result": "2024-05-23"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-05-23"
+          },
+          "result": "Thursday"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 62.55,
+      "id": "B08",
+      "subset": "boundary",
+      "mechanism": [
+        "roll_backward",
+        "holiday",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Saturday, 16 March 2024\nCITATION: Section 4.2: \"Deadlines calculated in calendar days are absolute and do not roll forward or backward, even if they fall on a weekend or public holiday.\"",
+      "char_count": 194,
+      "char_count_all_rounds": 390,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-03-01",
+            "days": 15
+          },
+          "result": "2024-03-16"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-03-16"
+          },
+          "result": "Saturday"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-03-01",
+            "days": 15
+          },
+          "result": "2024-03-16"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-03-16"
+          },
+          "result": "Saturday"
+        }
+      ],
+      "n_calls": 4,
+      "wall_s": 64.12,
+      "id": "B09",
+      "subset": "boundary",
+      "mechanism": [
+        "no_roll_trap",
+        "calendar_days",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Cannot be determined \u2014 the material does not state whether \"Geolocation Data\" is listed in Exhibit C, and that listing is the missing fact needed to apply Clause 9.1.\nCITATION: Section 2.1 and Clause 9.1 of the Master Agreement (Exhibit C not attached)",
+      "char_count": 260,
+      "char_count_all_rounds": 522,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 92.73,
+      "id": "A06",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_exhibit",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to answer; the missing fact is the contractual definition or criteria for a \"Severity 1 Incident\" (Clause 1 defines \"Incident,\" \"Remediation\" and \"Immediate\" but not \"Severity 1\"), so it cannot be determined from the contract text whether 5 hours of downtime qualifies or whether the Customer's unilateral declaration is binding.\nCITATION: Clause 1 (definitions; no \"Severity 1\" definition) and Clause 4 (Immediate Remediation for \"Severity 1 Incident\")\n\n",
+      "char_count": 510,
+      "char_count_all_rounds": 510,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 94.22,
+      "id": "A07",
+      "subset": "ambiguity",
+      "mechanism": [
+        "undefined_term",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to determine the legally binding SLA. Both amendments are contemporaneous (signed and dated 1 January 2024), neither references the other, and each purports to supersede all prior and contemporaneous agreements, creating an unresolvable conflict. The missing fact is which amendment takes precedence (e.g., the order of execution or a rule for resolving conflicts between two contemporaneous amendments that each claim to supersede the other).\nCITATION: Integration clause in both amendments: \"This Amendment supersedes all prior and contemporaneous agreements regarding its subject matter.\"\n\n",
+      "char_count": 648,
+      "char_count_all_rounds": 648,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 76.03,
+      "id": "A08",
+      "subset": "ambiguity",
+      "mechanism": [
+        "irresolvable_conflict",
+        "same_day_amendments",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the Vendor is authorised to use AWS as a sub-processor for this order.\nCITATION: 2024 Order Form (data privacy addenda exception) and 2023 Data Processing Addendum Section 2",
+      "char_count": 186,
+      "char_count_all_rounds": 186,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 66.83,
+      "id": "A09",
+      "subset": "ambiguity",
+      "mechanism": [
+        "later_in_time",
+        "specific_vs_general"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 5 March 2024\nCITATION: \"The Evaluation Period expires exactly 1 month after the Trial Start Date. Following expiration, the Customer has a 3-business-day Grace Period to export their data before deletion.\"",
+      "char_count": 213,
+      "char_count_all_rounds": 213,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-01-31",
+            "months": 1
+          },
+          "result": "2024-02-29"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-02-29"
+          },
+          "result": "Thursday"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-02-29",
+            "days": 3
+          },
+          "result": "2024-03-05"
+        }
+      ],
+      "n_calls": 3,
+      "wall_s": 130.22,
+      "id": "B10",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "business_days",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 23 December 2024\nCITATION: \"A Response must be filed exactly 15 calendar days after the Notice of Inquiry is issued. If the deadline falls on a weekend or a recognised public holiday, it rolls backward to the immediately preceding business day.\" (Notice issued Tuesday, 10 December 2024; 24 and 25 December are recognised public holidays)",
+      "char_count": 346,
+      "char_count_all_rounds": 694,
+      "rounds": 4,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-12-10",
+            "days": 15
+          },
+          "result": "2024-12-25"
+        },
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2024-12-25",
+            "direction": "backward",
+            "holidays": [
+              "2024-12-24",
+              "2024-12-25"
+            ]
+          },
+          "result": "2024-12-23"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-12-23"
+          },
+          "result": "Monday"
+        }
+      ],
+      "n_calls": 3,
+      "wall_s": 77.52,
+      "id": "B11",
+      "subset": "boundary",
+      "mechanism": [
+        "calendar_days",
+        "roll_backward",
+        "holiday",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Friday, 4 October 2024\nCITATION: \"7 full calendar days must intervene between the day of service and the day of the hearing\" and \"If the final permitted day for service falls on a weekend, the absolute deadline to serve rolls backward to the preceding business day\" (Hearing Date: Monday, 14 October 2024)",
+      "char_count": 313,
+      "char_count_all_rounds": 628,
+      "rounds": 4,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-10-07",
+            "end": "2024-10-14",
+            "unit": "days"
+          },
+          "result": 7
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-10-07"
+          },
+          "result": "Monday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-10-06"
+          },
+          "result": "Sunday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-10-04"
+          },
+          "result": "Friday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-10-05"
+          },
+          "result": "Saturday"
+        }
+      ],
+      "n_calls": 5,
+      "wall_s": 206.76,
+      "id": "B12",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "roll_backward",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 13 June 2024 (Thursday)\nCITATION: Notice must be deemed received at least 10 business days prior to the Renewal Date (1 July 2024); certified mail is deemed received 2 business days after posting",
+      "char_count": 203,
+      "char_count_all_rounds": 613,
+      "rounds": 6,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-07-01",
+            "days": -10
+          },
+          "result": "2024-06-17"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-06-17",
+            "days": -2
+          },
+          "result": "2024-06-13"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-06-13"
+          },
+          "result": "Thursday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-06-17"
+          },
+          "result": "Monday"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-06-13",
+            "days": 2
+          },
+          "result": "2024-06-17"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-06-13",
+            "days": 2
+          },
+          "result": "2024-06-17"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-06-13",
+            "days": 2
+          },
+          "result": "2024-06-17"
+        }
+      ],
+      "n_calls": 7,
+      "wall_s": 495.11,
+      "id": "B13",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "deemed_receipt",
+        "backward_count",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 30 June 2024\nCITATION: The statutory vesting cliff occurs exactly 3 months from the Grant Date (31 March 2024), and vesting dates do not roll forward or backward regardless of weekends or holidays",
+      "char_count": 204,
+      "char_count_all_rounds": 384,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-03-31",
+            "months": 3
+          },
+          "result": "2024-06-30"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2024-06-15"
+          },
+          "result": "2024-06-30"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-06-30"
+          },
+          "result": "Sunday"
+        }
+      ],
+      "n_calls": 3,
+      "wall_s": 76.45,
+      "id": "B14",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "no_roll_trap",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Cannot be determined \u2014 the contract does not define \"Change of Control,\" so it is not established whether the Founder's sale of 40% of voting stock (while remaining on the Board) meets the required threshold; the missing fact is the contractual definition of \"Change of Control.\"\nCITATION: Section 4.1 (\"Upon a Change of Control, all unvested equity shall immediately accelerate and vest\"); the material's statement that the contract does not define \"Change of Control\"",
+      "char_count": 477,
+      "char_count_all_rounds": 930,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 76.61,
+      "id": "A10",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_definition",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to determine which state has exclusive venue; the missing fact is a rule or provision resolving the conflict between the two concurrent addenda's competing exclusive-venue clauses (no order of precedence, later-in-time tiebreaker, or claim-allocation rule is provided).\nCITATION: Both addenda signed concurrently on 1 June 2024; Software Licence Addendum (New York) and Support Services Addendum (California) each purport to set exclusive venue for \"any dispute arising under this Master Agreement or its Addenda.\"",
+      "char_count": 571,
+      "char_count_all_rounds": 571,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 96.08,
+      "id": "A11",
+      "subset": "ambiguity",
+      "mechanism": [
+        "irresolvable_conflict",
+        "same_day_amendments",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Net-30, because Master Agreement Section 12 provides that the Master Agreement exclusively governs any conflict with a SOW regardless of contrary SOW language, and Section 3 sets payment terms at Net-30.\nCITATION: Master Agreement Section 12 (conflict clause) and Section 3 (Net-30 payment terms)",
+      "char_count": 304,
+      "char_count_all_rounds": 610,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 58.21,
+      "id": "A12",
+      "subset": "ambiguity",
+      "mechanism": [
+        "order_of_precedence",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to determine the exact expiry date; the missing fact is whether the 10 March email qualified as formal written notice in accordance with Clause 15 (Notices), since Clause 15 is not provided.\nCITATION: Clause 8 (Termination for Cause)",
+      "char_count": 290,
+      "char_count_all_rounds": 590,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-03-10",
+            "days": 30
+          },
+          "result": "2025-04-09"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 181.1,
+      "id": "A13",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_trigger_facts",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No. The PDF was unmarked, so it does not meet Section 1.1's strict definition of \"Confidential Information\" (which requires an explicit CONFIDENTIAL stamp or watermark), and Clause 5 only prohibits disclosure of Confidential Information.\nCITATION: Section 1.1 (definition of \"Confidential Information\")\n\n",
+      "char_count": 310,
+      "char_count_all_rounds": 310,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 44.97,
+      "id": "A14",
+      "subset": "ambiguity",
+      "mechanism": [
+        "strict_marking_trap",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Thursday, 26 December 2024\nCITATION: \"The statutory review period ends exactly 10 calendar days after the Filing Date. If the end date falls on a weekend or recognised public holiday, the deadline rolls forward to the next available business day.\" (Filing Date: Saturday, 14 December 2024; 24 and 25 December 2024 are recognised public holidays)",
+      "char_count": 353,
+      "char_count_all_rounds": 353,
+      "rounds": 4,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-12-14",
+            "days": 10
+          },
+          "result": "2024-12-24"
+        },
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2024-12-24",
+            "direction": "forward",
+            "holidays": [
+              "2024-12-24",
+              "2024-12-25"
+            ]
+          },
+          "result": "2024-12-26"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-12-26"
+          },
+          "result": "Thursday"
+        }
+      ],
+      "n_calls": 3,
+      "wall_s": 82.35,
+      "id": "B15",
+      "subset": "boundary",
+      "mechanism": [
+        "roll_forward",
+        "holiday",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Tuesday, 7 May 2024\nCITATION: Rule that the counter-notice must be served not less than 7 clear days before the Deposition Date, with clear days excluding the day of service and the day of the deposition; Deposition Date Wednesday, 15 May 2024",
+      "char_count": 251,
+      "char_count_all_rounds": 504,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-05-15",
+            "days": -8
+          },
+          "result": "2024-05-07"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-05-07"
+          },
+          "result": "Tuesday"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 103.53,
+      "id": "B16",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 27 June 2024\nCITATION: \"Final venue selections must be submitted at least 10 business days prior to the Main Event. The Main Event is scheduled for Monday, 15 July 2024. Thursday 4 July and Friday 5 July are recognised public holidays and do not count as business days.\"",
+      "char_count": 278,
+      "char_count_all_rounds": 558,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-07-15",
+            "days": -10,
+            "holidays": [
+              "2024-07-04",
+              "2024-07-05"
+            ]
+          },
+          "result": "2024-06-27"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-06-27"
+          },
+          "result": "Thursday"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 126.6,
+      "id": "B17",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "backward_count",
+        "holiday",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 27 November 2024\nCITATION: Warranty expires exactly 6 months from the Purchase Date (31 May 2024 \u2192 30 November 2024, a Saturday), rolling backward to the immediately preceding business day, skipping public holidays 28 and 29 November 2024.",
+      "char_count": 247,
+      "char_count_all_rounds": 496,
+      "rounds": 5,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-05-31",
+            "months": 6
+          },
+          "result": "2024-11-30"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-11-30"
+          },
+          "result": "Saturday"
+        },
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2024-11-30",
+            "direction": "backward",
+            "holidays": [
+              "2024-11-28",
+              "2024-11-29"
+            ]
+          },
+          "result": "2024-11-27"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-11-27"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 4,
+      "wall_s": 121.49,
+      "id": "B18",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "roll_backward",
+        "holiday",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Monday, 12 February 2024\nCITATION: 30 calendar days from deemed receipt (5 business days after posting); weekend deadline rolls forward to next business day",
+      "char_count": 164,
+      "char_count_all_rounds": 330,
+      "rounds": 5,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-01-04",
+            "days": 5
+          },
+          "result": "2024-01-11"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-01-11",
+            "days": 30
+          },
+          "result": "2024-02-10"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-02-10"
+          },
+          "result": "Saturday"
+        },
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2024-02-10",
+            "direction": "forward"
+          },
+          "result": "2024-02-12"
+        }
+      ],
+      "n_calls": 4,
+      "wall_s": 141.32,
+      "id": "B19",
+      "subset": "boundary",
+      "mechanism": [
+        "deemed_receipt",
+        "calendar_days",
+        "roll_forward",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 28 February 2025\nCITATION: \"The special options grant matures exactly 12 months from the Award Date\" (Award Date 29 February 2024; Section 9.1 prohibits rolling)",
+      "char_count": 169,
+      "char_count_all_rounds": 340,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-02-29",
+            "months": 12
+          },
+          "result": "2025-02-28"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-02-28"
+          },
+          "result": "2025-02-28"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 77.12,
+      "id": "B20",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "no_roll_trap_inert",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to answer; the missing fact is the date the hurricane struck (or the duration of the halted operations), without which it cannot be determined whether the continuous period of more than 30 calendar days required by Clause 14 has been exceeded.\nCITATION: Clause 14 (Force Majeure) \u2014 termination without penalty only if a force majeure event prevents performance for a continuous period of more than 30 calendar days.",
+      "char_count": 472,
+      "char_count_all_rounds": 472,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 49.8,
+      "id": "A15",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_trigger_facts",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to answer; the missing fact is the contents of Schedule D, which is \"[INTENTIONALLY LEFT BLANK],\" so the method for calculating the service credits is not specified.\nCITATION: Section 3 (Service Level Penalties) and the Schedule D entry \"[INTENTIONALLY LEFT BLANK]\"",
+      "char_count": 322,
+      "char_count_all_rounds": 322,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 34.38,
+      "id": "A16",
+      "subset": "ambiguity",
+      "mechanism": [
+        "deleted_cross_reference",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the Provider is contractually liable for the USD 500,000 in indirect damages, because Addendum A expressly carves out an exception to Section 8 for indirect damages arising directly from a breach of Customer Data, subject to a USD 1,000,000 cap, and the USD 500,000 amount falls within that cap.\nCITATION: Addendum A (Data Privacy) \u2014 \"Notwithstanding Section 8, the Provider shall be liable for indirect damages arising directly from a breach of Customer Data, subject to a USD 1,000,000 cap.\"",
+      "char_count": 506,
+      "char_count_all_rounds": 506,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 33.85,
+      "id": "A17",
+      "subset": "ambiguity",
+      "mechanism": [
+        "specific_vs_general",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the billing dispute notice was validly served. Section 10.2 expressly provides that, for the specific purpose of disputing an invoice, notice sent via email to billing@acme.com is deemed valid and sufficient, and the Customer sent exactly such an email. This specific provision governs over the general certified-mail requirement in Section 10.1.\nCITATION: Section 10.2 (Billing Disputes)",
+      "char_count": 401,
+      "char_count_all_rounds": 1107,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "Wednesday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 89.35,
+      "id": "A18",
+      "subset": "ambiguity",
+      "mechanism": [
+        "specific_vs_general",
+        "internal_section_conflict",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No \u2014 SOW #1 is not legally binding because the Customer's signature block remains completely blank, so the mutual execution by both parties required by Clause 2 has not occurred.\nCITATION: Clause 2 of the Master Agreement (\"legally binding only upon mutual execution by both parties\")\n\n",
+      "char_count": 292,
+      "char_count_all_rounds": 292,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 23.51,
+      "id": "A19",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_execution",
+        "course_of_dealing_distractor",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to answer; the specific list of geographic regions comprising the Authorised Territory is missing, as Clause 1.1 defers to Appendix B for the list and Appendix B defers back to Clause 1.1 for meaning and scope, with no regions actually enumerated in either.\nCITATION: Clause 1.1 and Appendix B (circular cross-reference; no regions explicitly listed)",
+      "char_count": 407,
+      "char_count_all_rounds": 407,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 42.81,
+      "id": "A20",
+      "subset": "ambiguity",
+      "mechanism": [
+        "irresolvable_circular_definition",
+        "unanswerable"
+      ]
+    }
+  ]
+}

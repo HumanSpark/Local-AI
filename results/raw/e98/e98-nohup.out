@@ -1,0 +1,79 @@
+[2026-08-31T22:02:31+01:00] === preflight ===
+[2026-08-31T22:02:31+01:00] preflight OK (template has no reasoning_effort; --thinking default is honest)
+[2026-08-31T22:02:31+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T22:02:32+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T22:02:32+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T22:02:32+01:00] --- A-l4: tier=l4 distractors=0 ctx=65536 max_tokens=32768 ---
+
+*** TRUNCATION GATE: 1/15 items (7%) hit the token cap and returned no answer. ***
+    max_tokens=32768. These are NOT misses - they were never answered.
+    hint: raise --max-tokens (and --ctx to fit it). Check the chat template honours
+    any effort flag before reaching for one: a template that ignores reasoning_effort
+    makes --thinking inert while the result file records it as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway,
+    in which case the truncated items are declared in the result file.
+=== PS eval L4: e98-A-l4 (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 65536 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2726, 'max_tokens': 32768, 'needed': 35494, 'ctx': 65536, 'headroom': 30042}
+  [1/15] P1  statutory_period correct           cite=ok 32.1s  28 February 2026
+  [2/15] P2  statutory_period correct           cite=ok 140.17s  30 April 2026
+  [3/15] P3  statutory_period correct           cite=ok 20.04s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 15.68s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    correct           cite=ok 182.12s  493.99
+  [6/15] N1  notice_period    correct           cite=ok 30.25s  30 November 2026
+  [7/15] N2  notice_period    truncated         cite=no 540.86s  None
+  [8/15] F1  fee_basis        correct           cite=ok 46.12s  106800
+  [9/15] S1  survival         correct           cite=no 10.5s  d
+  [10/15] D1  defect_find      correct           cite=ok 41.74s  d
+  [11/15] D2  defect_find      correct           cite=ok 18.77s  4
+  [12/15] D3  defect_find      correct           cite=ok 15.49s  650000
+  [13/15] X1  defect_absent    correct           cite=ok 17.33s  NO
+  [14/15] X2  defect_absent    correct           cite=no 9.18s  NO
+  [15/15] U1  underspecified   correct           cite=ok 9.67s  NOT_IN_PACK
+[2026-08-31T22:21:26+01:00] A-l4 rc=3 wall=1134s -> /home/agent-spark/sparkbench/results/raw/e98/e98-A-l4.json
+[2026-08-31T22:21:26+01:00] NOTE: rc=3 is the Rule 13 truncation gate. Prediction 1 is FALSIFIED
+[2026-08-31T22:21:26+01:00]   and the prereg says to STOP rather than raise the budget again.
+[2026-08-31T22:21:26+01:00] --- B-l3: tier=l3 distractors=9 ctx=65536 max_tokens=32768 ---
+=== PS eval L3: e98-B-l3 (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 65536 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 21295, 'max_tokens': 32768, 'needed': 54063, 'ctx': 65536, 'headroom': 11473}
+  [1/12] D1  date_effective   correct           cite=ok 44.13s  42000
+  [2/12] D2  date_effective   correct           cite=ok 32.78s  500000
+  [3/12] D3  date_effective   correct           cite=ok 22.0s  51,000
+  [4/12] V1  revocation       correct           cite=ok 18.38s  24
+  [5/12] V2  revocation       correct           cite=ok 15.62s  YES
+  [6/12] P1  precedence       correct           cite=ok 95.94s  6 months
+  [7/12] P2  precedence       over_applied      cite=no 25.24s  1 business day
+  [8/12] M1  multihop         correct           cite=ok 23.04s  378000
+  [9/12] M2  multihop         stale_value       cite=no 59.23s  139500
+  [10/12] M3  multihop         correct           cite=no 272.49s  24.5
+  [11/12] N1  exhaustive       format_error      cite=no 12.52s  None
+  [12/12] Z1  underspecified   over_claim        cite=no 29.07s  No, VAT is not chargeable on a service credit issu
+
+e98-B-l3: 8/12 correct, citations 7/12
+OVER-CLAIM 1/1 | STALE 0/5 | PREMATURE 0
+by_category: {'date_effective': {'correct': 3, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 1, 'total': 2}, 'multihop': {'correct': 2, 'total': 3}, 'exhaustive': {'correct': 0, 'total': 1}, 'underspecified': {'correct': 0, 'total': 1}}
+outcomes: {'correct': 8, 'format_error': 1, 'over_applied': 1, 'over_claim': 1, 'stale_value': 1}
+written: /home/agent-spark/sparkbench/results/raw/e98/e98-B-l3.json
+[2026-08-31T22:32:21+01:00] B-l3 rc=0 wall=655s -> /home/agent-spark/sparkbench/results/raw/e98/e98-B-l3.json
+[2026-08-31T22:32:21+01:00] === E98 arms done in 1789s; raw in /home/agent-spark/sparkbench/results/raw/e98 ===
+[2026-08-31T22:32:21+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T22:32:21+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1801307 
+[2026-08-31T22:32:21+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T22:32:21+01:00] E98 finished, rc=0

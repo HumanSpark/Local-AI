@@ -1,0 +1,37 @@
+
+*** TRUNCATION GATE: 1/24 items (4%) hit the token cap and returned no answer. ***
+    max_tokens=4096. These are NOT misses - they were never answered.
+    hint: raise --max-tokens (and --ctx to fit it). Check the chat template honours
+    any effort flag before reaching for one: a template that ignores reasoning_effort
+    makes --thinking inert while the result file records it as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway,
+    in which case the truncated items are declared in the result file.
+=== PS eval L5: e107-t07-s302 (local) ===
+pack: 8,807 chars over 9 question categories, 24 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2531, 'max_tokens': 4096, 'needed': 6627, 'ctx': 16384, 'headroom': 9757}
+  [1/24] R01 payment_clock    correct           cite=ok 98.45s  11 June 2026
+  [2/24] R02 statutory_period correct           cite=ok 33.27s  30 June 2026
+  [3/24] R03 acceptance_window correct           cite=ok 47.96s  24 March 2026
+  [4/24] R04 acceptance_window correct           cite=ok 68.9s  11 May 2026
+  [5/24] R05 acceptance_window correct           cite=ok 31.02s  8 April 2026
+  [6/24] R06 payment_clock    correct           cite=ok 67.86s  77
+  [7/24] R07 payment_clock    correct           cite=ok 180.68s  EUR 393.99
+  [8/24] R08 payment_clock    correct           cite=ok 139.19s  EUR 493.99
+  [9/24] R09 statutory_period off_by_calendar   cite=ok 46.56s  31 July 2026
+  [10/24] R10 statutory_period truncated         cite=no 340.6s  None
+  [11/24] R11 statutory_period correct           cite=ok 64.98s  275
+  [12/24] R12 composition      correct           cite=ok 56.25s  30 October 2026
+  [13/24] E01 which_instrument correct           cite=ok 14.92s  CO-2
+  [14/24] E02 precedence       correct           cite=no 26.86s  EUR 96,000
+  [15/24] E03 precedence       correct           cite=no 14.67s  EUR 180,000
+  [16/24] E04 which_instrument correct           cite=ok 21.03s  Three months, supplied by the Framework Agreement 
+  [17/24] E05 exhaustive       correct           cite=ok 22.57s  Two of the three Call-Off Orders state a Notice Pe
+  [18/24] E06 conflict         correct           cite=ok 32.13s  11 March 2026. The Chronology (CHRON-1) is express
+  [19/24] E07 conflict         correct           cite=ok 32.72s  No. The Site B liability cap is EUR 96,000, as set
+  [20/24] E08 which_instrument correct           cite=ok 19.16s  CO-3, eight Business Days
+  [21/24] E09 underspecified   correct           cite=ok 24.03s  NOT_IN_PACK
+  [22/24] E10 underspecified   correct           cite=ok 39.27s  NOT_IN_PACK
+  [23/24] E11 underspecified   correct           cite=ok 42.86s  NOT_IN_PACK
+  [24/24] E12 underspecified   correct           cite=ok 21.94s  NOT_IN_PACK

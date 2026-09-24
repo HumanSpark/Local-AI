@@ -1,0 +1,284 @@
+{
+  "label": "e93-ABL",
+  "tier": "l4",
+  "distractors": null,
+  "thinking": "low",
+  "model": "/opt/models/staging/Huihui-Qwen3.8-27B-abliterated-Q4_K.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 16384,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server",
+  "server_extra": "-fa on -ctk q8_0 -ctv q8_0",
+  "rule9_breach_acknowledged": false,
+  "rule9_busy_gpu": [],
+  "cloud_spend": null,
+  "latency": {
+    "n": 15,
+    "median_s": 42.86,
+    "p95_s": 143.53,
+    "min_s": 23.35,
+    "max_s": 143.53,
+    "under_10s": 0,
+    "under_30s": 2
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-08-31T19:57:13Z",
+  "wall_s": 871.2,
+  "pack_chars": 10029,
+  "context_preflight": {
+    "longest_prompt_tokens": 2648,
+    "max_tokens": 4096,
+    "needed": 6744,
+    "ctx": 16384,
+    "headroom": 9640
+  },
+  "correct": 14,
+  "total": 15,
+  "citation_valid": 15,
+  "over_claims": 0,
+  "over_claim_rate": 0.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "statutory_period": {
+      "correct": 3,
+      "total": 3
+    },
+    "breach_clock": {
+      "correct": 1,
+      "total": 1
+    },
+    "interest_calc": {
+      "correct": 1,
+      "total": 1
+    },
+    "notice_period": {
+      "correct": 1,
+      "total": 2
+    },
+    "fee_basis": {
+      "correct": 1,
+      "total": 1
+    },
+    "survival": {
+      "correct": 1,
+      "total": 1
+    },
+    "defect_find": {
+      "correct": 3,
+      "total": 3
+    },
+    "defect_absent": {
+      "correct": 2,
+      "total": 2
+    },
+    "underspecified": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 14,
+    "off_by_calendar": 1
+  },
+  "results": [
+    {
+      "id": "P1",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-DP, sections A and C.1; CAL-2026 (February 2026 has 28 days)",
+      "answer": "28 February 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 380,
+      "prompt_tokens": 2613,
+      "reasoning_chars": 1171,
+      "wall_s": 42.86
+    },
+    {
+      "id": "P2",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-DP, sections A and C (C.1 and C.2); CHRON, 31 January 2026 entry",
+      "answer": "30 April 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 505,
+      "prompt_tokens": 2604,
+      "reasoning_chars": 1648,
+      "wall_s": 44.78
+    },
+    {
+      "id": "P3",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-LIM, clauses 1\u20133; CHRON, entry dated 14 September 2020",
+      "answer": "14 September 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 423,
+      "prompt_tokens": 2590,
+      "reasoning_chars": 1472,
+      "wall_s": 38.0
+    },
+    {
+      "id": "B1",
+      "category": "breach_clock",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-DP, section B and section C.3; CHRON (3 April 2026 entry)",
+      "answer": "6 April 2026 at 14:30",
+      "finish_reason": "stop",
+      "completion_tokens": 445,
+      "prompt_tokens": 2592,
+      "reasoning_chars": 1137,
+      "wall_s": 39.83
+    },
+    {
+      "id": "I1",
+      "category": "interest_calc",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-LP clauses 1, 2, 3, 4, 5; CHRON (12 May 2026 and 27 August 2026)",
+      "answer": "EUR 493.99",
+      "finish_reason": "stop",
+      "completion_tokens": 1709,
+      "prompt_tokens": 2620,
+      "reasoning_chars": 3605,
+      "wall_s": 143.53
+    },
+    {
+      "id": "N1",
+      "category": "notice_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clauses 2.1 and 2.2",
+      "answer": "30 November 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 321,
+      "prompt_tokens": 2605,
+      "reasoning_chars": 1036,
+      "wall_s": 29.62
+    },
+    {
+      "id": "N2",
+      "category": "notice_period",
+      "outcome": "off_by_calendar",
+      "citation_ok": true,
+      "citation": "ENG-2025, clauses 2.1, 2.2 and 2.3",
+      "answer": "1 December 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 731,
+      "prompt_tokens": 2592,
+      "reasoning_chars": 2427,
+      "wall_s": 63.11
+    },
+    {
+      "id": "F1",
+      "category": "fee_basis",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clauses 1.1, 1.2, 2.1, 2.2, 2.3, 2.4",
+      "answer": "EUR 106,800",
+      "finish_reason": "stop",
+      "completion_tokens": 1039,
+      "prompt_tokens": 2598,
+      "reasoning_chars": 3015,
+      "wall_s": 88.4
+    },
+    {
+      "id": "S1",
+      "category": "survival",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 3.2",
+      "answer": "(d)",
+      "finish_reason": "stop",
+      "completion_tokens": 241,
+      "prompt_tokens": 2642,
+      "reasoning_chars": 898,
+      "wall_s": 23.35
+    },
+    {
+      "id": "D1",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 6; SUB-KILBEG, clause 5",
+      "answer": "(d)",
+      "finish_reason": "stop",
+      "completion_tokens": 681,
+      "prompt_tokens": 2687,
+      "reasoning_chars": 2764,
+      "wall_s": 59.46
+    },
+    {
+      "id": "D2",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 5 (six years) and clause 8 (requires no less onerous than clause 5); SUB-KILBEG clause 4 (two years)",
+      "answer": "4",
+      "finish_reason": "stop",
+      "completion_tokens": 387,
+      "prompt_tokens": 2598,
+      "reasoning_chars": 1517,
+      "wall_s": 34.95
+    },
+    {
+      "id": "D3",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 8 (referring to clause 6) and SUB-KILBEG, clause 5",
+      "answer": "EUR 650,000",
+      "finish_reason": "stop",
+      "completion_tokens": 469,
+      "prompt_tokens": 2601,
+      "reasoning_chars": 1548,
+      "wall_s": 41.63
+    },
+    {
+      "id": "X1",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 8; SUB-KILBEG, clause 6",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 1562,
+      "prompt_tokens": 2612,
+      "reasoning_chars": 6350,
+      "wall_s": 131.17
+    },
+    {
+      "id": "X2",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 8",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 602,
+      "prompt_tokens": 2612,
+      "reasoning_chars": 2301,
+      "wall_s": 52.54
+    },
+    {
+      "id": "U1",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 373,
+      "prompt_tokens": 2583,
+      "reasoning_chars": 1563,
+      "wall_s": 33.78
+    }
+  ],
+  "truncated": 0,
+  "truncation_gate": "PASS"
+}

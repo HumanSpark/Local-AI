@@ -1,0 +1,20 @@
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8126 --no-webui -v
+workhorse: full-offload gate OK, 98 layers
+  workhorse  (none)                       tok=447
+  workhorse  low                          tok=447
+  workhorse  medium                       tok=447
+  workhorse  xhigh                        tok=447
+  workhorse  sparkbench_nonsense_level    tok=447
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8126 --no-webui -v
+nemotron: full-offload gate OK, 106 layers
+  nemotron   (none)                       tok=386
+  nemotron   low                          tok=386
+  nemotron   medium                       tok=386
+  nemotron   xhigh                        tok=386
+  nemotron   sparkbench_nonsense_level    tok=386
+
+verdict: {
+  "workhorse": "INERT - every level produced identical output, nonsense accepted",
+  "nemotron": "INERT - every level produced identical output, nonsense accepted"
+}
+written: results/raw/e123/e123-effort-support.json

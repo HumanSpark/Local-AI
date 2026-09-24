@@ -1,0 +1,230 @@
+{
+  "label": "e52-8b-l3-n4",
+  "tier": "l3",
+  "distractors": 4,
+  "thinking": "default",
+  "model": "/opt/models/staging/Qwen3-8B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 32768,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "server_extra": "",
+  "cloud_spend": null,
+  "latency": {
+    "n": 12,
+    "median_s": 35.36,
+    "p95_s": 70.7,
+    "min_s": 11.25,
+    "max_s": 70.7,
+    "under_10s": 0,
+    "under_30s": 6
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-17T11:30:50Z",
+  "wall_s": 386.1,
+  "pack_chars": 49076,
+  "context_preflight": {
+    "longest_prompt_tokens": 11093,
+    "max_tokens": 4096,
+    "needed": 15189,
+    "ctx": 32768,
+    "headroom": 17579
+  },
+  "correct": 10,
+  "total": 12,
+  "citation_valid": 11,
+  "over_claims": 0,
+  "over_claim_rate": 0.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "date_effective": {
+      "correct": 3,
+      "total": 3
+    },
+    "revocation": {
+      "correct": 1,
+      "total": 2
+    },
+    "precedence": {
+      "correct": 1,
+      "total": 2
+    },
+    "multihop": {
+      "correct": 3,
+      "total": 3
+    },
+    "exhaustive": {
+      "correct": 1,
+      "total": 1
+    },
+    "underspecified": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 10,
+    "over_applied": 1,
+    "wrong": 1
+  },
+  "results": [
+    {
+      "id": "D1",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024#2.1 (original) and AMD-1#2.1 (amended effective 1 Jan 2025)",
+      "answer": "EUR 42,000",
+      "finish_reason": "stop",
+      "completion_tokens": 574,
+      "prompt_tokens": 11056,
+      "reasoning_chars": 1785,
+      "wall_s": 36.28
+    },
+    {
+      "id": "D2",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024#4.1 (as amended by AMD-2#4.1, effective 30 June 2025)",
+      "answer": "EUR 500,000",
+      "finish_reason": "stop",
+      "completion_tokens": 2223,
+      "prompt_tokens": 11056,
+      "reasoning_chars": 6620,
+      "wall_s": 70.7
+    },
+    {
+      "id": "D3",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024#2.1 (as amended by AMD-3#2.1)",
+      "answer": "EUR 51,000",
+      "finish_reason": "stop",
+      "completion_tokens": 497,
+      "prompt_tokens": 11056,
+      "reasoning_chars": 1468,
+      "wall_s": 15.61
+    },
+    {
+      "id": "V1",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024#5.2 (reinstated by AMD-3)",
+      "answer": "24",
+      "finish_reason": "stop",
+      "completion_tokens": 422,
+      "prompt_tokens": 11062,
+      "reasoning_chars": 1520,
+      "wall_s": 13.3
+    },
+    {
+      "id": "V2",
+      "category": "revocation",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "MSA-2024#4.2 (as amended by AMD-2 and AMD-3)",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 1465,
+      "prompt_tokens": 11049,
+      "reasoning_chars": 5649,
+      "wall_s": 46.32
+    },
+    {
+      "id": "P1",
+      "category": "precedence",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "POL-3.1 P-4.2 and SIDE-1 1",
+      "answer": "6 months",
+      "finish_reason": "stop",
+      "completion_tokens": 1551,
+      "prompt_tokens": 11038,
+      "reasoning_chars": 5655,
+      "wall_s": 49.06
+    },
+    {
+      "id": "P2",
+      "category": "precedence",
+      "outcome": "over_applied",
+      "citation_ok": false,
+      "citation": "POL-3.1 P-2.3",
+      "answer": "1",
+      "finish_reason": "stop",
+      "completion_tokens": 726,
+      "prompt_tokens": 11029,
+      "reasoning_chars": 2890,
+      "wall_s": 22.84
+    },
+    {
+      "id": "M1",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, clause 2.1 and AMD-1, clause 1 (retainer increased to EUR 46,500 from 1 January 2025, which is outside the 2024 calendar year)",
+      "answer": "378000",
+      "finish_reason": "stop",
+      "completion_tokens": 1119,
+      "prompt_tokens": 11073,
+      "reasoning_chars": 3304,
+      "wall_s": 35.36
+    },
+    {
+      "id": "M2",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024, Clause 2.1 (as amended by AMD-1 and AMD-3) and BM-EXTRACTS, Extract 1 and 2",
+      "answer": "445500",
+      "finish_reason": "stop",
+      "completion_tokens": 1445,
+      "prompt_tokens": 11063,
+      "reasoning_chars": 3943,
+      "wall_s": 45.7
+    },
+    {
+      "id": "M3",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024#4.1, AMD-2#4.1, AMD-3#4.2",
+      "answer": "24.5",
+      "finish_reason": "stop",
+      "completion_tokens": 717,
+      "prompt_tokens": 11043,
+      "reasoning_chars": 2061,
+      "wall_s": 22.53
+    },
+    {
+      "id": "N1",
+      "category": "exhaustive",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 472,
+      "prompt_tokens": 11101,
+      "reasoning_chars": 1875,
+      "wall_s": 14.98
+    },
+    {
+      "id": "Z1",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 358,
+      "prompt_tokens": 11024,
+      "reasoning_chars": 1479,
+      "wall_s": 11.25
+    }
+  ]
+}

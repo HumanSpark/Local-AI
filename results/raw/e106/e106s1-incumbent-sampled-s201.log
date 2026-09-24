@@ -1,0 +1,21 @@
+
+*** TRUNCATION GATE: 1/8 tasks hit the token cap and produced no usable output. ***
+    max_tokens=24576. These are NOT failures - they were never finished.
+    hint: raise --max-tokens (and --ctx to fit it). Verify the chat template honours
+    any effort flag before using one - an ignored flag is recorded as applied.
+=== coding eval: e106s1-incumbent-sampled-s201 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 24576, 'needed': 24909, 'ctx': 32768, 'headroom': 7859}
+  [1/8] glob_match             wrong_answer     14555 tok, 1209.49s  AssertionError
+  [2/8] round_decimal          pass             6433 tok, 528.49s  
+  [3/8] kmerge                 pass             1965 tok, 161.44s  
+  [4/8] wrap                   pass             3440 tok, 281.84s  
+  [5/8] sliding_median         error            19084 tok, 1600.12s  IndexError: list index out of range
+  [6/8] apply_patch            pass             6381 tok, 525.01s  
+  [7/8] interval_map           truncated        24576 tok, 2082.75s  hit max_tokens=24576
+  [8/8] parse_csv              wrong_answer     8725 tok, 718.95s  AssertionError
+
+e106s1-incumbent-sampled-s201: 4/8 passed  by_tier={'expert': {'pass': 4, 'total': 8}}
+outcomes: {'error': 1, 'pass': 4, 'truncated': 1, 'wrong_answer': 2}
+written: results/raw/e106/e106s1-incumbent-sampled-s201.json

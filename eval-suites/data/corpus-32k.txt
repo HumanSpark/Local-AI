@@ -1,0 +1,2090 @@
+# Phase A execution log
+
+<!--
+File: PHASE-A-LOG.md
+Purpose: Dated evidence record for every Phase A gate and benchmark run on sparkmax.
+Project: sparkbench | Date: 2026-07-03
+#
+# Overview: Append-only run log. Each entry records the step, command,
+# environment (build hash, backend, kernel), raw numbers, and verdict.
+# Referenced by WORKPLAN.md Section 5; promotion evidence lives in runtime
+# specs, this file is the bring-up trail.
+-->
+
+## 2026-07-03 - Step 1 verification (partial FAIL, awaiting re-run)
+
+- Packages installed: mesa-vulkan-drivers 25.2.8, vulkan-tools 1.3.275,
+  libvulkan-dev 1.3.275, glslc 2023.8, cmake 3.28.3, git 2.43.
+- MISSING at first verification: build-essential (g++ absent),
+  /opt/models/{staging,production}, models group membership (group exists,
+  no members), render group membership for agent-spark.
+- Kernel cmdline verified: `ttm.pages_limit=27648000 ttm.page_pool_size=27648000`
+  (in-tree names, correct). Disk: 1.8TB free.
+
+## 2026-07-03 - Step 2 driver gate (BLOCKED, diagnosed)
+
+- `vulkaninfo --summary` shows only llvmpipe (CPU rasterizer), not Radeon
+  8060S/RADV. Root cause: /dev/dri/renderD128 is root:render 660 and
+  agent-spark is not in `render` group. amdgpu module loaded; radeon_icd.json
+  (RADV) present. Fix: `usermod -aG render agent-spark` + fresh login.
+- NOT a driver fault - do not reinstall Mesa over this.
+- RESOLVED same day: `usermod -aG models,render agent-spark spark-infer` run by
+  Alastair. Via `sg render`: **GPU0 = Radeon 8060S Graphics (RADV GFX1151)**,
+  driverName radv, Mesa 25.2.8. Memory heaps 35.82 + 71.65 = 107.5 GiB =
+  105.5 GiB TTM GTT + 2 GiB BIOS UMA (Mesa 1/3 host-visible / 2/3
+  device-local split). Budget confirmed - at the 62GB TTM default the heaps
+  would total ~61 GiB. **Step 2 verdict: PASS.**
+- Session note: current shell predates the usermod, so all GPU work runs via
+  `sg render -c ...` and staging writes via `sg models -c ...` until a fresh
+  login makes the groups ambient.
+
+## 2026-07-03 - Step 2b CPU memory bandwidth (PASS)
+
+- Tool: `tools/membw.c` (STREAM-style, OpenMP, 3x1.6GB arrays, best of 10),
+  compiled `gcc -O3 -march=native -fopenmp`, 32 threads. mbw equivalent per
+  WORKPLAN step 2b.
+- **read 118.7 GB/s, copy 110.4 GB/s, triad 107.4 GB/s.**
+- Verdict: PASS. Within the documented healthy band (~110-120 GB/s CPU-side;
+  Infinity Fabric-limited). Confirms dual-channel LPDDR5x negotiated full
+  speed. GPU-side ~220 GB/s to be validated by step 5 reference benchmark.
+
+## 2026-07-03 - Step 3 llama.cpp source pinned (build pending g++)
+
+- Clone: https://github.com/ggml-org/llama.cpp.git (depth 200)
+- **Pinned commit: 067de937183141f54c681ed684f540706d2c420a** (2026-07-03,
+  "ui: align persisted config with strict server schema...").
+- Build blocked on build-essential; Vulkan build flags per plan:
+  `-DGGML_VULKAN=ON`.
+
+## 2026-07-03 - Step 3 build complete (PASS)
+
+- build-essential installed by Alastair; also spirv-headers, spirv-tools,
+  glslang-tools, glslang-dev (ggml-vulkan requires SPIRV-Headers cmake
+  package at this commit). A briefly-vendored project-local SPIRV-Headers
+  copy (`deps/`) was superseded by the system package and is dead - remove.
+- Configure: `cmake --fresh -B build -DGGML_VULKAN=ON -DLLAMA_CURL=OFF
+  -DCMAKE_BUILD_TYPE=Release`, system spirv-headers 1.6.1+1.4.309.0.
+- **DECLARED DEVIATION - LLAMA_CURL=OFF:** (a) libcurl4-openssl-dev absent
+  on this host at build time (verified via dpkg; only runtime libcurl4t64 +
+  curl binary present), so ON could not configure; (b) kept OFF by choice:
+  the `-hf` fetch path caches outside /opt/models/staging and records no
+  URL/revision/SHA256, structurally bypassing Section 4.6 manifest
+  discipline. All model downloads use explicit curl + HF API revision query
+  + sha256sum on arrival. Flag is part of the recorded build flags; revisit
+  consciously if a runtime spec ever needs it ON.
+- Build: `cmake --build build -j 30 --target llama-cli llama-server
+  llama-bench` - all three linked.
+- Acceptance: `llama-cli --list-devices` (via sg render) shows
+  **Vulkan0: Radeon 8060S Graphics (RADV GFX1151), 110048 MiB** (matches
+  heap total). **Step 3 verdict: PASS.**
+
+## 2026-07-03 - Step 4a model staged
+
+- Qwen3-0.6B-Q8_0.gguf (639,446,688 bytes) downloaded to
+  /opt/models/staging via explicit curl; manifest entry in
+  `manifests/MANIFEST.md`. Smoke run result to follow.
+
+## 2026-07-03 - Step 4a tiny smoke test (PASS)
+
+- Run: `llama-cli -m Qwen3-0.6B-Q8_0.gguf -ngl 99 -n 48 -st -p ...` via
+  sg render, timeout-guarded. Generated coherent text (Qwen3 thinking mode
+  visible through embedded chat template).
+- Throughput: prompt 1173.4 t/s, generation 253.5 t/s - GPU-class for
+  0.64GB Q8 (bandwidth arithmetic ceiling ~344 t/s; CPU would be ~5x slower).
+- Offload evidence (verbose log): `using device Vulkan0 (Radeon 8060S
+  Graphics (RADV GFX1151)) - 109882 MiB free`; **58/58 layer assignments to
+  Vulkan0, 0 to CPU**; Vulkan0 model buffer 604.15 MiB. The 157.65 MiB
+  CPU_Mapped buffer is the host-mapped token-embedding table - expected,
+  not fallback. **Step 4a verdict: PASS.**
+- FINDING (Phase B relevant): at commit 067de937 llama-cli is a chat-first
+  TUI - `--no-conversation` prints "not supported... use llama-completion
+  instead" and an EOF'd stdin loops forever on the chat prompt (first run
+  hung exactly this way; killed). Scripted/harness runs must use
+  llama-server (or llama-completion) + HTTP, never llama-cli. Single-turn
+  `-st -p` works for manual smoke checks; always wrap in `timeout`.
+- Chat-UI stdout suppresses classic load logs and stderr is empty by
+  default; offload evidence requires `-v`. sparkbench harness should
+  capture verbose logs for its "no CPU fallback" gate.
+- Findings promoted to hard rules in docs/HARNESS-RULES.md (Rules 1-3).
+
+## 2026-07-03 - Step 4b mid-size smoke test (PASS)
+
+- Model: Qwen3-14B-Q4_K_M.gguf (9,001,752,960 bytes, revision 530227a7,
+  manifest entry recorded). Download took ~4 min (~35MB/s on Wi-Fi -
+  faster than assumed).
+- Server: `llama-server -m ... -ngl 99 --host 127.0.0.1 --port 8100
+  --jinja -v`, ephemeral high port per two-plane architecture (4.5).
+- /v1/models healthy on first poll (~2s after model load completed).
+- Chat completion via tools/chat_smoke.py (urllib probe, temperature 0):
+  correct answer ("Paris"), Qwen3 thinking mode active through --jinja
+  template (reasoning_content populated), 136 completion tokens in 5.70s
+  wall (~24 t/s incl. prompt phase - matches 220/9GB bandwidth ceiling).
+- Offload evidence: `using device Vulkan0 ... 109882 MiB free`; **82/82
+  layer assignments to Vulkan0, 0 to CPU**; CPU_Mapped 417.30 MiB =
+  host-mapped embeddings (expected). **Step 4b verdict: PASS.**
+- Server stopped cleanly after test (exit 0).
+
+## 2026-07-03 - Step 4c reference-model download started
+
+- ggml-org/gpt-oss-120b-GGUF, revision d932fcea62f83e088d8f076a2cd2d7eb02dfa682,
+  3 shards (gpt-oss-120b-mxfp4-0000{1,2,3}-of-00003.gguf), explicit curl
+  with resume (-C -) into staging; SHA256 on completion.
+- **Divergence note (Section 3 like-for-like discipline):** community
+  reference table says "Q8"; the artefact everyone actually benches is
+  this ggml-org GGUF whose MoE weights are native MXFP4 (ftype reports
+  MXFP4 MoE; non-expert tensors Q8_0). Same artefact family as the
+  reference numbers; label recorded here so the comparison is honest.
+- Sequencing amendment approved by Alastair: overlap big download with 4b
+  (in the event, 4b passed before the download began, so plan order was
+  preserved anyway).
+
+## 2026-07-03 - Step 4c reference model staged (COMPLETE)
+
+- Download history: first attempt (plain curl loop) died on a Wi-Fi drop
+  mid-shard-2; second attempt failed instantly (bashism under sg's
+  /bin/sh=dash - exit-in-seconds is the "never ran" tell). Final:
+  tools/fetch_gpt_oss_120b.sh - resumable, size-verified against HF API
+  byte counts, bounded retries. Shard 1 (12.4MB) is metadata-only and was
+  complete all along; ~60MB/s sustained on resume.
+- All 3 shards COMPLETE, sizes exact, SHA256s recorded in
+  manifests/MANIFEST.md. Total 63.4GB staged.
+- Lesson recorded in HARNESS-RULES.md spirit: completion = byte-count
+  match against authority, never "curl exited 0".
+
+## 2026-07-03 - Step 5 reference benchmark (gate run - AWAITING HUMAN VERDICT)
+
+- Exact spec (Section 3 reference-run discipline):
+  - Model: gpt-oss-120b-mxfp4 shards, revision d932fcea (manifest entry;
+    ftype reported "MXFP4 MoE", 59.02 GiB, 116.83B params)
+  - Build: llama.cpp 067de937 (b200), `-DGGML_VULKAN=ON -DLLAMA_CURL=OFF
+    -DCMAKE_BUILD_TYPE=Release`, gcc 13.3.0
+  - Backend: Vulkan RADV, Mesa 25.2.8, kernel 6.17.0-35-generic HWE,
+    TTM 105GB (dmesg-verified)
+  - Command: `llama-bench -m <shard1> -o md` (all defaults: pp512, tg128,
+    5 reps, ngl -1 = full offload)
+  - Divergence from community config: newer llama.cpp build than the
+    reference run (theirs unrecorded/older); same hardware, same backend
+    class, same artefact family.
+- Results vs Section 3 reference (GMKtec EVO-X2):
+  - pp512: **545.65 ± 10.01** vs 517.61 ± 8.01 -> **+5.4%**
+  - tg128: **53.44 ± 0.38** vs 45.54 ± 0.02 -> **+17.3%**
+- Sanity arithmetic: ~2.6GB effective active bytes/token -> ceiling
+  ~84 t/s; 53.4 observed is 64% of ceiling - plausible, not
+  broken-measurement territory. Excess over reference consistent with
+  months of Vulkan MoE improvements since the community run.
+- Long-context probe (`llama-bench -d 8192`, same spec otherwise):
+  - pp512 @ d8192: **423.71 ± 5.93** (-22.3% vs d0)
+  - tg128 @ d8192: **48.35 ± 0.45** (-9.5% vs d0)
+  - Smooth degradation, no cliff; tg at 8K depth still exceeds the
+    community d0 reference (45.54). ROCm's claimed ~3x prefill advantage
+    at 130K+ (WORKPLAN 4.2) remains untested - only relevant if a
+    long-context workload materialises.
+- Raw outputs: llama.cpp/bench-step5-gate.md, bench-step5-longctx.md.
+- **Verdict: PENDING (human gate - Alastair).** Resolved same day - see the
+  step 5 verdict entry below.
+
+## 2026-07-03 - Step 5 reference gate verdict (PASS - Alastair)
+
+- **Verdict: PASS.** Rationale recorded with the tick: the gate's purpose
+  was never "match the reference exactly" - it exists to detect a broken
+  stack (CPU fallback, partial offload, misconfigured memory) before the
+  matrix runs. The evidence rules all of those out: 58/58 and 82/82 layer
+  assignments to Vulkan0 in the smoke tests, Vulkan heap totals matching
+  the TTM budget to the gigabyte, bandwidth sanity arithmetic passing
+  (53.4 t/s observed = 64% of the ~84 t/s ceiling implied by ~2.6GB
+  effective active bytes), and both directions of the reference comparison
+  explained (same ggml-org artefact family; newer llama.cpp build carrying
+  months of Vulkan MoE kernel improvements). The surplus is attributed,
+  not mysterious.
+- Honest wrinkle acknowledged in the verdict: +17.3% tg128 is technically
+  outside the "~10%" band, which was written imagining only
+  underperformance. WORKPLAN step 5 amended same day to asymmetric
+  tolerance (below band = stack problem, stop; above band = attribute the
+  surplus before proceeding) - codifying the behaviour this gate run
+  already exhibited.
+- **House reference baseline established:** pp512 545.65 ± 10.01 / tg128
+  53.44 ± 0.38 (d0) and 423.71 ± 5.93 / 48.35 ± 0.45 (d8192), at llama.cpp
+  067de937, Vulkan RADV, Mesa 25.2.8, kernel 6.17.0-35-generic, TTM 105GB.
+  This is now the regression baseline for every future kernel, Mesa, or
+  llama.cpp bump on this machine. The community table did its one job
+  (validating the stack) and retires to a footnote in WORKPLAN Section 3.
+- **LLAMA_CURL=OFF endorsed as a standing decision, not a workaround:**
+  the manifest-discipline rationale (the `-hf` fetch path caches outside
+  staging with no URL/revision/SHA256) stands on its own, so the flag
+  stays OFF even now that installing libcurl4-openssl-dev would be
+  trivial. Binding rule: HARNESS-RULES.md Rule 4. Revisit only via a
+  conscious runtime-spec decision.
+- **Step 4c download lesson promoted fleet-wide:** "completion = byte-count
+  match against the source-of-truth API, never 'curl exited 0'" now lives
+  in ~/workstation-dotfiles/.claude/rules/download-integrity.md (tidybot
+  and ragbuilder fetch things too); HARNESS-RULES.md remains the
+  sparkbench-local binding.
+
+## 2026-07-03 - Housekeeping: dead vendored deps/ removed
+
+- The briefly-vendored SPIRV-Headers copy (`deps/`, flagged dead in the
+  step 3 build entry) is removed - closes step 3's pending item.
+- Pre-deletion check: system spirv-headers package confirmed installed
+  (dpkg status "install ok installed", /usr/include/spirv present). The
+  recorded `--fresh` configure resolved against the system package, and
+  SPIRV-Headers is build-time only - neither the shipped binaries nor a
+  future rebuild reference the vendored copy.
+
+## 2026-07-03 - Step 6 matrix opened: Qwen mid-MoE workhorse (download + pin)
+
+- Matrix order (Alastair, 2026-07-03): Qwen mid-MoE workhorse FIRST
+  (production-relevant instant-tier candidate - ~70 t/s clears the
+  business case), GLM-4.5-Air second (thinking and non-thinking modes as
+  separate entries), 235B stress probe + pressure test parked for an
+  attended, physically-present session per 4.3.
+- Candidate pinned at execution per 4.4:
+  unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF, Q4_K_M, revision eea7b2be,
+  18,556,686,752 bytes. Selection rationale in manifests/MANIFEST.md (no
+  official Qwen GGUF of the 2507 refresh exists; unsloth is the
+  high-trust community-standard artefact, 511k downloads). This repo
+  publishes upstream LFS SHA256 - arrival hash will be compared to it.
+- Fetch: tools/fetch_hf_model.sh (generalised from fetch_gpt_oss_120b.sh;
+  third scripted fetch earned the abstraction), size-verified per the
+  download-integrity rule.
+- Artefact verified on arrival: size exact match against HF API
+  (18,556,686,752 bytes) AND local sha256sum byte-identical to the
+  upstream LFS oid - first artefact in the store with a full
+  origin-to-disk checksum chain (gpt-oss's xet-backed repo published
+  none).
+- **DECLARED DEVIATION - sg wrapping retained for this one leg:**
+  Alastair's sequencing put a fresh agent-spark login before step 6
+  (retiring `sg render -c`). This session's process predates the fresh
+  login and cannot re-PAM itself: `id` shows no ambient render/models
+  membership while `getent group` confirms both memberships exist. Rather
+  than park the afternoon, this first matrix leg runs via sg render
+  exactly as steps 2-5 did (same session-note pattern as the step 2
+  entry). The sg wrapper is a session artefact, NOT part of the recorded
+  spec - canonical commands are logged unwrapped. The next session must
+  start from a fresh login so the wrapper retires before further matrix
+  legs and all Phase B work.
+
+## 2026-07-03 - Step 6 matrix: Qwen mid-MoE workhorse (PASS - business case cleared)
+
+- Exact spec (Section 3 discipline): Qwen3-30B-A3B-Instruct-2507-Q4_K_M
+  (unsloth, revision eea7b2be, manifest entry, SHA256 verified against
+  upstream oid), llama.cpp 067de937 Vulkan build, Mesa 25.2.8, kernel
+  6.17.0-35, TTM 105GB. Canonical commands: `llama-bench -m <gguf> -o md`
+  and `llama-bench -m <gguf> -d 8192 -o md` (all other defaults; executed
+  via sg render per the declared session deviation above).
+- Results (llama-bench reports 17.28 GiB file, 30.53B params):
+  - pp512: **1137.67 ± 11.04** | tg128: **92.83 ± 0.46**
+  - pp512 @ d8192: **561.10 ± 6.78** | tg128 @ d8192: **66.97 ± 0.53**
+- **Business case: 92.8 t/s clears the ~70 t/s instant-tier line by +33%,
+  and still holds ~67 t/s at 8K depth.**
+- Surplus attribution (asymmetric-tolerance discipline, first
+  application): naive ceiling = ~2.0GB active bytes (A3B at ~0.61
+  bytes/param) -> ~110 t/s; observed 92.8 = 84% of ceiling - high but
+  below ceiling, so not broken-measurement. The 2x over Section 3's ~45
+  t/s field figure is a CROSS-BACKEND comparison (that figure was ROCm;
+  Vulkan is field-verified faster on this silicon per 4.2) plus the same
+  kernel-vintage delta the step 5 verdict accepted. Like-for-like anchor
+  is the ceiling arithmetic, not the ROCm number.
+- tg degradation at depth (-28%) is steeper than gpt-oss-120b's (-9.5%):
+  expected physics - the smaller the active set, the larger the KV-read
+  fraction per token at depth. Smooth, no cliff.
+- Raw outputs: llama.cpp/bench-step6-qwen3-30b-a3b-2507.md,
+  bench-step6-qwen3-30b-a3b-2507-longctx.md.
+
+## 2026-07-03 - Step 6 matrix: small fast baseline Qwen3-14B (recorded)
+
+- Same build/backend spec; model from step 4b (manifest entry, Qwen3-14B
+  Q4_K_M dense, 8.38 GiB). Canonical command:
+  `llama-bench -m <gguf> -d 0,8192 -o md`.
+- Results:
+  - pp512: **633.72 ± 1.39** | tg128: **24.39 ± 0.04**
+  - pp512 @ d8192: **282.30 ± 7.35** | tg128 @ d8192: **21.23 ± 0.01**
+- Sanity: 24.39 t/s is the 220/9.0GB naive ceiling almost exactly, and
+  matches step 4b's ~24 t/s server-side observation - two measurement
+  paths agreeing.
+- **Matrix insight, MoE-first thesis now empirical on this silicon:** the
+  30B-A3B MoE generates 3.8x faster than the dense 14B while being the
+  stronger model. Dense-at-interactive-speed remains physics-limited,
+  exactly as 4.4 predicted. Whether 24 t/s still clears any instant-tier
+  workload is a Phase B question (the "operational minimum" row exists
+  for retry/fallback behaviour, not speed records).
+- Raw output: llama.cpp/bench-step6-qwen3-14b.md.
+
+## 2026-07-03 - Step 6 matrix: GLM-4.5-Air pinned, download running
+
+- Pinned per 4.4 execution-time versioning: unsloth/GLM-4.5-Air-GGUF
+  Q4_K_M, revision 506d64aa, 2 shards, 73.0GB total, upstream LFS SHA256s
+  recorded (manifest entry with selection rationale and quant-choice
+  note). Download via tools/fetch_hf_model.sh (now handles repo
+  subfolder paths, flattening to staging root); resumable if interrupted
+  by session restart.
+- Execution-time landscape check: no Air-class successor exists
+  (GLM-4.6/4.7 are 355B-class). **Observation for Alastair:**
+  GLM-4.7-Flash (2026-01, MIT, 31B-class MoE, ggml-org GGUF available -
+  it is llama-bench's own help-text example at our pinned commit) is a
+  direct rival for the QWEN WORKHORSE row, not for Air. Decision whether
+  it earns a matrix row is his; not staged.
+- Bench deferred to the next (fresh-login) session so the sg wrapper
+  retires first. Thinking/non-thinking modes are an eval-time split;
+  llama-bench produces one throughput row per artefact.
+
+## 2026-07-03 - Step 6 matrix: GLM-4.5-Air quality-leaning middle (recorded - not instant-tier on this silicon)
+
+- Exact spec (Section 3 discipline): GLM-4.5-Air Q4_K_M (unsloth,
+  revision 506d64aa, 2 shards staged flat; resumed download arrived
+  byte-exact vs HF API pins, local SHA256s match upstream LFS oids,
+  manifest flipped PENDING -> VERIFIED), llama.cpp 067de937 Vulkan
+  build, Mesa 25.2.8, kernel 6.17.0-35, TTM 105GB. First bench of the
+  fresh-login era: `id -nG` shows ambient render/models, sg wrapper
+  retired per the 2026-07-03 decision - commands below ran unwrapped.
+- Canonical commands: `llama-bench -m <shard1> -o md` and
+  `llama-bench -m <shard1> -d 8192 -o md` (all other defaults).
+  **Declared deviation from the handoff's single combined command:**
+  the combined `-d 0,8192` invocation ABORTS on this artefact
+  (radv/amdgpu "Not enough memory for command submission" ->
+  vk::DeviceLostError, SIGABRT during decode; no rows emitted). Split
+  invocations - the same form the gpt-oss and Qwen legs already used -
+  pass. See memory-edge finding below.
+- Results (llama-bench reports 67.96 GiB file, 110.47B params, glm4moe
+  106B.A12B, full offload):
+  - pp512: **232.38 ± 8.14** | tg128: **23.90 ± 0.09**
+  - pp512 @ d8192: **55.24 ± 11.68** | tg128 @ d8192: **20.74 ± 0.13**
+- Ceiling arithmetic (asymmetric-tolerance): active bytes ~7.9GB (A12B
+  at the artefact's ~0.66 bytes/param) -> naive ceiling ~28 t/s;
+  observed 23.9 = 86% of ceiling. Below ceiling - no surplus to
+  attribute.
+- **Business case: FAILS the ~70 t/s instant-tier line (23.9 t/s) -
+  ties the dense 14B baseline (24.39) despite 110B params.** The
+  quality-leaning-middle row is quality-tier only on this box; whether
+  its output quality earns that slot is a Phase B eval question, not a
+  throughput one.
+- tg degradation at depth (-13.2%) sits between gpt-oss-120b (-9.5%)
+  and Qwen A3B (-28%), consistent with the active-set/KV-fraction
+  physics. Smooth, no cliff.
+- **FINDING - memory-edge behaviour at ~68GiB weights:** the 71.65 GiB
+  device-local heap (Mesa 2/3 split of 105.5 GiB GTT, step 2 entry)
+  leaves ~3.7 GiB headroom over the weights. Two symptoms: (1) the
+  combined-invocation DeviceLost abort above; (2) pp512 @ d8192
+  variance ±11.68 = 21% CV vs the matrix-typical ~1-2% - treat 55.24
+  as memory-pressured, not a clean measurement. Operational rule for
+  this box: models >~60GiB bench via separate d0 / d8192 invocations.
+  Kernel-side mechanism unconfirmed (dmesg needs sudo; noted, not
+  pursued).
+- Raw outputs: llama.cpp/bench-step6-glm45air.md,
+  bench-step6-glm45air-longctx.md.
+- Matrix status: unattended portion COMPLETE (reference + workhorse +
+  small baseline + GLM). 235B stress probe and pressure test stay
+  parked until Alastair is physically present, per 4.3.
+
+## 2026-07-03 - Step 7 pre-registration: three new rows queued (decisions locked by Alastair)
+
+- Bench queue brief received (decisions locked 2026-07-03, Alastair with
+  Claude web). Green-lit, queue order: gpt-oss-20b MXFP4 (efficiency
+  control), Qwen3.6-35B-A3B UD-Q4_K_XL (workhorse challenger),
+  GLM-4.7-Flash Q4_K (workhorse hedge). GLM-4.5-Air weights HELD for the
+  Phase B quality audition - no further throughput work. Qwen3-Next-80B-
+  A3B demoted to watchlist (superseded generation; documented Vulkan pp
+  weakness on this hardware). Do-not-test by corridor pricing:
+  Qwen3.6-27B dense (~18GB/token -> ~11-12 t/s here), Llama-4 Scout
+  class (17B active, ~16 t/s), all 235B+ (does not fit; stress probe
+  stays parked per 4.3).
+- **Pre-registered predictions (recorded BEFORE any Step 7 run;
+  deviations are findings):**
+  - Row A gpt-oss-20b (~12GiB MXFP4, ~3.6B active): naive ceiling
+    ~220/1.94GB = ~113 t/s. Fork: tg128 near 90 (~80% of naive) ->
+    the 120b's 67%-of-ceiling is model-specific overhead; near 75
+    (~67%) -> MXFP4 carries a quant tax on this box and the pre-screen
+    constant gains a quant term.
+  - Row B Qwen3.6-35B-A3B (35B/3B-active hybrid MoE, DeltaNet + Gated
+    Attention; text bench only): tg128 d0 ~80-90 t/s (~2.0-2.2GB/token
+    at this quant, 0.8 x 220). pp512 deliberately NOT predicted - it
+    measures Vulkan kernel maturity for the DeltaNet path; weak pp
+    beside healthy tg = software finding, not model failure. Bench at
+    DEFAULT ubatch 512 (sibling Qwen3-Next has a documented Strix
+    Halo/RADV pp regression above ubatch 512 - do not tune around it;
+    the default-config number is the finding). At 8K: shallow tg slope
+    expected if kernels behave.
+  - Row C GLM-4.7-Flash (31.2B/~3-3.6B active pure-transformer MoE):
+    tg128 d0 ~75-90 t/s; pp512 expected in pure-MoE class (Qwen3-30B
+    territory) - weak pp here IS a genuine anomaly, unlike Row B.
+- Row C artefact gate: GGUF upload must post-date 2026-01-21
+  (llama.cpp scoring_func softmax->sigmoid fix; earlier GGUFs loop and
+  score badly). House build gate PASSED: pinned commit 067de937 is
+  dated 2026-07-03 (verified via git show) - post-dates the fix, no
+  rebuild needed.
+- Invocation: combined `-d 0,8192` permitted for all three rows (all
+  well under the ~60GiB split-invocation rule from the GLM-4.5-Air
+  memory-edge finding).
+- **OPEN CONVENTION FLAG for Alastair - not resolved unilaterally:**
+  does the ~70 t/s instant-tier line apply at d0 only, or must it also
+  hold at 8K? The current workhorse sits at 66.97 @ d8192, so the
+  choice changes its badge and how the new rows get judged.
+
+## 2026-07-03 - Step 7 Row A: gpt-oss-20b efficiency control (recorded - fork lands on MXFP4 quant tax)
+
+- Exact spec: gpt-oss-20b-mxfp4.gguf (ggml-org, revision e1dc459f,
+  manifest VERIFIED on arrival - size byte-exact, sha256 identical to
+  upstream oid), llama.cpp 067de937 Vulkan, Mesa 25.2.8, kernel
+  6.17.0-35, TTM 105GB. Canonical command:
+  `llama-bench -m <gguf> -d 0,8192 -o md` (combined permitted per
+  brief - 11.27 GiB, well under the ~60GiB split-invocation rule).
+- Declared condition: Row B download ran concurrently (~16MB/s network
+  -to-disk over eno1; <0.1% of the ~220GB/s memory bandwidth - declared
+  rather than silently absorbed).
+- Results (llama-bench: 11.27 GiB file, 20.91B params):
+  - pp512: **1366.71 ± 12.31** | tg128: **77.76 ± 0.81**
+  - pp512 @ d8192: **1005.33 ± 41.22** | tg128 @ d8192: **70.65 ± 0.58**
+- **Pre-registered fork resolution: 77.76 = 68.8% of the ~113 t/s
+  naive ceiling - decisively the "near 75 / ~67%" arm (11 points from
+  the 80% arm, under 2 from the 67% arm). MXFP4 carries a quant tax on
+  this box; the pre-screen constant gains a quant term.**
+  Effective-bandwidth clusters across the matrix: Q4_K family lands
+  84-100% of naive (14B ~100%, GLM-Air 86%, Qwen A3B 84%); MXFP4 lands
+  ~64-69% (120b per step 5 entry, 20b here). Honest residual confound:
+  both MXFP4 points are also both gpt-oss architecture, so family
+  overhead is not fully separable from quant with this pair alone. The
+  clean discriminator exists: GLM-4.7-Flash ships a same-model
+  Q4_K_M / MXFP4_MOE pair (both pinned in the manifest) - Alastair's
+  call whether that second data point earns a run.
+- Depth behaviour: tg -9.1% at d8192 (70.65) - same shallow slope as
+  the 120b (-9.5%); the family's alternating/SWA attention pattern.
+- Convention-flag side effect: gpt-oss-20b clears the ~70 t/s line at
+  BOTH d0 and 8K - instant-tier under either reading of the open
+  convention. An unplanned candidate out of the control row; Phase B
+  use would need harmony-format handling.
+- Raw output: llama.cpp/bench-step7-gptoss20b.md.
+
+## 2026-07-03 - Step 7 Row B: Qwen3.6-35B-A3B workhorse challenger (recorded - tg MISSES pre-registered band; pp healthy)
+
+- Exact spec: Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf (unsloth, revision
+  a483e9e6, manifest VERIFIED on arrival - size byte-exact, sha256
+  identical to upstream oid), llama.cpp 067de937 Vulkan, Mesa 25.2.8,
+  kernel 6.17.0-35, TTM 105GB. Canonical command:
+  `llama-bench -m <gguf> -d 0,8192 -o md` at DEFAULT ubatch 512 per
+  pre-registration - no tuning around the sibling (Qwen3-Next) pp
+  regression.
+- Declared condition: Row C download ran concurrently (~16-19MB/s to
+  disk; <0.1% of memory bandwidth).
+- Results (llama-bench: 20.81 GiB file, 34.66B params, qwen35moe
+  35B.A3B):
+  - pp512: **996.40 ± 5.90** | tg128: **59.30 ± 0.36**
+  - pp512 @ d8192: **803.78 ± 12.62** | tg128 @ d8192: **55.29 ± 0.42**
+- **Pre-registered prediction vs outcome (deviations are findings):**
+  - tg128 d0 predicted ~80-90: observed **59.30 - MISS, 26% below the
+    band floor.** Effective bandwidth ~119-125GB/s = ~54-57% of naive -
+    below even the MXFP4 cluster, on a Q4_K artefact. The weight-bytes
+    model does not capture this hybrid's per-token cost: DeltaNet
+    recurrent-state read/write traffic and/or immature Vulkan kernels
+    on the recurrent path are the candidate drags (not separable from
+    llama-bench alone).
+  - pp512 (unpredicted by design): 996 d0 / 804 @8K - HEALTHY, second
+    only to Qwen3-30B's 1138. The anticipated Qwen3-Next-style Vulkan
+    pp collapse did NOT materialise at default ubatch.
+  - Depth slope: tg -6.8% at 8K - shallowest in the matrix (-9.1/-9.5%
+    gpt-oss, -13.2% GLM-Air, -28% Qwen30B). The linear-attention
+    shallow-slope prediction CONFIRMED.
+- Business case: 59.3 d0 / 55.3 @8K fails the ~70 t/s line at both
+  depths - the challenger misses the workhorse audition on throughput
+  under either reading of the open convention. Its distinguishing
+  asset is the flattest depth curve; any crossover vs Qwen3-30B sits
+  beyond 8K (unmeasured - noted, not extrapolated).
+- Finding shape for the pre-screen rule: healthy pp + depressed tg is
+  the INVERSE of the failure mode the brief hedged against. Hybrid
+  architectures need a per-token-cost term in the corridor rule, not
+  just active weight bytes.
+- Raw output: llama.cpp/bench-step7-qwen36-35b.md.
+
+## 2026-07-03 - Step 7 addendum pre-registration: quant-isolation pair (GLM-4.7-Flash MXFP4_MOE)
+
+- Green-lit by Alastair 2026-07-03 under the dual-purpose research
+  reframe (lab findings are client-facing on-prem AI research;
+  resolving the Row A confound is the point, not a nice-to-have).
+- Design: same model (GLM-4.7-Flash), same build/backend, quant varied:
+  Q4_K_M (Row C, the matrix row, 18,312,339,808 bytes) vs MXFP4_MOE
+  (16,968,499,296 bytes, upstream oid ecf4f3fd..., same 2026-02-12
+  upload date - passes the scoring_func date gate). This isolates the
+  quant variable that Row A's gpt-oss pair could not separate from
+  architecture family.
+- **Pre-registered fork (efficiency fractions, fixed before either
+  GLM-4.7-Flash artefact is benched):** if MXFP4_MOE lands in the
+  ~64-69%-of-naive-ceiling cluster while Q4_K_M lands in the 84-100%
+  cluster, the MXFP4 tax is quant-intrinsic on this stack and the
+  pre-screen quant term stands. If both land in the same cluster, Row
+  A's depressed fraction was gpt-oss-family overhead and the quant
+  term is withdrawn. Naive ceilings computed per row from llama-bench's
+  reported params x artefact bytes/param x active fraction, per the
+  house convention.
+- Caveat pre-declared: gpt-oss MXFP4 is quantization-aware/native;
+  GLM-4.7-Flash MXFP4_MOE is a post-hoc community requant. A
+  same-cluster result withdraws the quant term; a split result
+  confirms the tax for POST-HOC MXFP4 on this stack, with native
+  MXFP4 evidence still resting on the gpt-oss pair alone.
+- Sequencing: bench AFTER Row C's Q4_K_M matrix row completes
+  (sequential GPU use, sequential downloads on the ~16-19MB/s
+  upstream-limited line).
+
+## 2026-07-03 - Step 7 Row C: GLM-4.7-Flash workhorse hedge (recorded - tg near-miss; pp healthy at d0; MLA arch tax surfaced)
+
+- Exact spec: GLM-4.7-Flash-Q4_K_M.gguf (unsloth, revision 0d32489e,
+  date gate PASSED, manifest VERIFIED on arrival - size byte-exact,
+  sha256 identical to upstream oid), llama.cpp 067de937 Vulkan, Mesa
+  25.2.8, kernel 6.17.0-35, TTM 105GB. Canonical command:
+  `llama-bench -m <gguf> -d 0,8192 -o md`.
+- Declared condition: MXFP4_MOE download ran concurrently (~16-19MB/s).
+- Arch note: llama-bench identifies the artefact as **deepseek2
+  30B.A3B** (29.94B params reported vs the brief's 31.2B) -
+  GLM-4.7-Flash runs on llama.cpp's DeepSeek-V2-style graph (MLA
+  attention + shared-expert MoE). Load-bearing for the arithmetic
+  below.
+- Results (17.05 GiB file):
+  - pp512: **943.49 ± 1.24** | tg128: **71.93 ± 0.69**
+  - pp512 @ d8192: **340.01 ± 16.91** | tg128 @ d8192: **50.74 ± 0.29**
+- Pre-registered prediction vs outcome:
+  - tg128 d0 predicted ~75-90: observed **71.93 - NEAR-MISS, 4.1%
+    below the band floor.**
+  - pp512 (expected pure-MoE class): 943 at d0 - healthy, no anomaly.
+    BUT pp @8192 = 340 (-64%) is the steepest non-memory-edge prefill
+    slope in the matrix (Qwen30B -51%, 14B -55%); candidate cause is
+    MLA latent-projection compute at depth on Vulkan. Recorded as
+    observation, not attributed.
+  - tg depth slope -29.5% - matches Qwen30B's -28% (small-active-set
+    physics, as expected).
+- Ceiling arithmetic: 0.612 bytes/param; active 3.0-3.6B ->
+  1.83-2.20GB/token -> naive ceiling ~100-120 t/s; observed 71.93 =
+  **60-72% of naive (central ~66% at 3.3B active) - on a Q4_K
+  artefact. The 84-100% Q4_K premise does NOT hold for this model.**
+- **Matrix insight - the A3B label is not a price:** three A3B-class
+  MoEs, same quant family, same hardware: Qwen3-30B (pure MoE) 92.8 =
+  84% of naive; GLM-4.7-Flash (MLA MoE) 71.9 = ~66%; Qwen3.6-35B
+  (DeltaNet hybrid) 59.3 = ~55%. A 1.57x tg spread by architecture
+  alone. Extends the Row B finding: the corridor rule needs an
+  ARCHITECTURE term, not just active weight bytes - MLA and hybrid
+  recurrence both underprice per-token cost.
+- **AMENDMENT to the quant-isolation pre-registration (declared BEFORE
+  the MXFP4_MOE leg runs):** the fork assumed the Q4_K_M leg would
+  land in the 84-100% cluster; it landed at ~66%. The fork therefore
+  resolves on the SAME-MODEL DELTA: MXFP4_MOE fraction within a few
+  points of Q4_K_M's ~66% -> no quant tax beyond the arch effect
+  (quant term weakened; architecture is the operative lever).
+  MXFP4_MOE fraction clearly below -> quant tax stacks on the arch tax
+  (quant term confirmed for post-hoc MXFP4). The same-model design is
+  unaffected by the premise miss - resolving exactly this ambiguity is
+  why the pair exists.
+- Business case: 71.93 clears the ~70 line at d0 by 2.8% but sits at
+  50.74 @8K - the OPEN CONVENTION FLAG now decides this row's badge
+  too (d0-only: instant tier, barely; also-8K: fails). On throughput
+  Qwen3-30B keeps the workhorse seat (92.8/67.0 vs 71.9/50.7);
+  GLM-4.7-Flash's Phase B audition case is quality + MIT licence, not
+  speed.
+- Raw output: llama.cpp/bench-step7-glm47flash.md.
+
+## 2026-07-03 - Step 7 addendum resolved: MXFP4 tg tax CONFIRMED, stacks on arch tax
+
+- Exact spec: GLM-4.7-Flash-MXFP4_MOE.gguf (unsloth, revision
+  0d32489e, date gate passed, manifest VERIFIED on arrival - size
+  byte-exact, sha256 identical to upstream oid), same build/backend as
+  Row C. Canonical command: `llama-bench -m <gguf> -d 0,8192 -o md`.
+  No concurrent downloads - first clean-condition run of step 7.
+- Results (15.79 GiB file, 29.94B params, deepseek2 30B.A3B MXFP4 MoE):
+  - pp512: **985.57 ± 2.46** | tg128: **62.94 ± 0.16**
+  - pp512 @ d8192: **327.42 ± 2.89** | tg128 @ d8192: **46.22 ± 0.28**
+- **Amended-fork resolution: QUANT TAX CONFIRMED, tg-specific.**
+  Same-model delta: Q4_K_M 71.93 tg = ~66% of naive; MXFP4_MOE 62.94 =
+  ~53.5% (0.567 bytes/param -> 1.87GB/token central -> ceiling ~118) -
+  a 12.5-point fraction drop. The decisive framing: the MXFP4 artefact
+  is 7.3% SMALLER (fewer bytes to read per token) yet generates 12.5%
+  SLOWER. Effective bandwidth 117.7 vs 145.2 GB/s = MXFP4 achieves 81%
+  of Q4_K's per-byte efficiency on the identical model, build, and
+  hardware. Bandwidth arithmetic cannot produce that sign; the MXFP4
+  dequant path on this Vulkan stack costs it.
+- Refinement: **the tax is TG-ONLY.** pp512 985.57 is +4.5% ABOVE the
+  Q4_K_M leg - compute-bound prefill pays no MXFP4 penalty here; the
+  cost lands exactly where production latency lives, token generation.
+- Cross-check vs Row A: gpt-oss MXFP4 fractions (64-69%) sit ABOVE
+  GLM's MXFP4 (53.5%) - architecture still dominates absolute levels
+  (gpt-oss SWA > GLM MLA). Clean isolated claims: (1) post-hoc MXFP4
+  requant costs ~19% effective tg bandwidth vs Q4_K, same-model, this
+  stack; (2) native-MXFP4 (gpt-oss) evidence is consistent with a tax
+  but family-confounded, per the pre-declared caveat.
+- Pair design bonus: depth slopes are quant-invariant (tg -26.6% vs
+  -29.5%; pp -66.8% vs -64.0%) - the MLA-at-depth behaviour is an ARCH
+  property, cleanly separated from quant by the same-model design.
+- **Pre-screen corridor rule as Phase A closes:** t/s ~= (220 GB/s /
+  active bytes per token) x arch factor (dense ~1.0, pure MoE ~0.84,
+  MLA-MoE ~0.66, DeltaNet hybrid ~0.55) x quant factor (Q4_K baseline
+  1.0, post-hoc MXFP4 ~0.81 on tg). Phase B may refine the factors;
+  the FORM is now evidence-based, all terms from pre-registered runs.
+- **Step 7 COMPLETE:** 3 matrix rows + 1 research pair; every artefact
+  manifest-VERIFIED against upstream oids; every run pre-registered;
+  every deviation logged as a finding.
+- Raw output: llama.cpp/bench-step7-glm47flash-mxfp4.md.
+
+## 2026-07-03 - Step 8 pre-registration: unattended window (depth curves, dense/MLA constants, contamination + KV-quant characterisation)
+
+- Provenance: brief authored outside the session (author lacked full
+  project context), sanity-checked against log/manifest/staging this
+  session, APPROVED by Alastair 2026-07-03 with amendments (recorded
+  below). Everything here is logged BEFORE any Step 8 run.
+- **Sanity-check corrections (declared before runs):**
+  1. The brief's findings register (F3/F11/F12 references) did not
+     exist. Created docs/FINDINGS.md: F1-F11 numbered chronologically
+     from this log; content-mapping lands the "single-cluster" quant
+     reading at F3, so the brief's supersession reference holds as
+     written. F11 (already resolved by the step 7 pair) entered now;
+     F12 reserved for the 2d fork.
+  2. Stop-on-anomaly CV gate scoped: >5% halts tg legs; pp-at-depth
+     legs halt at >10%. Healthy artefacts already show 4-5% pp@8192 CV
+     (gpt-oss-20b 4.1%, Flash Q4 5.0%) - a flat 5% gate would
+     false-halt known-good measurement classes.
+  3. Block 3a premise corrected: Row B measured HEALTHY pp at default
+     ub 512 (996 t/s); the documented regression is on sibling
+     Qwen3-Next, ABOVE ub 512. Registered expectation unchanged - pp
+     degrades above 512; a flat sweep is a kernel-maturity finding.
+  4. End-state badge table will carry BOTH convention columns (d0-only
+     AND both-depths). The brief's "under the both-depths convention"
+     would unilaterally resolve the step 7 OPEN CONVENTION FLAG; two
+     columns satisfy the brief without closing Alastair's flag.
+  5. Block 2d fork registered verbatim (below) plus a pin-time
+     derivation check: naive ceiling recomputed from the pinned
+     artefact's actual bytes; if the implied factor boundaries move
+     materially (>~5 t/s), a declared amendment lands BEFORE the run.
+  6. Block 2c: meta-llama HF repos are gated; planned substitution is
+     an ungated community GGUF (bartowski or lmstudio-community),
+     logged per the brief's substitution rule.
+  7. Network note: approval message says "still on Wi-Fi" - eno1
+     ethernet is in fact active and default-routed (ip route verified
+     this session). The power-blip caveat stands regardless: unattended
+     window, unconfirmed AC-restore behaviour - a mysteriously short
+     log has a known suspect.
+- **Alastair's amendments (approved 2026-07-03, overriding the brief
+  where they conflict):**
+  1. Blanket "downloads may overlap benches" REPLACED by Block 3c
+     contamination experiment. Until 3c reports, Block 2 downloads
+     wait for Block 1 benches to finish. 3c design: canonical
+     Qwen3-30B leg quiet vs with a download + SHA256 verification
+     deliberately active (the first Block 2 fetch is the contamination
+     source - on UMA, disk I/O, page cache, and hashing share the
+     LPDDR5x bus the GPU reads weights from). PREDICTION: tg delta
+     <2%, within triplet CV. Holds -> overlap rule becomes
+     evidence-based; breaks -> Block 1 numbers were protected.
+  2. DeviceLost canary gate: after ANY DeviceLost, run the Qwen3-0.6B
+     canary (~30s) before touching the queue. Canary passes ->
+     continue; fails or degrades -> HALT the entire window and flag
+     (a wedged Vulkan driver produces plausible-looking garbage - the
+     worst unattended outcome, because it looks like data).
+  3. Block 3d added - KV-cache-quant depth leg on Qwen3-30B
+     (-ctk q8_0 -ctv q8_0). Design note declared now: quantised
+     V-cache requires flash attention, so the lever config is
+     -fa 1 + q8 KV = TWO variables vs baseline; an intermediate
+     -fa 1 (f16 KV) leg is added so FA and KV-quant effects separate
+     (quant-isolation discipline, applied again). Registered
+     expectations: d0 tg within ~5% of baseline for both legs; at max
+     shared depth, q8-KV tg >= f16 baseline (the lever "works").
+     Fork: -fa 1 alone regressing tg >5% = the lever is FA-blocked on
+     this Vulkan stack (a finding, not a failure).
+  4. Thermal capture: amdgpu hwmon edge temp logged before/after every
+     leg (tools/run_step8_leg.sh wrapper, hwmon node resolved by name)
+     -> llama.cpp/bench-step8-thermal.log. Gives the repeatability
+     triplet its explanation if CV drifts; sustained-load thermal
+     behaviour is itself client-facing material.
+  5. End-state gains item 6 - re-run trigger: the canonical set
+     re-executes on any llama.cpp/Mesa/kernel bump, diffed against the
+     house baseline (binding text lands in WORKPLAN Section 3 at
+     end-state). Constants are maintained measurements, not decaying
+     folklore.
+  6. Concurrency scaling explicitly PARKED for Step 9: needs
+     llama-server + a load generator - real machinery with judgment
+     calls, disqualified from an unattended window; that machinery is
+     the Phase B harness's server-lifecycle core, so Step 9 builds it.
+  7. Reframe on the record: the METHOD is the product, not the
+     constants (see FINDINGS.md F10 status note).
+- **Block 1 registered questions** (depth curves
+  `-d 0,2048,4096,8192,16384`, +32768 only where n_ctx_train >= 32896
+  - read from the loader's metadata at launch, not asserted from
+  memory - and KV arithmetic clears 5GiB heap headroom, trivially true
+  at these sizes; six residents: Qwen3-30B-A3B, Qwen3.6-35B, Flash
+  Q4_K_M, Flash MXFP4_MOE, gpt-oss-20b, Qwen3-14B; Qwen3-0.6B excluded
+  as smoke/canary; Air + 120b excluded per brief):
+  - Q1: at what depth does Qwen3-30B tg cross below 70? PREDICTION:
+    between 4096 and 8192 (interpolating 92.83 -> 66.97; linear and
+    reciprocal-linear models both put the crossing ~6.9-7.2K).
+  - Q2: at what depth does gpt-oss-20b tg cross below 70? PREDICTION:
+    between 8192 and 16384 (held 70.65 +/- 0.58 at 8K - by 1.1 sigma).
+  - Q3: does the hybrid hold a flatter tg slope than pure-MoE rows?
+    PREDICTION priced from its own step 7 points: yes - Qwen3.6-35B
+    repeats ~-7% at 8K vs Qwen3-30B's -28%; expect the flattest curve
+    in the matrix at every depth.
+  - Q4: do the Flash Q4/MXFP4 curves stay parallel at all depths?
+    PREDICTION: yes - extends quant-invariant slopes from 2 points
+    to 5.
+- **Block 2 registered bands (verbatim from the brief):**
+  - 2a Qwen3-4B, newest instruct variant, Q4_K family (~2.5GB):
+    tg128 d0 in 75-85. The 8K badge is a registered QUESTION, not a
+    number.
+  - 2b Qwen3-8B, Q4_K family (~5GB): tg128 d0 in 37-43.
+  - 2c Llama-3.1-8B dense family control, Q4_K family (~5GB, ungated
+    community GGUF per correction 6): tg128 d0 in 38-44. Landing well
+    off the Qwen 8B number = dense constant is family-contaminated,
+    and the register must say so.
+  - 2d DeepSeek-V2-Lite (16B total / 2.4B active, MLA, Q4 family,
+    ~10GB): FORK - tg128 <=105 confirms MLA as a general constant
+    class; >=112 says the 0.66 was Flash-specific; 105-112 recorded
+    as inconclusive. Older model: support problems -> log and skip,
+    no unattended debugging.
+- **Block 3:** 3a ubatch sweep, Qwen3.6-35B pp512 at
+  -ub 128,256,512,1024,2048, d0 (registered expectation: pp degrades
+  above ub 512, per corrected premise in correction 3). 3b
+  repeatability triplet: canonical Qwen3-30B leg (`llama-bench -m
+  <gguf> -o md`) at window start/middle/end; PREDICTION: tg CV <2%
+  across the three. 3c and 3d as amended above.
+- **Standing rules otherwise as the brief wrote them:** retention rule
+  (nothing deleted); pause downloads below 10% free disk (1.6T free
+  at window open - not in play); stop-on-anomaly halts the leg, not
+  the queue (except the canary gate); Rule 4.3 untouched - no stress
+  probes, nothing over 25GiB.
+- **Execution order:** 3b leg 1 -> Block 1 curves (six models) ->
+  3b leg 2 -> 3c at the Block 1/Block 2 boundary -> Block 2
+  (fetch+verify+bench per artefact) -> 3a -> 3d -> 3b leg 3 ->
+  end-state (combined table; constants ladder with n per constant;
+  F12 + Block 1 badge-death findings into FINDINGS.md; DUAL-convention
+  badge table; WORKPLAN Section 3 re-run trigger; HANDOFF refresh;
+  plain-language note for Alastair on what changed and which
+  predictions broke).
+
+## 2026-07-04 - Step 8 Block 2 pins, declared 2d amendment, 3c design note
+
+- All four Block 2 artefacts pinned per 4.4 execution-time versioning
+  (revisions, byte sizes, upstream LFS oids in manifests/MANIFEST.md,
+  entries PENDING until arrival verification):
+  - 2a unsloth/Qwen3-4B-Instruct-2507-GGUF Q4_K_M, rev a06e946b,
+    2,497,281,120 B.
+  - 2b unsloth/Qwen3-8B-GGUF Q4_K_M, rev a6adef13, 5,027,784,512 B.
+  - 2c bartowski/Meta-Llama-3.1-8B-Instruct-GGUF Q4_K_M, rev bf5b95e9,
+    4,920,739,232 B (ungated community GGUF per correction 6).
+  - 2d mradermacher/DeepSeek-V2-Lite-Chat-GGUF Q4_K_M, rev 9ee9f1f8,
+    10,364,416,768 B. SUBSTITUTION declared: the bartowski repo for
+    this model does not exist (HF API 401); mradermacher mirror used.
+- **DECLARED AMENDMENT - 2d fork thresholds (before the 2d run; the
+  pre-registered materiality trigger fired):** the brief's 105/112
+  values imply a ~157 t/s naive ceiling (0.585 B/param pure-quant
+  assumption). The pinned artefact is 0.660 B/param (house convention:
+  file bytes / params) -> 2.4B active -> ~1.58 GB/token -> naive
+  ~139 t/s. Applying the brief's own factor semantics to the real
+  ceiling: **tg128 <=92 confirms MLA as a constant class; >=99 says
+  the 0.66 was Flash-specific; 92-99 inconclusive.** Same fork shape,
+  same inconclusive-zone width (5% of ceiling), recalibrated to the
+  actual artefact 13 t/s below the brief's assumed one.
+- **3c design refinement (declared before the run):** quiet-CONTAM-
+  quiet sandwich instead of a single quiet reference. Triplet leg 2
+  (93.41, seconds before) is the leading quiet bracket; a trailing
+  quiet leg runs immediately after the contaminated one. Delta is
+  measured against the bracket mean - run-level drift (observed
+  +/-1.5-3% across the window) would otherwise be indistinguishable
+  from contamination. Contamination source: the real 2a fetch
+  (~17MB/s network-to-disk write) plus a deliberate sha256sum of the
+  47GB Air shard 1 (sustained ~GB/s read+hash on the shared LPDDR5x
+  bus). Prediction unchanged: tg delta <2%.
+- Triplet leg 2 recorded: pp512 1117.68 +/- 9.14, tg128 93.41 +/- 0.53
+  (llama.cpp/bench-step8-triplet-2.md). Leg 1/leg 2 spread 90.63 ->
+  93.41 (CV 2.1%, straddling the registered 2% line; leg 3 decides).
+  Leg 2 is FASTER after ~4h of sustained benching, and every leg
+  starts from the same 46-47degC idle - thermal-accumulation
+  explanation dead; drift is non-monotonic state noise.
+
+## 2026-07-04 - Step 8 Block 3c RESOLVED: contamination null on mean; variance signature found
+
+- Declared deviation: the composite's first invocation carried a shell
+  precedence bug (`&` bound the var-assignment + fetch chain, so the
+  parent shell's hash load died instantly on an empty-variable
+  redirect). Consequence: the two contamination sources ran as
+  SEPARATE arms - download-only, then hash-only - which gives
+  per-source attribution the registered lumped design could not.
+  Overlap evidenced in both arms (fetch reaped only after the bench
+  returned; explicit `kill -0` probe printed OVERLAP-CONFIRMED).
+- Arm 1 - download (~17MB/s network-to-disk write; the real 2a
+  fetch): tg 92.37 +/- 0.44 vs quiet bracket (93.41 lead / 92.42
+  trail, mean 92.92) -> **delta -0.6%. NULL.**
+- Arm 2 - sha256 of the 47GB Air shard (sustained ~GB/s read+hash on
+  the shared LPDDR5x bus): tg 93.05 +/- 2.01 vs bracket (92.42 lead /
+  91.05 trail, mean 91.74) -> **delta +1.4%. NULL on mean - but
+  within-run sigma inflated ~4x** (2.01 vs 0.16-0.80 on every quiet
+  leg this window). Bus contention on UMA arrives as JITTER, not
+  throughput loss.
+- **PREDICTION HOLDS (<2% both arms). Overlap rule now
+  evidence-based:** downloads may overlap benches freely; heavy
+  sequential disk-read/hash work leaves means intact but inflates
+  variance - keep it away from legs whose CV matters, or expect the
+  variance flag. Client-facing form: "ingest during inference on
+  unified memory: throughput holds, latency jitter rises."
+- 2a arrived during arm 1 and VERIFIED (byte-exact 2,497,281,120 B,
+  local sha256 identical to upstream oid) - manifest flipped.
+- Quiet-leg tg catalogue this window: 90.63 / 93.41 / 92.42 / 91.05
+  (plus 92.28 curve d0) - run-level spread ~+/-1.5% around ~92 is the
+  honest error bar for single-run numbers on this stack (bears on the
+  Q2 bracket miss).
+- Raw: llama.cpp/bench-step8-3c-contam.md, -contam-hash.md,
+  -quiet-after.md, -quiet-after2.md.
+- 2b/2c/2d downloads start now, overlapped with Block 2 benches per
+  the resolved rule (declared condition on affected legs).
+
+## 2026-07-04 - Step 8 Block 2a: Qwen3-4B dense boundary case (recorded - band HIT; 8K question answered)
+
+- Exact spec: Qwen3-4B-Instruct-2507-Q4_K_M.gguf (unsloth, rev
+  a06e946b, manifest VERIFIED on arrival), llama.cpp 067de937 Vulkan,
+  Mesa 25.2.8, kernel 6.17.0-35, TTM 105GB. Canonical
+  `llama-bench -m <gguf> -d 0,8192 -o md`. Declared condition: 2b
+  download ran concurrently (evidence-based overlap rule, 3c entry).
+- Results (2.32 GiB file, 4.02B params):
+  - pp512: **2051.57 ± 8.40** | tg128: **78.38 ± 0.64**
+  - pp512 @ d8192: **665.94 ± 12.71** | tg128 @ d8192: **54.12 ± 0.22**
+- **Registered band 75-85: HIT (78.38).** The dense boundary case
+  clears the ~70 instant line at d0. Registered 8K QUESTION answered:
+  54.12 - no badge under a both-depths reading; the 4B loses 31% of
+  tg by 8K, the STEEPEST tg slope in the matrix (steeper than the
+  30B MoE's -28%). Small weight set -> KV-read fraction dominates
+  early; F5 physics at its sharpest.
+- Ceiling arithmetic (house convention): 0.620 B/param x 4.02B dense
+  -> 2.49 GB/token -> naive ~88 t/s; observed 78.38 = **88.7% of
+  naive** - inside the Q4_K 84-100% cluster, with first signs of
+  small-model overhead at the cluster's low edge.
+- pp512 2051 at d0 is the highest prefill in the matrix - the
+  instant-feel asset of tiny dense models is prompt latency, not
+  generation.
+- Raw: llama.cpp/bench-step8-block2a-qwen3-4b.md.
+
+## 2026-07-04 - Step 8 declared deviation: 3a pulled into the download window
+
+- Registered order was Block 2 complete -> 3a -> 3d. The 2b/2c/2d
+  fetches (~20GB at upstream-limited ~17MB/s) leave the GPU idle for
+  ~20 min; 3a (ubatch sweep, resident Qwen3.6-35B) runs now instead,
+  with Block 2 benches interleaving as artefacts verify. Downloads
+  overlapping benches is the 3c-resolved rule; sweep legs carry the
+  declared condition.
+
+## 2026-07-04 - Step 8 Block 3a first pass: brief's design cannot test its own question; AMENDED before the extension runs
+
+- Results (pp512 only, -n 0, ub sweep; declared condition: downloads
+  active): ub128 **555.86 ± 11.41**, ub256 **700.39 ± 9.18**, ub512
+  **899.00 ± 11.39**, ub1024 **896.11 ± 8.25**, ub2048 **893.21 ± 6.30**.
+- **Design flaw exposed by the data:** with a 512-token prompt, ubatch
+  above 512 never fills - the prompt caps the physical batch, so the
+  ub 1024/2048 legs are computationally identical to ub 512. The
+  three statistically indistinguishable results (899/896/893) confirm
+  it empirically. The registered expectation ("pp degrades above
+  ub 512") is UNTESTABLE at pp512; the only real information below
+  512 is a normal saturation curve (556 -> 700 -> 899, no anomaly).
+- **DECLARED AMENDMENT (before the extension runs):** re-run at
+  pp2048 with ub 512/1024/2048 so ubatch actually exceeds 512 in
+  flight. Expectation carried over unchanged: if the sibling
+  (Qwen3-Next) regression manifests in this architecture, per-token
+  prefill rate degrades at ub 1024/2048 vs 512. Flat = kernel
+  maturity finding.
+- Raw: llama.cpp/bench-step8-block3a-ubatch.md.
+- Note for the brief's post-mortem: pp512 @ ub2048 was a
+  never-fires configuration in the original design - the sweep needed
+  prompt >= max ubatch from the start.
+
+## 2026-07-04 - Step 8 Block 3a RESOLVED: no ubatch regression; mild ub1024 optimum
+
+- Amended sweep (pp2048, -n 0; declared condition: 2c download active):
+  ub512 **929.40 ± 35.99**, ub1024 **1014.55 ± 2.50**, ub2048
+  **929.54 ± 10.23**.
+- **Registered expectation ("pp degrades above ub 512") MISSES - in
+  the good direction.** No Qwen3-Next-style collapse manifests in
+  qwen35moe on this stack: ub1024 IMPROVES on ub512 by +9.2%, and
+  ub2048 returns to ub512 level (flat, not degraded). Kernel-maturity
+  finding: the hybrid's prefill path is healthy across ubatch; the
+  default leaves ~9% on the table at ub1024 for long prompts.
+  Deployment note only - the canonical bench spec stays at default
+  512 per Section 3 discipline.
+- ub512's elevated variance (3.9% CV) is consistent with the 3c
+  variance signature: the fetch chain sha256-hashes each completed
+  file, and 2b's end-of-file hash plausibly overlapped this first
+  sweep leg (jitter, no mean shift). Under the 10% pp gate; recorded,
+  not halted.
+- Raw: llama.cpp/bench-step8-block3a-ubatch-pp2048.md.
+
+## 2026-07-04 - Step 8 Block 2b: Qwen3-8B second dense point (recorded - band overshot by a hair; dense-at-ceiling confirmed)
+
+- Exact spec: Qwen3-8B-Q4_K_M.gguf (unsloth, rev a6adef13, manifest
+  VERIFIED on arrival), house build/backend. Canonical
+  `llama-bench -m <gguf> -d 0,8192 -o md`. Declared condition: 2c/2d
+  downloads active (evidence-based overlap rule).
+- Results (4.68 GiB file, 8.19B params):
+  - pp512: **1078.08 ± 1.70** | tg128: **43.56 ± 0.24**
+  - pp512 @ d8192: **499.97 ± 10.38** | tg128 @ d8192: **35.23 ± 0.15**
+- **Registered band 37-43: overshot by 1.3% (43.56)** - a marginal
+  high-side miss that the ceiling arithmetic explains: 0.614 B/param
+  x 8.19B dense -> 5.03 GB/token -> naive 43.7 t/s; observed = **99.7%
+  of naive**. Dense Q4_K runs AT the bandwidth ceiling on this stack
+  (14B: ~100%, now 8B: ~100%; the 4B's 88.7% marks where small-model
+  overhead starts). The band was drawn conservative, the physics is
+  F4 exactly.
+- Raw: llama.cpp/bench-step8-block2b-qwen3-8b.md.
+
+## 2026-07-04 - Step 8 Block 2c: Llama-3.1-8B family control (recorded - dense constant is FAMILY-CLEAN)
+
+- Exact spec: Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf (bartowski, rev
+  bf5b95e9, manifest VERIFIED on arrival; ungated community GGUF per
+  correction 6), house build/backend. Canonical
+  `llama-bench -m <gguf> -d 0,8192 -o md`. Declared condition: 2d
+  download active (evidence-based overlap rule).
+- Results (4.58 GiB file, 8.03B params):
+  - pp512: **1089.93 ± 2.11** | tg128: **44.21 ± 0.21**
+  - pp512 @ d8192: **538.54 ± 10.40** | tg128 @ d8192: **35.96 ± 0.29**
+- **Registered band 38-44: at the ceiling edge (44.21, 0.5% over).**
+  Ceiling arithmetic: 0.613 B/param x 8.03B dense -> 4.92 GB/token ->
+  naive 44.7; observed = **98.9% of naive**.
+- **Family-contamination check RESOLVES CLEAN:** Qwen3-8B 43.56 =
+  99.7% of naive; Llama-3.1-8B 44.21 = 98.9% - the two most
+  architecturally distinct mainstream dense families land within 1%
+  of each other in ceiling fraction. Dense Q4_K ~= 1.0 x naive is a
+  STACK property, not a Qwen property. Dense constant now n=4 (14B
+  ~100%, 8B x2 ~99%, 4B 88.7% marking small-model overhead onset).
+- Raw: llama.cpp/bench-step8-block2c-llama31-8b.md.
+
+## 2026-07-04 - Step 8 Block 2d: DeepSeek-V2-Lite MLA fork (recorded - F12 RESOLVED: 0.66 was Flash-specific)
+
+- Exact spec: DeepSeek-V2-Lite-Chat.Q4_K_M.gguf (mradermacher, rev
+  9ee9f1f8, manifest VERIFIED on arrival; substitution declared in the
+  pins entry), house build/backend. Canonical
+  `llama-bench -m <gguf> -d 0,8192 -o md`. No downloads active - 2d
+  was the last fetch. The "older model support problems" caveat never
+  fired: the deepseek2 graph is this model's home graph.
+- Results (9.65 GiB file, 15.71B params, deepseek2 16B):
+  - pp512: **1640.63 ± 13.15** | tg128: **110.80 ± 0.55**
+  - pp512 @ d8192: **1181.76 ± 29.65** | tg128 @ d8192: **44.52 ± 0.21**
+- **Amended fork resolution: 110.80 >= 99 -> the ~0.66 MLA-MoE factor
+  was FLASH-SPECIFIC.** 110.80 / ~139 naive = **~80% of ceiling** -
+  pure-MoE territory (0.84), nowhere near 0.66, on the archetype of
+  the same llama.cpp graph GLM-4.7-Flash runs. MLA alone does not
+  price a model; the corridor rule's MLA-MoE row becomes a per-model
+  range (0.66-0.80, n=2) pending a mechanism split.
+- **The amendment converted an inconclusive into a decisive result:**
+  under the brief's original thresholds (105/112, derived from an
+  assumed ~157 ceiling) this exact measurement would have landed in
+  the inconclusive zone. Pin-time re-derivation is now a proven step,
+  not a formality.
+- Depth wrinkle: tg -59.8% at 8K - the steepest 8K drop in the
+  matrix, per-token depth cost (+13.4ms at 8K) 2-3x Flash's or
+  Qwen3-30B's. Candidate cause: deepseek2/MLA per-token compute at
+  depth on Vulkan (consistent with Flash's pp-at-depth collapse,
+  amplified by the tiny 2.4B active set). Recorded, not attributed.
+- Business aside: 110.80 d0 is the fastest tg in the matrix, but the
+  8K number (44.52) fails the line - a pure d0-demo model on this
+  stack unless short-context workloads dominate.
+- Raw: llama.cpp/bench-step8-block2d-dsv2lite.md.
+
+## 2026-07-04 - Step 8 Block 3d RESOLVED: q8 KV is a working depth lever; FA is free
+
+- Signature check before the runs: at 067de937 `-fa` is tri-state
+  (on|off|auto, default auto) - the brief's implied 0/1 form would
+  have errored, and the Block 1 baseline ran under auto. Design
+  unaffected: leg 1 vs baseline reads what auto chose; leg 2 vs leg 1
+  isolates the KV quant.
+- Leg 1 (-fa on, f16 KV, six depths): tg 92.12 / 81.60 / 75.78 /
+  66.66 / 53.09 / 38.15 - identical to the auto-baseline within noise
+  at every depth (-0.2 to -0.9%). **Registered FA-blocked fork does
+  NOT fire; FA costs nothing here** (auto almost certainly resolves
+  to on for this model). Raw: bench-step8-block3d-fa-on-f16.md.
+- Leg 2 (-fa on, q8_0 K+V, six depths): tg 88.66 / 79.64 / 75.34 /
+  67.98 / 57.61 / 43.75. Deltas vs leg 1: **-3.8% / -2.4% / -0.6% /
+  +2.0% / +8.5% / +14.7%** - a clean crossover at ~4-6K depth.
+  **Both registered expectations HOLD:** d0 cost inside the ~5%
+  budget; q8 >= f16 at max shared depth, decisively. Raw:
+  bench-step8-block3d-fa-on-q8kv.md.
+- Nuance for the badge-death map: the 70-line crossing moves only
+  ~6.9K -> ~7.1K (the crossing sits near the q8 break-even), so KV
+  quant does NOT rescue instant badges - what it buys is deep-context
+  throughput (+15% at 32K) and half the KV footprint (unmeasured
+  capacity headroom noted, not claimed).
+- pp under q8 KV: mostly slightly slower (-3 to -9% through 16K),
+  +5.8% at 32K - mixed, secondary, recorded in the raw table.
+
+## 2026-07-04 - Step 8 END-STATE: window complete (5 mandated deliverables + item 6)
+
+### 1. Combined depth matrix (canonical spec: llama.cpp 067de937 Vulkan, Mesa 25.2.8, kernel 6.17.0-35, TTM 105GB; all VERIFIED artefacts)
+
+tg128 (t/s) by depth:
+
+| Model | d0 | 2048 | 4096 | 8192 | 16384 | 32768 |
+|---|---|---|---|---|---|---|
+| Qwen3-30B-A3B Q4_K_M | 92.28 | 82.35 | 76.30 | 67.06 | 53.21 | 38.32 |
+| ^ +q8 KV (fa on) | 88.66 | 79.64 | 75.34 | 67.98 | 57.61 | 43.75 |
+| Qwen3.6-35B UD-Q4_K_XL | 58.71 | 57.08 | 56.53 | 55.14 | 52.47 | 47.87 |
+| GLM-4.7-Flash Q4_K_M | 70.93 | 62.75 | 57.12 | 50.50 | 39.21 | 27.91 |
+| GLM-4.7-Flash MXFP4 | 63.44 | 56.44 | 52.72 | 45.43 | 36.47 | 26.29 |
+| gpt-oss-20b MXFP4 | 75.22 | 71.97 | 71.24 | 67.51 | 63.57 | 56.08 |
+| Qwen3-14B Q4_K_M | 24.34 | 23.39 | 22.65 | 21.19 | 18.85 | 15.47 |
+
+pp512 (t/s) by depth:
+
+| Model | d0 | 2048 | 4096 | 8192 | 16384 | 32768 |
+|---|---|---|---|---|---|---|
+| Qwen3-30B-A3B Q4_K_M | 1140.72 | 912.75 | 744.61 | 561.16 | 346.59 | 182.10 |
+| Qwen3.6-35B UD-Q4_K_XL | 982.86 | 870.38 | 844.46 | 799.36 | 702.46 | 587.42 |
+| GLM-4.7-Flash Q4_K_M | 922.24 | 613.14 | 484.49 | 315.59 | 197.01 | 113.85 |
+| GLM-4.7-Flash MXFP4 | 968.27 | 628.99 | 479.14 | 321.82 | 199.57 | 113.48 |
+| gpt-oss-20b MXFP4 | 1321.83 | 1141.74 | 1084.99 | 964.48 | 727.08 | 457.86 |
+| Qwen3-14B Q4_K_M | 621.66 | 453.03 | 386.27 | 271.79 | 156.47 | 39.54* |
+
+*flagged: 10.7% CV, marginally over the pp gate - low confidence; the
+dense 16K->32K prefill cliff (4x drop) is real in direction, magnitude
+low-confidence.
+
+Block 2 rows (canonical d0/8192):
+
+| Model | tg d0 | tg 8K | pp d0 | pp 8K | % of naive (d0) |
+|---|---|---|---|---|---|
+| DeepSeek-V2-Lite Q4_K_M | 110.80 | 44.52 | 1640.63 | 1181.76 | ~80% |
+| Qwen3-4B-2507 Q4_K_M | 78.38 | 54.12 | 2051.57 | 665.94 | 88.7% |
+| Llama-3.1-8B Q4_K_M | 44.21 | 35.96 | 1089.93 | 538.54 | 98.9% |
+| Qwen3-8B Q4_K_M | 43.56 | 35.23 | 1078.08 | 499.97 | 99.7% |
+
+### 2. Constants ladder (n per constant; single machine, single stack)
+
+- Naive ceiling: 220 GB/s / active bytes per token (house convention:
+  file bytes/param x active params).
+- Dense Q4_K arch factor: **~1.00** (n=3: 14B 1.00, Qwen-8B 0.997,
+  Llama-8B 0.989 - FAMILY-CLEAN per 2c). Small-dense overhead onset:
+  0.89 at 4B/2.3GiB (n=1).
+- Pure-MoE Q4_K: **~0.84-0.86** (n=2: Qwen3-30B 0.84, GLM-Air glm4moe
+  0.86).
+- MLA-MoE Q4_K: **per-model 0.66-0.80, NOT a single class** (n=2:
+  Flash 0.66, DeepSeek-V2-Lite 0.80; F12 resolved Flash-specific).
+- DeltaNet-hybrid Q4_K: **~0.55** (n=1: Qwen3.6-35B).
+- MXFP4 quant multiplier: **~0.81, tg-only** (n=1 same-model isolated;
+  gpt-oss native-MXFP4 consistent but family-confounded).
+- q8_0 KV lever: -3.8% at d0, break-even ~4-6K, +8.5% @16K, +14.7%
+  @32K; FA itself free (n=1: Qwen3-30B).
+- Depth slopes: architecture-determined, quant-invariant (Flash pair,
+  5 depths); hybrid flattest (-18.5% by 32K), MLA/pure-MoE steepest
+  (-59 to -61%), dense pays the full quadratic pp price at 32K.
+- Single-run noise: **±1.5% CV** (triplet n=3); one cross-evening pair
+  (gpt-oss-20b, -3.3%/-4.4%) exceeds it - unexplained, watch.
+
+### 3. Findings register updated
+
+F11/F12 resolved earlier this window; F13 (badge-death map), F14
+(depth-dependent workhorse crossover), F15 (run-noise + UMA jitter
+signature), F16 (q8-KV lever) appended to docs/FINDINGS.md; F10 ladder
+re-priced per above.
+
+### 4. Badge table - BOTH conventions (the flag stays Alastair's)
+
+Badge-death = interpolated depth where tg crosses below 70.
+
+| Model | d0-only | both-depths (d0+8K) | badge-death |
+|---|---|---|---|
+| Qwen3-30B-A3B | INSTANT (92.3) | NO (67.1 @8K) | ~6.9K (q8 KV: ~7.1K) |
+| gpt-oss-20b | INSTANT (75.2-77.8) | BORDERLINE - 8K value straddles the line across runs (70.65 step 7 / 67.51 step 8) | ~5.5-9K, measurement-sensitive (flat curve at the line) |
+| GLM-4.7-Flash Q4 | INSTANT, hairline (70.93) | NO (50.5) | **~230 tokens** - most fragile badge in the matrix |
+| DeepSeek-V2-Lite | INSTANT (110.8, fastest d0 in matrix) | NO (44.5) | ~3.2K (2-pt estimate) |
+| Qwen3-4B-2507 | INSTANT (78.4) | NO (54.1) | ~2.2K (2-pt estimate) |
+| Qwen3.6-35B | NO (58.7) | NO | never held it (but holds 47.9 at 32K - best deep-context tg) |
+| all dense 8-14B, Air, 120b, Flash MXFP4 | NO | NO | - |
+
+Convention-flag consequence, stated plainly: d0-only awards FIVE
+badges (three of them dying under 3.5K of context); both-depths awards
+ZERO unambiguously (gpt-oss-20b is borderline). The 8K convention is
+effectively a one-model club on this hardware - and that model's
+membership flips with ±2% run noise.
+
+### 5. Prediction scoreboard (11 registered, pre-run)
+
+- Q1 crossing 4096-8192: **HIT** (~6.9K). Q2 crossing 8192-16384:
+  **MISS** - landed 4096-8192 via cross-run drift; finding, not
+  failure. Q3 flattest hybrid slope: **HIT** (+crossover found). Q4
+  parallel quant curves: **HIT** with mechanism refinement
+  (convergence at depth). 2a 75-85: **HIT** (78.38). 2b 37-43:
+  overshot 1.3% (at-ceiling). 2c 38-44: edge (44.21, at-ceiling,
+  family-clean). 2d fork: **decisive via declared amendment**
+  (Flash-specific). 3a "degrades above ub512": **MISS good-direction**
+  (+ original design was untestable - flaw found and amended). 3b
+  triplet CV<2%: **HOLDS** (1.52%). 3c contamination <2%: **HOLDS**
+  both arms (+jitter signature). 3d d0<5% and q8>=f16 at depth: both
+  **HOLD**.
+
+### 6. Re-run trigger
+
+Banked in WORKPLAN Section 3 (two-tier: quick on any bump, full
+depth-curve set on tolerance breach or kernel-relevant changes; ±1.5%
+noise floor written into the tolerance).
+
+### Plain-language note (Alastair)
+
+What changed in the constants: dense ~1.0 is now family-clean (n=3);
+"MLA-MoE 0.66" died as a class - it is Flash-specific (DeepSeek-V2-Lite
+runs 0.80); pure-MoE 0.84-0.86 gained a second point; the quant-tax and
+hybrid numbers stand unchanged. What broke: only Q2 (gpt-oss crossing
+bracket, run-drift artefact) and 3a's expectation (no ubatch regression
+exists - and the brief's original sweep couldn't have detected one; the
+amended sweep settles it). New levers you can quote to clients: q8 KV
+costs ~4% fresh and buys ~15% at 32K with half the KV memory; ingest
+during inference holds throughput and costs only jitter; every "instant"
+badge on this box dies with context depth, and the depth where it dies
+is now a measured number per model.
+
+## 2026-07-04 - Phase B roadmap sequenced (Alastair)
+
+- Order: Step 9 concurrency characterisation FIRST (Phase B on-ramp -
+  server-lifecycle core + throughput-vs-slots chart, one session, two
+  deliverables) -> promptfoo spike (rides the same server machinery;
+  eval suites get short- and long-context variants per task type, per
+  the step 8 badge-death data) -> 235B probe + pressure test (parked
+  for physical presence per 4.3; KV-quant lever and contamination
+  variables now pre-designed rather than discovered under pressure).
+  Qwen3-Coder bench and whisper.cpp STT spike slot into gaps
+  (half-day, non-blocking).
+- Assistant design notes recorded at sequencing time:
+  (a) Step 9's comparison anchor is our own single-slot Vulkan
+  numbers - the ROCm ~168 t/s @16-slot field figure is cross-backend,
+  same trap the step 6 surplus attribution avoided; aggregate-speedup
+  curve is the honest chart. A q8-KV arm belongs in the design (F16:
+  halved KV = more slots per context budget).
+  (b) 235B arithmetic: Q4_K_M ~133GB exceeds the 105.5GiB GTT
+  outright; Q2/Q3 quants graze the 71.65GiB device-local heap - the
+  probe is an F6 memory-edge/heap-spill experiment by construction,
+  and quant selection is part of the design, not an afterthought.
+  (c) The thermal-envelope urgency on the Coder bench is retired by
+  step 8 evidence: 6h of sustained benching, every leg starting
+  46-47degC, no drift (triplet CV 1.52%) - the box re-enters its
+  envelope in seconds, so the Coder bench is a gap-filler without a
+  clock. Pre-registration gift: same arch/quant/size as the workhorse
+  -> predict ~92 t/s tg d0; any deviation is a finding about coder
+  fine-tunes, not physics.
+  (d) Long-context eval variants are diagnostic only BEYOND a model's
+  F13 badge-death depth, and the harness should measure TTFT
+  separately from generation - pp collapse (Flash -88% by 32K, dense
+  4x cliff at 16K->32K) is the failure users actually feel.
+
+## 2026-07-04 - Step 9 pre-registration: concurrency characterisation (spec: docs/plans/2026-07-04-step9-concurrency.md)
+
+- Green-lit by Alastair 2026-07-04 ("plan and execute"). Spec written
+  first per specs.md; deviation noted there (SPEC-TEMPLATE.md does not
+  exist in this repo; equivalent sections carried explicitly).
+  docs/plans/ created this session.
+- Deliverables: (A) tools/serve_bench.py - the Phase B server-lifecycle
+  core (HARNESS-RULES 1-4 binding); (B) throughput-vs-slots dataset,
+  Qwen3-30B workhorse, slots {1,2,4,8,16} x KV {f16,q8_0}; secondary
+  gpt-oss-20b {1,4,16} f16 if the window allows.
+- **Pre-registered predictions (before any run):**
+  - P1: single-slot per-stream gen rate 85-93 t/s.
+  - P2: aggregate monotonic in slots; 16-slot/1-slot aggregate RATIO
+    2.5-4.5x (ROCm field ratio ~3.7x is the anchor for the ratio only;
+    cross-backend caveat declared).
+  - P3: per-stream monotonically declining; instant-tier frontier
+    (max slots with per-stream >= 70) at 1-2 slots.
+  - P4: q8-KV aggregate within -6%..+2% of f16 at equal slots.
+  - P5: registered QUESTION - the scaling knee (slot count where the
+    marginal aggregate gain per doubling drops below 20%).
+- Pulled-forward smoke per integration-smoke rule: Qwen3-0.6B, -np 2,
+  before any workhorse config.
+- Gap-filler pre-registration (Coder): Qwen3-Coder-30B-A3B-Instruct
+  Q4_K_M pinned (rev b17cb02d, 18,556,689,568 B - within 3KB of the
+  workhorse artefact, same arch/quant). **Registered band: tg128 d0
+  90.5-94** (workhorse triplet band); deviation = coder-finetune
+  finding, not physics. Bench runs only in a GPU gap; download
+  overlaps per the 3c rule.
+- promptfoo spike BLOCKED on Node (absent on host) - toolchain
+  decision flagged to Alastair (apt nodejs vs user-level nvm). Step 9
+  proceeds; the spike inherits serve_bench's machinery when unblocked.
+
+## 2026-07-04 - Step 9 RESULTS: concurrency characterisation (deliverables A+B complete)
+
+- Deliverable A shipped: tools/serve_bench.py (HARNESS-RULES 1-4
+  enforced in code: HTTP-only /completion, timeouts on every wait,
+  Rule 3 offload gate parses -v logs and treats zero evidence as
+  failure, finally-guaranteed kill). Pulled-forward smoke PASSED
+  first-run (Qwen3-0.6B, -np 2, 20 requests, gate green). Post-run
+  process check: CLEAN (pgrep -x, no llama-server left; note: pgrep
+  -af self-matches through the session shell wrapper - use -x).
+- Method note: aggregate = generated tokens / wall (includes each
+  request's prompt phase - serving throughput); per-stream = mean of
+  server-side gen-phase rates (tg128 analog). Unique prompt prefix
+  per request, cache_prompt=false, so every request pays realistic
+  prefill. Declared condition: Coder download active throughout
+  (3c rule).
+- **Primary matrix, Qwen3-30B-A3B Q4_K_M (aggregate / per-stream /
+  TTFT p50 ms):**
+
+| slots | f16 KV | q8_0 KV |
+|---|---|---|
+| 1 | 72.85 / 87.81 / 287 | 67.97 / 85.00 / 285 |
+| 2 | 104.53 / 63.37 / 390 | 103.54 / 62.69 / 405 |
+| 4 | 137.08 / 42.97 / 695 | 133.92 / 41.84 / 718 |
+| 8 | 159.79 / 24.86 / 1154 | 157.87 / 24.53 / 1186 |
+| 16 | 193.49 / 14.68 / 1677 | 192.39 / 14.79 / 1720 |
+
+- **Secondary, gpt-oss-20b MXFP4 f16 (slots 1/4/16):** 59.86 / 101.32
+  / 108.99 aggregate; per-stream 71.57 / 31.86 / 8.23; TTFT p50 273 /
+  750 / 2540 ms.
+- **Prediction resolutions:**
+  - P1 HIT: single-slot per-stream 87.81 (band 85-93); server+HTTP
+    costs ~4.8% vs bare llama-bench tg128.
+  - P2 HIT: 16-slot/1-slot aggregate ratio **2.66x** (band 2.5-4.5).
+    Absolute 193.5 t/s is +15% over the ROCm ~168 field figure -
+    the recurring Vulkan>ROCm pattern, cross-backend caveat stands.
+  - P3 HIT: per-stream monotone declining; **instant-tier frontier =
+    1 slot** (63.4 at 2 slots already fails the ~70 line).
+  - P4: 4/5 configs in the -6..+2% band; ws1 lands -6.7%, 0.7 points
+    past the floor - within the +/-1.5% run-noise of the boundary.
+    Verdict: q8 KV is effectively FREE under concurrency at 4K
+    contexts, while halving the KV budget that caps slot count.
+  - P5 answered: NO sharp knee on the workhorse - gains per doubling
+    +43/+31/+17/+21%, still rising at 16 slots. The knee exists on
+    gpt-oss-20b instead: scaling collapses past ~4 slots (+7.6% from
+    4->16).
+- **FINDING (new, -> F17): concurrency scaling is architecture-
+  dependent.** Workhorse 2.66x at 16 slots vs gpt-oss 1.82x; the
+  models' single-user gap (92 vs 78, 1.2x) WIDENS to 1.8x aggregate
+  under fleet load. Candidate causes for the gpt-oss plateau: MXFP4
+  dequant cost compounding in batched matmuls (F11 mechanism), or
+  the SWA/alternating-attention batch path; not separable with this
+  tool - a Coder-vs-workhorse pair can't test it, but a Q4_K vs
+  MXFP4_MOE concurrency pair on GLM-4.7-Flash could (same-model
+  isolation again; noted as a candidate follow-up, not scheduled).
+- TTFT is the user-visible cost of fleet load: p50 grows ~6x from 1
+  to 16 slots (287 -> 1677 ms) on the workhorse, 2.5s on gpt-oss@16.
+  Phase B evals that care about perceived latency must budget TTFT
+  per slot count, not just throughput.
+- Raw: llama.cpp/bench-step9-ws*-{f16,q8}.json,
+  bench-step9-oss20b-ws*.json (+ .serverlog per config); smoke JSON
+  in session scratchpad (throwaway per no-home-clutter).
+
+## 2026-07-04 - Gap-filler: Qwen3-Coder-30B bench (recorded - band HIT dead-centre)
+
+- Exact spec: Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf (unsloth, rev
+  b17cb02d, manifest VERIFIED on arrival - byte-exact, sha256 = oid),
+  house build/backend. Canonical `llama-bench -m <gguf> -d 0,8192 -o
+  md`. GPU-gap sequencing honoured (ran after the Step 9 matrix).
+- Results (17.28 GiB, 30.53B params, qwen3moe - same graph as the
+  workhorse):
+  - pp512: **1108.96 ± 8.96** | tg128: **93.05 ± 0.65**
+  - pp512 @ d8192: **558.57 ± 7.43** | tg128 @ d8192: **67.09 ± 0.84**
+- **Registered band 90.5-94: HIT, dead-centre.** The coder finetune is
+  throughput-identical to the workhorse (d0 within the triplet band;
+  @8K 67.09 vs 67.06 - to three significant figures). Fine-tuning
+  changes weight VALUES, not weight BYTES; the corridor rule prices
+  both identically and the measurement agrees. Phase B can choose
+  between them on quality alone; throughput is a wash.
+- Raw: llama.cpp/bench-step9-coder30b.md.
+
+## 2026-07-04 - promptfoo spike PASSED (3/3); user-level toolchain installed and documented
+
+- Authorisation: Alastair 2026-07-04, remote - "user level for
+  anything you need, document it" -> docs/TOOLCHAIN.md carries the
+  full what/where/why/removal/permanent-options record.
+- Toolchain: Node v24.18.0 LTS tarball (hash-verified against
+  SHASUMS256.txt per download-integrity) at ~/.local/opt/, chosen
+  over nvm because nvm patches shell init files that belong to the
+  deploy-managed dotfiles repo. promptfoo 0.121.17 installed inside
+  the prefix. Honest footprint: ~3.1GB (2.1G prefix incl. promptfoo
+  node_modules + 993M npm cache) - larger than the ~40MB quoted when
+  flagging the option; the delta is promptfoo's dependency tree, not
+  Node.
+- Spike (spikes/promptfoo-spike/): llama-server on Qwen3-4B (-np 4,
+  -c 16384 explicit, --jinja), promptfoo openai provider at
+  127.0.0.1:8100/v1, three wire-up tests (factual / is-json /
+  arithmetic). **Result: 3/3 PASS, 90 tokens, concurrency 4; server
+  killed cleanly (pgrep -x verified).** Raw: spikes/promptfoo-spike/
+  results.json; server log in session scratchpad (throwaway).
+- **Verdict vs HARNESS-RULES:** Rule 1 native fit (promptfoo speaks
+  OpenAI HTTP); Rule 2 satisfiable (outer timeout wrapped the eval;
+  per-request timeouts configurable) with the key division of labour
+  CONFIRMED: promptfoo does NOT manage servers - our serve_bench-class
+  wrapper keeps lifecycle, offload gate (Rule 3), and outer timeouts.
+  Rule 4 untouched (spike used a manifest-VERIFIED artefact).
+  promptfoo is VIABLE for Phase B as the eval orchestrator inside our
+  lifecycle wrapper; adoption decision remains a Phase B design call
+  (with Step 8's short+long context variants as a design input).
+- Telemetry/update pings disabled via env at run time (not persisted;
+  the Phase B wrapper must set them - noted in TOOLCHAIN.md).
+
+
+# File: model-survey.md
+# Purpose: Running results log for the capability-assessment model survey (briefing v2, 2026-07-04).
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: One entry per model in the briefing's capture format, appended
+# as each bench completes. Canonical spec unless noted: llama.cpp 067de937
+# Vulkan RADV, Mesa 25.2.8, kernel 6.17.0-35, TTM 105GB, llama-bench
+# `-d 0,4096,8192` (split invocations for >~60GiB weights per F6). Corridor
+# predictions computed at pin time from artefact bytes (FINDINGS F10).
+# Provenance for every artefact: manifests/MANIFEST.md.
+
+## Baseline (Phase A, do not re-run - briefing reference data)
+
+| Model | pp512 | tg128 | tg@8K | Notes |
+|---|---|---|---|---|
+| gpt-oss-120b MXFP4 | 545.65 | 53.44 | 48.35 | house reference baseline |
+| Qwen3-30B-A3B Q4_K_M | 1140.72 | 92.28 | 67.06 | workhorse; concurrency: 193.5 agg @16 slots |
+| Qwen3-Coder-30B Q4_K_M | 1108.96 | 93.05 | 67.09 | throughput-identical to workhorse |
+| Qwen3.6-35B-A3B UD-Q4_K_XL | 982.86 | 58.71 | 55.14 | hybrid; flattest depth slope |
+| GLM-4.5-Air Q4_K_M | 232.38 | 23.90 | 20.74 | memory-edge (F6) |
+| GLM-4.7-Flash Q4_K_M | 922.24 | 70.93 | 50.50 | MLA; badge dies ~230 tokens |
+| gpt-oss-20b MXFP4 | 1321.83 | 75.22 | 67.51 | concurrency knee ~4 slots (F17) |
+| Qwen3-14B Q4_K_M | 621.66 | 24.34 | 21.19 | dense ~100% of naive |
+| Qwen3-8B Q4_K_M | 1078.08 | 43.56 | 35.23 | dense at ceiling (Tier 2 #8: already done) |
+| Llama-3.1-8B Q4_K_M | 1089.93 | 44.21 | 35.96 | dense constant family-clean |
+| Qwen3-4B-2507 Q4_K_M | 2051.57 | 78.38 | 54.12 | fastest pp in matrix |
+| DeepSeek-V2-Lite Q4_K_M | 1640.63 | 110.80 | 44.52 | fastest d0 tg; MLA depth cliff |
+
+## Gaps and skips
+
+- ROCm comparison (Part 2): SKIPPED - ROCm not installed (checked
+  2026-07-04); entry 1 in DEFERRED-ROOT.md.
+- Tier 3 (Qwen3-235B, DeepSeek-V3): not present on disk, not
+  downloaded per briefing.
+- Tier 2 #8 (Qwen3-8B): already benched in Phase A - reused above,
+  not re-run.
+
+## Survey entries (appended per model)
+
+### Phi-4 (dense, 14.7B params, 14.7B active)
+
+- Quant: Q4_K_M
+- File: /opt/models/staging/phi-4-Q4_K_M.gguf (unsloth/phi-4-GGUF,
+  rev 5110b777, manifest VERIFIED)
+- File size: 8.89 GB (8.28 GiB per llama-bench)
+- Memory usage: ~8.3 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 611.88 t/s
+- tg128: 24.40 t/s
+- tg128 @ 4K context: 22.36 t/s
+- tg128 @ 8K context: 20.62 t/s
+- Corridor prediction: 220/8.89 x ~1.0 (dense) = 24.7 t/s
+- Corridor ratio (actual/predicted): 0.99
+- Notes: registered band 23.5-25.5 HIT. Runs on the llama graph
+  (llama-bench reports "llama 13B", 14.66B params). Fifth dense
+  point at ~99-100% of naive - the dense constant is now
+  family-diverse (Qwen x3, Llama, Phi). Consulting answer for
+  "modest hardware floor": 24 t/s = comfortable reading speed;
+  Phi-4-mini (Tier 2) will probe the true floor. Declared
+  condition: Scout + Tier-1 downloads active (3c rule);
+  pp@8192 CV 4.4%, within gates.
+
+### Mistral-Small-3.1-24B-Instruct-2503 (dense, 23.6B params, 23.6B active)
+
+- Quant: Q4_K_M
+- File: /opt/models/staging/Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M.gguf
+  (unsloth, rev d63ca941, manifest VERIFIED)
+- File size: 14.33 GB (13.34 GiB per llama-bench)
+- Memory usage: ~13.4 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 333.97 t/s
+- tg128: 15.07 t/s
+- tg128 @ 4K context: 14.42 t/s
+- tg128 @ 8K context: 13.81 t/s
+- Corridor prediction: 220/14.33 x ~1.0 (dense) = 15.4 t/s
+- Corridor ratio (actual/predicted): 0.98
+- Notes: registered band 14.5-16 HIT. Dense-at-ceiling n=6, family #4
+  (Mistral). THE narrative number for the EU-sovereignty
+  conversation: the strong European dense model reads at 15 t/s where
+  the same-quant MoE workhorse does 92 - the dense penalty in one
+  example. pp 334 is the honest compute cost of dense (all 23.6B
+  params per token; contrast Phi-4's 612 at 14.7B, workhorse's 1141
+  at 3.3B active). Mild depth slopes (-8.4% tg by 8K). Declared
+  condition: downloads active; pp CVs 3.5-4.8%, within gates. Quant
+  ladder (Part 4) will reuse this artefact as its Q4_K_M rung.
+
+### Gemma-3-27B-it (dense, 27.0B params, 27.0B active)
+
+- Quant: Q4_K_M
+- File: /opt/models/staging/gemma-3-27b-it-Q4_K_M.gguf (unsloth,
+  rev 7cd0121f, manifest VERIFIED)
+- File size: 16.55 GB (15.40 GiB per llama-bench)
+- Memory usage: ~15.4 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 248.43 t/s
+- tg128: 12.56 t/s
+- tg128 @ 4K context: 11.91 t/s
+- tg128 @ 8K context: 11.65 t/s
+- Corridor prediction: 220/16.55 x ~1.0 (dense) = 13.3 t/s
+- Corridor ratio (actual/predicted): 0.94
+- Notes: registered band 12.5-13.8 HIT at the floor edge. Native
+  gemma3 graph. Ratio 0.94 is the low edge of the dense cluster
+  (others 0.98-1.00) - noted, not attributed. SHALLOWEST dense depth
+  slope (-7.2% tg by 8K): the 5:1 local:global SWA keeps KV reads
+  light, as predicted at pin time. pp 248 = the honest 27B-dense
+  compute bill. Consulting answer: Gemma works fine on AMD, but at
+  27B dense it is a 12 t/s reader, not a chat engine. Declared
+  condition: downloads active; pp d0 CV 5.3%.
+
+### Qwen3-32B (dense, 32.8B params, 32.8B active) - THE dense-vs-MoE comparison
+
+- Quant: Q4_K_M
+- File: /opt/models/staging/Qwen3-32B-Q4_K_M.gguf (unsloth,
+  rev 931c8406, manifest VERIFIED)
+- File size: 19.76 GB (18.40 GiB per llama-bench)
+- Memory usage: ~18.4 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 198.20 t/s
+- tg128: 10.89 t/s
+- tg128 @ 4K context: 10.30 t/s
+- tg128 @ 8K context: 9.76 t/s
+- Corridor prediction: 220/19.76 x ~1.0 (dense) = 11.1 t/s
+- Corridor ratio (actual/predicted): 0.98
+- Notes: registered band 10-12 HIT. **The survey's centrepiece
+  result - same family, same generation, same quant, near-same file
+  size as the MoE workhorse: Qwen3-30B-A3B does 92.28 tg / 1141 pp;
+  Qwen3-32B dense does 10.89 tg / 198 pp. MoE advantage at matched
+  scale: 8.5x generation, 5.8x prefill.** Phase A's 3.8x (vs 14B
+  dense) understated the matched-size case. Physics: dense reads all
+  18.4GB per token, the MoE ~2GB. Consulting answer to "MoE or
+  dense?": MoE, by nearly an order of magnitude, and it is not
+  close. Also the matrix's slowest prefill: an 8K-context document
+  costs ~95s of prefill (86 t/s pp @8K) before the first token -
+  dense 32B is a batch tool on this hardware, not interactive.
+  Declared condition: R1-Distill download active.
+
+### Llama-4-Scout-17B-16E (MoE, 107.8B params, 17B active)
+
+- Quant: Q4_K_M (2 shards)
+- File: /opt/models/staging/Llama-4-Scout-...-0000{1,2}-of-00002.gguf
+  (unsloth, rev 72a6853f, manifest VERIFIED; briefing's bartowski URL
+  was stale - substitution logged)
+- File size: 65.36 GB (60.86 GiB per llama-bench)
+- Memory usage: ~61 GiB weights, FULL Vulkan offload - fits with
+  ~10 GiB device-local headroom; F6 split invocations used, no
+  memory events across three legs
+- Flags: none (defaults; split -d invocations per F6)
+- pp512: 163.17 t/s
+- tg128: 18.54 t/s
+- tg128 @ 4K context: 16.64 t/s
+- tg128 @ 8K context: 17.89 t/s
+- Corridor prediction: 220/(0.604 B/param x 17B active) x 0.84
+  (pure MoE) = ~18 t/s
+- Corridor ratio (actual/predicted vs naive 21.4): 0.87 - pure-MoE
+  class, llama4's chunked attention carries no extra arch tax at d0
+- Notes: registered band 15-20 HIT. **Consulting answer to "Can I
+  run Llama locally?": YES on a 128GB Strix Halo box - Meta's 109B
+  Scout runs wholly on-GPU at 18.5 t/s reading speed** (and NO on
+  32/64GB machines - it needs ~61GiB for weights alone).
+  FINDING-shaped wrinkle: depth behaviour is NON-MONOTONIC - d8192
+  (17.89 tg / 165 pp) beats d4096 (16.64 / 146), with 8K pp matching
+  d0. Consistent with llama4 chunked attention (8192-token chunks):
+  d8192 sits at a chunk boundary where the local window resets.
+  Candidate mechanism, not attributed - a finer depth sweep would
+  map the sawtooth. Quality caveat for client conversations: Scout's
+  mixed reception vs Qwen is a quality question; this row only
+  settles that it RUNS, comfortably.
+
+### DeepSeek-R1-Distill-Qwen-32B (dense, 32.8B params, 32.8B active)
+
+- Quant: Q4_K_M
+- File: /opt/models/staging/DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf
+  (unsloth, rev 1938d05c, manifest VERIFIED)
+- File size: 19.85 GB (18.48 GiB per llama-bench)
+- Memory usage: ~18.5 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 223.96 t/s
+- tg128: 11.05 t/s
+- tg128 @ 4K context: 10.50 t/s
+- tg128 @ 8K context: 10.00 t/s
+- Corridor prediction: 220/19.85 x ~1.0 (dense) = 11.1 t/s
+- Corridor ratio (actual/predicted): 1.00
+- Notes: registered band 10-12 HIT, at ceiling. Confirms Qwen3-32B
+  within 1.5% (qwen2 vs qwen3 graph - generation-independent).
+  Reasoning-model reality check: 11 t/s x 1000+-token thinking
+  traces = MINUTES per answer on this box. "Thinking" models at
+  dense-32B scale are batch analysts here, not chat partners - the
+  accessible reasoning option is a fast MoE with thinking mode
+  (Qwen3-30B-A3B at 92 t/s), not the distill. Declared condition:
+  no downloads active (last bench of the chain).
+
+### Phi-4-mini (dense, 3.8B params, 3.8B active) - Tier 2, the floor
+
+- Quant: Q4_K_M
+- File: /opt/models/staging/Phi-4-mini-instruct-Q4_K_M.gguf (unsloth,
+  rev 78eb92a4, manifest VERIFIED)
+- File size: 2.49 GB (2.31 GiB per llama-bench)
+- Memory usage: ~2.3 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 2149.96 t/s (highest prefill in the matrix)
+- tg128: 77.44 t/s
+- tg128 @ 4K context: 63.13 t/s
+- tg128 @ 8K context: 54.87 t/s
+- Corridor prediction: 220/2.49 x ~0.9-1.0 = band 79-90
+- Corridor ratio (actual/naive): 0.88
+- Notes: registered band MISSED low by 2% (77.44 vs 79 floor) - and
+  the miss refines a constant: 0.877 of naive matches Qwen3-4B's
+  0.887, so SMALL-DENSE OVERHEAD ~0.88 is now n=2 and looks
+  systematic below ~5GB artefacts (vs ~0.99 for 9-20GB dense).
+  Floor answer: the smallest useful model clears the ~70 instant
+  line fresh (badge dies ~2K depth, same pattern as the 4B), reads
+  8K prompts at 917 t/s pp. Declared condition: Coder-32B download
+  active.
+
+### Qwen2.5-Coder-32B-Instruct (dense, 32.8B params, 32.8B active) - Tier 2
+
+- Quant: Q4_K_M
+- File: /opt/models/staging/Qwen2.5-Coder-32B-Instruct-Q4_K_M.gguf
+  (unsloth, rev 638ed913, manifest VERIFIED)
+- File size: 19.85 GB (18.48 GiB per llama-bench)
+- Memory usage: ~18.5 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 223.16 t/s
+- tg128: 11.09 t/s
+- tg128 @ 4K context: 10.53 t/s
+- tg128 @ 8K context: 10.03 t/s
+- Corridor prediction: 220/19.85 x ~1.0 (dense) = 11.1 t/s
+- Corridor ratio (actual/predicted): 1.00
+- Notes: registered band 10-12 HIT at ceiling. Statistically
+  IDENTICAL to R1-Distill (11.05/10.50/10.00) - same Qwen2.5-32B
+  body, third confirmation that fine-tune content never moves
+  throughput. Coding story on this box: dense-32B coder = 11 t/s
+  batch code reviewer; the interactive coding seat belongs to
+  Qwen3-Coder-30B MoE at 93 t/s. Declared condition: Mixtral
+  download active.
+
+### Mixtral-8x7B-Instruct-v0.1 (MoE, 46.7B params, ~12.9B active) - Tier 2
+
+- Quant: Q4_K_M (mradermacher re-conversion)
+- File: /opt/models/staging/Mixtral-8x7B-Instruct-v0.1.Q4_K_M.gguf
+  (rev 92bb790b, manifest VERIFIED)
+- File size: 28.45 GB (26.49 GiB per llama-bench)
+- Memory usage: ~26.5 GiB weights, full Vulkan offload
+- Flags: none (defaults)
+- pp512: 216.13 t/s
+- tg128: 26.45 t/s
+- tg128 @ 4K context: 24.60 t/s
+- tg128 @ 8K context: 23.46 t/s
+- Corridor prediction: 220/(0.609 x 12.9B) x 0.84 = ~23.5; band 21-27
+- Corridor ratio (actual/naive ~28): 0.94
+- Notes: registered band HIT near ceiling. TWO findings: (1) the
+  original TheBloke Dec-2023 GGUF DOES NOT LOAD at 067de937 (MoE
+  tensor layout changed) - "GGUF archives age, re-conversion
+  required" is a real operational fact for anyone keeping model
+  archives; artefact kept as evidence. (2) The classic big-expert
+  top-2-of-8 MoE runs at ~0.94 of naive - ABOVE the modern
+  fine-grained MoE cluster (0.84-0.86); simpler routing appears
+  cheaper per byte on this stack. Still obsolete on merit: the
+  workhorse is 3.5x faster on 40% less memory. Declared condition:
+  ladder downloads active.
+
+## PART 4 COMPLETE - Mistral-Small-24B quantization ladder (2026-07-04)
+
+| Quant | File GB | tg128 | pp512 | Predicted tg | Speed vs Q4 | Size vs Q4 |
+|---|---|---|---|---|---|---|
+| Q4_K_M | 14.33 | 15.07 | 334 | 15.4 | 1.00x | 1.00x |
+| Q5_K_M | 16.76 | 12.97 | 236 | 12.9 | 0.86x | 1.17x |
+| Q6_K | 19.35 | 11.59 | 249 | 11.1 | 0.77x | 1.35x |
+| Q8_0 | 25.05 | 8.83 | 283 | 8.6 | 0.59x | 1.75x |
+
+- **Generation speed is EXACTLY inverse to file size** - every rung
+  lands at 0.98-1.03 of its corridor prediction. The consulting
+  soundbite: "quantization's speed cost IS the size ratio; the only
+  open question is quality, and that is what evals are for."
+  Near-lossless Q8 costs 41% of Q4's speed on the same model.
+- pp wrinkle (recorded, not attributed): prefill does NOT follow the
+  same line (Q4 334 > Q8 283 > Q6 249 > Q5 236) - dequant kernel
+  paths differ per quant in compute-bound prefill.
+- All three new rungs verified against upstream oids before use
+  (hashed directly; the chain-level hash prints only at invocation
+  end).
+
+## TIER 2 COMPLETE (Qwen3-8B reused from Phase A) - summary above plus:
+Phi-4-mini 77.44 (floor, small-dense 0.88), Coder-32B 11.09 (= R1
+body), Mixtral 26.45 (vintage-GGUF finding + classic-MoE efficiency).
+
+## TIER 1 COMPLETE - summary (2026-07-04)
+
+| Model | Arch | tg128 d0 | tg @8K | pp512 | Band | Ratio |
+|---|---|---|---|---|---|---|
+| Llama-4-Scout 109B/A17B | MoE | 18.54 | 17.89 | 163 | HIT | 0.87 |
+| Mistral-Small-24B | dense | 15.07 | 13.81 | 334 | HIT | 0.98 |
+| Gemma-3-27B | dense | 12.56 | 11.65 | 248 | HIT | 0.94 |
+| Phi-4 14.7B | dense | 24.40 | 20.62 | 612 | HIT | 0.99 |
+| Qwen3-32B | dense | 10.89 | 9.76 | 198 | HIT | 0.98 |
+| R1-Distill-32B | dense | 11.05 | 10.00 | 224 | HIT | 1.00 |
+
+**Six unseen models, six registered-band hits, corridor ratios
+0.87-1.00.** The pricing model (F10) predicts throughput of models it
+has never seen from file size + architecture class alone. Headline:
+Qwen3-32B dense vs Qwen3-30B-A3B MoE = 8.5x generation gap at matched
+family/scale/quant. Meta's 109B Scout runs wholly on-box at reading
+speed. Every dense model 24B+ is a batch tool, not a chat engine, on
+this hardware.
+
+
+# File: capability-probes.md
+# Purpose: Results log for non-LLM capability probes (briefing v2 Part 3: STT, image generation, TTS).
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: Exploratory probes - "does it work, roughly how fast" - not
+# comprehensive benchmarks. One section per probe with the briefing's
+# capture fields, build provenance, and the consulting question answered.
+# Stack: Vulkan RADV / Mesa 25.2.8 / kernel 6.17.0-35 unless noted.
+
+## 3.1 Speech-to-text: whisper.cpp - PASS, 28x real-time
+
+- Build: whisper.cpp master @ clone 2026-07-04, `-DGGML_VULKAN=ON`,
+  checkout at ~/sparkbench/whisper.cpp (gitignored). Built clean,
+  first try.
+- Vulkan acceleration CONFIRMED: model loaded to Vulkan0 (Radeon
+  8060S RADV GFX1151), 1.62GB on-device for large-v3-turbo.
+- Test audio: samples/jfk.wav (11s) + a 330s file made by
+  concatenating it 30x (stdlib wave; no ffmpeg on host - see
+  DEFERRED-ROOT note below).
+
+| Model | Audio | Total time | RTF | Transcript |
+|---|---|---|---|---|
+| large-v3-turbo (1.6GB) | 11s | 1.27s (incl. 0.31s load) | ~11x | correct |
+| large-v3-turbo | 330s | 11.69s | **~28x real-time** | correct |
+| small (466MB) | 330s | 11.87s | ~28x | correct |
+
+- **Finding: quality is free.** small and large-v3-turbo run at the
+  SAME speed on this stack (both ~28x; the bottleneck is not the
+  encoder GPU work at these sizes). Always use large-v3-turbo.
+- **Consulting question ("real-time meeting transcription?"): YES,
+  emphatically.** A 1-hour meeting transcribes in ~2 minutes with
+  the best turbo model; live streaming use leaves >25x headroom.
+- Caveats: single-speaker clean audio sample; repeated content may
+  flatter the decoder slightly. Real meeting audio (crosstalk,
+  accents) is a quality question for a later eval, not a throughput
+  one. ffmpeg absent (apt) - listed in DEFERRED-ROOT.md alongside
+  ROCm; stdlib wave sufficed here.
+
+## 3.2 Image generation: stable-diffusion.cpp - PASS (with one required flag)
+
+- Build: stable-diffusion.cpp master @ clone 2026-07-04, `-DSD_VULKAN=ON`,
+  at ~/sparkbench/stable-diffusion.cpp (gitignored). Built clean.
+  NOTE: the CLI binary is now `sd-cli`, not `sd` (briefing's command
+  is stale); FLUX split files load via `--diffusion-model`, not `-m`.
+- Model set (tool-local models/, provenance = size+sha256 verified at
+  fetch): flux1-schnell-Q4_0.gguf (6.77GB, city96, oid-matched);
+  ae.safetensors (335MB - SUBSTITUTION: black-forest-labs repo is
+  GATED (401), ungated second-state mirror used, byte-size identical,
+  oid-matched); clip_l (246MB) + t5xxl_fp16 (9.79GB) from
+  comfyanonymous, oid-matched.
+- VRAM: 15.94GB total (t5xxl 9.3GB dominates - fp8 variant would
+  halve this if VRAM ever matters).
+
+| Resolution | Sampling (4 steps) | VAE decode | Total gen | Verdict |
+|---|---|---|---|---|
+| 512x512 | 8.52s | 0.94s | **~9.5s** | clean image |
+| 1024x1024 (no flag) | 40.25s | FAILS | - | OOM at decode |
+| 1024x1024 --vae-tiling | 40.25s | 7.23s | **~48s** | clean image |
+
+- **FINDING - deployment gotcha:** at 1024x1024 the FLUX VAE requests
+  an 8.5GB contiguous compute buffer; RADV's single-allocation limit
+  (~4.3GB) rejects it AFTER 40s of successful sampling. `--vae-tiling`
+  is mandatory at 1024 on this stack (7.2s tiled decode, no quality
+  complaint visible). Failure mode is late and expensive - bake the
+  flag into any wrapper.
+- Quality: both images coherent, well-lit, artefact-free to my eye;
+  sent to Alastair 2026-07-04 for the subjective call.
+- **Consulting question ("local images instead of Midjourney/
+  DALL-E?"): qualified YES** - 9.5s at 512, 48s at 1024, on-prem,
+  no per-image billing; the qualification is FLUX-schnell's style
+  range vs commercial tools, a quality question not a speed one.
+
+### 3.2 addendum: 50-image style gallery + resolution ceiling (2026-07-04)
+
+- **Gallery batch (Alastair request):** 50 business-blog prompts
+  across 10 style families (photography, flat/isometric illustration,
+  watercolor, oil, cartoon/comic, 3D render, sketch/line art, pixel
+  art, business-concept), 1024x1024, seeds 1001-1050, prompts tracked
+  in results/flux-gallery-prompts.txt. **50/50 succeeded**, ~36s
+  sampling each, ~55 min wall total, images in results/flux-gallery/
+  (gitignored, 67MB) + zip delivered to Alastair. Sampling time was
+  style-invariant (35.9-36.1s across all families) - cost depends on
+  pixels, never on content or style.
+- **Resolution ceiling (Alastair request - 1080p/4K):**
+
+| Resolution | MP | Result |
+|---|---|---|
+| 1024x1024 | 1.05 | OK, ~40s sampling |
+| 1344x768 (16:9) | 1.03 | OK, 35s |
+| 1536x864 (16:9) | 1.33 | **OK, 49s - largest verified 16:9** |
+| 1792x1008 (16:9) | 1.81 | FAILS - flux compute buffer over allocation cap |
+| 1920x1080 (native 1080p) | 2.07 | FAILS - same cap |
+| 3840x2160 (native 4K) | 8.29 | FAILS - requests a 208GB buffer (impossible: exceeds total RAM) |
+
+- **FINDING:** the binding constraint is the RADV single-allocation
+  cap (~4.3GB) on the transformer's attention buffer, which grows
+  ~quadratically with pixel count - NOT total VRAM (only 16GB of
+  110GB was in use). Practical ceiling ~1.3-1.5MP. Production recipe
+  for 1080p/4K deliverables: generate at 1536x864 and upscale (1.25x
+  to 1080p; a dedicated upscaler for 4K - candidate future probe,
+  e.g. realesrgan-ncnn-vulkan). Failure mode caveat from the first
+  attempt: errors can arrive AFTER a full sampling phase, and a
+  filtered log can hide them - always check the output file exists.
+
+## 3.3 Text-to-speech: Piper - PASS, 26.6x real-time on CPU
+
+- Install: pre-built binary release 2023.11.14-2 (pip unavailable on
+  host - python3-pip in DEFERRED-ROOT.md; the briefing's binary
+  fallback used instead). Location: ~/sparkbench/piper/ (gitignored);
+  tarball sha256 recorded in docs/TOOLCHAIN.md.
+- Voice: en_GB-alba-medium (63MB onnx, sha256 in TOOLCHAIN.md) -
+  British English per the briefing's Irish-market note.
+- Test: 497-character paragraph -> **30.1s of audio in 1.13s = 26.6x
+  real-time, CPU-only** (no GPU involvement at all - this leaves the
+  GPU free for concurrent LLM work).
+- Quality: **APPROVED - Alastair auditioned the sample 2026-07-04:
+  "sounded great", and he specifically likes the alba voice.**
+  en_GB-alba-medium is the house default voice going forward.
+- **Consulting question ("local speech generation for
+  accessibility/training?"): YES, unqualified** - a 10-minute
+  narration renders in ~23 seconds on CPU while the GPU serves LLM
+  load, and the quality passed the founder's ear test.
+
+
+# File: experiments.md
+# Purpose: Pre-registrations and results for post-briefing follow-up experiments (Scout sawtooth, GLM concurrency quant-pair).
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: Two targeted experiments green-lit by Alastair 2026-07-04
+# ("plan then execute all of that"). Each carries its pre-registered
+# prediction/fork BEFORE the run, per the standing discipline. Stack:
+# llama.cpp 067de937 Vulkan, Mesa 25.2.8, kernel 6.17.0-35, TTM 105GB.
+
+## E1: Scout chunk-boundary depth sweep (sawtooth mapping)
+
+- Motivation: the Tier 1 survey found NON-MONOTONIC depth behaviour on
+  Llama-4-Scout (d8192 faster than d4096; 8K pp = d0 pp), consistent
+  with llama4's 8192-token chunked attention resetting the local
+  window at chunk boundaries.
+- Design: tg128 at depths 2048 / 6144 / 7680 / 8448 / 12288 / 16384,
+  each a SEPARATE invocation (F6: ~61GiB weights), -r 3 repetitions
+  (prefill cost dominates; 3 reps keeps the sweep ~25 min). Existing
+  points reused: d0 18.54, d4096 16.64, d8192 17.89.
+- **PRE-REGISTERED PREDICTION (before the run): sawtooth with period
+  8192.** Specifically: (a) tg declines from 2048 to a minimum near
+  7680 (late-chunk = maximal local window); (b) tg RECOVERS at 8448
+  (just past the boundary, fresh window) to near the d8192 level;
+  (c) the pattern repeats: tg(12288) < tg(16384-adjacent boundary
+  region), i.e. mid-second-chunk dips again. Falsifier: monotonic
+  decline like every other model = the survey's d4096/d8192 ordering
+  was noise, not mechanism.
+- Value: on-prem long-context sizing for llama4-class models - if
+  depth cost resets per chunk, Scout's effective long-context
+  behaviour is dramatically better than a naive slope suggests.
+
+### E1 results: SAWTOOTH CONFIRMED (2026-07-04) - all three sub-predictions hit
+
+| depth | 0* | 2048 | 4096* | 6144 | 7680 | 8192* | 8448 | 12288 | 16384 |
+|---|---|---|---|---|---|---|---|---|---|
+| tg128 | 18.54 | 17.60 | 16.64 | 16.75 | **16.23** | **17.89** | 17.63 | 16.65 | 17.24 |
+
+(*survey points reused; sweep points -r 3, sigmas 0.02-0.18)
+
+- (a) decline to a trough LATE in the chunk: 16.23 at d7680 = sweep
+  minimum ✓. (b) reset AT the 8192 boundary: 17.89, holding 17.63 at
+  8448 ✓. (c) period repeats: mid-second-chunk dip (16.65 @12288) and
+  second-boundary recovery (17.24 @16384) ✓.
+- Amplitude ~8% peak-to-trough, perfectly periodic - mechanism is
+  llama4's 8192-token chunked local attention (window resets each
+  chunk), now measured, not inferred.
+- **Consulting value: Scout is effectively DEPTH-FLAT.** tg at 16K is
+  within 7% of tg at 2K, vs the pure-MoE workhorse losing 42% over
+  the same span. For long-document workloads at reading speed,
+  Scout's depth behaviour is the best in the matrix - its ~18 t/s
+  just never degrades. Caveat: quality effects of chunked attention
+  on long-range reference are an eval question, not a throughput one.
+- Raw: llama.cpp/bench-e1-scout-d{2048,6144,7680,8448,12288,16384}.md.
+
+## E2: GLM-4.7-Flash quant-pair CONCURRENCY (F17 mechanism isolation)
+
+- Motivation: F17 found gpt-oss-20b (native MXFP4) plateaus at ~4
+  slots while the Q4_K workhorse scales to 16. Two candidate
+  mechanisms: MXFP4 dequant cost compounding in batched matmuls
+  (F11's tg tax, amplified), or gpt-oss's attention/SWA batch path.
+  The same-model GLM-4.7-Flash pair separates them - identical
+  architecture, only quant differs (the design that resolved F11).
+- Design: serve_bench.py, slots {1, 4, 16}, f16 KV, 4K ctx/slot, on
+  GLM-4.7-Flash-Q4_K_M vs GLM-4.7-Flash-MXFP4_MOE (both manifest-
+  VERIFIED, resident). 6 configs, ~15 min.
+- **PRE-REGISTERED FORK (before the run):** compare aggregate scaling
+  ratios (16-slot aggregate / 1-slot aggregate) between the two
+  quants of the same model. (a) MXFP4 ratio clearly BELOW Q4's
+  (>15% relative shortfall) -> the MXFP4 batched-dequant tax is real
+  and compounds under concurrency; gpt-oss's plateau is (at least
+  partly) quant-driven. (b) Ratios parallel (within ~10% relative) ->
+  MXFP4 batches fine; the gpt-oss plateau is architecture (SWA/
+  attention path), not quant. (c) Between = inconclusive, recorded.
+- Value: whether MXFP4 artefacts are disqualified from fleet serving
+  on this stack - a deployment rule, not trivia.
+
+### E2 results: FORK RESOLVED arm (b) + NEW FINDING - MLA anti-scales (2026-07-04)
+
+| Config | aggregate t/s | per-stream | TTFT p50 |
+|---|---|---|---|
+| Q4_K_M 1 slot | 54.07 | 67.4 | 366ms |
+| Q4_K_M 4 slots | 45.45 | 13.3 | 1.2s |
+| Q4_K_M 16 slots | 38.06* | 4.0 | 19.6s |
+| MXFP4 1 slot | 52.30 | 60.5 | 320ms |
+| MXFP4 4 slots | 31.77 | 10.3 | 3.6s |
+| MXFP4 16 slots | 39.49* | 4.3 | 19.8s |
+
+(*under_sampled flag - low confidence on the exact value; the
+direction is unambiguous)
+
+- **Fork: arm (b).** Scaling ratios 0.70 (Q4) vs 0.76 (MXFP4) -
+  parallel within ~9% relative. MXFP4 batches no worse than Q4 on
+  the same model -> the gpt-oss-20b plateau (F17) is ARCHITECTURE
+  (SWA/attention batch path), not quant. MXFP4 artefacts are not
+  disqualified from fleet serving by their quant.
+- **NEW FINDING (-> F18): the deepseek2/MLA graph ANTI-SCALES under
+  concurrency on this stack.** Aggregate at 16 slots is ~30% BELOW
+  single-stream (0.70-0.76x, vs workhorse 2.66x, gpt-oss 1.82x), and
+  TTFT reaches ~20s. Candidate mechanism: MLA latent decompression is
+  per-token compute that batching multiplies instead of amortizing
+  (consistent with F8's pp-at-depth collapse); not further separable
+  with this tool. Deployment rule: MLA models are SINGLE-USER
+  machines on this stack - never behind a multi-slot server.
+- Cross-check: single-slot per-stream 67.4 vs llama-bench 70.93 =
+  -5% server overhead, consistent with Step 9's P1 pattern.
+- Raw: llama.cpp/bench-e2-{q4,mxfp4}-ws{1,4,16}.json.
+
+## E3: Image upscaler probe (completes the 1080p/4K story)
+
+- Motivation: FLUX native ceiling is 1536x864 (allocation cap);
+  1080p/4K deliverables need generate-then-upscale. Real-ESRGAN's
+  ncnn-vulkan build is the standard local upscaler.
+- Design: pre-built realesrgan-ncnn-vulkan release binary (pinned +
+  hashed at fetch, TOOLCHAIN.md entry); upscale a 1536x864 gallery-
+  style image to 1080p-class (x2 -> 3072x1728, downsample-free
+  check) and a 1024x1024 to 4K-class (x4 -> 4096x4096); record
+  seconds per upscale and visual verdict. 15-30 min probe per the
+  briefing's Part 3 conventions (log errors, move on).
+- **EXPECTATION (registered): x4 on a 1MP image completes in
+  seconds-to-tens-of-seconds on Vulkan; total 1024->4K pipeline
+  (48s generate + upscale) lands under ~90s.** Failure/limit is a
+  finding (the allocation cap may bite tiled upscalers too - the
+  tool tiles by default, so probably not).
+
+## E4: Scout concurrency (4th architecture point on the F17/F18 ladder)
+
+- Design: serve_bench slots {1, 4, 8} on Llama-4-Scout Q4_K_M, f16
+  KV, 4K ctx/slot. Capped at 8 slots: ~61GiB weights + 8-slot KV
+  approaches the F6 memory edge; 16 slots risks DeviceLost (canary
+  rule stands if it happens anyway).
+- **PRE-REGISTERED (before run):** chunked attention should batch
+  like a normal MoE (the anti-scaling pathology is MLA-specific):
+  8-slot/1-slot aggregate ratio in 1.6-2.3 (workhorse measured 2.19x
+  at 8 slots). Fork: ratio <1.3 = a second anti-scaling architecture
+  (would gut the "MLA-specific" attribution in F18); >1.6 = ladder
+  point confirmed, F18 attribution strengthened.
+
+### E4 results: fork CONFIRMED, band overshot high (2026-07-04)
+
+| slots | aggregate | per-stream | TTFT p50 |
+|---|---|---|---|
+| 1 | 14.86 | 18.43 | 1.6s |
+| 4 | 33.76 | 11.33 | 3.7s |
+| 8 | 40.49* | 6.68 | 5.9s |
+
+(*under_sampled flag; direction unambiguous. Per-stream ws1 18.43 vs
+llama-bench 18.54 = -0.6% server overhead.)
+
+- 8-slot/1-slot ratio **2.72x** - fork arm ">=1.6" confirmed
+  decisively, and the registered 1.6-2.3 band OVERSHOT: Scout
+  out-scales even the pure-MoE workhorse (2.19x at 8 slots).
+  Chunked local attention appears to batch exceptionally well
+  (small per-slot KV windows in batched decode - candidate
+  mechanism, not attributed).
+- **F18's MLA-specific attribution strengthened.** The architecture-
+  concurrency ladder: chunked/llama4 2.72x@8 > pure MoE 2.19x@8
+  (2.66x@16) > gpt-oss/SWA 1.82x@16 (knee ~4) > MLA 0.70x (ANTI).
+- Fleet quotable: a 109B model serving 8 concurrent users at 40 t/s
+  aggregate on one box, no memory events at the F6 edge.
+- Raw: llama.cpp/bench-e4-scout-ws{1,4,8}.json.
+
+## E5: Vision probe - Gemma-3-27B multimodal (new capability axis)
+
+- Motivation: local image understanding ("can the box read charts,
+  photos, documents?") is unmapped territory in the capability
+  envelope; Gemma-3-27B is the only resident multimodal model.
+- Design: fetch the unsloth mmproj (pin + verify), llama-server
+  --mmproj, OpenAI chat with base64 images from our OWN gallery
+  (ground truth known: the papercraft deer, the cartoon cats' board
+  meeting, the chess king). 3-4 questions with objectively checkable
+  answers + 1 open description.
+- **PRE-REGISTERED:** works end-to-end at 067de937 (mtmd is in-tree
+  by this vintage); >=3 of 4 factual questions answered correctly.
+  Risk logged: if --mmproj is unsupported/broken for gemma3 here,
+  that IS the result (log and move on, briefing convention).
+
+### E5 results: PASS 4/4, ~2.4s per image (2026-07-04)
+
+- Gemma-3-27B + mmproj-F16 (verified) via llama-server --mmproj at
+  067de937: paper-craft deer, boardroom cats, chess, windowsill plant
+  - all four factual questions answered correctly in 2.3-2.5s each
+  (including vision encoding of 1024x1024 PNGs). Registered >=3/4
+  HOLDS with margin.
+- **New capability axis confirmed: local image understanding works
+  out of the box.** Consulting form: "the box can read charts,
+  photos, and documents locally - ~2.5s per image at 27B quality" -
+  document-understanding workflows (invoice OCR-plus-reasoning,
+  chart QA) are now credible probe targets.
+- Caveat: 4 easy images from our own gallery = wire-up + sanity, not
+  a vision benchmark; a document/chart-heavy eval is the follow-up
+  if the capability matters to a client.
+- Ops note (twice-bitten now): backgrounding a `cd &&` chain leaves
+  the parent shell's cwd unchanged AND `kill` on the wrapper orphans
+  the server - always absolute paths, background the binary only,
+  pkill -x as the cleanup backstop.
+
+## E6: Mixed-workload test (one box, whole office)
+
+- Motivation: every baseline is now measured solo (workhorse 4-slot
+  aggregate 137 t/s; whisper 330s-file in 11.7s; FLUX 1024 in ~48s).
+  Clients ask "can one box do chat + transcription + images AT ONCE";
+  F15 only covered disk/network contention - this is GPU-compute
+  contention, a different regime.
+- Design: run simultaneously: (a) serve_bench workhorse 4 slots
+  45s window, (b) whisper large-v3-turbo on the 330s file, (c) FLUX
+  1024x1024 generation. Record each vs its solo baseline.
+- **PRE-REGISTERED (expectations, first GPU-contention data):** all
+  three COMPLETE without errors; LLM aggregate degrades but stays
+  >=60% of solo (>=82 t/s); whisper and FLUX each take <=3x their
+  solo time. The deliverable is the degradation matrix whatever the
+  numbers; crashes/DeviceLost = the finding instead.
+
+### E6 results: all workloads survive; LLM pays the steepest tax (2026-07-04)
+
+| Workload | Solo baseline | Mixed | Cost |
+|---|---|---|---|
+| LLM chat, 4-slot aggregate | 137.1 t/s | 55.89 t/s | **-59%** |
+| whisper 3x 330s files | ~35s | 76s | 2.2x |
+| FLUX 1024x1024 | ~60s | 77s | 1.3x |
+
+- Registered expectations: completion-without-errors HOLDS (no
+  DeviceLost, no failures, TTFT p50 still 2.0s); media <=3x HOLDS;
+  **LLM >=60%-of-solo MISSES (41%)** - bandwidth-bound decode pays
+  the steepest GPU-contention price, not the "small" media jobs.
+- Efficiency framing: ~175s of solo-equivalent work delivered in
+  ~80s of wall time - time-slicing works, the box just charges the
+  chat workload most of the toll.
+- **Consulting form:** "One box CAN run chat + meeting transcription
+  + image generation simultaneously - nothing crashes and users
+  still get 2s first tokens - but budget chat throughput to roughly
+  HALVE under media load. Schedule media batches off-peak or size
+  the fleet for the haircut."
+- Raw: llama.cpp/bench-e6-mixed-llm.json; e6 logs in scratchpad
+  (throwaway); image e6-flux.png rendered correctly under contention.
+
+## E7: Eval suite v2 - hard long-context tasks (P2 follow-up)
+
+- Motivation: pilot P2 missed - simple 12K needle-retrieval is below
+  the whole fleet's floor. The separating suite needs multi-hop,
+  aggregation, and cross-reference tasks.
+- Design: 6 new long-context tests over the same 12K log excerpt
+  (all deterministically checkable): value arithmetic across entries
+  ("how much faster in t/s is X than Y"), counting ("how many models
+  are recorded clearing 70 t/s in this excerpt"), cross-reference
+  ("which model's pp512 at d8192 was flagged for high variance, and
+  what was the CV"), ordering, and a two-hop lookup. Same 5 models.
+- **PRE-REGISTERED:** separation appears - at least one model scores
+  <50% on the hard-long set while at least one scores >=80%.
+  Secondary question: does the coder finetune beat its base-family
+  sibling on arithmetic-flavoured tasks?
+
+## E8: 32K-context eval with cross-chunk reference (the Scout quality question)
+
+- Motivation: E1 proved Scout's tg is depth-flat via 8192-token
+  chunked attention, with the declared caveat that long-range
+  REFERENCE quality was untested. F19 says the fleet floor is high
+  at 12K - so go to ~32K and make questions span chunk boundaries.
+- Design: ~32K-token corpus from real project prose (positions of
+  every fact verified programmatically at build time). 6 questions:
+  2 within-chunk retrieval, 2 CROSS-CHUNK (facts >8192 tokens apart
+  combined in one answer), 2 multi-hop arithmetic across regions.
+  Models: Qwen3-30B (workhorse), gpt-oss-20b, Llama-4-Scout.
+  Serving: -np 1, -c 36864, promptfoo -j 1 (serial, maximizes prompt
+  cache reuse across the shared 32K prelude).
+- **PRE-REGISTERED FORK:** (a) Scout fails cross-chunk questions
+  that the full-attention models pass -> chunked attention's speed
+  is paid in long-range recall (the tradeoff quantified). (b) Scout
+  matches -> chunk-flat throughput is FREE at 32K; Scout becomes the
+  uncontested long-document recommendation. Secondary: fleet stays
+  >=80% on within-chunk items (F19 extension to 32K).
+
+### E8 results: (pending)
+
+## E9: adversarial contradiction detection (suite v3, arm 2)
+
+- Design: the 12K excerpt plus a planted "erratum" entry contradicting
+  an early value. 3 tasks x 5 fast models: detect the conflict, list
+  both values, state which entry is later. Grading: both numbers
+  present (deterministic).
+- **PRE-REGISTERED:** contradiction detection separates where
+  retrieval did not - at least one model misses the conflict
+  (predicting the 4B, consistent with the judgment-tax pattern).
+
+### E9 results: (pending)
+
+## E10: long structured generation (suite v3, arm 3)
+
+- Design: from the 12K excerpt, generate a markdown table of EVERY
+  model with a recorded tg128 (>=8 required rows). Graded by counting
+  required model names AND their correct values present. 5 models,
+  max_tokens 1200.
+- **PRE-REGISTERED:** generation completeness separates: at least one
+  model omits >=2 required rows (long faithful enumeration is harder
+  than retrieval). Question: does any model hallucinate a value not
+  in the doc (worst failure mode, flagged specially)?
+
+### E10 results: (pending)
+
+## E11: STT accuracy round-trip (quantified WER)
+
+- Design: Piper (alba voice) reads a ~200-word original passage with
+  numbers, names, and technical terms -> whisper large-v3-turbo
+  transcribes -> word-error-rate computed programmatically (stdlib
+  edit distance, normalized casing/punctuation). Closed loop: ground
+  truth exact by construction; audio is real TTS speech, not
+  concatenated samples.
+- **PRE-REGISTERED:** WER <= 5% on clean synthetic speech; numbers
+  and proper nouns are where errors concentrate if any.
+
+### E11 results: (pending)
+
+### E7 results: separation MISSES AGAIN - the high floor is the replicated finding (2026-07-04)
+
+| Model | hard-long score |
+|---|---|
+| Qwen3-30B-A3B | 6/6 |
+| gpt-oss-20b | 6/6 |
+| GLM-4.7-Flash | 6/6 |
+| Qwen3-4B | 6/6 |
+| Qwen3-Coder-30B | 5/6 |
+
+- Registered prediction (>=1 model <50%, >=1 model >=80%): **MISS** -
+  worst score is 83%. Second consecutive suite design (pilot P2, now
+  E7 multi-hop) that failed to separate the fleet at 12K context.
+- The one real failure inverts the secondary question: the CODER
+  finetune made the only arithmetic error (493.95 for 1137.67 -
+  633.72 = 503.95; off by 10) while every base model - including the
+  2.3GB Qwen3-4B - computed it correctly.
+- **Replicated finding (-> F19): the fleet's 12K-context capability
+  floor is HIGH.** Retrieval, cross-reference, and multi-hop
+  arithmetic over real technical documents are reliable across every
+  resident instruct model. The small-model tax is JUDGMENT (spam
+  triage, pilot), not context reach or arithmetic. Separating these
+  models will take >32K contexts, adversarial/contradictory
+  documents, or long structured GENERATION - noted for suite v3.
+- Consulting form: "12K-document Q&A including computation is safe
+  fleet-wide on this box; pick the model for speed and judgment, not
+  context anxiety."
+- Raw: results/eval-pilot/hardlong-*.json.
+
+### E3 results: PASS, far under expectation (2026-07-04)
+
+| Pipeline | Generate | Upscale | Total |
+|---|---|---|---|
+| 1024x1024 -> x4 -> 4096x4096 (4K-class) | 48s | **2.9s** | ~51s |
+| 1536x864 -> x2 -> 3072x1728 (1080p+ hero) | 49s | **1.4s** | ~50s |
+
+- Registered expectation (pipeline < ~90s): HOLDS with 40% margin.
+  The "native 1080p/4K impossible" finding now has a practical
+  production answer: generate at the 1536x864/1024 ceiling, upscale
+  in seconds. realesrgan tiles internally - the allocation cap never
+  bites.
+- Quality: samples sent to Alastair (4096px outputs exceed the 2000px
+  context-read limit - not self-reviewed; founder's eye is the gate).
+- Tool: realesrgan-ncnn-vulkan v0.2.5.0 at ~/sparkbench/realesrgan
+  (gitignored); zip 46,931,474 B, local sha256 e5aa6eb131...40c96 =
+  provenance (GitHub publishes no checksum); TOOLCHAIN.md entry added.

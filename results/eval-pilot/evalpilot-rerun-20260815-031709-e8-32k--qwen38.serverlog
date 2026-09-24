@@ -1,0 +1,60 @@
+0.00.030.008 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.030.298 I srv          init: The UI is disabled
+0.00.030.299 I srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+0.00.030.413 W srv  llama_server: -----------------
+0.00.030.413 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.030.414 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.030.414 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.030.414 W srv  llama_server: -----------------
+0.00.031.640 I srv    load_model: loading model '/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf'
+0.00.651.387 W model has unused tensor blk.64.attn_norm.weight (size = 20480 bytes) -- ignoring
+0.00.651.396 W model has unused tensor blk.64.post_attention_norm.weight (size = 20480 bytes) -- ignoring
+0.00.651.400 W model has unused tensor blk.64.attn_q.weight (size = 35389440 bytes) -- ignoring
+0.00.651.402 W model has unused tensor blk.64.attn_k.weight (size = 2949120 bytes) -- ignoring
+0.00.651.404 W model has unused tensor blk.64.attn_v.weight (size = 4300800 bytes) -- ignoring
+0.00.651.409 W model has unused tensor blk.64.attn_output.weight (size = 17694720 bytes) -- ignoring
+0.00.651.411 W model has unused tensor blk.64.attn_q_norm.weight (size = 1024 bytes) -- ignoring
+0.00.651.412 W model has unused tensor blk.64.attn_k_norm.weight (size = 1024 bytes) -- ignoring
+0.00.651.414 W model has unused tensor blk.64.ffn_gate.weight (size = 50135040 bytes) -- ignoring
+0.00.651.415 W model has unused tensor blk.64.ffn_down.weight (size = 73113600 bytes) -- ignoring
+0.00.651.417 W model has unused tensor blk.64.ffn_up.weight (size = 50135040 bytes) -- ignoring
+0.00.651.420 W model has unused tensor blk.64.nextn.eh_proj.weight (size = 29491200 bytes) -- ignoring
+0.00.651.422 W model has unused tensor blk.64.nextn.enorm.weight (size = 20480 bytes) -- ignoring
+0.00.651.424 W model has unused tensor blk.64.nextn.hnorm.weight (size = 20480 bytes) -- ignoring
+0.00.651.428 W model has unused tensor blk.64.nextn.shared_head_norm.weight (size = 20480 bytes) -- ignoring
+0.02.626.449 I cmn          init: llama threadpool init, n_threads = 16
+0.02.841.428 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 32768, kv_unified = 'false'
+0.02.845.236 I srv          init: chat template supports preserving reasoning, consider enabling it via --reasoning-preserve
+0.02.845.289 I srv  llama_server: model loaded
+0.02.845.295 I srv  llama_server: listening on http://127.0.0.1:8100
+0.03.861.172 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.03.861.337 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.03.861.377 E srv    send_error: task id = 0, error: request (41570 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.861.400 I slot      release: id  0 | task 0 | stop processing: n_tokens = 0, truncated = 0
+0.03.861.405 W srv          stop: cancel task, id_task = 0
+0.03.861.408 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78796913047
+0.03.861.459 I slot launch_slot_: id  0 | task 1 | processing task, is_child = 0
+0.03.861.463 E srv    send_error: task id = 1, error: request (41587 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.861.464 I slot      release: id  0 | task 1 | stop processing: n_tokens = 0, truncated = 0
+0.03.861.492 W srv          stop: cancel task, id_task = 1
+0.03.862.988 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78796913111
+0.03.863.082 I slot launch_slot_: id  0 | task 6 | processing task, is_child = 0
+0.03.863.087 E srv    send_error: task id = 6, error: request (41587 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.863.090 I slot      release: id  0 | task 6 | stop processing: n_tokens = 0, truncated = 0
+0.03.863.104 W srv          stop: cancel task, id_task = 6
+0.03.870.493 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78796914737
+0.03.870.536 I slot launch_slot_: id  0 | task 9 | processing task, is_child = 0
+0.03.870.540 E srv    send_error: task id = 9, error: request (41556 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.870.542 I slot      release: id  0 | task 9 | stop processing: n_tokens = 0, truncated = 0
+0.03.870.559 W srv          stop: cancel task, id_task = 9
+0.03.961.614 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78796922189
+0.03.961.750 I slot launch_slot_: id  0 | task 12 | processing task, is_child = 0
+0.03.961.765 E srv    send_error: task id = 12, error: request (41586 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.961.770 I slot      release: id  0 | task 12 | stop processing: n_tokens = 0, truncated = 0
+0.03.961.775 W srv          stop: cancel task, id_task = 12
+0.03.967.585 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 78797013417
+0.03.967.674 I slot launch_slot_: id  0 | task 15 | processing task, is_child = 0
+0.03.967.678 E srv    send_error: task id = 15, error: request (41581 tokens) exceeds the available context size (32768 tokens), try increasing it
+0.03.967.681 I slot      release: id  0 | task 15 | stop processing: n_tokens = 0, truncated = 0
+0.03.967.694 W srv          stop: cancel task, id_task = 15
+0.04.088.639 I srv    operator(): operator(): cleaning up before exit...

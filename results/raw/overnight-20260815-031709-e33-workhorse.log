@@ -1,0 +1,22 @@
+=== coding eval: e33-workhorse (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 98, 'devices': ['Vulkan0']}
+  [1/15] rle_encode             pass             119 tok, 1.55s  
+  [2/15] is_balanced            pass             88 tok, 1.18s  
+  [3/15] merge_intervals        pass             158 tok, 1.99s  
+  [4/15] parse_semver           error            344 tok, 4.05s  ValueError: Prerelease identifier can only contain letters, digits, an
+  [5/15] top_k_frequent         pass             108 tok, 1.49s  
+  [6/15] spiral_order           pass             265 tok, 3.27s  
+  [7/15] group_anagrams         pass             207 tok, 2.62s  
+  [8/15] normalize_path         wrong_answer     110 tok, 1.52s  AssertionError
+  [9/15] roman_roundtrip        pass             624 tok, 7.49s  
+  [10/15] longest_valid_parens   pass             139 tok, 1.86s  
+  [11/15] lru_cache              pass             222 tok, 2.81s  
+  [12/15] word_break             pass             236 tok, 2.96s  
+  [13/15] topo_schedule          pass             300 tok, 3.7s  
+  [14/15] min_window             pass             331 tok, 4.04s  
+  [15/15] eval_expr              wrong_answer     586 tok, 7.04s  AssertionError: expected ValueError for '1 2'
+
+e33-workhorse: 12/15 passed  by_tier={'easy': {'pass': 2, 'total': 2}, 'medium': {'pass': 5, 'total': 7}, 'hard': {'pass': 5, 'total': 6}}
+outcomes: {'error': 1, 'pass': 12, 'wrong_answer': 2}
+written: /home/agent-spark/sparkbench/results/raw/e33-20260815-031709-workhorse.json

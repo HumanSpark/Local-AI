@@ -1,0 +1,15 @@
+=== coding eval: e110-incumbent-expert2 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 254, 'max_tokens': 24576, 'needed': 24830, 'ctx': 32768, 'headroom': 7938}
+  [1/7] semver_cmp             pass             1479 tok, 121.41s  
+  [2/7] txn_update             pass             1381 tok, 114.5s  
+  [3/7] topo_stable            pass             1173 tok, 97.14s  
+  [4/7] ttl_cache              pass             2907 tok, 238.23s  
+  [5/7] interval_cover         pass             2336 tok, 191.97s  
+  [6/7] round_half_even        pass             6161 tok, 505.77s  
+  [7/7] stream_dedupe          pass             1480 tok, 122.22s  
+
+e110-incumbent-expert2: 7/7 passed  by_tier={'expert2': {'pass': 7, 'total': 7}}
+outcomes: {'pass': 7}
+written: results/raw/e110/e110-incumbent-expert2.json

@@ -1,0 +1,76 @@
+{
+  "_comment": [
+    "File: tts-bench/arms-narrator-pairs.json",
+    "Purpose: Declare the arms of the W3 British-female NARRATOR comparison as reference/clone pairs.",
+    "Project: sparkbench | Date: 2026-07-26",
+    "",
+    "Overview: Consumed by build_ab_reel.py --takes. This reel answers a different question from the",
+    "engine reel: not 'which engine', but 'which VOICE should the narrator be'. A corpus recording is",
+    "only the REFERENCE; what would ship is that reference cloned. So each voice is presented as a PAIR -",
+    "the human recording first, then the clone - because a voice that sounds right as a human recording",
+    "but does not survive cloning is not a candidate.",
+    "",
+    "COUNT, stated plainly (comparison-integrity rule 3): TWO voices, cloned by TWO engines. That is",
+    "2x2 = four clones plus two human references, six takes. The two human takes are NOT candidate arms;",
+    "they are the source material, and they read a different sentence from the clones because they are",
+    "VCTK corpus utterances, not renders of our line. Both facts are announced in the audio.",
+    "",
+    "Every clone here passed tts-bench/check_intelligibility.py at WER 0.00 against the requested line",
+    "before being placed in this manifest. That gate exists because three earlier narrator candidates",
+    "were delivered garbled after passing every duration/level/flat-factor screen.",
+    "",
+    "CosyVoice3 is excluded, and the reason is a finding rather than an omission: it cannot reproduce its",
+    "own documented example on this box (see 'excluded'). It was the ONLY engine the earlier narrator",
+    "renders used, which is why they were all garbage.",
+    "",
+    "Arm order is fixed: each voice's human reference immediately precedes its clones, and the owner's",
+    "own prior ranking (p239 first, p233 second) is deliberately INVERTED here so the voice he ranked",
+    "second is heard first, un-anchored by his own ordering."
+  ],
+
+  "line": "The businesses that win with AI won't be the ones with the biggest budgets. They'll be the ones who understood the problem before buying the tool.",
+
+  "intro": "Narrator voice comparison. Two voices, each cloned by two engines - so four clones, plus the two human recordings they were cloned from. Six takes in total, but only four are candidates. The human takes read a different sentence, because they are corpus recordings rather than renders - they are here so you can hear how faithful each clone is to its source. Cosy Voice 3 is excluded: it cannot reproduce its own documented example on this machine, and it was the only engine used for the narrator takes you rejected as garbled. Every clone here has been machine checked as intelligible English before reaching you. All takes are level matched to minus sixteen loudness units.",
+
+  "arms": [
+    {
+      "file": "stage2-sweep/out/refvoice/_parts_p233/p233_008.flac",
+      "label": "Take one. The human reference for voice A. Staffordshire, female. This is a corpus recording, not a render - it reads a different sentence.",
+      "note": "VCTK p233, utterance 008, 8.65s. CC BY 4.0. Source material, NOT a candidate arm. Owner ranked this voice second of two."
+    },
+    {
+      "file": "stage2-sweep/out/refvoice/narr2_cb_p233.wav",
+      "label": "Take two. Voice A cloned by Chatterbox, M I T licence.",
+      "note": "WER 0.00. 3.85 words/sec. exaggeration 0.5, cfg_weight 0.5 - a neutral setting; pace is a second pass on whichever voice wins."
+    },
+    {
+      "file": "stage2-sweep/out/refvoice/narr2_vox_p233.wav",
+      "label": "Take three. Voice A cloned by Vox C P M 2, Apache licence.",
+      "note": "WER 0.00. 3.69 words/sec. Cloning mode, no transcript. Owner previously called VoxCPM2 'marginally better' than Chatterbox on his own voice."
+    },
+    {
+      "file": "stage2-sweep/out/refvoice/_parts_p239/p239_008.flac",
+      "label": "Take four. The human reference for voice B. South West England, female. Also a corpus recording reading a different sentence. This is the noisier of the two references, and you heard that yourself.",
+      "note": "VCTK p239, utterance 008, 7.17s. CC BY 4.0. SNR 20.9 dB vs p233's 27.7 dB - owner's ear caught this and it measures. NOT denoised: afftdn gated quiet passages to a -inf floor and made the clone worse."
+    },
+    {
+      "file": "stage2-sweep/out/refvoice/narr2_cb_p239.wav",
+      "label": "Take five. Voice B cloned by Chatterbox, M I T licence.",
+      "note": "WER 0.00. 4.11 words/sec - the fastest take in the reel."
+    },
+    {
+      "file": "stage2-sweep/out/refvoice/narr2_vox_p239.wav",
+      "label": "Take six. Voice B cloned by Vox C P M 2, Apache licence.",
+      "note": "WER 0.00. 3.39 words/sec - the slowest take in the reel."
+    }
+  ],
+
+  "excluded": [
+    {"engine": "CosyVoice3", "reason": "NOT VIABLE on this box. Fails its own documented example verbatim - repo asset audio, repo Chinese text from example.py, garbled; the same call with our English line also garbled. Every one of its 12 renders this session was garbled across two dtype handlings, five reference clips, both inference modes and prompts of 7s/9s/12s/20.5s. Suspected cause (not proven): speech_tokenizer_v3.onnx on the CPU execution provider, which turns prompt audio into the tokens conditioning the LM."},
+    {"engine": "F5-TTS", "reason": "cc-by-nc research licence - intelligible (WER 0.04) and a useful quality yardstick, but cannot ship, so it is not offered as a narrator candidate."},
+    {"engine": "Kokoro-82M", "reason": "all voices rejected by the owner. It narrates the LABELS in this reel, which is a fixed-narrator fairness control, not a candidate arm."},
+    {"engine": "Fish s2-pro", "reason": "F50 - reproducible -48.5 dB non-speech render. Disqualified."},
+    {"engine": "MegaTTS3", "reason": "F52 - WavVAE encoder withheld, so it cannot clone our own reference audio at all."},
+    {"engine": "Zonos", "reason": "F53 - .to(cuda,bf16) never completes on gfx1151."}
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "label": "e106s1-incumbent-sampled-s201",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 24576,
+  "ctx": 32768,
+  "sampler": {
+    "temperature": 1.0,
+    "min_p": 0.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "seed": 201
+  },
+  "context_preflight": {
+    "longest_prompt_tokens": 333,
+    "max_tokens": 24576,
+    "needed": 24909,
+    "ctx": 32768,
+    "headroom": 7859
+  },
+  "thinking": "medium",
+  "request_timeout": 4396,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 718.95,
+    "p95_s": 2082.75,
+    "min_s": 161.44,
+    "max_s": 2082.75,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-09-05T10:59:57Z",
+  "wall_s": 7113.2,
+  "passed": 4,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 4,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "error": 1,
+    "pass": 4,
+    "truncated": 1,
+    "wrong_answer": 2
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 14555,
+      "prompt_tokens": 263,
+      "reasoning_chars": 42383,
+      "wall_s": 1209.49,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 9,
+        "distinct_line_ratio": 0.6189
+      }
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 6433,
+      "prompt_tokens": 233,
+      "reasoning_chars": 17736,
+      "wall_s": 528.49,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 7,
+        "distinct_line_ratio": 0.7297
+      }
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1965,
+      "prompt_tokens": 136,
+      "reasoning_chars": 6608,
+      "wall_s": 161.44,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.7263
+      }
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 3440,
+      "prompt_tokens": 193,
+      "reasoning_chars": 9924,
+      "wall_s": 281.84,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.8045
+      }
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "IndexError: list index out of range",
+      "finish_reason": "stop",
+      "completion_tokens": 19084,
+      "prompt_tokens": 148,
+      "reasoning_chars": 63877,
+      "wall_s": 1600.12,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 11,
+        "distinct_line_ratio": 0.4602
+      }
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 6381,
+      "prompt_tokens": 343,
+      "reasoning_chars": 19696,
+      "wall_s": 525.01,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 4,
+        "distinct_line_ratio": 0.5886
+      }
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=24576",
+      "finish_reason": "length",
+      "completion_tokens": 24576,
+      "prompt_tokens": 236,
+      "reasoning_chars": 77880,
+      "wall_s": 2082.75,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 7,
+        "distinct_line_ratio": 0.7632
+      }
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 8725,
+      "prompt_tokens": 230,
+      "reasoning_chars": 28460,
+      "wall_s": 718.95,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 11,
+        "distinct_line_ratio": 0.564
+      }
+    }
+  ],
+  "truncated": 1,
+  "truncation_gate": "OVERRIDDEN"
+}

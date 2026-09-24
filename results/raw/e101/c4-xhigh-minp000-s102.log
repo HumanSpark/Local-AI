@@ -1,0 +1,19 @@
+
+*** TRUNCATION GATE: 3/6 tasks hit the token cap and produced no usable output. ***
+    max_tokens=8192. These are NOT failures - they were never finished.
+    hint: raise --max-tokens (and --ctx to fit it). Verify the chat template honours
+    any effort flag before using one - an ignored flag is recorded as applied.
+=== coding eval: c4-xhigh-minp000-s102 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 124, 'max_tokens': 8192, 'needed': 8316, 'ctx': 16384, 'headroom': 8068}
+  [1/6] normalize_path         pass             5327 tok, 436.08s  
+  [2/6] roman_roundtrip        truncated        8192 tok, 673.93s  hit max_tokens=8192
+  [3/6] longest_valid_parens   pass             293 tok, 26.58s  
+  [4/6] word_break             truncated        8192 tok, 674.06s  hit max_tokens=8192
+  [5/6] min_window             pass             3737 tok, 306.41s  
+  [6/6] eval_expr              truncated        8192 tok, 675.34s  hit max_tokens=8192
+
+c4-xhigh-minp000-s102: 3/6 passed  by_tier={'medium': {'pass': 1, 'total': 2}, 'hard': {'pass': 2, 'total': 4}}
+outcomes: {'pass': 3, 'truncated': 3}
+written: results/raw/e101/c4-xhigh-minp000-s102.json

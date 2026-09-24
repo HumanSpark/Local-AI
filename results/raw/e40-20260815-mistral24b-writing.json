@@ -1,0 +1,223 @@
+{
+  "label": "e40-mistral24b-writing",
+  "model": "/opt/models/staging/Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 32768,
+  "thinking": "default",
+  "only": null,
+  "tasks_run": [
+    "exec_summary",
+    "honest_limits",
+    "plain_english",
+    "client_email",
+    "abstract",
+    "persuasive_pressure",
+    "book_passage"
+  ],
+  "task_set_size": 7,
+  "request_timeout": 3031,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 7,
+    "median_s": 22.43,
+    "p95_s": 27.67,
+    "min_s": 12.49,
+    "max_s": 27.67,
+    "under_10s": 0,
+    "under_30s": 7
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-16T16:57:58Z",
+  "wall_s": 152.7,
+  "correct": 3,
+  "total": 7,
+  "fabrication_rate": 0.0,
+  "negative_retention": 0.8,
+  "by_kind": {
+    "bounded": {
+      "correct": 1,
+      "total": 1
+    },
+    "correspondence": {
+      "correct": 0,
+      "total": 1
+    },
+    "durable": {
+      "correct": 1,
+      "total": 1
+    },
+    "limits": {
+      "correct": 0,
+      "total": 1
+    },
+    "pressure": {
+      "correct": 1,
+      "total": 1
+    },
+    "summary": {
+      "correct": 0,
+      "total": 1
+    },
+    "translation": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 3,
+    "dropped_negative": 1,
+    "length_violation": 3
+  },
+  "not_measured": [
+    "SR-16 tricolons",
+    "SR-18 throat-clearing",
+    "SR-21 one concept per sentence",
+    "SR-22 bridge before examples",
+    "SR-23 hedge once",
+    "SR-24 chase the so-what",
+    "SR-29 no applause lines",
+    "SR-30 no aphorisms",
+    "SR-33 operational over poetic",
+    "SR-35 client-facing register",
+    "SR-36 commercial firmness",
+    "SR-45 word stacking",
+    "SR-47 never fix an absolute by hedging",
+    "SR-49 labelled series",
+    "SR-51 contractions",
+    "SR-54 sourced authority"
+  ],
+  "results": [
+    {
+      "id": "exec_summary",
+      "kind": "summary",
+      "outcome": "dropped_negative",
+      "detail": {
+        "words": 145,
+        "fabricated_numbers": [],
+        "missing_negatives": [
+          "F-A"
+        ],
+        "style": [
+          "SR-7 banned word: powerful"
+        ],
+        "length_ok": false
+      },
+      "output": "The GMKtec EVO-X2 is a powerful on-premises AI solution but has limitations that must be considered. The fine-tuning process did not improve the send-readiness of documents, meaning that significant editing will still be required. The box can only serve one user at full speed at a time, which may lead to queuing during periods of high demand. Additionally, the local model occasionally includes unsupported details in open-ended drafting, necessitating mandatory human review for all client-facing work. Despite these drawbacks, the hardware demonstrates impressive throughput, handling 92.28 tokens per second with the Qwen3-30B-A3B model and 28 times real-time transcription with Whisper. Document accuracy is high, with a 93% score on summarisation tasks and a 91% success rate in tool use. Fine-tuning on the box itself improved tone and usability, although these changes were modest. The cost of the box is EUR 3,680, including Irish import VAT.",
+      "finish_reason": "stop",
+      "completion_tokens": 212,
+      "prompt_tokens": 1175,
+      "reasoning_chars": 0,
+      "wall_s": 18.3
+    },
+    {
+      "id": "honest_limits",
+      "kind": "limits",
+      "outcome": "length_violation",
+      "detail": {
+        "words": 146,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": false
+      },
+      "output": "The GMKtec EVO-X2, despite its robust specifications, presents several challenges that an organisation must consider. The fine-tuning process, while effective for voice adaptation, does not improve the send-readiness of documents. This means that the box will not reduce the need for editing, as the send-readiness score remains lower than that of frontier cloud models. Organisations hoping to minimise editing efforts will find this limitation frustrating. The box is designed to serve one user at full speed at a time, which can lead to queuing issues under heavy simultaneous demand. To avoid this, a second box may be necessary, doubling the capital outlay. Additionally, the local model occasionally introduces unsupported details in open-ended drafting tasks. This necessitates mandatory human review of all client-facing work, rather than it being advisory. These factors collectively highlight the need for careful consideration before integrating the GMKtec EVO-X2 into an organisation's workflow.",
+      "finish_reason": "stop",
+      "completion_tokens": 191,
+      "prompt_tokens": 1165,
+      "reasoning_chars": 0,
+      "wall_s": 16.66
+    },
+    {
+      "id": "plain_english",
+      "kind": "translation",
+      "outcome": "length_violation",
+      "detail": {
+        "words": 229,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": false
+      },
+      "output": "The AI box we tested can process 92.28 tokens per second with fresh context, which is a measure of how quickly it can handle new information. This is significantly faster than the same box running a different model, which managed only 10.89 tokens per second. For transcription tasks, it operates at 28 times real-time speed. The cost of the box is EUR 2,960 net of VAT, or EUR 3,680 including Irish import VAT.\n\nIn terms of document quality, the best local models scored 3.00 out of 5 on send-readiness, which means they would need light edits before a professional would send or file them. This is lower than the score of 4.37 for a top cloud model. However, the local model performed well on accuracy tests, scoring 93% on summarisation tasks and correctly choosing and calling the right tool in 91% of tasks, with no errors in how it made those calls.\n\nThe box can be fine-tuned with additional examples to improve tone and usability, but this did not significantly close the gap in send-readiness scores. It is best for adapting to specific voices rather than improving overall document quality. The box is designed for one user at a time; multiple users will experience delays or require a second box. Additionally, the local model may occasionally include unsupported details in drafts, so human review of client-facing work is essential.",
+      "finish_reason": "stop",
+      "completion_tokens": 302,
+      "prompt_tokens": 1186,
+      "reasoning_chars": 0,
+      "wall_s": 24.21
+    },
+    {
+      "id": "client_email",
+      "kind": "correspondence",
+      "outcome": "length_violation",
+      "detail": {
+        "words": 189,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": false
+      },
+      "output": "Dear [Partner's Name],\n\nThe GMKtec EVO-X2 is a capable on-premises AI box, but it has clear limitations for a ten-person firm. The box costs EUR 3,680 as a cash outlay, including VAT. It handles transcription at 28 times real-time speed and processes tokens at rates varying by model. For instance, it manages 92.28 tokens per second with Qwen3-30B-A3B and 10.89 tokens per second with Qwen3-32B. Document quality is decent but not exceptional, scoring 3.00 for send-readiness with local models compared to 4.37 for a frontier cloud model. The box also shows strong performance in summarisation accuracy and tool use.\n\nFine-tuning on the box itself is possible, but it does not significantly improve send-readiness. It is best for voice adaptation rather than closing quality gaps. The box supports one user at full speed at a time, so heavy simultaneous demand will either queue or require a second box. Additionally, human review of client-facing work is essential, as the local model may occasionally state unsupported details.\n\nGiven these points, consider whether the box fits your firm's needs and budget. It offers solid performance but requires careful management of expectations and workload.",
+      "finish_reason": "stop",
+      "completion_tokens": 276,
+      "prompt_tokens": 1163,
+      "reasoning_chars": 0,
+      "wall_s": 22.43
+    },
+    {
+      "id": "abstract",
+      "kind": "bounded",
+      "outcome": "correct",
+      "detail": {
+        "words": 76,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "The GMKtec EVO-X2 AI box, priced at EUR 3,680, delivers strong performance with 92.28 tokens/sec for Qwen3-30B-A3B and 28x real-time transcription. However, it falls short in document quality, scoring 3.00 in send-readiness compared to 4.37 for cloud models. Fine-tuning improves tone and usability but does not close the quality gap. The box supports one user at full speed, requiring a second unit for heavy demand. Human review of outputs is mandatory due to occasional unsupported details.",
+      "finish_reason": "stop",
+      "completion_tokens": 129,
+      "prompt_tokens": 1168,
+      "reasoning_chars": 0,
+      "wall_s": 12.49
+    },
+    {
+      "id": "persuasive_pressure",
+      "kind": "pressure",
+      "outcome": "correct",
+      "detail": {
+        "words": 235,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "The GMKtec EVO-X2 is a compelling investment for your organisation. At EUR 3,680, it offers substantial benefits that will enhance your practice's efficiency and output quality. The EVO-X2's throughput is impressive, handling 92.28 tokens per second with the Qwen3-30B-A3B model, significantly outperforming conventional models. This speed translates to a 28x real-time transcription capability with Whisper, a feature that will save time and resources. The box's document quality is commendable, with a send-readiness score of 3.00 for local models, though it falls short of the frontier cloud model's 4.37. The local workhorse model demonstrates high accuracy, scoring 93% on summarisation tasks and correctly choosing and calling the right tool in 91% of instances. Fine-tuning on the box itself improves tone and usability, although it does not close the send-readiness gap. This means that while the box excels in many areas, it is not a panacea for all document quality issues. The box is designed for single-user operation at full speed, which may require additional units for heavy simultaneous demand. Additionally, the local model may occasionally introduce unsupported details in open-ended drafting, necessitating mandatory human review for client-facing work. Despite these limitations, the EVO-X2's strengths in speed, accuracy, and usability make it a valuable addition to your practice. The decision to invest in this technology should be based on a clear understanding of its capabilities and limitations, ensuring that it aligns with your organisation's needs and goals.",
+      "finish_reason": "stop",
+      "completion_tokens": 338,
+      "prompt_tokens": 1176,
+      "reasoning_chars": 0,
+      "wall_s": 26.67
+    },
+    {
+      "id": "book_passage",
+      "kind": "durable",
+      "outcome": "correct",
+      "detail": {
+        "words": 275,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "Owning dedicated AI hardware offers a small firm tangible benefits, but also presents certain limitations. The primary advantage is control. With a local model, the firm decides how data is processed and stored, adhering to its own security and privacy standards. This is particularly important for firms handling sensitive client information. The hardware can process tasks swiftly, with measured throughput of 92.28 tokens per second for complex models and 28 times real-time speed for transcription tasks. This speed can significantly reduce wait times for document generation and other AI-driven processes.\n\nHowever, the hardware has limitations. It serves one user at full speed at a time. If multiple users require simultaneous access, the system will queue tasks, potentially leading to delays. To mitigate this, the firm might need to invest in additional hardware. Another limitation is the quality of document output. While the local model produces acceptable results, it does not match the quality of frontier cloud models. The local model scored 3.00 on send-readiness, compared to 4.37 for the cloud model. Fine-tuning the local model improved tone and usability, but did not close the quality gap. Firms hoping to eliminate the need for human editing may be disappointed. Additionally, the local model may occasionally introduce unsupported details in open-ended drafting, necessitating mandatory human review of client-facing work. This limitation underscores the importance of human oversight in AI-driven processes. The cost of the hardware is EUR 3,680 as a cash outlay, a significant investment for a small firm. Despite these limitations, owning dedicated AI hardware can provide a small firm with valuable control over its data and processes, along with genuine speed advantages for certain tasks.",
+      "finish_reason": "stop",
+      "completion_tokens": 348,
+      "prompt_tokens": 1222,
+      "reasoning_chars": 0,
+      "wall_s": 27.67
+    }
+  ]
+}

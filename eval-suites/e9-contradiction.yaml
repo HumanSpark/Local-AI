@@ -1,0 +1,41 @@
+# File: e9-contradiction.yaml
+# Purpose: E9 - adversarial contradiction detection over the 12K log with a planted erratum.
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: data/long-log-contradiction.txt = the pilot's 12K excerpt
+# plus an appended erratum superseding Qwen3-14B's tg128 (24.39 early ->
+# 25.11 late). Three tasks: detect, enumerate both values, reason about
+# which is current. Registered prediction: this separates where
+# retrieval did not.
+
+description: "sparkbench E9 - contradiction detection"
+
+providers:
+  - id: openai:chat:local-model
+    config:
+      apiBaseUrl: http://127.0.0.1:8100/v1
+      apiKey: dummy-key
+      temperature: 0
+      max_tokens: 400
+
+prompts:
+  - "{{prelude}}{{task}}"
+
+defaultTest:
+  vars:
+    prelude: file://data/long-log-contradiction.txt
+
+tests:
+  - description: e9-detect
+    vars: { task: "\n\nDoes the log above contain any internal contradiction between two recorded values for the same measurement? Answer yes or no, and if yes, name the model concerned." }
+    assert:
+      - { type: icontains, value: "yes" }
+      - { type: icontains, value: "14B" }
+  - description: e9-enumerate
+    vars: { task: "\n\nThe log above records two different tg128 values for Qwen3-14B at depth 0. List both values." }
+    assert:
+      - { type: javascript, value: "output.includes('24.39') && output.includes('25.11')" }
+  - description: e9-resolve
+    vars: { task: "\n\nAccording to the log's own text, which Qwen3-14B tg128 value should be treated as current, and why? Answer with the number and a one-sentence reason." }
+    assert:
+      - { type: javascript, value: "output.includes('25.11')" }

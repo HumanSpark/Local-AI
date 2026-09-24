@@ -1,0 +1,52 @@
+[07:25:01] PAUSE gateway for quality-pipeline batch
+[07:25:06] --- pipeline: qwen3-30b-workhorse ---
+[07:25:06] === PIPELINE qwen3-30b-workhorse : Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf ===
+[07:25:16]   server healthy after 8s
+[07:26:46]   draft-client-letter-delay 90s  strips=[] defects=10 sel=2
+[07:28:20]   summarise-agreement-plain 94s  strips=[] defects=9 sel=2
+[07:29:49]   extract-engagement-terms 89s  strips=['preamble'] defects=8 sel=2
+[07:32:09]   attendance-note 139s  strips=[] defects=12 sel=1
+[07:34:08]   review-flag-clauses 120s  strips=['preamble'] defects=6 sel=2
+[07:35:08]   client-email-chase 59s  strips=[] defects=3 sel=2
+[07:37:21]   explain-terms-plain 133s  strips=['postamble'] defects=5 sel=2
+[07:38:23]   status-update 62s  strips=[] defects=3 sel=2
+[07:40:46]   engagement-letter-draft 143s  strips=[] defects=10 sel=1
+[07:41:06]   decline-conflict 20s  strips=[] defects=0 sel=2
+[07:41:08]   judging all rungs (frontier)...
+
+=== PIPELINE ABLATION: qwen3-30b-workhorse ===
+  rung                     use  faith  compl  tone  overall  n
+  L0_baseline             2.60   3.30   4.20  4.20     3.17  10
+  L1_cleanup              2.60   3.30   4.10  4.30     3.38  10
+  L2_critique_revise      2.80   3.80   3.80  4.20     3.38  10
+  L3_best_of_n            2.90   3.30   4.00  4.30     3.40  10
+  --> usability lift L0->L3: 2.60 -> 2.90 (+0.30)
+  reference: Mistral-24B baseline ~3.0 | frontier gpt-5.6-sol ~4.37
+[07:43:23] --- qwen3-30b-workhorse done (rc=0) ---
+[07:43:26] --- pipeline: mistral-24b ---
+[07:43:26] === PIPELINE mistral-24b : Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M.gguf ===
+[07:43:36]   server healthy after 8s
+[07:48:15]   draft-client-letter-delay 279s  strips=[] defects=3 sel=0
+[07:55:18]   summarise-agreement-plain 422s  strips=['postamble'] defects=7 sel=0
+[08:01:01]   extract-engagement-terms 343s  strips=['preamble'] defects=5 sel=1
+[08:09:38]   attendance-note 517s  strips=[] defects=0 sel=0
+[08:15:43]   review-flag-clauses 365s  strips=['preamble'] defects=3 sel=1
+[08:20:51]   client-email-chase 308s  strips=[] defects=23 sel=1
+[08:28:48]   explain-terms-plain 477s  strips=[] defects=9 sel=1
+[08:32:17]   status-update 209s  strips=[] defects=3 sel=1
+[08:38:15]   engagement-letter-draft 358s  strips=[] defects=7 sel=1
+[08:40:18]   decline-conflict 124s  strips=[] defects=2 sel=2
+[08:40:21]   judging all rungs (frontier)...
+
+=== PIPELINE ABLATION: mistral-24b ===
+  rung                     use  faith  compl  tone  overall  n
+  L0_baseline             3.40   4.30   4.10  4.50     3.83  10
+  L1_cleanup              3.10   4.40   3.70  4.40     3.80  10
+  L2_critique_revise      2.60   4.10   3.60  3.90     3.30  10
+  L3_best_of_n            3.00   4.50   3.90  4.20     3.67  10
+  --> usability lift L0->L3: 3.40 -> 3.00 (-0.40)
+  reference: Mistral-24B baseline ~3.0 | frontier gpt-5.6-sol ~4.37
+[08:42:35] --- mistral-24b done (rc=0) ---
+[08:42:38] PIPELINE BATCH DONE
+[08:42:38] RESTORE gateway
+active

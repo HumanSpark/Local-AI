@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "label": "e86-p1-c3",
+    "bank": "kw",
+    "pack": "s",
+    "item_packs": [
+      "s"
+    ],
+    "pack_chars": 55665,
+    "pack_docs": [
+      "memory-edge-deadlock",
+      "decode-hang",
+      "harness-rules",
+      "qwen38-report"
+    ],
+    "measured_prompt_tokens": 14717,
+    "ctx": 98304,
+    "max_tokens": 1024,
+    "system": "You are answering questions about the documents supplied below. Answer from those documents only. If the documents do not settle a question, say so explicitly rather than guessing. Be specific: give figures, names and dates exactly as they appear. Keep answers under 200 words.",
+    "tools_offered": false,
+    "started_at": "2026-08-29T07:44:40+0100",
+    "kernel": "7.0.0-29-generic"
+  },
+  "records": [
+    {
+      "id": "K01",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two different amdgpu-related failures are described in this material. For EACH, state the VRAM figure observed, and say whether a hard power cycle was required.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Failure 1: amdgpu SDMA-suballocator deadlock (memory-edge-deadlock.md)**  \n- **VRAM figure observed:** Exactly **2.00 GiB** (2,147,483,648 B)  \n- **Hard power cycle required:** Yes  \n\n**Failure 2: gpt-oss-120b decode hang (2026-08-19-gptoss120b-decode-hang.md)**  \n- **VRAM figure observed:** **1.90 GiB**, never parked  \n- **Hard power cycle required:** No (process was killed normally with `pkill`)",
+      "ttft_s": 0.3,
+      "wall_s": 2.68,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 142,
+        "prompt_tokens": 14768,
+        "total_tokens": 14910,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14768,
+      "completion_tokens": 142,
+      "answer_chars": 402,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K02",
+      "category": "implication",
+      "pack": "s",
+      "question": "A colleague proposes a monitor that raises an alarm whenever the llama-server process is in D (uninterruptible) state. Using this material, explain why that is a defect rather than a useful alarm.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The proposed monitor is a defect because it would raise a false alarm during normal model loading. According to the evidence in *docs/memory-edge-deadlock.md*, the `wchan` `folio_wait_bit_common` \u2014 a normal page-cache wait \u2014 is the typical state during disk reads, and this is **not** a deadlock. The document explicitly states that the guard chain initially reported `SUSPICIOUS` throughout normal loading due to this `D` state, which trained operators to ignore the alarm. This is worse than no check, as it desensitizes users to real issues. The only true deadlock signature is `drm_suballoc_new` in `wchan`, not any `D` state. Therefore, monitoring for `D` state alone is unreliable and counterproductive.",
+      "ttft_s": 0.34,
+      "wall_s": 3.02,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 160,
+        "prompt_tokens": 14775,
+        "total_tokens": 14935,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14775,
+      "completion_tokens": 160,
+      "answer_chars": 709,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K05",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Based only on this material, what is the measured per-load probability that gpt-oss-120b will hang? Give the figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The material does not provide a measured per-load probability that gpt-oss-120b will hang. It reports one observed incident (2026-08-19) where the model hung during decode, but this is described as a single occurrence with no statistical basis for calculating a probability. Therefore, no figure can be given.",
+      "ttft_s": 0.35,
+      "wall_s": 1.56,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 73,
+        "prompt_tokens": 14765,
+        "total_tokens": 14838,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14765,
+      "completion_tokens": 73,
+      "answer_chars": 309,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    }
+  ]
+}

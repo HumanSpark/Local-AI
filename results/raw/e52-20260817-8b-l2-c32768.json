@@ -1,0 +1,229 @@
+{
+  "label": "e52-8b-l2-c32768",
+  "tier": "l2",
+  "distractors": null,
+  "thinking": "default",
+  "model": "/opt/models/staging/Qwen3-8B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 32768,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "server_extra": "",
+  "cloud_spend": null,
+  "latency": {
+    "n": 12,
+    "median_s": 21.81,
+    "p95_s": 113.08,
+    "min_s": 9.13,
+    "max_s": 113.08,
+    "under_10s": 2,
+    "under_30s": 8
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-17T11:56:52Z",
+  "wall_s": 532.2,
+  "pack_chars": 13221,
+  "context_preflight": {
+    "longest_prompt_tokens": 3519,
+    "max_tokens": 4096,
+    "needed": 7615,
+    "ctx": 32768,
+    "headroom": 25153
+  },
+  "correct": 9,
+  "total": 12,
+  "citation_valid": 9,
+  "over_claims": 0,
+  "over_claim_rate": 0.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "date_effective": {
+      "correct": 2,
+      "total": 3
+    },
+    "revocation": {
+      "correct": 2,
+      "total": 2
+    },
+    "precedence": {
+      "correct": 0,
+      "total": 2
+    },
+    "multihop": {
+      "correct": 3,
+      "total": 3
+    },
+    "exhaustive": {
+      "correct": 1,
+      "total": 1
+    },
+    "underspecified": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 9,
+    "truncated": 3
+  },
+  "results": [
+    {
+      "id": "D1",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 2.1",
+      "answer": "42000",
+      "finish_reason": "stop",
+      "completion_tokens": 503,
+      "prompt_tokens": 3450,
+      "reasoning_chars": 1637,
+      "wall_s": 16.95
+    },
+    {
+      "id": "D2",
+      "category": "date_effective",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 4096,
+      "prompt_tokens": 3453,
+      "reasoning_chars": 12616,
+      "wall_s": 112.55
+    },
+    {
+      "id": "D3",
+      "category": "date_effective",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3 2.1",
+      "answer": "51000",
+      "finish_reason": "stop",
+      "completion_tokens": 346,
+      "prompt_tokens": 3450,
+      "reasoning_chars": 1014,
+      "wall_s": 9.46
+    },
+    {
+      "id": "V1",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3 1.1 and AMD-3 3.1",
+      "answer": "24",
+      "finish_reason": "stop",
+      "completion_tokens": 343,
+      "prompt_tokens": 3465,
+      "reasoning_chars": 1228,
+      "wall_s": 9.13
+    },
+    {
+      "id": "V2",
+      "category": "revocation",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3 clause 3",
+      "answer": "YES",
+      "finish_reason": "stop",
+      "completion_tokens": 382,
+      "prompt_tokens": 3450,
+      "reasoning_chars": 1489,
+      "wall_s": 10.12
+    },
+    {
+      "id": "P1",
+      "category": "precedence",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 4096,
+      "prompt_tokens": 3457,
+      "reasoning_chars": 15763,
+      "wall_s": 112.78
+    },
+    {
+      "id": "P2",
+      "category": "precedence",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 4096,
+      "prompt_tokens": 3454,
+      "reasoning_chars": 16468,
+      "wall_s": 113.08
+    },
+    {
+      "id": "M1",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "MSA-2024 clause 2.1 (original rate EUR 42,000/month for 9 months in 2024)",
+      "answer": "378000",
+      "finish_reason": "stop",
+      "completion_tokens": 806,
+      "prompt_tokens": 3464,
+      "reasoning_chars": 2321,
+      "wall_s": 21.81
+    },
+    {
+      "id": "M2",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-3:2.1, AMD-1:2.1, MSA-2024:2.1",
+      "answer": "445500",
+      "finish_reason": "stop",
+      "completion_tokens": 2917,
+      "prompt_tokens": 3457,
+      "reasoning_chars": 8080,
+      "wall_s": 79.17
+    },
+    {
+      "id": "M3",
+      "category": "multihop",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "AMD-2:4.1, AMD-3:4.2",
+      "answer": "24.5",
+      "finish_reason": "stop",
+      "completion_tokens": 894,
+      "prompt_tokens": 3465,
+      "reasoning_chars": 2436,
+      "wall_s": 23.79
+    },
+    {
+      "id": "N1",
+      "category": "exhaustive",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 386,
+      "prompt_tokens": 3527,
+      "reasoning_chars": 1560,
+      "wall_s": 10.35
+    },
+    {
+      "id": "Z1",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 410,
+      "prompt_tokens": 3443,
+      "reasoning_chars": 1810,
+      "wall_s": 10.83
+    }
+  ]
+}

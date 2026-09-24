@@ -1,0 +1,173 @@
+{
+  "analysis_version": "e79-agg-v1-2026-08-28",
+  "arms": {
+    "e79-a": {
+      "tools": "off",
+      "schema_version": null,
+      "thinking": "default",
+      "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+      "total_correct": 13,
+      "total_tool_calls": 0,
+      "rule9_breach_acknowledged": true,
+      "band_R_correct": 3,
+      "band_E_correct": 10,
+      "band_R_outcomes": {
+        "correct": 3,
+        "wrong": 7,
+        "off_by_calendar": 2
+      },
+      "band_E_outcomes": {
+        "correct": 10,
+        "wrong": 1,
+        "over_claim": 1
+      },
+      "band_R_items_calling": 0,
+      "band_E_items_calling": 0
+    },
+    "e79-b": {
+      "tools": "on",
+      "schema_version": "v2",
+      "thinking": "default",
+      "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+      "total_correct": 11,
+      "total_tool_calls": 83,
+      "rule9_breach_acknowledged": true,
+      "band_R_correct": 6,
+      "band_E_correct": 5,
+      "band_R_outcomes": {
+        "correct": 6,
+        "off_by_calendar": 2,
+        "wrong": 4
+      },
+      "band_E_outcomes": {
+        "correct": 5,
+        "format_error": 5,
+        "transport_failed": 1,
+        "over_claim": 1
+      },
+      "band_R_items_calling": 12,
+      "band_E_items_calling": 10
+    },
+    "e79-c": {
+      "tools": "preamble-only",
+      "schema_version": null,
+      "thinking": "default",
+      "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+      "total_correct": 13,
+      "total_tool_calls": 0,
+      "rule9_breach_acknowledged": true,
+      "band_R_correct": 3,
+      "band_E_correct": 10,
+      "band_R_outcomes": {
+        "correct": 3,
+        "off_by_calendar": 3,
+        "wrong": 6
+      },
+      "band_E_outcomes": {
+        "correct": 10,
+        "wrong": 1,
+        "over_claim": 1
+      },
+      "band_R_items_calling": 0,
+      "band_E_items_calling": 0
+    },
+    "e79-d": {
+      "tools": "on",
+      "schema_version": "v2",
+      "thinking": "low",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "total_correct": 22,
+      "total_tool_calls": 24,
+      "rule9_breach_acknowledged": true,
+      "band_R_correct": 10,
+      "band_E_correct": 12,
+      "band_R_outcomes": {
+        "correct": 10,
+        "off_by_calendar": 2
+      },
+      "band_E_outcomes": {
+        "correct": 12
+      },
+      "band_R_items_calling": 12,
+      "band_E_items_calling": 0
+    }
+  },
+  "comparisons": [
+    {
+      "baseline": "e79-a",
+      "candidate": "e79-b",
+      "conversions": {
+        "R": [
+          "R03",
+          "R04",
+          "R05"
+        ],
+        "E": [
+          "E04"
+        ]
+      },
+      "capability_regressions": {
+        "R": [],
+        "E": [
+          "E02",
+          "E03",
+          "E07",
+          "E08",
+          "E10"
+        ]
+      },
+      "infrastructure_regressions": {
+        "R": [],
+        "E": [
+          "E09"
+        ]
+      }
+    },
+    {
+      "baseline": "e79-a",
+      "candidate": "e79-c",
+      "conversions": {
+        "R": [],
+        "E": []
+      },
+      "capability_regressions": {
+        "R": [],
+        "E": []
+      },
+      "infrastructure_regressions": {
+        "R": [],
+        "E": []
+      }
+    },
+    {
+      "baseline": "e79-a",
+      "candidate": "e79-d",
+      "conversions": {
+        "R": [
+          "R03",
+          "R04",
+          "R05",
+          "R07",
+          "R08",
+          "R10",
+          "R11",
+          "R12"
+        ],
+        "E": [
+          "E04",
+          "E11"
+        ]
+      },
+      "capability_regressions": {
+        "R": [
+          "R09"
+        ],
+        "E": []
+      },
+      "infrastructure_regressions": {
+        "R": [],
+        "E": []
+      }
+    }
+  ]
+}

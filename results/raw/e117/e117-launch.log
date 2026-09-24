@@ -1,0 +1,16 @@
+=== coding eval: e117-server-path-medium (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v --reasoning-effort medium
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 24576, 'needed': 24909, 'ctx': 32768, 'headroom': 7859}
+  [1/8] glob_match             pass             13836 tok, 1148.52s  
+  [2/8] round_decimal          pass             6279 tok, 515.67s  
+  [3/8] kmerge                 pass             4692 tok, 384.42s  
+  [4/8] wrap                   pass             2386 tok, 195.79s  
+  [5/8] sliding_median         wrong_answer     15400 tok, 1283.09s  AssertionError: 1
+  [6/8] apply_patch            pass             10439 tok, 863.61s  
+  [7/8] interval_map           pass             14916 tok, 1242.0s  
+  [8/8] parse_csv              pass             6848 tok, 562.83s  
+
+e117-server-path-medium: 7/8 passed  by_tier={'expert': {'pass': 7, 'total': 8}}
+outcomes: {'pass': 7, 'wrong_answer': 1}
+written: results/raw/e117/e117-server-path-medium.json

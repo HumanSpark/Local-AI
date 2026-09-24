@@ -1,0 +1,109 @@
+[2026-08-31T20:29:08+01:00] === preflight ===
+[2026-08-31T20:29:08+01:00] preflight OK
+[2026-08-31T20:29:08+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T20:29:08+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T20:29:08+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T20:29:08+01:00] --- BASE / pr1 ---
+=== PS eval PR1: e93-BASE (local) ===
+pack: 1,679 chars over 7 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 589, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 448, in main
+    [PROMPT_TEMPLATE.format(pack=pack, question=q["question"])
+                                                ~^^^^^^^^^^^^
+KeyError: 'question'
+[2026-08-31T20:29:12+01:00] BASE/pr1 rc=1 wall=4s -> /home/agent-spark/sparkbench/results/raw/e93/e93-BASE-pr1.json
+[2026-08-31T20:29:12+01:00] WARNING: BASE/pr1 exited 1; continuing
+[2026-08-31T20:29:12+01:00] --- ABL / pr1 ---
+=== PS eval PR1: e93-ABL (local) ===
+pack: 1,679 chars over 7 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Huihui-Qwen3.8-27B-abliterated-Q4_K.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 589, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 448, in main
+    [PROMPT_TEMPLATE.format(pack=pack, question=q["question"])
+                                                ~^^^^^^^^^^^^
+KeyError: 'question'
+[2026-08-31T20:29:17+01:00] ABL/pr1 rc=1 wall=5s -> /home/agent-spark/sparkbench/results/raw/e93/e93-ABL-pr1.json
+[2026-08-31T20:29:17+01:00] WARNING: ABL/pr1 exited 1; continuing
+[2026-08-31T20:29:17+01:00] --- BASE / l4 ---
+=== PS eval L4: e93-BASE (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2648, 'max_tokens': 4096, 'needed': 6744, 'ctx': 16384, 'headroom': 9640}
+  [1/15] P1  statutory_period correct           cite=ok 45.05s  28 February 2026
+  [2/15] P2  statutory_period correct           cite=ok 41.52s  30 April 2026
+  [3/15] P3  statutory_period correct           cite=ok 35.64s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 33.96s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    correct           cite=ok 146.65s  EUR 493.99
+  [6/15] N1  notice_period    correct           cite=ok 37.31s  30 November 2026
+  [7/15] N2  notice_period    off_by_calendar   cite=ok 54.59s  1 December 2026
+  [8/15] F1  fee_basis        correct           cite=ok 72.61s  EUR 106,800
+  [9/15] S1  survival         correct           cite=ok 21.39s  (d)
+  [10/15] D1  defect_find      correct           cite=ok 48.18s  (d)
+  [11/15] D2  defect_find      correct           cite=ok 31.75s  4
+  [12/15] D3  defect_find      correct           cite=ok 42.86s  EUR 650,000
+  [13/15] X1  defect_absent    correct           cite=ok 106.01s  NO
+  [14/15] X2  defect_absent    correct           cite=ok 49.07s  NO
+  [15/15] U1  underspecified   correct           cite=ok 34.02s  NOT_IN_PACK
+
+e93-BASE: 14/15 correct, citations 15/15
+OVER-CLAIM 0/1 | STALE 0/0 | PREMATURE 0
+by_category: {'statutory_period': {'correct': 3, 'total': 3}, 'breach_clock': {'correct': 1, 'total': 1}, 'interest_calc': {'correct': 1, 'total': 1}, 'notice_period': {'correct': 1, 'total': 2}, 'fee_basis': {'correct': 1, 'total': 1}, 'survival': {'correct': 1, 'total': 1}, 'defect_find': {'correct': 3, 'total': 3}, 'defect_absent': {'correct': 2, 'total': 2}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 14, 'off_by_calendar': 1}
+written: /home/agent-spark/sparkbench/results/raw/e93/e93-BASE-l4.json
+[2026-08-31T20:42:42+01:00] BASE/l4 rc=0 wall=805s -> /home/agent-spark/sparkbench/results/raw/e93/e93-BASE-l4.json
+[2026-08-31T20:42:42+01:00] --- ABL / l4 ---
+=== PS eval L4: e93-ABL (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Huihui-Qwen3.8-27B-abliterated-Q4_K.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2648, 'max_tokens': 4096, 'needed': 6744, 'ctx': 16384, 'headroom': 9640}
+  [1/15] P1  statutory_period correct           cite=ok 42.86s  28 February 2026
+  [2/15] P2  statutory_period correct           cite=ok 44.78s  30 April 2026
+  [3/15] P3  statutory_period correct           cite=ok 38.0s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 39.83s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    correct           cite=ok 143.53s  EUR 493.99
+  [6/15] N1  notice_period    correct           cite=ok 29.62s  30 November 2026
+  [7/15] N2  notice_period    off_by_calendar   cite=ok 63.11s  1 December 2026
+  [8/15] F1  fee_basis        correct           cite=ok 88.4s  EUR 106,800
+  [9/15] S1  survival         correct           cite=ok 23.35s  (d)
+  [10/15] D1  defect_find      correct           cite=ok 59.46s  (d)
+  [11/15] D2  defect_find      correct           cite=ok 34.95s  4
+  [12/15] D3  defect_find      correct           cite=ok 41.63s  EUR 650,000
+  [13/15] X1  defect_absent    correct           cite=ok 131.17s  NO
+  [14/15] X2  defect_absent    correct           cite=ok 52.54s  NO
+  [15/15] U1  underspecified   correct           cite=ok 33.78s  NOT_IN_PACK
+
+e93-ABL: 14/15 correct, citations 15/15
+OVER-CLAIM 0/1 | STALE 0/0 | PREMATURE 0
+by_category: {'statutory_period': {'correct': 3, 'total': 3}, 'breach_clock': {'correct': 1, 'total': 1}, 'interest_calc': {'correct': 1, 'total': 1}, 'notice_period': {'correct': 1, 'total': 2}, 'fee_basis': {'correct': 1, 'total': 1}, 'survival': {'correct': 1, 'total': 1}, 'defect_find': {'correct': 3, 'total': 3}, 'defect_absent': {'correct': 2, 'total': 2}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 14, 'off_by_calendar': 1}
+written: /home/agent-spark/sparkbench/results/raw/e93/e93-ABL-l4.json
+[2026-08-31T20:57:13+01:00] ABL/l4 rc=0 wall=871s -> /home/agent-spark/sparkbench/results/raw/e93/e93-ABL-l4.json
+[2026-08-31T20:57:13+01:00] === E93 arms done in 1685s; raw in /home/agent-spark/sparkbench/results/raw/e93 ===
+[2026-08-31T20:57:13+01:00] NOTE: BASE l4 duplicates E91 arm B (same build, same day). Kept as an
+[2026-08-31T20:57:13+01:00]   in-experiment replicate - F96 says within-process reps are not
+[2026-08-31T20:57:13+01:00]   independent, but these are separate processes, so it is a real one.
+[2026-08-31T20:57:13+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T20:57:13+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1784389 
+[2026-08-31T20:57:13+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T20:57:13+01:00] E93 finished, rc=0

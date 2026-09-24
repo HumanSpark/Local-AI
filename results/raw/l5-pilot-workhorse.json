@@ -1,0 +1,409 @@
+{
+  "label": "l5-workhorse",
+  "tier": "l5",
+  "distractors": null,
+  "thinking": "default",
+  "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 16384,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "server_extra": "-fa on",
+  "rule9_breach_acknowledged": true,
+  "rule9_busy_gpu": [
+    {
+      "process": "llama-server",
+      "pids": [
+        "282349"
+      ]
+    }
+  ],
+  "cloud_spend": null,
+  "latency": {
+    "n": 24,
+    "median_s": 0.55,
+    "p95_s": 0.84,
+    "min_s": 0.31,
+    "max_s": 2.77,
+    "under_10s": 24,
+    "under_30s": 24
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-08-28T14:18:35Z",
+  "wall_s": 19.6,
+  "pack_chars": 8807,
+  "context_preflight": {
+    "longest_prompt_tokens": 2453,
+    "max_tokens": 4096,
+    "needed": 6549,
+    "ctx": 16384,
+    "headroom": 9835
+  },
+  "correct": 12,
+  "total": 24,
+  "citation_valid": 20,
+  "over_claims": 1,
+  "over_claim_rate": 0.25,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "payment_clock": {
+      "correct": 1,
+      "total": 4
+    },
+    "statutory_period": {
+      "correct": 2,
+      "total": 4
+    },
+    "acceptance_window": {
+      "correct": 0,
+      "total": 3
+    },
+    "composition": {
+      "correct": 0,
+      "total": 1
+    },
+    "which_instrument": {
+      "correct": 2,
+      "total": 3
+    },
+    "precedence": {
+      "correct": 2,
+      "total": 2
+    },
+    "exhaustive": {
+      "correct": 0,
+      "total": 1
+    },
+    "conflict": {
+      "correct": 2,
+      "total": 2
+    },
+    "underspecified": {
+      "correct": 3,
+      "total": 4
+    }
+  },
+  "outcome_counts": {
+    "correct": 12,
+    "off_by_calendar": 2,
+    "over_claim": 1,
+    "partial": 1,
+    "wrong": 8
+  },
+  "results": [
+    {
+      "id": "R01",
+      "category": "payment_clock",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "FA-2025, clause 5.1",
+      "answer": "11 June 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 30,
+      "prompt_tokens": 2430,
+      "reasoning_chars": 0,
+      "wall_s": 2.77
+    },
+    {
+      "id": "R02",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-1 S.2; FRAMEWORK SERVICES AGREEMENT clause 4.3",
+      "answer": "30 June 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 35,
+      "prompt_tokens": 2445,
+      "reasoning_chars": 0,
+      "wall_s": 0.68
+    },
+    {
+      "id": "R03",
+      "category": "acceptance_window",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "FA-2025 clause 4.1, FA-2025 clause 4.2, CAL-2026",
+      "answer": "22 March 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 48,
+      "prompt_tokens": 2448,
+      "reasoning_chars": 0,
+      "wall_s": 0.84
+    },
+    {
+      "id": "R04",
+      "category": "acceptance_window",
+      "outcome": "off_by_calendar",
+      "citation_ok": true,
+      "citation": "FA-2025 clause 4.1, FA-2025 clause 4.2, CAL-2026",
+      "answer": "12 May 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 48,
+      "prompt_tokens": 2448,
+      "reasoning_chars": 0,
+      "wall_s": 0.84
+    },
+    {
+      "id": "R05",
+      "category": "acceptance_window",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "FA-2025, clause 4.1 and 4.2; CAL-2026",
+      "answer": "10 April 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 42,
+      "prompt_tokens": 2449,
+      "reasoning_chars": 0,
+      "wall_s": 0.77
+    },
+    {
+      "id": "R06",
+      "category": "payment_clock",
+      "outcome": "off_by_calendar",
+      "citation_ok": true,
+      "citation": "FA-2025, clause 5.1 and 5.2",
+      "answer": "107",
+      "finish_reason": "stop",
+      "completion_tokens": 30,
+      "prompt_tokens": 2452,
+      "reasoning_chars": 0,
+      "wall_s": 0.63
+    },
+    {
+      "id": "R07",
+      "category": "payment_clock",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "FA-2025, clause 5.2",
+      "answer": "524.74",
+      "finish_reason": "stop",
+      "completion_tokens": 28,
+      "prompt_tokens": 2451,
+      "reasoning_chars": 0,
+      "wall_s": 0.61
+    },
+    {
+      "id": "R08",
+      "category": "payment_clock",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-1, S.1; FA-2025, 5.2; CHRON-1",
+      "answer": "110.00",
+      "finish_reason": "stop",
+      "completion_tokens": 40,
+      "prompt_tokens": 2419,
+      "reasoning_chars": 0,
+      "wall_s": 0.72
+    },
+    {
+      "id": "R09",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-1 S.3, FA-2025 clause 4.4",
+      "answer": "31 August 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 36,
+      "prompt_tokens": 2461,
+      "reasoning_chars": 0,
+      "wall_s": 0.75
+    },
+    {
+      "id": "R10",
+      "category": "statutory_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-1 S.4 and S.5",
+      "answer": "15 September 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 28,
+      "prompt_tokens": 2475,
+      "reasoning_chars": 0,
+      "wall_s": 0.66
+    },
+    {
+      "id": "R11",
+      "category": "statutory_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-1 S.5",
+      "answer": "305",
+      "finish_reason": "stop",
+      "completion_tokens": 19,
+      "prompt_tokens": 2446,
+      "reasoning_chars": 0,
+      "wall_s": 0.52
+    },
+    {
+      "id": "R12",
+      "category": "composition",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "FA-2025, clause 3.4",
+      "answer": "31 August 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 30,
+      "prompt_tokens": 2461,
+      "reasoning_chars": 0,
+      "wall_s": 0.68
+    },
+    {
+      "id": "E01",
+      "category": "which_instrument",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "CO-2",
+      "answer": "CO-2",
+      "finish_reason": "stop",
+      "completion_tokens": 15,
+      "prompt_tokens": 2397,
+      "reasoning_chars": 0,
+      "wall_s": 0.35
+    },
+    {
+      "id": "E02",
+      "category": "precedence",
+      "outcome": "correct",
+      "citation_ok": false,
+      "citation": "VAR-1",
+      "answer": "96,000",
+      "finish_reason": "stop",
+      "completion_tokens": 19,
+      "prompt_tokens": 2394,
+      "reasoning_chars": 0,
+      "wall_s": 0.4
+    },
+    {
+      "id": "E03",
+      "category": "precedence",
+      "outcome": "correct",
+      "citation_ok": false,
+      "citation": "CO-1",
+      "answer": "180,000",
+      "finish_reason": "stop",
+      "completion_tokens": 20,
+      "prompt_tokens": 2396,
+      "reasoning_chars": 0,
+      "wall_s": 0.4
+    },
+    {
+      "id": "E04",
+      "category": "which_instrument",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "FA-2025, clause 3.3",
+      "answer": "two months",
+      "finish_reason": "stop",
+      "completion_tokens": 23,
+      "prompt_tokens": 2399,
+      "reasoning_chars": 0,
+      "wall_s": 0.45
+    },
+    {
+      "id": "E05",
+      "category": "exhaustive",
+      "outcome": "partial",
+      "citation_ok": true,
+      "citation": "CO-1, CO-3",
+      "answer": "2; CO-1 and CO-3",
+      "finish_reason": "stop",
+      "completion_tokens": 26,
+      "prompt_tokens": 2404,
+      "reasoning_chars": 0,
+      "wall_s": 0.55
+    },
+    {
+      "id": "E06",
+      "category": "conflict",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "CHRON-1",
+      "answer": "11 March 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 22,
+      "prompt_tokens": 2399,
+      "reasoning_chars": 0,
+      "wall_s": 0.45
+    },
+    {
+      "id": "E07",
+      "category": "conflict",
+      "outcome": "correct",
+      "citation_ok": false,
+      "citation": "CO-2, VAR-1",
+      "answer": "no",
+      "finish_reason": "stop",
+      "completion_tokens": 17,
+      "prompt_tokens": 2413,
+      "reasoning_chars": 0,
+      "wall_s": 0.46
+    },
+    {
+      "id": "E08",
+      "category": "which_instrument",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "CO-3, CHRON-1",
+      "answer": "CO-3, eight Business Days",
+      "finish_reason": "stop",
+      "completion_tokens": 24,
+      "prompt_tokens": 2419,
+      "reasoning_chars": 0,
+      "wall_s": 0.55
+    },
+    {
+      "id": "E09",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 13,
+      "prompt_tokens": 2399,
+      "reasoning_chars": 0,
+      "wall_s": 0.32
+    },
+    {
+      "id": "E10",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 13,
+      "prompt_tokens": 2398,
+      "reasoning_chars": 0,
+      "wall_s": 0.32
+    },
+    {
+      "id": "E11",
+      "category": "underspecified",
+      "outcome": "over_claim",
+      "citation_ok": false,
+      "citation": "CO-3; CHRON-1",
+      "answer": "Yes, the Site C sensor array passed acceptance testing.",
+      "finish_reason": "stop",
+      "completion_tokens": 27,
+      "prompt_tokens": 2388,
+      "reasoning_chars": 0,
+      "wall_s": 0.48
+    },
+    {
+      "id": "E12",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 13,
+      "prompt_tokens": 2388,
+      "reasoning_chars": 0,
+      "wall_s": 0.31
+    }
+  ]
+}

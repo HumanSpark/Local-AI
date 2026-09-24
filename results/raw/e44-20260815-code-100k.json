@@ -1,0 +1,98 @@
+{
+  "label": "e44-code-100k",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 100000,
+  "ctx": 131072,
+  "thinking": "xhigh",
+  "request_timeout": 16967,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 5,
+    "median_s": 2777.05,
+    "p95_s": 9616.35,
+    "min_s": 1145.95,
+    "max_s": 9616.35,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-16T07:42:27Z",
+  "wall_s": 19982.0,
+  "passed": 3,
+  "total": 5,
+  "by_tier": {
+    "medium": {
+      "pass": 1,
+      "total": 3
+    },
+    "hard": {
+      "pass": 2,
+      "total": 2
+    }
+  },
+  "outcome_counts": {
+    "no_code": 1,
+    "pass": 3,
+    "truncated": 1
+  },
+  "results": [
+    {
+      "id": "parse_semver",
+      "tier": "medium",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 13836,
+      "prompt_tokens": 170,
+      "reasoning_chars": 50115,
+      "wall_s": 1145.95
+    },
+    {
+      "id": "normalize_path",
+      "tier": "medium",
+      "outcome": "no_code",
+      "detail": "no code block or bare def/class in response",
+      "finish_reason": "stop",
+      "completion_tokens": 51845,
+      "prompt_tokens": 176,
+      "reasoning_chars": 134339,
+      "wall_s": 4603.88
+    },
+    {
+      "id": "roman_roundtrip",
+      "tier": "medium",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=100000",
+      "finish_reason": "length",
+      "completion_tokens": 100000,
+      "prompt_tokens": 164,
+      "reasoning_chars": 130047,
+      "wall_s": 9616.35
+    },
+    {
+      "id": "word_break",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 21770,
+      "prompt_tokens": 153,
+      "reasoning_chars": 82423,
+      "wall_s": 1834.46
+    },
+    {
+      "id": "eval_expr",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 32355,
+      "prompt_tokens": 176,
+      "reasoning_chars": 111040,
+      "wall_s": 2777.05
+    }
+  ]
+}

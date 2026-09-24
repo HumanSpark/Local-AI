@@ -1,0 +1,16 @@
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8118 --no-webui -v
+full-offload gate OK, 132 layers
+     (none)  reasoning_chars=   337 completion_tokens=  220 stop
+    minimal  REJECTED HTTP 500: uting CallExpression at line 49, column 28 in source:
+...', 'low') %}↵        {{- raise_exception('Unexpected reasoning 
+        low  reasoning_chars=   542 completion_tokens=  416 stop
+     medium  reasoning_chars=   633 completion_tokens=  515 stop
+       high  REJECTED HTTP 500: xecuting CallExpression at line 49, column 28 in source:
+...', 'low') %}↵        {{- raise_exception('Unexpected reasoni
+      xhigh  reasoning_chars=   337 completion_tokens=  220 stop
+        max  REJECTED HTTP 500: executing CallExpression at line 49, column 28 in source:
+...', 'low') %}↵        {{- raise_exception('Unexpected reason
+
+distinct reasoning_chars values: [337, 542, 633]
+levels REJECTED by the template: ['minimal', 'high', 'max']
+written: results/raw/e115/e115b-effort-ladder.json

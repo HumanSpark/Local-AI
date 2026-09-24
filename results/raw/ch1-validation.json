@@ -1,0 +1,174 @@
+{
+  "validated": [
+    {
+      "id": "C01",
+      "commit": "f776249",
+      "at_commit": {
+        "passed": 33,
+        "failed": 0,
+        "errors": 0,
+        "timed_out": false
+      },
+      "after_revert": {
+        "passed": 31,
+        "failed": 2,
+        "errors": 0,
+        "timed_out": false
+      },
+      "revert_tail": "     \"Condition B\",\n        )\n>       assert (score, judge) == (\"?\", True)\nE       AssertionError: assert ('0', False) == ('?', True)\nE         At index 0 diff: '0' != '?'\nE         Use -v to get more diff\n\ntests/test_score_aabr.py:344: AssertionError\n=========================== short test summary info ============================\nFAILED tests/test_score_aabr.py::TestUnsettledOutcomesDeferRatherThanGuess::test_gpt_oss_phrasing_scores_2\nFAILED tests/test_score_aabr.py::TestUnsettledOutcomesDeferRatherThanGuess::test_naming_the_dependency_without_a_gap_phrase_defers\n2 failed, 31 passed in 0.04s\n",
+      "passes_at_commit": true,
+      "fails_after_revert": true,
+      "usable": true,
+      "discriminating_failures": 2,
+      "regression_baseline": {
+        "failed": 11,
+        "errors": 0,
+        "passed": 512,
+        "timed_out": false
+      }
+    },
+    {
+      "id": "C02",
+      "commit": "916b207",
+      "at_commit": {
+        "passed": 25,
+        "failed": 0,
+        "errors": 0,
+        "timed_out": false
+      },
+      "after_revert": {
+        "passed": 25,
+        "failed": 0,
+        "errors": 0,
+        "timed_out": false
+      },
+      "revert_tail": ".........................                                                [100%]\n25 passed in 0.02s\n",
+      "passes_at_commit": true,
+      "fails_after_revert": false,
+      "usable": false,
+      "why_not": "held-out test still passes after the revert - it does not exercise the change, so every arm would score correct",
+      "discriminating_failures": 0,
+      "regression_baseline": {
+        "failed": 11,
+        "errors": 0,
+        "passed": 512,
+        "timed_out": false
+      }
+    },
+    {
+      "id": "C03",
+      "commit": "bbe651c",
+      "at_commit": {
+        "passed": 6,
+        "failed": 0,
+        "errors": 0,
+        "timed_out": false
+      },
+      "after_revert": {
+        "passed": 0,
+        "failed": 0,
+        "errors": 6,
+        "timed_out": false
+      },
+      "revert_tail": "short test summary info ============================\nERROR tests/test_webdav_push.py::test_password_comes_from_the_environment_when_set\nERROR tests/test_webdav_push.py::test_password_falls_back_to_the_vault_when_the_shell_shielded_it\nERROR tests/test_webdav_push.py::test_the_environment_still_wins_over_the_vault\nERROR tests/test_webdav_push.py::test_resolution_happens_per_call_not_at_import\nERROR tests/test_webdav_push.py::test_a_host_without_sparkcore_still_works_on_the_environment\nERROR tests/test_webdav_push.py::test_the_failure_message_names_the_vault_not_the_shared_file\n6 errors in 0.02s\n",
+      "passes_at_commit": true,
+      "fails_after_revert": true,
+      "usable": true,
+      "discriminating_failures": 6,
+      "regression_baseline": {
+        "failed": 11,
+        "errors": 0,
+        "passed": 276,
+        "timed_out": false
+      }
+    },
+    {
+      "id": "C04",
+      "commit": "f751532",
+      "at_commit": {
+        "passed": 40,
+        "failed": 0,
+        "errors": 0,
+        "timed_out": false
+      },
+      "after_revert": {
+        "passed": 16,
+        "failed": 24,
+        "errors": 0,
+        "timed_out": false
+      },
+      "revert_tail": "_never_suppressed_however_often_they_repeat[2]\nFAILED tests/test_sparkmax_watch_notify.py::TestUnreachableSuppression::test_real_verdicts_are_never_suppressed_however_often_they_repeat[3]\nFAILED tests/test_sparkmax_watch_notify.py::TestFailedSendDoesNotSilenceTheAlert::test_failed_send_leaves_the_episode_unreported\nFAILED tests/test_sparkmax_watch_notify.py::TestFailedSendDoesNotSilenceTheAlert::test_successful_send_records_the_episode\nFAILED tests/test_sparkmax_watch_notify.py::TestFailedSendDoesNotSilenceTheAlert::test_failed_unreachable_alert_retries_next_tick\n24 failed, 16 passed in 0.10s\n",
+      "passes_at_commit": true,
+      "fails_after_revert": true,
+      "usable": true,
+      "discriminating_failures": 24,
+      "regression_baseline": {
+        "failed": 11,
+        "errors": 0,
+        "passed": 399,
+        "timed_out": false
+      }
+    },
+    {
+      "id": "C05",
+      "commit": "82b7455",
+      "at_commit": {
+        "passed": 14,
+        "failed": 0,
+        "errors": 0,
+        "timed_out": false
+      },
+      "after_revert": {
+        "passed": 8,
+        "failed": 6,
+        "errors": 0,
+        "timed_out": false
+      },
+      "revert_tail": "s::test_a_key_the_chain_never_produces_is_refused\nFAILED tests/test_aabr_items.py::TestTheGateAllowsLegitimateShapes::test_a_date_key_produced_mid_chain_passes\nFAILED tests/test_aabr_items.py::TestTheGateAllowsLegitimateShapes::test_a_yes_no_key_is_not_required_to_end_the_chain\nFAILED tests/test_aabr_items.py::TestTheGateAllowsLegitimateShapes::test_a_non_date_item_must_still_pin_at_least_one_step\nFAILED tests/test_aabr_items.py::TestStructuralValidation::test_duplicate_ids_are_refused\nFAILED tests/test_aabr_items.py::test_the_ten_drafts_all_validate - tools.aab...\n6 failed, 8 passed in 0.04s\n",
+      "passes_at_commit": true,
+      "fails_after_revert": true,
+      "usable": true,
+      "discriminating_failures": 6,
+      "regression_baseline": {
+        "failed": 11,
+        "errors": 0,
+        "passed": 487,
+        "timed_out": false
+      }
+    },
+    {
+      "id": "C06",
+      "commit": "8e905bc",
+      "at_commit": {
+        "passed": 4,
+        "failed": 0,
+        "errors": 0,
+        "timed_out": false
+      },
+      "after_revert": {
+        "passed": 0,
+        "failed": 0,
+        "errors": 1,
+        "timed_out": false
+      },
+      "revert_tail": "est_preflight.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.12/importlib/__init__.py:90: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\ntests/test_preflight.py:9: in <module>\n    from preflight import can_run_both, mem_available_bytes  # noqa: E402\nE   ModuleNotFoundError: No module named 'preflight'\n=========================== short test summary info ============================\nERROR tests/test_preflight.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.03s\n",
+      "passes_at_commit": true,
+      "fails_after_revert": true,
+      "usable": true,
+      "discriminating_failures": 1,
+      "regression_baseline": {
+        "failed": 0,
+        "errors": 0,
+        "passed": 0,
+        "timed_out": false
+      }
+    }
+  ],
+  "usable_ids": [
+    "C01",
+    "C03",
+    "C04",
+    "C05",
+    "C06"
+  ]
+}

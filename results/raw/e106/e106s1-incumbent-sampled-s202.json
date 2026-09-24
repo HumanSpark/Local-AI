@@ -1,0 +1,183 @@
+{
+  "label": "e106s1-incumbent-sampled-s202",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 24576,
+  "ctx": 32768,
+  "sampler": {
+    "temperature": 1.0,
+    "min_p": 0.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "seed": 202
+  },
+  "context_preflight": {
+    "longest_prompt_tokens": 333,
+    "max_tokens": 24576,
+    "needed": 24909,
+    "ctx": 32768,
+    "headroom": 7859
+  },
+  "thinking": "medium",
+  "request_timeout": 4396,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 765.38,
+    "p95_s": 1744.3,
+    "min_s": 179.82,
+    "max_s": 1744.3,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-09-05T12:58:07Z",
+  "wall_s": 7090.2,
+  "passed": 5,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 5,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "error": 1,
+    "pass": 5,
+    "wrong_answer": 2
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 7264,
+      "prompt_tokens": 263,
+      "reasoning_chars": 20309,
+      "wall_s": 596.17,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 4,
+        "distinct_line_ratio": 0.7744
+      }
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 5700,
+      "prompt_tokens": 233,
+      "reasoning_chars": 16838,
+      "wall_s": 467.79,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 4,
+        "distinct_line_ratio": 0.6539
+      }
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 2191,
+      "prompt_tokens": 136,
+      "reasoning_chars": 7810,
+      "wall_s": 179.82,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.6573
+      }
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 8329,
+      "prompt_tokens": 193,
+      "reasoning_chars": 22427,
+      "wall_s": 685.72,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.7804
+      }
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 20371,
+      "prompt_tokens": 148,
+      "reasoning_chars": 66950,
+      "wall_s": 1712.7,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 10,
+        "distinct_line_ratio": 0.543
+      }
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 11270,
+      "prompt_tokens": 343,
+      "reasoning_chars": 37501,
+      "wall_s": 933.31,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 14,
+        "distinct_line_ratio": 0.3539
+      }
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 20730,
+      "prompt_tokens": 236,
+      "reasoning_chars": 63887,
+      "wall_s": 1744.3,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 13,
+        "distinct_line_ratio": 0.7367
+      }
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "IndexError: string index out of range",
+      "finish_reason": "stop",
+      "completion_tokens": 9274,
+      "prompt_tokens": 230,
+      "reasoning_chars": 31642,
+      "wall_s": 765.38,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 7,
+        "distinct_line_ratio": 0.6292
+      }
+    }
+  ],
+  "truncated": 0,
+  "truncation_gate": "PASS"
+}

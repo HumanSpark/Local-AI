@@ -1,0 +1,319 @@
+2026-09-06T20:31:04+01:00 ===== START E118-nemotron-matched-effort
+2026-09-06T20:31:04+01:00 --- nemotron / l4 / effort=low / ctx=16384 ---
+=== PS eval L4: e118-nemotron-l4-low (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 721, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 528, in main
+    fit = assert_context_fits(
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/bench_context.py", line 85, in assert_context_fits
+    raise RuntimeError(
+RuntimeError: context preflight FAILED: longest prompt is 2,726 tokens, max_tokens is 16,384, so the run needs 19,110 of -c 16,384 (2,726 over). hint: raise --ctx to at least 19,110 or lower --max-tokens; do NOT let it truncate silently
+2026-09-06T20:31:18+01:00 l4 rc=1 -> /home/agent-spark/sparkbench/results/raw/e118/e118-nemotron-l4-low.json
+2026-09-06T20:31:18+01:00 --- nemotron / l3 / effort=low / ctx=32768 ---
+=== PS eval L3: e118-nemotron-l3-low (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 721, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/run_ps_eval.py", line 528, in main
+    fit = assert_context_fits(
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/bench_context.py", line 85, in assert_context_fits
+    raise RuntimeError(
+RuntimeError: context preflight FAILED: longest prompt is 21,295 tokens, max_tokens is 16,384, so the run needs 37,679 of -c 32,768 (4,911 over). hint: raise --ctx to at least 37,679 or lower --max-tokens; do NOT let it truncate silently
+2026-09-06T20:31:22+01:00 l3 rc=1 -> /home/agent-spark/sparkbench/results/raw/e118/e118-nemotron-l3-low.json
+2026-09-06T20:31:22+01:00 E118 complete
+2026-09-06T20:31:22+01:00 ===== END E118-nemotron-matched-effort rc=0
+2026-09-06T20:31:22+01:00 ===== START E114-full-harness-rerun
+server pid 2493536, waiting for health
+full-offload gate OK: 132 layers, 0 on CPU
+wrote 10 documents to /home/agent-spark/sparkbench/results/raw/e114/docs
+  [1/24] R01   correct          docs=2 294.0s
+  [2/24] R02   correct          docs=0 72.8s
+  [3/24] R03   correct          docs=1 313.4s
+  [4/24] R04   correct          docs=0 195.3s
+  [5/24] R05   correct          docs=2 115.3s
+  [6/24] R06   correct          docs=3 400.0s
+  [7/24] R07   correct          docs=1 684.5s
+  [8/24] R08   correct          docs=3 567.9s
+  [9/24] R09   off_by_calendar  docs=0 212.3s
+  [10/24] R10   transport_failed docs=0 2400.1s
+  [11/24] R11   correct          docs=2 368.3s
+  [12/24] R12   correct          docs=3 263.9s
+  [13/24] E01   correct          docs=0 102.6s
+  [14/24] E02   correct          docs=0 191.4s
+  [15/24] E03   correct          docs=0 167.5s
+  [16/24] E04   correct          docs=0 205.6s
+  [17/24] E05   correct          docs=0 134.0s
+  [18/24] E06   correct          docs=3 205.1s
+  [19/24] E07   correct          docs=2 287.0s
+  [20/24] E08   correct          docs=1 61.3s
+  [21/24] E09   correct          docs=7 242.1s
+  [22/24] E10   correct          docs=2 164.1s
+  [23/24] E11   correct          docs=8 163.4s
+  [24/24] E12   correct          docs=0 186.9s
+
+22/24 correct (band R 10/12, band E 12/12, over_claim 0). wrote /home/agent-spark/sparkbench/results/raw/e114/e114-armB-hermes-l5-full.json
+2026-09-06T22:44:47+01:00 E114 rc=0
+2026-09-06T22:44:47+01:00 ===== END E114-full-harness-rerun rc=0
+2026-09-06T22:44:52+01:00 ===== QUEUE DRAINED
+2026-09-06T22:44:56+01:00 ===== START E118-retry (ctx corrected)
+2026-09-06T22:44:56+01:00 --- nemotron / l4 / effort=low / ctx=32768 ---
+
+*** TRUNCATION GATE: 1/15 items (7%) hit the token cap and returned no answer. ***
+    max_tokens=16384. These are NOT misses - they were never answered.
+    hint: raise --max-tokens (and --ctx to fit it). Check the chat template honours
+    any effort flag before reaching for one: a template that ignores reasoning_effort
+    makes --thinking inert while the result file records it as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway,
+    in which case the truncated items are declared in the result file.
+=== PS eval L4: e118-nemotron-l4-low (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2726, 'max_tokens': 16384, 'needed': 19110, 'ctx': 32768, 'headroom': 13658}
+  [1/15] P1  statutory_period correct           cite=ok 32.07s  28 February 2026
+  [2/15] P2  statutory_period correct           cite=ok 140.31s  30 April 2026
+  [3/15] P3  statutory_period correct           cite=ok 20.06s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 15.68s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    correct           cite=ok 182.37s  493.99
+  [6/15] N1  notice_period    correct           cite=ok 30.25s  30 November 2026
+  [7/15] N2  notice_period    truncated         cite=no 267.9s  None
+  [8/15] F1  fee_basis        correct           cite=ok 45.88s  106800
+  [9/15] S1  survival         correct           cite=no 10.44s  d
+  [10/15] D1  defect_find      correct           cite=ok 41.71s  d
+  [11/15] D2  defect_find      correct           cite=ok 18.72s  4
+  [12/15] D3  defect_find      correct           cite=ok 15.43s  650000
+  [13/15] X1  defect_absent    correct           cite=ok 17.29s  NO
+  [14/15] X2  defect_absent    correct           cite=no 9.13s  NO
+  [15/15] U1  underspecified   correct           cite=ok 9.63s  NOT_IN_PACK
+2026-09-06T22:59:17+01:00 l4 rc=3 -> /home/agent-spark/sparkbench/results/raw/e118/e118-nemotron-l4-low.json
+2026-09-06T22:59:17+01:00 --- nemotron / l3 / effort=low / ctx=49152 ---
+=== PS eval L3: e118-nemotron-l3-low (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 49152 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 21295, 'max_tokens': 16384, 'needed': 37679, 'ctx': 49152, 'headroom': 11473}
+  [1/12] D1  date_effective   correct           cite=ok 40.6s  42000
+  [2/12] D2  date_effective   correct           cite=ok 32.78s  500000
+  [3/12] D3  date_effective   correct           cite=ok 21.93s  51,000
+  [4/12] V1  revocation       correct           cite=ok 18.34s  24
+  [5/12] V2  revocation       correct           cite=ok 15.58s  YES
+  [6/12] P1  precedence       correct           cite=ok 96.12s  6 months
+  [7/12] P2  precedence       over_applied      cite=no 25.27s  1 business day
+  [8/12] M1  multihop         correct           cite=ok 22.94s  378000
+  [9/12] M2  multihop         stale_value       cite=no 59.13s  139500
+  [10/12] M3  multihop         correct           cite=no 273.08s  24.5
+  [11/12] N1  exhaustive       format_error      cite=no 12.41s  None
+  [12/12] Z1  underspecified   over_claim        cite=no 29.03s  No, VAT is not chargeable on a service credit issu
+
+e118-nemotron-l3-low: 8/12 correct, citations 7/12
+OVER-CLAIM 1/1 | STALE 0/5 | PREMATURE 0
+by_category: {'date_effective': {'correct': 3, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 1, 'total': 2}, 'multihop': {'correct': 2, 'total': 3}, 'exhaustive': {'correct': 0, 'total': 1}, 'underspecified': {'correct': 0, 'total': 1}}
+outcomes: {'correct': 8, 'format_error': 1, 'over_applied': 1, 'over_claim': 1, 'stale_value': 1}
+written: /home/agent-spark/sparkbench/results/raw/e118/e118-nemotron-l3-low.json
+2026-09-06T23:10:09+01:00 l3 rc=0 -> /home/agent-spark/sparkbench/results/raw/e118/e118-nemotron-l3-low.json
+2026-09-06T23:10:09+01:00 E118 complete
+2026-09-06T23:10:09+01:00 ===== END E118-retry rc=0
+2026-09-06T23:10:09+01:00 ===== QUEUE2 DRAINED
+2026-09-06T23:10:17+01:00 ===== START E119-request-position
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8121 --no-webui -v
+P: full-offload gate OK, 132 layers
+  P pos1  reasoning_chars=  1012 completion_tokens=  640
+  P pos2  reasoning_chars=  1012 completion_tokens=  640
+  P pos3  reasoning_chars=  1012 completion_tokens=  640
+  P pos4  reasoning_chars=  1012 completion_tokens=  640
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8121 --no-webui -v
+Q: full-offload gate OK, 132 layers
+  Q pos1 B1 counting    reasoning_chars=   337 completion_tokens=  220
+  Q pos2 B1 scheduling  reasoning_chars=   775 completion_tokens=  404
+  Q pos3 B2 counting    reasoning_chars=   633 completion_tokens=  515
+  Q pos4 B2 scheduling  reasoning_chars=  1131 completion_tokens=  691
+
+P: all four positions identical? True
+Q: B2-scheduling now 1131/691; E115 had 1131/691, and A1 had 1248/746
+written: /home/agent-spark/sparkbench/results/raw/e119/e119-request-position.json
+2026-09-06T23:16:36+01:00 ===== END E119 rc=0
+2026-09-06T23:16:36+01:00 ===== QUEUE3 DRAINED
+2026-09-06T23:16:44+01:00 ===== START E120-nemotron-abstention
+full-offload gate OK: 106 layers, 0 on CPU
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/run_kw_eval.py", line 342, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/run_kw_eval.py", line 193, in main
+    items = BANKS[args.bank]()
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/run_kw_eval.py", line 55, in _abstain_loader
+    return _load(pack)
+           ^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/spikes/kw-eval/abstain_items.py", line 341, in load_items
+    raise ValueError(
+ValueError: E76 abstention bank failed its gate:
+  U02: text asserted ABSENT is present in pack 's': '7.0.0'
+    hint: the item claims the corpus does not settle this, but it does - the item is wrong, not the model
+  U02: text asserted ABSENT is present in pack 's': '6.17'
+    hint: the item claims the corpus does not settle this, but it does - the item is wrong, not the model
+  U02: text asserted ABSENT is present in pack 's' case-insensitively: '7.0.0'
+    hint: the item claims the corpus does not settle this. It does. The item is wrong, not the model
+  U02: text asserted ABSENT is present in pack 's' case-insensitively: '6.17'
+    hint: the item claims the corpus does not settle this. It does. The item is wrong, not the model
+hint: every item's evidence must be present in its pack and every `absent` string must really be absent
+2026-09-06T23:16:51+01:00 E120 run rc=1
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/score_abstain.py", line 258, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/score_abstain.py", line 208, in main
+    summaries = [score_file(Path(f)) for f in args.files]
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/score_abstain.py", line 64, in score_file
+    by_id = {i["id"]: i for i in load_items()}
+                                 ^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/spikes/kw-eval/abstain_items.py", line 341, in load_items
+    raise ValueError(
+ValueError: E76 abstention bank failed its gate:
+  U02: text asserted ABSENT is present in pack 's': '7.0.0'
+    hint: the item claims the corpus does not settle this, but it does - the item is wrong, not the model
+  U02: text asserted ABSENT is present in pack 's': '6.17'
+    hint: the item claims the corpus does not settle this, but it does - the item is wrong, not the model
+  U02: text asserted ABSENT is present in pack 's' case-insensitively: '7.0.0'
+    hint: the item claims the corpus does not settle this. It does. The item is wrong, not the model
+  U02: text asserted ABSENT is present in pack 's' case-insensitively: '6.17'
+    hint: the item claims the corpus does not settle this. It does. The item is wrong, not the model
+hint: every item's evidence must be present in its pack and every `absent` string must really be absent
+2026-09-06T23:16:56+01:00 E120 scoring rc=0
+2026-09-06T23:16:56+01:00 ===== END E120 rc=0
+2026-09-06T23:16:56+01:00 ===== QUEUE4 DRAINED
+2026-09-07T01:12:22+01:00 ===== START E121-workhorse-matched-effort
+2026-09-07T01:12:22+01:00 --- workhorse / l4 / low / ctx=32768 ---
+=== PS eval L4: e121-workhorse-l4-low (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 98, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2575, 'max_tokens': 16384, 'needed': 18959, 'ctx': 32768, 'headroom': 13809}
+  [1/15] P1  statutory_period wrong             cite=ok 2.85s  30 October 2026
+  [2/15] P2  statutory_period wrong             cite=ok 0.55s  2 March 2026
+  [3/15] P3  statutory_period wrong_trigger     cite=ok 0.49s  2 March 2029
+  [4/15] B1  breach_clock     off_by_calendar   cite=ok 0.61s  5 April 2026 at 14:30
+  [5/15] I1  interest_calc    wrong             cite=no 0.48s  107.56
+  [6/15] N1  notice_period    off_by_calendar   cite=ok 0.59s  31 October 2026
+  [7/15] N2  notice_period    wrong             cite=ok 0.57s  31 October 2026
+  [8/15] F1  fee_basis        wrong             cite=ok 0.56s  100,800
+  [9/15] S1  survival         correct           cite=ok 0.54s  d
+  [10/15] D1  defect_find      correct           cite=ok 0.57s  d
+  [11/15] D2  defect_find      correct           cite=ok 0.63s  4
+  [12/15] D3  defect_find      correct           cite=ok 0.68s  650000
+  [13/15] X1  defect_absent    correct           cite=ok 0.62s  NO
+  [14/15] X2  defect_absent    correct           cite=ok 0.51s  NO
+  [15/15] U1  underspecified   over_claim        cite=no 0.36s  No
+
+e121-workhorse-l4-low: 6/15 correct, citations 13/15
+OVER-CLAIM 1/1 | STALE 0/0 | PREMATURE 0
+by_category: {'statutory_period': {'correct': 0, 'total': 3}, 'breach_clock': {'correct': 0, 'total': 1}, 'interest_calc': {'correct': 0, 'total': 1}, 'notice_period': {'correct': 0, 'total': 2}, 'fee_basis': {'correct': 0, 'total': 1}, 'survival': {'correct': 1, 'total': 1}, 'defect_find': {'correct': 3, 'total': 3}, 'defect_absent': {'correct': 2, 'total': 2}, 'underspecified': {'correct': 0, 'total': 1}}
+outcomes: {'correct': 6, 'off_by_calendar': 2, 'over_claim': 1, 'wrong': 5, 'wrong_trigger': 1}
+written: /home/agent-spark/sparkbench/results/raw/e121/e121-workhorse-l4-low.json
+2026-09-07T01:12:45+01:00 l4 rc=0
+2026-09-07T01:12:45+01:00 --- workhorse / l3 / low / ctx=49152 ---
+=== PS eval L3: e121-workhorse-l3-low (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf -c 49152 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 98, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 20564, 'max_tokens': 16384, 'needed': 36948, 'ctx': 49152, 'headroom': 12204}
+  [1/12] D1  date_effective   premature         cite=no 47.11s  46,500
+  [2/12] D2  date_effective   premature         cite=no 0.72s  1,250,000
+  [3/12] D3  date_effective   correct           cite=ok 0.77s  51,000
+  [4/12] V1  revocation       correct           cite=ok 0.83s  24
+  [5/12] V2  revocation       correct           cite=ok 0.92s  YES
+  [6/12] P1  precedence       precedence_missed cite=no 0.83s  24 months
+  [7/12] P2  precedence       over_applied      cite=ok 0.8s  1
+  [8/12] M1  multihop         wrong             cite=no 1.06s  504,000
+  [9/12] M2  multihop         wrong             cite=ok 0.87s  1,224,000
+  [10/12] M3  multihop         wrong             cite=ok 0.85s  24.6
+  [11/12] N1  exhaustive       correct           cite=ok 0.84s  d
+  [12/12] Z1  underspecified   over_claim        cite=no 0.71s  No
+
+e121-workhorse-l3-low: 4/12 correct, citations 7/12
+OVER-CLAIM 1/1 | STALE 0/5 | PREMATURE 2
+by_category: {'date_effective': {'correct': 1, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 0, 'total': 2}, 'multihop': {'correct': 0, 'total': 3}, 'exhaustive': {'correct': 1, 'total': 1}, 'underspecified': {'correct': 0, 'total': 1}}
+outcomes: {'correct': 4, 'over_applied': 1, 'over_claim': 1, 'precedence_missed': 1, 'premature': 2, 'wrong': 3}
+written: /home/agent-spark/sparkbench/results/raw/e121/e121-workhorse-l3-low.json
+2026-09-07T01:13:45+01:00 l3 rc=0
+2026-09-07T01:13:45+01:00 ===== END E121
+2026-09-07T01:13:50+01:00 ===== START E122-workhorse-candidate-throughput
+2026-09-07T01:13:50+01:00 --- llama-bench Qwen3-30B-A3B-Instruct-2507-Q4_K_M ---
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1151) (radv) | uma: 1 | fp16: 1 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: KHR_coopmat
+2026-09-07T01:14:20+01:00 Qwen3-30B-A3B-Instruct-2507-Q4_K_M rc=0
+2026-09-07T01:14:20+01:00 --- llama-bench nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M ---
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon Graphics (RADV GFX1151) (radv) | uma: 1 | fp16: 1 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: KHR_coopmat
+2026-09-07T01:14:54+01:00 nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M rc=0
+2026-09-07T01:14:54+01:00 ===== END E122
+2026-09-07T06:49:29+01:00 ===== START E126-nemotron-expert
+
+*** TRUNCATION GATE: 2/8 tasks hit the token cap and produced no usable output. ***
+    max_tokens=24576. These are NOT failures - they were never finished.
+    hint: raise --max-tokens (and --ctx to fit it). Verify the chat template honours
+    any effort flag before using one - an ignored flag is recorded as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway.
+=== coding eval: e126-nemotron-expert (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 332, 'max_tokens': 24576, 'needed': 24908, 'ctx': 32768, 'headroom': 7860}
+  [1/8] glob_match             truncated        24576 tok, 399.86s  hit max_tokens=24576
+  [2/8] round_decimal          wrong_answer     3331 tok, 54.98s  AssertionError
+  [3/8] kmerge                 wrong_answer     1255 tok, 21.17s  AssertionError
+  [4/8] wrap                   pass             2302 tok, 37.87s  
+  [5/8] sliding_median         error            4439 tok, 72.06s  IndexError: index out of range
+  [6/8] apply_patch            error            8509 tok, 137.86s  KeyError: 'z'
+  [7/8] interval_map           wrong_answer     8951 tok, 145.16s  AssertionError: assigning the default removes the run
+  [8/8] parse_csv              truncated        24576 tok, 402.66s  hit max_tokens=24576
+2026-09-07T07:10:46+01:00 ===== END E126-nemotron-expert rc=0
+2026-09-07T07:10:46+01:00 ===== START E127-nemotron-l5
+
+*** TRUNCATION GATE: 1/24 items (4%) hit the token cap and returned no answer. ***
+    max_tokens=16384. These are NOT misses - they were never answered.
+    hint: raise --max-tokens (and --ctx to fit it). Check the chat template honours
+    any effort flag before reaching for one: a template that ignores reasoning_effort
+    makes --thinking inert while the result file records it as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway,
+    in which case the truncated items are declared in the result file.
+=== PS eval L5: e127-nemotron-l5 (local) ===
+pack: 8,807 chars over 9 question categories, 24 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 49152 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2549, 'max_tokens': 16384, 'needed': 18933, 'ctx': 49152, 'headroom': 30219}
+  [1/24] R01 payment_clock    correct           cite=ok 21.58s  11 June 2026
+  [2/24] R02 statutory_period correct           cite=ok 22.58s  30 June 2026
+  [3/24] R03 acceptance_window correct           cite=ok 79.77s  24 March 2026
+  [4/24] R04 acceptance_window correct           cite=ok 38.58s  11 May 2026
+  [5/24] R05 acceptance_window correct           cite=ok 46.3s  8 April 2026
+  [6/24] R06 payment_clock    correct           cite=ok 21.24s  77
+  [7/24] R07 payment_clock    correct           cite=ok 39.36s  €393.99
+  [8/24] R08 payment_clock    correct           cite=ok 121.47s  €493.99
+  [9/24] R09 statutory_period off_by_calendar   cite=ok 97.14s  31 July 2026
+  [10/24] R10 statutory_period truncated         cite=no 268.35s  None
+  [11/24] R11 statutory_period correct           cite=no 18.44s  275
+  [12/24] R12 composition      off_by_calendar   cite=ok 62.65s  29 October 2026
+  [13/24] E01 which_instrument correct           cite=ok 14.59s  CO-2
+  [14/24] E02 precedence       correct           cite=no 13.04s  96,000
+  [15/24] E03 precedence       correct           cite=no 10.03s  EUR 180,000
+  [16/24] E04 which_instrument correct           cite=ok 8.35s  three months
+  [17/24] E05 exhaustive       correct           cite=ok 9.93s  2 (CO-1, CO-3)
+  [18/24] E06 conflict         correct           cite=ok 7.74s  11 March 2026
+  [19/24] E07 conflict         correct           cite=no 9.7s  NO
+  [20/24] E08 which_instrument correct           cite=ok 14.66s  CO-3 eight
+  [21/24] E09 underspecified   correct           cite=ok 6.62s  NOT_IN_PACK
+  [22/24] E10 underspecified   correct           cite=ok 10.9s  NOT_IN_PACK
+  [23/24] E11 underspecified   correct           cite=ok 7.85s  NOT_IN_PACK
+  [24/24] E12 underspecified   correct           cite=ok 4.19s  NOT_IN_PACK
+2026-09-07T07:26:45+01:00 ===== END E127-nemotron-l5 rc=0
+2026-09-07T07:26:45+01:00 ===== DEEP QUEUE DRAINED

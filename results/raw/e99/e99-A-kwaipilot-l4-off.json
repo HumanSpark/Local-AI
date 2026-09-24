@@ -1,0 +1,287 @@
+{
+  "label": "e99-A-kwaipilot-l4-off",
+  "tier": "l4",
+  "distractors": null,
+  "thinking": "off",
+  "model": "/opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 32768,
+  "request_timeout": 3031,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server",
+  "server_extra": "-fa on -ctk q8_0 -ctv q8_0",
+  "rule9_breach_acknowledged": false,
+  "rule9_busy_gpu": [],
+  "cloud_spend": null,
+  "latency": {
+    "n": 15,
+    "median_s": 1.21,
+    "p95_s": 15.82,
+    "min_s": 0.88,
+    "max_s": 15.82,
+    "under_10s": 14,
+    "under_30s": 15
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-08-31T21:33:01Z",
+  "wall_s": 39.3,
+  "pack_chars": 10029,
+  "context_preflight": {
+    "longest_prompt_tokens": 2648,
+    "max_tokens": 16384,
+    "needed": 19032,
+    "ctx": 32768,
+    "headroom": 13736
+  },
+  "correct": 8,
+  "total": 15,
+  "citation_valid": 15,
+  "over_claims": 0,
+  "over_claim_rate": 0.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "statutory_period": {
+      "correct": 0,
+      "total": 3
+    },
+    "breach_clock": {
+      "correct": 1,
+      "total": 1
+    },
+    "interest_calc": {
+      "correct": 0,
+      "total": 1
+    },
+    "notice_period": {
+      "correct": 0,
+      "total": 2
+    },
+    "fee_basis": {
+      "correct": 0,
+      "total": 1
+    },
+    "survival": {
+      "correct": 1,
+      "total": 1
+    },
+    "defect_find": {
+      "correct": 3,
+      "total": 3
+    },
+    "defect_absent": {
+      "correct": 2,
+      "total": 2
+    },
+    "underspecified": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 8,
+    "off_by_calendar": 2,
+    "wrong": 5
+  },
+  "results": [
+    {
+      "id": "P1",
+      "category": "statutory_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-DP section A and C.1; CHRON item 3",
+      "answer": "31 October 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 33,
+      "prompt_tokens": 2585,
+      "reasoning_chars": 0,
+      "wall_s": 3.55
+    },
+    {
+      "id": "P2",
+      "category": "statutory_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-DP section A and C.1; CHRON item 3",
+      "answer": "31 March 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 33,
+      "prompt_tokens": 2576,
+      "reasoning_chars": 0,
+      "wall_s": 1.19
+    },
+    {
+      "id": "P3",
+      "category": "statutory_period",
+      "outcome": "off_by_calendar",
+      "citation_ok": true,
+      "citation": "STAT-LIM clause 1 and 3; CHRON entry 14 September 2020",
+      "answer": "13 September 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 40,
+      "prompt_tokens": 2562,
+      "reasoning_chars": 0,
+      "wall_s": 1.33
+    },
+    {
+      "id": "B1",
+      "category": "breach_clock",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-DP, clauses B and C.3; CHRON",
+      "answer": "6 April 2026 at 14:30",
+      "finish_reason": "stop",
+      "completion_tokens": 37,
+      "prompt_tokens": 2564,
+      "reasoning_chars": 0,
+      "wall_s": 1.29
+    },
+    {
+      "id": "I1",
+      "category": "interest_calc",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "STAT-LP clauses 1, 2, 3, 4, 5; STAT-DP clause C.4; CHRON entries 12 May 2026 and 27 August 2026",
+      "answer": "488.87",
+      "finish_reason": "stop",
+      "completion_tokens": 988,
+      "prompt_tokens": 2592,
+      "reasoning_chars": 0,
+      "wall_s": 15.82
+    },
+    {
+      "id": "N1",
+      "category": "notice_period",
+      "outcome": "off_by_calendar",
+      "citation_ok": true,
+      "citation": "ENG-2025 clauses 2.1 and 2.2; CHRON paragraph 6",
+      "answer": "12 November 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 40,
+      "prompt_tokens": 2577,
+      "reasoning_chars": 0,
+      "wall_s": 1.31
+    },
+    {
+      "id": "N2",
+      "category": "notice_period",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "ENG-2025, clauses 2.1, 2.2, 2.3; CHRON, item 6",
+      "answer": "12 November 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 47,
+      "prompt_tokens": 2564,
+      "reasoning_chars": 0,
+      "wall_s": 1.45
+    },
+    {
+      "id": "F1",
+      "category": "fee_basis",
+      "outcome": "wrong",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 1.2",
+      "answer": "100,800",
+      "finish_reason": "stop",
+      "completion_tokens": 29,
+      "prompt_tokens": 2570,
+      "reasoning_chars": 0,
+      "wall_s": 1.16
+    },
+    {
+      "id": "S1",
+      "category": "survival",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025, clause 3.2",
+      "answer": "(d)",
+      "finish_reason": "stop",
+      "completion_tokens": 24,
+      "prompt_tokens": 2614,
+      "reasoning_chars": 0,
+      "wall_s": 1.21
+    },
+    {
+      "id": "D1",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 6; SUB-KILBEG clauses 3-5",
+      "answer": "(d)",
+      "finish_reason": "stop",
+      "completion_tokens": 32,
+      "prompt_tokens": 2659,
+      "reasoning_chars": 0,
+      "wall_s": 1.42
+    },
+    {
+      "id": "D2",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 8 and SUB-KILBEG clause 4",
+      "answer": "4",
+      "finish_reason": "stop",
+      "completion_tokens": 29,
+      "prompt_tokens": 2570,
+      "reasoning_chars": 0,
+      "wall_s": 1.13
+    },
+    {
+      "id": "D3",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 6, SUB-KILBEG clause 5",
+      "answer": "650000",
+      "finish_reason": "stop",
+      "completion_tokens": 34,
+      "prompt_tokens": 2573,
+      "reasoning_chars": 0,
+      "wall_s": 1.21
+    },
+    {
+      "id": "X1",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 8; SUB-KILBEG clause 6",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 28,
+      "prompt_tokens": 2584,
+      "reasoning_chars": 0,
+      "wall_s": 1.13
+    },
+    {
+      "id": "X2",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 8",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 19,
+      "prompt_tokens": 2584,
+      "reasoning_chars": 0,
+      "wall_s": 0.98
+    },
+    {
+      "id": "U1",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 13,
+      "prompt_tokens": 2555,
+      "reasoning_chars": 0,
+      "wall_s": 0.88
+    }
+  ],
+  "truncated": 0,
+  "truncation_gate": "PASS",
+  "transport_failed": 0,
+  "transport_gate": "PASS"
+}

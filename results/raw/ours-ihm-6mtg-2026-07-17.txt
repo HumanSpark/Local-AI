@@ -1,0 +1,26 @@
+AMI IHM test | primary config: WeSpeaker + 3s/1s + complete linkage + supplied k
+
+meeting                  min  k DER(0.25,skip) DER(0.25,ovl)
+--------------------------------------------------------------
+ES2004b.Mix-Headset.wa  39.1  4          13.9%         19.3%
+TS3003b.Mix-Headset.wa  36.8  4          24.9%         26.6%
+IS1009a.Mix-Headset.wa  14.0  4          29.5%         34.3%
+IS1009d.Mix-Headset.wa  32.4  4          27.4%         31.7%
+IS1009b.Mix-Headset.wa  34.2  4           9.7%         15.5%
+EN2002d.Mix-Headset.wa  36.8  4          25.3%         44.9%
+--------------------------------------------------------------
+
+AGGREGATE over 6 meetings (IHM):
+
+scoring policy                   DER    miss      FA    conf
+------------------------------------------------------------
+collar0.25 overlap-skipped     20.3%    1.1%   10.6%    8.6%
+collar0.25 overlap-SCORED      28.6%   11.7%    8.5%    8.5%
+collar0.0  overlap-skipped     23.7%    1.3%   12.4%    9.9%
+collar0.0  overlap-SCORED      33.4%   14.8%    9.3%    9.3%
+------------------------------------------------------------
+
+miss = reference speech we labelled as nobody (incl. overlap we cannot represent)
+FA   = we labelled speech where the reference has none
+conf = we labelled speech as the WRONG speaker
+OURS_ihm_DONE

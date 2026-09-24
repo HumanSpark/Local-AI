@@ -1,0 +1,35 @@
+=== PS eval L5: e107-t10-s303 (local) ===
+pack: 8,807 chars over 9 question categories, 24 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2531, 'max_tokens': 4096, 'needed': 6627, 'ctx': 16384, 'headroom': 9757}
+  [1/24] R01 payment_clock    correct           cite=ok 68.23s  11 June 2026
+  [2/24] R02 statutory_period correct           cite=ok 50.54s  30 June 2026
+  [3/24] R03 acceptance_window correct           cite=ok 42.59s  24 March 2026
+  [4/24] R04 acceptance_window correct           cite=ok 45.54s  11 May 2026
+  [5/24] R05 acceptance_window off_by_calendar   cite=ok 36.23s  7 April 2026
+  [6/24] R06 payment_clock    correct           cite=ok 54.82s  77
+  [7/24] R07 payment_clock    correct           cite=ok 80.15s  EUR 393.99
+  [8/24] R08 payment_clock    correct           cite=ok 121.66s  EUR 493.99
+  [9/24] R09 statutory_period off_by_calendar   cite=ok 56.23s  31 July 2026
+  [10/24] R10 statutory_period correct           cite=ok 269.58s  16 June 2027
+  [11/24] R11 statutory_period correct           cite=ok 38.1s  275
+  [12/24] R12 composition      correct           cite=ok 62.44s  30 October 2026
+  [13/24] E01 which_instrument correct           cite=ok 13.76s  CO-2
+  [14/24] E02 precedence       correct           cite=no 27.37s  EUR 96,000
+  [15/24] E03 precedence       correct           cite=no 16.72s  EUR 180,000
+  [16/24] E04 which_instrument correct           cite=ok 26.17s  Three months, supplied by the Framework Agreement 
+  [17/24] E05 exhaustive       correct           cite=ok 18.62s  Two Call-Off Orders state a Notice Period of their
+  [18/24] E06 conflict         correct           cite=ok 34.15s  11 March 2026. The Chronology (CHRON-1) is express
+  [19/24] E07 conflict         correct           cite=ok 31.55s  No
+  [20/24] E08 which_instrument correct           cite=ok 20.52s  CO-3; eight Business Days
+  [21/24] E09 underspecified   correct           cite=ok 22.61s  NOT_IN_PACK
+  [22/24] E10 underspecified   correct           cite=ok 36.4s  NOT_IN_PACK
+  [23/24] E11 underspecified   correct           cite=ok 34.42s  NOT_IN_PACK
+  [24/24] E12 underspecified   correct           cite=ok 20.7s  NOT_IN_PACK
+
+e107-t10-s303: 22/24 correct, citations 22/24
+OVER-CLAIM 0/4 | STALE 0/0 | PREMATURE 0
+by_category: {'payment_clock': {'correct': 4, 'total': 4}, 'statutory_period': {'correct': 3, 'total': 4}, 'acceptance_window': {'correct': 2, 'total': 3}, 'composition': {'correct': 1, 'total': 1}, 'which_instrument': {'correct': 3, 'total': 3}, 'precedence': {'correct': 2, 'total': 2}, 'exhaustive': {'correct': 1, 'total': 1}, 'conflict': {'correct': 2, 'total': 2}, 'underspecified': {'correct': 4, 'total': 4}}
+outcomes: {'correct': 22, 'off_by_calendar': 2}
+written: results/raw/e107/e107-t10-s303.json

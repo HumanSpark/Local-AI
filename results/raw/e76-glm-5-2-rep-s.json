@@ -1,0 +1,606 @@
+{
+  "meta": {
+    "label": "glm-5-2-rep",
+    "bank": "abstain",
+    "pack": "s",
+    "pack_chars": 56223,
+    "pack_docs": [
+      "memory-edge-deadlock",
+      "decode-hang",
+      "harness-rules",
+      "qwen38-report"
+    ],
+    "measured_prompt_tokens": null,
+    "ctx": null,
+    "max_tokens": 1024,
+    "system": "You are answering questions about the documents supplied below. Answer from those documents only. If the documents do not settle a question, say so explicitly rather than guessing. Be specific: give figures, names and dates exactly as they appear. Keep answers under 200 words.",
+    "tools_offered": false,
+    "started_at": "2026-08-21T00:48:52+0100",
+    "kernel": null,
+    "provider": "mistral",
+    "model_requested": "glm-5-2",
+    "endpoint": "https://api.mistral.ai/v1/chat/completions",
+    "price_table_usd_per_1m": null,
+    "runner": "tools/run_kw_mistral.py",
+    "ttft_note": "null on every record: cloud_client.chat() is not streaming",
+    "budget": {
+      "calls": 21,
+      "calls_with_provider_reported_cost": 0,
+      "prompt_tokens": 300647,
+      "completion_tokens": 1785,
+      "usd_total": 0.612,
+      "usd_provider_reported": 0.0,
+      "usd_estimated_from_table": 0.612,
+      "note": "OpenRouter reports per-call cost and is authoritative; Mistral does not, so its share is estimated from a hand-maintained 2026-08 price table. Token counts are authoritative throughout."
+    }
+  },
+  "records": [
+    {
+      "id": "K01",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two different amdgpu-related failures are described in this material. For EACH, state the VRAM figure observed, and say whether a hard power cycle was required.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Failure 1: amdgpu SDMA suballocator deadlock** (memory-edge-deadlock.md)\n- **VRAM figure:** Parks at exactly **2.00 GiB** (2,147,483,648 B), held steady.\n- **Hard power cycle required:** **Yes.** SIGKILL is inert, the process never self-resolves, and a graceful `sudo reboot` stalls on the wedged task. A physical hard power cycle was required for both the F27 and F28 occurrences.\n\n**Failure 2: gpt-oss-120b decode hang** (decode-hang.md)\n- **VRAM figure:** **1.90 GiB**, never parked.\n- **Hard power cycle required:** **No.** The process was in interruptible sleep (`S` state) and was killed normally with `pkill -x` in under 5 seconds. The box was unharmed and no reboot was needed.",
+      "ttft_s": null,
+      "wall_s": 1.05,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14323,
+        "total_tokens": 14521,
+        "completion_tokens": 198,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14323,
+      "completion_tokens": 198,
+      "answer_chars": 687,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K02",
+      "category": "implication",
+      "pack": "s",
+      "question": "A colleague proposes a monitor that raises an alarm whenever the llama-server process is in D (uninterruptible) state. Using this material, explain why that is a defect rather than a useful alarm.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The decode-hang document explains this directly. During normal model loading, D state is the *expected* condition, not an anomaly: reading 59 GiB from disk puts the process in D state with `wchan` at `folio_wait_bit_common`, an ordinary page-cache wait.\n\nA monitor that alarms on any D-state process would report `SUSPICIOUS` throughout every normal large-model load. As the document states: \"A check that alarms constantly during normal operation trains its reader to ignore it, which is worse than no check.\"\n\nThe actual deadlock fingerprint requires a *specific combination* of signals, not D state alone: the wchan must be exactly `drm_suballoc_new`, VRAM must park at exactly 2.00 GiB, VmRSS must collapse to ~30\u201357 MB, and the process must be unkillable. The gpt-oss-120b decode hang, by contrast, showed all threads in `S` (interruptible sleep), was killable with `pkill`, and required no reboot.\n\nThe monitoring defect was found and fixed during the 2026-08-19 incident: the check script was corrected to distinguish the ordinary page-cache wait from the deadlock-specific `drm_suballoc_new` wchan, rather than alarming on D state indiscriminately.",
+      "ttft_s": null,
+      "wall_s": 1.36,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14330,
+        "total_tokens": 14597,
+        "completion_tokens": 267,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14330,
+      "completion_tokens": 267,
+      "answer_chars": 1156,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K03",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs how many GPU consumers may run at once, and what does that rule say a contended measurement is?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Rule 9 governs GPU consumer concurrency. It states that the box has one GPU, and any second consumer\u2014another `llama-bench`, another `llama-server`, or the sparkrouter gateway\u2014makes **both** measurements **void**, not degraded or noisy, because neither process can say what share it got. The rule requires every bench entry point to refuse to start if `llama-server` or `llama-bench` is already running, mandates the relay come down under an advisory maintenance flag for any quoted run, and specifies that a contended result is **deleted, not archived** unless kept as evidence for a finding (and then labelled as such).",
+      "ttft_s": null,
+      "wall_s": 0.85,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14317,
+        "total_tokens": 14454,
+        "completion_tokens": 137,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14317,
+      "completion_tokens": 137,
+      "answer_chars": 620,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K04",
+      "category": "implication",
+      "pack": "s",
+      "question": "The harness rules forbid re-creating the deadlock's known triggers during routine benching. Name the ONE trigger this material describes as confirmed, and say what the operative mechanism is said to be.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The one confirmed trigger is **running heavy disk I/O concurrently with a near-edge GPU model load** (F24, dmesg-verified; reproduced on demand in C1/Run 1b on 2026-07-10).\n\nThe operative mechanism is **memory pressure**, not disk I/O per se. When the model plus the concurrent I/O's file-cache reads exceed the 128 GB RAM ceiling, model pages get evicted and re-read faster than they load. The GPU backend gets its first 2 GiB buffer but cannot get the rest resident; the VM-update SDMA suballocator then starves waiting for a small buffer that can never be satisfied, and the whole path deadlocks.",
+      "ttft_s": null,
+      "wall_s": 0.88,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14328,
+        "total_tokens": 14473,
+        "completion_tokens": 145,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14328,
+      "completion_tokens": 145,
+      "answer_chars": 599,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K15",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two models were given the same deterministic date calculator. Give the before-and-after score for EACH of them.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "From the qwen38-report:\n\n**Fast everyday model:** 0 out of 6 \u2192 4 out of 6 (transformative).\n\n**gpt-oss-120b:** 5 out of 6 \u2192 4 out of 6 (made it worse; repeated three times with identical results).",
+      "ttft_s": null,
+      "wall_s": 0.71,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14311,
+        "total_tokens": 14375,
+        "completion_tokens": 64,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14311,
+      "completion_tokens": 64,
+      "answer_chars": 196,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K16",
+      "category": "implication",
+      "pack": "s",
+      "question": "A third experimental condition was run to isolate WHY offering a tool changed a model's behaviour. Describe that condition and state what it showed.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The third condition told the model that the tools existed but did not actually attach them. It showed that this condition changed nothing \u2014 the model's behaviour was identical to having no tools mentioned at all. This established that it is the **attachment itself** (the tool descriptions being written into the prompt the model reads) that changes behaviour on every request, including requests that never use the tool, not merely the model's awareness that tools exist.",
+      "ttft_s": null,
+      "wall_s": 0.75,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14317,
+        "total_tokens": 14405,
+        "completion_tokens": 88,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14317,
+      "completion_tokens": 88,
+      "answer_chars": 472,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K17",
+      "category": "compare",
+      "pack": "s",
+      "question": "On twenty ordinary questions containing no dates at all, what happened to the everyday model once tools were attached? Give the score change and the number of tool calls.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "On twenty ordinary questions with no dates, the everyday model dropped from **14 out of 20 to 11**, and made **68 tool calls**. On five of those questions it produced no answer at all, having spent its entire budget going round in circles.",
+      "ttft_s": null,
+      "wall_s": 0.61,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14322,
+        "total_tokens": 14376,
+        "completion_tokens": 54,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14322,
+      "completion_tokens": 54,
+      "answer_chars": 239,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K18",
+      "category": "recommend",
+      "pack": "s",
+      "question": "What practical consequence does this material draw for a service that offers tools on every request by default? State the price and the form it is paid in.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The material states that any route offering tools by default pays for them on every request, including ones that never use the tool. The price is up to three questions in twenty (the everyday model dropped from 14/20 to 11/20 on ordinary questions with no dates). It is paid as **no answer at all** rather than a wrong one\u2014the model spends its entire budget going round in circles making tool calls\u2014which is the more expensive failure for someone waiting.",
+      "ttft_s": null,
+      "wall_s": 0.85,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14320,
+        "total_tokens": 14415,
+        "completion_tokens": 95,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14320,
+      "completion_tokens": 95,
+      "answer_chars": 455,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K19",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs model downloads, and what is the name of the file each download must be recorded in before first use?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Rule 4 governs model downloads. Each download must be recorded in **manifests/MANIFEST.md** before first use.",
+      "ttft_s": null,
+      "wall_s": 0.54,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14317,
+        "total_tokens": 14344,
+        "completion_tokens": 27,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14317,
+      "completion_tokens": 27,
+      "answer_chars": 109,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K05",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Based only on this material, what is the measured per-load probability that gpt-oss-120b will hang? Give the figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents do not provide a measured per-load probability figure for gpt-oss-120b hanging. They state only that the hang occurred once (the very first time the model was loaded) and that it then \"behaved on every load since \u2014 more than a dozen now.\" No exact denominator or probability percentage is given.",
+      "ttft_s": null,
+      "wall_s": 0.73,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14318,
+        "total_tokens": 14385,
+        "completion_tokens": 67,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14318,
+      "completion_tokens": 67,
+      "answer_chars": 309,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K20",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What does it cost, in euros per year, to run this hardware? Answer from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not state any euro-per-year cost for running the hardware. They describe the machine (sparkmax, Ryzen AI Max+ 395, 128 GB unified RAM, Radeon 8060S / RADV) and its performance characteristics, but no operating cost, electricity cost, depreciation, or annual expense figure appears anywhere in the material.",
+      "ttft_s": null,
+      "wall_s": 0.7,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14311,
+        "total_tokens": 14385,
+        "completion_tokens": 74,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14311,
+      "completion_tokens": 74,
+      "answer_chars": 332,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U01",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What is the memory clock speed of this machine's unified RAM, in MT/s, and what peak memory bandwidth does that give? Answer from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not state the memory clock speed (in MT/s) or the peak memory bandwidth of the machine's unified RAM. They only mention that sparkmax has 128 GB of unified RAM.",
+      "ttft_s": null,
+      "wall_s": 0.58,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14322,
+        "total_tokens": 14364,
+        "completion_tokens": 42,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14322,
+      "completion_tokens": 42,
+      "answer_chars": 186,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U02",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Which Ubuntu release and which kernel version is this machine running? Give both, from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not state the Ubuntu release or the kernel version for this machine. They mention the hardware (Ryzen AI Max+ 395, Radeon 8060S), the driver stack (amdgpu, RADV), and a llama.cpp build hash (`9e40df63b`), but no OS or kernel version appears in this material.",
+      "ttft_s": null,
+      "wall_s": 0.68,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14310,
+        "total_tokens": 14387,
+        "completion_tokens": 77,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14310,
+      "completion_tokens": 77,
+      "answer_chars": 284,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U03",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "How many engineer-hours were spent diagnosing the amdgpu deadlock across all recorded instances? Give the figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents do not state a figure for engineer-hours spent diagnosing the amdgpu deadlock. They record the dates, models, triggers, and confirmation methods for each instance (F24 through F28, plus the C1 live reproduction), but no hour count is given anywhere in the supplied text.",
+      "ttft_s": null,
+      "wall_s": 0.74,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14312,
+        "total_tokens": 14373,
+        "completion_tokens": 61,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14312,
+      "completion_tokens": 61,
+      "answer_chars": 284,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U04",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Is this hardware still under manufacturer warranty, and would a fault that needs a hard power cycle be covered? Answer from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not address the hardware's manufacturer warranty status or whether a hard-power-cycle fault would be covered. They cover the operational impact and recovery procedure of the amdgpu deadlock on sparkmax, but contain no warranty, support-contract, or coverage information.",
+      "ttft_s": null,
+      "wall_s": 0.72,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14317,
+        "total_tokens": 14372,
+        "completion_tokens": 55,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14317,
+      "completion_tokens": 55,
+      "answer_chars": 296,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U05",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What GPU edge temperature was recorded at the moment of the deadlock? Give the figure in degrees Celsius.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not record any GPU edge temperature at the moment of the deadlock. The documents describe the deadlock's fingerprint, mechanism, triggers, and recovery, but do not mention temperature readings.",
+      "ttft_s": null,
+      "wall_s": 0.9,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14310,
+        "total_tokens": 14350,
+        "completion_tokens": 40,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14310,
+      "completion_tokens": 40,
+      "answer_chars": 219,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U06",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "How many people work on this benchmarking programme? Give the number, from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents do not state how many people work on this benchmarking programme. They mention one person by name \u2014 Alastair \u2014 who appears to be a supervisor or principal requiring reports and authorising access, and refer to \"the benchmarking assistant\" as the author of at least one report, but they do not give a total headcount for the programme.",
+      "ttft_s": null,
+      "wall_s": 0.76,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14309,
+        "total_tokens": 14382,
+        "completion_tokens": 73,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14309,
+      "completion_tokens": 73,
+      "answer_chars": 348,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U07",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "How much free disk space does this machine have, and what kind of drive holds the model files? Answer from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not state how much free disk space the machine has, nor do they specify what kind of drive holds the model files. The documents mention that models are staged in `/opt/models/staging` and that downloads record size and SHA256 in manifests, but no disk capacity, free-space figure, or drive type (e.g., SSD, HDD, NVMe) appears anywhere in the material.",
+      "ttft_s": null,
+      "wall_s": 0.78,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14316,
+        "total_tokens": 14399,
+        "completion_tokens": 83,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14316,
+      "completion_tokens": 83,
+      "answer_chars": 377,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U08",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Under what licence is gpt-oss-120b distributed, and does that licence permit commercial use? Answer from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not state the licence under which gpt-oss-120b is distributed, nor whether that licence permits commercial use. The material discusses gpt-oss-120b's benchmark performance, loading behaviour, and a decode-hang incident, but contains no licence information.",
+      "ttft_s": null,
+      "wall_s": 0.65,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14317,
+        "total_tokens": 14376,
+        "completion_tokens": 59,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14317,
+      "completion_tokens": 59,
+      "answer_chars": 282,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U09",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What is this machine's peak power draw, in watts, while loading a large model? Give the figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not contain any information about the machine's peak power draw in watts while loading a large model. The documents cover amdgpu SDMA-suballocator deadlocks, a decode hang incident, harness design rules, and Qwen3.8 benchmarking results, but none mention power consumption figures.",
+      "ttft_s": null,
+      "wall_s": 0.73,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14312,
+        "total_tokens": 14375,
+        "completion_tokens": 63,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14312,
+      "completion_tokens": 63,
+      "answer_chars": 307,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "U10",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Which Python version do the harness scripts require? Give the version, from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The supplied documents do not specify a Python version requirement for the harness scripts.",
+      "ttft_s": null,
+      "wall_s": 1.29,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 14308,
+        "total_tokens": 14324,
+        "completion_tokens": 16,
+        "prompt_tokens_details": {
+          "cached_tokens": 14272
+        }
+      },
+      "prompt_tokens": 14308,
+      "completion_tokens": 16,
+      "answer_chars": 91,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    }
+  ]
+}

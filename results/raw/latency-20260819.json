@@ -1,0 +1,759 @@
+{
+  "utc": "2026-08-19T01:23:32Z",
+  "kernel": "7.0.0-28-generic",
+  "ctx": 32768,
+  "max_tokens": 8192,
+  "reps": null,
+  "server_extra": "-b 512 -ub 128",
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "wall_s": 913.6,
+  "tiers": [
+    {
+      "tier": "chat",
+      "why": "91.3% of real relay traffic - median 68 prompt tokens, 56 generated",
+      "chars": 220
+    },
+    {
+      "tier": "document",
+      "why": "the 3.9% between - one engagement pack in front of you",
+      "chars": 10469
+    },
+    {
+      "tier": "folder",
+      "why": "the 1.4% that carries 34% of all generation time",
+      "chars": 94360
+    }
+  ],
+  "table": [
+    {
+      "arm": "workhorse-30B-A3B",
+      "tier": "chat",
+      "cold_s": 1.11,
+      "warm_median_s": 0.91,
+      "median_gen_tokens": 82,
+      "median_tok_per_s": 89.98
+    },
+    {
+      "arm": "workhorse-30B-A3B",
+      "tier": "document",
+      "cold_s": 5.59,
+      "warm_median_s": 0.38,
+      "median_gen_tokens": 28,
+      "median_tok_per_s": 74.32
+    },
+    {
+      "arm": "workhorse-30B-A3B",
+      "tier": "folder",
+      "cold_s": 61.88,
+      "warm_median_s": 0.29,
+      "median_gen_tokens": 11,
+      "median_tok_per_s": 18.82
+    },
+    {
+      "arm": "qwen38-27B-off",
+      "tier": "chat",
+      "cold_s": 5.62,
+      "warm_median_s": 5.48,
+      "median_gen_tokens": 57,
+      "median_tok_per_s": 10.4
+    },
+    {
+      "arm": "qwen38-27B-off",
+      "tier": "document",
+      "cold_s": 15.39,
+      "warm_median_s": 3.2,
+      "median_gen_tokens": 28,
+      "median_tok_per_s": 8.75
+    },
+    {
+      "arm": "qwen38-27B-off",
+      "tier": "folder",
+      "cold_s": 100.71,
+      "warm_median_s": 1.77,
+      "median_gen_tokens": 11,
+      "median_tok_per_s": 3.16
+    },
+    {
+      "arm": "qwen38-27B-low",
+      "tier": "chat",
+      "cold_s": 23.36,
+      "warm_median_s": 22.15,
+      "median_gen_tokens": 266,
+      "median_tok_per_s": 12.01
+    },
+    {
+      "arm": "qwen38-27B-low",
+      "tier": "document",
+      "cold_s": 28.59,
+      "warm_median_s": 16.54,
+      "median_gen_tokens": 193,
+      "median_tok_per_s": 11.66
+    },
+    {
+      "arm": "qwen38-27B-low",
+      "tier": "folder",
+      "cold_s": 149.86,
+      "warm_median_s": 50.1,
+      "median_gen_tokens": 562,
+      "median_tok_per_s": 7.49
+    },
+    {
+      "arm": "qwen3-8B",
+      "tier": "chat",
+      "cold_s": 9.48,
+      "warm_median_s": 9.46,
+      "median_gen_tokens": 394,
+      "median_tok_per_s": 41.62
+    },
+    {
+      "arm": "qwen3-8B",
+      "tier": "document",
+      "cold_s": 11.84,
+      "warm_median_s": 8.61,
+      "median_gen_tokens": 336,
+      "median_tok_per_s": 38.96
+    },
+    {
+      "arm": "qwen3-8B",
+      "tier": "folder",
+      "cold_s": 91.62,
+      "warm_median_s": 51.29,
+      "median_gen_tokens": 1366,
+      "median_tok_per_s": 20.77
+    }
+  ],
+  "arms": [
+    {
+      "label": "workhorse-30B-A3B",
+      "thinking": "default",
+      "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+      "load_s": 4.0,
+      "gate": {
+        "layers_assigned": 98,
+        "devices": [
+          "Vulkan0"
+        ]
+      },
+      "rows": [
+        {
+          "wall_s": 1.11,
+          "prompt_tokens": 54,
+          "completion_tokens": 82,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 73.98,
+          "answer": "Professional indemnity insurance protects professionals\u2014like consultants, designers, or accountants\u2014if a client claims they made a mistake or gave bad advice that caused financial loss. It covers thin",
+          "tier": "chat",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 0.92,
+          "prompt_tokens": 54,
+          "completion_tokens": 82,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 89.14,
+          "answer": "Professional indemnity insurance protects professionals\u2014like consultants, designers, or accountants\u2014if a client claims they made a mistake or gave bad advice that caused financial loss. It covers thin",
+          "tier": "chat",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 0.91,
+          "prompt_tokens": 54,
+          "completion_tokens": 82,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 89.97,
+          "answer": "Professional indemnity insurance protects professionals\u2014like consultants, designers, or accountants\u2014if a client claims they made a mistake or gave bad advice that caused financial loss. It covers thin",
+          "tier": "chat",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 0.91,
+          "prompt_tokens": 54,
+          "completion_tokens": 82,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 89.98,
+          "answer": "Professional indemnity insurance protects professionals\u2014like consultants, designers, or accountants\u2014if a client claims they made a mistake or gave bad advice that caused financial loss. It covers thin",
+          "tier": "chat",
+          "rep": 4,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 0.91,
+          "prompt_tokens": 54,
+          "completion_tokens": 82,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 90.17,
+          "answer": "Professional indemnity insurance protects professionals\u2014like consultants, designers, or accountants\u2014if a client claims they made a mistake or gave bad advice that caused financial loss. It covers thin",
+          "tier": "chat",
+          "rep": 5,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 0.9,
+          "prompt_tokens": 54,
+          "completion_tokens": 82,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 91.3,
+          "answer": "Professional indemnity insurance protects professionals\u2014like consultants, designers, or accountants\u2014if a client claims they made a mistake or gave bad advice that caused financial loss. It covers thin",
+          "tier": "chat",
+          "rep": 6,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 0.91,
+          "prompt_tokens": 54,
+          "completion_tokens": 82,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 90.16,
+          "answer": "Professional indemnity insurance protects professionals\u2014like consultants, designers, or accountants\u2014if a client claims they made a mistake or gave bad advice that caused financial loss. It covers thin",
+          "tier": "chat",
+          "rep": 7,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.59,
+          "prompt_tokens": 2456,
+          "completion_tokens": 28,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 5.01,
+          "answer": "ANSWER: 27,600  \nCITATION: ENG-2025, clause 1.2",
+          "tier": "document",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 0.38,
+          "prompt_tokens": 2456,
+          "completion_tokens": 28,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 74.44,
+          "answer": "ANSWER: 27,600  \nCITATION: ENG-2025, clause 1.2",
+          "tier": "document",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 0.38,
+          "prompt_tokens": 2456,
+          "completion_tokens": 28,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 74.32,
+          "answer": "ANSWER: 27,600  \nCITATION: ENG-2025, clause 1.2",
+          "tier": "document",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 61.88,
+          "prompt_tokens": 20464,
+          "completion_tokens": 11,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 0.18,
+          "answer": "ANSWER: NONE\nCITATION: NONE",
+          "tier": "folder",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 0.29,
+          "prompt_tokens": 20464,
+          "completion_tokens": 11,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 37.45,
+          "answer": "ANSWER: NONE\nCITATION: NONE",
+          "tier": "folder",
+          "rep": 2,
+          "cache": "warm"
+        }
+      ]
+    },
+    {
+      "label": "qwen38-27B-off",
+      "thinking": "off",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "load_s": 4.0,
+      "gate": {
+        "layers_assigned": 132,
+        "devices": [
+          "Vulkan0"
+        ]
+      },
+      "rows": [
+        {
+          "wall_s": 5.62,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.15,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 5.44,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.48,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.48,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.4,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.48,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.39,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 4,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.48,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.4,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 5,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.39,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.58,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 6,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.53,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.3,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 7,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 15.39,
+          "prompt_tokens": 2523,
+          "completion_tokens": 28,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 1.82,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025 clause 1.2",
+          "tier": "document",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 3.19,
+          "prompt_tokens": 2523,
+          "completion_tokens": 28,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 8.77,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025 clause 1.2",
+          "tier": "document",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 3.2,
+          "prompt_tokens": 2523,
+          "completion_tokens": 28,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 8.75,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025 clause 1.2",
+          "tier": "document",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 100.71,
+          "prompt_tokens": 21122,
+          "completion_tokens": 11,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 0.11,
+          "answer": "ANSWER: NONE\nCITATION: NONE",
+          "tier": "folder",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 1.77,
+          "prompt_tokens": 21122,
+          "completion_tokens": 11,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 6.21,
+          "answer": "ANSWER: NONE\nCITATION: NONE",
+          "tier": "folder",
+          "rep": 2,
+          "cache": "warm"
+        }
+      ]
+    },
+    {
+      "label": "qwen38-27B-low",
+      "thinking": "low",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "load_s": 8.0,
+      "gate": {
+        "layers_assigned": 132,
+        "devices": [
+          "Vulkan0"
+        ]
+      },
+      "rows": [
+        {
+          "wall_s": 23.36,
+          "prompt_tokens": 86,
+          "completion_tokens": 266,
+          "reasoning_chars": 976,
+          "finish_reason": "stop",
+          "tok_per_s": 11.39,
+          "answer": "Professional indemnity insurance protects you if a client claims that your professional advice or services caused them a financial loss. It covers things like claims for negligence, errors, or omissio",
+          "tier": "chat",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 22.99,
+          "prompt_tokens": 86,
+          "completion_tokens": 266,
+          "reasoning_chars": 976,
+          "finish_reason": "stop",
+          "tok_per_s": 11.57,
+          "answer": "Professional indemnity insurance protects you if a client claims that your professional advice or services caused them a financial loss. It covers things like claims for negligence, errors, or omissio",
+          "tier": "chat",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 22.14,
+          "prompt_tokens": 86,
+          "completion_tokens": 266,
+          "reasoning_chars": 976,
+          "finish_reason": "stop",
+          "tok_per_s": 12.02,
+          "answer": "Professional indemnity insurance protects you if a client claims that your professional advice or services caused them a financial loss. It covers things like claims for negligence, errors, or omissio",
+          "tier": "chat",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 22.15,
+          "prompt_tokens": 86,
+          "completion_tokens": 266,
+          "reasoning_chars": 976,
+          "finish_reason": "stop",
+          "tok_per_s": 12.01,
+          "answer": "Professional indemnity insurance protects you if a client claims that your professional advice or services caused them a financial loss. It covers things like claims for negligence, errors, or omissio",
+          "tier": "chat",
+          "rep": 4,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 22.13,
+          "prompt_tokens": 86,
+          "completion_tokens": 266,
+          "reasoning_chars": 976,
+          "finish_reason": "stop",
+          "tok_per_s": 12.02,
+          "answer": "Professional indemnity insurance protects you if a client claims that your professional advice or services caused them a financial loss. It covers things like claims for negligence, errors, or omissio",
+          "tier": "chat",
+          "rep": 5,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 22.16,
+          "prompt_tokens": 86,
+          "completion_tokens": 266,
+          "reasoning_chars": 976,
+          "finish_reason": "stop",
+          "tok_per_s": 12.0,
+          "answer": "Professional indemnity insurance protects you if a client claims that your professional advice or services caused them a financial loss. It covers things like claims for negligence, errors, or omissio",
+          "tier": "chat",
+          "rep": 6,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 22.15,
+          "prompt_tokens": 86,
+          "completion_tokens": 266,
+          "reasoning_chars": 976,
+          "finish_reason": "stop",
+          "tok_per_s": 12.01,
+          "answer": "Professional indemnity insurance protects you if a client claims that your professional advice or services caused them a financial loss. It covers things like claims for negligence, errors, or omissio",
+          "tier": "chat",
+          "rep": 7,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 28.59,
+          "prompt_tokens": 2551,
+          "completion_tokens": 193,
+          "reasoning_chars": 493,
+          "finish_reason": "stop",
+          "tok_per_s": 6.75,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025, clause 1.2",
+          "tier": "document",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 16.52,
+          "prompt_tokens": 2551,
+          "completion_tokens": 193,
+          "reasoning_chars": 493,
+          "finish_reason": "stop",
+          "tok_per_s": 11.69,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025, clause 1.2",
+          "tier": "document",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 16.55,
+          "prompt_tokens": 2551,
+          "completion_tokens": 193,
+          "reasoning_chars": 493,
+          "finish_reason": "stop",
+          "tok_per_s": 11.66,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025, clause 1.2",
+          "tier": "document",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 149.86,
+          "prompt_tokens": 21150,
+          "completion_tokens": 562,
+          "reasoning_chars": 2059,
+          "finish_reason": "stop",
+          "tok_per_s": 3.75,
+          "answer": "ANSWER: The engagement pack does not contain an engagement letter ENG-2025 between Ardmore Composites and Calderwood Advisory. No such document or party appears in the provided materials, so the month",
+          "tier": "folder",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 50.1,
+          "prompt_tokens": 21150,
+          "completion_tokens": 562,
+          "reasoning_chars": 2059,
+          "finish_reason": "stop",
+          "tok_per_s": 11.22,
+          "answer": "ANSWER: The engagement pack does not contain an engagement letter ENG-2025 between Ardmore Composites and Calderwood Advisory. No such document or party appears in the provided materials, so the month",
+          "tier": "folder",
+          "rep": 2,
+          "cache": "warm"
+        }
+      ]
+    },
+    {
+      "label": "qwen3-8B",
+      "thinking": "default",
+      "model": "/opt/models/staging/Qwen3-8B-Q4_K_M.gguf",
+      "load_s": 2.0,
+      "gate": {
+        "layers_assigned": 74,
+        "devices": [
+          "Vulkan0"
+        ]
+      },
+      "rows": [
+        {
+          "wall_s": 9.48,
+          "prompt_tokens": 54,
+          "completion_tokens": 394,
+          "reasoning_chars": 1489,
+          "finish_reason": "stop",
+          "tok_per_s": 41.55,
+          "answer": "Professional indemnity insurance is a type of coverage that protects professionals (like lawyers, accountants, or consultants) if they\u2019re sued for mistakes, errors, or negligence in their work. It typ",
+          "tier": "chat",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 9.48,
+          "prompt_tokens": 54,
+          "completion_tokens": 394,
+          "reasoning_chars": 1489,
+          "finish_reason": "stop",
+          "tok_per_s": 41.57,
+          "answer": "Professional indemnity insurance is a type of coverage that protects professionals (like lawyers, accountants, or consultants) if they\u2019re sued for mistakes, errors, or negligence in their work. It typ",
+          "tier": "chat",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 9.47,
+          "prompt_tokens": 54,
+          "completion_tokens": 394,
+          "reasoning_chars": 1489,
+          "finish_reason": "stop",
+          "tok_per_s": 41.62,
+          "answer": "Professional indemnity insurance is a type of coverage that protects professionals (like lawyers, accountants, or consultants) if they\u2019re sued for mistakes, errors, or negligence in their work. It typ",
+          "tier": "chat",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 9.47,
+          "prompt_tokens": 54,
+          "completion_tokens": 394,
+          "reasoning_chars": 1489,
+          "finish_reason": "stop",
+          "tok_per_s": 41.59,
+          "answer": "Professional indemnity insurance is a type of coverage that protects professionals (like lawyers, accountants, or consultants) if they\u2019re sued for mistakes, errors, or negligence in their work. It typ",
+          "tier": "chat",
+          "rep": 4,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 9.45,
+          "prompt_tokens": 54,
+          "completion_tokens": 394,
+          "reasoning_chars": 1489,
+          "finish_reason": "stop",
+          "tok_per_s": 41.7,
+          "answer": "Professional indemnity insurance is a type of coverage that protects professionals (like lawyers, accountants, or consultants) if they\u2019re sued for mistakes, errors, or negligence in their work. It typ",
+          "tier": "chat",
+          "rep": 5,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 9.46,
+          "prompt_tokens": 54,
+          "completion_tokens": 394,
+          "reasoning_chars": 1489,
+          "finish_reason": "stop",
+          "tok_per_s": 41.66,
+          "answer": "Professional indemnity insurance is a type of coverage that protects professionals (like lawyers, accountants, or consultants) if they\u2019re sued for mistakes, errors, or negligence in their work. It typ",
+          "tier": "chat",
+          "rep": 6,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 9.43,
+          "prompt_tokens": 54,
+          "completion_tokens": 394,
+          "reasoning_chars": 1489,
+          "finish_reason": "stop",
+          "tok_per_s": 41.76,
+          "answer": "Professional indemnity insurance is a type of coverage that protects professionals (like lawyers, accountants, or consultants) if they\u2019re sued for mistakes, errors, or negligence in their work. It typ",
+          "tier": "chat",
+          "rep": 7,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 11.84,
+          "prompt_tokens": 2456,
+          "completion_tokens": 336,
+          "reasoning_chars": 1110,
+          "finish_reason": "stop",
+          "tok_per_s": 28.39,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025 1.2",
+          "tier": "document",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 8.62,
+          "prompt_tokens": 2456,
+          "completion_tokens": 336,
+          "reasoning_chars": 1110,
+          "finish_reason": "stop",
+          "tok_per_s": 38.96,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025 1.2",
+          "tier": "document",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 8.61,
+          "prompt_tokens": 2456,
+          "completion_tokens": 336,
+          "reasoning_chars": 1110,
+          "finish_reason": "stop",
+          "tok_per_s": 39.01,
+          "answer": "ANSWER: EUR 27,600\nCITATION: ENG-2025 1.2",
+          "tier": "document",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 91.62,
+          "prompt_tokens": 20464,
+          "completion_tokens": 1366,
+          "reasoning_chars": 4511,
+          "finish_reason": "stop",
+          "tok_per_s": 14.91,
+          "answer": "ANSWER: EUR 51,000\nCITATION: MSA-2024, clause 2.1 (as amended by AMD-3)",
+          "tier": "folder",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 51.29,
+          "prompt_tokens": 20464,
+          "completion_tokens": 1366,
+          "reasoning_chars": 4511,
+          "finish_reason": "stop",
+          "tok_per_s": 26.63,
+          "answer": "ANSWER: EUR 51,000\nCITATION: MSA-2024, clause 2.1 (as amended by AMD-3)",
+          "tier": "folder",
+          "rep": 2,
+          "cache": "warm"
+        }
+      ]
+    }
+  ]
+}

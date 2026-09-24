@@ -1,0 +1,179 @@
+{
+  "label": "e126-nemotron-expert",
+  "model": "/opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 24576,
+  "ctx": 32768,
+  "sampler": null,
+  "context_preflight": {
+    "longest_prompt_tokens": 332,
+    "max_tokens": 24576,
+    "needed": 24908,
+    "ctx": 32768,
+    "headroom": 7860
+  },
+  "thinking": "default",
+  "request_timeout": 4396,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "server_extra": "",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 137.86,
+    "p95_s": 402.66,
+    "min_s": 21.17,
+    "max_s": 402.66,
+    "under_10s": 0,
+    "under_30s": 1
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-09-07T06:10:46Z",
+  "wall_s": 1276.5,
+  "passed": 1,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 1,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "error": 2,
+    "pass": 1,
+    "truncated": 2,
+    "wrong_answer": 3
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=24576",
+      "finish_reason": "length",
+      "completion_tokens": 24576,
+      "prompt_tokens": 255,
+      "reasoning_chars": 108151,
+      "wall_s": 399.86,
+      "repetition": {
+        "max_line_run": 241,
+        "max_ngram_rep": 295,
+        "distinct_line_ratio": 0.5114
+      }
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 3331,
+      "prompt_tokens": 235,
+      "reasoning_chars": 12030,
+      "wall_s": 54.98,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 6,
+        "distinct_line_ratio": 0.6497
+      }
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 1255,
+      "prompt_tokens": 139,
+      "reasoning_chars": 4840,
+      "wall_s": 21.17,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.5
+      }
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 2302,
+      "prompt_tokens": 197,
+      "reasoning_chars": 7357,
+      "wall_s": 37.87,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.8793
+      }
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "IndexError: index out of range",
+      "finish_reason": "stop",
+      "completion_tokens": 4439,
+      "prompt_tokens": 158,
+      "reasoning_chars": 14362,
+      "wall_s": 72.06,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 4,
+        "distinct_line_ratio": 0.739
+      }
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "KeyError: 'z'",
+      "finish_reason": "stop",
+      "completion_tokens": 8509,
+      "prompt_tokens": 348,
+      "reasoning_chars": 32747,
+      "wall_s": 137.86,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 9,
+        "distinct_line_ratio": 0.3018
+      }
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError: assigning the default removes the run",
+      "finish_reason": "stop",
+      "completion_tokens": 8951,
+      "prompt_tokens": 240,
+      "reasoning_chars": 36733,
+      "wall_s": 145.16,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.7966
+      }
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=24576",
+      "finish_reason": "length",
+      "completion_tokens": 24576,
+      "prompt_tokens": 233,
+      "reasoning_chars": 110346,
+      "wall_s": 402.66,
+      "repetition": {
+        "max_line_run": 4,
+        "max_ngram_rep": 19,
+        "distinct_line_ratio": 0.4274
+      }
+    }
+  ],
+  "truncated": 2,
+  "truncation_gate": "FAIL"
+}

@@ -1,0 +1,26 @@
+AMI SDM test | primary config: WeSpeaker + 3s/1s + complete linkage + supplied k
+
+meeting                  min  k DER(0.25,skip) DER(0.25,ovl)
+--------------------------------------------------------------
+ES2004b.Array1-01.wav   39.1  4          12.0%         17.6%
+TS3003b.Array1-01.wav   36.8  4          16.4%         18.2%
+IS1009a.Array1-01.wav   14.0  4          30.7%         35.7%
+IS1009d.Array1-01.wav   32.4  4          23.3%         27.9%
+IS1009b.Array1-01.wav   34.2  4          30.2%         33.8%
+EN2002d.Array1-01.wav   36.8  4          26.6%         44.1%
+--------------------------------------------------------------
+
+AGGREGATE over 6 meetings (SDM):
+
+scoring policy                   DER    miss      FA    conf
+------------------------------------------------------------
+collar0.25 overlap-skipped     21.7%    2.3%    9.4%   10.0%
+collar0.25 overlap-SCORED      29.4%   12.7%    7.5%    9.2%
+collar0.0  overlap-skipped     25.1%    2.7%   11.2%   11.2%
+collar0.0  overlap-SCORED      34.1%   15.9%    8.4%    9.9%
+------------------------------------------------------------
+
+miss = reference speech we labelled as nobody (incl. overlap we cannot represent)
+FA   = we labelled speech where the reference has none
+conf = we labelled speech as the WRONG speaker
+OURS_sdm_DONE

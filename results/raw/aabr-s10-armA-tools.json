@@ -1,0 +1,314 @@
+{
+  "label": "armA-gptoss120b",
+  "condition": "tools",
+  "schema_version": "v2",
+  "model": "/opt/models/staging/gpt-oss-120b-mxfp4-00001-of-00003.gguf",
+  "items_file": "spikes/aabr/items-40.json",
+  "n_items": 10,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 74,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 13,
+  "round_cap_hits": 0,
+  "wall_s": 219.46,
+  "note": "transcript only - scoring is score_aabr.py over this file",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the notice was not received in time to prevent renewal.  \nCITATION: RULE. Notice of Non\u2011Renewal must be received not less than 45\u202fdays prior to the Renewal Date; registered post is deemed received on the 3rd business day after posting.",
+      "char_count": 247,
+      "char_count_all_rounds": 247,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-11-01",
+            "days": -45
+          },
+          "result": "2024-09-17"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 16.44,
+      "id": "B01",
+      "subset": "boundary",
+      "mechanism": [
+        "deemed_receipt",
+        "backward_count",
+        "roll_forward",
+        "business_days"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Friday, 17 May 2024  \nCITATION: RULE (14 clear days before hearing; deadline rolls backward if on weekend or holiday) & FACTS (Hearing Date Monday 3 June 2024; 27 May 2024 public holiday)",
+      "char_count": 195,
+      "char_count_all_rounds": 195,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-05-19"
+          },
+          "result": "Sunday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-05-19"
+          },
+          "result": "Sunday"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 29.97,
+      "id": "B02",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "roll_backward",
+        "holiday"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the option was validly exercised.  \nCITATION: RULE stating expiration at 17:00 on the 90th calendar day (rolling forward if weekend) and deeming email after 17:00 delivered at 09:00 next business day; FACTS that the Effective Date is 7\u202fJan\u202f2024 (making the 90th day 6\u202fApr\u202f2024, a Saturday, so expiration is 8\u202fApr\u202f2024\u202f17:00) and the buyer\u2019s email was sent 5\u202fApr\u202f2024\u202f19:15, deemed delivered 8\u202fApr\u202f2024\u202f09:00, before expiration.",
+      "char_count": 440,
+      "char_count_all_rounds": 440,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-01-07",
+            "days": 90
+          },
+          "result": "2024-04-06"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-04-06"
+          },
+          "result": "Saturday"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 25.99,
+      "id": "B03",
+      "subset": "boundary",
+      "mechanism": [
+        "time_of_day_cutoff",
+        "roll_forward",
+        "deemed_receipt"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 17 November 2024\nCITATION: RULE (cure period 15 business days; final termination notice takes effect 10 calendar days after service) and FACTS (default notice received 16\u202fOct\u202f2024; final notice served the first calendar day after cure period)",
+      "char_count": 250,
+      "char_count_all_rounds": 250,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-10-16",
+            "days": 15
+          },
+          "result": "2024-11-06"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-11-07",
+            "days": 10
+          },
+          "result": "2024-11-17"
+        }
+      ],
+      "n_calls": 2,
+      "wall_s": 22.14,
+      "id": "B04",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "calendar_days",
+        "no_roll_trap"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 1 April 2024\nCITATION: Warranty Period expires exactly 6 months from the Delivery Date (default to last day of month); claims must be filed no later than 30 calendar days after the Warranty Period expires; weekend deadlines roll to the next business day.",
+      "char_count": 262,
+      "char_count_all_rounds": 262,
+      "rounds": 7,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-03-30"
+          },
+          "result": "Saturday"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-02-29",
+            "days": 30
+          },
+          "result": "2024-03-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-02-29",
+            "days": 30
+          },
+          "result": "2024-03-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-02-29",
+            "days": 30
+          },
+          "result": "2024-03-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-02-29",
+            "days": 30
+          },
+          "result": "2024-03-30"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-03-30"
+          },
+          "result": "Saturday"
+        }
+      ],
+      "n_calls": 6,
+      "wall_s": 54.81,
+      "id": "B05",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "roll_forward"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: USD\u202f100,000  \nCITATION: MSA Section\u202f10.2 (liability cap) and MSA Section\u202f1.5 (SOWs may not modify terms without explicitly referencing the specific MSA section)",
+      "char_count": 168,
+      "char_count_all_rounds": 168,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 10.52,
+      "id": "A01",
+      "subset": "ambiguity",
+      "mechanism": [
+        "precedence",
+        "ineffective_override"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the 15\u2011day termination notice is not legally effective because Addendum\u202fB has not been countersigned by both parties\u2019 Chief Legal Officers, so it is not incorporated and the default 60\u2011day period applies.  \nCITATION: Clause\u202f11.3 (countersignature requirement) and the fact that the breaching party\u2019s CLO signature block is blank.",
+      "char_count": 341,
+      "char_count_all_rounds": 341,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 10.16,
+      "id": "A02",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_dependency",
+        "conditional_incorporation"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Trade Secret obligations are no longer in effect because Clause\u202f5\u2019s 5\u2011year survival period governs any conflict with Clause\u202f12.  \nCITATION: Clause\u202f5 (confidentiality survives 5\u202fyears, except as provided in Clause\u202f12) and Clause\u202f12 (conflict\u2011resolution sentence stating Clause\u202f5 exclusively governs).",
+      "char_count": 315,
+      "char_count_all_rounds": 315,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.98,
+      "id": "A03",
+      "subset": "ambiguity",
+      "mechanism": [
+        "circular_reference",
+        "tie_breaker"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The Consultant is not legally entitled to the bonus because the required written UAT sign\u2011off was not provided.  \nCITATION: RULE. The Consultant is entitled to a 10% bonus if Project Alpha is delivered on schedule (Condition A) AND the client provides written User Acceptance Testing (UAT) sign\u2011off (Condition B).",
+      "char_count": 321,
+      "char_count_all_rounds": 321,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 11.56,
+      "id": "A04",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_premise",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Customer did not breach Clause 7.1.\nCITATION: Clause\u202f7.1 bars resale of \u201cProducts,\u201d defined as the software licences listed in Exhibit\u202fA (Acme Database\u202fv2.0); the Customer only resold the complimentary physical server and retained the software licence.",
+      "char_count": 268,
+      "char_count_all_rounds": 268,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.63,
+      "id": "A05",
+      "subset": "ambiguity",
+      "mechanism": [
+        "defined_term",
+        "scope_mismatch"
+      ]
+    }
+  ]
+}

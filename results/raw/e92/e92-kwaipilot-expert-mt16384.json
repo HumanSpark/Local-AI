@@ -1,0 +1,136 @@
+{
+  "label": "e92-kwaipilot-mt16384",
+  "model": "/opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 32768,
+  "context_preflight": {
+    "longest_prompt_tokens": 333,
+    "max_tokens": 16384,
+    "needed": 16717,
+    "ctx": 32768,
+    "headroom": 16051
+  },
+  "thinking": "default",
+  "request_timeout": 3031,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 259.45,
+    "p95_s": 259.84,
+    "min_s": 4.78,
+    "max_s": 259.84,
+    "under_10s": 1,
+    "under_30s": 1
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-08-31T18:20:50Z",
+  "wall_s": 1732.6,
+  "passed": 0,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 0,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "error": 1,
+    "truncated": 6,
+    "wrong_answer": 1
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=16384",
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 263,
+      "reasoning_chars": 74004,
+      "wall_s": 259.45
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=16384",
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 233,
+      "reasoning_chars": 83015,
+      "wall_s": 259.55
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "TypeError: 'list' object is not an iterator",
+      "finish_reason": "stop",
+      "completion_tokens": 292,
+      "prompt_tokens": 136,
+      "reasoning_chars": 692,
+      "wall_s": 4.78
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=16384",
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 193,
+      "reasoning_chars": 84503,
+      "wall_s": 259.37
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=16384",
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 148,
+      "reasoning_chars": 46843,
+      "wall_s": 259.31
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=16384",
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 343,
+      "reasoning_chars": 58376,
+      "wall_s": 259.84
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 10691,
+      "prompt_tokens": 236,
+      "reasoning_chars": 29645,
+      "wall_s": 166.41
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=16384",
+      "finish_reason": "length",
+      "completion_tokens": 16384,
+      "prompt_tokens": 230,
+      "reasoning_chars": 82263,
+      "wall_s": 259.46
+    }
+  ],
+  "truncated": 6,
+  "truncation_gate": "FAIL"
+}

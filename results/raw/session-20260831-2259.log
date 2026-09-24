@@ -1,0 +1,30 @@
+[2026-08-31T22:59:46+01:00] === session queue: tools/queue-e94-h3.txt ===
+[2026-08-31T22:59:46+01:00]   queued: E94-h3-fast-alone
+[2026-08-31T22:59:46+01:00]   queued: E94-h3-smart-alone
+[2026-08-31T22:59:46+01:00] === opening the session window (ONE window for the whole queue) ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T22:59:46+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T22:59:46+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T22:59:46+01:00] --- [1] E94-h3-fast-alone ---
+FAILED: RuntimeError: router did not become healthy on port 8115 within 900.0s (last: <urlopen error [Errno 111] Connection refused>). hint: check the serverlog for a load failure or an allocation refusal
+=== E94 residency: ctx=98,304 per model, 1 models: ['fast'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 1 -c 98304 --host 127.0.0.1 --port 8115 --no-webui -v
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx98304-fast.json
+[2026-08-31T23:14:46+01:00] [1] E94-h3-fast-alone rc=1 wall=900s - UNEXPECTED
+[2026-08-31T23:14:46+01:00] --- [2] E94-h3-smart-alone ---
+[2026-08-31T23:23:58+01:00] === closing the session window (exit rc=143) ===
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T23:23:58+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1809193 
+[2026-08-31T23:23:58+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T23:23:58+01:00] session finished, rc=143

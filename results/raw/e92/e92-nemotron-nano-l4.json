@@ -1,0 +1,282 @@
+{
+  "label": "e92-nemotron-nano",
+  "tier": "l4",
+  "distractors": null,
+  "thinking": "default",
+  "model": "/opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 4096,
+  "ctx": 16384,
+  "request_timeout": 983,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server",
+  "server_extra": "-fa on -ctk q8_0 -ctv q8_0",
+  "rule9_breach_acknowledged": false,
+  "rule9_busy_gpu": [],
+  "cloud_spend": null,
+  "latency": {
+    "n": 15,
+    "median_s": 20.04,
+    "p95_s": 67.43,
+    "min_s": 9.16,
+    "max_s": 67.43,
+    "under_10s": 2,
+    "under_30s": 8
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-08-31T17:01:11Z",
+  "wall_s": 473.6,
+  "pack_chars": 10029,
+  "context_preflight": {
+    "longest_prompt_tokens": 2726,
+    "max_tokens": 4096,
+    "needed": 6822,
+    "ctx": 16384,
+    "headroom": 9562
+  },
+  "correct": 12,
+  "total": 15,
+  "citation_valid": 10,
+  "over_claims": 0,
+  "over_claim_rate": 0.0,
+  "stale_values": 0,
+  "premature_values": 0,
+  "by_category": {
+    "statutory_period": {
+      "correct": 2,
+      "total": 3
+    },
+    "breach_clock": {
+      "correct": 1,
+      "total": 1
+    },
+    "interest_calc": {
+      "correct": 0,
+      "total": 1
+    },
+    "notice_period": {
+      "correct": 1,
+      "total": 2
+    },
+    "fee_basis": {
+      "correct": 1,
+      "total": 1
+    },
+    "survival": {
+      "correct": 1,
+      "total": 1
+    },
+    "defect_find": {
+      "correct": 3,
+      "total": 3
+    },
+    "defect_absent": {
+      "correct": 2,
+      "total": 2
+    },
+    "underspecified": {
+      "correct": 1,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 12,
+    "truncated": 3
+  },
+  "results": [
+    {
+      "id": "P1",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-DP C.1",
+      "answer": "28 February 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 1765,
+      "prompt_tokens": 2669,
+      "reasoning_chars": 6570,
+      "wall_s": 32.69
+    },
+    {
+      "id": "P2",
+      "category": "statutory_period",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 4096,
+      "prompt_tokens": 2659,
+      "reasoning_chars": 16863,
+      "wall_s": 67.31
+    },
+    {
+      "id": "P3",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-LIM clause 3",
+      "answer": "14 September 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 1154,
+      "prompt_tokens": 2646,
+      "reasoning_chars": 4450,
+      "wall_s": 20.04
+    },
+    {
+      "id": "B1",
+      "category": "breach_clock",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "STAT-DP B",
+      "answer": "6 April 2026 at 14:30",
+      "finish_reason": "stop",
+      "completion_tokens": 907,
+      "prompt_tokens": 2647,
+      "reasoning_chars": 2896,
+      "wall_s": 15.7
+    },
+    {
+      "id": "I1",
+      "category": "interest_calc",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 4096,
+      "prompt_tokens": 2676,
+      "reasoning_chars": 11435,
+      "wall_s": 67.43
+    },
+    {
+      "id": "N1",
+      "category": "notice_period",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clauses 2.1 and 2.2",
+      "answer": "30 November 2026",
+      "finish_reason": "stop",
+      "completion_tokens": 1787,
+      "prompt_tokens": 2660,
+      "reasoning_chars": 6538,
+      "wall_s": 30.32
+    },
+    {
+      "id": "N2",
+      "category": "notice_period",
+      "outcome": "truncated",
+      "citation_ok": false,
+      "citation": null,
+      "answer": null,
+      "finish_reason": "length",
+      "completion_tokens": 4096,
+      "prompt_tokens": 2648,
+      "reasoning_chars": 17687,
+      "wall_s": 67.37
+    },
+    {
+      "id": "F1",
+      "category": "fee_basis",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clauses 1.1 and 1.2",
+      "answer": "106800",
+      "finish_reason": "stop",
+      "completion_tokens": 2748,
+      "prompt_tokens": 2654,
+      "reasoning_chars": 9795,
+      "wall_s": 45.8
+    },
+    {
+      "id": "S1",
+      "category": "survival",
+      "outcome": "correct",
+      "citation_ok": false,
+      "citation": "ENG-2025 clause 7",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 551,
+      "prompt_tokens": 2695,
+      "reasoning_chars": 2043,
+      "wall_s": 10.49
+    },
+    {
+      "id": "D1",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 6",
+      "answer": "d",
+      "finish_reason": "stop",
+      "completion_tokens": 2509,
+      "prompt_tokens": 2742,
+      "reasoning_chars": 10749,
+      "wall_s": 41.85
+    },
+    {
+      "id": "D2",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 5",
+      "answer": "4",
+      "finish_reason": "stop",
+      "completion_tokens": 1077,
+      "prompt_tokens": 2654,
+      "reasoning_chars": 4239,
+      "wall_s": 18.81
+    },
+    {
+      "id": "D3",
+      "category": "defect_find",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "SUB-KILBEG clause 5",
+      "answer": "650000",
+      "finish_reason": "stop",
+      "completion_tokens": 894,
+      "prompt_tokens": 2656,
+      "reasoning_chars": 3249,
+      "wall_s": 15.45
+    },
+    {
+      "id": "X1",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "ENG-2025 clause 8",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 1008,
+      "prompt_tokens": 2670,
+      "reasoning_chars": 4238,
+      "wall_s": 17.36
+    },
+    {
+      "id": "X2",
+      "category": "defect_absent",
+      "outcome": "correct",
+      "citation_ok": false,
+      "citation": "NONE",
+      "answer": "NO",
+      "finish_reason": "stop",
+      "completion_tokens": 500,
+      "prompt_tokens": 2671,
+      "reasoning_chars": 2069,
+      "wall_s": 9.16
+    },
+    {
+      "id": "U1",
+      "category": "underspecified",
+      "outcome": "correct",
+      "citation_ok": true,
+      "citation": "NONE",
+      "answer": "NOT_IN_PACK",
+      "finish_reason": "stop",
+      "completion_tokens": 532,
+      "prompt_tokens": 2639,
+      "reasoning_chars": 2174,
+      "wall_s": 9.65
+    }
+  ]
+}

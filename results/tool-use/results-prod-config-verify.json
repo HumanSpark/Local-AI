@@ -1,0 +1,278 @@
+{
+  "label": "prod-config-verify",
+  "base_url": "http://127.0.0.1:8400",
+  "results": [
+    {
+      "id": "01-delay-letter",
+      "kind": "single",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "murphy-delay.docx",
+            "body_paragraphs": [
+              "Dear Mr. Murphy,",
+              "",
+              "I am writing to sincerely apologise for the delay in progressing your conveyancing matter. We understand the importance of timely completion, and we regret that we have not met the expected timeline by approximately two weeks.",
+              "",
+              "This delay was due to an unforeseen backlog in document verification, which has now been resolved. Your file is currently being prioritised, and we are working diligently to ensure all outstanding tasks are completed without further delay.",
+              "",
+              "Please rest assured that we are committed to bringing this matter to a successful conclusion as swiftly as possible. Should you have any questions or require further updates, please do not hesitate to contact me directly.",
+              "",
+              "Thank you for your understanding and patience.",
+              "",
+              "Yours sincerely,",
+              "",
+              "Alex Turner",
+              "Legal Associate, Smith & Co. Law"
+            ]
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "murphy-delay.docx"
+      ],
+      "final_text": "The client letter has been successfully drafted and saved as `murphy-delay.docx`. The document includes a professional apology for the two-week delay in the Murphy conveyancing file, explains the reason for the delay, confirms prioritisation of the file, and offers direct contact for further queries. The document is ready for dispatch.",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 3.8
+    },
+    {
+      "id": "02-summary",
+      "kind": "grounded",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "summary.docx",
+            "body_paragraphs": [
+              "This document outlines the key terms of our engagement with Fitzgerald Ltd.:\n\n- **Fee**: A fixed fee of EUR 4,500 will be charged for the services.\n\n- **Scope of Work**: We will review and negotiate a commercial lease on your behalf.\n\n- **Engagement Term**: The engagement will last for 3 months from the date the agreement is signed.\n\n- **Termination**: Either party may end the engagement by giving 14 days\u2019 written notice. If the engagement is terminated early, you will still be responsible for paying for all work completed up to that point."
+            ],
+            "title": "Engagement Summary \u2013 Fitzgerald Ltd."
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "summary.docx"
+      ],
+      "final_text": "The plain-English summary of the engagement with Fitzgerald Ltd. has been saved as `summary.docx`. The document includes the fee, scope of work, engagement term, and termination conditions in clear, easy-to-understand language.",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 2.8
+    },
+    {
+      "id": "03-extract",
+      "kind": "grounded",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "engagement-terms.docx",
+            "body_paragraphs": [
+              "**Parties:**\n- Client: Deirdre O'Brien\n- Solicitors: Walsh & Co Solicitors",
+              "**Fee:**\n- EUR 1,800 plus VAT and outlay",
+              "**Key Dates:**\n- Target completion date: 30 September 2026",
+              "**Termination Terms:**\n- Either party may terminate on written notice.\n- Fees for work done to date remain payable."
+            ],
+            "title": "Engagement Terms Summary"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "engagement-terms.docx"
+      ],
+      "final_text": "The structured document summarizing the engagement terms has been successfully created and saved as `engagement-terms.docx`. It includes the parties, fee, key dates, and termination terms as requested.",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 2.4
+    },
+    {
+      "id": "04-attendance-note",
+      "kind": "grounded",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "attendance-note.docx",
+            "body_paragraphs": [
+              "Call with client (Mr Byrne) on 14/07, lasting 15 minutes.",
+              "Discussed probate timeline. Client will send the death certificate and the will by Friday.",
+              "Application for the grant will be made once documents are received.",
+              "Client inquired about CAT thresholds; advised to consult accountant.",
+              "Next review scheduled in 3 weeks."
+            ],
+            "title": "Attendance Note"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "attendance-note.docx"
+      ],
+      "final_text": "The attendance note has been successfully saved as `attendance-note.docx`. Let me know if you need any further assistance!",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 2.0
+    },
+    {
+      "id": "05-email-and-copy",
+      "kind": "single",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "byrne-chaser.docx",
+            "body_paragraphs": [
+              "Dear [Client's Name],\n\nI hope this message finds you well.\n\nI am writing to kindly follow up regarding the outstanding documents required for the Byrne probate file. To ensure we can proceed efficiently and meet all necessary deadlines, it would be greatly appreciated if you could provide the remaining documents at your earliest convenience.\n\nPlease let me know if you need any assistance or clarification in gathering the materials. I\u2019m happy to help in any way I can.\n\nThank you in advance for your prompt attention to this matter.\n\nBest regards,\n\n[Your Full Name]\n[Your Position]\n[Law Firm Name]\n[Contact Information]"
+            ],
+            "title": "Follow-Up on Outstanding Documents \u2013 Byrne Probate File"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "byrne-chaser.docx"
+      ],
+      "final_text": "The polite chasing email has been drafted and saved as `byrne-chaser.docx` on disk. The document includes a courteous request for the outstanding documents related to the Byrne probate file, with a professional tone and space for personal details.",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 3.1
+    },
+    {
+      "id": "06-two-tools",
+      "kind": "multi",
+      "expect": [
+        "add_reminder",
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "oconnor-fee.docx",
+            "body_paragraphs": [
+              "Dear Mr. O'Connor,",
+              "",
+              "I hope this message finds you well. I am writing to kindly remind you of the outstanding fee balance related to your matter. As of today, the amount due is $X,XXX.00.",
+              "",
+              "Please settle the outstanding balance at your earliest convenience to avoid any further action. If you have already made payment, please disregard this notice and accept our thanks.",
+              "",
+              "Should you have any questions or require a detailed breakdown of the charges, do not hesitate to contact me.",
+              "",
+              "Sincerely,",
+              "",
+              "Your Name",
+              "Law Firm Name",
+              "Contact Information"
+            ],
+            "title": "Fee Reminder \u2013 O'Connor Matter"
+          },
+          "json_ok": true
+        },
+        {
+          "name": "add_reminder",
+          "args": {
+            "title": "Follow up on O'Connor fee reminder",
+            "due": "in 14 days"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "oconnor-fee.docx"
+      ],
+      "final_text": "The fee reminder letter for the O'Connor matter has been successfully drafted and saved as `oconnor-fee.docx`. Additionally, a follow-up reminder has been added to your practice diary, due in 14 days.",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 3.4
+    },
+    {
+      "id": "07-conditional",
+      "kind": "conditional",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "kelly-fee.docx",
+            "body_paragraphs": [
+              "Dear Client,\n\nThis letter serves as a reminder that the outstanding balance for your matter, Kelly, is currently EUR 7,400. We kindly request that you settle this amount at your earliest convenience to avoid any further action.\n\nPlease note that this balance exceeds EUR 5,000, which necessitates our urgent attention. We urge you to address this matter promptly to prevent escalation.\n\nShould you have already made payment, please disregard this notice and accept our thanks. If you have any questions or require further information, do not hesitate to contact us.\n\nYours sincerely,\n\n[Your Name]\n[Law Firm Name]"
+            ],
+            "title": "URGENT: Fee Reminder - Kelly File"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "kelly-fee.docx"
+      ],
+      "final_text": "The fee-reminder letter for the Kelly file has been created and saved as `kelly-fee.docx`. The document includes the urgent notice in the title due to the outstanding balance exceeding EUR 5,000. The file is ready for dispatch.",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": true
+      },
+      "seconds": 3.2
+    },
+    {
+      "id": "08-no-tool-trap",
+      "kind": "no-tool",
+      "expect": [],
+      "called": [],
+      "docs_written": [],
+      "final_text": "The term \"without prejudice\" on a letter means that the contents of the letter cannot be used as evidence in any future legal proceedings. It is typically used to encourage open and honest communication during negotiations, such as settlement discussions, without the risk that statements made will prejudice the sender\u2019s position if the matter goes to court.",
+      "score": {
+        "call_valid": false,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 0.9
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "meta": {
+    "label": "mistral-large-3",
+    "bank": "kw",
+    "pack": "m",
+    "pack_chars": 143236,
+    "pack_docs": [
+      "memory-edge-deadlock",
+      "decode-hang",
+      "harness-rules",
+      "qwen38-report",
+      "routing-guide",
+      "rd-programme"
+    ],
+    "measured_prompt_tokens": null,
+    "ctx": null,
+    "max_tokens": 1024,
+    "system": "You are answering questions about the documents supplied below. Answer from those documents only. If the documents do not settle a question, say so explicitly rather than guessing. Be specific: give figures, names and dates exactly as they appear. Keep answers under 200 words.",
+    "tools_offered": false,
+    "started_at": "2026-08-20T23:04:10+0100",
+    "kernel": null,
+    "provider": "mistral",
+    "model_requested": "mistral-large-latest",
+    "endpoint": "https://api.mistral.ai/v1/chat/completions",
+    "price_table_usd_per_1m": [
+      0.5,
+      1.5
+    ],
+    "runner": "tools/run_kw_mistral.py",
+    "ttft_note": "null on every record: cloud_client.chat() is not streaming",
+    "budget": {
+      "calls": 13,
+      "calls_with_provider_reported_cost": 0,
+      "prompt_tokens": 505787,
+      "completion_tokens": 2028,
+      "usd_total": 0.2559,
+      "usd_provider_reported": 0.0,
+      "usd_estimated_from_table": 0.2559,
+      "note": "OpenRouter reports per-call cost and is authoritative; Mistral does not, so its share is estimated from a hand-maintained 2026-08 price table. Token counts are authoritative throughout."
+    }
+  },
+  "records": [
+    {
+      "id": "K06",
+      "category": "conflict",
+      "pack": "m",
+      "question": "This material contains advice that explicitly corrects an earlier recommendation. Identify which recommendation was corrected, and state what the correction was based on.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The recommendation corrected was:\n\n**\"Mistral only\" for conditional tool calls.**\n\n**Original recommendation (pre-2026-08-16):**\nMistral-Small-24B-Q4 was advised as the only model that correctly withholds a flag on a false branch (4/5), based on a 3-task sample (E33).\n\n**Correction (2026-08-16, E45):**\nOn a full set of 13 paired conditional tasks, Mistral scored **38%**, the worst of the three models tested. The workhorse (Qwen3-30B-A3B) scored 68%, and Qwen3.8-27B at `reasoning_effort: medium` scored 86%. The correction was based on measuring the full task set, which revealed the earlier 3-task sample was not representative. The corrected routing guide now states:\n*\"Conditional flags are the weak spot, and the per-task numbers are NOISY... Test your own condition, on the branch where it must NOT fire.\"* (See `routing-guide`, \"Conditional tool calls\" row.)",
+      "ttft_s": null,
+      "wall_s": 9.42,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38899,
+        "total_tokens": 39148,
+        "completion_tokens": 249,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38899,
+      "completion_tokens": 249,
+      "answer_chars": 868,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K07",
+      "category": "recommend",
+      "pack": "m",
+      "question": "A client needs a statutory deadline counted across a calendar. Which model does this material tell you to use, and which does it explicitly tell you NOT to use for this?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents explicitly instruct:\n\n**Use:** **Qwen3.8-27B** (with reasoning enabled).\n- It scores **7/8** on walked periods (e.g., statutory deadlines) in the routing guide (*routing-guide*, \"Knowledge work over a document pack\" table).\n\n**Do NOT use:** **Qwen3-30B-A3B (the workhorse)**.\n- It scores **0/8** on walked periods, failing every deadline/interest calculation (*routing-guide*: \"The workhorse is fine for a quick question and should not be your companion here... never to work out a date\").\n- The routing guide\u2019s sharpest instruction: *\"Use the workhorse to read a contract; never to work out a date.\"*",
+      "ttft_s": null,
+      "wall_s": 8.45,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38905,
+        "total_tokens": 39063,
+        "completion_tokens": 158,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38905,
+      "completion_tokens": 158,
+      "answer_chars": 615,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K08",
+      "category": "compare",
+      "pack": "m",
+      "question": "For a batch of hard coding problems, this material recommends a model and a specific setting. State the wall-time ratio against the alternative it is compared with, and both absolute wall-time figures.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "For hard coding problems, the material recommends **Qwen3.8-27B at `reasoning_effort: medium`**.\n\n- **Wall-time ratio**: 94x slower than the alternative (Qwen3-Coder-30B).\n- **Absolute wall-time figures**:\n  - Qwen3.8-27B: **6,223 seconds** (103.7 minutes).\n  - Qwen3-Coder-30B: **66 seconds**.\n\nSource: *routing-guide* (reports/2026-07-16-local-model-routing-guide.md), \"A batch of HARD coding problems\" row.",
+      "ttft_s": null,
+      "wall_s": 6.72,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38909,
+        "total_tokens": 39054,
+        "completion_tokens": 145,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38909,
+      "completion_tokens": 145,
+      "answer_chars": 409,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K09",
+      "category": "implication",
+      "pack": "m",
+      "question": "This material identifies gpt-oss-120b as the strongest candidate for difficult work on one axis, while placing an operational restriction on it. State the restriction and the reason given for it.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The restriction on **gpt-oss-120b** is:\n\n**Do not run it unattended.**\n\nThe reason given is an **unexplained decode hang** during its first load (2026-08-19), where the server stopped responding/logging mid-decode, held 64 GiB of memory, and required a `pkill` to recover. While subsequent loads (12+) behaved normally, the root cause remains unknown, and the document explicitly states: *\"until we understand it, we will not leave it running unattended\"* (`decode-hang.md`). This is distinct from the amdgpu deadlock, which requires a hard power cycle.",
+      "ttft_s": null,
+      "wall_s": 6.01,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38912,
+        "total_tokens": 39057,
+        "completion_tokens": 145,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38912,
+      "completion_tokens": 145,
+      "answer_chars": 553,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K10",
+      "category": "conflict",
+      "pack": "m",
+      "question": "Does this material recommend Mistral-Small-24B for tool calls whose behaviour depends on a condition? Answer yes or no and give the supporting figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "No.\n\nThe routing guide explicitly states that **Qwen3.8-27B at `reasoning_effort: medium` (86%)** is the recommended model for conditional tool calls, while Mistral-Small-24B scores **38%** on the full set of conditional tasks (E45). Mistral is the *worst* arm for this category.",
+      "ttft_s": null,
+      "wall_s": 2.92,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38903,
+        "total_tokens": 38985,
+        "completion_tokens": 82,
+        "prompt_tokens_details": {
+          "cached_tokens": 38848
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38903,
+      "completion_tokens": 82,
+      "answer_chars": 279,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K11",
+      "category": "summarise",
+      "pack": "m",
+      "question": "Summarise, in no more than four sentences, why this material argues that a latency figure on its own cannot be interpreted.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents show that latency alone is misleading because:\n\n1. **A fast response may never answer**\u2014e.g., GLM-4.7-Flash\u2019s 1,640-token generations produced no usable output (F87, E61).\n2. **Token count is a diagnostic, not a measure of adequacy**\u2014e.g., gpt-oss-120b\u2019s 11-token folder-tier answers were correct, while longer generations often failed (F90).\n3. **Non-termination and wrong answers render latency undefined or infinite**\u2014success-at-deadline must be reported alongside conditional TTCA (rd-programme).\n4. **Workload shapes latency**\u2014e.g., Qwen3.8-27B\u2019s MTP acceptance dropped from 83.4% on legal work to 30.2% on chat, making speed numbers non-transferable (routing-guide, F85).",
+      "ttft_s": null,
+      "wall_s": 9.42,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38897,
+        "total_tokens": 39095,
+        "completion_tokens": 198,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38897,
+      "completion_tokens": 198,
+      "answer_chars": 691,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K14",
+      "category": "draft",
+      "pack": "m",
+      "question": "Draft a short note (5 sentences maximum) to a colleague who wants to run a large model benchmark while a big download is in progress. Tell them whether to proceed and why, citing the specific risk.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Do not proceed. Running a large model benchmark (>~60 GiB) while a big download is in progress risks triggering the **amdgpu SDMA suballocator deadlock** (docs/memory-edge-deadlock.md). This deadlock is **unkillable (D-state)**, requires a **hard power cycle** to recover, and cannot be cleared remotely. The confirmed trigger is **memory pressure crossing 128 GB RAM** from concurrent heavy disk I/O (e.g., downloads) evicting model pages. Wait for the download to finish before loading the model.",
+      "ttft_s": null,
+      "wall_s": 5.79,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38912,
+        "total_tokens": 39033,
+        "completion_tokens": 121,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38912,
+      "completion_tokens": 121,
+      "answer_chars": 498,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K21",
+      "category": "recommend",
+      "pack": "m",
+      "question": "For creating a Word document or driving office tools agentically, which model does this material recommend, and which model does it say refuses the task outright?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The documents recommend **Qwen3-30B-A3B** for creating Word documents or driving office tools agentically. It achieves **91% mean success** and **0 format leaks** in 110 tool-use calls (E33 in `routing-guide`).\n\nThe material states that **Mistral-Small-24B-Q4 refuses these tasks outright** unless supplied with a hand-written tool template (`routing-guide`).",
+      "ttft_s": null,
+      "wall_s": 5.39,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38901,
+        "total_tokens": 38993,
+        "completion_tokens": 92,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38901,
+      "completion_tokens": 92,
+      "answer_chars": 359,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K22",
+      "category": "implication",
+      "pack": "m",
+      "question": "For a long advisory session with documents arriving as you go, which model is recommended? State the specific risk this material says changes over a long session - and say explicitly whether accuracy decayed.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "For a long advisory session with documents arriving as you go, the recommended model is **Qwen3.8-27B**.\n\n**Specific risk that changes over a long session:**\nThe workhorse (Qwen3-30B-A3B) loses its **willingness to contradict you**\u2014under pressure, its wrong answers start agreeing with false premises you assert, rather than remaining independently wrong. The 8B model also abandons figures it had previously given correctly.\n\n**Accuracy did NOT decay.**\nAll three models (Qwen3.8-27B, Qwen3-8B, and the workhorse) held answers perfectly over 29 turns and ~71-76% of context. Corrections made early were still applied 20,000 tokens later, and no model ever quoted the wrong agreement\u2019s figure. The issue is **resistance to false premises**, not accuracy degradation.\n\nSource: *reports/2026-07-16-local-model-routing-guide.md* (2026-08-17 additions, \"And after a long session?\" section).",
+      "ttft_s": null,
+      "wall_s": 8.25,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38909,
+        "total_tokens": 39146,
+        "completion_tokens": 237,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38909,
+      "completion_tokens": 237,
+      "answer_chars": 886,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K23",
+      "category": "conflict",
+      "pack": "m",
+      "question": "One model is described as the strongest on a document/knowledge evaluation whose strength then failed to carry over to agentic coding work. Name that model, and say what the material tells you to use instead for interactive coding.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The model described as strongest on document/knowledge evaluation but failing in agentic coding is **Qwen3-30B-A3B** (the workhorse).\n\nThe material specifies using **Qwen3-Coder-30B** as the replacement for interactive coding, with **GLM-4.7-Flash** as a fallback. This recommendation is based on real-project results (F33/F36), where Qwen3-30B-A3B scored 0 on both real-repository coding tasks despite topping the document matrix (93.3% / 87.5%). Qwen3-Coder-30B passed in 129 seconds, making it the preferred choice for coding work.",
+      "ttft_s": null,
+      "wall_s": 5.26,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38915,
+        "total_tokens": 39069,
+        "completion_tokens": 154,
+        "prompt_tokens_details": {
+          "cached_tokens": 8448
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38915,
+      "completion_tokens": 154,
+      "answer_chars": 534,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K24",
+      "category": "implication",
+      "pack": "m",
+      "question": "If a model must fit in under 5 GiB, which one does this material recommend, and what are the TWO limits it names?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The document recommends **Qwen3-8B with reasoning ON** for models fitting under 5 GiB.\n\n**Two limits named:**\n1. **Context size:** Tops out at **40,960 tokens** (vs. the 27B's 262,144).\n2. **Reasoning setting:** `enable_thinking: false` costs **4 points on the easy tier**, with **every arithmetic item flipping to wrong** (routing-guide, \"Knowledge work over a document pack\" section).",
+      "ttft_s": null,
+      "wall_s": 5.69,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38900,
+        "total_tokens": 39014,
+        "completion_tokens": 114,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38900,
+      "completion_tokens": 114,
+      "answer_chars": 386,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K25",
+      "category": "summarise",
+      "pack": "m",
+      "question": "The R&D PROGRAMME document (not the harness rules) sets out a primary and a secondary metric that must always be reported together. Name both, and say why the secondary one cannot be quoted alone.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The **primary metric** is **success-at-deadline**: the share of items reaching a correct, completed answer within a pre-registered wall-clock deadline (wrong, truncated, and non-terminating all score 0).\n\nThe **secondary metric** is **conditional TTCA** (Time To Correct Answer): median and p95 wall time, computed **only over successes**, reported with the success count beside it.\n\nThe secondary metric **cannot be quoted alone** because it is **undefined on a wrong answer** and **infinite on a hang**, so any central tendency computed over it has silently dropped exactly the cases the programme exists to study. A median TTCA hides the tail where non-termination lives, and a conditional TTCA quoted without its success-at-deadline figure is not a result. (Source: `rd-programme.md`, \"The headline metric changes\" section.)",
+      "ttft_s": null,
+      "wall_s": 6.9,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38913,
+        "total_tokens": 39094,
+        "completion_tokens": 181,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38913,
+      "completion_tokens": 181,
+      "answer_chars": 828,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K26",
+      "category": "draft",
+      "pack": "m",
+      "question": "Draft a short note (5 sentences maximum) to a colleague who is about to put a single tokens-per-second figure in a client report. Tell them what is wrong with that and what to report instead.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Subject:** Tokens-per-second is not the number to quote\n\nA single `tok/s` figure hides two things that matter: it doesn\u2019t tell you whether the model actually answered the question, and it doesn\u2019t say how long the user waited. Report **time to a correct, completed answer** (TTCA) instead, always paired with the success rate at a stated deadline. If you must quote throughput, give it as a diagnostic alongside TTCA, not as the headline. The relay\u2019s own traffic shows 91.3% of requests are under 1,000 tokens, so a single number misrepresents the service. See `routing-guide.md` \u201cHow fast is it actually?\u201d for the measured medians.",
+      "ttft_s": null,
+      "wall_s": 5.63,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 38912,
+        "total_tokens": 39064,
+        "completion_tokens": 152,
+        "prompt_tokens_details": {
+          "cached_tokens": 38848
+        },
+        "service_tier": "standard"
+      },
+      "prompt_tokens": 38912,
+      "completion_tokens": 152,
+      "answer_chars": 633,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    }
+  ]
+}

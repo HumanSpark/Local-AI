@@ -1,0 +1,23 @@
+=== coding eval: e124-nemotron-core (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 125, 'max_tokens': 24576, 'needed': 24701, 'ctx': 32768, 'headroom': 8067}
+  [1/15] rle_encode             pass             199 tok, 4.06s  
+  [2/15] is_balanced            pass             195 tok, 4.1s  
+  [3/15] merge_intervals        pass             428 tok, 7.79s  
+  [4/15] parse_semver           pass             1684 tok, 27.85s  
+  [5/15] top_k_frequent         pass             334 tok, 6.44s  
+  [6/15] spiral_order           pass             467 tok, 8.48s  
+  [7/15] group_anagrams         pass             594 tok, 10.51s  
+  [8/15] normalize_path         pass             2808 tok, 45.86s  
+  [9/15] roman_roundtrip        pass             1230 tok, 20.71s  
+  [10/15] longest_valid_parens   pass             227 tok, 4.7s  
+  [11/15] lru_cache              wrong_answer     393 tok, 7.35s  AssertionError
+  [12/15] word_break             pass             950 tok, 16.18s  
+  [13/15] topo_schedule          error            769 tok, 13.35s  ImportError: cannot import name 'dict' from 'typing' (/usr/lib/python3
+  [14/15] min_window             pass             311 tok, 6.03s  
+  [15/15] eval_expr              error            5486 tok, 88.81s  TypeError: cannot unpack non-iterable int object
+
+e124-nemotron-core: 12/15 passed  by_tier={'easy': {'pass': 2, 'total': 2}, 'medium': {'pass': 7, 'total': 7}, 'hard': {'pass': 3, 'total': 6}}
+outcomes: {'error': 2, 'pass': 12, 'wrong_answer': 1}
+written: results/raw/e124/e124-nemotron-core.json

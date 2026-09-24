@@ -1,0 +1,654 @@
+{
+  "analysis_version": "l5-bands-v1-2026-08-28",
+  "separation": {
+    "band_R": 8,
+    "band_E": 2
+  },
+  "runs": [
+    {
+      "label": "l5-workhorse",
+      "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+      "total_correct": 13,
+      "band_R_correct": 3,
+      "band_E_correct": 10,
+      "band_R_outcomes": {
+        "correct": 3,
+        "wrong": 7,
+        "off_by_calendar": 2
+      },
+      "band_E_outcomes": {
+        "correct": 10,
+        "wrong": 1,
+        "over_claim": 1
+      },
+      "regraded_since_run": [
+        "E05: banked partial -> re-graded correct"
+      ],
+      "rule9_breach_acknowledged": true,
+      "kernel": "7.0.0-29-generic",
+      "rows": [
+        {
+          "id": "R01",
+          "band": "R",
+          "difficulty": "D1",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R02",
+          "band": "R",
+          "difficulty": "D2",
+          "category": "statutory_period",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R03",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R04",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "off_by_calendar",
+          "verdict": "off_by_calendar"
+        },
+        {
+          "id": "R05",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R06",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "payment_clock",
+          "banked_outcome": "off_by_calendar",
+          "verdict": "off_by_calendar"
+        },
+        {
+          "id": "R07",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "payment_clock",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R08",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "payment_clock",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R09",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "statutory_period",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R10",
+          "band": "R",
+          "difficulty": "D5",
+          "category": "statutory_period",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R11",
+          "band": "R",
+          "difficulty": "D2",
+          "category": "statutory_period",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R12",
+          "band": "R",
+          "difficulty": "D5",
+          "category": "composition",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "E01",
+          "band": "E",
+          "difficulty": "D1",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E02",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "precedence",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E03",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "precedence",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E04",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "which_instrument",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "E05",
+          "band": "E",
+          "difficulty": "D4",
+          "category": "exhaustive",
+          "banked_outcome": "partial",
+          "verdict": "correct"
+        },
+        {
+          "id": "E06",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "conflict",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E07",
+          "band": "E",
+          "difficulty": "D4",
+          "category": "conflict",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E08",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E09",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E10",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E11",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "underspecified",
+          "banked_outcome": "over_claim",
+          "verdict": "over_claim"
+        },
+        {
+          "id": "E12",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        }
+      ]
+    },
+    {
+      "label": "l5-qwen3-8b",
+      "model": "/opt/models/staging/Qwen3-8B-Q4_K_M.gguf",
+      "total_correct": 16,
+      "band_R_correct": 5,
+      "band_E_correct": 11,
+      "band_R_outcomes": {
+        "correct": 5,
+        "off_by_calendar": 3,
+        "wrong": 2,
+        "truncated": 2
+      },
+      "band_E_outcomes": {
+        "correct": 11,
+        "partial": 1
+      },
+      "regraded_since_run": [
+        "R09: banked wrong -> re-graded off_by_calendar"
+      ],
+      "rule9_breach_acknowledged": true,
+      "kernel": "7.0.0-29-generic",
+      "rows": [
+        {
+          "id": "R01",
+          "band": "R",
+          "difficulty": "D1",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R02",
+          "band": "R",
+          "difficulty": "D2",
+          "category": "statutory_period",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R03",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "off_by_calendar",
+          "verdict": "off_by_calendar"
+        },
+        {
+          "id": "R04",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R05",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "off_by_calendar",
+          "verdict": "off_by_calendar"
+        },
+        {
+          "id": "R06",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "payment_clock",
+          "banked_outcome": "wrong",
+          "verdict": "wrong"
+        },
+        {
+          "id": "R07",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R08",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R09",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "statutory_period",
+          "banked_outcome": "wrong",
+          "verdict": "off_by_calendar"
+        },
+        {
+          "id": "R10",
+          "band": "R",
+          "difficulty": "D5",
+          "category": "statutory_period",
+          "banked_outcome": "truncated",
+          "verdict": "truncated"
+        },
+        {
+          "id": "R11",
+          "band": "R",
+          "difficulty": "D2",
+          "category": "statutory_period",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R12",
+          "band": "R",
+          "difficulty": "D5",
+          "category": "composition",
+          "banked_outcome": "truncated",
+          "verdict": "truncated"
+        },
+        {
+          "id": "E01",
+          "band": "E",
+          "difficulty": "D1",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E02",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "precedence",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E03",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "precedence",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E04",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E05",
+          "band": "E",
+          "difficulty": "D4",
+          "category": "exhaustive",
+          "banked_outcome": "partial",
+          "verdict": "partial"
+        },
+        {
+          "id": "E06",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "conflict",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E07",
+          "band": "E",
+          "difficulty": "D4",
+          "category": "conflict",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E08",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E09",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E10",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E11",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E12",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        }
+      ]
+    },
+    {
+      "label": "l5-qwen38",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "total_correct": 23,
+      "band_R_correct": 11,
+      "band_E_correct": 12,
+      "band_R_outcomes": {
+        "correct": 11,
+        "off_by_calendar": 1
+      },
+      "band_E_outcomes": {
+        "correct": 12
+      },
+      "regraded_since_run": [
+        "R09: banked wrong -> re-graded off_by_calendar"
+      ],
+      "rule9_breach_acknowledged": true,
+      "kernel": "7.0.0-29-generic",
+      "rows": [
+        {
+          "id": "R01",
+          "band": "R",
+          "difficulty": "D1",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R02",
+          "band": "R",
+          "difficulty": "D2",
+          "category": "statutory_period",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R03",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R04",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R05",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "acceptance_window",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R06",
+          "band": "R",
+          "difficulty": "D3",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R07",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R08",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "payment_clock",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R09",
+          "band": "R",
+          "difficulty": "D4",
+          "category": "statutory_period",
+          "banked_outcome": "wrong",
+          "verdict": "off_by_calendar"
+        },
+        {
+          "id": "R10",
+          "band": "R",
+          "difficulty": "D5",
+          "category": "statutory_period",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R11",
+          "band": "R",
+          "difficulty": "D2",
+          "category": "statutory_period",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "R12",
+          "band": "R",
+          "difficulty": "D5",
+          "category": "composition",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E01",
+          "band": "E",
+          "difficulty": "D1",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E02",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "precedence",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E03",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "precedence",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E04",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E05",
+          "band": "E",
+          "difficulty": "D4",
+          "category": "exhaustive",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E06",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "conflict",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E07",
+          "band": "E",
+          "difficulty": "D4",
+          "category": "conflict",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E08",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "which_instrument",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E09",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E10",
+          "band": "E",
+          "difficulty": "D2",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E11",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        },
+        {
+          "id": "E12",
+          "band": "E",
+          "difficulty": "D3",
+          "category": "underspecified",
+          "banked_outcome": "correct",
+          "verdict": "correct"
+        }
+      ]
+    }
+  ]
+}

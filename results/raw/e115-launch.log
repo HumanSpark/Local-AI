@@ -1,0 +1,14 @@
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8117 --no-webui -v --reasoning-effort medium
+arm A: full-offload gate OK, 132 layers
+  A1 counting    reasoning_chars=   633 completion_tokens=  509   stop 41.9s
+  A1 scheduling  reasoning_chars=  1248 completion_tokens=  746   stop 62.0s
+  A2 counting    reasoning_chars=   337 completion_tokens=  220   stop 20.59s
+  A2 scheduling  reasoning_chars=   775 completion_tokens=  404   stop 35.14s
+server: /home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8117 --no-webui -v
+arm B: full-offload gate OK, 132 layers
+  B1 counting    reasoning_chars=   337 completion_tokens=  220   stop 19.71s
+  B1 scheduling  reasoning_chars=   775 completion_tokens=  404   stop 35.14s
+  B2 counting    reasoning_chars=   633 completion_tokens=  515   stop 43.48s
+  B2 scheduling  reasoning_chars=  1131 completion_tokens=  691   stop 57.56s
+
+written: results/raw/e115/e115-effort-override.json

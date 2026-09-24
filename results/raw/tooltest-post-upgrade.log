@@ -1,0 +1,10 @@
+=== local_smart
+  local_smart  should fire      CALLED get_invoice_total args={'invoice_number': 'INV-1042', 'currency': 'EUR'} (valid JSON) finish=tool_calls 9.4s
+  local_smart  should NOT fire  no call, text='A debit is an entry on the left side of an account (increasing assets ' finish=stop 13.0s
+=== local_fast
+  local_fast   should fire      CALLED get_invoice_total args={'invoice_number': 'INV-1042', 'currency': 'EUR'} (valid JSON) finish=tool_calls 1.0s
+  local_fast   should NOT fire  no call, text='A debit increases assets or expenses and decreases liabilities or equi' finish=stop 0.6s
+=== local_code
+  local_code   should fire      CALLED get_invoice_total args={'invoice_number': 'INV-1042', 'currency': 'EUR'} (valid JSON) finish=tool_calls 1.0s
+  local_code   should NOT fire  no call, text='A debit is an accounting entry that increases assets or expenses and d' finish=stop 0.6s
+=== TOOL TEST COMPLETE

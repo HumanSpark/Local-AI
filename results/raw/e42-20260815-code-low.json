@@ -1,0 +1,127 @@
+{
+  "label": "e42-code-low",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 24576,
+  "ctx": 32768,
+  "thinking": "low",
+  "request_timeout": 4396,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 666.65,
+    "p95_s": 2082.81,
+    "min_s": 138.87,
+    "max_s": 2082.81,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-15T16:14:28Z",
+  "wall_s": 6363.4,
+  "passed": 5,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 5,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "pass": 5,
+    "truncated": 1,
+    "wrong_answer": 2
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 10522,
+      "prompt_tokens": 293,
+      "reasoning_chars": 29603,
+      "wall_s": 867.47
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 4220,
+      "prompt_tokens": 263,
+      "reasoning_chars": 11202,
+      "wall_s": 346.7
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1677,
+      "prompt_tokens": 166,
+      "reasoning_chars": 5623,
+      "wall_s": 138.87
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 2920,
+      "prompt_tokens": 223,
+      "reasoning_chars": 7949,
+      "wall_s": 240.06
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 19339,
+      "prompt_tokens": 178,
+      "reasoning_chars": 61129,
+      "wall_s": 1622.81
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 8081,
+      "prompt_tokens": 373,
+      "reasoning_chars": 25364,
+      "wall_s": 666.65
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=24576",
+      "finish_reason": "length",
+      "completion_tokens": 24576,
+      "prompt_tokens": 266,
+      "reasoning_chars": 80135,
+      "wall_s": 2082.81
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 4781,
+      "prompt_tokens": 260,
+      "reasoning_chars": 15081,
+      "wall_s": 393.12
+    }
+  ]
+}

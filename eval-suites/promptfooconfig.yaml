@@ -1,0 +1,104 @@
+# File: promptfooconfig.yaml
+# Purpose: Eval-pilot suite - 4 task types x short/long context, deterministic assertions (spec: docs/plans/2026-07-04-eval-pilot.md).
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: One config serves every model - llama-server hosts whichever
+# model the runner started, so the provider block never changes. Long
+# variants inject real project prose via the {{prelude}} var (file://).
+# All grading is string/JS assertions at temperature 0; no LLM judges.
+
+description: "sparkbench eval pilot - short vs long context task suite"
+
+providers:
+  - id: openai:chat:local-model
+    config:
+      apiBaseUrl: http://127.0.0.1:8100/v1
+      apiKey: dummy-key
+      temperature: 0
+      max_tokens: 600
+
+prompts:
+  - "{{prelude}}{{task}}"
+
+defaultTest:
+  vars:
+    prelude: ""
+
+tests:
+  # --- EMAIL TRIAGE (short) ---
+  - description: triage-urgent-outage
+    vars: { task: "Classify this email as exactly one word - urgent, routine, or spam:\n\nSubject: PRODUCTION DOWN - all clients affected\nBody: The main API has been returning 500s for 20 minutes. Customers are calling. Need someone on this immediately." }
+    assert: [{ type: icontains, value: urgent }]
+  - description: triage-urgent-legal
+    vars: { task: "Classify this email as exactly one word - urgent, routine, or spam:\n\nSubject: Court deadline tomorrow\nBody: Our solicitor needs the signed affidavit before 10am tomorrow or we miss the filing deadline." }
+    assert: [{ type: icontains, value: urgent }]
+  - description: triage-routine-invoice
+    vars: { task: "Classify this email as exactly one word - urgent, routine, or spam:\n\nSubject: Invoice HS-2026-0851 attached\nBody: Please find attached this month's invoice. Payment due in 30 days as usual. Thanks!" }
+    assert: [{ type: icontains, value: routine }]
+  - description: triage-routine-meeting
+    vars: { task: "Classify this email as exactly one word - urgent, routine, or spam:\n\nSubject: Moving Thursday's catch-up to 3pm\nBody: Something came up - can we shift our usual sync half an hour later? Same link." }
+    assert: [{ type: icontains, value: routine }]
+  - description: triage-spam-prize
+    vars: { task: "Classify this email as exactly one word - urgent, routine, or spam:\n\nSubject: CONGRATULATIONS you are our WINNER!!!\nBody: You have been selected for a FREE cruise. Click here immediately to claim your prize before it expires!!!" }
+    assert: [{ type: icontains, value: spam }]
+  - description: triage-spam-crypto
+    vars: { task: "Classify this email as exactly one word - urgent, routine, or spam:\n\nSubject: Double your Bitcoin in 24 hours - guaranteed\nBody: Our AI trading bot guarantees 100% returns. Limited spots. Send 0.1 BTC to get started today!" }
+    assert: [{ type: icontains, value: spam }]
+
+  # --- EXTRACTION short (invoice) ---
+  - description: extract-short-invoice-number
+    vars: { task: "From the invoice below, what is the invoice number? Answer with just the invoice number.\n\n{{doc}}", doc: file://data/invoice.txt }
+    assert: [{ type: icontains, value: "HS-2026-0847" }]
+  - description: extract-short-total
+    vars: { task: "From the invoice below, what is the TOTAL DUE including VAT? Answer with just the amount.\n\n{{doc}}", doc: file://data/invoice.txt }
+    assert: [{ type: icontains, value: "8,388.60" }]
+  - description: extract-short-due-date
+    vars: { task: "From the invoice below, what is the payment due date? Answer with just the date.\n\n{{doc}}", doc: file://data/invoice.txt }
+    assert: [{ type: icontains, value: "11 July 2026" }]
+
+  # --- EXTRACTION long (~12K tokens of real bench log) ---
+  - description: extract-long-air-tg
+    vars:
+      prelude: file://data/long-log.txt
+      task: "\n\nFrom the benchmark log above: what tg128 value (tokens per second, at depth 0) was recorded for GLM-4.5-Air? Answer with just the number."
+    assert: [{ type: icontains, value: "23.90" }]
+  - description: extract-long-workhorse-tg
+    vars:
+      prelude: file://data/long-log.txt
+      task: "\n\nFrom the benchmark log above: what tg128 value was recorded for the Qwen3-30B-A3B workhorse at depth 0 (the step 6 matrix entry)? Answer with just the number."
+    assert: [{ type: icontains, value: "92.83" }]
+  - description: extract-long-120b-tg
+    vars:
+      prelude: file://data/long-log.txt
+      task: "\n\nFrom the benchmark log above: what tg128 value did gpt-oss-120b record in the step 5 reference benchmark? Answer with just the number."
+    assert: [{ type: icontains, value: "53.44" }]
+  - description: extract-long-14b-tg
+    vars:
+      prelude: file://data/long-log.txt
+      task: "\n\nFrom the benchmark log above: what tg128 value was recorded for Qwen3-14B in the step 6 matrix? Answer with just the number."
+    assert: [{ type: icontains, value: "24.39" }]
+
+  # --- SUMMARIZATION short (~1K tokens) ---
+  - description: summarize-short-whisper
+    vars: { task: "Summarize the following report section in exactly 3 bullet points. Be specific about the numbers.\n\n{{doc}}", doc: file://data/short-summary-src.txt }
+    assert:
+      - { type: icontains, value: "28" }
+      - { type: icontains, value: "turbo" }
+
+  # --- SUMMARIZATION long (~5K tokens) ---
+  - description: summarize-long-capability
+    vars:
+      prelude: file://data/long-summary-src.txt
+      task: "\n\nSummarize the findings above in exactly 3 bullet points for a business audience. Include the MoE-versus-dense speed comparison number."
+    assert:
+      - { type: icontains, value: "8.5" }
+
+  # --- CODING ---
+  - description: code-fizzbuzz
+    vars: { task: "Write a Python function fizzbuzz(n) that returns a list of strings for 1..n where multiples of 3 are 'Fizz', multiples of 5 are 'Buzz', multiples of both are 'FizzBuzz', and other numbers are str(i). Return only the code." }
+    assert:
+      - { type: javascript, value: "output.includes('def fizzbuzz') && output.includes('FizzBuzz') && (output.includes('% 15') || output.includes('% 3'))" }
+  - description: code-dedupe-preserve-order
+    vars: { task: "Write a Python function dedupe(items) that removes duplicates from a list while preserving the original order, without using dict.fromkeys. Return only the code." }
+    assert:
+      - { type: javascript, value: "output.includes('def dedupe') && (output.includes('seen') || output.includes('set('))" }

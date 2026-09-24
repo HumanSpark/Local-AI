@@ -1,0 +1,128 @@
+{
+  "label": "e42-code-off",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 24576,
+  "ctx": 32768,
+  "thinking": "off",
+  "request_timeout": 4396,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 141.19,
+    "p95_s": 205.15,
+    "min_s": 53.65,
+    "max_s": 205.15,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-15T14:28:25Z",
+  "wall_s": 1051.1,
+  "passed": 3,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 3,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "error": 2,
+    "pass": 3,
+    "timeout": 1,
+    "wrong_answer": 2
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 2072,
+      "prompt_tokens": 265,
+      "reasoning_chars": 0,
+      "wall_s": 169.6
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1331,
+      "prompt_tokens": 235,
+      "reasoning_chars": 0,
+      "wall_s": 110.06
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "TypeError: 'list' object is not an iterator",
+      "finish_reason": "stop",
+      "completion_tokens": 635,
+      "prompt_tokens": 138,
+      "reasoning_chars": 0,
+      "wall_s": 53.65
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1045,
+      "prompt_tokens": 195,
+      "reasoning_chars": 0,
+      "wall_s": 86.85
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "IndexError: index out of range",
+      "finish_reason": "stop",
+      "completion_tokens": 1717,
+      "prompt_tokens": 150,
+      "reasoning_chars": 0,
+      "wall_s": 141.19
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 2480,
+      "prompt_tokens": 345,
+      "reasoning_chars": 0,
+      "wall_s": 205.15
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "timeout",
+      "detail": "exceeded 15.0s",
+      "finish_reason": "stop",
+      "completion_tokens": 2184,
+      "prompt_tokens": 238,
+      "reasoning_chars": 0,
+      "wall_s": 180.58
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 1008,
+      "prompt_tokens": 232,
+      "reasoning_chars": 0,
+      "wall_s": 84.01
+    }
+  ]
+}

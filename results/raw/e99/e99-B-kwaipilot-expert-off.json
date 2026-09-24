@@ -1,0 +1,136 @@
+{
+  "label": "e99-B-kwaipilot-expert-off",
+  "model": "/opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 32768,
+  "context_preflight": {
+    "longest_prompt_tokens": 333,
+    "max_tokens": 16384,
+    "needed": 16717,
+    "ctx": 32768,
+    "headroom": 16051
+  },
+  "thinking": "off",
+  "request_timeout": 3031,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 8,
+    "median_s": 13.58,
+    "p95_s": 30.58,
+    "min_s": 3.12,
+    "max_s": 30.58,
+    "under_10s": 4,
+    "under_30s": 7
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-08-31T21:35:11Z",
+  "wall_s": 99.9,
+  "passed": 2,
+  "total": 8,
+  "by_tier": {
+    "expert": {
+      "pass": 2,
+      "total": 8
+    }
+  },
+  "outcome_counts": {
+    "error": 1,
+    "pass": 2,
+    "wrong_answer": 5
+  },
+  "results": [
+    {
+      "id": "glob_match",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 957,
+      "prompt_tokens": 265,
+      "reasoning_chars": 0,
+      "wall_s": 14.66
+    },
+    {
+      "id": "round_decimal",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 268,
+      "prompt_tokens": 235,
+      "reasoning_chars": 0,
+      "wall_s": 4.44
+    },
+    {
+      "id": "kmerge",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 187,
+      "prompt_tokens": 138,
+      "reasoning_chars": 0,
+      "wall_s": 3.19
+    },
+    {
+      "id": "wrap",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 1045,
+      "prompt_tokens": 195,
+      "reasoning_chars": 0,
+      "wall_s": 16.02
+    },
+    {
+      "id": "sliding_median",
+      "tier": "expert",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 180,
+      "prompt_tokens": 150,
+      "reasoning_chars": 0,
+      "wall_s": 3.12
+    },
+    {
+      "id": "apply_patch",
+      "tier": "expert",
+      "outcome": "error",
+      "detail": "ValueError: Path does not exist: /a",
+      "finish_reason": "stop",
+      "completion_tokens": 2004,
+      "prompt_tokens": 345,
+      "reasoning_chars": 0,
+      "wall_s": 30.58
+    },
+    {
+      "id": "interval_map",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 599,
+      "prompt_tokens": 238,
+      "reasoning_chars": 0,
+      "wall_s": 9.41
+    },
+    {
+      "id": "parse_csv",
+      "tier": "expert",
+      "outcome": "wrong_answer",
+      "detail": "AssertionError",
+      "finish_reason": "stop",
+      "completion_tokens": 878,
+      "prompt_tokens": 232,
+      "reasoning_chars": 0,
+      "wall_s": 13.58
+    }
+  ],
+  "truncated": 0,
+  "truncation_gate": "PASS"
+}

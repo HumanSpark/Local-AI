@@ -1,0 +1,914 @@
+{
+  "label": "e81-o2",
+  "tools": "routed",
+  "schema_version": "v2",
+  "router": "fixed",
+  "router_version": "tool-router-v1-2026-08-28",
+  "router_base_url": null,
+  "router_thinking": "off",
+  "router_decisions": "results/raw/e80-r2-decisions.json",
+  "order": "bank",
+  "interleave_dummy": true,
+  "thinking": "default",
+  "rule9_breach_acknowledged": true,
+  "rule9_busy_gpu": [
+    {
+      "process": "llama-server",
+      "pids": [
+        "282349"
+      ]
+    }
+  ],
+  "n_tools_offered": 0,
+  "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+  "tier": "l5",
+  "distractors": null,
+  "ctx": 16384,
+  "max_tokens": 4096,
+  "max_rounds": 6,
+  "server_extra": "-fa on",
+  "pack_chars": 8807,
+  "question_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12",
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "E06",
+    "E07",
+    "E08",
+    "E09",
+    "E10",
+    "E11",
+    "E12"
+  ],
+  "full_offload_gate": {
+    "layers_assigned": 98,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "correct": 15,
+  "total": 24,
+  "outcome_counts": {
+    "correct": 15,
+    "off_by_calendar": 3,
+    "over_claim": 1,
+    "wrong": 5
+  },
+  "class_counts": {
+    "correct_with_tool": 7,
+    "result_ignored": 4,
+    "wrong_args": 3,
+    "correct_without_tool": 8,
+    "no_call": 2
+  },
+  "total_tool_calls": 41,
+  "wall_s": 66.26,
+  "results": [
+    {
+      "id": "R01",
+      "category": "payment_clock",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "11 June 2026",
+      "citation": "FA-2025, clause 5.1",
+      "expected": "2026-06-11",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-05-12",
+            "days": 30
+          },
+          "result": "2026-06-11"
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 4.52,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R02",
+      "category": "statutory_period",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "30 June 2026",
+      "citation": "STAT-1 S.2; FA-2025 clause 4.3",
+      "expected": "2026-06-30",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-05-31",
+            "months": 1
+          },
+          "result": "2026-06-30"
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 1.4,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R03",
+      "category": "acceptance_window",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "24 March 2026",
+      "citation": "FA-2025 clause 4.1, 4.2; CO-1; CAL-2026",
+      "expected": "2026-03-24",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-03-11",
+            "days": 8,
+            "holidays": [
+              "2026-01-01",
+              "2026-02-02",
+              "2026-03-17",
+              "2026-04-06",
+              "2026-05-04",
+              "2026-06-01",
+              "2026-08-03",
+              "2026-10-26",
+              "2026-12-25",
+              "2026-12-28"
+            ]
+          },
+          "result": "2026-03-24"
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 3.2,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R04",
+      "category": "acceptance_window",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "11 May 2026",
+      "citation": "FA-2025, clause 4.1 and 4.2; CAL-2026",
+      "expected": "2026-05-11",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-04-28",
+            "days": 8,
+            "holidays": [
+              "2026-01-01",
+              "2026-02-02",
+              "2026-03-17",
+              "2026-04-06",
+              "2026-05-04",
+              "2026-06-01",
+              "2026-08-03",
+              "2026-10-26",
+              "2026-12-25",
+              "2026-12-28"
+            ]
+          },
+          "result": "2026-05-11"
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 3.19,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R05",
+      "category": "acceptance_window",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "2026-04-08",
+      "citation": "FA-2025 clause 4.1, FA-2025 clause 4.2, CAL-2026",
+      "expected": "2026-04-08",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-03-30",
+            "days": 6,
+            "holidays": [
+              "2026-01-01",
+              "2026-02-02",
+              "2026-03-17",
+              "2026-04-06",
+              "2026-05-04",
+              "2026-06-01",
+              "2026-08-03",
+              "2026-10-26",
+              "2026-12-25",
+              "2026-12-28"
+            ]
+          },
+          "result": "2026-04-08"
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 3.28,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R06",
+      "category": "payment_clock",
+      "outcome": "off_by_calendar",
+      "class": "result_ignored",
+      "answer": "76",
+      "citation": "FA-2025, clause 5.1 and 5.2",
+      "expected": "None",
+      "n_calls": 2,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-05-12",
+            "days": 30
+          },
+          "result": "2026-06-11"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2026-06-12",
+            "end": "2026-08-27",
+            "unit": "days"
+          },
+          "result": 76
+        }
+      ],
+      "rounds": 3,
+      "wall_s": 2.17,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R07",
+      "category": "payment_clock",
+      "outcome": "wrong",
+      "class": "result_ignored",
+      "answer": "1074.47",
+      "citation": "FA-2025, 5.2",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2026-05-12",
+            "end": "2026-08-27",
+            "unit": "days"
+          },
+          "result": 107
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-05-12",
+            "days": 1
+          },
+          "result": "2026-05-13"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-05-13",
+            "days": 107
+          },
+          "result": "2026-08-28"
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 2.79,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R08",
+      "category": "payment_clock",
+      "outcome": "wrong",
+      "class": "result_ignored",
+      "answer": "117.00",
+      "citation": "STAT-1 S.1, FA-2025 5.2",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2026-05-12T00:00",
+            "end": "2026-08-27T00:00",
+            "unit": "days"
+          },
+          "result": 107
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-05-12T00:00",
+            "days": 30
+          },
+          "result": "2026-06-11T00:00"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2026-06-11T00:00",
+            "end": "2026-08-27T00:00",
+            "unit": "days"
+          },
+          "result": 77
+        }
+      ],
+      "rounds": 3,
+      "wall_s": 3.31,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R09",
+      "category": "statutory_period",
+      "outcome": "off_by_calendar",
+      "class": "wrong_args",
+      "answer": "31 July 2026",
+      "citation": "STAT-1 S.3",
+      "expected": "2026-08-31",
+      "n_calls": 2,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-05-31",
+            "months": 2
+          },
+          "result": "2026-07-31"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2026-07-31"
+          },
+          "result": "2026-07-31"
+        }
+      ],
+      "rounds": 3,
+      "wall_s": 1.88,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R10",
+      "category": "statutory_period",
+      "outcome": "wrong",
+      "class": "wrong_args",
+      "answer": "14 December 2025",
+      "citation": "STAT-1 S.4, S.5",
+      "expected": "2027-06-16",
+      "n_calls": 5,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2020-09-14",
+            "years": 6
+          },
+          "result": "2026-09-14"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2023-03-01",
+            "days": 1
+          },
+          "result": "2023-03-02"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2023-11-30",
+            "days": 1
+          },
+          "result": "2023-12-01"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2023-03-01",
+            "end": "2023-11-30",
+            "unit": "days"
+          },
+          "result": 274
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-09-14",
+            "days": -274
+          },
+          "result": "2025-12-14"
+        }
+      ],
+      "rounds": 6,
+      "wall_s": 4.05,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R11",
+      "category": "statutory_period",
+      "outcome": "off_by_calendar",
+      "class": "result_ignored",
+      "answer": "274",
+      "citation": "STAT-1 S.5",
+      "expected": "None",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2023-03-01",
+            "end": "2023-11-30",
+            "unit": "days"
+          },
+          "result": 274
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 1.42,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "R12",
+      "category": "composition",
+      "outcome": "wrong",
+      "class": "wrong_args",
+      "answer": "2026-11-02",
+      "citation": "FA-2025, clause 3.4",
+      "expected": "2026-10-30",
+      "n_calls": 4,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-08-12",
+            "days": 60,
+            "holidays": [
+              "2026-01-01",
+              "2026-02-02",
+              "2026-03-17",
+              "2026-04-06",
+              "2026-05-04",
+              "2026-06-01",
+              "2026-08-03",
+              "2026-10-26",
+              "2026-12-25",
+              "2026-12-28"
+            ]
+          },
+          "result": "2026-11-05"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2026-10-12"
+          },
+          "result": "2026-10-31"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2026-10-31"
+          },
+          "result": "Saturday"
+        },
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2026-10-31",
+            "direction": "forward",
+            "holidays": [
+              "2026-01-01",
+              "2026-02-02",
+              "2026-03-17",
+              "2026-04-06",
+              "2026-05-04",
+              "2026-06-01",
+              "2026-08-03",
+              "2026-10-26",
+              "2026-12-25",
+              "2026-12-28"
+            ]
+          },
+          "result": "2026-11-02"
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 6.33,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E01",
+      "category": "which_instrument",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "CO-2",
+      "citation": "CO-2",
+      "expected": "co-2",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 2.87,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E02",
+      "category": "precedence",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "96,000",
+      "citation": "VAR-1",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.42,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E03",
+      "category": "precedence",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "180,000",
+      "citation": "CO-1",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.43,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E04",
+      "category": "which_instrument",
+      "outcome": "wrong",
+      "class": "no_call",
+      "answer": "two months",
+      "citation": "FA-2025, clause 3.3",
+      "expected": "three months",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.47,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E05",
+      "category": "exhaustive",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "2; CO-1 and CO-3",
+      "citation": "FA-2025, CO-1, CO-3",
+      "expected": "None",
+      "n_calls": 13,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2026-02-16"
+          },
+          "result": "Monday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2026-03-09"
+          },
+          "result": "Monday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2026-04-07"
+          },
+          "result": "Tuesday"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-02-16",
+            "days": 2
+          },
+          "result": "2026-02-18"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-03-09",
+            "days": 2
+          },
+          "result": "2026-03-11"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-04-07",
+            "days": 2
+          },
+          "result": "2026-04-09"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-02-16",
+            "days": 3
+          },
+          "result": "2026-02-19"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-03-09",
+            "days": 3
+          },
+          "result": "2026-03-12"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-04-07",
+            "days": 3
+          },
+          "result": "2026-04-10"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-02-16",
+            "days": 12
+          },
+          "result": "2026-03-04"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-03-09",
+            "days": 8
+          },
+          "result": "2026-03-19"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-04-07",
+            "days": 6
+          },
+          "result": "2026-04-15"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2026-04-15"
+          },
+          "result": "2026-04-30"
+        }
+      ],
+      "rounds": 6,
+      "wall_s": 7.59,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E06",
+      "category": "conflict",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "11 March 2026",
+      "citation": "CHRON-1",
+      "expected": "2026-03-11",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.46,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E07",
+      "category": "conflict",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "no",
+      "citation": "CO-2, VAR-1",
+      "expected": "no",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.49,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E08",
+      "category": "which_instrument",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "CO-3; 8 Business Days",
+      "citation": "CO-3, CHRON-1",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2026-04-28"
+          },
+          "result": "Tuesday"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-04-28",
+            "days": 8
+          },
+          "result": "2026-05-08"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2026-04-28",
+            "days": 12
+          },
+          "result": "2026-05-14"
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 2.45,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E09",
+      "category": "underspecified",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "NOT_IN_PACK",
+      "citation": "NONE",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.34,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E10",
+      "category": "underspecified",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "NOT_IN_PACK",
+      "citation": "NONE",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.34,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E11",
+      "category": "underspecified",
+      "outcome": "over_claim",
+      "class": "no_call",
+      "answer": "Yes, the Site C sensor array passed acceptance testing.",
+      "citation": "CO-3; CHRON-1",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.51,
+      "routing": {
+        "offer_tool": false,
+        "router": "fixed",
+        "replayed": true
+      }
+    },
+    {
+      "id": "E12",
+      "category": "underspecified",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "NOT_IN_PACK",
+      "citation": "NONE",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.48,
+      "routing": {
+        "offer_tool": true,
+        "router": "fixed",
+        "replayed": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+[2026-08-31T18:51:57+01:00] === preflight ===
+[2026-08-31T18:51:57+01:00] preflight OK
+[2026-08-31T18:51:57+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T18:51:57+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T18:51:57+01:00] window open, VERIFIED
+[2026-08-31T18:51:57+01:00] --- kwaipilot / expert / max_tokens=16384 / ctx=32768 ---
+
+*** TRUNCATION GATE: 6/8 tasks hit the token cap and produced no usable output. ***
+    max_tokens=16384. These are NOT failures - they were never finished.
+    hint: raise --max-tokens (and --ctx to fit it). Verify the chat template honours
+    any effort flag before using one - an ignored flag is recorded as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway.
+=== coding eval: e92-kwaipilot-mt16384 (local) ===
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8110 --no-webui -v
+full-offload gate: {'layers_assigned': 82, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 333, 'max_tokens': 16384, 'needed': 16717, 'ctx': 32768, 'headroom': 16051}
+  [1/8] glob_match             truncated        16384 tok, 259.45s  hit max_tokens=16384
+  [2/8] round_decimal          truncated        16384 tok, 259.55s  hit max_tokens=16384
+  [3/8] kmerge                 error            292 tok, 4.78s  TypeError: 'list' object is not an iterator
+  [4/8] wrap                   truncated        16384 tok, 259.37s  hit max_tokens=16384
+  [5/8] sliding_median         truncated        16384 tok, 259.31s  hit max_tokens=16384
+  [6/8] apply_patch            truncated        16384 tok, 259.84s  hit max_tokens=16384
+  [7/8] interval_map           wrong_answer     10691 tok, 166.41s  AssertionError
+  [8/8] parse_csv              truncated        16384 tok, 259.46s  hit max_tokens=16384
+[2026-08-31T19:20:50+01:00] kwaipilot/expert rc=3 wall=1733s
+[2026-08-31T19:20:50+01:00] --- nemotron-nano / l4 / max_tokens=16384 / ctx=32768 ---
+
+*** TRUNCATION GATE: 1/15 items (7%) hit the token cap and returned no answer. ***
+    max_tokens=16384. These are NOT misses - they were never answered.
+    hint: raise --max-tokens (and --ctx to fit it). Check the chat template honours
+    any effort flag before reaching for one: a template that ignores reasoning_effort
+    makes --thinking inert while the result file records it as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway,
+    in which case the truncated items are declared in the result file.
+=== PS eval L4: e92-nemotron-nano-mt16384 (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2726, 'max_tokens': 16384, 'needed': 19110, 'ctx': 32768, 'headroom': 13658}
+  [1/15] P1  statutory_period correct           cite=ok 32.09s  28 February 2026
+  [2/15] P2  statutory_period correct           cite=ok 140.43s  30 April 2026
+  [3/15] P3  statutory_period correct           cite=ok 20.03s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 15.69s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    correct           cite=ok 182.52s  493.99
+  [6/15] N1  notice_period    correct           cite=ok 30.3s  30 November 2026
+  [7/15] N2  notice_period    truncated         cite=no 268.09s  None
+  [8/15] F1  fee_basis        correct           cite=ok 45.85s  106800
+  [9/15] S1  survival         correct           cite=no 10.41s  d
+  [10/15] D1  defect_find      correct           cite=ok 41.69s  d
+  [11/15] D2  defect_find      correct           cite=ok 18.73s  4
+  [12/15] D3  defect_find      correct           cite=ok 15.43s  650000
+  [13/15] X1  defect_absent    correct           cite=ok 17.29s  NO
+  [14/15] X2  defect_absent    correct           cite=no 9.13s  NO
+  [15/15] U1  underspecified   correct           cite=ok 9.62s  NOT_IN_PACK
+[2026-08-31T19:35:11+01:00] nemotron-nano/l4 rc=3 wall=861s -> /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-l4-mt16384.json
+[2026-08-31T19:35:11+01:00] --- nemotron-nano / l3 / max_tokens=16384 / ctx=49152 ---
+=== PS eval L3: e92-nemotron-nano-mt16384 (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/nvidia_Nemotron-3-Nano-30B-A3B-Q4_K_M.gguf -c 49152 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 106, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 21295, 'max_tokens': 16384, 'needed': 37679, 'ctx': 49152, 'headroom': 11473}
+  [1/12] D1  date_effective   correct           cite=ok 40.63s  42000
+  [2/12] D2  date_effective   correct           cite=ok 32.76s  500000
+  [3/12] D3  date_effective   correct           cite=ok 21.93s  51,000
+  [4/12] V1  revocation       correct           cite=ok 18.32s  24
+  [5/12] V2  revocation       correct           cite=ok 15.58s  YES
+  [6/12] P1  precedence       correct           cite=ok 96.12s  6 months
+  [7/12] P2  precedence       over_applied      cite=no 25.2s  1 business day
+  [8/12] M1  multihop         correct           cite=ok 22.97s  378000
+  [9/12] M2  multihop         stale_value       cite=no 59.23s  139500
+  [10/12] M3  multihop         correct           cite=no 272.85s  24.5
+  [11/12] N1  exhaustive       format_error      cite=no 12.43s  None
+  [12/12] Z1  underspecified   over_claim        cite=no 29.02s  No, VAT is not chargeable on a service credit issu
+
+e92-nemotron-nano-mt16384: 8/12 correct, citations 7/12
+OVER-CLAIM 1/1 | STALE 0/5 | PREMATURE 0
+by_category: {'date_effective': {'correct': 3, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 1, 'total': 2}, 'multihop': {'correct': 2, 'total': 3}, 'exhaustive': {'correct': 0, 'total': 1}, 'underspecified': {'correct': 0, 'total': 1}}
+outcomes: {'correct': 8, 'format_error': 1, 'over_applied': 1, 'over_claim': 1, 'stale_value': 1}
+written: /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-l3-mt16384.json
+[2026-08-31T19:46:03+01:00] nemotron-nano/l3 rc=0 wall=652s -> /home/agent-spark/sparkbench/results/raw/e92/e92-nemotron-nano-l3-mt16384.json
+[2026-08-31T19:46:03+01:00] --- kwaipilot / l4 / max_tokens=16384 / ctx=32768 ---
+
+*** TRUNCATION GATE: 1/15 items (7%) hit the token cap and returned no answer. ***
+    max_tokens=16384. These are NOT misses - they were never answered.
+    hint: raise --max-tokens (and --ctx to fit it). Check the chat template honours
+    any effort flag before reaching for one: a template that ignores reasoning_effort
+    makes --thinking inert while the result file records it as applied.
+    Refusing to report a score. Pass --allow-truncation to record it anyway,
+    in which case the truncated items are declared in the result file.
+=== PS eval L4: e92-kwaipilot-mt16384 (local) ===
+pack: 10,029 chars over 9 question categories, 15 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Kwaipilot_KAT-Coder-V2.5-Dev-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 82, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 2648, 'max_tokens': 16384, 'needed': 19032, 'ctx': 32768, 'headroom': 13736}
+  [1/15] P1  statutory_period correct           cite=ok 6.52s  28 February 2026
+  [2/15] P2  statutory_period correct           cite=ok 5.62s  30 April 2026
+  [3/15] P3  statutory_period correct           cite=ok 5.02s  14 September 2026
+  [4/15] B1  breach_clock     correct           cite=ok 2.96s  6 April 2026 at 14:30
+  [5/15] I1  interest_calc    wrong             cite=ok 8.24s  EUR 150.49
+  [6/15] N1  notice_period    off_by_calendar   cite=ok 3.91s  31 October 2026
+  [7/15] N2  notice_period    truncated         cite=no 259.98s  None
+  [8/15] F1  fee_basis        correct           cite=ok 4.54s  EUR 106,800
+  [9/15] S1  survival         correct           cite=ok 2.75s  (d)
+  [10/15] D1  defect_find      correct           cite=ok 6.08s  (d)
+  [11/15] D2  defect_find      correct           cite=ok 4.22s  4
+  [12/15] D3  defect_find      correct           cite=ok 2.82s  650,000
+  [13/15] X1  defect_absent    correct           cite=ok 7.49s  NO
+  [14/15] X2  defect_absent    correct           cite=ok 3.43s  NO
+  [15/15] U1  underspecified   correct           cite=ok 2.81s  NOT_IN_PACK
+[2026-08-31T19:51:33+01:00] kwaipilot/l4 rc=3 wall=330s -> /home/agent-spark/sparkbench/results/raw/e92/e92-kwaipilot-l4-mt16384.json
+[2026-08-31T19:51:33+01:00] === rerun done in 3576s ===
+[2026-08-31T19:51:33+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T19:51:34+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1771409 
+[2026-08-31T19:51:34+01:00] relay restored, VERIFIED
+[2026-08-31T19:51:34+01:00] rerun finished, rc=0

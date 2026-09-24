@@ -1,0 +1,114 @@
+# File: e10-full-table.yaml
+# Purpose: Answer key for the E10 faithful-enumeration task - every model with a depth-0 tg128
+#          recorded in data/long-log.txt, plus the values that look like data and are not.
+# Project: sparkbench | Date: 2026-08-11
+#
+# Overview: Ground truth for keyed scoring (docs/plans/2026-08-11-benchmark-instrumentation-uplift.md
+# task 3). Each required element carries the checkable proposition, the SET of acceptable surface
+# forms for both the model name and the value, and the named failure mode a miss represents.
+# `traps` are values present in the log that are NOT depth-0 llama-bench tg128 measurements;
+# reproducing one as table data is a contradiction, not a miss.
+#
+# Derivation: every line matching a tg128 measurement was read in context and attributed to the
+# nearest preceding step heading. Line numbers are into data/long-log.txt as committed.
+# NOTE the original promptfoo assertion for this test checked only 4 of these 8 values
+# (53.44, 92.83, 24.39, 23.90), so a "pass" never established the table was complete.
+
+task: e10-full-table
+source: data/long-log.txt
+proposition: >-
+  List every model with a tg128 value recorded at depth 0 anywhere in the log,
+  with the exact value from the log.
+
+required:
+  - id: 1
+    model: gpt-oss-120b-mxfp4
+    aliases: ["gpt-oss-120b", "gpt-oss-120b-mxfp4", "gpt-oss-120b-mxfp4-00001-of-00003.gguf", "gpt-oss-120b-mxfp4 shards"]
+    values: ["53.44"]
+    line: 170
+    missed: >-
+      Step 5 is the reference-benchmark gate and the only leg whose row is stated as a
+      comparison ("53.44 vs 45.54"). A reader who scans for the "| tg128:" table form
+      misses it entirely.
+
+  - id: 2
+    model: Qwen3-30B-A3B-Instruct-2507-Q4_K_M
+    aliases: ["Qwen3-30B-A3B", "Qwen3-30B-A3B-Instruct-2507", "Qwen3-30B-A3B-Instruct-2507-Q4_K_M", "Qwen3-30B-A3B-Instruct-2507-GGUF"]
+    values: ["92.83"]
+    line: 275
+    missed: The workhorse leg; omitting it drops the highest-throughput MoE result in the log.
+
+  - id: 3
+    model: Qwen3-14B-Q4_K_M
+    aliases: ["Qwen3-14B", "Qwen3-14B-Q4_K_M", "Qwen3-14B-Q4_K_M.gguf"]
+    values: ["24.39"]
+    line: 299
+    missed: The small dense baseline; without it the dense-vs-MoE contrast has no anchor.
+
+  - id: 4
+    model: GLM-4.5-Air
+    aliases: ["GLM-4.5-Air", "GLM-4.5-Air-GGUF", "GLM-4.5-Air Q4_K_M", "glm4moe 106B.A12B"]
+    values: ["23.90", "23.9"]
+    line: 349
+    missed: >-
+      Recorded under a heading about a memory-edge deadlock and split invocations, so the
+      result is easy to read as a failed run rather than a recorded value.
+
+  - id: 5
+    model: gpt-oss-20b-mxfp4
+    aliases: ["gpt-oss-20b", "gpt-oss-20b-mxfp4", "gpt-oss-20b-mxfp4.gguf"]
+    values: ["77.76"]
+    line: 434
+    missed: >-
+      Step 7 Row A. Sits below a long pre-registered-prediction block; a reader who stops at
+      the Step 6 matrix never reaches it.
+
+  - id: 6
+    model: Qwen3.6-35B-A3B-UD-Q4_K_XL
+    aliases: ["Qwen3.6-35B-A3B", "Qwen3.6-35B-A3B-UD-Q4_K_XL", "Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf"]
+    values: ["59.30", "59.3"]
+    line: 469
+    missed: Step 7 Row B. The heading says "tg MISSES pre-registered" - a miss against a
+      PREDICTION, not a failed measurement. Dropping it confuses the two.
+
+  - id: 7
+    model: GLM-4.7-Flash-Q4_K_M
+    aliases: ["GLM-4.7-Flash-Q4_K_M", "GLM-4.7-Flash-Q4_K_M.gguf", "GLM-4.7-Flash Q4_K_M"]
+    values: ["71.93"]
+    line: 539
+    missed: >-
+      Step 7 Row C. Must be kept distinct from the MXFP4_MOE quant of the SAME model
+      (element 8) - collapsing the two into one row loses the quant-tax comparison.
+
+  - id: 8
+    model: GLM-4.7-Flash-MXFP4_MOE
+    aliases: ["GLM-4.7-Flash-MXFP4_MOE", "GLM-4.7-Flash-MXFP4_MOE.gguf", "GLM-4.7-Flash MXFP4"]
+    values: ["62.94"]
+    line: 588
+    missed: >-
+      Recorded in a Step 7 ADDENDUM, not a numbered row. The most-missed element: it is a
+      second quant of an already-listed model, so a reader deduplicating by model name
+      drops it.
+
+traps:
+  - value: "253.5"
+    line: 92
+    why: >-
+      Step 4a tiny smoke test, phrased "generation 253.5 t/s". It is not a llama-bench
+      tg128 measurement and has no depth-0 row. Reproducing it as table data asserts a
+      benchmark figure the log does not contain.
+  - value: "45.54"
+    line: 170
+    why: >-
+      The COMMUNITY reference figure that 53.44 is compared against, not a measurement
+      taken on this box. Attributing it to gpt-oss-120b as our result inverts the finding.
+  - value: "92.37"
+    line: 804
+    why: >-
+      Step 8 Block 3c contamination experiment - a tg figure under a deliberately
+      perturbed condition, not a depth-0 headline. Nothing in the log attributes it to a
+      model row.
+
+# Depth-8192 values. Real measurements, wrong depth: 48.35, 66.97, 21.23, 20.74, 55.24.
+# Listed separately because reporting one is a depth confusion rather than invented data.
+wrong_depth: ["48.35", "66.97", "21.23", "20.74", "55.24"]

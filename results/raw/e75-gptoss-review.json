@@ -1,0 +1,1166 @@
+{
+  "meta": {
+    "reviewer": "gptoss",
+    "draft_arm": "workhorse",
+    "peer_arm": "gptoss",
+    "max_tokens": 1024,
+    "n_items": 24,
+    "drafts_reused_from": "E74 (not regenerated)",
+    "started_at": "2026-08-20T02:01:35+0100",
+    "kernel": "7.0.0-28-generic"
+  },
+  "records": [
+    {
+      "id": "K01",
+      "category": "compare",
+      "pack": "s",
+      "draft": "**Failure 1: amdgpu SDMA-suballocator deadlock (memory-edge-deadlock.md)**  \n- **VRAM figure observed:** Exactly **2.00 GiB** (2,147,483,648 B)  \n- **Hard power cycle required:** Yes  \n\n**Failure 2: gpt-oss-120b decode hang (2026-08-19-gptoss120b-decode-hang.md)**  \n- **VRAM figure observed:** **1.90 GiB**, never parked  \n- **Hard power cycle required:** No (process was killed normally with `pkill`)",
+      "draft_wall_s": 28.46,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 3.26,
+        "outcome": "completed"
+      },
+      "peer_answer": "**1.\u202famdgpu\u202fSDMA\u2011suballocator deadlock (the \u201cmemory\u2011edge\u2011deadlock\u201d)**  \n- **VRAM observed:** exactly **2.00\u202fGiB** (2\u202f147\u202f483\u202f648\u202fB) \u2013 the driver\u2019s small\u2011buffer suballocator parks at this size and never grows.  \n- **Recovery:** a **hard physical power\u2011cycle** is required; `SIGKILL` and a graceful `sudo reboot` both stall on the wedged task.\n\n**2.\u202fgpt\u2011oss\u2011120b decode\u2011hang (the \u201cdecode\u2011hang\u201d incident)**  \n- **VRAM observed:** about **1.90\u202fGiB** (the process never parked at 2\u202fGiB; the model\u2019s GTT usage rose to ~64\u202fGiB, but VRAM stayed at ~1.90\u202fGiB).  \n- **Recovery:** no hard power\u2011cycle needed \u2013 the process could be killed normally (`pkill`) and the box remained reachable.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "**Failure 1: amdgpu SDMA-suballocator deadlock (memory-edge-deadlock.md)**  \n- **VRAM figure observed:** Exactly **2.00 GiB** (2,147,483,648 B)  \n- **Hard power cycle required:** Yes  \n\n**Failure 2: gpt-oss-120b decode hang (2026-08-19-gptoss120b-decode-hang.md)**  \n- **VRAM figure observed:** **1.90 GiB**, never parked  \n- **Hard power cycle required:** No (process was killed normally with `pkill`)",
+        "wall_s": 10.96,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 406,
+          "prompt_tokens": 14403,
+          "total_tokens": 14809,
+          "prompt_tokens_details": {
+            "cached_tokens": 13883
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 1 -> 2",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "**Failure 1: amdgpu SDMA-suballocator deadlock (memory-edge-deadlock.md)**  \n- **VRAM figure observed:** Exactly **2.00 GiB** (2,147,483,648 B)  \n- **Hard power cycle required:** Yes  \n\n**Failure 2: gpt-oss-120b decode hang (2026-08-19-gptoss120b-decode-hang.md)**  \n- **VRAM figure observed:** **1.90 GiB**, never parked  \n- **Hard power cycle required:** No (process was killed normally with `pkill`)",
+        "wall_s": 14.45,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 591,
+          "prompt_tokens": 14403,
+          "total_tokens": 14994,
+          "prompt_tokens_details": {
+            "cached_tokens": 14277
+          }
+        }
+      }
+    },
+    {
+      "id": "K02",
+      "category": "implication",
+      "pack": "s",
+      "draft": "The proposed monitor is a defect because it would raise a false alarm during normal model loading. According to the documents, a `D` state process with `wchan` of `folio_wait_bit_common` is **normal** while reading a large model from disk \u2014 this is an ordinary page-cache wait, not a deadlock. The monitor would incorrectly flag this as a problem, training operators to ignore alarms. This is explicitly identified as a defect in the `decode-hang` document, where a check script initially reported `SUSPICIOUS` throughout normal loading due to this exact issue. The correct behavior is to allow `D` state during disk reads, and only alarm on the specific deadlock fingerprint (e.g., `wchan` = `drm_suballoc_new`, VRAM parked at 2.00 GiB, etc.).",
+      "draft_wall_s": 3.43,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.23,
+        "outcome": "completed"
+      },
+      "peer_answer": "The alarm would be **defective** because a \u201cD\u2011state\u201d (uninterruptible) flag is **not unique to the dead\u2011lock** we are trying to catch.\n\n* **Dead\u2011lock fingerprint** (\u202f`memory\u2011edge\u2011deadlock.md`\u202f): D\u2011state is only one of six signals. The decisive pair is **`wchan = drm_suballoc_new`** together with **VRAM parked at exactly\u202f2.00\u202fGiB (2,147,483,648\u202fB)**. Without those, a D\u2011state task is harmless.  \n\n* **Normal D\u2011state** (\u202f`2026\u201108\u201119\u2011gptoss120b\u2011decode\u2011hang.md`\u202f): during a 59\u202fGiB model load the nine llama\u2011server threads were all in **state\u202fS**, but the check script originally flagged **D\u2011state as \u201csuspicious\u201d** because it is the *normal* condition while reading large files (`folio_wait_bit_common`). The process was killable and recovered without a power\u2011cycle.\n\n* **Consequences**: an alarm that fires on any D\u2011state would fire on every large\u2011model load, on ordinary decode waits, and on the harmless situation described on **2026\u201108\u201119**. It would generate false positives, drown out the true dead\u2011lock (which needs the exact `drm_suballoc_new` wchan and 2\u202fGiB VRAM park), and could lead operators to ignore a real wedged task.\n\nTherefore, monitoring **only** for D\u2011state is too coarse and would be a defect, not a useful alarm.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The proposed monitor is a defect because it would raise a false alarm during normal model loading. According to the documents, a `D` state process with `wchan` of `folio_wait_bit_common` is **normal** while reading a large model from disk \u2014 this is an ordinary page-cache wait, not a deadlock. The monitor would incorrectly flag this as a problem, training operators to ignore alarms. This is explicitly identified as a defect in the `decode-hang` document, where a check script initially reported `SUSPICIOUS` throughout normal loading due to this exact issue. The correct behavior is to allow `D` state during disk reads, and only alarm on the specific deadlock fingerprint (e.g., `wchan` = `drm_suballoc_new`, VRAM parked at 2.00 GiB, etc.).",
+        "wall_s": 14.56,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 528,
+          "prompt_tokens": 14455,
+          "total_tokens": 14983,
+          "prompt_tokens_details": {
+            "cached_tokens": 13883
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 2 -> 3",
+        "action": "rewrite",
+        "protocol_adhered": false,
+        "raw": "The monitor would be a defect because a **D\u2011state (uninterruptible) process is not itself a reliable sign of the amdgpu sub\u2011allocator deadlock**; it also occurs during ordinary model loading.\n\n* **Normal loading shows D\u2011state.**  \n  In the *gpt\u2011oss\u2011120b decode\u2011hang* incident the authors note that the check script initially reported every \u201cSUSPICIOUS\u201d while the 59\u202fGiB model was being read from disk. The process was in D\u2011state with a `wchan` of `folio_wait_bit_common`, which is just an ordinary page\u2011cache wait and is expected during large\u2011model loads. Raising an alarm on any D\u2011state would theref",
+        "final_answer": "The monitor would be a defect because a **D\u2011state (uninterruptible) process is not itself a reliable sign of the amdgpu sub\u2011allocator deadlock**; it also occurs during ordinary model loading.\n\n* **Normal loading shows D\u2011state.**  \n  In the *gpt\u2011oss\u2011120b decode\u2011hang* incident the authors note that the check script initially reported every \u201cSUSPICIOUS\u201d while the 59\u202fGiB model was being read from disk. The process was in D\u2011state with a `wchan` of `folio_wait_bit_common`, which is just an ordinary page\u2011cache wait and is expected during large\u2011model loads. Raising an alarm on any D\u2011state would therefore generate a flood of false positives and teach operators to ignore the alarm.\n\n* **The deadlock fingerprint is much more specific.**  \n  The *memory\u2011edge\u2011deadlock* document lists six signals that together identify the fatal condition. The D\u2011state is only one of them; the decisive clues are  \n\n  1. `wchan`\u202f=\u202f`drm_suballoc_new` (the driver\u2019s small\u2011buffer sub\u2011allocator),  \n  2. VRAM usage **exactly 2.00\u202fGiB** (2\u202f147\u202f483\u202f648\u202fB) and stuck at that level,  \n  3. Resident set size collapsed to ~30\u201157\u202fMiB,  \n  4.",
+        "wall_s": 23.54,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 14455,
+          "total_tokens": 15479,
+          "prompt_tokens_details": {
+            "cached_tokens": 14444
+          }
+        }
+      }
+    },
+    {
+      "id": "K03",
+      "category": "compare",
+      "pack": "s",
+      "draft": "Rule 9 governs how many GPU consumers may run at once.\n\nIt says: **One GPU consumer at a time** \u2014 a contended number is **VOID, not noisy**.\n\nSpecifically, the rule states that any second consumer (another `llama-bench`, another `llama-server`, or the sparkrelay gateway) makes **both measurements void**. A contended result is **deleted, not archived**, unless kept as evidence for a finding \u2014 and then it must be labelled as such.",
+      "draft_wall_s": 2.16,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.57,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Rule\u202f9** \u2013 *One GPU consumer at a time \u2013 a contended number is\u202fVOID, not noisy*.\n\nThe rule states that the box has a single GPU, so any second consumer (e.g., another\u202f`llama\u2011server`, `llama\u2011bench`, or the gateway) makes **both measurements void**. A contended result is considered *void* (invalid) and is deleted rather than kept as a noisy or degraded measurement.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Rule 9 governs how many GPU consumers may run at once.\n\nIt says: **One GPU consumer at a time** \u2014 a contended number is **VOID, not noisy**.\n\nSpecifically, the rule states that any second consumer (another `llama-bench`, another `llama-server`, or the sparkrelay gateway) makes **both measurements void**. A contended result is **deleted, not archived**, unless kept as evidence for a finding \u2014 and then it must be labelled as such.",
+        "wall_s": 13.3,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 503,
+          "prompt_tokens": 14372,
+          "total_tokens": 14875,
+          "prompt_tokens_details": {
+            "cached_tokens": 13883
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 9 -> 10",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "**Correct answer:**  \nThe relevant rule is **Rule\u202f9** in the harness rules. It states that only one GPU consumer may run at a time; any additional consumer (e.g., a second `llama\u2011bench`, `llama\u2011server`, or the sparkrelay gateway) makes the measurement **VOID** (i.e., the result is considered invalid). A contended result is therefore **deleted, not archived**, unless it is deliberately retained as evidence for a finding, in which case it must be labelled as such.",
+        "final_answer": "**  \nThe relevant rule is **Rule\u202f9** in the harness rules. It states that only one GPU consumer may run at a time; any additional consumer (e.g., a second `llama\u2011bench`, `llama\u2011server`, or the sparkrelay gateway) makes the measurement **VOID** (i.e., the result is considered invalid). A contended result is therefore **deleted, not archived**, unless it is deliberately retained as evidence for a finding, in which case it must be labelled as such.",
+        "wall_s": 9.99,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 400,
+          "prompt_tokens": 14372,
+          "total_tokens": 14772,
+          "prompt_tokens_details": {
+            "cached_tokens": 14269
+          }
+        }
+      }
+    },
+    {
+      "id": "K04",
+      "category": "implication",
+      "pack": "s",
+      "draft": "The ONE confirmed trigger described in the material is: **running heavy disk I/O concurrently with a near-edge GPU model load**.\n\nThe operative mechanism is said to be: **memory pressure from concurrent I/O evicting model pages faster than they load, causing the total footprint to exceed 128 GB RAM, which starves the amdgpu driver's small-buffer suballocator during VM page-table setup**.",
+      "draft_wall_s": 1.86,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 6.71,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Confirmed trigger:**\u202fRunning heavy disk I/O\u202f(e.g., large\u202fsha256sum, downloads, backups) **concurrently with a near\u2011edge\u2011size model load** (>\u202f~60\u202fGiB).  \n\n**Operative mechanism:**\u202fThe I/O creates **memory\u2011pressure** that pushes total RAM usage past the 128\u202fGB ceiling, evicting model pages from the file\u2011cache. While the GPU backend has obtained its first 2\u202fGiB buffer, the driver\u2019s small\u2011buffer suballocator (`drm_suballoc_new`) then starves for the next buffer and blocks the VM\u2011page\u2011table SDMA job. This starvation produces an un\u2011interruptible D\u2011state deadlock that can only be cleared by a hard power\u2011cycle.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The ONE confirmed trigger described in the material is: **running heavy disk I/O concurrently with a near-edge GPU model load**.\n\nThe operative mechanism is said to be: **memory pressure from concurrent I/O evicting model pages faster than they load, causing the total footprint to exceed 128 GB RAM, which starves the amdgpu driver's small-buffer suballocator during VM page-table setup**.",
+        "wall_s": 14.09,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 540,
+          "prompt_tokens": 14364,
+          "total_tokens": 14904,
+          "prompt_tokens_details": {
+            "cached_tokens": 13883
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 128 -> 129",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The confirmed trigger is **running heavy disk I/O concurrently with a near\u2011edge GPU model load**.  \nThe operative mechanism is **memory pressure caused by the concurrent I/O evicting model pages faster than they can be loaded, pushing total RAM usage past the 128\u202fGB ceiling and starving the amdgpu driver\u2019s small\u2011buffer suballocator during VM page\u2011table setup**.",
+        "final_answer": "The confirmed trigger is **running heavy disk I/O concurrently with a near\u2011edge GPU model load**.  \nThe operative mechanism is **memory pressure caused by the concurrent I/O evicting model pages faster than they can be loaded, pushing total RAM usage past the 128\u202fGB ceiling and starving the amdgpu driver\u2019s small\u2011buffer suballocator during VM page\u2011table setup**.",
+        "wall_s": 17.25,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 741,
+          "prompt_tokens": 14364,
+          "total_tokens": 15105,
+          "prompt_tokens_details": {
+            "cached_tokens": 14338
+          }
+        }
+      }
+    },
+    {
+      "id": "K05",
+      "category": "ambiguity",
+      "pack": "s",
+      "draft": "The measured per-load probability that gpt-oss-120b will hang is **1 in 1**, based on the single observed incident on 2026-08-19, where the model hung during decode after a complete load. This is the only recorded instance of a hang for this model in the provided documents.",
+      "draft_wall_s": 1.63,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 2.73,
+        "outcome": "completed"
+      },
+      "peer_answer": "The supplied documents do not give a measured per\u2011load hang probability for\u202fgpt\u2011oss\u2011120b. They note that the model hung on its very first load (see the \u201cdecode\u2011hang\u201d and \u201cqwen38\u2011report\u201d sections) and that subsequent loads have run without hanging, but no quantitative figure or probability is provided.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "rewrite",
+        "protocol_adhered": false,
+        "raw": "**Measured per\u2011load hang probability for\u202fgpt\u2011oss\u2011120b:**\u202f1\u202fhang out of at least\u202f13\u202floads (the first load hung; \u201cmore than a dozen\u201d subsequent loads succeeded), i.e. roughly **1\u202fin\u202f13\u202f\u2248\u202f7.7\u202f%**.",
+        "final_answer": "**Measured per\u2011load hang probability for\u202fgpt\u2011oss\u2011120b:**\u202f1\u202fhang out of at least\u202f13\u202floads (the first load hung; \u201cmore than a dozen\u201d subsequent loads succeeded), i.e. roughly **1\u202fin\u202f13\u202f\u2248\u202f7.7\u202f%**.",
+        "wall_s": 16.89,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 665,
+          "prompt_tokens": 14337,
+          "total_tokens": 15002,
+          "prompt_tokens_details": {
+            "cached_tokens": 13883
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 1 -> 2",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: Based on the documents, the only observed hang occurred on the very first load of\u202fgpt\u2011oss\u2011120b, and the model has subsequently loaded successfully \u201cmore than a dozen\u201d times.\u202fThat gives a measured hang rate of\u202f1\u202fhang out of at least\u202f13\u202floads, i.e. roughly\u202f1\u202fin\u202f13\u202f\u2248\u202f7.7\u202f% per load.",
+        "final_answer": "Based on the documents, the only observed hang occurred on the very first load of\u202fgpt\u2011oss\u2011120b, and the model has subsequently loaded successfully \u201cmore than a dozen\u201d times.\u202fThat gives a measured hang rate of\u202f1\u202fhang out of at least\u202f13\u202floads, i.e. roughly\u202f1\u202fin\u202f13\u202f\u2248\u202f7.7\u202f% per load.",
+        "wall_s": 21.2,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 855,
+          "prompt_tokens": 14337,
+          "total_tokens": 15192,
+          "prompt_tokens_details": {
+            "cached_tokens": 13882
+          }
+        }
+      }
+    },
+    {
+      "id": "K06",
+      "category": "conflict",
+      "pack": "m",
+      "draft": "The recommendation that was corrected was the advice in the **routing guide (reports/2026-07-16-local-model-routing-guide.md)** that Mistral-Small-24B-Q4 was the best model for conditional tool use.\n\nThe correction was based on **E45**, which showed that Mistral-Small-24B-Q4 scored only **38%** on 13 paired conditional tasks, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The original recommendation was based on a 3-task sample that was not representative, and the corrected row now states that **Qwen3.8-27B at `reasoning_effort: medium`** is the best model for conditional tool use.",
+      "draft_wall_s": 133.77,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 5.54,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Recommendation that was corrected**  \n- **Original advice:**\u202f*\u201cAdd the `--jinja` flag (or be sure it is present) because a missing `--jinja` disables tool\u2011use on this box.\u201d* \u2013 this appeared in the early documentation of the dead\u2011lock\u2011prevention rule (Rule\u202f5 of **HARNESS\u2011RULES.md**) and in the earlier **routing\u2011guide** entry that warned operators to add `--jinja` to avoid tool\u2011use failures.\n\n**What the correction was**  \n- The advice was **retracted** and replaced with the statement that **`--jinja` is a no\u2011op on the current build** \u2013 the flag is already enabled by default, so its presence or absence does not affect tool\u2011use behaviour.\n\n**What the correction is based on**  \n- A dedicated control experiment (see `results/tool\u2011use/jinja\u2011default\u2011control.md`, dated\u202f2026\u201107\u201117) showed that toggling the flag made **no observable difference** in tool\u2011use performance. Consequently the earlier claim that the flag needed to be set was proven false and formally retracted in the documentation.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "**Corrected recommendation**  \nThe earlier recommendation warned that *\u201ca missing `--jinja` flag disables tool use\u201d* (stated in **HARNESS\u2011RULES.md**, Rule\u202f5).  \n\n**What the correction says**  \nThe guidance was later **retracted**: the `--jinja` flag is **enabled by default** on the current build, so omitting it does **not** turn off tool use.  \n\n**Evidence for the correction**  \nThe retraction is based on a dedicated control experiment documented in **`results/tool-use/jinja-default-control.md`** (referenced in HARNESS\u2011RULES.md). That test showed that the flag\u2019s default state is \u201cenabled\u201d and ",
+        "final_answer": "the `--jinja` flag is **enabled by default** on the current build, so omitting it does **not** turn off tool use.  \n\n**Evidence for the correction**  \nThe retraction is based on a dedicated control experiment documented in **`results/tool-use/jinja-default-control.md`** (referenced in HARNESS\u2011RULES.md). That test showed that the flag\u2019s default state is \u201cenabled\u201d and that changing it has no observable effect on tool\u2011use behaviour. Consequently, the prior advice to set `--jinja` (or to worry that its absence would break tool use) was withdrawn.",
+        "wall_s": 120.2,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 881,
+          "prompt_tokens": 36263,
+          "total_tokens": 37144,
+          "prompt_tokens_details": {
+            "cached_tokens": 13881
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 2026 -> 2027",
+        "action": "empty",
+        "protocol_adhered": false,
+        "raw": "",
+        "final_answer": "The recommendation that was corrected was the advice in the **routing guide (reports/2026-07-16-local-model-routing-guide.md)** that Mistral-Small-24B-Q4 was the best model for conditional tool use.\n\nThe correction was based on **E45**, which showed that Mistral-Small-24B-Q4 scored only **38%** on 13 paired conditional tasks, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The original recommendation was based on a 3-task sample that was not representative, and the corrected row now states that **Qwen3.8-27B at `reasoning_effort: medium`** is the best model for conditional tool use.",
+        "wall_s": 31.24,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36263,
+          "total_tokens": 37287,
+          "prompt_tokens_details": {
+            "cached_tokens": 35746
+          }
+        }
+      }
+    },
+    {
+      "id": "K07",
+      "category": "recommend",
+      "pack": "m",
+      "draft": "Based on the provided documents, specifically the **routing guide** (reports/2026-07-16-local-model-routing-guide.md), the model to use for counting a statutory deadline across a calendar is **Qwen3.8-27B**.\n\nThe document explicitly tells you **NOT to use the workhorse (Qwen3-30B-A3B)** for this task.\n\nThe evidence is found in the \"routing matrix\" under the row \"Work out a DEADLINE, an interest figure, or any date counted across a calendar\":\n> **Qwen3.8-27B.** Do **not** use the workhorse for this at all\n> ...\n> **Qwen3.8-27B gets 7 of 8 and the 8B 5 of 8.** **Use the workhorse to read a contract; never to work out a date.**",
+      "draft_wall_s": 5.92,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 4.03,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Use:**\u202f**Qwen\u202f3.8\u201127B** \u2013 the routing guide (2026\u201107\u201116) explicitly recommends Qwen\u202f3.8\u201127B for any task that requires \u201ca DEADLINE, an interest figure, or any date counted across a calendar.\u201d  \n\n**Do\u202fnot\u202fuse:**\u202f**the workhorse model (Qwen\u201130B\u2011A3B, the \u201cworkhorse\u201d)** \u2013 the same guide states \u201cDo\u202fnot\u202fuse the workhorse\u201d for statutory\u2011deadline/date\u2011counting work because it fails to count time correctly (0\u202f/\u202f8 correct on the walked\u2011period test).  \n\n*Source:*\u202fdocs/HARNESS\u2011RULES.md, \u201cWork out a DEADLINE, an interest figure, or any date counted across a calendar\u201d row.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Based on the provided documents, specifically the **routing guide** (reports/2026-07-16-local-model-routing-guide.md), the model to use for counting a statutory deadline across a calendar is **Qwen3.8-27B**.\n\nThe document explicitly tells you **NOT to use the workhorse (Qwen3-30B-A3B)** for this task.\n\nThe evidence is found in the \"routing matrix\" under the row \"Work out a DEADLINE, an interest figure, or any date counted across a calendar\":\n> **Qwen3.8-27B.** Do **not** use the workhorse for this at all\n> ...\n> **Qwen3.8-27B gets 7 of 8 and the 8B 5 of 8.** **Use the workhorse to read a contract; never to work out a date.**",
+        "wall_s": 19.26,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 566,
+          "prompt_tokens": 36295,
+          "total_tokens": 36861,
+          "prompt_tokens_details": {
+            "cached_tokens": 35746
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 2026 -> 2027",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "**Correct answer:**  \nThe material tells you to use **Qwen3.8\u201127B** for counting a statutory deadline across a calendar, and it explicitly tells you **not to use the workhorse model (Qwen3\u201130B\u2011A3B)** for this task.\n\n**Evidence:**  \nIn the Qwen3.8 report (docs/2026-08-19-qwen38-report.md) the \u201cdate arithmetic\u201d section states:\n\n- \u201cThe workhorse cannot count time at all \u2013 zero of eight.\u201d  \n- \u201cQwen3.8\u201127B gets 7 of",
+        "final_answer": "**  \nThe material tells you to use **Qwen3.8\u201127B** for counting a statutory deadline across a calendar, and it explicitly tells you **not to use the workhorse model (Qwen3\u201130B\u2011A3B)** for this task.\n\n**Evidence:**  \nIn the Qwen3.8 report (docs/2026-08-19-qwen38-report.md) the \u201cdate arithmetic\u201d section states:\n\n- \u201cThe workhorse cannot count time at all \u2013 zero of eight.\u201d  \n- \u201cQwen3.8\u201127B gets 7 of",
+        "wall_s": 31.17,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36295,
+          "total_tokens": 37319,
+          "prompt_tokens_details": {
+            "cached_tokens": 35778
+          }
+        }
+      }
+    },
+    {
+      "id": "K08",
+      "category": "compare",
+      "pack": "m",
+      "draft": "For a batch of hard coding problems where correctness matters more than wait time, the material recommends **Qwen3.8-27B** with `reasoning_effort: medium` set.\n\nThe wall-time ratio against the alternative (Qwen3-Coder-30B) is **94x** (Qwen3.8-27B wall time: 6,223s; Qwen3-Coder-30B wall time: 66s).\n\nAbsolute wall-time figures:\n- Qwen3.8-27B: **6,223 seconds**\n- Qwen3-Coder-30B: **66 seconds**",
+      "draft_wall_s": 4.54,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 3.52,
+        "outcome": "completed"
+      },
+      "peer_answer": "",
+      "review_real": {
+        "seeded_change": null,
+        "action": "empty",
+        "protocol_adhered": false,
+        "raw": "",
+        "final_answer": "For a batch of hard coding problems where correctness matters more than wait time, the material recommends **Qwen3.8-27B** with `reasoning_effort: medium` set.\n\nThe wall-time ratio against the alternative (Qwen3-Coder-30B) is **94x** (Qwen3.8-27B wall time: 6,223s; Qwen3-Coder-30B wall time: 66s).\n\nAbsolute wall-time figures:\n- Qwen3.8-27B: **6,223 seconds**\n- Qwen3-Coder-30B: **66 seconds**",
+        "wall_s": 30.88,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36245,
+          "total_tokens": 37269,
+          "prompt_tokens_details": {
+            "cached_tokens": 35778
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 8 -> 9",
+        "action": "empty",
+        "protocol_adhered": false,
+        "raw": "",
+        "final_answer": "For a batch of hard coding problems where correctness matters more than wait time, the material recommends **Qwen3.8-27B** with `reasoning_effort: medium` set.\n\nThe wall-time ratio against the alternative (Qwen3-Coder-30B) is **94x** (Qwen3.8-27B wall time: 6,223s; Qwen3-Coder-30B wall time: 66s).\n\nAbsolute wall-time figures:\n- Qwen3.8-27B: **6,223 seconds**\n- Qwen3-Coder-30B: **66 seconds**",
+        "wall_s": 30.8,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36245,
+          "total_tokens": 37269,
+          "prompt_tokens_details": {
+            "cached_tokens": 35777
+          }
+        }
+      }
+    },
+    {
+      "id": "K09",
+      "category": "implication",
+      "pack": "m",
+      "draft": "The operational restriction on gpt-oss-120b is that it **must not be run unattended** until the cause of a decode hang is understood.\n\nThe reason given is that **the first time gpt-oss-120b was loaded, it hung and produced nothing**, and this failure has not been reproduced or diagnosed. Although it has behaved correctly on every subsequent load (more than a dozen), the unexplained hang remains a risk, and the model is not to be left running unattended until this issue is resolved.",
+      "draft_wall_s": 3.66,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 4.25,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Restriction** \u2013\u202fWhen gpt\u2011oss\u2011120b (\u2248\u202f60\u202fGiB\u2011plus weights) is being loaded you must **not run any heavy disk\u2011I/O at the same time and you must be present to power\u2011cycle the machine if the load stalls**.  \n\n**Why** \u2013\u202fThe dead\u2011lock fingerprint (see *memory\u2011edge\u2011deadlock.md*) shows that loading a near\u2011edge model while the system is under memory pressure (total RAM usage >\u202f128\u202fGB, most easily caused by concurrent large file\u2011hashes, downloads, backups, etc.) starves the amdgpu driver\u2019s small\u2011buffer suballocator. The wedged process becomes an uninterruptible D\u2011state task (`drm_suballoc_new`) that **SIGKILL cannot kill and a graceful `sudo reboot` stalls**; the only way to recover is a **hard physical power\u2011cycle**. Therefore the operational rule is to avoid concurrent heavy I/O during the load and to have an operator (Alastair) physically present to power\u2011cycle if the load ever hangs.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The operational restriction on gpt-oss-120b is that it **must not be run unattended** until the cause of a decode hang is understood.\n\nThe reason given is that **the first time gpt-oss-120b was loaded, it hung and produced nothing**, and this failure has not been reproduced or diagnosed. Although it has behaved correctly on every subsequent load (more than a dozen), the unexplained hang remains a risk, and the model is not to be left running unattended until this issue is resolved.",
+        "wall_s": 22.44,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 719,
+          "prompt_tokens": 36222,
+          "total_tokens": 36941,
+          "prompt_tokens_details": {
+            "cached_tokens": 35776
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "appended a false citation",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The operational restriction on gpt-oss-120b is that it **must not be run unattended** until the cause of a decode hang is understood.\n\nThe reason given is that **the first time gpt-oss-120b was loaded, it hung and produced nothing**, and this failure has not been reproduced or diagnosed. Although it has behaved correctly on every subsequent load (more than a dozen), the unexplained hang remains a risk, and the model is not to be left running unattended until this issue is resolved.",
+        "wall_s": 19.21,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 686,
+          "prompt_tokens": 36234,
+          "total_tokens": 36920,
+          "prompt_tokens_details": {
+            "cached_tokens": 36217
+          }
+        }
+      }
+    },
+    {
+      "id": "K10",
+      "category": "conflict",
+      "pack": "m",
+      "draft": "No.\n\nSupporting figure: The routing guide (2026-08-17) states that Mistral-Small-24B-Q4 is the **WORST arm** on the full set of conditional tasks, scoring **38%**, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The corrected row explicitly states: \"Mistral is the WORST arm on the full set (38%): it scores 0/5 on every category-routing, tool-selection and compound-condition task.\"",
+      "draft_wall_s": 4.05,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 2.98,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Yes.**  \n\nThe routing guide states that *\u201cMistral\u2019s\u202f75\u202f% is template\u2011confounded by the chain category; **excluding chains it is\u202f96\u202f%**, the strongest single\u2011tool and conditional model tested \u2013 but only after supplying a tool template by hand.\u201d* (docs/HARNESS\u2011RULES.md).",
+      "review_real": {
+        "seeded_change": null,
+        "action": "empty",
+        "protocol_adhered": false,
+        "raw": "",
+        "final_answer": "No.\n\nSupporting figure: The routing guide (2026-08-17) states that Mistral-Small-24B-Q4 is the **WORST arm** on the full set of conditional tasks, scoring **38%**, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The corrected row explicitly states: \"Mistral is the WORST arm on the full set (38%): it scores 0/5 on every category-routing, tool-selection and compound-condition task.\"",
+        "wall_s": 30.97,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36224,
+          "total_tokens": 37248,
+          "prompt_tokens_details": {
+            "cached_tokens": 35746
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 2026 -> 2027",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: No. The routing guide (docs/2026-07-16-local-model-routing-guide.md) shows that Mistral\u2011Small\u201124B scores only **38\u202f%** on the \u201cConditional logic\u201d benchmark, making it the worst performer compared with the workhorse (68\u202f%) and Qwen3.8\u201127B (86\u202f%). This low score indicates that the material does **not** recommend Mistral\u2011Small\u201124B for tool calls whose behaviour depends on a condition.",
+        "final_answer": "No. The routing guide (docs/2026-07-16-local-model-routing-guide.md) shows that Mistral\u2011Small\u201124B scores only **38\u202f%** on the \u201cConditional logic\u201d benchmark, making it the worst performer compared with the workhorse (68\u202f%) and Qwen3.8\u201127B (86\u202f%). This low score indicates that the material does **not** recommend Mistral\u2011Small\u201124B for tool calls whose behaviour depends on a condition.",
+        "wall_s": 23.2,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 744,
+          "prompt_tokens": 36224,
+          "total_tokens": 36968,
+          "prompt_tokens_details": {
+            "cached_tokens": 35745
+          }
+        }
+      }
+    },
+    {
+      "id": "K11",
+      "category": "summarise",
+      "pack": "m",
+      "draft": "A latency figure on its own cannot be interpreted because it does not indicate whether the response completed the task correctly or at all. As shown in the gpt-oss-120b decode hang incident, a model can appear to be \"fast\" in latency while failing to produce any output, resulting in a transport failure. The document emphasizes that latency must be paired with success-at-deadline (whether the answer was correct and completed within a deadline) to be meaningful. Without this, a latency number can be misleading\u2014such as a fast time for a non-terminating or incorrect response\u2014making it uninterpretable as a measure of performance.",
+      "draft_wall_s": 4.16,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 3.21,
+        "outcome": "completed"
+      },
+      "peer_answer": "The documents state that a raw latency number is meaningless unless it is known that the model actually produced a **completed, correct answer** \u2013 otherwise the timing could be for a hung, truncated, or irrelevant generation (see the metric correction in\u202f*rd\u2011programme*\u202f2026\u201108\u201119, \u201cA latency number is interpretable only after establishing that the response completed the task\u201d).\u202fToken\u2011count is required as a diagnostic of non\u2011answering, and the primary metric must be **success\u2011at\u2011deadline** (whether the answer arrived within the pre\u2011registered deadline) with a secondary conditional TTCA reported alongside it (same section).\u202fConsequently, latency must be paired with a success flag and token statistics; without those, the figure can hide failures such as the decode\u2011hang or deadlock cases described elsewhere (e.g.,\u202f*decode\u2011hang*\u202f2026\u201108\u201119).\u202fThus the material argues that latency alone cannot be interpreted because it does not convey answer quality or completion.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The documents state that a latency number is only meaningful when it is known that the response actually completed the task. Without confirming that the answer is correct, complete, and non\u2011empty, latency can be misleading\u2014for example, a model might return quickly but produce no output or an incorrect answer. Therefore latency must be paired with a success\u2011at\u2011deadline or token\u2011count check to indicate whether the response was useful. On its own, latency does not convey performance.",
+        "final_answer": "The documents state that a latency number is only meaningful when it is known that the response actually completed the task. Without confirming that the answer is correct, complete, and non\u2011empty, latency can be misleading\u2014for example, a model might return quickly but produce no output or an incorrect answer. Therefore latency must be paired with a success\u2011at\u2011deadline or token\u2011count check to indicate whether the response was useful. On its own, latency does not convey performance.",
+        "wall_s": 29.81,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 980,
+          "prompt_tokens": 36234,
+          "total_tokens": 37214,
+          "prompt_tokens_details": {
+            "cached_tokens": 35744
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "flipped 'does not' -> 'does'",
+        "action": "rewrite",
+        "protocol_adhered": false,
+        "raw": "A latency number is only meaningful after you have verified that the model\u2019s response actually completed the task. The documents state that generated\u2011token count (or other evidence of a finished answer) is required to detect non\u2011answering or hung outputs, because a fast latency can correspond to a response that never produced a result or was incorrect. Therefore, without confirming success\u2011at\u2011deadline, a latency figure can be misleading and cannot be interpreted on its own.",
+        "final_answer": "A latency number is only meaningful after you have verified that the model\u2019s response actually completed the task. The documents state that generated\u2011token count (or other evidence of a finished answer) is required to detect non\u2011answering or hung outputs, because a fast latency can correspond to a response that never produced a result or was incorrect. Therefore, without confirming success\u2011at\u2011deadline, a latency figure can be misleading and cannot be interpreted on its own.",
+        "wall_s": 21.88,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 692,
+          "prompt_tokens": 36233,
+          "total_tokens": 36925,
+          "prompt_tokens_details": {
+            "cached_tokens": 35743
+          }
+        }
+      }
+    },
+    {
+      "id": "K14",
+      "category": "draft",
+      "pack": "m",
+      "draft": "Do not proceed. Running a large model benchmark (over ~60 GiB) while a big download is in progress risks triggering an unkillable amdgpu SDMA deadlock. The concurrent disk I/O causes memory pressure exceeding the 128 GB RAM ceiling, evicting model pages and starving the GPU's VM-update suballocator. This results in a D-state process stuck at `drm_suballoc_new`, unkillable by SIGKILL and requiring a hard power cycle to recover. The only safe condition is an idle machine with no concurrent I/O. Always ensure the box is quiet and you are present to power-cycle if needed.",
+      "draft_wall_s": 4.21,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 3.12,
+        "outcome": "completed"
+      },
+      "peer_answer": "Don\u2019t start the benchmark while the download is running.\u202fLoading a\u202f\u2265\u202f60\u202fGiB model under memory pressure from concurrent heavy I/O can trigger the amdgpu SDMA\u2011suballocator deadlock (wchan\u202f=\u202f`drm_suballoc_new`, D\u2011state, unkillable, only a hard power\u2011cycle clears it).\u202fThe box will wedge and a graceful reboot will stall, so the risk is a complete, un\u2011recoverable kernel lock\u2011up.\u202fWait for the download to finish, then run the benchmark.\u202fThis avoids the known deadlock that has already required physical intervention on sparkmax.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Do not proceed. Running a large model benchmark (over ~60 GiB) while a big download is in progress risks triggering an unkillable amdgpu SDMA deadlock. The concurrent disk I/O causes memory pressure exceeding the 128 GB RAM ceiling, evicting model pages and starving the GPU's VM-update suballocator. This results in a D-state process stuck at `drm_suballoc_new`, unkillable by SIGKILL and requiring a hard power cycle to recover. The only safe condition is an idle machine with no concurrent I/O. Always ensure the box is quiet and you are present to power-cycle if needed.",
+        "wall_s": 14.27,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 405,
+          "prompt_tokens": 36249,
+          "total_tokens": 36654,
+          "prompt_tokens_details": {
+            "cached_tokens": 35742
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 60 -> 61",
+        "action": "rewrite",
+        "protocol_adhered": false,
+        "raw": "Do not run the benchmark while the download is in progress. Loading a\u202f>\u202f~60\u202fGiB model together with heavy disk I/O can push total RAM usage over the 128\u202fGB ceiling, evicting model pages and starving the amdgpu SDMA suballocator. This triggers an unkillable D\u2011state task stuck in\u202f`drm_suballoc_new`, which SIGKILL cannot stop and requires a hard power cycle to recover. The only safe condition is an idle machine with no concurrent I/O. Ensure the box is quiet and be present to power\u2011cycle if the load stalls.",
+        "final_answer": "Do not run the benchmark while the download is in progress. Loading a\u202f>\u202f~60\u202fGiB model together with heavy disk I/O can push total RAM usage over the 128\u202fGB ceiling, evicting model pages and starving the amdgpu SDMA suballocator. This triggers an unkillable D\u2011state task stuck in\u202f`drm_suballoc_new`, which SIGKILL cannot stop and requires a hard power cycle to recover. The only safe condition is an idle machine with no concurrent I/O. Ensure the box is quiet and be present to power\u2011cycle if the load stalls.",
+        "wall_s": 26.56,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 932,
+          "prompt_tokens": 36249,
+          "total_tokens": 37181,
+          "prompt_tokens_details": {
+            "cached_tokens": 36128
+          }
+        }
+      }
+    },
+    {
+      "id": "K15",
+      "category": "compare",
+      "pack": "s",
+      "draft": "Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.",
+      "draft_wall_s": 2.52,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 4.99,
+        "outcome": "completed"
+      },
+      "peer_answer": "- **Fast everyday model** \u2013 before the calculator it scored **0\u202fout\u202fof\u202f6** on the six date\u2011arithmetic questions; after the calculator it scored **4\u202fout\u202fof\u202f6**.  \n\n- **gpt\u2011oss\u2011120b** \u2013 before the calculator it scored **5\u202fout\u202fof\u202f6**; after the calculator it dropped to **4\u202fout\u202fof\u202f6**.  \n\n(These figures are taken from the \u201cdate calculator\u201d experiment in the Qwen3.8 report.)",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.",
+        "wall_s": 10.43,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 373,
+          "prompt_tokens": 14381,
+          "total_tokens": 14754,
+          "prompt_tokens_details": {
+            "cached_tokens": 13881
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 8 -> 9",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: \n- **Qwen3.8\u201127B**:\u202fbefore the deterministic date calculator\u202f32\u202fout of\u202f40\u202fon the date\u2011arithmetic half;\u202fafter the calculator\u202f40\u202fout of\u202f40.  \n- **gpt\u2011oss\u2011120b**:\u202fbefore the deterministic date calculator\u202f36\u202fout of\u202f40\u202fon the date\u2011arithmetic half;\u202fafter the calculator\u202f38\u202fout of\u202f40.",
+        "final_answer": "- **Qwen3.8\u201127B**:\u202fbefore the deterministic date calculator\u202f32\u202fout of\u202f40\u202fon the date\u2011arithmetic half;\u202fafter the calculator\u202f40\u202fout of\u202f40.  \n- **gpt\u2011oss\u2011120b**:\u202fbefore the deterministic date calculator\u202f36\u202fout of\u202f40\u202fon the date\u2011arithmetic half;\u202fafter the calculator\u202f38\u202fout of\u202f40.",
+        "wall_s": 15.37,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 637,
+          "prompt_tokens": 14381,
+          "total_tokens": 15018,
+          "prompt_tokens_details": {
+            "cached_tokens": 14285
+          }
+        }
+      }
+    },
+    {
+      "id": "K16",
+      "category": "implication",
+      "pack": "s",
+      "draft": "The third condition tested whether offering a tool changed a model's behaviour *without actually attaching the tool*. The model was told the tools existed, but they were not attached to the session.\n\nThis condition showed **no change in behaviour** compared to the baseline (no tool offered). The model did not make any tool calls, and its answers remained unchanged. This proved that the change in behaviour observed when the tool was *attached* was due to the tool being present in the prompt context, not merely the knowledge that tools were available.",
+      "draft_wall_s": 2.19,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.71,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Condition:**  \nAfter seeing that simply attaching a calculator to a model altered its answers, the team added a *control* run in which the model was *told* that tools (the calculator) existed but the tools were **not actually attached** to the request. In other words, the prompt contained a statement like \u201ctools are available\u201d but no tool\u2011description payload was sent.\n\n**What it showed:**  \nIn that \u201ctool\u2011exists\u2011but\u2011not\u2011attached\u201d run the model\u2019s behaviour was **identical to the baseline (no\u2011tool) run** \u2013 the scores and the generated answers did not change. This demonstrated that the observed shift in behaviour was caused by the *attachment* of the tool (the extra prompt text describing the calculator), not merely by the model\u2019s awareness that a tool is available.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The third condition tested whether offering a tool changed a model's behaviour *without actually attaching the tool*. The model was told the tools existed, but they were not attached to the session.\n\nThis condition showed **no change in behaviour** compared to the baseline (no tool offered). The model did not make any tool calls, and its answers remained unchanged. This proved that the change in behaviour observed when the tool was *attached* was due to the tool being present in the prompt context, not merely the knowledge that tools were available.",
+        "wall_s": 13.92,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 529,
+          "prompt_tokens": 14377,
+          "total_tokens": 14906,
+          "prompt_tokens_details": {
+            "cached_tokens": 13881
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "flipped 'no' -> 'Yes'",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The third experimental condition told the model that tools were available but did **not** actually attach any tools to the session. In this \u201ctools\u2011known\u2011but\u2011not\u2011attached\u201d setup the model\u2019s behaviour was unchanged compared to the baseline with no tools offered \u2013 it made no tool calls and its answers remained the same. This demonstrated that the behavioural shift seen when a tool was attached was caused by the tool\u2019s description being present in the prompt, not merely by the model\u2019s awareness that tools exist.",
+        "final_answer": "The third experimental condition told the model that tools were available but did **not** actually attach any tools to the session. In this \u201ctools\u2011known\u2011but\u2011not\u2011attached\u201d setup the model\u2019s behaviour was unchanged compared to the baseline with no tools offered \u2013 it made no tool calls and its answers remained the same. This demonstrated that the behavioural shift seen when a tool was attached was caused by the tool\u2019s description being present in the prompt, not merely by the model\u2019s awareness that tools exist.",
+        "wall_s": 13.94,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 584,
+          "prompt_tokens": 14377,
+          "total_tokens": 14961,
+          "prompt_tokens_details": {
+            "cached_tokens": 14309
+          }
+        }
+      }
+    },
+    {
+      "id": "K17",
+      "category": "compare",
+      "pack": "s",
+      "draft": "On twenty ordinary questions containing no dates at all, the everyday model dropped from **14 out of 20 to 11 out of 20** once tools were attached. It made **68 tool calls** on questions about retainers and liability caps.",
+      "draft_wall_s": 1.32,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.74,
+        "outcome": "completed"
+      },
+      "peer_answer": "When we attached tools to the everyday (fast) model and ran **twenty ordinary, non\u2011date questions**, its score fell from **14\u202f/\u202f20** to **11\u202f/\u202f20** \u2013 a **drop of 3 points**. During that run the model issued **68 tool calls** (all on questions about retainers and liability caps).",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "On twenty ordinary questions containing no dates at all, the everyday model dropped from **14 out of 20 to 11 out of 20** once tools were attached. It made **68 tool calls** on questions about retainers and liability caps.",
+        "wall_s": 10.99,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 403,
+          "prompt_tokens": 14326,
+          "total_tokens": 14729,
+          "prompt_tokens_details": {
+            "cached_tokens": 13881
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 14 -> 15",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: On twenty ordinary questions containing no dates at all, the everyday model\u2019s score fell from **14 out of 20 to 11 out of 20** (a drop of 3 points), and it made **68 tool calls**.",
+        "final_answer": "On twenty ordinary questions containing no dates at all, the everyday model\u2019s score fell from **14 out of 20 to 11 out of 20** (a drop of 3 points), and it made **68 tool calls**.",
+        "wall_s": 11.42,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 473,
+          "prompt_tokens": 14326,
+          "total_tokens": 14799,
+          "prompt_tokens_details": {
+            "cached_tokens": 14289
+          }
+        }
+      }
+    },
+    {
+      "id": "K18",
+      "category": "recommend",
+      "pack": "s",
+      "draft": "The practical consequence of offering tools on every request by default is that the service pays a price of up to **three questions in twenty** being answered incorrectly, and this cost is paid in the form of **no answer at all**, rather than a wrong one. This occurs because the mere presence of tools in the prompt changes model behavior, causing the model to make unnecessary tool calls and sometimes fail to produce any answer, even on questions unrelated to the tool's function.",
+      "draft_wall_s": 2.01,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 3.59,
+        "outcome": "completed"
+      },
+      "peer_answer": "The material says that offering tools on every request \u201ccosts\u201d the service by consuming a noticeable fraction of its traffic\u202f\u2014\u202fabout **three questions out of every twenty** (\u224815\u202f% of requests).\u202fThat cost is paid **not as a wrong answer but as a complete lack of answer** (a \u201cno\u2011answer\u201d failure), which is the more expensive failure for a user waiting on a response.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The material says that offering tools on every request imposes a cost of up to three questions out of every twenty, and that cost is paid in the form of **no answer at all** (the model fails to respond), rather than producing an incorrect answer.",
+        "final_answer": "The material says that offering tools on every request imposes a cost of up to three questions out of every twenty, and that cost is paid in the form of **no answer at all** (the model fails to respond), rather than producing an incorrect answer.",
+        "wall_s": 21.35,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 857,
+          "prompt_tokens": 14367,
+          "total_tokens": 15224,
+          "prompt_tokens_details": {
+            "cached_tokens": 13881
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "flipped 'no' -> 'Yes'",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The material notes that offering tools on every request incurs a cost of up to three unanswered questions out of every twenty requests, and the price is paid in the form of **no answer** (the model fails to respond) rather than a wrong answer.",
+        "final_answer": "The material notes that offering tools on every request incurs a cost of up to three unanswered questions out of every twenty requests, and the price is paid in the form of **no answer** (the model fails to respond) rather than a wrong answer.",
+        "wall_s": 15.97,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 623,
+          "prompt_tokens": 14367,
+          "total_tokens": 14990,
+          "prompt_tokens_details": {
+            "cached_tokens": 13880
+          }
+        }
+      }
+    },
+    {
+      "id": "K19",
+      "category": "compare",
+      "pack": "s",
+      "draft": "Rule 4 governs model downloads.\n\nEach download must be recorded in the file `manifests/MANIFEST.md` before first use.",
+      "draft_wall_s": 0.75,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.44,
+        "outcome": "completed"
+      },
+      "peer_answer": "The relevant rule is **Rule\u202f4** in the harness hard\u2011rules document. It states that **model downloads must be explicit and recorded in a manifest**. Each download is logged in the file **`manifests/MANIFEST.md`** (the repository\u2011, revision\u2011, size\u2011 and SHA\u2011256\u2011recorded manifest) before the model is used for the first time.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Rule 4 governs model downloads.\n\nEach download must be recorded in the file `manifests/MANIFEST.md` before first use.",
+        "wall_s": 6.83,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 223,
+          "prompt_tokens": 14298,
+          "total_tokens": 14521,
+          "prompt_tokens_details": {
+            "cached_tokens": 13879
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 4 -> 5",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: Rule\u202f4 governs model downloads, and each download must be recorded in the file `manifests/MANIFEST.md` before first use.",
+        "final_answer": "Rule\u202f4 governs model downloads, and each download must be recorded in the file `manifests/MANIFEST.md` before first use.",
+        "wall_s": 7.03,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 289,
+          "prompt_tokens": 14298,
+          "total_tokens": 14587,
+          "prompt_tokens_details": {
+            "cached_tokens": 14269
+          }
+        }
+      }
+    },
+    {
+      "id": "K20",
+      "category": "ambiguity",
+      "pack": "s",
+      "draft": "The provided documents do not contain any information about the cost of running the hardware in euros per year.",
+      "draft_wall_s": 0.61,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.2,
+        "outcome": "completed"
+      },
+      "peer_answer": "The supplied documents do not contain any information about the annual (\u20ac\u202fper\u202fyear) cost of operating the hardware. No euro\u2011per\u2011year figure is mentioned in any of the provided texts.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The provided documents do not contain any information about the cost of running the hardware in euros per year.",
+        "wall_s": 4.92,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 142,
+          "prompt_tokens": 14285,
+          "total_tokens": 14427,
+          "prompt_tokens_details": {
+            "cached_tokens": 13879
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "flipped 'do not' -> 'should'",
+        "action": "abstain",
+        "protocol_adhered": true,
+        "raw": "ABSTAIN",
+        "final_answer": "ABSTAIN",
+        "wall_s": 4.41,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 178,
+          "prompt_tokens": 14284,
+          "total_tokens": 14462,
+          "prompt_tokens_details": {
+            "cached_tokens": 14265
+          }
+        }
+      }
+    },
+    {
+      "id": "K21",
+      "category": "recommend",
+      "pack": "m",
+      "draft": "The material recommends **Qwen3-30B-A3B** for creating a Word document or driving office tools agentically, as it has a 91% mean success rate with 0 format leaks in 110 calls and works out of the box.\n\nIt says **Mistral-Small-24B-Q4** refuses the task outright without a hand-supplied tool template.",
+      "draft_wall_s": 2.81,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.66,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Recommendation:**\u202fUse **Qwen\u202f3\u201130B\u2011A3B** (the \u201cworkhorse\u201d model) for creating a Word document or driving office\u2011tool actions agentically.  \n\n**Refusal:**\u202fThe **Mistral\u2011Small\u201124B\u2011Q4** model is recorded as outright refusing that task.  \n\n*Source \u2013\u202frouting\u2011guide (docs/HARNESS\u2011RULES.md), \u201cCreate a Word doc / drive office tools / agentic file work\u201d row.*",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The material recommends **Qwen3-30B-A3B** for creating a Word document or driving office tools agentically, as it has a 91% mean success rate with 0 format leaks in 110 calls and works out of the box.\n\nIt says **Mistral-Small-24B-Q4** refuses the task outright without a hand-supplied tool template.",
+        "wall_s": 108.5,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 452,
+          "prompt_tokens": 36187,
+          "total_tokens": 36639,
+          "prompt_tokens_details": {
+            "cached_tokens": 13879
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 91 -> 92",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The material recommends **Qwen3-30B-A3B** for creating a Word document or driving office tools agentically, as it has a 91% mean success rate with 0 format leaks in 110 calls and works out of the box.\n\nIt says **Mistral-Small-24B-Q4** refuses the task outright without a hand-supplied tool template.",
+        "wall_s": 12.86,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 442,
+          "prompt_tokens": 36187,
+          "total_tokens": 36629,
+          "prompt_tokens_details": {
+            "cached_tokens": 36136
+          }
+        }
+      }
+    },
+    {
+      "id": "K22",
+      "category": "implication",
+      "pack": "m",
+      "draft": "For a long advisory session with documents arriving as you go, **Qwen3.8-27B** is recommended.\n\nThe specific risk that changes over a long session is the **workhorse's (Qwen3-30B-A3B) willingness to contradict the user**. Over a long session, the workhorse's wrong answer began to align with the user's incorrect assertion (e.g., adopting a 60-day period when the record said 30 days), whereas Qwen3.8-27B did not adopt false premises at any depth.\n\n**Accuracy did not decay**. The document states: \"Nothing decayed. Every one of the fifteen paired answers came back identical the second time, character for character - including the wrong ones.\" This confirms that the model's answers remained consistent and did not degrade in accuracy over the long session.",
+      "draft_wall_s": 5.56,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 3.58,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Recommended model:** **Qwen\u202f3.8\u201127B**  \n\n**Why:** In the routing\u2011matrix table the entry for \u201cA long advisory session \u2013 many turns, documents arriving as you go\u201d lists **Qwen\u202f3.8\u201127B** as the chosen model and shows all risk scores at **0.0** (no observed degradation)\u3010routing\u2011guide\u3011.\n\n**Specific risk that changes over a long session:**  \nThe only noted behavioural shift is for the \u201cworkhorse\u201d (Qwen\u202f3\u201130B\u2011A3B). The guide says *\u201cThe workhorse loses willingness to contradict you over a long session.\u201d*\u3010routing\u2011guide\u3011. This is a change in attitude, not a loss of factual accuracy.\n\n**Accuracy decay:** No \u2013 the risk metrics for Qwen\u202f3.8\u201127B are all zero, indicating that its accuracy did **not** decay during long advisory sessions.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "For a long advisory session with documents arriving as you go, **Qwen3.8-27B** is recommended.\n\nThe specific risk that changes over a long session is the **workhorse's (Qwen3-30B-A3B) willingness to contradict the user**. Over a long session, the workhorse's wrong answer began to align with the user's incorrect assertion (e.g., adopting a 60-day period when the record said 30 days), whereas Qwen3.8-27B did not adopt false premises at any depth.\n\n**Accuracy did not decay**. The document states: \"Nothing decayed. Every one of the fifteen paired answers came back identical the second time, character for character - including the wrong ones.\" This confirms that the model's answers remained consistent and did not degrade in accuracy over the long session.",
+        "wall_s": 17.81,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 502,
+          "prompt_tokens": 36288,
+          "total_tokens": 36790,
+          "prompt_tokens_details": {
+            "cached_tokens": 35670
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 8 -> 9",
+        "action": "empty",
+        "protocol_adhered": false,
+        "raw": "",
+        "final_answer": "For a long advisory session with documents arriving as you go, **Qwen3.8-27B** is recommended.\n\nThe specific risk that changes over a long session is the **workhorse's (Qwen3-30B-A3B) willingness to contradict the user**. Over a long session, the workhorse's wrong answer began to align with the user's incorrect assertion (e.g., adopting a 60-day period when the record said 30 days), whereas Qwen3.8-27B did not adopt false premises at any depth.\n\n**Accuracy did not decay**. The document states: \"Nothing decayed. Every one of the fifteen paired answers came back identical the second time, character for character - including the wrong ones.\" This confirms that the model's answers remained consistent and did not degrade in accuracy over the long session.",
+        "wall_s": 31.19,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36288,
+          "total_tokens": 37312,
+          "prompt_tokens_details": {
+            "cached_tokens": 35771
+          }
+        }
+      }
+    },
+    {
+      "id": "K23",
+      "category": "conflict",
+      "pack": "m",
+      "draft": "The model described as the strongest on the document/knowledge evaluation whose strength failed to carry over to agentic coding work is **Qwen3-30B-A3B**.\n\nThe material tells you to use **Qwen3-Coder-30B** instead for interactive coding. This is stated in the routing guide: \"Write or edit code, interactively | **Qwen3-Coder-30B**, fallback **GLM-4.7-Flash**\" and confirmed by the findings: \"F33: the workhorse topped the 10-model document matrix... and scored **0 on both real-repository coding tasks**... while Qwen3-Coder-30B passed in 129s.\"",
+      "draft_wall_s": 4.88,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 2.87,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Model:** **Qwen3\u201130B\u2011A3B** \u2013 the \u201cworkhorse\u201d that topped the 10\u2011model document/knowledge benchmark.  \n\n**What to use instead for interactive coding:** the material recommends switching to **Qwen3\u2011Coder\u201130B**, which is the only model shown to succeed on the real\u2011repository coding tasks.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The model described as the strongest on the document/knowledge evaluation whose strength failed to carry over to agentic coding work is **Qwen3-30B-A3B**.\n\nThe material tells you to use **Qwen3-Coder-30B** instead for interactive coding. This is stated in the routing guide: \"Write or edit code, interactively | **Qwen3-Coder-30B**, fallback **GLM-4.7-Flash**\" and confirmed by the findings: \"F33: the workhorse topped the 10-model document matrix... and scored **0 on both real-repository coding tasks**... while Qwen3-Coder-30B passed in 129s.\"",
+        "wall_s": 18.99,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 584,
+          "prompt_tokens": 36267,
+          "total_tokens": 36851,
+          "prompt_tokens_details": {
+            "cached_tokens": 35771
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 4 -> 5",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The model described as the strongest on the document/knowledge evaluation whose strength failed to carry over to agentic coding work is **Qwen3-30B-A3B**.\n\nThe material tells you to use **Qwen3-Coder-30B** instead for interactive coding. This is stated in the routing guide: \"Write or edit code, interactively | **Qwen3-Coder-30B**, fallback **GLM-4.7-Flash**\" and confirmed by the findings: \"F33: the workhorse topped the 10-model document matrix... and scored **0 on both real-repository coding tasks**... while Qwen3-Coder-30B passed in 129s.\"",
+        "wall_s": 15.68,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 465,
+          "prompt_tokens": 36267,
+          "total_tokens": 36732,
+          "prompt_tokens_details": {
+            "cached_tokens": 35770
+          }
+        }
+      }
+    },
+    {
+      "id": "K24",
+      "category": "implication",
+      "pack": "m",
+      "draft": "The material recommends **Qwen3-8B with reasoning ON** for models that must fit in under 5 GiB.\n\nThe two limits it names are:\n1. Its context tops out at 40,960 tokens against the 27B's 262,144, so it cannot take a big folder at all.\n2. `enable_thinking: false` costs 4 points on the easy tier with every arithmetic item flipping to wrong - that setting is 12.6x faster and puts it BELOW the workhorse.",
+      "draft_wall_s": 3.8,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 7.53,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Model:**\u202fThe only model the documents point to that fits under a 5\u202fGiB RAM budget is **Qwen\u20113\u202f8B** (the GGUF is listed as **4.68\u202fGiB**).\n\n**Two limits the material calls out for Qwen\u20113\u202f8B**\n\n1. **Speed limit** \u2013 it is *significantly slower on short\u2011question workloads* than the larger MoE workhorse (e.g.\u202f9.46\u202fs vs\u202f5.48\u202fs on a",
+      "review_real": {
+        "seeded_change": null,
+        "action": "empty",
+        "protocol_adhered": false,
+        "raw": "",
+        "final_answer": "The material recommends **Qwen3-8B with reasoning ON** for models that must fit in under 5 GiB.\n\nThe two limits it names are:\n1. Its context tops out at 40,960 tokens against the 27B's 262,144, so it cannot take a big folder at all.\n2. `enable_thinking: false` costs 4 points on the easy tier with every arithmetic item flipping to wrong - that setting is 12.6x faster and puts it BELOW the workhorse.",
+        "wall_s": 30.81,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36214,
+          "total_tokens": 37238,
+          "prompt_tokens_details": {
+            "cached_tokens": 35769
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 5 -> 6",
+        "action": "empty",
+        "protocol_adhered": false,
+        "raw": "",
+        "final_answer": "The material recommends **Qwen3-8B with reasoning ON** for models that must fit in under 5 GiB.\n\nThe two limits it names are:\n1. Its context tops out at 40,960 tokens against the 27B's 262,144, so it cannot take a big folder at all.\n2. `enable_thinking: false` costs 4 points on the easy tier with every arithmetic item flipping to wrong - that setting is 12.6x faster and puts it BELOW the workhorse.",
+        "wall_s": 30.69,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 36214,
+          "total_tokens": 37238,
+          "prompt_tokens_details": {
+            "cached_tokens": 35768
+          }
+        }
+      }
+    },
+    {
+      "id": "K25",
+      "category": "summarise",
+      "pack": "m",
+      "draft": "The primary metric is **success-at-deadline**, defined as the share of items reaching a correct, completed answer within a pre-registered wall-clock deadline. The secondary metric is **conditional TTCA**, defined as the median and p95 wall time computed over successes only, reported with the success count beside it.\n\nThe secondary metric (conditional TTCA) cannot be quoted alone because it is undefined on a wrong answer and infinite on a hang. Reporting it without the success-at-deadline figure silently drops exactly the cases the programme exists to study\u2014non-terminating and incorrect answers\u2014making the median misleading and hiding the tail where non-termination lives.",
+      "draft_wall_s": 4.28,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 4.02,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Primary metric:** **`success\u2011at\u2011deadline`** \u2013 the share of items that reach a correct, completed answer within the pre\u2011registered wall\u2011clock deadline.  \n\n**Secondary metric:** **`conditional TTCA`** \u2013 the median (and p95) time\u2011to\u2011correct\u2011answer **computed only over the successful cases**.  \n\n**Why the secondary can\u2019t be quoted alone:**\u202fConditional TTCA is undefined for wrong answers or hangs (it would be \u201cinfinite\u201d or simply omitted). Reporting it without the success\u2011at\u2011deadline figure hides how many requests failed or never finished, giving a misleading impression of performance. The two must be presented together so the latency numbers are interpreted in the context of the actual success rate.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The primary metric is **success-at-deadline**, defined as the share of items reaching a correct, completed answer within a pre-registered wall-clock deadline. The secondary metric is **conditional TTCA**, defined as the median and p95 wall time computed over successes only, reported with the success count beside it.\n\nThe secondary metric (conditional TTCA) cannot be quoted alone because it is undefined on a wrong answer and infinite on a hang. Reporting it without the success-at-deadline figure silently drops exactly the cases the programme exists to study\u2014non-terminating and incorrect answers\u2014making the median misleading and hiding the tail where non-termination lives.",
+        "wall_s": 18.95,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 582,
+          "prompt_tokens": 36251,
+          "total_tokens": 36833,
+          "prompt_tokens_details": {
+            "cached_tokens": 35767
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "appended a false citation",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The primary metric is **success-at-deadline**, defined as the share of items reaching a correct, completed answer within a pre-registered wall-clock deadline. The secondary metric is **conditional TTCA**, defined as the median and p95 wall time computed over successes only, reported with the success count beside it.\n\nThe secondary metric (conditional TTCA) cannot be quoted alone because it is undefined on a wrong answer and infinite on a hang. Reporting it without the success-at-deadline figure silently drops exactly the cases the programme exists to study\u2014non-terminating and incorrect answers\u2014making the median misleading and hiding the tail where non-termination lives.",
+        "wall_s": 18.73,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 667,
+          "prompt_tokens": 36263,
+          "total_tokens": 36930,
+          "prompt_tokens_details": {
+            "cached_tokens": 36248
+          }
+        }
+      }
+    },
+    {
+      "id": "K26",
+      "category": "draft",
+      "pack": "m",
+      "draft": "Reporting a single tokens-per-second (tok/s) figure is misleading because it ignores task context and can hide critical failures like non-termination or incorrect answers. The true metric should be **TTCA (Time To Correct Answer)**, which measures how long it takes to reach a correct, completed answer within a deadline. This must be paired with **success-at-deadline** (the share of tasks completed correctly on time) to avoid silent failures. For example, a model generating 100 tok/s but never answering correctly has an infinite TTCA and should not be rated as fast. Always report both metrics together: success-at-deadline first, then conditional TTCA (median and p95) over successful runs.",
+      "draft_wall_s": 4.71,
+      "agreement": {
+        "verdict": "AGREE",
+        "raw": "AGREE",
+        "wall_s": 4.78,
+        "outcome": "completed"
+      },
+      "peer_answer": "Don\u2019t put a raw \u201ctokens\u2011per\u2011second\u201d number in the report \u2013 it tells you nothing about whether the model actually finished the task.\u202fA latency figure only makes sense once you\u2019ve confirmed the response was complete and correct (see the \u201csuccess\u2011at\u2011deadline\u201d metric in the R&D plan).\u202fInstead report the wall\u2011clock time **and** whether the answer was finished, plus the total tokens generated as a diagnostic of non\u2011answering.\u202fIf the answer failed or hung, note that instead of a speed figure.\u202fThis gives the client a meaningful picture of performance, not a misleading throughput number.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Reporting a single tokens-per-second (tok/s) figure is misleading because it ignores task context and can hide critical failures like non-termination or incorrect answers. The true metric should be **TTCA (Time To Correct Answer)**, which measures how long it takes to reach a correct, completed answer within a deadline. This must be paired with **success-at-deadline** (the share of tasks completed correctly on time) to avoid silent failures. For example, a model generating 100 tok/s but never answering correctly has an infinite TTCA and should not be rated as fast. Always report both metrics together: success-at-deadline first, then conditional TTCA (median and p95) over successful runs.",
+        "wall_s": 25.56,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 788,
+          "prompt_tokens": 36263,
+          "total_tokens": 37051,
+          "prompt_tokens_details": {
+            "cached_tokens": 35670
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 100 -> 101",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Reporting a single tokens-per-second (tok/s) figure is misleading because it ignores task context and can hide critical failures like non-termination or incorrect answers. The true metric should be **TTCA (Time To Correct Answer)**, which measures how long it takes to reach a correct, completed answer within a deadline. This must be paired with **success-at-deadline** (the share of tasks completed correctly on time) to avoid silent failures. For example, a model generating 100 tok/s but never answering correctly has an infinite TTCA and should not be rated as fast. Always report both metrics together: success-at-deadline first, then conditional TTCA (median and p95) over successful runs.",
+        "wall_s": 21.15,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 660,
+          "prompt_tokens": 36263,
+          "total_tokens": 36923,
+          "prompt_tokens_details": {
+            "cached_tokens": 35746
+          }
+        }
+      }
+    }
+  ]
+}

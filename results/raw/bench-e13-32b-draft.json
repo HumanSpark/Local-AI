@@ -1,0 +1,81 @@
+{
+ "label": "e13-32b-draft",
+ "config": {
+  "model": "/opt/models/staging/Qwen3-32B-Q4_K_M.gguf",
+  "slots": 1,
+  "kv": "f16",
+  "fa": "auto",
+  "ctx_per_slot": 4096,
+  "duration": 45,
+  "gen_tokens": 128,
+  "port": 8100,
+  "load_timeout": 180.0,
+  "request_timeout": 120.0,
+  "label": "e13-32b-draft",
+  "out": "llama.cpp/bench-e13-32b-draft.json",
+  "extra": "-md /opt/models/staging/Qwen3-0.6B-Q8_0.gguf --spec-draft-n-max 16 --spec-draft-n-min 1",
+  "dry_run": false
+ },
+ "utc": "2026-07-04T18:53:08Z",
+ "offload_gate": {
+  "pass": true,
+  "assignments": {
+   "Vulkan0": 188
+  }
+ },
+ "summary": {
+  "requests_ok": 4,
+  "requests_failed": 0,
+  "min_requests_per_stream": 4,
+  "under_sampled": false,
+  "wall_s": 51.536,
+  "aggregate_gen_tps": 9.93,
+  "mean_stream_gen_tps": 10.85,
+  "ttft_ms_p50": 1040.8,
+  "ttft_ms_p95": 1041.8,
+  "streams": 1
+ },
+ "records": [
+  {
+   "thread": 0,
+   "seq": 0,
+   "start": 114772.363522613,
+   "end": 114785.234159612,
+   "prompt_n": 167,
+   "prompt_ms": 1027.479,
+   "predicted_n": 128,
+   "predicted_per_second": 10.8541172719533
+  },
+  {
+   "thread": 0,
+   "seq": 1,
+   "start": 114785.234185491,
+   "end": 114798.129548786,
+   "prompt_n": 167,
+   "prompt_ms": 1040.787,
+   "predicted_n": 128,
+   "predicted_per_second": 10.842074261601802
+  },
+  {
+   "thread": 0,
+   "seq": 2,
+   "start": 114798.129573635,
+   "end": 114811.031681954,
+   "prompt_n": 167,
+   "prompt_ms": 1041.823,
+   "predicted_n": 128,
+   "predicted_per_second": 10.836536602264903
+  },
+  {
+   "thread": 0,
+   "seq": 3,
+   "start": 114811.031702884,
+   "end": 114823.899646827,
+   "prompt_n": 167,
+   "prompt_ms": 1040.331,
+   "predicted_n": 128,
+   "predicted_per_second": 10.86626086275904
+  }
+ ],
+ "server_exit": 0
+}

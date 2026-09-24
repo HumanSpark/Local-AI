@@ -1,0 +1,40 @@
+[2026-09-01T06:22:37+01:00] === session queue: tools/queue-e94-262k-clean.txt ===
+[2026-09-01T06:22:37+01:00]   queued: E94-ceiling-262144-smart
+[2026-09-01T06:22:37+01:00] === opening the session window (ONE window for the whole queue) ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-09-01T06:22:37+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-09-01T06:22:37+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-09-01T06:22:37+01:00] --- [1] E94-ceiling-262144-smart ---
+=== E94 residency: ctx=262,144 per model, 1 models: ['smart'] ===
+GTT baseline before load: 5.02 GiB
+control preset (smart): /home/agent-spark/sparkbench/results/raw/e94/preset-smart.ini
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/results/raw/e94/preset-smart.ini --models-max 1 -c 262144 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['smart']
+  warm smart     10.22s  GTT=28.36 GiB
+GTT with all 1 resident: 28.36 GiB (delta 23.34)
+  solo smart  walls=[8.219, 8.186, 8.03] min=8.03
+=== context ceiling: alias=smart allocated_ctx=262,144 ===
+  top    261,827 tok -> SERVED  3545.98s  200
+
+no ceiling below the allocation: 261,827 tokens served
+written: /home/agent-spark/sparkbench/results/raw/e94/ceiling-ctx262144-smart.json
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx262144-smart.json
+[2026-09-01T07:22:19+01:00] [1] E94-ceiling-262144-smart rc=0 wall=3582s
+[2026-09-01T07:22:19+01:00] === session done: 1 arms in 3582s ===
+[2026-09-01T07:22:19+01:00] every arm exited 0
+[2026-09-01T07:22:19+01:00] === closing the session window (exit rc=0) ===
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-09-01T07:22:19+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1872769 
+[2026-09-01T07:22:19+01:00] relay restored, VERIFIED: llama-server is running
+[2026-09-01T07:22:19+01:00] session finished, rc=0

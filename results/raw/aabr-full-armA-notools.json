@@ -1,0 +1,774 @@
+{
+  "label": "armA-gptoss120b",
+  "condition": "no-tools",
+  "schema_version": null,
+  "model": "/opt/models/staging/gpt-oss-120b-mxfp4-00001-of-00003.gguf",
+  "items_file": "spikes/aabr/items-40.json",
+  "n_items": 40,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 74,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 0,
+  "round_cap_hits": 0,
+  "wall_s": 145.02,
+  "note": "merged s10 + s30 halves; identical serving config both halves",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the notice was not received in time to prevent renewal.  \nCITATION: Notice must be received not less than 45 days prior to the Renewal Date; registered post deemed received on the 3rd business day after posting.",
+      "char_count": 223,
+      "char_count_all_rounds": 223,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 12.16,
+      "id": "B01",
+      "subset": "boundary",
+      "mechanism": [
+        "deemed_receipt",
+        "backward_count",
+        "roll_forward",
+        "business_days"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Friday\u202f17\u202fMay\u202f2024  \nCITATION: Rule \u2013 \u201cSupplementary Evidence must be filed not less than 14 clear days before the Hearing Date\u2026 If the absolute final day to file falls on a weekend or public holiday, the deadline rolls backward to the preceding business day.\u201d and Facts \u2013 Hearing Date\u202f=\u202fMonday\u202f3\u202fJune\u202f2024; 27\u202fMay\u202f2024 is a public holiday.",
+      "char_count": 348,
+      "char_count_all_rounds": 348,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 22.25,
+      "id": "B02",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "roll_backward",
+        "holiday"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the option was validly exercised.\nCITATION: Rule: option expires at 17:00 on the 90th day (April\u202f6\u202f2024) rolling forward to 17:00 Monday\u202fApril\u202f8\u202f2024; email after\u202f17:00 deemed delivered at 09:00 next business day. Fact: Effective Date\u202f7\u202fJan\u202f2024; notice sent\u202f5\u202fApr\u202f2024\u202f19:15.",
+      "char_count": 289,
+      "char_count_all_rounds": 289,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 22.73,
+      "id": "B03",
+      "subset": "boundary",
+      "mechanism": [
+        "time_of_day_cutoff",
+        "roll_forward",
+        "deemed_receipt"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 17 November 2024  \nCITATION: The cure period for a material breach is 15 business days from the receipt of the default notice. If uncured, the aggrieved party may serve a final termination notice, which takes effect exactly 10 calendar days after the date of service.",
+      "char_count": 275,
+      "char_count_all_rounds": 275,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 22.01,
+      "id": "B04",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "calendar_days",
+        "no_roll_trap"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine the final deadline, as it lacks the number of days in February 2024 (i.e., whether it is a leap year). \nCITATION: The rule requires defaulting to the last day of February, but the facts do not specify if February 2024 has 28 or 29 days.",
+      "char_count": 306,
+      "char_count_all_rounds": 306,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.81,
+      "id": "B05",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "roll_forward"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: USD\u202f100,000  \nCITATION: MSA Section\u202f10.2 (liability cap) and MSA Section\u202f1.5 (SOW cannot modify terms without explicit reference)",
+      "char_count": 137,
+      "char_count_all_rounds": 137,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.32,
+      "id": "A01",
+      "subset": "ambiguity",
+      "mechanism": [
+        "precedence",
+        "ineffective_override"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the 15\u2011day termination notice is not legally effective because Addendum B has not been countersigned by both parties' Chief Legal Officers, so its fast\u2011track termination right does not apply.  \nCITATION: Clause\u202f11.3 (addenda effective only upon countersignature by both parties' CLOs)",
+      "char_count": 296,
+      "char_count_all_rounds": 296,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.33,
+      "id": "A02",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_dependency",
+        "conditional_incorporation"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Trade Secret obligations are no longer in effect because Clause\u202f5\u2019s five\u2011year survival period governs any conflict with Clause\u202f12.  \nCITATION: Clause\u202f5 (Confidentiality) survival 5\u202fyears; Clause\u202f12 final sentence stating conflicts are governed by Clause\u202f5.",
+      "char_count": 272,
+      "char_count_all_rounds": 272,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 9.55,
+      "id": "A03",
+      "subset": "ambiguity",
+      "mechanism": [
+        "circular_reference",
+        "tie_breaker"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Consultant is not legally entitled to the bonus because the required written UAT sign\u2011off (Condition\u202fB) is not shown to have been provided.  \nCITATION: RULE \u2013 entitlement requires both Condition\u202fA (on\u2011schedule delivery) AND Condition\u202fB (written UAT sign\u2011off).",
+      "char_count": 275,
+      "char_count_all_rounds": 275,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.5,
+      "id": "A04",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_premise",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Customer did not breach Clause 7.1.  \nCITATION: \"Products\" defined in Section\u202f1 as the software licences listed in Exhibit\u202fA; Clause\u202f7.1 prohibits reselling \"Products\".",
+      "char_count": 184,
+      "char_count_all_rounds": 184,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.12,
+      "id": "A05",
+      "subset": "ambiguity",
+      "mechanism": [
+        "defined_term",
+        "scope_mismatch"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 29 February 2024  \nCITATION: The Lock-Up Period expires exactly 6 months after the IPO Date; the IPO Date was 31 August 2023.",
+      "char_count": 133,
+      "char_count_all_rounds": 133,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 10.63,
+      "id": "B06",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Wednesday, 17 January 2024\nCITATION: A party has exactly 5 business days from the Date of Discovery to report an incident; Business days are Monday to Friday and there are no holidays.",
+      "char_count": 192,
+      "char_count_all_rounds": 192,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.38,
+      "id": "B07",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Thursday 23 May 2024\nCITATION: statute dictates that if a deadline falls on a weekend or public holiday, it rolls backward to the immediately preceding business day; Friday, 24 May 2024 is also a public holiday.",
+      "char_count": 219,
+      "char_count_all_rounds": 219,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 8.57,
+      "id": "B08",
+      "subset": "boundary",
+      "mechanism": [
+        "roll_backward",
+        "holiday",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Saturday, 16\u202fMarch\u202f2024  \nCITATION: Payment is due exactly 15 calendar days from the Invoice Date; Section\u202f4.2 states calendar\u2011day deadlines are absolute, even on weekends or holidays; Invoice Date was Friday,\u202f1\u202fMarch\u202f2024.",
+      "char_count": 231,
+      "char_count_all_rounds": 231,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.92,
+      "id": "B09",
+      "subset": "boundary",
+      "mechanism": [
+        "no_roll_trap",
+        "calendar_days",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to determine whether Geolocation Data is listed in Exhibit\u202fC, which is required to assess a material breach.  \nCITATION: Section\u202f2.1 and Clause\u202f9.1.",
+      "char_count": 205,
+      "char_count_all_rounds": 205,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.03,
+      "id": "A06",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_exhibit",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the Vendor is contractually obligated to provide Immediate Remediation for this incident.  \nCITATION: Clause\u202f4 requires the Vendor to provide \u201cImmediate Remediation\u201d for any \u201cSeverity\u202f1 Incident.\u201d",
+      "char_count": 209,
+      "char_count_all_rounds": 209,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.29,
+      "id": "A07",
+      "subset": "ambiguity",
+      "mechanism": [
+        "undefined_term",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine which amendment controls, so the legally binding guaranteed uptime SLA cannot be determined.\nCITATION: Missing fact \u2013 which amendment supersedes the other (e.g., ordering or hierarchy) is not specified.",
+      "char_count": 272,
+      "char_count_all_rounds": 272,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.4,
+      "id": "A08",
+      "subset": "ambiguity",
+      "mechanism": [
+        "irresolvable_conflict",
+        "same_day_amendments",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the Vendor is authorised to use AWS as a sub\u2011processor for this order.  \nCITATION: 2024 Order Form (data privacy addenda remain in full force) and 2023 Data Processing Addendum (Section\u202f2 pre\u2011authorises AWS).",
+      "char_count": 221,
+      "char_count_all_rounds": 221,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 9.04,
+      "id": "A09",
+      "subset": "ambiguity",
+      "mechanism": [
+        "later_in_time",
+        "specific_vs_general"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Tuesday, 5\u202fMarch\u202f2024  \nCITATION: Evaluation Period expires exactly 1 month after the Trial Start Date; following expiration, the Customer has a 3\u2011business\u2011day Grace Period; Business days are Monday to Friday.",
+      "char_count": 217,
+      "char_count_all_rounds": 217,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 13.92,
+      "id": "B10",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "business_days",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Monday, 23\u202fDecember\u202f2024  \nCITATION: A Response must be filed exactly 15 calendar days after the Notice of Inquiry is issued. If the deadline falls on a weekend or a recognised public holiday, it rolls backward to the immediately preceding business day. The Notice of Inquiry was issued on Tuesday, 10\u202fDecember\u202f2024. Both 24\u202fDecember and 25\u202fDecember are recognised public holidays.",
+      "char_count": 389,
+      "char_count_all_rounds": 389,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 11.97,
+      "id": "B11",
+      "subset": "boundary",
+      "mechanism": [
+        "calendar_days",
+        "roll_backward",
+        "holiday",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Friday\u202f4\u202fOctober\u202f2024  \nCITATION: \u201cMotions must be served not less than 7 clear days before the Hearing Date\u2026 If the final permitted day for service falls on a weekend, the absolute deadline to serve rolls backward to the preceding business day. The Hearing Date is Monday,\u202f14\u202fOctober\u202f2024.\u201d",
+      "char_count": 299,
+      "char_count_all_rounds": 299,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 18.07,
+      "id": "B12",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "roll_backward",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Thursday\u202f13\u202fJune\u202f2024  \nCITATION: Notice must be deemed received at least 10 business days before the Renewal Date (Monday\u202f1\u202fJuly\u202f2024) and certified mail is deemed received 2 business days after posting.",
+      "char_count": 212,
+      "char_count_all_rounds": 212,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 13.21,
+      "id": "B13",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "deemed_receipt",
+        "backward_count",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 30 June 2024  \nCITATION: The vesting cliff occurs exactly 3 months from the Grant Date of 31\u202fMarch\u202f2024.",
+      "char_count": 112,
+      "char_count_all_rounds": 112,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.83,
+      "id": "B14",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "no_roll_trap",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine whether a Change of Control occurred, as the contract does not define \u201cChange of Control.\u201d  \nCITATION: Section\u202f4.1 states the acceleration trigger but notes the contract does not define \u201cChange of Control.\u201d",
+      "char_count": 276,
+      "char_count_all_rounds": 276,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.0,
+      "id": "A10",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_definition",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine which state has exclusive venue, as it lacks a rule for resolving the conflict between the two addenda\u2019s venue provisions.  \nCITATION: The material contains conflicting venue clauses (New York and California) but does not specify which provision controls in case of such a conflict.",
+      "char_count": 352,
+      "char_count_all_rounds": 352,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 4.23,
+      "id": "A11",
+      "subset": "ambiguity",
+      "mechanism": [
+        "irresolvable_conflict",
+        "same_day_amendments",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Net\u201130 payment terms apply to SOW\u202f#2.  \nCITATION: Master Agreement Section\u202f12 (conflict clause) and Section\u202f3 (Net\u201130 payment terms).",
+      "char_count": 141,
+      "char_count_all_rounds": 141,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.2,
+      "id": "A12",
+      "subset": "ambiguity",
+      "mechanism": [
+        "order_of_precedence",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine the exact cure\u2011period expiration date because it does not specify whether the email sent on 10\u202fMarch satisfies the formal written notice requirements of Clause\u202f15.  \nCITATION: The contract requires notice \u201cin accordance with Clause\u202f15 (Notices),\u201d but Clause\u202f15 is not included in the provided material.",
+      "char_count": 372,
+      "char_count_all_rounds": 372,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.64,
+      "id": "A13",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_trigger_facts",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Customer did not breach Clause\u202f5 because the PDF was not marked with a CONFIDENTIAL stamp or watermark and therefore does not meet the defined scope of \u201cConfidential Information.\u201d  \nCITATION: Section\u202f1.1 definition of \u201cConfidential Information\u201d requiring explicit CONFIDENTIAL stamp or watermark.",
+      "char_count": 312,
+      "char_count_all_rounds": 312,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.18,
+      "id": "A14",
+      "subset": "ambiguity",
+      "mechanism": [
+        "strict_marking_trap",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Thursday 26 December 2024\nCITATION: The statutory review period ends exactly 10 calendar days after the Filing Date. If the end date falls on a weekend or recognised public holiday, the deadline rolls forward to the next available business day.",
+      "char_count": 252,
+      "char_count_all_rounds": 252,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 9.65,
+      "id": "B15",
+      "subset": "boundary",
+      "mechanism": [
+        "roll_forward",
+        "holiday",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Tuesday, 7\u202fMay\u202f2024  \nCITATION: Local rules dictate that the counter\u2011notice must be served not less than 7 clear days before the Deposition Date; clear days exclude the day of service and the day of the deposition.",
+      "char_count": 222,
+      "char_count_all_rounds": 222,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 10.08,
+      "id": "B16",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Thursday\u202f27\u202fJune\u202f2024  \nCITATION: Final venue selections must be submitted at least 10 business days prior to the Main Event; Main Event is Monday\u202f15\u202fJuly\u202f2024; Thursday\u202f4\u202fJuly and Friday\u202f5\u202fJuly are public holidays and do not count as business days.",
+      "char_count": 257,
+      "char_count_all_rounds": 257,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 12.69,
+      "id": "B17",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "backward_count",
+        "holiday",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine the exact expiration date because it lacks a rule for handling months that do not have the same day number (e.g., November has only 30 days).  \nCITATION: The rule specifies \u201cexpires exactly 6 months from the Purchase Date\u201d and the rollover rule for weekends/holidays, but does not address how to handle months where the corresponding day does not exist.",
+      "char_count": 423,
+      "char_count_all_rounds": 423,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.6,
+      "id": "B18",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "roll_backward",
+        "holiday",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Monday\u202f12\u202fFebruary\u202f2024  \nCITATION: Schedules sent via standard post are deemed received 5 business days after posting; the Customer has 30 calendar days from receipt to file an objection; if the deadline falls on a weekend it rolls forward to the next business day.",
+      "char_count": 274,
+      "char_count_all_rounds": 274,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 19.52,
+      "id": "B19",
+      "subset": "boundary",
+      "mechanism": [
+        "deemed_receipt",
+        "calendar_days",
+        "roll_forward",
+        "chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine the exact maturity date because it lacks a rule for handling a non\u2011existent date such as 29\u202fFebruary\u202f2025.  \nCITATION: The award date is 29\u202fFebruary\u202f2024 and Section\u202f9.1 prohibits rolling for weekends or holidays, but no provision is given for dates that do not exist in the target year.",
+      "char_count": 357,
+      "char_count_all_rounds": 357,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 9.9,
+      "id": "B20",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "no_roll_trap_inert",
+        "short_chain"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not specify whether the force\u2011majeure event has lasted more than 30\u202fcalendar days, so we cannot determine if the Customer may terminate without penalty.  \nCITATION: Clause\u202f14 requires a continuous period of >30\u202fdays, but the duration of the hurricane\u2011induced halt is not provided.",
+      "char_count": 306,
+      "char_count_all_rounds": 306,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.35,
+      "id": "A15",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_trigger_facts",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The contract provides no basis to calculate a credit because Schedule\u202fD, which defines the calculation, is intentionally left blank, so the amount cannot be determined.  \nCITATION: Section\u202f3 requires credits \u201ccalculated strictly in accordance with Schedule\u202fD,\u201d and Schedule\u202fD is \u201c[INTENTIONALLY LEFT BLANK]\u201d.",
+      "char_count": 316,
+      "char_count_all_rounds": 316,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.42,
+      "id": "A16",
+      "subset": "ambiguity",
+      "mechanism": [
+        "deleted_cross_reference",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the Provider is contractually liable for the USD\u202f500,000 indirect damages.  \nCITATION: Addendum\u202fA (Data Privacy) \u2013 \u201cNotwithstanding Section\u202f8, the Provider shall be liable for indirect damages arising directly from a breach of Customer Data, subject to a USD\u202f1,000,000 cap.\u201d",
+      "char_count": 287,
+      "char_count_all_rounds": 287,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.39,
+      "id": "A17",
+      "subset": "ambiguity",
+      "mechanism": [
+        "specific_vs_general",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the billing dispute notice was validly served.\nCITATION: Section\u202f10.2 (Billing Disputes) states that notice sent via email to billing@acme.com shall be deemed valid and sufficient for disputing an invoice.",
+      "char_count": 218,
+      "char_count_all_rounds": 218,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.34,
+      "id": "A18",
+      "subset": "ambiguity",
+      "mechanism": [
+        "specific_vs_general",
+        "internal_section_conflict",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, SOW\u202f#1 is not currently legally binding because the Customer has not executed (signed) it, and Clause\u202f2 requires mutual execution by both parties.  \nCITATION: Clause\u202f2 of the Master Agreement \u2013 \u201cAny Statement of Work (SOW) referencing this Agreement shall be legally binding only upon mutual execution by both parties.\u201d",
+      "char_count": 331,
+      "char_count_all_rounds": 331,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.9,
+      "id": "A19",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_execution",
+        "course_of_dealing_distractor",
+        "resolvable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not specify whether Canada is included; the required list of geographic regions is missing.  \nCITATION: Clause\u202f1.1 and Appendix\u202fB (no explicit regions listed).",
+      "char_count": 185,
+      "char_count_all_rounds": 185,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.77,
+      "id": "A20",
+      "subset": "ambiguity",
+      "mechanism": [
+        "irresolvable_circular_definition",
+        "unanswerable"
+      ]
+    }
+  ]
+}

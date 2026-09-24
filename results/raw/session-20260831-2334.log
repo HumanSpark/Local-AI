@@ -1,0 +1,376 @@
+[2026-08-31T23:34:07+01:00] === session queue: tools/queue-night.txt ===
+[2026-08-31T23:34:07+01:00]   queued: E94-ceiling-098304
+[2026-08-31T23:34:07+01:00]   queued: E94-ceiling-131072
+[2026-08-31T23:34:07+01:00]   queued: E94-ceiling-262144
+[2026-08-31T23:34:07+01:00] === opening the session window (ONE window for the whole queue) ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T23:34:07+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: 
+[2026-08-31T23:34:07+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T23:34:07+01:00] --- [1] E94-ceiling-098304 ---
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+=== E94 residency: ctx=98,304 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 98304 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       2.66s  GTT=58.34 GiB
+  warm smart     11.89s  GTT=67.52 GiB
+  warm code       0.13s  GTT=67.53 GiB
+GTT with all 3 resident: 67.53 GiB (delta 62.51)
+  solo fast   walls=[0.722, 0.612, 0.592] min=0.592
+  solo smart  walls=[8.305, 8.22, 8.055] min=8.055
+  solo code   walls=[0.755, 0.627, 0.607] min=0.607
+  switch fast   -> smart  wall=8.05s solo_min=8.05s excess=-0.003s
+  switch fast   -> code   wall=0.63s solo_min=0.61s excess=+0.023s
+  switch smart  -> fast   wall=0.62s solo_min=0.59s excess=+0.027s
+  switch smart  -> code   wall=0.63s solo_min=0.61s excess=+0.023s
+  switch code   -> fast   wall=0.60s solo_min=0.59s excess=+0.004s
+  switch code   -> smart  wall=8.01s solo_min=8.05s excess=-0.042s
+=== context ceiling: alias=fast allocated_ctx=98,304 ===
+=== context ceiling: alias=smart allocated_ctx=98,304 ===
+=== context ceiling: alias=code allocated_ctx=98,304 ===
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx98304-all.json
+[2026-08-31T23:35:29+01:00] [1] E94-ceiling-098304 rc=0 wall=82s
+[2026-08-31T23:35:29+01:00] --- [2] E94-ceiling-131072 ---
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+=== E94 residency: ctx=131,072 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 131072 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       4.34s  GTT=59.97 GiB
+  warm smart      5.04s  GTT=71.93 GiB
+  warm code       0.14s  GTT=71.93 GiB
+GTT with all 3 resident: 71.93 GiB (delta 66.91)
+  solo fast   walls=[0.726, 0.61, 0.608] min=0.608
+  solo smart  walls=[8.346, 8.216, 8.052] min=8.052
+  solo code   walls=[0.763, 0.639, 0.627] min=0.627
+  switch fast   -> smart  wall=8.05s solo_min=8.05s excess=+0.001s
+  switch fast   -> code   wall=0.63s solo_min=0.63s excess=+0.004s
+  switch smart  -> fast   wall=0.62s solo_min=0.61s excess=+0.016s
+  switch smart  -> code   wall=0.64s solo_min=0.63s excess=+0.009s
+  switch code   -> fast   wall=0.61s solo_min=0.61s excess=+0.002s
+  switch code   -> smart  wall=8.04s solo_min=8.05s excess=-0.011s
+=== context ceiling: alias=fast allocated_ctx=131,072 ===
+=== context ceiling: alias=smart allocated_ctx=131,072 ===
+=== context ceiling: alias=code allocated_ctx=131,072 ===
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx131072-all.json
+[2026-08-31T23:36:46+01:00] [2] E94-ceiling-131072 rc=0 wall=77s
+[2026-08-31T23:36:46+01:00] --- [3] E94-ceiling-262144 ---
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+Traceback (most recent call last):
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 175, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 118, in main
+    text, n = build_prompt(base, hi)
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 54, in build_prompt
+    per_unit = tokenize(base, probe) / 40.0
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/agent-spark/sparkbench/tools/e94/ctx_ceiling.py", line 46, in tokenize
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
+=== E94 residency: ctx=262,144 per model, 3 models: ['fast', 'smart', 'code'] ===
+GTT baseline before load: 5.02 GiB
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server --models-preset /home/agent-spark/sparkbench/tools/e94/models-e94.ini --models-max 3 -c 262144 --host 127.0.0.1 --port 8115 --no-webui -v
+router healthy in 1.02s
+models listed: ['code', 'fast', 'smart']
+  warm fast       3.99s  GTT=66.80 GiB
+  warm smart      7.00s  GTT=89.89 GiB
+  warm code       0.13s  GTT=89.89 GiB
+GTT with all 3 resident: 89.89 GiB (delta 84.87)
+  solo fast   walls=[0.729, 0.619, 0.614] min=0.614
+  solo smart  walls=[8.399, 8.271, 8.095] min=8.095
+  solo code   walls=[0.765, 0.641, 0.63] min=0.63
+  switch fast   -> smart  wall=8.08s solo_min=8.10s excess=-0.015s
+  switch fast   -> code   wall=0.63s solo_min=0.63s excess=+0.002s
+  switch smart  -> fast   wall=0.63s solo_min=0.61s excess=+0.012s
+  switch smart  -> code   wall=0.64s solo_min=0.63s excess=+0.009s
+  switch code   -> fast   wall=0.62s solo_min=0.61s excess=+0.011s
+  switch code   -> smart  wall=8.09s solo_min=8.10s excess=-0.008s
+=== context ceiling: alias=fast allocated_ctx=262,144 ===
+=== context ceiling: alias=smart allocated_ctx=262,144 ===
+=== context ceiling: alias=code allocated_ctx=262,144 ===
+written: /home/agent-spark/sparkbench/results/raw/e94/e94-residency-ctx262144-all.json
+[2026-08-31T23:38:05+01:00] [3] E94-ceiling-262144 rc=0 wall=79s
+[2026-08-31T23:38:05+01:00] === session done: 3 arms in 238s ===
+[2026-08-31T23:38:05+01:00] every arm exited 0
+[2026-08-31T23:38:05+01:00] === closing the session window (exit rc=0) ===
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T23:38:05+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1814240 
+[2026-08-31T23:38:05+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T23:38:05+01:00] session finished, rc=0

@@ -1,0 +1,4137 @@
+{
+  "evalId": "eval-0nC-2026-07-11T08:01:44",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-07-11T08:01:44.609Z",
+    "prompts": [
+      {
+        "id": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "raw": "{{task}}",
+        "label": "{{task}}",
+        "provider": "openai:chat",
+        "metrics": {
+          "score": 16,
+          "testPassCount": 16,
+          "testFailCount": 8,
+          "testErrorCount": 0,
+          "assertPassCount": 23,
+          "assertFailCount": 8,
+          "totalLatencyMs": 10334,
+          "tokenUsage": {
+            "prompt": 893,
+            "completion": 3762,
+            "cached": 0,
+            "total": 4655,
+            "numRequests": 24,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "error": "Custom function returned false\nconst bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 3;",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\nconst bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 3;",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\nconst bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 3;",
+              "assertion": {
+                "type": "javascript",
+                "value": "const bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 3;\n"
+              }
+            }
+          ]
+        },
+        "id": "036b95e5-11c9-404d-989f-ca0d49958452",
+        "latencyMs": 1528,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "- Meeting discussed current matter status, key risks, and any immediate client concerns raised during the call.\n- Parties reviewed outstanding documents, recent correspondence, and any deadlines or procedural requirements needing attention.\n- Agreed next steps were identified and responsibility for follow-up was allocated accordingly.\n\n- Action item 1: Confirm and circulate the latest timeline of key dates and deadlines.\n- Action item 2: Obtain any outstanding documents or information required from the client or third parties.\n- Action item 3: Prepare and send a concise update to the client summarising progress and next steps.",
+          "tokenUsage": {
+            "total": 145,
+            "prompt": 27,
+            "completion": 118,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 1528,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:46 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756904-l9OcpCHElgYFBm0CrVDK"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "exact-bullets-3-action-items",
+          "vars": {
+            "task": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 3;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 27,
+          "completion": 118,
+          "cached": 0,
+          "total": 145,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:46 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756904-l9OcpCHElgYFBm0CrVDK"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const paragraphs = output.split(/\\n\\n+/).filter(p => p.trim().length > 0);\nreturn paragraphs.length === 2;\n"
+              }
+            }
+          ]
+        },
+        "id": "7fc7ea94-7586-46ce-813c-7ce9accb35eb",
+        "latencyMs": 417,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "Smith v Jones Ltd. is a breach of contract claim brought by the plaintiff against the defendant, with the defendant denying liability. The claimant seeks £15,000 in damages.\n\nThe dispute arose out of a supply agreement dated 1 May 2025. The claimant says the goods were delivered three weeks late, and the quality of the goods is also disputed.",
+          "tokenUsage": {
+            "total": 158,
+            "prompt": 82,
+            "completion": 76,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 417,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:45 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756904-3gxmGH1Kad8H5kLRbVQY"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "exact-paragraphs-2-case-summary",
+          "vars": {
+            "task": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const paragraphs = output.split(/\\n\\n+/).filter(p => p.trim().length > 0);\nreturn paragraphs.length === 2;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 82,
+          "completion": 76,
+          "cached": 0,
+          "total": 158,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:45 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756904-3gxmGH1Kad8H5kLRbVQY"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 4;\n"
+              }
+            }
+          ]
+        },
+        "id": "a180c2eb-df9d-44a7-aeb6-e54e22fe9bc5",
+        "latencyMs": 328,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "- **Tight delivery window with limited remedy:** The clause requires delivery within 30 days, but the buyer’s cancellation right only starts after 45 days, leaving a 15-day delay period with no clear remedy or compensation.\n- **Delayed delivery may still disrupt operations:** Even if cancellation becomes available after 45 days, the buyer may suffer business interruption, stock shortages, or lost sales before that point without any express liability for the supplier.\n- **Title retention can create recovery and financing risk:** Goods remain the supplier’s property until full payment, which may complicate the buyer’s ability to use, resell, or pledge the goods and may create disputes if the buyer becomes insolvent.\n- **Transit insurance burden on buyer:** The buyer bears insurance responsibility during transit, increasing cost and risk exposure if goods are lost or damaged before receipt, with no express allocation of carrier liability or minimum coverage requirements.",
+          "tokenUsage": {
+            "total": 253,
+            "prompt": 68,
+            "completion": 185,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 328,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:44 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756904-7i9e26Ugk3UO0I3MGI6j"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "exact-bullets-4-contract-risks",
+          "vars": {
+            "task": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 4;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 68,
+          "completion": 185,
+          "cached": 0,
+          "total": 253,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:44 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756904-7i9e26Ugk3UO0I3MGI6j"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 100 && words <= 150;\n"
+              }
+            }
+          ]
+        },
+        "id": "2211a064-b8af-45d9-8152-6914cea751e7",
+        "latencyMs": 305,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "The client instructed us on 1 June 2026 in relation to a dispute with a supplier concerning the quality of delivered goods. The goods were supplied on 15 June 2026, after which the client identified quality issues and raised a complaint on 22 June 2026. The supplier has رفضed to provide a full refund and has instead offered only a partial credit. The client estimates its loss at £8,500 and seeks recovery of the full purchase price together with additional damages. The key issues are the quality of the goods, the supplier’s refusal to refund, and the extent of the client’s recoverable loss. Further review of the contract terms, supporting evidence, and the complaint correspondence will be required to assess liability and prospects of settlement or claim.",
+          "tokenUsage": {
+            "total": 245,
+            "prompt": 87,
+            "completion": 158,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 305,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:44 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756904-t9kwQJyPwmK5Eh10u3TL"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "word-range-100-150-case-summary",
+          "vars": {
+            "task": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 100 && words <= 150;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 87,
+          "completion": 158,
+          "cached": 0,
+          "total": 245,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:44 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756904-t9kwQJyPwmK5Eh10u3TL"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 200 && words <= 300;\n"
+              }
+            }
+          ]
+        },
+        "id": "777d7e75-f92a-433c-870f-0fe2045739fe",
+        "latencyMs": 408,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "[Date]\n\n[Contractor Name]  \n[Contractor Business Name]  \n[Street Address]  \n[City, State ZIP]\n\n**Re: Formal Demand for Payment Due to Breach of Contract**\n\nDear [Contractor Name]:\n\nThis letter serves as formal notice that you are in breach of our contract dated [Contract Date]. Under the terms of that agreement, you were required to [briefly describe the contractor’s obligation, e.g., complete renovation work by a specified date and in a workmanlike manner]. However, you failed to perform as agreed, including [briefly describe the breach, e.g., missed deadlines, incomplete work, and defective workmanship].\n\nAs a result of your breach, I have incurred damages in the amount of **$[Amount Claimed]**. This amount reflects the costs necessary to correct and complete the work, as well as related losses directly caused by your failure to comply with the contract terms.\n\nAccordingly, I hereby demand payment of **$[Amount Claimed]** in full no later than **[Deadline Date, e.g., 14 days from the date of this letter]**. Payment should be made by certified check or other immediately available funds and delivered to the address listed above.\n\nIf I do not receive payment by the stated deadline, I will consider all available legal remedies without further notice, which may include filing a lawsuit to recover damages, costs, and any other relief available under applicable law. I remain willing to resolve this matter amicably and avoid further escalation if prompt payment is made.\n\nSincerely,\n\n[Your Name]  \n[Your Address]  \n[City, State ZIP]  \n[Phone Number]  \n[Email Address]",
+          "tokenUsage": {
+            "total": 382,
+            "prompt": 38,
+            "completion": 344,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 408,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:46 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756905-J1cd0PbdD5cOL065VHES"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "word-range-200-300-demand-letter",
+          "vars": {
+            "task": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 200 && words <= 300;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 38,
+          "completion": 344,
+          "cached": 0,
+          "total": 382,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:46 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756905-J1cd0PbdD5cOL065VHES"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function returned false\nconst words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function returned false\nconst words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function returned false\nconst words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;",
+              "assertion": {
+                "type": "javascript",
+                "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;\n"
+              }
+            }
+          ]
+        },
+        "id": "a74fefd5-d27e-4cec-9d38-b036edbc03f6",
+        "latencyMs": 516,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "Please provide the matter details, and I’ll turn them into a 50–75 word client summary covering:\n\n- Matter type  \n- Key issue  \n- Next step  \n- Timeline expectation  \n\nIf helpful, you can paste the facts in bullet form, and I’ll draft the summary right away.",
+          "tokenUsage": {
+            "total": 95,
+            "prompt": 32,
+            "completion": 63,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 516,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:47 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756906-ASLtfuQICvyHcrbkBi4H"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "word-range-50-75-client-brief",
+          "vars": {
+            "task": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "tokenUsage": {
+          "prompt": 32,
+          "completion": 63,
+          "cached": 0,
+          "total": 95,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:47 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756906-ASLtfuQICvyHcrbkBi4H"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Date"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Recipient"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Subject"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Conclusion"
+              }
+            }
+          ]
+        },
+        "id": "a999c850-bb91-43f9-9b85-0ac49b763805",
+        "latencyMs": 277,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "**Date:** July 11, 2026\n\n**Recipient:** [Client Name]  \n[Client Company]  \n[Client Address]\n\n**Subject Line:** Update on Your Matter and Next Steps\n\nDear [Client Name],\n\nI hope you are doing well. I am writing to provide you with an update regarding your matter and to outline the next steps.\n\nWe have reviewed the current status and gathered the relevant information needed at this stage. Based on our assessment, the matter remains on track, and we are continuing to move forward with the necessary work. If any additional documents, approvals, or information are required from you, we will let you know promptly.\n\n## Current Status\nAt this time, we are completing the remaining items needed before the next phase. We will continue to monitor developments and keep you informed of any material updates.\n\n## Next Steps\nOur immediate next steps are as follows:\n1. Finalize the outstanding review items.\n2. Confirm any remaining details with the relevant parties.\n3. Provide you with a further update once the next milestone is reached.\n\nPlease feel free to contact me if you have any questions or if there is anything you would like to discuss in more detail. We appreciate the opportunity to assist you and will continue to work diligently on your behalf.\n\n**Conclusion**\n\nThank you for your continued trust and cooperation. We look forward to keeping you updated as the matter progresses.\n\nSincerely,  \n[Your Name]  \n[Your Title]  \n[Your Firm/Organization]",
+          "tokenUsage": {
+            "total": 340,
+            "prompt": 37,
+            "completion": 303,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 277,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:47 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756906-guwziHrXCIgdHYwJ1bLF"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sections-client-letter-4-required",
+          "vars": {
+            "task": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections."
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "Date"
+            },
+            {
+              "type": "icontains",
+              "value": "Recipient"
+            },
+            {
+              "type": "icontains",
+              "value": "Subject"
+            },
+            {
+              "type": "icontains",
+              "value": "Conclusion"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "tokenUsage": {
+          "prompt": 37,
+          "completion": 303,
+          "cached": 0,
+          "total": 340,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:47 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756906-guwziHrXCIgdHYwJ1bLF"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Issue"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Analysis"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Conclusion"
+              }
+            }
+          ]
+        },
+        "id": "017e5b2e-d0ab-4ed1-aaf4-3434a125dc80",
+        "latencyMs": 289,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "Sure — here is a concise legal memo format with the requested sections. If you want, I can also tailor it to a specific fact pattern or jurisdiction.\n\n---\n\n# Legal Memorandum\n\n## Issue\nWhat is the legal question presented by the facts?\n\n## Analysis\nThe analysis section should apply relevant law to the facts. It typically includes:\n- the governing legal rule or standard,\n- how courts interpret that rule,\n- application of the rule to the specific facts,\n- any arguments for and against liability or relief.\n\nFor example, if the issue concerns a contract dispute, the analysis would discuss whether a valid contract existed, whether a breach occurred, and what remedies may be available.\n\n## Conclusion\nBased on the governing law and the facts, state the likely outcome or answer to the legal issue in a direct sentence.\n\n---\n\nIf you’d like, I can draft a full legal memo on a specific topic in this exact structure.",
+          "tokenUsage": {
+            "total": 213,
+            "prompt": 24,
+            "completion": 189,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 289,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:47 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756907-OlsHWE2El7rNNZe5Q4b9"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sections-legal-memo-3-required",
+          "vars": {
+            "task": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion."
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "Issue"
+            },
+            {
+              "type": "icontains",
+              "value": "Analysis"
+            },
+            {
+              "type": "icontains",
+              "value": "Conclusion"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "tokenUsage": {
+          "prompt": 24,
+          "completion": 189,
+          "cached": 0,
+          "total": 213,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:47 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756907-OlsHWE2El7rNNZe5Q4b9"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Scope"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Fees"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "Confidentiality"
+              }
+            }
+          ]
+        },
+        "id": "1608e613-7997-4341-82d2-dd1b804a2ce4",
+        "latencyMs": 304,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "Certainly — here is a general **engagement letter template** with the requested sections clearly labeled. You can customize the bracketed fields to fit your situation.\n\n---\n\n# Engagement Letter\n\n**Date:** [Insert Date]  \n**Client:** [Client Name]  \n**Service Provider:** [Your Name / Company Name]  \n**Address:** [Address]  \n\nDear [Client Name],\n\nThis letter confirms the terms under which [Your Name / Company Name] will provide services to [Client Name].\n\n## Scope of Work\n\n[Your Name / Company Name] will provide the following services:\n\n- [Describe primary services]\n- [Describe additional tasks or deliverables]\n- [Specify any exclusions or limitations]\n\nThe services will begin on [start date] and are expected to conclude on [end date or “upon completion”]. Any changes to the scope of work must be agreed to in writing by both parties and may result in additional fees and adjusted timelines.\n\n## Fees\n\nIn consideration for the services described above, the Client agrees to pay the following fees:\n\n- **Fee Structure:** [Hourly / fixed fee / retainer / milestone-based]\n- **Rate:** [Insert rate or total amount]\n- **Payment Schedule:** [e.g., due upon invoice, net 30, milestone payments]\n- **Expenses:** [State whether expenses are included or billed separately]\n\nInvoices will be issued [weekly / monthly / upon completion / according to milestones]. Any overdue amounts may be subject to [late fee / interest], to the extent permitted by law.\n\n## Confidentiality\n\nEach party agrees to keep confidential any non-public, proprietary, or sensitive information disclosed in connection with this engagement. Confidential information may not be disclosed to any third party except:\n\n- as necessary to perform the services;\n- with the prior written consent of the disclosing party; or\n- as required by law, regulation, or court order.\n\nThis obligation of confidentiality will survive termination of this engagement for a period of [insert period] years, or as otherwise required by applicable law.\n\n## Other Terms\n\n1. **Independent Contractor**  \n   [Your Name / Company Name] is acting as an independent contractor and not as an employee, partner, or agent of the Client.\n\n2. **Termination**  \n   Either party may terminate this engagement upon [number] days’ written notice. The Client will remain responsible for payment for all services performed and approved expenses incurred up to the date of termination.\n\n3. **Ownership of Work Product**  \n   Upon full payment, ownership of deliverables will [transfer to Client / remain with Service Provider except as otherwise agreed].\n\n4. **Limitation of Liability**  \n   To the fullest extent permitted by law, [insert limitation language if desired].\n\n5. **Governing Law**  \n   This engagement letter will be governed by the laws of [State/Country].\n\n6. **Entire Agreement**  \n   This letter contains the entire agreement between the parties regarding the subject matter and supersedes prior discussions or understandings.\n\nPlease sign below to indicate your acceptance of these terms.\n\nSincerely,  \n[Your Name]  \n[Title]  \n[Company Name]  \n\n---\n\n**Accepted and Agreed:**  \n\nClient Name: _______________________  \nSignature: __________________________  \nDate: ______________________________  \n\nService Provider: ____________________  \nSignature: __________________________  \nDate: ______________________________  \n\n---\n\nIf you’d like, I can also turn this into:\n- a **more formal legal-style version**\n- a **freelancer/client engagement letter**\n- or a **specific version for consulting, law, accounting, or design services**.",
+          "tokenUsage": {
+            "total": 758,
+            "prompt": 31,
+            "completion": 727,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 304,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:48 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756907-KsciZ8bGIGB4GFkyJCRd"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "sections-engagement-letter-3-required",
+          "vars": {
+            "task": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow."
+          },
+          "assert": [
+            {
+              "type": "icontains",
+              "value": "Scope"
+            },
+            {
+              "type": "icontains",
+              "value": "Fees"
+            },
+            {
+              "type": "icontains",
+              "value": "Confidentiality"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "tokenUsage": {
+          "prompt": 31,
+          "completion": 727,
+          "cached": 0,
+          "total": 758,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:48 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756907-KsciZ8bGIGB4GFkyJCRd"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('liable');",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('liable');",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('liable');",
+              "assertion": {
+                "type": "javascript",
+                "value": "return !output.toLowerCase().includes('liable');\n"
+              }
+            }
+          ]
+        },
+        "id": "1456e421-e0cf-4752-a5a7-51f93d9a6ee5",
+        "latencyMs": 697,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "Potential exposure includes contractual damages, indemnification obligations, regulatory fines, and litigation costs arising from alleged breach, misrepresentation, negligence, or noncompliance. Actual risk depends on governing law, contract terms, available defenses, insurance coverage, and causation. Early assessment, document preservation, and counsel review may reduce adverse outcomes and financial impact.",
+          "tokenUsage": {
+            "total": 99,
+            "prompt": 27,
+            "completion": 72,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 697,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:50 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756909-wI580crZ0d2cYwRsW39h"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "forbidden-word-liable",
+          "vars": {
+            "task": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "return !output.toLowerCase().includes('liable');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "tokenUsage": {
+          "prompt": 27,
+          "completion": 72,
+          "cached": 0,
+          "total": 99,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:50 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756909-wI580crZ0d2cYwRsW39h"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('unfortunately');",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('unfortunately');",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('unfortunately');",
+              "assertion": {
+                "type": "javascript",
+                "value": "return !output.toLowerCase().includes('unfortunately');\n"
+              }
+            }
+          ]
+        },
+        "id": "58254472-5864-4265-8145-089cd1f206da",
+        "latencyMs": 296,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "The case has been delayed due to pending court scheduling and document review. We are actively monitoring developments and will keep you informed as soon as we receive an updated timeline. Please let us know if you have any questions.",
+          "tokenUsage": {
+            "total": 74,
+            "prompt": 27,
+            "completion": 47,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 296,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:49 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756909-4Gmbjec7iQxLmdRGH1z6"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "forbidden-word-unfortunately",
+          "vars": {
+            "task": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "return !output.toLowerCase().includes('unfortunately');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 10,
+        "tokenUsage": {
+          "prompt": 27,
+          "completion": 47,
+          "cached": 0,
+          "total": 74,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:49 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756909-4Gmbjec7iQxLmdRGH1z6"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('due to');",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('due to');",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn !output.toLowerCase().includes('due to');",
+              "assertion": {
+                "type": "javascript",
+                "value": "return !output.toLowerCase().includes('due to');\n"
+              }
+            }
+          ]
+        },
+        "id": "522b7605-f176-45f4-8950-5cb391b3c040",
+        "latencyMs": 318,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "The contract ended because one party failed to meet essential obligations, making continued collaboration impractical. Repeated missed deadlines, unresolved quality issues, and poor communication eroded trust, leaving the other party no reasonable option but to terminate the agreement and seek alternatives.",
+          "tokenUsage": {
+            "total": 81,
+            "prompt": 27,
+            "completion": 54,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 318,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:49 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756909-1AipebabxwwrifWrAQK7"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "forbidden-word-due-to",
+          "vars": {
+            "task": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "return !output.toLowerCase().includes('due to');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 11,
+        "tokenUsage": {
+          "prompt": 27,
+          "completion": 54,
+          "cached": 0,
+          "total": 81,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:49 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756909-1AipebabxwwrifWrAQK7"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;\n"
+              }
+            }
+          ]
+        },
+        "id": "85f15c42-fe71-49f2-ba21-7b72045528c1",
+        "latencyMs": 682,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "An efficient law firm client intake process should be clear, consistent, and designed to capture the right information quickly while filtering out unsuitable matters early. It should also create a smooth first impression for prospective clients.\n\n## 1. Make access easy\nThe intake process should begin with simple ways for prospective clients to get in touch:\n- phone\n- web enquiry form\n- email\n- live chat, if appropriate\n- referral from another professional\n\nAll channels should feed into one central system so enquiries are not lost or duplicated.\n\n## 2. Use a standard initial triage\nEvery enquiry should be handled through a structured triage process. This helps the firm decide quickly whether:\n- the matter fits the firm’s practice areas\n- there is a conflict of interest\n- the matter is urgent\n- the firm has capacity to act\n- the client is likely to be suitable from a risk and commercial perspective\n\nA short screening script or form should be used so that all key information is gathered consistently.\n\n## 3. Collect essential information only at first\nThe first stage should focus on the minimum information needed to assess the matter:\n- client name and contact details\n- type of legal issue\n- key dates and deadlines\n- opposing parties\n- urgency\n- how the client found the firm\n- any immediate risks or court deadlines\n\nAvoid requesting excessive detail too early, as this can slow the process and frustrate clients.\n\n## 4. Run conflict checks immediately\nConflict checks should be completed as early as possible, before any substantive legal advice is given. The process should be:\n- quick\n- documented\n- linked to a matter-opening system\n- carried out against both current and former client records where relevant\n\nIf a potential conflict is identified, there should be a clear escalation route for review.\n\n## 5. Qualify and prioritise matters\nNot every enquiry should move to a full consultation. The firm should have criteria for:\n- high-priority matters, such as urgent court deadlines\n- high-value or strategic work\n- matters within the firm’s target client base\n- matters requiring specialist expertise\n- low-value or unsuitable enquiries that should be declined politely and promptly\n\nThis helps fee earners focus on the best-fit cases.\n\n## 6. Create a smooth handover to the right fee earner\nOnce a matter passes initial screening, it should be assigned to the appropriate solicitor or team based on:\n- area of law\n- complexity\n- jurisdiction\n- workload\n- client profile\n\nThe handover should include a concise summary of the issue, any deadlines, and the outcome of conflict checks.\n\n## 7. Use a structured consultation process\nThe consultation should follow a clear format:\n- confirm the client’s objectives\n- gather fuller background information\n- identify risks and next steps\n- explain likely fees and funding options\n- manage expectations about outcome and timescales\n\nThe person conducting the consultation should take clear notes that can be saved to the client record.\n\n## 8. Set out fees and engagement terms early\nBefore work starts, the firm should provide:\n- a clear client care letter\n- terms of business\n- fee estimate or pricing structure\n- information on disbursements and VAT\n- details of any retainer or payment required\n\nThis reduces misunderstandings and supports compliance.\n\n## 9. Build compliance into the workflow\nThe intake process should include checks for:\n- identity and verification requirements\n- source of funds, where relevant\n- anti-money laundering obligations\n- sanctions screening\n- vulnerability or safeguarding concerns, if applicable\n\nThese checks should be built into the process rather than treated as an afterthought.\n\n## 10. Use a case management or CRM system\nAn efficient intake process relies on technology to:\n- log all enquiries\n- track status and deadlines\n- store notes and documents\n- automate acknowledgement emails\n- trigger reminders for follow-up\n- generate reports on conversion rates and enquiry sources\n\nThis improves consistency and reduces admin time.\n\n## 11. Standardise communication\nProspective clients should receive prompt, professional updates such as:\n- acknowledgement of receipt\n- confirmation that the firm is reviewing the enquiry\n- request for any missing information\n- acceptance or decline decision\n- next-step instructions\n\nTemplates should be used where appropriate, but with enough flexibility to remain personal.\n\n## 12. Review performance regularly\nThe firm should monitor key intake metrics, for example:\n- number of enquiries received\n- percentage converted into paid matters\n- average response time\n- main referral sources\n- reasons for declining matters\n- common bottlenecks\n\nRegular review helps improve the process and identify training or resourcing needs.\n\n## 13. Keep the process client-friendly\nEfficiency should not come at the expense of service. The intake process should be:\n- easy to understand\n- responsive\n- respectful\n- confidential\n- proportionate to the nature of the matter\n\nA well-organised intake process reassures clients that the firm is professional and capable from the outset.\n\n## In summary\nAn effective law firm client intake process should combine speed, consistency, and good judgement. It should capture essential information early, carry out conflict and compliance checks promptly, route matters to the right people, and set clear expectations before work begins. Done well, it improves conversion rates, reduces risk, and creates a stronger client experience.",
+          "tokenUsage": {
+            "total": 1108,
+            "prompt": 25,
+            "completion": 1083,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 682,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:51 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756910-zRRXjdDqlideUeiUNwx8"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "uk-spelling-organised",
+          "vars": {
+            "task": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 12,
+        "tokenUsage": {
+          "prompt": 25,
+          "completion": 1083,
+          "cached": 0,
+          "total": 1108,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:51 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756910-zRRXjdDqlideUeiUNwx8"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const hasRealised = output.toLowerCase().includes('realised');\nconst hasRealized = output.toLowerCase().includes('realized');\nreturn hasRealised && !hasRealized;\n"
+              }
+            }
+          ]
+        },
+        "id": "46199b55-ffea-4335-b0b9-8aa3085cb378",
+        "latencyMs": 323,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Explain what the client should have realised before signing the agreement. Use only UK English spelling.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "The client should have realised, before signing the agreement, what they were actually committing to, including:\n\n- the key terms and obligations in the contract\n- any payment amounts, deadlines, fees, or penalties\n- any risks, limitations, or liabilities they were accepting\n- whether the agreement matched what had been discussed or promised\n- any clauses about termination, renewal, or notice periods\n- whether they needed independent legal advice before proceeding\n\nIn short, they should have understood the substance and consequences of the agreement before signing it.",
+          "tokenUsage": {
+            "total": 140,
+            "prompt": 24,
+            "completion": 116,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 323,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:51 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756911-ALXAe3NkQkBJoQaklJ2J"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "uk-spelling-realised",
+          "vars": {
+            "task": "Explain what the client should have realised before signing the agreement. Use only UK English spelling."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const hasRealised = output.toLowerCase().includes('realised');\nconst hasRealized = output.toLowerCase().includes('realized');\nreturn hasRealised && !hasRealized;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 13,
+        "tokenUsage": {
+          "prompt": 24,
+          "completion": 116,
+          "cached": 0,
+          "total": 140,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Explain what the client should have realised before signing the agreement. Use only UK English spelling."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:51 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756911-ALXAe3NkQkBJoQaklJ2J"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;\n"
+              }
+            }
+          ]
+        },
+        "id": "0fbf94f1-f279-4ebd-a24a-abde1018991e",
+        "latencyMs": 268,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "Of course — I can do that.\n\nPlease provide the contract text, clause excerpt, or agreement details you want analysed, and I will review:\n\n- the contractual obligations of each party\n- compliance requirements and deadlines\n- any conditions precedent or ongoing duties\n- breach risks, notice requirements, and remedies\n- ambiguous or problematic provisions\n- practical points for compliance monitoring\n\nI will use UK English spelling throughout.",
+          "tokenUsage": {
+            "total": 107,
+            "prompt": 21,
+            "completion": 86,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 268,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:51 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756911-coNQzwrdxcMQjGQGa2vy"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "uk-spelling-analyse",
+          "vars": {
+            "task": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 14,
+        "tokenUsage": {
+          "prompt": 21,
+          "completion": 86,
+          "cached": 0,
+          "total": 107,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:51 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756911-coNQzwrdxcMQjGQGa2vy"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "try {\n  const obj = JSON.parse(output);\n  return typeof obj.name === 'string' && obj.name.length > 0 &&\n         typeof obj.date_instructed === 'string' && obj.date_instructed.length > 0 &&\n         typeof obj.matter_code === 'string' && obj.matter_code.length > 0;\n} catch {\n  return false;\n}\n"
+              }
+            }
+          ]
+        },
+        "id": "834537e5-8cd4-427f-b7fc-7175a74b7dad",
+        "latencyMs": 631,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "{\n  \"name\": \"Avery Chen\",\n  \"date_instructed\": \"2026-07-11\",\n  \"matter_code\": \"MAT-2026-0417\"\n}",
+          "tokenUsage": {
+            "total": 83,
+            "prompt": 39,
+            "completion": 44,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 631,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756912-LBCx4GqUNi11Mr1SLAU9"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "json-output-client-record",
+          "vars": {
+            "task": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "try {\n  const obj = JSON.parse(output);\n  return typeof obj.name === 'string' && obj.name.length > 0 &&\n         typeof obj.date_instructed === 'string' && obj.date_instructed.length > 0 &&\n         typeof obj.matter_code === 'string' && obj.matter_code.length > 0;\n} catch {\n  return false;\n}\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 15,
+        "tokenUsage": {
+          "prompt": 39,
+          "completion": 44,
+          "cached": 0,
+          "total": 83,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756912-LBCx4GqUNi11Mr1SLAU9"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "try {\n  const obj = JSON.parse(output);\n  return typeof obj.hours === 'number' && obj.hours > 0 &&\n         typeof obj.description === 'string' && obj.description.length > 0 &&\n         typeof obj.rate === 'number' && obj.rate > 0;\n} catch {\n  return false;\n}\n"
+              }
+            }
+          ]
+        },
+        "id": "2831124f-b727-4695-8d99-7bd2e94e4cb8",
+        "latencyMs": 269,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"hours\":2.5,\"description\":\"Client meeting and project planning\",\"rate\":85}",
+          "tokenUsage": {
+            "total": 67,
+            "prompt": 44,
+            "completion": 23,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 269,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:52 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756912-mbAOkW18LHnVUq8CIgvw"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "json-output-time-entry",
+          "vars": {
+            "task": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "try {\n  const obj = JSON.parse(output);\n  return typeof obj.hours === 'number' && obj.hours > 0 &&\n         typeof obj.description === 'string' && obj.description.length > 0 &&\n         typeof obj.rate === 'number' && obj.rate > 0;\n} catch {\n  return false;\n}\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 16,
+        "tokenUsage": {
+          "prompt": 44,
+          "completion": 23,
+          "cached": 0,
+          "total": 67,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:52 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756912-mbAOkW18LHnVUq8CIgvw"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "try {\n  const obj = JSON.parse(output);\n  const validStatuses = ['open', 'closed', 'pending'];\n  return typeof obj.client_name === 'string' && obj.client_name.length > 0 &&\n         typeof obj.matter_type === 'string' && obj.matter_type.length > 0 &&\n         typeof obj.status === 'string' && validStatuses.includes(obj.status);\n} catch {\n  return false;\n}\n"
+              }
+            }
+          ]
+        },
+        "id": "26fadc6e-8edf-4388-86b4-62eec51a3401",
+        "latencyMs": 286,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"client_name\":\"Apex Horizon Technologies, LLC\",\"matter_type\":\"Commercial contract review\",\"status\":\"pending\"}",
+          "tokenUsage": {
+            "total": 73,
+            "prompt": 47,
+            "completion": 26,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 286,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756913-AnELiichLhe4sBqsI3J2"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "json-output-matter-summary",
+          "vars": {
+            "task": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "try {\n  const obj = JSON.parse(output);\n  const validStatuses = ['open', 'closed', 'pending'];\n  return typeof obj.client_name === 'string' && obj.client_name.length > 0 &&\n         typeof obj.matter_type === 'string' && obj.matter_type.length > 0 &&\n         typeof obj.status === 'string' && validStatuses.includes(obj.status);\n} catch {\n  return false;\n}\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 17,
+        "tokenUsage": {
+          "prompt": 47,
+          "completion": 26,
+          "cached": 0,
+          "total": 73,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756913-AnELiichLhe4sBqsI3J2"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+              "assertion": {
+                "type": "javascript",
+                "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+              }
+            }
+          ]
+        },
+        "id": "170a1a75-7b84-4f6a-bf6a-cb7b9acf3921",
+        "latencyMs": 317,
+        "namedScores": {},
+        "prompt": {
+          "raw": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "09 August 2026",
+          "tokenUsage": {
+            "total": 55,
+            "prompt": 46,
+            "completion": 9,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 317,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756913-z3sUDfUfRDiDpoKU3IIw"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "date-format-court-deadline",
+          "vars": {
+            "task": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 18,
+        "tokenUsage": {
+          "prompt": 46,
+          "completion": 9,
+          "cached": 0,
+          "total": 55,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756913-z3sUDfUfRDiDpoKU3IIw"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+              "assertion": {
+                "type": "javascript",
+                "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+              }
+            }
+          ]
+        },
+        "id": "b9cfeab1-7c66-483b-acfc-4206c4c83bb5",
+        "latencyMs": 384,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "15 March 2026",
+          "tokenUsage": {
+            "total": 34,
+            "prompt": 25,
+            "completion": 9,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 384,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756913-gV4IVnbypMgXPP2EOLOU"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "date-format-contract-signature-date",
+          "vars": {
+            "task": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 19,
+        "tokenUsage": {
+          "prompt": 25,
+          "completion": 9,
+          "cached": 0,
+          "total": 34,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:53 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756913-gV4IVnbypMgXPP2EOLOU"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Custom function threw error: Unexpected token 'return'\nStack Trace: SyntaxError: Unexpected token 'return'\n    at new Function (<anonymous>)\n    at handleJavascript (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:2211:34)\n    at runAssertion (file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5056:24)\n    at file:///home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/dist/src/evaluator-CM_f4JnS.js:5155:24\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:151:38\n    at replenish (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:447:21)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:452:13\n    at Object.eachOfLimit (/home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:478:36)\n    at /home/agent-spark/.local/opt/node-v24.18.0-linux-x64/lib/node_modules/promptfoo/node_modules/async/dist/async.js:220:25\n    at new Promise (<anonymous>)\nreturn /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);",
+              "assertion": {
+                "type": "javascript",
+                "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+              }
+            }
+          ]
+        },
+        "id": "d99ef5e8-6b66-4377-9e14-40e29dd08308",
+        "latencyMs": 276,
+        "namedScores": {},
+        "prompt": {
+          "raw": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "25 July 2026",
+          "tokenUsage": {
+            "total": 44,
+            "prompt": 35,
+            "completion": 9,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 276,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:54 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756913-v57pauZeuSHNGgLaNaYG"
+              }
+            }
+          }
+        },
+        "score": 0,
+        "success": false,
+        "testCase": {
+          "description": "date-format-payment-deadline",
+          "vars": {
+            "task": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 20,
+        "tokenUsage": {
+          "prompt": 35,
+          "completion": 9,
+          "cached": 0,
+          "total": 44,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:54 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756913-v57pauZeuSHNGgLaNaYG"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+              }
+            }
+          ]
+        },
+        "id": "3e7a3bc4-223d-4c74-b953-eadd4b1f32f1",
+        "latencyMs": 287,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "No",
+          "tokenUsage": {
+            "total": 37,
+            "prompt": 26,
+            "completion": 11,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 287,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:54 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756914-Kffj8hTmYnkAlpAajC2Y"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "one-word-conflict-disclosure",
+          "vars": {
+            "task": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 21,
+        "tokenUsage": {
+          "prompt": 26,
+          "completion": 11,
+          "cached": 0,
+          "total": 37,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:54 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756914-Kffj8hTmYnkAlpAajC2Y"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+              }
+            }
+          ]
+        },
+        "id": "5912de24-e9c6-434b-aca4-bb0e45e094c6",
+        "latencyMs": 663,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no.",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "yes",
+          "tokenUsage": {
+            "total": 30,
+            "prompt": 25,
+            "completion": 5,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 663,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:55 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756914-LCWFkQsvYg7NHeF46J8N"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "one-word-liability-assessment",
+          "vars": {
+            "task": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no."
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 22,
+        "tokenUsage": {
+          "prompt": 25,
+          "completion": 5,
+          "cached": 0,
+          "total": 30,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no."
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:55 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756914-LCWFkQsvYg7NHeF46J8N"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+              }
+            }
+          ]
+        },
+        "id": "816430d4-c7ba-4105-8066-6372035e31ac",
+        "latencyMs": 265,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?",
+          "label": "{{task}}",
+          "config": {}
+        },
+        "promptId": "ec1aefd522ceea4dbc16cd07da0dccd9fce23abef66cb24e561eb6956c67f536",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:chat",
+          "label": ""
+        },
+        "response": {
+          "output": "medium",
+          "tokenUsage": {
+            "total": 34,
+            "prompt": 29,
+            "completion": 5,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0
+            }
+          },
+          "cached": false,
+          "latencyMs": 265,
+          "finishReason": "stop",
+          "guardrails": {
+            "flagged": false
+          },
+          "metadata": {
+            "http": {
+              "status": 200,
+              "statusText": "OK",
+              "headers": {
+                "access-control-allow-origin": "*",
+                "access-control-expose-headers": "X-Generation-Id,cf-ray",
+                "cf-ray": "[REDACTED]",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Sat, 11 Jul 2026 08:01:55 GMT",
+                "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+                "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+                "server": "cloudflare",
+                "transfer-encoding": "chunked",
+                "x-content-type-options": "nosniff",
+                "x-generation-id": "gen-1783756914-lkujJPp3XQjMttnGfWDc"
+              }
+            }
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "one-word-client-priority",
+          "vars": {
+            "task": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?"
+          },
+          "assert": [
+            {
+              "type": "javascript",
+              "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 23,
+        "tokenUsage": {
+          "prompt": 29,
+          "completion": 5,
+          "cached": 0,
+          "total": 34,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {
+          "task": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?"
+        },
+        "metadata": {
+          "http": {
+            "status": 200,
+            "statusText": "OK",
+            "headers": {
+              "access-control-allow-origin": "*",
+              "access-control-expose-headers": "X-Generation-Id,cf-ray",
+              "cf-ray": "[REDACTED]",
+              "connection": "keep-alive",
+              "content-type": "application/json",
+              "date": "Sat, 11 Jul 2026 08:01:55 GMT",
+              "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")",
+              "referrer-policy": "no-referrer, strict-origin-when-cross-origin",
+              "server": "cloudflare",
+              "transfer-encoding": "chunked",
+              "x-content-type-options": "nosniff",
+              "x-generation-id": "gen-1783756914-lkujJPp3XQjMttnGfWDc"
+            }
+          },
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 16,
+      "failures": 8,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 893,
+        "completion": 3762,
+        "cached": 0,
+        "total": 4655,
+        "numRequests": 24,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 14576,
+      "evaluationDurationMs": 14576
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "sparkbench instruction-following suite - 24 solicitor-realistic constraint tests",
+    "prompts": [
+      "{{task}}"
+    ],
+    "providers": [
+      {
+        "id": "openai:chat",
+        "config": {
+          "apiBaseUrl": "https://openrouter.ai/api/v1",
+          "apiKeyEnvar": "[REDACTED]",
+          "model": "openai/gpt-5.4-mini",
+          "temperature": 0,
+          "max_tokens": 100
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "exact-bullets-3-action-items",
+        "vars": {
+          "task": "You are assisting a solicitor. Draft meeting notes with exactly 3 action items. Format as bullet points."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 3;\n"
+          }
+        ]
+      },
+      {
+        "description": "exact-paragraphs-2-case-summary",
+        "vars": {
+          "task": "Summarise this case in exactly 2 paragraphs. First paragraph: parties and claim. Second paragraph: key facts.\n\nCase: Smith v Jones Ltd. Plaintiff alleges breach of contract. Defendant denies liability. Claimant seeks £15,000 damages. Dispute arose from supply agreement dated 1 May 2025. Delivery was 3 weeks late. Quality of goods disputed."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const paragraphs = output.split(/\\n\\n+/).filter(p => p.trim().length > 0);\nreturn paragraphs.length === 2;\n"
+          }
+        ]
+      },
+      {
+        "description": "exact-bullets-4-contract-risks",
+        "vars": {
+          "task": "Review the following contract clause and list exactly 4 key risks as bullet points.\n\nClause: 'The supplier shall deliver goods within 30 days of order. Delivery delayed beyond 45 days entitles buyer to cancel without penalty. Goods remain supplier's property until paid in full. Buyer responsible for insurance during transit.'"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const bullets = output.match(/^[\\s]*[-•*]/gm) || [];\nreturn bullets.length === 4;\n"
+          }
+        ]
+      },
+      {
+        "description": "word-range-100-150-case-summary",
+        "vars": {
+          "task": "Write a case summary in exactly 100-150 words. Do not exceed this range.\n\nFacts: Client instructed 1 June 2026. Dispute with supplier over quality of delivered goods. Goods supplied 15 June 2026. Quality complaint raised 22 June 2026. Supplier refused refund, offered partial credit only. Estimated loss £8,500. Client seeking full refund plus damages."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 100 && words <= 150;\n"
+          }
+        ]
+      },
+      {
+        "description": "word-range-200-300-demand-letter",
+        "vars": {
+          "task": "Draft a formal demand letter to a contractor in 200-300 words. Include: date, recipient address, breach description, amount claimed, deadline for payment."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 200 && words <= 300;\n"
+          }
+        ]
+      },
+      {
+        "description": "word-range-50-75-client-brief",
+        "vars": {
+          "task": "Create a brief client summary in 50-75 words covering: matter type, key issue, next step, and timeline expectation."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const words = output.split(/\\s+/).filter(w => w.length > 0).length;\nreturn words >= 50 && words <= 75;\n"
+          }
+        ]
+      },
+      {
+        "description": "sections-client-letter-4-required",
+        "vars": {
+          "task": "Draft a client letter with the following sections: Date, Recipient, Subject Line, and Conclusion. Sections must be clearly labelled. You may add other sections."
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "Date"
+          },
+          {
+            "type": "icontains",
+            "value": "Recipient"
+          },
+          {
+            "type": "icontains",
+            "value": "Subject"
+          },
+          {
+            "type": "icontains",
+            "value": "Conclusion"
+          }
+        ]
+      },
+      {
+        "description": "sections-legal-memo-3-required",
+        "vars": {
+          "task": "Write a legal memo structured with these sections clearly headed: Issue, Analysis, and Conclusion."
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "Issue"
+          },
+          {
+            "type": "icontains",
+            "value": "Analysis"
+          },
+          {
+            "type": "icontains",
+            "value": "Conclusion"
+          }
+        ]
+      },
+      {
+        "description": "sections-engagement-letter-3-required",
+        "vars": {
+          "task": "Draft an engagement letter with these sections clearly labelled: Scope of Work, Fees, and Confidentiality. Other sections may follow."
+        },
+        "assert": [
+          {
+            "type": "icontains",
+            "value": "Scope"
+          },
+          {
+            "type": "icontains",
+            "value": "Fees"
+          },
+          {
+            "type": "icontains",
+            "value": "Confidentiality"
+          }
+        ]
+      },
+      {
+        "description": "forbidden-word-liable",
+        "vars": {
+          "task": "Write a 50-word legal summary of potential exposure. Do not use the word 'liable' anywhere."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "return !output.toLowerCase().includes('liable');\n"
+          }
+        ]
+      },
+      {
+        "description": "forbidden-word-unfortunately",
+        "vars": {
+          "task": "Draft a 40-word client update on a case delay. Do not use the word 'unfortunately'."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "return !output.toLowerCase().includes('unfortunately');\n"
+          }
+        ]
+      },
+      {
+        "description": "forbidden-word-due-to",
+        "vars": {
+          "task": "Explain a contract termination reason in 40 words. Do not use the phrase 'due to' anywhere."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "return !output.toLowerCase().includes('due to');\n"
+          }
+        ]
+      },
+      {
+        "description": "uk-spelling-organised",
+        "vars": {
+          "task": "Describe how a law firm's client intake process should be organised efficiently. Use UK English spelling throughout."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const hasOrganised = output.toLowerCase().includes('organised');\nconst hasOrganized = output.toLowerCase().includes('organized');\nreturn hasOrganised && !hasOrganized;\n"
+          }
+        ]
+      },
+      {
+        "description": "uk-spelling-realised",
+        "vars": {
+          "task": "Explain what the client should have realised before signing the agreement. Use only UK English spelling."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const hasRealised = output.toLowerCase().includes('realised');\nconst hasRealized = output.toLowerCase().includes('realized');\nreturn hasRealised && !hasRealized;\n"
+          }
+        ]
+      },
+      {
+        "description": "uk-spelling-analyse",
+        "vars": {
+          "task": "Analyse the contractual obligations and compliance requirements carefully. Use UK English spelling throughout."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const hasAnalyse = output.toLowerCase().includes('analyse');\nconst hasAnalyze = output.toLowerCase().includes('analyze');\nreturn hasAnalyse && !hasAnalyze;\n"
+          }
+        ]
+      },
+      {
+        "description": "json-output-client-record",
+        "vars": {
+          "task": "Return a client record as valid JSON. Include these required fields: name (string), date_instructed (string), matter_code (string). Invent realistic values."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "try {\n  const obj = JSON.parse(output);\n  return typeof obj.name === 'string' && obj.name.length > 0 &&\n         typeof obj.date_instructed === 'string' && obj.date_instructed.length > 0 &&\n         typeof obj.matter_code === 'string' && obj.matter_code.length > 0;\n} catch {\n  return false;\n}\n"
+          }
+        ]
+      },
+      {
+        "description": "json-output-time-entry",
+        "vars": {
+          "task": "Return a time entry as valid JSON with these required fields: hours (number, must be positive), description (string), rate (number in pounds, must be positive). Invent realistic values."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "try {\n  const obj = JSON.parse(output);\n  return typeof obj.hours === 'number' && obj.hours > 0 &&\n         typeof obj.description === 'string' && obj.description.length > 0 &&\n         typeof obj.rate === 'number' && obj.rate > 0;\n} catch {\n  return false;\n}\n"
+          }
+        ]
+      },
+      {
+        "description": "json-output-matter-summary",
+        "vars": {
+          "task": "Return a matter summary as valid JSON with these required fields: client_name (string), matter_type (string), status (string, must be one of: open, closed, pending). Invent realistic values."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "try {\n  const obj = JSON.parse(output);\n  const validStatuses = ['open', 'closed', 'pending'];\n  return typeof obj.client_name === 'string' && obj.client_name.length > 0 &&\n         typeof obj.matter_type === 'string' && obj.matter_type.length > 0 &&\n         typeof obj.status === 'string' && validStatuses.includes(obj.status);\n} catch {\n  return false;\n}\n"
+          }
+        ]
+      },
+      {
+        "description": "date-format-court-deadline",
+        "vars": {
+          "task": "State a court filing deadline in DD Month YYYY format (e.g. 15 August 2026). Make up a realistic deadline within the next 30 days from 11 July 2026."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+          }
+        ]
+      },
+      {
+        "description": "date-format-contract-signature-date",
+        "vars": {
+          "task": "Provide a contract signature date in DD Month YYYY format. Use a date in 2026."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+          }
+        ]
+      },
+      {
+        "description": "date-format-payment-deadline",
+        "vars": {
+          "task": "State a payment deadline in DD Month YYYY format. Assume today is 11 July 2026 and set a deadline 14 days from now."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "return /\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4}/.test(output);\n"
+          }
+        ]
+      },
+      {
+        "description": "one-word-conflict-disclosure",
+        "vars": {
+          "task": "Answer with exactly one word only. Has a conflict of interest been disclosed? Answer yes or no."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+          }
+        ]
+      },
+      {
+        "description": "one-word-liability-assessment",
+        "vars": {
+          "task": "Answer with exactly one word only. Is the defendant liable for damages? Answer yes or no."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+          }
+        ]
+      },
+      {
+        "description": "one-word-client-priority",
+        "vars": {
+          "task": "Answer with exactly one word only. How would you classify this client's priority level: high, medium, or low?"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const trimmed = output.trim();\nconst words = trimmed.split(/\\s+/).filter(w => w.length > 0);\nreturn words.length === 1;\n"
+          }
+        ]
+      }
+    ],
+    "env": {},
+    "defaultTest": {
+      "vars": {},
+      "assert": [],
+      "options": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "/home/agent-spark/sparkbench/results/deep-eval/cloud-gpt54mini-instruction-following.json"
+    ],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.17",
+    "nodeVersion": "v24.18.0",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2026-07-11T08:01:59.411Z",
+    "evaluationCreatedAt": "2026-07-11T08:01:44.609Z"
+  },
+  "vars": [
+    "task"
+  ],
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": false
+  }
+}

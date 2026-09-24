@@ -1,0 +1,279 @@
+{
+  "utc": "2026-08-19T01:45:08Z",
+  "kernel": "7.0.0-28-generic",
+  "power_profile": "balanced",
+  "arm_set": "stage2",
+  "ctx": 32768,
+  "max_tokens": 8192,
+  "reps": null,
+  "server_extra": "-b 512 -ub 128",
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "wall_s": 74.4,
+  "tiers": [
+    {
+      "tier": "chat",
+      "why": "91.3% of real relay traffic - median 68 prompt tokens, 56 generated",
+      "chars": 220
+    }
+  ],
+  "table": [
+    {
+      "arm": "27B-off-nomtp",
+      "tier": "chat",
+      "cold_s": 5.58,
+      "warm_median_s": 5.34,
+      "median_gen_tokens": 57,
+      "median_tok_per_s": 10.66
+    },
+    {
+      "arm": "27B-off-mtp4",
+      "tier": "chat",
+      "cold_s": 4.18,
+      "warm_median_s": 4.05,
+      "median_gen_tokens": 57,
+      "median_tok_per_s": 14.07
+    }
+  ],
+  "arms": [
+    {
+      "label": "27B-off-nomtp",
+      "thinking": "off",
+      "server_extra_override": "",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "load_s": 4.0,
+      "gate": {
+        "layers_assigned": 132,
+        "devices": [
+          "Vulkan0"
+        ]
+      },
+      "rows": [
+        {
+          "wall_s": 5.58,
+          "prompt_ms": 1148.503,
+          "predicted_ms": 4430.433,
+          "predicted_per_second": 12.639848069026211,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.21,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 5.28,
+          "prompt_ms": 843.382,
+          "predicted_ms": 4430.802,
+          "predicted_per_second": 12.638795414464472,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.8,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.34,
+          "prompt_ms": 858.854,
+          "predicted_ms": 4472.821,
+          "predicted_per_second": 12.520062841772564,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.68,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.35,
+          "prompt_ms": 866.7,
+          "predicted_ms": 4476.19,
+          "predicted_per_second": 12.51063962879145,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.66,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 4,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.34,
+          "prompt_ms": 852.457,
+          "predicted_ms": 4482.502,
+          "predicted_per_second": 12.493022869816901,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.68,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 5,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.35,
+          "prompt_ms": 865.653,
+          "predicted_ms": 4481.972,
+          "predicted_per_second": 12.4945001887562,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.65,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 6,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 5.35,
+          "prompt_ms": 862.676,
+          "predicted_ms": 4478.18,
+          "predicted_per_second": 12.50508018882671,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 10.66,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 7,
+          "cache": "warm"
+        }
+      ]
+    },
+    {
+      "label": "27B-off-mtp4",
+      "thinking": "off",
+      "server_extra_override": "--spec-type draft-mtp --spec-draft-n-max 4",
+      "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+      "load_s": 4.0,
+      "gate": {
+        "layers_assigned": 198,
+        "devices": [
+          "Vulkan0"
+        ]
+      },
+      "rows": [
+        {
+          "wall_s": 4.18,
+          "prompt_ms": 508.578,
+          "predicted_ms": 3663.628,
+          "predicted_per_second": 15.285394696186403,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 13.65,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 1,
+          "cache": "cold"
+        },
+        {
+          "wall_s": 4.04,
+          "prompt_ms": 184.251,
+          "predicted_ms": 3851.352,
+          "predicted_per_second": 14.540348428292196,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 14.11,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 2,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 4.04,
+          "prompt_ms": 190.463,
+          "predicted_ms": 3848.365,
+          "predicted_per_second": 14.551634265460788,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 14.1,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 3,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 4.05,
+          "prompt_ms": 188.824,
+          "predicted_ms": 3856.742,
+          "predicted_per_second": 14.520027525823608,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 14.07,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 4,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 4.05,
+          "prompt_ms": 188.885,
+          "predicted_ms": 3860.295,
+          "predicted_per_second": 14.506663350857899,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 14.06,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 5,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 4.05,
+          "prompt_ms": 188.593,
+          "predicted_ms": 3856.44,
+          "predicted_per_second": 14.521164597400713,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 14.07,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 6,
+          "cache": "warm"
+        },
+        {
+          "wall_s": 4.06,
+          "prompt_ms": 189.899,
+          "predicted_ms": 3860.813,
+          "predicted_per_second": 14.504717011676037,
+          "prompt_tokens": 58,
+          "completion_tokens": 57,
+          "reasoning_chars": 0,
+          "finish_reason": "stop",
+          "tok_per_s": 14.05,
+          "answer": "Professional indemnity insurance is a type of coverage that protects you if a client claims you made a mistake in your work that caused them financial loss. It typically pays for legal defense costs a",
+          "tier": "chat",
+          "rep": 7,
+          "cache": "warm"
+        }
+      ]
+    }
+  ]
+}

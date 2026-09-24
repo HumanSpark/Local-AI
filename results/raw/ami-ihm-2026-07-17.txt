@@ -1,0 +1,35 @@
+AMI IHM test | primary config: WeSpeaker + 3s/1s + complete linkage + supplied k
+
+meeting                  min  k DER(0.25,skip) DER(0.25,ovl)
+--------------------------------------------------------------
+EN2002b.Mix-Headset.wa  29.8  4          20.6%         35.2%
+TS3003a.Mix-Headset.wa  25.1  4          30.1%         31.7%
+ES2004c.Mix-Headset.wa  38.9  4          14.7%         20.4%
+ES2004b.Mix-Headset.wa  39.1  4          20.7%         24.9%
+TS3003b.Mix-Headset.wa  36.8  4          28.8%         30.2%
+IS1009a.Mix-Headset.wa  14.0  4          54.0%         54.2%
+IS1009d.Mix-Headset.wa  32.4  4          37.6%         40.7%
+IS1009b.Mix-Headset.wa  34.2  4          18.6%         23.3%
+EN2002d.Mix-Headset.wa  36.8  4          22.3%         39.5%
+TS3003c.Mix-Headset.wa  42.8  4          30.0%         31.5%
+ES2004d.Mix-Headset.wa  37.0  4          29.2%         34.4%
+TS3003d.Mix-Headset.wa  43.6  4          51.5%         52.2%
+ES2004a.Mix-Headset.wa  17.5  4          38.9%         41.8%
+EN2002c.Mix-Headset.wa  49.5  3          43.4%         49.7%
+IS1009c.Mix-Headset.wa  30.3  4          23.6%         25.5%
+EN2002a.Mix-Headset.wa  35.7  4          20.6%         35.5%
+--------------------------------------------------------------
+
+AGGREGATE over 16 meetings (IHM):
+
+scoring policy                   DER    miss      FA    conf
+------------------------------------------------------------
+collar0.25 overlap-skipped     29.2%    0.3%   20.2%    8.7%
+collar0.25 overlap-SCORED      35.3%   11.9%   15.8%    7.6%
+collar0.0  overlap-skipped     32.3%    0.4%   21.9%   10.1%
+collar0.0  overlap-SCORED      39.2%   14.8%   16.0%    8.4%
+------------------------------------------------------------
+
+miss = reference speech we labelled as nobody (incl. overlap we cannot represent)
+FA   = we labelled speech where the reference has none
+conf = we labelled speech as the WRONG speaker

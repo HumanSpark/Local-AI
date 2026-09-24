@@ -1,0 +1,156 @@
+{
+  "label": "c5-xhigh-minp005-s103",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 8192,
+  "ctx": 16384,
+  "sampler": {
+    "temperature": 1.0,
+    "min_p": 0.05,
+    "top_p": 0.95,
+    "top_k": 20,
+    "presence_penalty": 0.0,
+    "repeat_penalty": 1.0,
+    "seed": 103
+  },
+  "context_preflight": {
+    "longest_prompt_tokens": 124,
+    "max_tokens": 8192,
+    "needed": 8316,
+    "ctx": 16384,
+    "headroom": 8068
+  },
+  "thinking": "default",
+  "request_timeout": 1665,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 6,
+    "median_s": 674.32,
+    "p95_s": 674.79,
+    "min_s": 116.91,
+    "max_s": 674.79,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-09-04T19:48:12Z",
+  "wall_s": 2770.9,
+  "passed": 3,
+  "total": 6,
+  "by_tier": {
+    "medium": {
+      "pass": 1,
+      "total": 2
+    },
+    "hard": {
+      "pass": 2,
+      "total": 4
+    }
+  },
+  "outcome_counts": {
+    "pass": 3,
+    "truncated": 3
+  },
+  "results": [
+    {
+      "id": "normalize_path",
+      "tier": "medium",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 4345,
+      "prompt_tokens": 176,
+      "reasoning_chars": 16421,
+      "wall_s": 355.07,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 7,
+        "distinct_line_ratio": 0.66
+      }
+    },
+    {
+      "id": "roman_roundtrip",
+      "tier": "medium",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=8192",
+      "finish_reason": "length",
+      "completion_tokens": 8192,
+      "prompt_tokens": 164,
+      "reasoning_chars": 26959,
+      "wall_s": 674.32,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.9485
+      }
+    },
+    {
+      "id": "longest_valid_parens",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1409,
+      "prompt_tokens": 116,
+      "reasoning_chars": 4585,
+      "wall_s": 116.91,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.5376
+      }
+    },
+    {
+      "id": "word_break",
+      "tier": "hard",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=8192",
+      "finish_reason": "length",
+      "completion_tokens": 8192,
+      "prompt_tokens": 153,
+      "reasoning_chars": 32309,
+      "wall_s": 674.35,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.9188
+      }
+    },
+    {
+      "id": "min_window",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 3305,
+      "prompt_tokens": 120,
+      "reasoning_chars": 12553,
+      "wall_s": 271.05,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.6818
+      }
+    },
+    {
+      "id": "eval_expr",
+      "tier": "hard",
+      "outcome": "truncated",
+      "detail": "hit max_tokens=8192",
+      "finish_reason": "length",
+      "completion_tokens": 8192,
+      "prompt_tokens": 176,
+      "reasoning_chars": 31401,
+      "wall_s": 674.79,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 4,
+        "distinct_line_ratio": 0.821
+      }
+    }
+  ],
+  "truncated": 3,
+  "truncation_gate": "OVERRIDDEN"
+}

@@ -1,0 +1,134 @@
+[2026-08-31T16:32:20+01:00] === preflight ===
+[2026-08-31T16:32:20+01:00] FATAL: an llama-server is already running. If that is the production
+[2026-08-31T16:32:20+01:00] relay, this script opens its own window - but if it is another BENCH,
+[2026-08-31T16:32:20+01:00] both measurements are void. Check before forcing:
+1742229 /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 16384 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+[2026-08-31T16:32:20+01:00] FATAL: run_e91.sh is STILL RUNNING. Wait for it.
+[2026-08-31T16:32:20+01:00] l3 re-run finished, rc=1
+[2026-08-31T17:05:04+01:00] === preflight ===
+[2026-08-31T17:05:04+01:00] FATAL: an llama-server is already running. If that is the production
+[2026-08-31T17:05:04+01:00] relay, this script opens its own window - but if it is another BENCH,
+[2026-08-31T17:05:04+01:00] both measurements are void. Check before forcing:
+1748846 /opt/sparkrouter/llama.cpp/build/bin/llama-server -m /opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf -c 98304 -fa on -ctk q8_0 -ctv q8_0 --jinja --host 127.0.0.1 --no-webui -ub 2048 --port 8400
+[2026-08-31T17:05:04+01:00] preflight OK
+[2026-08-31T17:05:04+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-08-31T17:05:04+01:00) ---
+  llama-gateway.service : inactive
+  maintenance flag: SET -> sparkbench Qwen3.8-27B bench run in progress (see results/model-survey.md pre-registration)
+  llama-server processes: [2026-08-31T17:05:04+01:00] note: 'down' exited non-zero; verifying state instead
+[2026-08-31T17:05:04+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-08-31T17:05:04+01:00] --- arm A-workhorse / l3 / effort=default / ctx=32768 ---
+=== PS eval L3: e91-A-workhorse (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 98, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 20564, 'max_tokens': 4096, 'needed': 24660, 'ctx': 32768, 'headroom': 8108}
+  [1/12] D1  date_effective   premature         cite=no 46.97s  46,500
+  [2/12] D2  date_effective   premature         cite=no 0.73s  1,250,000
+  [3/12] D3  date_effective   correct           cite=ok 0.78s  51,000
+  [4/12] V1  revocation       correct           cite=ok 0.84s  24
+  [5/12] V2  revocation       correct           cite=ok 0.92s  YES
+  [6/12] P1  precedence       precedence_missed cite=no 0.84s  24 months
+  [7/12] P2  precedence       over_applied      cite=ok 0.79s  1
+  [8/12] M1  multihop         wrong             cite=no 1.06s  504,000
+  [9/12] M2  multihop         wrong             cite=ok 0.87s  1,224,000
+  [10/12] M3  multihop         wrong             cite=ok 0.85s  24.6
+  [11/12] N1  exhaustive       correct           cite=ok 0.84s  d
+  [12/12] Z1  underspecified   over_claim        cite=no 0.7s  No
+
+e91-A-workhorse: 4/12 correct, citations 7/12
+OVER-CLAIM 1/1 | STALE 0/5 | PREMATURE 2
+by_category: {'date_effective': {'correct': 1, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 0, 'total': 2}, 'multihop': {'correct': 0, 'total': 3}, 'exhaustive': {'correct': 1, 'total': 1}, 'underspecified': {'correct': 0, 'total': 1}}
+outcomes: {'correct': 4, 'over_applied': 1, 'over_claim': 1, 'precedence_missed': 1, 'premature': 2, 'wrong': 3}
+written: /home/agent-spark/sparkbench/results/raw/e91/e91-A-workhorse-l3.json
+[2026-08-31T17:06:04+01:00] arm A-workhorse/l3 rc=0 wall=60s -> /home/agent-spark/sparkbench/results/raw/e91/e91-A-workhorse-l3.json
+[2026-08-31T17:06:04+01:00] --- arm B-qwen38-low / l3 / effort=low / ctx=32768 ---
+=== PS eval L3: e91-B-qwen38-low (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 132, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 21228, 'max_tokens': 4096, 'needed': 25324, 'ctx': 32768, 'headroom': 7444}
+  [1/12] D1  date_effective   correct           cite=ok 113.31s  EUR 42,000
+  [2/12] D2  date_effective   correct           cite=ok 34.62s  EUR 500,000
+  [3/12] D3  date_effective   correct           cite=ok 30.51s  EUR 51,000
+  [4/12] V1  revocation       correct           cite=ok 45.87s  24 months
+  [5/12] V2  revocation       correct           cite=ok 28.01s  YES
+  [6/12] P1  precedence       correct           cite=ok 67.96s  6 months
+  [7/12] P2  precedence       correct           cite=ok 46.94s  2 Business Days. Although POL-3.1 (P-2.3) requires
+  [8/12] M1  multihop         correct           cite=ok 39.14s  EUR 378,000
+  [9/12] M2  multihop         correct           cite=ok 47.79s  EUR 445,500
+  [10/12] M3  multihop         correct           cite=ok 40.03s  24.5
+  [11/12] N1  exhaustive       correct           cite=no 42.6s  (d)
+  [12/12] Z1  underspecified   correct           cite=ok 51.24s  NOT_IN_PACK
+
+e91-B-qwen38-low: 12/12 correct, citations 11/12
+OVER-CLAIM 0/1 | STALE 0/5 | PREMATURE 0
+by_category: {'date_effective': {'correct': 3, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 2, 'total': 2}, 'multihop': {'correct': 3, 'total': 3}, 'exhaustive': {'correct': 1, 'total': 1}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 12}
+written: /home/agent-spark/sparkbench/results/raw/e91/e91-B-qwen38-low-l3.json
+[2026-08-31T17:16:03+01:00] arm B-qwen38-low/l3 rc=0 wall=599s -> /home/agent-spark/sparkbench/results/raw/e91/e91-B-qwen38-low-l3.json
+[2026-08-31T17:16:03+01:00] --- arm C-flashnext-low / l3 / effort=low / ctx=32768 ---
+=== PS eval L3: e91-C-flashnext-low (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 98, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 21228, 'max_tokens': 4096, 'needed': 25324, 'ctx': 32768, 'headroom': 7444}
+  [1/12] D1  date_effective   correct           cite=ok 111.8s  EUR 42,000
+  [2/12] D2  date_effective   correct           cite=ok 24.88s  EUR 500,000
+  [3/12] D3  date_effective   correct           cite=ok 19.61s  EUR 51,000
+  [4/12] V1  revocation       correct           cite=ok 27.63s  24 months
+  [5/12] V2  revocation       correct           cite=ok 19.05s  YES
+  [6/12] P1  precedence       correct           cite=ok 31.22s  6 months from termination
+  [7/12] P2  precedence       correct           cite=ok 22.51s  2 Business Days
+  [8/12] M1  multihop         correct           cite=ok 26.53s  EUR 378,000
+  [9/12] M2  multihop         correct           cite=ok 36.05s  EUR 445,500
+  [10/12] M3  multihop         correct           cite=ok 26.84s  24.5
+  [11/12] N1  exhaustive       correct           cite=ok 23.44s  (d)
+  [12/12] Z1  underspecified   correct           cite=ok 19.8s  NOT_IN_PACK
+
+e91-C-flashnext-low: 12/12 correct, citations 12/12
+OVER-CLAIM 0/1 | STALE 0/5 | PREMATURE 0
+by_category: {'date_effective': {'correct': 3, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 2, 'total': 2}, 'multihop': {'correct': 3, 'total': 3}, 'exhaustive': {'correct': 1, 'total': 1}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 12}
+written: /home/agent-spark/sparkbench/results/raw/e91/e91-C-flashnext-low-l3.json
+[2026-08-31T17:22:57+01:00] arm C-flashnext-low/l3 rc=0 wall=414s -> /home/agent-spark/sparkbench/results/raw/e91/e91-C-flashnext-low-l3.json
+[2026-08-31T17:22:57+01:00] --- arm D-flashnext-medium / l3 / effort=medium / ctx=32768 ---
+=== PS eval L3: e91-D-flashnext-medium (local) ===
+pack: 93,920 chars over 6 question categories, 12 questions
+server: /home/agent-spark/sparkbench/llama.cpp/wt/daef7b6/build/bin/llama-server -m /opt/models/staging/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf -c 32768 -np 1 --host 127.0.0.1 --port 8112 --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+full-offload gate: {'layers_assigned': 98, 'devices': ['Vulkan0']}
+context preflight: {'longest_prompt_tokens': 21228, 'max_tokens': 4096, 'needed': 25324, 'ctx': 32768, 'headroom': 7444}
+  [1/12] D1  date_effective   correct           cite=ok 115.82s  EUR 42,000
+  [2/12] D2  date_effective   correct           cite=ok 25.55s  EUR 500,000
+  [3/12] D3  date_effective   correct           cite=ok 21.19s  EUR 51,000
+  [4/12] V1  revocation       correct           cite=ok 30.71s  24 months
+  [5/12] V2  revocation       correct           cite=ok 18.09s  YES
+  [6/12] P1  precedence       correct           cite=ok 40.92s  6 months from termination. Although clause 5.2 of 
+  [7/12] P2  precedence       correct           cite=ok 30.93s  2 Business Days
+  [8/12] M1  multihop         correct           cite=ok 35.52s  EUR 378,000
+  [9/12] M2  multihop         correct           cite=ok 44.54s  EUR 445,500 (3 months at EUR 46,500 from January t
+  [10/12] M3  multihop         correct           cite=ok 38.82s  24.5
+  [11/12] N1  exhaustive       correct           cite=ok 24.67s  (d)
+  [12/12] Z1  underspecified   correct           cite=ok 20.02s  NOT_IN_PACK
+
+e91-D-flashnext-medium: 12/12 correct, citations 12/12
+OVER-CLAIM 0/1 | STALE 0/5 | PREMATURE 0
+by_category: {'date_effective': {'correct': 3, 'total': 3}, 'revocation': {'correct': 2, 'total': 2}, 'precedence': {'correct': 2, 'total': 2}, 'multihop': {'correct': 3, 'total': 3}, 'exhaustive': {'correct': 1, 'total': 1}, 'underspecified': {'correct': 1, 'total': 1}}
+outcomes: {'correct': 12}
+written: /home/agent-spark/sparkbench/results/raw/e91/e91-D-flashnext-medium-l3.json
+[2026-08-31T17:30:46+01:00] arm D-flashnext-medium/l3 rc=0 wall=469s -> /home/agent-spark/sparkbench/results/raw/e91/e91-D-flashnext-medium-l3.json
+[2026-08-31T17:30:46+01:00] === l3 arms done in 1542s ===
+[2026-08-31T17:30:46+01:00] score the whole experiment with: python3 /home/agent-spark/sparkbench/tools/e91/score_e91.py
+[2026-08-31T17:30:46+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-08-31T17:30:46+01:00) ---
+  llama-gateway.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 1753569 
+[2026-08-31T17:30:46+01:00] relay restored, VERIFIED: llama-server is running
+[2026-08-31T17:30:46+01:00] l3 re-run finished, rc=0

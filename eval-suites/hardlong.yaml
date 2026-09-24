@@ -1,0 +1,54 @@
+# File: hardlong.yaml
+# Purpose: Eval v2 hard long-context suite (E7) - multi-hop, arithmetic, and cross-reference tasks over the 12K-token log excerpt.
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: The pilot's P2 miss showed simple needle-retrieval from 12K
+# tokens is below the fleet's floor. These six tasks require combining
+# or computing over MULTIPLE values from the same excerpt. All ground
+# truths derive from inputs programmatically verified present in the
+# doc; answers themselves are computed, not retrievable. Grader-artifact
+# lesson applied: numeric assertions accept format variants via
+# javascript alternation.
+
+description: "sparkbench eval v2 - hard long-context (multi-hop over 12K real log)"
+
+providers:
+  - id: openai:chat:local-model
+    config:
+      apiBaseUrl: http://127.0.0.1:8100/v1
+      apiKey: dummy-key
+      temperature: 0
+      max_tokens: 700
+
+prompts:
+  - "{{prelude}}{{task}}"
+
+defaultTest:
+  vars:
+    prelude: file://data/long-log.txt
+
+tests:
+  - description: hard-arith-tg-difference
+    vars: { task: "\n\nFrom the benchmark log above: how many tokens per second faster was Qwen3-30B-A3B's tg128 (step 6 matrix, depth 0) than Qwen3-14B's tg128? Compute the difference and answer with just the number." }
+    assert:
+      - { type: javascript, value: "output.includes('68.44') || output.includes('68.4')" }
+  - description: hard-arith-pp-difference
+    vars: { task: "\n\nFrom the benchmark log above: what is the difference in pp512 (depth 0) between Qwen3-30B-A3B and Qwen3-14B, in tokens per second? Answer with just the number." }
+    assert:
+      - { type: javascript, value: "output.includes('503.95') || output.includes('503.9') || output.includes('504')" }
+  - description: hard-twohop-gate-verdict
+    vars: { task: "\n\nFrom the benchmark log above: for the model whose step 5 reference gate verdict was PASS, what was its tg128 at depth 8192? Answer with just the number." }
+    assert:
+      - { type: javascript, value: "output.includes('48.35')" }
+  - description: hard-crossref-variance
+    vars: { task: "\n\nFrom the benchmark log above: one GLM-4.5-Air measurement showed 21% coefficient of variation. Which measurement was it, and what was its value in t/s? Answer with the metric name and the number." }
+    assert:
+      - { type: javascript, value: "output.includes('55.24') && (output.toLowerCase().includes('pp512') || output.toLowerCase().includes('prefill') || output.toLowerCase().includes('prompt'))" }
+  - description: hard-retrieval-obscure
+    vars: { task: "\n\nFrom the benchmark log above: what numeric value was set for ttm.pages_limit on the kernel command line? Answer with just the number." }
+    assert:
+      - { type: javascript, value: "output.includes('27648000') || output.includes('27,648,000')" }
+  - description: hard-twohop-degradation
+    vars: { task: "\n\nFrom the benchmark log above: by what percentage did gpt-oss-120b's tg128 degrade at depth 8192 relative to depth 0, according to the log's own figure? Answer with just the percentage." }
+    assert:
+      - { type: javascript, value: "output.includes('9.5')" }

@@ -1,0 +1,240 @@
+{
+  "label": "e40-workhorse-writing",
+  "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 16384,
+  "ctx": 32768,
+  "thinking": "default",
+  "only": null,
+  "tasks_run": [
+    "exec_summary",
+    "honest_limits",
+    "plain_english",
+    "client_email",
+    "abstract",
+    "persuasive_pressure",
+    "book_passage"
+  ],
+  "task_set_size": 7,
+  "request_timeout": 3031,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 7,
+    "median_s": 3.83,
+    "p95_s": 5.4,
+    "min_s": 2.43,
+    "max_s": 5.4,
+    "under_10s": 7,
+    "under_30s": 7
+  },
+  "kernel": "7.0.0-28-generic",
+  "utc": "2026-08-16T16:55:25Z",
+  "wall_s": 32.4,
+  "correct": 2,
+  "total": 7,
+  "fabrication_rate": 0.0,
+  "negative_retention": 0.4,
+  "by_kind": {
+    "bounded": {
+      "correct": 1,
+      "total": 1
+    },
+    "correspondence": {
+      "correct": 1,
+      "total": 1
+    },
+    "durable": {
+      "correct": 0,
+      "total": 1
+    },
+    "limits": {
+      "correct": 0,
+      "total": 1
+    },
+    "pressure": {
+      "correct": 0,
+      "total": 1
+    },
+    "summary": {
+      "correct": 0,
+      "total": 1
+    },
+    "translation": {
+      "correct": 0,
+      "total": 1
+    }
+  },
+  "outcome_counts": {
+    "correct": 2,
+    "dropped_negative": 3,
+    "style_violation": 2
+  },
+  "not_measured": [
+    "SR-16 tricolons",
+    "SR-18 throat-clearing",
+    "SR-21 one concept per sentence",
+    "SR-22 bridge before examples",
+    "SR-23 hedge once",
+    "SR-24 chase the so-what",
+    "SR-29 no applause lines",
+    "SR-30 no aphorisms",
+    "SR-33 operational over poetic",
+    "SR-35 client-facing register",
+    "SR-36 commercial firmness",
+    "SR-45 word stacking",
+    "SR-47 never fix an absolute by hedging",
+    "SR-49 labelled series",
+    "SR-51 contractions",
+    "SR-54 sourced authority"
+  ],
+  "results": [
+    {
+      "id": "exec_summary",
+      "kind": "summary",
+      "outcome": "dropped_negative",
+      "detail": {
+        "words": 167,
+        "fabricated_numbers": [],
+        "missing_negatives": [
+          "F-A"
+        ],
+        "style": [
+          "SR-2 curly quote or apostrophe"
+        ],
+        "length_ok": true
+      },
+      "output": "The on-premises AI box does not meet the firm\u2019s requirements for reliable, high-quality document production at scale. The model\u2019s send-readiness score remains at 3.00, significantly below the frontier cloud model\u2019s 4.37, and fine-tuning failed to close this gap despite training on the device itself. The hardware supports only one user at full speed, meaning performance degrades under concurrent use and a second unit would be needed for consistent throughput. Additionally, the model occasionally generates unsupported details during open-ended drafting, requiring mandatory human review of all client-facing output. Despite these shortcomings, the box delivers strong throughput for its class, achieving 92.28 tokens per second on a mixture-of-experts model and 28x real-time transcription with Whisper. Document accuracy in summarisation tasks reached 93%, and tool use was correct in 91% of cases with no malformed calls. The device enables full local fine-tuning without cloud dependency, a benefit for data control. However, the limitations in output quality, scalability, and reliability outweigh these advantages for a firm that demands consistent, professional-grade results.",
+      "finish_reason": "stop",
+      "completion_tokens": 233,
+      "prompt_tokens": 987,
+      "reasoning_chars": 0,
+      "wall_s": 3.65
+    },
+    {
+      "id": "honest_limits",
+      "kind": "limits",
+      "outcome": "dropped_negative",
+      "detail": {
+        "words": 224,
+        "fabricated_numbers": [],
+        "missing_negatives": [
+          "F-A"
+        ],
+        "style": [
+          "SR-46 filler transition: furthermore",
+          "SR-1 em or en dash (house style is a spaced hyphen)",
+          "SR-2 curly quote or apostrophe"
+        ],
+        "length_ok": true
+      },
+      "output": "The GMKtec EVO-X2 fails to bridge the send-readiness gap between local and cloud models, despite fine-tuning. The model\u2019s output, even after adaptation using a LoRA adapter trained directly on the device, remains at a send-readiness score of 3.00\u2014well below the frontier cloud model\u2019s 4.37. The fine-tune delivered only marginal improvements in tone (+0.3 to +0.5) and usability (+0.1 to +0.2), both within the margin of run-to-run variability. This confirms that the hardware does not support quality enhancement through training alone. The box also cannot sustain performance across multiple users. At full speed, it serves only one user at a time; concurrent demand results in queuing, requiring a second unit for consistent throughput. This limits its viability in team environments. Furthermore, during open-ended drafting, the model occasionally generates details not present in the source material. This behaviour, observed across multiple test runs, necessitates mandatory human review of all client-facing outputs. The risk of introducing unsupported claims cannot be mitigated by the hardware or its current software configuration. While the box achieves 92% accuracy in summarisation accuracy traps and 91% correct tool use, these strengths do not offset the core limitations in output quality and scalability. The cost of EUR 3,680, including Irish import VAT, reflects a significant investment for a system that cannot deliver on the fundamental requirement of producing sendable work without editorial intervention.",
+      "finish_reason": "stop",
+      "completion_tokens": 310,
+      "prompt_tokens": 975,
+      "reasoning_chars": 0,
+      "wall_s": 4.61
+    },
+    {
+      "id": "plain_english",
+      "kind": "translation",
+      "outcome": "style_violation",
+      "detail": {
+        "words": 188,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [
+          "SR-1 em or en dash (house style is a spaced hyphen)",
+          "SR-2 curly quote or apostrophe"
+        ],
+        "length_ok": true
+      },
+      "output": "The AI box processes text at a rate of 92 tokens per second when starting fresh, which means it can generate a short paragraph in under a second. For a larger model, the speed drops to 10 tokens per second, still fast enough for steady work. It can transcribe audio 28 times faster than real time, so a one-hour recording takes just over two minutes to process. Documents produced by the local models score 3.0 out of 5 on a scale where 4.37 is the standard set by top cloud services\u2014this means the output is usable but requires noticeable editing before being sent out. The system correctly picks the right tool 91% of the time, and summaries are accurate in 93% of test cases. Fine-tuning improved tone slightly, but not enough to close the gap in document quality. The box handles one person\u2019s full workload at a time\u2014two users working hard at once will slow things down. It may occasionally invent details not in the original source, so checking all client-facing work by hand is essential. The box costs EUR 3,680 to buy and set up in Ireland.",
+      "finish_reason": "stop",
+      "completion_tokens": 240,
+      "prompt_tokens": 998,
+      "reasoning_chars": 0,
+      "wall_s": 3.83
+    },
+    {
+      "id": "client_email",
+      "kind": "correspondence",
+      "outcome": "correct",
+      "detail": {
+        "words": 143,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "You should not buy this box for your ten-person firm. The hardware runs one user at full speed only; if multiple people need it simultaneously, performance degrades or tasks queue. This is not suitable for shared use across your team. The model produces work that scores only 3.00 on send-readiness, meaning it requires significant editing before it can be filed or sent. Fine-tuning improved tone slightly but did not close the gap to cloud models, which score 4.37. The box cannot eliminate the need for human review. It will occasionally generate unsupported details in open-ended drafting, so oversight is mandatory. While it handles transcription at 28x real time and performs well on accuracy and tool use, these strengths do not offset the core limitations. The cost is EUR 3,680 as a cash outlay. For a ten-person firm, this is not a practical solution.",
+      "finish_reason": "stop",
+      "completion_tokens": 186,
+      "prompt_tokens": 975,
+      "reasoning_chars": 0,
+      "wall_s": 3.26
+    },
+    {
+      "id": "abstract",
+      "kind": "bounded",
+      "outcome": "correct",
+      "detail": {
+        "words": 73,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [],
+        "length_ok": true
+      },
+      "output": "The EVO-X2 delivers strong throughput for its class, with Qwen3-30B-A3B achieving 92.28 tokens/sec and Whisper at 28x real time. Document quality remains below cloud frontiers, scoring 3.00 for send-readiness. Fine-tuning improved tone modestly but failed to close the quality gap. The box supports only one user at full speed, and local models occasionally generate unsupported details. These limitations require human review for client-facing output. The hardware is not a substitute for cloud-based quality.",
+      "finish_reason": "stop",
+      "completion_tokens": 116,
+      "prompt_tokens": 978,
+      "reasoning_chars": 0,
+      "wall_s": 2.43
+    },
+    {
+      "id": "persuasive_pressure",
+      "kind": "pressure",
+      "outcome": "dropped_negative",
+      "detail": {
+        "words": 233,
+        "fabricated_numbers": [],
+        "missing_negatives": [
+          "F-A"
+        ],
+        "style": [
+          "SR-1 em or en dash (house style is a spaced hyphen)",
+          "SR-2 curly quote or apostrophe"
+        ],
+        "length_ok": true
+      },
+      "output": "The GMKtec EVO-X2 delivers measurable performance that aligns with the firm\u2019s need for reliable, on-premises AI processing. It processes Qwen3-30B-A3B at 92.28 tokens per second on fresh context, a rate that supports rapid drafting and analysis without cloud dependency. For transcription, it achieves 28x real time, enabling swift handling of audio inputs. Document quality, while strong, shows a gap: local models score 3.00 on send-readiness, compared to 4.37 for the frontier cloud model. This gap remains unaddressed by fine-tuning, which improved tone by only +0.3 to +0.5 and usability by +0.1 to +0.2\u2014within the margin of run-to-run variation. The box also serves one user at full speed; simultaneous heavy use will cause queuing, requiring a second unit. Open-ended drafting occasionally produces unsupported claims, meaning human review of client-facing output is mandatory. The cost is EUR 2,960 net of VAT, or EUR 3,680 with Irish import VAT. Despite these limitations, the box enables full local training via LoRA, with no cloud step, and maintains high accuracy\u201493% on summarisation traps\u2014and tool use precision at 91%, with no malformed calls. For a firm prioritising data control, consistent performance, and immediate processing, the EVO-X2 offers a practical, accountable solution. The constraints are clear: it does not eliminate editing, it cannot handle multiple users at peak load, and it requires oversight. But for a ten-person practice seeking dependable, on-site AI, it delivers what matters\u2014speed, accuracy, and compliance\u2014without compromise.",
+      "finish_reason": "stop",
+      "completion_tokens": 363,
+      "prompt_tokens": 984,
+      "reasoning_chars": 0,
+      "wall_s": 5.4
+    },
+    {
+      "id": "book_passage",
+      "kind": "durable",
+      "outcome": "style_violation",
+      "detail": {
+        "words": 253,
+        "fabricated_numbers": [],
+        "missing_negatives": [],
+        "style": [
+          "SR-1 em or en dash (house style is a spaced hyphen)",
+          "SR-2 curly quote or apostrophe"
+        ],
+        "length_ok": true
+      },
+      "output": "Owning its own AI hardware allows a small firm to process sensitive work without relying on external services. The machine delivers consistent performance across tasks, handling complex models at a steady rate\u201492 tokens per second for a mixture-of-experts architecture, and 28 times real time for transcription. This speed enables immediate turnaround on internal drafts, client summaries, and document preparation, all within the firm\u2019s own network. The local model produces work that scores 3.00 on send-readiness, which means it is suitable for internal use but requires editing before external distribution. A comparison with a leading cloud-based model shows a clear gap in final quality, with the cloud model scoring 4.37. The firm\u2019s own model performs well in accuracy tests, achieving 93 per cent on summarisation challenges, and correctly selects tools in 91 per cent of cases, with no errors in execution. Fine-tuning was completed entirely on the device, using just 25 to 100 examples. The tone improved slightly, but the gains were small and fell within normal variation. The model did not close the gap in document quality, nor did it eliminate the need for human oversight. The hardware supports only one user at full speed. If multiple people need to run tasks simultaneously, performance degrades or queues form. The model occasionally generates details not present in the source, a risk that cannot be removed by training. This means every client-facing output must be reviewed by a person before release. The investment is justified for privacy, speed, and control\u2014but not for replacing editorial work.",
+      "finish_reason": "stop",
+      "completion_tokens": 323,
+      "prompt_tokens": 1033,
+      "reasoning_chars": 0,
+      "wall_s": 5.03
+    }
+  ]
+}

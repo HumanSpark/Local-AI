@@ -1,0 +1,155 @@
+{
+  "label": "c2-medium-minp000-s103",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "provider": "local",
+  "max_tokens": 8192,
+  "ctx": 16384,
+  "sampler": {
+    "temperature": 1.0,
+    "min_p": 0.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "presence_penalty": 0.0,
+    "repeat_penalty": 1.0,
+    "seed": 103
+  },
+  "context_preflight": {
+    "longest_prompt_tokens": 124,
+    "max_tokens": 8192,
+    "needed": 8316,
+    "ctx": 16384,
+    "headroom": 8068
+  },
+  "thinking": "medium",
+  "request_timeout": 1665,
+  "exec_timeout": 15.0,
+  "server_bin": "/home/agent-spark/sparkbench/llama.cpp/wt/b10435/build/bin/llama-server",
+  "cloud_spend": null,
+  "latency": {
+    "n": 6,
+    "median_s": 189.68,
+    "p95_s": 223.02,
+    "min_s": 72.0,
+    "max_s": 223.02,
+    "under_10s": 0,
+    "under_30s": 0
+  },
+  "kernel": "7.0.0-29-generic",
+  "utc": "2026-09-04T14:10:56Z",
+  "wall_s": 923.6,
+  "passed": 6,
+  "total": 6,
+  "by_tier": {
+    "medium": {
+      "pass": 2,
+      "total": 2
+    },
+    "hard": {
+      "pass": 4,
+      "total": 4
+    }
+  },
+  "outcome_counts": {
+    "pass": 6
+  },
+  "results": [
+    {
+      "id": "normalize_path",
+      "tier": "medium",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1762,
+      "prompt_tokens": 134,
+      "reasoning_chars": 4858,
+      "wall_s": 143.8,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.7481
+      }
+    },
+    {
+      "id": "roman_roundtrip",
+      "tier": "medium",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 2317,
+      "prompt_tokens": 122,
+      "reasoning_chars": 5326,
+      "wall_s": 189.68,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.8671
+      }
+    },
+    {
+      "id": "longest_valid_parens",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 868,
+      "prompt_tokens": 74,
+      "reasoning_chars": 2140,
+      "wall_s": 72.0,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.7164
+      }
+    },
+    {
+      "id": "word_break",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 2534,
+      "prompt_tokens": 111,
+      "reasoning_chars": 8065,
+      "wall_s": 207.19,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 3,
+        "distinct_line_ratio": 0.6303
+      }
+    },
+    {
+      "id": "min_window",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 1010,
+      "prompt_tokens": 78,
+      "reasoning_chars": 2851,
+      "wall_s": 83.52,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.6562
+      }
+    },
+    {
+      "id": "eval_expr",
+      "tier": "hard",
+      "outcome": "pass",
+      "detail": "",
+      "finish_reason": "stop",
+      "completion_tokens": 2723,
+      "prompt_tokens": 134,
+      "reasoning_chars": 7911,
+      "wall_s": 223.02,
+      "repetition": {
+        "max_line_run": 1,
+        "max_ngram_rep": 2,
+        "distinct_line_ratio": 0.6696
+      }
+    }
+  ],
+  "truncated": 0,
+  "truncation_gate": "PASS"
+}
