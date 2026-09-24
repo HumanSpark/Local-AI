@@ -1,6 +1,6 @@
 # Local AI for a Small Firm - the data
 
-This repository is the complete data package behind **[Local AI for a Small Firm: What a 128 GB Mini-PC Can Actually Do](https://humanspark.ai/local-ai/)** - independent research into what a EUR 3,680 on-premises mini-PC (GMKtec EVO-X2, Ryzen AI Max+ 395, 128 GB unified memory) can do for a small professional practice.
+This repository is the data package behind **[Local AI for a Small Firm: What a 128 GB Mini-PC Can Actually Do](https://humanspark.ai/local-ai/)** - independent research into what a EUR 3,680 on-premises mini-PC (GMKtec EVO-X2, Ryzen AI Max+ 395, 128 GB unified memory) can do for a small professional practice.
 
 **If you want the findings, read the report, not this repo.** The plain-English argument, the verdict, and the practical guidance live on the website:
 
@@ -8,37 +8,48 @@ This repository is the complete data package behind **[Local AI for a Small Firm
 - [In Practice](https://humanspark.ai/local-ai/in-practice/) - which model for which job, setup, media results
 - [The Evidence](https://humanspark.ai/local-ai/evidence/) - every finding, method, and correction, rendered readably
 
-This repository exists so that none of it has to be taken on trust. Every number published on those pages traces to a raw file here.
+This repository exists so that the numbers on those pages do not have to be taken on trust. Start with the current release below, and read [WITHHELD.md](WITHHELD.md) for what is deliberately not here.
+
+## Current release: r5.0 (findings through 24 September 2026)
+
+r5.0 catches this repository up with the research. Findings F47 to F166, 120 recorded after the previous package release (r4.6), are in [FINDINGS.md](FINDINGS.md), with the evidence behind them. The subjects range from text-to-speech engines on this GPU, through reasoning effort, tool use and agentic coding, to tests of published speed claims (a "73 tok/s" Bonsai figure that does not reproduce; Halogen's 32K prefill claim, which measures 81% of the published figure). [RELEASE-NOTES.md](RELEASE-NOTES.md) groups them by subject, lists the retractions and amendments, and says which published claims are under review.
+
+Two things to know before relying on it:
+
+- **The claims registry has not been re-reviewed.** `claims.yml` is unchanged since r4.6; its header still reads release 4.0 and data freeze 2026-07-17, because the claims were last checked against the data on that date. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **Not everything is here.** Verbose server logs, internal design documents, and two sets of files that contain private content are withheld, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
 
 1. Open `claims.yml`. Every published number is a claim with an id, a plain-English statement, its value, and the evidence file path(s) that back it.
-2. Follow the path. Raw benchmark outputs are in `results/`, evaluation outputs in `results/eval-pilot/` and `results/real-quality/`, and the scripts that produced derived figures (such as the cost model) are in `tools/`.
+2. Follow the path. Raw benchmark outputs are in `results/`, evaluation outputs in `results/eval-pilot/` and `results/real-quality/`, text-to-speech evidence in `tts-bench/`, and the scripts that produced derived figures (such as the cost model) are in `tools/`.
 3. Cross-check provenance. `MANIFEST.md` lists every model file used, with source repository, revision, byte size, and SHA256.
 
-A build-time completeness check enforces that every file path cited in `FINDINGS.md`, `experiments.md`, or `claims.yml` exists in this package. A release cannot ship a citation it cannot back.
+A build-time completeness check enforces that every file path cited in `FINDINGS.md`, `experiments.md`, `claims.yml`, or an evidence document under `results/` either exists in this package or is listed in `WITHHELD.md` with a reason. A release cannot ship a citation it cannot account for.
 
 ## What's here
 
 - `claims.yml` - the claims registry: the contract between the published prose and this data
-- `FINDINGS.md` - the findings register (F1 onward), including negative results and lessons
+- `FINDINGS.md` - the findings register (F1 onward), including negative results, retractions and lessons
 - `experiments.md` - pre-registrations and results; predictions were written down before each test ran, and the misses are published beside the hits
 - `integrated-technical-results-v2.md` - the compiled technical results, including the corrections log
 - `MANIFEST.md` - model provenance (source, revision, size, SHA256 for every model file)
 - `PHASE-A-LOG.md` - the dated execution log, kept as written
-- `results/` - raw benchmark, evaluation, tool-use, and fine-tune outputs
+- `results/` - benchmark, evaluation, tool-use, coding, and fine-tune outputs, including the pre-registration and results document for each experiment
+- `tts-bench/` - the text-to-speech engine evidence
 - `eval-suites/` - the evaluation suite definitions and data
-- `tools/` - scripts referenced by published claims
+- `tools/` - scripts referenced by published claims and findings
+- `docs/` - design and measurement documents cited by the findings
 - `RELEASE-NOTES.md` - what changed in each release
-- `docs/` - working design documents cited by the findings, published as-is for completeness
+- `WITHHELD.md` - what is cited but not shipped, and why
 
 ## Method in one paragraph
 
-Single machine, single continuous run, 3-14 July 2026, data frozen 2026-07-14. Models served with llama.cpp (Vulkan and ROCm backends). Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
+Single machine, run from July to September 2026; the findings register in this release is current to 2026-09-24. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
 
 ## Versioning
 
-Releases are tagged and frozen. Release 4.0 restructures the published reporting into three pages; the underlying data is unchanged from Release 3.1 and remains frozen at 2026-07-14. If a future measurement changes a claim, the claim is updated in `claims.yml` with its status field, the change is listed in `RELEASE-NOTES.md`, and the old value stays in the history.
+Releases are tagged and frozen. If a future measurement changes a claim, the claim is updated in `claims.yml` with its status field, the change is listed in `RELEASE-NOTES.md`, and the old value stays in the history.
 
 ## Licence and attribution
 
