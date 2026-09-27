@@ -1677,6 +1677,10 @@ code:
   Image pulled by digest (image id 1094701565c3, 3.57 GB). Log: `results/e139/fetch-2026-09-24.log`.
 - **Licence:** weights Apache-2.0 (derivative of Qwen/Qwen3.8-Flash-Next, whose terms govern);
   engine closed source, Peonist LLC terms.
+- **Image, E152 (pinned 2026-09-27):** `ghcr.io/peonist-ai/halogen-flash-server:0.14.0` =
+  sha256:ec7ec0c6f955f48329bb444efa97286dc8216e9ab1b130bc40d7d8c3babdf6b2, created 2026-09-25 23:33 UTC,
+  3,568,583,068 B, label version 0.14.0. Pulled by tag then pinned by digest; run by digest only. Same checkpoint
+  files as E139 (no re-download). Log: `results/e152-pull-2026-09-27.log`.
 
 ## jcbtc/Qwen3.8-Flash-CIRU-STRIX-Orca (CIRU/Crown packaging of OrcaRouter refusal-removed Qwen3.8-Flash-Next) - E144 candidate
 
@@ -1722,3 +1726,49 @@ code:
 - **Qwen3.6-35B-A3B-UD-Q4_K_M.gguf** (widget option 1 (Qwen3.6 35B A3B UD-Q4_K_M); E143 arm C ran the UD-Q4_K_XL quant of the same model)
   - repo `unsloth/Qwen3.6-35B-A3B-GGUF` @ a483e9e6cbd595906af30beda3187c2663a1118c, licence apache-2.0
   - 22,134,528,992 B, sha256 ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61
+
+## nvidia/Qwen3.8-27B-NVFP4 + two Atlas source trees - E146 candidates (pinned 2026-09-25, NOT yet fetched, built or used)
+
+- **Role:** E146, testing the Atlas inference engine's Strix Halo claims. NVFP4 is Atlas's verified Strix Halo model per its README. It is a different quantisation from our Q4_K_M (20.44 GiB here against 15.66 GiB), so speed is not compared like for like on bytes.
+- **Weights:** `nvidia/Qwen3.8-27B-NVFP4` @ 482ca0f3832238542f8f5295dde86b5f22711d80, licence apache-2.0, 19 files, 21,945,291,730 B total, not gated. Per file (size, sha256 where the API gives one):
+  - `.gitattributes` 1,570 B (non-LFS, size only)
+  - `.quant_summary.txt` 318,035 B (non-LFS, size only)
+  - `LICENSE` 11,544 B (non-LFS, size only)
+  - `README.md` 9,578 B (non-LFS, size only)
+  - `chat_template.jinja` 8,952 B (non-LFS, size only)
+  - `config.json` 87,506 B (non-LFS, size only)
+  - `generation_config.json` 214 B (non-LFS, size only)
+  - `hf_quant_config.json` 53,760 B (non-LFS, size only)
+  - `merges.txt` 3,353,259 B (non-LFS, size only)
+  - `model-00001-of-00003.safetensors` 9,965,652,544 B sha256 7d0fd155118901373eb0fd13ed3aae68f95be747bc205be72ebc41739c25ee80
+  - `model-00002-of-00003.safetensors` 9,985,757,064 B sha256 98a7e9486baa860c792c9463a770cb9d017696bdd17606300a5b9334149f4c27
+  - `model-00003-of-00003.safetensors` 1,970,287,672 B sha256 0506ad35dc21469708e7813bd76c592cef08bd0317b4a1fe899745ebe2435271
+  - `model.safetensors.index.json` 214,866 B (non-LFS, size only)
+  - `preprocessor_config.json` 390 B (non-LFS, size only)
+  - `processor_config.json` 1,191 B (non-LFS, size only)
+  - `tokenizer.json` 12,809,320 B sha256 0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3
+  - `tokenizer_config.json` 1,121 B (non-LFS, size only)
+  - `video_preprocessor_config.json` 385 B (non-LFS, size only)
+  - `vocab.json` 6,722,759 B (non-LFS, size only)
+- **Source A:** `Atlas-Inf/atlas` @ 2d1aab8bf4f813059d5614776117b27d17931c05 (HEAD of main, 2026-09-24T22:38Z), AGPL-3.0, created 2026-08-24, 30 stars. Build: `build-amd.sh` per its README (Ubuntu 24.04, ROCm 6.2+).
+- **Source B:** `Avarok-Cybersecurity/atlas`, AGPL-3.0, created 2026-05-05, 699 stars, HEAD d822945614e64854978ab416e434f6e5eea8a975 (2026-09-23). The MLPerf-edge-Strix tags live here, e.g. `mlperf-edge-strix-k3-m64-20260724`, with a `toolchain-scale-1.7.1` tag. The commit each tag resolves to is pinned at build time, not here.
+- **Provenance:** both repos describe themselves as the real Atlas; `Atlas-Inf/atlas` carries a notice that the older repo is a "disputed Atlas asset". This project takes no side. It tests code at pinned commits. Never `curl | sh`, never the sparkrun/uvx installer.
+
+## Qwen3.6-27B-DFlash-Q8_0.gguf - E147 drafter (pinned 2026-09-25)
+
+- **Role:** E147 arm M2, the DFlash speculative drafter for Qwen3.6-27B so the MLPerf-metric Atlas comparison has a llama.cpp
+  arm WITH speculation (Atlas runs MTP K=3; E146's reference M0 had none). Same role as `Qwen3.8-27B-DFlash2-Q8_0.gguf` for E138/E146 block 1.
+- **Repo:** `Alittlehammmer/Qwen3.6-27B-DFlash-GGUF-llama.cpp` @ 5f2ed671305fb1fd8de023d6b335cef4d2663888, licence apache-2.0, a GGUF conversion of
+  `z-lab/Qwen3.6-27B-DFlash` (MIT). 1,849,481,440 B, sha256 23b6c8ebcc51b3b4107709342fd2960167e88397af36e394923b8d5895ddf7ea.
+- **Caveat:** a community conversion, not the drafter's author; the drafter's fitness is measured by acceptance rate in the run, not assumed.
+
+## z-lab/Qwen3.6-27B-DFlash - E148 drafter for Atlas's DFlash mode (pinned 2026-09-26)
+
+- **Role:** E148 arm M3: Atlas (patched HEAD, as E146 M1p) with `--dflash --draft-model` on this drafter, so the Atlas-side like-for-like of E147 uses the same drafter lineage llama.cpp used (the E147 GGUF is a conversion of this checkpoint).
+- **Repo:** `z-lab/Qwen3.6-27B-DFlash` @ 0919688658996800f86b895034249700e9481106, licence mit, 6 files, 3,460,843,707 B. Into `/opt/models/staging/qwen3.6-27b-dflash/`.
+  - `.gitattributes` 1,580 B (non-LFS, size only)
+  - `README.md` 3,414 B (non-LFS, size only)
+  - `assets/dflash_system.png` 338,153 B sha256 bea1f82796909c1e4f7261ee3c08af743ec3c25057b83fca918808b76af4a7dc
+  - `assets/speedup.png` 66,921 B (non-LFS, size only)
+  - `config.json` 1,135 B (non-LFS, size only)
+  - `model.safetensors` 3,460,432,504 B sha256 e0c050b34798d32728a164d2c3f1681746ff85c11945701b0205b654e2f1fdbe

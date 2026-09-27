@@ -1,0 +1,36 @@
+[2026-09-25T09:17:29+01:00] === preflight ===
+[2026-09-25T09:17:31+01:00] G1 OK: drafter 1849481440 B, sha256 matches the pin
+[2026-09-25T09:17:31+01:00] G3: kernel 7.0.0-31-generic; livepatch '- kernel: 7.0.0-31.31~24.04.1-generic'; GTT used 67 GiB before the window
+[2026-09-25T09:17:31+01:00] DRY-RUN: preflight passed; would open the window and run M2
+[2026-09-25T09:17:36+01:00] run finished, rc=0
+[2026-09-25T09:35:20+01:00] === preflight ===
+[2026-09-25T09:35:21+01:00] G1 OK: drafter 1849481440 B, sha256 matches the pin
+[2026-09-25T09:35:21+01:00] G3: kernel 7.0.0-31-generic; livepatch '- kernel: 7.0.0-31.31~24.04.1-generic'; GTT used 63 GiB before the window
+[2026-09-25T09:35:21+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway-router.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-09-25T09:35:21+01:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by agent-spark at 2026-09-25T09:35:21+01:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+[2026-09-25T09:35:21+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-09-25T09:35:21+01:00] --- arm M2: llama.cpp daef7b6 + DFlash drafter n=4 ---
+[2026-09-25T09:35:33+01:00] full-offload gate OK (142 layers incl. drafter, 0 on CPU)
+probe timings: draft_n=19 draft_n_accepted=14 predicted_per_second=14.577460790466645
+[2026-09-25T09:35:36+01:00] G2 OK: drafter proposes and is accepted
+[2026-09-25T09:35:36+01:00] harness start: 4 trajectories, drafter on
+[2026-09-25T10:02:28+01:00] harness rc=0; 2026-09-25 10:02:28,012 - inference_endpoint.commands.benchmark.execute - INFO - Duration: 1601.66 seconds 2026-09-25 10:02:28,013 - inference_endpoint.commands
+arm M2 dmesg amdgpu fault lines: 0
+[2026-09-25T10:02:33+01:00] arm M2 done in 1632s
+[2026-09-25T10:02:34+01:00] === done; raw results in /home/agent-spark/sparkbench/results/raw/e147 ===
+[2026-09-25T10:02:39+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway-router.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-09-25T10:02:39+01:00) ---
+  serving unit    : llama-gateway-router.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 3428845 
+[2026-09-25T10:02:39+01:00] relay restored, VERIFIED: llama-server is running
+[2026-09-25T10:02:39+01:00] run finished, rc=0

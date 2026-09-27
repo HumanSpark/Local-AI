@@ -1,0 +1,15 @@
+=== E138 blocks 2-4: Bonsai 2 PQ2_0 (B0p) ===
+l5 documents: 21/24 correct, 1 truncated (unanswered) | incumbent 23/24 | quality-l5-8192.json
+core coding: 15/15 correct, 0 truncated (unanswered) | incumbent 15/15 | quality-core.json
+expert coding: 3/8 correct, 1 truncated (unanswered) | incumbent 7/8 | quality-expert.json
+  l5 source: re-run at 8,192 (amendment 3)
+Aider: 2/3 | [('T1', 'pass'), ('T2', 'pass'), ('T3', 'not-applied (seed diff only)')] | incumbent Aider 2/3 (E113)
+pi: 3/3 | [('T1', 'pass'), ('T2', 'pass'), ('T3', 'pass')] | incumbent Aider 2/3 (E113)
+
+registered predictions:
+  P7 B0.l5_correct 21-23 of 24: 21 (1 unanswered) -> HELD
+  P8 B0.expert_correct <= 5 of 8: 3 (1 unanswered) -> HELD
+  P9 aider.pass_count <= incumbent 2 of 3: 2 -> HELD
+  P10 pi.pass_count == aider.pass_count: 3 vs 2 -> FALSIFIED
+
+F171 check: any task labelled 'not-applied' failed because the edit never reached the file, not because the model was wrong.

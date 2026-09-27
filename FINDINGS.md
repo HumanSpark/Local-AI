@@ -7495,3 +7495,267 @@ guard floor kept. `HALOGEN_KV_POOL_POSITIONS` cannot be set below the context (`
 health response, `/cache` and startup warnings are accurate and worth reading before a first run.
 
 Evidence: `results/e139/speed-G0*.serverlog`, `results/e139/mem_guard.log`. See [[F165]].
+
+## F167 - the widget's options tie with the 35B we already ran; its speed order holds, its speed size does not
+
+**Date:** 2026-09-25 | **Experiment:** E145 | **Status:** ESTABLISHED for these tasks (3 tasks x 3 repeats)
+
+**Kind: MODEL**
+
+**Claim.** A third-party "approximate options for 128 GB" widget names three models with unexplained
+"intelligence" and "tasks/hr" scores. Through Aider on the three E113 tasks, on the build and flags of
+[[F164]], they measure:
+
+| model | passes /9 | time per repeat |
+|---|---|---|
+| Qwen3.6-35B-A3B UD-Q4_K_M (widget "best fit") | 6 | 294 s |
+| Ornith 1.0 35B Q4_K_M (widget "faster") | 6 | 179 s |
+| Ornith 1.5 35B-A3B Q4_K_M (newer than the widget) | 6 | 267 s |
+| Qwen3.6-27B Q4_K_M (stand-in for the MLX-only "OptiQ 4-bit") | 7 | 1,380 s |
+
+**No model is distinguished** (widest gap 2 of 9 across all eight arms of E143 and E145; the band was 4).
+The widget's speed ORDER holds: Ornith 1.0 takes 39% less time than the 35B best fit, which the widget put
+at "~42% faster". The SIZE of the 27B penalty does not: the widget says 109% slower (2.09x), we measure
+4.7x. Ornith 1.5 gives most of the speed back (49% slower than 1.0), so the widget's claim is about 1.0.
+
+**What it cannot show.** The instrument has 5 to 7 of 9 across eight models, so the widget's intelligence
+scores cannot be tested with it. Ornith's lineage is unverified (no declared base model). Time includes each
+model's default thinking.
+
+**Operationally:** nothing to change; `local_code` stays Qwen3-Coder ([[F164]]). If a fast 35B-class model is
+wanted for small jobs, Ornith 1.0 is 39% faster than the Qwen3.6 35B at the same pass count on this bank,
+with the provenance caveat.
+
+Evidence: `results/e145-results.md`, `results/raw/e145/`, prereg `results/e145-prereg.md`.
+See [[F164]], [[F151]], [[F126]].
+
+## F168 - an Atlas benchmark measures its configuration: a checkpoint label and one missing flag each cost the whole run
+
+**Date:** 2026-09-25 | **Experiment:** E146 | **Status:** ESTABLISHED (two independent failures, both reproduced from logs)
+
+**Kind: PLATFORM**
+
+**Claim.** Atlas-Inf HEAD (2d1aab8) built native-HIP on gfx1151 fails on the MLPerf entry's checkpoint, and the same engine is 6.5x slower on an
+agentic workload unless prefix caching is switched on. (1) `nvidia/Qwen3.6-27B-NVFP4` labels its 193 MLP layers `W4A16_NVFP4`; the detector counts a layer as
+NVFP4 only when `quant_algo == "NVFP4"`, so the model routes to the FP8 path and dies at `mlp.gate_proj` ("Expected FP8E4M3, got UInt8") after loading 20.4 GB.
+One line fixes it. The MLPerf-era source snapshot predates that branch and loads the checkpoint unpatched. (2) `--enable-prefix-caching` is off by default, and for a
+hybrid model a full prefix skip also needs `--ssm-cache-slots` above zero. Off: **61 s per turn**, re-prefilling 16K-token histories at about 195 tok/s. On: **9.4 s**.
+The llama.cpp reference caches prefixes by default, so an Atlas run without the flags is not configured like the comparator.
+
+**Operationally:** any Atlas number must state its flags. This is F39's rule again (a benchmark measures a configuration, not a box), and the second time here that a
+missing serving flag, not the model, decided a result.
+
+Evidence: `results/e146-results.md`, `results/raw/e146/M1/server.serverlog`, `results/raw/e146/M1p0/`, prereg amendments 2-3. See [[F39]], [[F108]], [[F128]].
+
+## F169 - on the MLPerf edge-agentic metric Atlas takes about 27% less time per turn than the llama.cpp reference here, and the published latency is not reproduced
+
+**Date:** 2026-09-25 | **Experiment:** E146 | **Status:** ESTABLISHED for this subset (206 turns, one run per arm)
+
+**Kind: PLATFORM**
+
+**Claim.** On MLCommons' own edge-agentic harness (Qwen3.6-27B, temperature 0, single stream, 4 of 20 trajectories), the llama.cpp reference averages **12,863 ms per turn**.
+Atlas averages **9,307 ms** (patched HEAD, one-line fix) and **9,453 ms** (the entry's shipped source, native-HIP reconstruction): paired ratios 0.724 and 0.735 on the same
+206 turns, consistent across thirds, inline accuracy within 0.015 and 0.032 of the reference. The entry's published Strix Halo figure is 7,059 ms: **1.32-1.34x higher here**,
+outside the +/-25% band; ROCm 7.2.4 (theirs 7.13), a 4-trajectory subset and a resident TTS service are declared differences, not established causes.
+
+On the README's own claim (Qwen3.8-27B, K=4) Atlas measures **27.2 tok/s on code** (claim 28.3-28.6, confirmed) and 15.3 on chat, against llama.cpp + drafter 23.6 and 11.0: chat
+1.39x and clear; code 1.15x with overlapping repetitions, not established. Prefill is about 140 tok/s at 32K on all three engines. **Atlas is not byte-deterministic** (3
+distinct outputs in 10 identical greedy requests). It reserves its GPU pool up front (66 GiB above baseline at `GPU_UTIL=0.60`).
+
+**Limits:** the reference has no speculation and no llama.cpp arm with a drafter was run on Qwen3.6; the comparator is the MLPerf reference, not the best open configuration.
+
+Evidence: `results/e146-results.md`, `results/raw/e146/`, prereg `results/e146-prereg.md`. See [[F168]], [[F84]], [[F85]], [[F165]].
+
+## F170 - the vendor page's MLPerf figures do not match the MLCommons entry it cites
+
+**Date:** 2026-09-25 | **Experiment:** E146 (gate G5) | **Status:** ESTABLISHED as a comparison of the page against the results repository
+
+**Kind: METHOD**
+
+**Claim.** `mlcommons/inference_results_v6.1`, `closed/Atlas_Inference`, reports Strix Halo as **Qwen3.6-27B NVFP4, MTP K=3, native HIP, Ubuntu, ROCm 7.13**, official metric mean
+latency per turn: **7,058.99 ms** (DGX Spark **3,807.66 ms**), so Strix Halo is **1.85x slower** per turn. The vendor page states "19.63 tok/s ... cross-architecture parity" and
+"under 64 minutes" for 1,007 turns. The entry's own `tps` for Strix Halo is 10.2 and its duration 118.5 minutes; "under 64 minutes" matches the DGX Spark (1,007 x 3.808 s = 63.9 min).
+How 19.63 was derived is not in what was read; a decode-only rate is a plausible source, so this is a mismatch of stated numbers with the entry, not an accusation.
+Two repositories present as Atlas (`Avarok-Cybersecurity/atlas`, 699 stars, created 2026-05-05; `Atlas-Inf/atlas`, 30 stars, created 2026-08-24, calling the older one a "disputed asset"); the
+page's "675 stars" and "PR #187" match the older repo's numbers, not the one it links. Which is genuine was not settled and is out of scope.
+
+**Operationally:** quote MLPerf results from the results repository, in the unit it defines. Read the descriptor before the marketing.
+
+Evidence: `results/e146-gates.md`. See [[F159]], [[F165]].
+
+## F171 - every T3 failure across eight models is an edit that never reached the file; the "opposite task profiles" of F164 and F167 are partly a harness artefact
+
+**Date:** 2026-09-25 | **Experiment:** E143, E145 (diagnosis of banked results) | **Status:** ESTABLISHED from the recorded diffs
+
+**Kind: METHOD**
+
+**Claim.** Across E143 and E145, task T3 (make two test files skip cleanly when `fastapi` is absent) failed in 21 of 24
+attempts. Every one of the 21 carries a recorded `git diff` of exactly **978 characters**, which is the task's seed restoring
+the two pre-fix files and nothing else. The 3 passes carry 1,372 to 1,412 characters: the seed plus a fix. So in every failure the
+model's edit never reached the working tree. The transcripts say otherwise: the Qwen3.8-27B run ends "The changes are complete",
+names both files and the exact `importorskip` fix, and Aider exits 0. Every arm ran in Aider's `whole` edit format.
+
+**What this changes.** F164 and F167 read T3 as the task the incumbent owns and the others cannot do. The measured fact is
+narrower: the others' fixes were correct in prose and absent on disk. Whether each model emitted a whole file the format could not
+apply, or a description with no file, is not established from the recorded tails; the kept worktrees under `results/raw/e143/*/worktrees/`
+and `results/raw/e145/*/worktrees/` hold the Aider logs that would settle it. The incumbent also lost one T3 attempt the same way.
+
+**Operationally:** an Aider pass count on this bank is a joint property of model and edit format ([[F114]]), and Aider's exit code is
+not evidence ([[F113]], [[F152]]). Before the next coding bank, the harness records whether an edit was applied as its own field, and a
+task whose failures all carry the seed diff is scored "not applied", never "wrong".
+
+Evidence: `results/raw/e143/*/r?.json`, `results/raw/e145/*/r?.json` (fields `diff`, `aider_tail`, `verify_after_rc`). See [[F113]], [[F114]], [[F152]], [[F164]], [[F167]].
+
+## F172 - with a drafter, llama.cpp beats Atlas on the MLPerf edge-agentic metric; F169's advantage was over a reference without speculation
+
+**Date:** 2026-09-25 | **Experiment:** E147 | **Status:** ESTABLISHED for this subset (206 turns, one run)
+
+**Kind: PLATFORM**
+
+**Claim.** The MLPerf reference implementation (llama.cpp, Qwen3.6-27B Q4_K_M, no speculation) plus one change, a DFlash speculative
+drafter at n=4, takes **7,775 ms per turn** on MLCommons' edge-agentic harness against 12,863 ms for the reference (paired 0.604) and
+9,307 / 9,453 ms for the two Atlas builds of E146 (Atlas/M2 paired **1.197 and 1.216**, above the registered 1.15 line in the second and
+third thirds of the run). Accuracy is identical to the reference to three decimals (0.637). The published Atlas Strix Halo latency of
+7,059 ms sits inside the +/-25% band for this configuration (1.10x); it did not for either Atlas build.
+
+**What it changes.** [[F169]] stands as stated: Atlas is about 27% faster than the reference. It is not faster than the open
+engine configured with the speculation Atlas uses itself. Any "engine X is faster" claim needs the comparator's speculation stated;
+the reference implementation is a floor, not the competition.
+
+**Limits.** 4 of 20 trajectories; a community GGUF conversion of the z-lab drafter, untuned; Atlas's own DFlash mode not run; the
+drafter's per-turn acceptance not recorded per turn (this build's server log carries no acceptance lines; the 20-token probe accepted 14 of 19 drafts, 0.737). *Addendum 2026-09-26:* Atlas's DFlash mode was run in E148 and is slower still, [[F175]].
+
+Evidence: `results/e147-results.md`, `results/raw/e147/`, prereg `results/e147-prereg.md`. See [[F169]], [[F84]], [[F85]], [[F168]].
+
+## F173 - the ternary Bonsai 2 keeps the incumbent's answers on documents and core coding and loses on expert coding; it also runs away twice in 47 items
+
+**Date:** 2026-09-25 | **Experiment:** E138 blocks 2-4 | **Status:** ESTABLISHED (one run per bank)
+
+**Kind: MODEL**
+
+**Claim.** Ternary Bonsai 2 27B PQ2_0, the 8 GiB compression of the 27B that F159 found 1.8x faster than the incumbent, scores
+**21 of 24** on the l5 document bank (incumbent 23; both misses calendar arithmetic, the incumbent's class too), **15 of 15** on
+the core coding bank (incumbent 15) and **3 of 8** on the expert coding bank (incumbent 7). That is F144's shape a second time:
+compression costs show on the hardest coding bank and nowhere else measured. Two items in 47 ran to their token cap and were never
+answered: R10 at `low` effort (24,460 reasoning characters at an 8,192-token cap, twice) and `interval_map` at `medium` (24,576).
+They are recorded as runaways, not misses. The 23 answered l5 items were identical across two runs (F59).
+
+**Operationally:** Bonsai is a candidate for document work and routine coding at half the memory and nearly twice the speed, and
+not for the hardest coding work. Its runaway rate (2 in 47) needs a token cap and a retry in any serving configuration, as F140
+found for the incumbent at the wrong effort default. The routing guide is not changed by one run per bank.
+
+Evidence: `results/e138-results.md` (blocks 2-4), `results/e138/quality-*.json`, prereg amendments 3-4. See [[F159]], [[F160]], [[F144]], [[F140]], [[F59]].
+
+## F174 - on the same weights, pi passed the task Aider could not, because it applied the edit; the harness decided T3
+
+**Date:** 2026-09-25 | **Experiment:** E138 block 4 | **Status:** ESTABLISHED (one run per harness)
+
+**Kind: METHOD**
+
+**Claim.** Bonsai 2 with its drafter, behind the same server, scored **2 of 3** through Aider and **3 of 3** through pi on the three
+E113 tasks. The difference is T3: Aider's record carries a 978-character diff, the task's seed and nothing else, while pi's carries
+1,389 characters including the `importorskip` fix, after 13 requests and 948 s. The same model proposed the same fix to both
+harnesses; one wrote it to the file. This is [[F171]]'s mechanism observed from the other side: with F171 the failures shared a diff
+size, here a second harness on identical weights turned the failure into a pass.
+
+**Operationally:** a pass count on this bank is a property of the harness's edit path as much as of the model. Until the runner
+records whether an edit applied as its own field, T3 results across models are not comparable, and the "Aider vs pi" question is
+about edit application, not capability. P10 of E138 ("pi equals Aider") is falsified for that reason.
+
+Evidence: `results/e138/agentic-aider.json`, `results/e138/agentic-pi.json` (field `diff`). See [[F171]], [[F113]], [[F114]], [[F152]].
+
+*F171 and F174 addendum, 2026-09-26:* `tools/aider_task_runner.py` now records `seed_diff_chars` and `edit_applied` (the final diff differs from the seed's, same pathspec) on every record, and `classify()` returns `fail-not-applied` for a verify failure with no applied edit. Tests: `tests/test_aider_task_runner_classify.py`. Records from E113 to E145 predate the field; the 978-character heuristic in `tools/score_e138_blocks.py` covers them.
+
+## F175 - Atlas's own DFlash mode is its slowest configuration on this box: the drafter accepts 0.064 tokens per 15-token step, and the MLPerf-era build cannot serve it on HIP at all
+
+**Date:** 2026-09-26 | **Experiment:** E148 | **Status:** ESTABLISHED for this subset (206 turns, one run); cause OPEN
+
+**Kind: PLATFORM**
+
+**Claim.** Atlas HEAD (plus the one-line W4A16 patch of F168) serving the MLPerf model with `--dflash --draft-model` z-lab's
+Qwen3.6-27B-DFlash, the checkpoint E147's GGUF drafter was converted from, takes **22,898 ms per turn** on MLCommons' edge-agentic
+harness: paired **1.780x** the reference (12,863), **2.460x** Atlas's own MTP arm (9,307) and **2.945x** llama.cpp with the same
+drafter lineage (7,775), in every third of the run. Accuracy held (0.631 against M1p's 0.622). The mechanism is in Atlas's own log:
+4,006 of 4,160 verify steps accepted zero of 15 drafts (0.064 tokens per step; tokens per step 1.074 against MTP's 1.689), and
+acceptance falls from 1.98 per step under 4K context to under 0.02 past 8K, where nearly every harness turn sits. The MLPerf
+entry's shipped source accepts the flag and fails to build the model on HIP (`Module 'prefill_paged_indirect' not loaded`).
+
+**What it changes.** [[F172]] is strengthened: with the same drafter on both engines the open configuration is 2.9x faster per
+turn, and Atlas's best measured configuration remains MTP K=3, which F172 already placed behind llama.cpp with a drafter. The
+vendor's "faster path" is a claim about its CUDA builds; on this hardware it is not faster and, in the recorded source, not runnable.
+
+**Cause CLOSED-UNEXPLAINED 2026-09-26 (E149-E151, [[F176]] [[F177]] [[F178]]): attention pattern, context cap and prefix cache each tested in a single-variable arm and retired; the HIP kernel path remains and is not pursued.** Original text: **Cause open, three candidates, none tested:** HEAD and the MLPerf-era source disagree on the drafter's capture layers
+(`[1, 16, 31, 46, 61] used directly` against `[0, 15, 30, 45, 60] offset=-1`), so an off-by-one feeding the drafter the wrong hidden
+states is the first thing to try; `DFlash ctx_window = 4096` coincides with where acceptance collapses; and the HIP kernel path is
+unexercised by the vendor. A prefix-caching WARN naming an SM12.x correctness regression did not show in the score.
+
+Evidence: `results/e148-results.md`, `results/raw/e148/` (M3p per-turn record, both server logs), prereg `results/e148-prereg.md`,
+`tools/e148_dflash_accept.py`. See [[F172]], [[F169]], [[F168]], [[F85]], [[F160]].
+
+## F176 - F175's cause is Atlas's 4,096-token drafter context cap, stated in its own source; declaring the drafter's sliding-window layers is inert
+
+**Date:** 2026-09-26 | **Experiment:** E149 | **Status:** the sliding-window result is ESTABLISHED (one capped run, 109 turns); **the cause claim in the title is RETRACTED by E150 ([[F177]]): lifting the cap nine-fold changed nothing**
+
+**Kind: PLATFORM**
+
+**Claim.** Supplying z-lab's drafter with the `causal`/`use_swa`/`swa_window_size` fields Atlas reads (the checkpoint declares them
+at the top level, where Atlas does not look) changed nothing: **0.071** accepted tokens per step against M3p's 0.064, per-turn
+server time **1.002x** M3p's on the same 109 turns, 107 of 109 turns with the identical output length. It could not have changed
+anything: the engine's window argument overrode the config to 4,096, and the drafter's context is capped at 4,096
+(`ATLAS_DFLASH_CTX_WINDOW`), so the sliding window covered everything the drafter could see. Atlas's source says what the cap
+does: the drafter "was trained over the FULL captured prefix" and the cap "cripples it on prompts past a tiny window - Atlas's
+6-10% acceptance vs the paper's 70% is dominated by this cap"; the default was raised from 512 to 4,096 for the vendor's own
+workloads. The MLPerf agentic-coding turns run 2,000-28,000 tokens of context, and our acceptance curve (2.2 per step under 4K,
+0.3 at 4-8K, under 0.02 beyond) is that cap measured.
+
+**What it changes.** [[F175]]'s "cause open" narrows to one candidate with a vendor statement behind it, and a one-variable test:
+E150, `ATLAS_DFLASH_CTX_WINDOW=36864`. The capture-layer off-by-one is retired as a candidate (HEAD's authors measured the
+direct indexing better); the sliding-window declaration is retired by this run. Method: a harness killed at a cap writes no
+events file, so capped arms are compared server-side on Atlas's per-turn lines.
+
+Evidence: `results/e149-results.md`, `results/raw/e149/M4/`, prereg `results/e149-prereg.md` (amendment 1), `tools/score_e149.py`.
+See [[F175]], [[F172]], [[F85]].
+
+## F177 - Atlas's drafter context cap is not the cause of F175 either: lifted to 36,864, acceptance and output are identical to the shipped configuration; F176's cause claim is retracted
+
+**Date:** 2026-09-26 | **Experiment:** E150 | **Status:** ESTABLISHED (one capped run, 128 turns); cause OPEN, prefix cache under test (E151)
+
+**Kind: PLATFORM**
+
+**Claim.** With `ATLAS_DFLASH_CTX_WINDOW=36864` (the serving context, against the default 4,096), Atlas's DFlash drafter accepted
+**0.060** tokens per 15-draft step (M3p 0.064), 0.008 past 12K context (M3p 0.009), with tokens per step 1.071 against 1.071 and
+the identical output length on 127 of 128 turns. Server-side time per turn 0.999x M3p. The vendor's source comment that its low
+acceptance "is dominated by this cap" does not describe this workload: the cap was lifted nine-fold and nothing moved. Across
+E149 and E150, three configurations produced one curve and the same output on 383 of 386 compared turns.
+
+**What it changes.** [[F176]]'s cause claim is withdrawn; its measurement (the sliding-window declaration is inert) stands.
+[[F175]] returns to "cause open" with two candidates retired (attention pattern, context cap) and one live: Atlas's own startup
+WARN names a DFlash correctness regression on multi-turn prefix-cache hits, and M3p's log shows first turns of a conversation
+accepting **1.125** per step at 4-8K context against **0.207** for later turns at the same context. E151 (pre-registered before
+this result was read) tests the cache. If that fails too, the HIP kernel path is what remains, and this project stops there.
+
+Evidence: `results/e150-results.md`, `results/raw/e150/M5/`, prereg `results/e150-prereg.md`, `tools/score_capped_atlas_arm.py`.
+See [[F175]], [[F176]], [[F172]].
+
+## F178 - Atlas's prefix cache is a 0.05-token contributor to its DFlash collapse, not the cause; three single-variable arms retire three explanations and the investigation stops
+
+**Date:** 2026-09-26 | **Experiment:** E151 | **Status:** ESTABLISHED (one capped run, 31 turns); the Atlas DFlash cause is CLOSED-UNEXPLAINED by decision
+
+**Kind: PLATFORM**
+
+**Claim.** With `--enable-prefix-caching` removed, on the same first 31 turns as M3p, Atlas's DFlash drafter accepted **0.346** per
+step at 4-8K context (M3p 0.338), **0.068** at 8-12K and **0.039** past 12K where M3p accepted exactly **0.000** over 491 steps.
+The first-turn control held (2.238 against 2.429). Every turn re-prefilled its context, so time per turn was **3.436x** M3p's.
+The startup WARN Atlas prints about DFlash and multi-turn cache hits describes a real but small effect here: about one accepted
+token per 20 steps, against a first-turn level of 2.2 and llama.cpp's 0.74 acceptance rate on the same drafter lineage.
+
+**What it changes.** [[F175]]'s cause is closed unexplained, by the rule fixed in E150's and E151's preregs: attention pattern
+(E149, [[F176]]), context cap (E150, [[F177]]) and prefix cache (E151) are retired, the HIP kernel path is what remains, and this
+project does not pursue engine internals. Operationally nothing changes from [[F172]]: on this box Atlas's usable speculative mode
+is MTP, and it is behind llama.cpp with a drafter. Method, for the next engine claim: one variable per arm, the vendor's own
+explanation tested first, a hard cap so a dead arm costs 40 minutes, and the per-turn server log as the ruler when the harness is
+capped.
+
+Evidence: `results/e151-results.md`, `results/raw/e151/M6/`, prereg `results/e151-prereg.md`, `tools/score_capped_atlas_arm.py`
+(the M3p same-turns split). See [[F175]], [[F176]], [[F177]], [[F172]].
+

@@ -367,3 +367,43 @@ claims:
     status: active
     evidence:
       - results/diarisation/e44-vad-fix.md
+  - id: C-CLAIM-BONSAI-SPEED-001
+    statement: "A public '~73 tok/s on Strix Halo' for Ternary Bonsai 2 27B does not reproduce: 34.16 tok/s was the best of nine configurations (PQ2_0 plus a DFlash2 drafter, code prompt), and the claim's own 10.1 GB memory figure matches the PTQ1_0 configuration, which decodes at 3.63 tok/s on this Vulkan stack. Plain Bonsai runs 22.22 tok/s in 8.07 GiB against the incumbent 27B's 12.33 in 16.78 GiB; answer quality was not measured, so no swap is recommended on speed alone."
+    value: 34.16
+    unit: "tokens_per_second_decode"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/e138-results.md
+  - id: C-CLAIM-HALOGEN-PREFILL-001
+    statement: "Halogen's published '~1,424 tok/s prefill at 32K' for Qwen3.8-Flash-Next measures 1,152 tok/s here (median of 3), scored reproduced-conditionally against a 1,000-1,210 band that allowed for this box's IOMMU mode; mainline llama.cpp on our GGUF does 216.5 tok/s, so a 32K request takes 33 s on Halogen and 162 s on llama.cpp. Its speculative decoding was byte-identical to serial on 4 of 4 prompts. Halogen could not serve our GGUF beside the resident TTS service: it repacks the file into 70 GiB of host RAM and was stopped twice by the 12 GiB memory guard."
+    value: 1152.01
+    unit: "tokens_per_second_prefill_32k"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/e139-results.md
+  - id: C-CLAIM-ATLAS-MLPERF-001
+    statement: "On MLCommons' own edge-agentic harness (Qwen3.6-27B, 206 of 1,007 turns, single stream) Atlas took 9,307 ms per turn (Atlas HEAD plus a one-line patch) and 9,453 ms (the MLPerf entry's shipped source) against 12,863 ms for the llama.cpp reference: paired ratios 0.724 and 0.735 on the same turns, inline accuracy within 0.03. The entry's published 7,059 ms was not reproduced (1.32-1.34x). The reference runs no speculation; with a DFlash drafter added and nothing else changed (E147), llama.cpp took 7,775 ms per turn at identical accuracy, and both Atlas builds were 1.20-1.22x slower than that open configuration (F172). Atlas's own DFlash mode with the same drafter lineage (E148) took 22,898 ms per turn, 2.46x its MTP mode, because the drafter accepted 0.064 tokens per 15-draft step past 4K context; the MLPerf-era source cannot serve that mode on HIP (F175)."
+    value: 9307
+    unit: "mean_turn_latency_ms"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/e146-results.md
+  - id: C-CLAIM-ATLAS-DETERMINISM-001
+    statement: "Atlas (HEAD 2d1aab8, Qwen3.8-27B NVFP4, MTP K=4) returned 3 distinct outputs to 10 identical temperature-0 requests in one process; llama.cpp returned 1 distinct output to the same test, with and without a drafter. Atlas's README decode claim of 28.3-28.6 tok/s on code prompts measured 27.18, confirmed."
+    value: 3
+    unit: "distinct_outputs_of_10_identical_greedy_requests"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/e146-results.md
+  - id: C-CODING-RECOMMENDED-TIE-001
+    statement: "Seven coding models recommended by a Strix Halo chat and a comparison widget (Qwen3.8-27B, Qwen3.8-Flash-Next, two quants of Qwen3.6-35B-A3B, Ornith 1.0 and 1.5, Qwen3.6-27B) tie with the incumbent Qwen3-Coder through Aider on three real repo tasks: 5 to 7 passes of 9 for every model against a pre-registered band of 4 for a real difference, with the incumbent 2x to 10x faster per attempt set. The widget's speed order held (its 'faster' option is 39% faster; it said 42%) and its 27B penalty did not (4.7x, it said 2.09x). Every failure on the task the incumbent passes carries only the seed diff: the other models' edits never reached the file (F171)."
+    value: null
+    unit: "qualitative"
+    confidence_interval: null
+    status: active
+    evidence:
+      - results/e145-results.md

@@ -33,7 +33,7 @@ client-side 0.1519 s.
 ### Declared deviation - the authenticated door is not the one being used
 
 The goal named "the real SparkRouter endpoint". The authenticated door
-(`http://<gateway>:8000/v1`) **cannot be driven from this account**, and that was probed
+(`http://<fleet-host>:8000/v1`) **cannot be driven from this account**, and that was probed
 rather than assumed:
 
 - `GET :8000/v1/models` unauthenticated returns **HTTP 401**; `/health` returns `200 {"state":"serving"}`.

@@ -1,0 +1,77 @@
+[2026-09-24T22:33:25+01:00] === preflight ===
+T1-bugfix-root-collection: valid - verify fails first (rc=1)
+T2-tdd-serving-discovery: valid - verify fails first (rc=2)
+T3-multifile-optional-dep: valid - verify fails first (rc=1)
+
+all 3 preconditions valid.
+[2026-09-24T22:33:28+01:00] preflight OK: arms H E F G, build present, preconditions valid
+[2026-09-24T22:33:28+01:00] === opening maintenance window ===
+[2026-09-24T22:33:28+01:00] --- arm H: Qwen3.6-35B-A3B-UD-Q4_K_M.gguf ---
+[2026-09-24T22:33:28+01:00] DRY-RUN: would serve and run arm H
+[2026-09-24T22:33:28+01:00] --- arm E: ornith-1.0-35b-Q4_K_M.gguf ---
+[2026-09-24T22:33:28+01:00] DRY-RUN: would serve and run arm E
+[2026-09-24T22:33:28+01:00] --- arm F: Ornith-1.5-35B-Q4_K_M.gguf ---
+[2026-09-24T22:33:28+01:00] DRY-RUN: would serve and run arm F
+[2026-09-24T22:33:28+01:00] --- arm G: Qwen3.6-27B-Q4_K_M.gguf ---
+[2026-09-24T22:33:28+01:00] DRY-RUN: would serve and run arm G
+[2026-09-24T22:33:28+01:00] === all arms done in 0s; raw results in /home/agent-spark/sparkbench/results/raw/e145 ===
+[2026-09-24T22:33:33+01:00] run finished, rc=0
+[2026-09-24T22:33:33+01:00] === preflight ===
+T1-bugfix-root-collection: valid - verify fails first (rc=1)
+T2-tdd-serving-discovery: valid - verify fails first (rc=2)
+T3-multifile-optional-dep: valid - verify fails first (rc=1)
+
+all 3 preconditions valid.
+[2026-09-24T22:33:36+01:00] preflight OK: arms H E F G, build present, preconditions valid
+[2026-09-24T22:33:36+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway-router.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-09-24T22:33:36+01:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by agent-spark at 2026-09-24T22:33:36+01:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+[2026-09-24T22:33:36+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-09-24T22:33:36+01:00] --- arm H: Qwen3.6-35B-A3B-UD-Q4_K_M.gguf ---
+[2026-09-24T22:33:40+01:00] arm H: full-offload gate OK (82 layers, 0 on CPU); load took 4s
+[2026-09-24T22:33:43+01:00] arm H: served model id /opt/models/staging/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+[2026-09-24T22:39:10+01:00] arm H repeat 1 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/H/r1.json
+[2026-09-24T22:44:16+01:00] arm H repeat 2 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/H/r2.json
+[2026-09-24T22:48:24+01:00] arm H repeat 3 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/H/r3.json
+arm H dmesg amdgpu fault lines: 0
+[2026-09-24T22:48:29+01:00] arm H done in 893s
+[2026-09-24T22:48:30+01:00] --- arm E: ornith-1.0-35b-Q4_K_M.gguf ---
+[2026-09-24T22:48:44+01:00] arm E: full-offload gate OK (82 layers, 0 on CPU); load took 14s
+[2026-09-24T22:48:47+01:00] arm E: served model id /opt/models/staging/ornith-1.0-35b-Q4_K_M.gguf
+[2026-09-24T22:52:13+01:00] arm E repeat 1 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/E/r1.json
+[2026-09-24T22:55:22+01:00] arm E repeat 2 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/E/r2.json
+[2026-09-24T22:57:44+01:00] arm E repeat 3 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/E/r3.json
+arm E dmesg amdgpu fault lines: 0
+[2026-09-24T22:57:50+01:00] arm E done in 560s
+[2026-09-24T22:57:50+01:00] --- arm F: Ornith-1.5-35B-Q4_K_M.gguf ---
+[2026-09-24T22:58:01+01:00] arm F: full-offload gate OK (84 layers, 0 on CPU); load took 11s
+[2026-09-24T22:58:04+01:00] arm F: served model id /opt/models/staging/Ornith-1.5-35B-Q4_K_M.gguf
+[2026-09-24T23:02:10+01:00] arm F repeat 1 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/F/r1.json
+[2026-09-24T23:06:29+01:00] arm F repeat 2 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/F/r2.json
+[2026-09-24T23:11:25+01:00] arm F repeat 3 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/F/r3.json
+arm F dmesg amdgpu fault lines: 0
+[2026-09-24T23:11:31+01:00] arm F done in 821s
+[2026-09-24T23:11:31+01:00] --- arm G: Qwen3.6-27B-Q4_K_M.gguf ---
+[2026-09-24T23:11:35+01:00] arm G: full-offload gate OK (130 layers, 0 on CPU); load took 4s
+[2026-09-24T23:11:39+01:00] arm G: served model id /opt/models/staging/Qwen3.6-27B-Q4_K_M.gguf
+[2026-09-24T23:43:56+01:00] arm G repeat 1 rc=0 -> /home/agent-spark/sparkbench/results/raw/e145/G/r1.json
+[2026-09-25T00:02:14+01:00] arm G repeat 2 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/G/r2.json
+[2026-09-25T00:20:39+01:00] arm G repeat 3 rc=1 -> /home/agent-spark/sparkbench/results/raw/e145/G/r3.json
+arm G dmesg amdgpu fault lines: 0
+[2026-09-25T00:20:45+01:00] arm G done in 4154s
+[2026-09-25T00:20:45+01:00] === all arms done in 6429s; raw results in /home/agent-spark/sparkbench/results/raw/e145 ===
+[2026-09-25T00:20:50+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway-router.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-09-25T00:20:50+01:00) ---
+  serving unit    : llama-gateway-router.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 3999094 
+[2026-09-25T00:20:50+01:00] relay restored, VERIFIED: llama-server is running
+[2026-09-25T00:20:50+01:00] run finished, rc=0

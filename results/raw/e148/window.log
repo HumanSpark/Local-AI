@@ -1,0 +1,59 @@
+[2026-09-26T02:40:17+01:00] === preflight ===
+[preflight] plan: [('CODE', 3, 384), ('CHAT', 3, 384), ('D1500', 1, 384), ('P8K', 3, 128), ('P32K', 3, 128)] + determinism x10
+wrote /tmp/tmp.Hwf7MlgXcp/c.yaml; changes from the reference (dropped datasets: ['bfcl_v4::function_calling']):
+  model_params.name: 'Qwen3.6-27B-Q4_K_M' -> 't'
+  model_params.tokenizer_name: 'Qwen/Qwen3.6-27B' -> '/opt/models/staging/qwen3.6-27b-nvfp4'
+  datasets[agentic_coding].path: 'examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl' -> '/home/agent-spark/atlas-e146/endpoints/examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl'
+  num_trajectories_to_issue: 20 -> 4
+  datasets (accuracy dropped): ['agentic_coding', 'bfcl_v4::function_calling'] -> ['agentic_coding']
+  endpoint_config.endpoints: ['http://localhost:8080'] -> ['http://127.0.0.1:8080']
+  report_dir: 'results/edge_agentic_full_run/' -> '/tmp/tmp.Hwf7MlgXcp/r'
+[2026-09-26T02:40:19+01:00] preflight OK: arms M3p M3s
+[2026-09-26T02:40:19+01:00] === opening maintenance window ===
+[2026-09-26T02:40:19+01:00] --- arm M3p ---
+[2026-09-26T02:40:19+01:00] DRY-RUN: would run arm M3p
+[2026-09-26T02:40:19+01:00] --- arm M3s ---
+[2026-09-26T02:40:19+01:00] DRY-RUN: would run arm M3s
+[2026-09-26T02:40:19+01:00] === all arms done in 0s; raw results in /home/agent-spark/sparkbench/results/raw/e148 ===
+[2026-09-26T02:40:24+01:00] run finished, rc=0
+[2026-09-26T02:40:24+01:00] === preflight ===
+[preflight] plan: [('CODE', 3, 384), ('CHAT', 3, 384), ('D1500', 1, 384), ('P8K', 3, 128), ('P32K', 3, 128)] + determinism x10
+wrote /tmp/tmp.3TdrZ0uNvD/c.yaml; changes from the reference (dropped datasets: ['bfcl_v4::function_calling']):
+  model_params.name: 'Qwen3.6-27B-Q4_K_M' -> 't'
+  model_params.tokenizer_name: 'Qwen/Qwen3.6-27B' -> '/opt/models/staging/qwen3.6-27b-nvfp4'
+  datasets[agentic_coding].path: 'examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl' -> '/home/agent-spark/atlas-e146/endpoints/examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl'
+  num_trajectories_to_issue: 20 -> 4
+  datasets (accuracy dropped): ['agentic_coding', 'bfcl_v4::function_calling'] -> ['agentic_coding']
+  endpoint_config.endpoints: ['http://localhost:8080'] -> ['http://127.0.0.1:8080']
+  report_dir: 'results/edge_agentic_full_run/' -> '/tmp/tmp.3TdrZ0uNvD/r'
+[2026-09-26T02:40:26+01:00] preflight OK: arms M3p M3s
+[2026-09-26T02:40:26+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway-router.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-09-26T02:40:26+01:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by agent-spark at 2026-09-26T02:40:26+01:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+[2026-09-26T02:40:26+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-09-26T02:40:26+01:00] --- arm M3p ---
+[2026-09-26T02:40:54+01:00] M3p answered /v1/models; dflash line: 2026-09-26T01:40:26.699457Z  INFO spark::main_modules::serve_phases::config: DFlash γ=16 (source: model_toml)
+[2026-09-26T02:40:54+01:00] harness start: 4 trajectories against nvidia/Qwen3.6-27B-NVFP4 on :8081
+[2026-09-26T03:59:41+01:00] harness rc=0; 2026-09-26 03:59:41,662 - inference_endpoint.commands.benchmark.execute - INFO - Duration: 4716.98 seconds 2026-09-26 03:59:41,663 - inference_endpoint.commands
+arm M3p dmesg amdgpu fault lines: 0
+[2026-09-26T03:59:47+01:00] arm M3p done in 4761s
+[2026-09-26T03:59:48+01:00] --- arm M3s ---
+[2026-09-26T04:00:58+01:00] arm VOID: M3s never answered /v1/models (see /home/agent-spark/sparkbench/results/raw/e148/M3s/server.serverlog)
+arm M3s dmesg amdgpu fault lines: 0
+[2026-09-26T04:01:03+01:00] arm M3s done in 75s
+[2026-09-26T04:01:03+01:00] === all arms done in 4837s; raw results in /home/agent-spark/sparkbench/results/raw/e148 ===
+[2026-09-26T04:01:08+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway-router.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-09-26T04:01:09+01:00) ---
+  serving unit    : llama-gateway-router.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 3907897 
+[2026-09-26T04:01:09+01:00] relay restored, VERIFIED: llama-server is running
+[2026-09-26T04:01:09+01:00] run finished, rc=0

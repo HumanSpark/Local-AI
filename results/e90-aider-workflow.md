@@ -24,7 +24,7 @@ tested function, and `tools/local-code` calls it before every run, so an invocat
 drift from what is resident.
 
 **The endpoint is loopback, and that is a declared gap.** The authenticated door
-(`<gateway>:8000`) cannot be driven from `agent-spark`: it returns 401, `keys.txt` is
+(`<fleet-host>:8000`) cannot be driven from `agent-spark`: it returns 401, `keys.txt` is
 `0750 spark-infer` (`PermissionError`, errno 13), and the key is absent from this host's vault
 checkout (`vault_get` exits 1; only four names are present, none of them the gateway key). That
 grant is deliberately narrow and was not widened. So every figure below is measured against the

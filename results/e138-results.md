@@ -100,3 +100,50 @@ is what moves this figure: the same config at `-c 16384` would sit higher.
 - **GiB vs GB is not cosmetic here.** Every figure in this file is GiB unless it says GB; the
   claim's "10.1GB" is ambiguous and the two readings differ by 7%, which is larger than the gap
   between two of the arms.
+
+# E138 BLOCKS 2-4 - Bonsai keeps the incumbent's answers on documents and core coding, loses on expert coding (2026-09-25)
+
+Scored against `results/e138-prereg.md` P7-P10 and amendments 2-4. Two windows (10:40-12:51 and 12:52-13:16), the F144 banks
+and the three E113 tasks on Ternary Bonsai 2 27B PQ2_0 (arm B0p; B1p with its drafter for the agentic block). Scorer
+`tools/score_e138_blocks.py`, output `results/e138/score-blocks.txt`. Registered as F173 and F174.
+
+## Quality (B0p, no drafter)
+
+| bank | Bonsai | incumbent Qwen3.8-27B Q4_K_M | note |
+|---|---|---|---|
+| l5 documents (24), `low` | **21 correct, 1 unanswered** | 23 | R04 and R09 `off_by_calendar` in both runs; R10 ran to the cap twice (4,096 and 8,192 tokens, 24,460 reasoning chars) |
+| core coding (15), `medium` | **15** | 15 | no truncation |
+| expert coding (8), `medium` | **3 correct, 1 unanswered** | 7 | `glob_match`, `round_decimal`, `parse_csv` wrong; `apply_patch` errored in its own code; `interval_map` ran to the 24,576 cap |
+
+The 23 answered l5 items were identical across the two runs (F59). Both misses are calendar arithmetic, the class F80 and F92
+name as the hardest thing on this bank; the incumbent's one miss (F117) is the same class.
+
+## Agentic (B1p, drafter n=4, the three E113 tasks)
+
+| harness | passes | T1 | T2 | T3 |
+|---|---|---|---|---|
+| Aider | 2 of 3 | pass, 27 s | pass, 236 s | fail: diff is exactly the 978-char seed, the edit never reached the file (F171) |
+| pi | **3 of 3** | pass, 240 s | pass, 327 s | **pass, 948 s, 13 requests**: diff 1,389 chars with the `importorskip` fix |
+
+The incumbent scored 2 of 3 through Aider in E113 (T3 failed the same way).
+
+## Scored predictions
+
+| # | field | predicted | measured | verdict |
+|---|---|---|---|---|
+| P7 | `B0.l5_correct` | 21-23 of 24 | 21 (1 unanswered, twice) | HELD |
+| P8 | `B0.expert_correct` | <= 5 of 8 | 3 (1 unanswered) | HELD |
+| P9 | `aider.pass_count` | <= incumbent's 2 of 3 | 2 | HELD |
+| P10 | `pi.pass_count` = `aider.pass_count` | equal | 3 vs 2 | **FALSIFIED** |
+
+## What the blocks add to block 1
+
+Block 1 found Bonsai faster on half the memory (F159, F160). Blocks 2-4 find its answers unchanged on the document bank and the
+core coding bank, and worse on the expert bank: 3 of 8 against 7 of 8, the same bank on which F144 found the IQ3_S quant losing
+3. Two runaways in 47 quality items (R10 at `low`, `interval_map` at `medium`), each recorded and not scored. The one agentic
+difference is the harness, not the model: pi applied the T3 edit that Aider's `whole` format did not, on the same weights.
+
+## Limits
+
+One run per bank; the expert bank's `interval_map` and the l5 bank's R10 are unanswered, not wrong; the drafter was on for the
+agentic block only, as registered; pi and Aider were run once each; both windows had the Chatterbox TTS container resident (F166).

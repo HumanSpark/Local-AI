@@ -1,0 +1,14 @@
+=== M5: 128 turns; server-side comparison on the same first 128 turns ===
+  M5: tok_step 1.071, p1 0.036, decode 4.45 tok/s, TTFT 3903 ms, est 23323 ms/turn
+  M3p: tok_step 1.071, p1 0.036, decode 4.44 tok/s, TTFT 3916 ms, est 23349 ms/turn
+    M5/M3p est ratio 0.999; identical output token counts 127/128
+  M1p: tok_step 1.681, p1 0.681, decode 14.99 tok/s, TTFT 3818 ms, est 9291 ms/turn
+    M5/M1p est ratio 2.510; identical output token counts 113/128
+acceptance: 0.060 tokens per step over 2689 logged steps; 12,288-28,671 bucket 0.008
+acceptance by first-turn against later turns (128 turns matched to E148's order):
+  first turns, context       0-4095: steps    21, accepted/step 2.429
+  first turns, context    4096-8191: steps    40, accepted/step 1.125
+  later turns, context       0-4095: steps     3, accepted/step 1.667
+  later turns, context    4096-8191: steps   242, accepted/step 0.161
+  later turns, context   8192-12287: steps   394, accepted/step 0.018
+  later turns, context       12288+: steps  1989, accepted/step 0.008

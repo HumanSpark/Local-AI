@@ -1,0 +1,37 @@
+name: edge-agentic-full-run
+version: '1.0'
+type: online
+model_params:
+  name: nvidia/Qwen3.6-27B-NVFP4
+  tokenizer_name: /opt/models/staging/qwen3.6-27b-nvfp4
+  temperature: 0
+  seed: 42
+  max_new_tokens: 1024
+datasets:
+- name: agentic_coding
+  type: performance
+  path: /home/agent-spark/atlas-e146/endpoints/examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl
+  accuracy_config:
+    eval_method: agentic_inference_inline
+  agentic_inference:
+    turn_timeout_s: 600.0
+    num_trajectories_to_issue: 4
+settings:
+  runtime:
+    max_issue_duration_ms: 14400000
+    dataloader_random_seed: 42
+  timeouts:
+    run_timeout_s: 21600
+  load_pattern:
+    type: agentic_inference
+    target_concurrency: 1
+  client:
+    num_workers: 1
+    max_connections: 1
+    warmup_connections: 0
+endpoint_config:
+  endpoints:
+  - http://127.0.0.1:8081
+  api_type: openai
+  api_key: null
+report_dir: /home/agent-spark/sparkbench/results/raw/e148/M3p/harness-report

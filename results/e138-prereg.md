@@ -166,3 +166,27 @@ Owner's call: run **block 1 only** (speed + memory) in the first window, ~45 min
 pre-registered configs and wait for a later window. Nothing else changes: the arms, the
 predictions and the >= 65 tok/s bar for C1 are as registered. P7-P10 are simply unscored until
 that second window runs.
+
+## AMENDMENT 3 - l5 re-run at a doubled token cap (declared 2026-09-25 11:10, before the re-run)
+
+**Trigger.** Phase 3's l5 bank (B0p, `--thinking low --max-tokens 4096`) ended rc=3: `run_ps_eval.py` refuses to
+report a score when any item is truncated. One item, R10, ran to the 4,096-token cap with 14,128 reasoning characters and
+was never answered; the other 23 answered, 21 correctly. The median reasoning length was 1,537 characters, so the `low`
+effort flag was honoured and this is a single runaway (F140's class), not an inert flag.
+
+**Handling.** R10 is recorded as truncated, not as a miss. The l5 bank is re-run once, in a second short window after
+phase 4, with `--max-tokens 8192` and everything else unchanged (`--ctx 16384` holds it). **P7 (`B0.l5_correct`, 21-23 of
+24) is scored on the re-run.** If R10 truncates again at 8,192, it is recorded as a runaway and P7 is scored on the 23
+answered items, stated as such. The phase-3 core bank runs at 8,192 already; if it also truncates, the same rule applies
+and the same window re-runs it at 16,384.
+
+## AMENDMENT 4 - the expert bank's one truncation is recorded, not re-run (declared 2026-09-25 12:20, during phase 4, before scoring)
+
+Phase 3's expert bank (B0p, `--thinking medium --max-tokens 24576`) ended rc=3 for the same reason as l5: one item truncated.
+`interval_map` ran to the 24,576-token cap (1,220 s) and was never answered; the other seven answered: 3 passed (`kmerge`, `wrap`,
+`sliding_median`), 3 wrong (`glob_match`, `round_decimal`, `parse_csv`), 1 errored in its own code (`apply_patch`).
+
+**P8 (`B0.expert_correct` <= 5 of 8) is decided whichever way the truncated item would go**: the ceiling is 4 of 8. So
+`interval_map` is recorded as a runaway (F140's class, at a cap six times the l5 one) and is not re-run; a re-run at 49,152 tokens
+would cost about 40 minutes of gateway time and change no scoring outcome. P8 is scored as **3 of 8 answered correctly, 1 unanswered**,
+stated that way. Amendment 3's l5 re-run stands, because P7's band (21-23) can still move on R10.

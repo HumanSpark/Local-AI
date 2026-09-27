@@ -1,0 +1,15 @@
+=== E149 M4 - CAPPED run, 109 turns; server-side comparison (a capped harness writes no events) ===
+  M4 : tok_step 1.080, p1 0.045, decode 4.40 tok/s, est 21860 ms/turn
+  M3p: tok_step 1.082, p1 0.041, decode 4.42 tok/s, est 21824 ms/turn
+    M4/M3p est ratio 1.002; identical output token counts 107/109
+  M1p: tok_step 1.685, p1 0.685, decode 14.98 tok/s, est 8806 ms/turn
+    M4/M1p est ratio 2.482; identical output token counts 99/109
+acceptance: 0.071 tokens per step over 2173 logged steps; 12,288-28,671 bucket 0.007
+
+registered predictions:
+  P1 M4.accepted_per_step >= 1.0: 0.071 -> FALSIFIED
+  P2 M4/M3p <= 0.60: 1.002 (server-side, first 109 turns) -> FALSIFIED
+  P3 M4/M2: UNSCORED (capped; M2 is llama.cpp, no server-side turn lines)
+  P4 accuracy: UNSCORED (capped; no scores.json)
+  P5 cap does not fire: fired -> FALSIFIED
+  P6 accepted per step, 12,288-28,671 bucket >= 0.5: 0.007 -> FALSIFIED

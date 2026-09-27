@@ -1,0 +1,61 @@
+[2026-09-26T11:50:17+01:00] === preflight ===
+[2026-09-26T11:50:17+01:00] FATAL: G1 - drafter size differs from the pin
+[2026-09-26T11:50:22+01:00] run finished, rc=1
+[2026-09-26T11:50:35+01:00] === preflight ===
+[2026-09-26T11:50:37+01:00] G1: -swa config = original + {'mask_token_id': 248070, 'target_layer_ids': [1, 16, 31, 46, 61], 'causal': True, 'use_swa': True, 'swa_window_size': 2048}
+[2026-09-26T11:50:37+01:00] G3: kernel 7.0.0-31-generic; livepatch 'patchState: nothing-to-apply'; GTT used 66 GiB; spark-infer python processes 5
+[preflight] plan: [('CODE', 3, 384), ('CHAT', 3, 384), ('D1500', 1, 384), ('P8K', 3, 128), ('P32K', 3, 128)] + determinism x10
+wrote /tmp/tmp.rOF7ziX8GT/c.yaml; changes from the reference (dropped datasets: ['bfcl_v4::function_calling']):
+  model_params.name: 'Qwen3.6-27B-Q4_K_M' -> 't'
+  model_params.tokenizer_name: 'Qwen/Qwen3.6-27B' -> '/opt/models/staging/qwen3.6-27b-nvfp4'
+  datasets[agentic_coding].path: 'examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl' -> '/home/agent-spark/atlas-e146/endpoints/examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl'
+  num_trajectories_to_issue: 20 -> 4
+  datasets (accuracy dropped): ['agentic_coding', 'bfcl_v4::function_calling'] -> ['agentic_coding']
+  endpoint_config.endpoints: ['http://localhost:8080'] -> ['http://127.0.0.1:8080']
+  report_dir: 'results/edge_agentic_full_run/' -> '/tmp/tmp.rOF7ziX8GT/r'
+[2026-09-26T11:50:37+01:00] preflight OK: arms M4
+[2026-09-26T11:50:37+01:00] === opening maintenance window ===
+[2026-09-26T11:50:37+01:00] --- arm M4 ---
+[2026-09-26T11:50:37+01:00] DRY-RUN: would run arm M4
+[2026-09-26T11:50:37+01:00] === all arms done in 0s; raw results in /home/agent-spark/sparkbench/results/raw/e149 ===
+[2026-09-26T11:50:42+01:00] run finished, rc=0
+[2026-09-26T11:50:59+01:00] === preflight ===
+[2026-09-26T11:51:01+01:00] G1: -swa config = original + {'mask_token_id': 248070, 'target_layer_ids': [1, 16, 31, 46, 61], 'causal': True, 'use_swa': True, 'swa_window_size': 2048}
+[2026-09-26T11:51:01+01:00] G3: kernel 7.0.0-31-generic; livepatch 'patchState: nothing-to-apply'; GTT used 66 GiB; spark-infer python processes 5
+[preflight] plan: [('CODE', 3, 384), ('CHAT', 3, 384), ('D1500', 1, 384), ('P8K', 3, 128), ('P32K', 3, 128)] + determinism x10
+wrote /tmp/tmp.hHGmsrgKLF/c.yaml; changes from the reference (dropped datasets: ['bfcl_v4::function_calling']):
+  model_params.name: 'Qwen3.6-27B-Q4_K_M' -> 't'
+  model_params.tokenizer_name: 'Qwen/Qwen3.6-27B' -> '/opt/models/staging/qwen3.6-27b-nvfp4'
+  datasets[agentic_coding].path: 'examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl' -> '/home/agent-spark/atlas-e146/endpoints/examples/11_Edge_Agentic_Example/agentic_coding_2.5h.jsonl'
+  num_trajectories_to_issue: 20 -> 4
+  datasets (accuracy dropped): ['agentic_coding', 'bfcl_v4::function_calling'] -> ['agentic_coding']
+  endpoint_config.endpoints: ['http://localhost:8080'] -> ['http://127.0.0.1:8080']
+  report_dir: 'results/edge_agentic_full_run/' -> '/tmp/tmp.hHGmsrgKLF/r'
+[2026-09-26T11:51:01+01:00] preflight OK: arms M4
+[2026-09-26T11:51:01+01:00] === opening maintenance window ===
+==> setting advisory maintenance flag
+==> stopping llama-gateway-router.service
+==> window OPEN (gateway down, flag set)
+--- sparkrouter window status (2026-09-26T11:51:01+01:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by agent-spark at 2026-09-26T11:51:01+01:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+[2026-09-26T11:51:01+01:00] window open, VERIFIED: no llama-server process holds the GPU
+[2026-09-26T11:51:01+01:00] --- arm M4 ---
+[2026-09-26T11:51:26+01:00] M4 answered /v1/models; 2026-09-26T10:51:23.704997Z  INFO spark_model::weight_loader::dflash_loader: DFlash/DSpark drafter loaded: 5 layers, hidden=5120, vocab=248320, γ=16, markov_rank=0, own_embed=false, causal=Some(true), swa=Some(true)/Some(2048), sinks=0/5, candidate_selector=f
+[2026-09-26T11:51:26+01:00] harness start: 4 trajectories against nvidia/Qwen3.6-27B-NVFP4 on :8081
+[2026-09-26T12:31:26+01:00] harness CAPPED at 2400s (declared): scored on the turns completed
+[2026-09-26T12:31:26+01:00] harness rc=124; 
+arm M4 dmesg amdgpu fault lines: 0
+[2026-09-26T12:31:31+01:00] arm M4 done in 2430s
+[2026-09-26T12:31:32+01:00] === all arms done in 2431s; raw results in /home/agent-spark/sparkbench/results/raw/e149 ===
+[2026-09-26T12:31:37+01:00] restoring relay (exit rc=0)
+==> starting llama-gateway-router.service
+==> clearing maintenance flag
+==> window CLOSED (gateway serving, flag clear)
+--- sparkrouter window status (2026-09-26T12:31:37+01:00) ---
+  serving unit    : llama-gateway-router.service : ACTIVE (serving)
+  maintenance flag: clear
+  llama-server processes: 891750 
+[2026-09-26T12:31:37+01:00] relay restored, VERIFIED: llama-server is running
+[2026-09-26T12:31:37+01:00] run finished, rc=0

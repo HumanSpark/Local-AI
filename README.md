@@ -10,13 +10,13 @@ This repository is the data package behind **[Local AI for a Small Firm: What a 
 
 This repository exists so that the numbers on those pages do not have to be taken on trust. Start with the current release below, and read [WITHHELD.md](WITHHELD.md) for what is deliberately not here.
 
-## Current release: r5.0 (findings through 24 September 2026)
+## Current release: r5.1 (findings through 26 September 2026)
 
-r5.0 catches this repository up with the research. Findings F47 to F166, 120 recorded after the previous package release (r4.6), are in [FINDINGS.md](FINDINGS.md), with the evidence behind them. The subjects range from text-to-speech engines on this GPU, through reasoning effort, tool use and agentic coding, to tests of published speed claims (a "73 tok/s" Bonsai figure that does not reproduce; Halogen's 32K prefill claim, which measures 81% of the published figure). [RELEASE-NOTES.md](RELEASE-NOTES.md) groups them by subject, lists the retractions and amendments, and says which published claims are under review.
+r5.1 adds ten findings (F167 to F172 and F175 to F178) and five claims from testing published speed claims on the box - Bonsai, Halogen, Atlas and the models a chat and a comparison widget recommended - to the r5.0 release of 24 September 2026, which caught this repository up with findings F47 to F166. All are in [FINDINGS.md](FINDINGS.md), with the evidence behind them. The subjects range from text-to-speech engines on this GPU, through reasoning effort, tool use and agentic coding, to tests of published speed claims (a "73 tok/s" Bonsai figure that does not reproduce; Halogen's 32K prefill claim, which measures 81% of the published figure). [RELEASE-NOTES.md](RELEASE-NOTES.md) groups them by subject, lists the retractions and amendments, and says which published claims are under review.
 
 Two things to know before relying on it:
 
-- **The claims registry has not been re-reviewed.** `claims.yml` is unchanged since r4.6; its header still reads release 4.0 and data freeze 2026-07-17, because the claims were last checked against the data on that date. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** `claims.yml` gained five claims in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models); the 45 claims before them are unchanged since r4.6, and the header still reads release 4.0 and data freeze 2026-07-17, because those were last checked against the data on that date. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and two sets of files that contain private content are withheld, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
