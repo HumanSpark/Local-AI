@@ -1,0 +1,32 @@
+# File: e10-generation.yaml
+# Purpose: E10 - long structured generation: complete model/tg128 table from the 12K log.
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: Faithful enumeration test - generate a markdown table of
+# every model with a depth-0 tg128 in the pilot excerpt. Core grading:
+# four required (model, value) pairs all present. Omissions and
+# hallucinated values are inspected manually in the raw JSON afterward.
+
+description: "sparkbench E10 - long structured generation"
+
+providers:
+  - id: openai:chat:local-model
+    config:
+      apiBaseUrl: http://127.0.0.1:8100/v1
+      apiKey: dummy-key
+      temperature: 0
+      max_tokens: 1200
+
+prompts:
+  - "{{prelude}}{{task}}"
+
+defaultTest:
+  vars:
+    prelude: file://data/long-log.txt
+
+tests:
+  - description: e10-full-table
+    vars: { task: "\n\nFrom the benchmark log above, produce a complete markdown table with columns Model and tg128, listing EVERY model that has a tg128 value recorded at depth 0 anywhere in the log. Use the exact values from the log." }
+    assert:
+      - { type: javascript, value: "output.includes('53.44') && output.includes('92.83') && output.includes('24.39') && output.includes('23.90')" }
+      - { type: javascript, value: "output.toLowerCase().includes('gpt-oss') && output.toLowerCase().includes('30b') && output.toLowerCase().includes('14b') && output.toLowerCase().includes('air')" }

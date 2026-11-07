@@ -1,0 +1,416 @@
+{
+  "label": "armB-qwen38-27b",
+  "condition": "tools",
+  "schema_version": "v2",
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "items_file": "spikes/aabr/items-40.json",
+  "n_items": 10,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 132,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 26,
+  "round_cap_hits": 0,
+  "wall_s": 2218.27,
+  "note": "transcript only - scoring is score_aabr.py over this file",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No \u2014 the notice was deemed received on 18 September 2024 (the 3rd business day after posting on Friday 13 September 2024), which is only 44 days before the 1 November 2024 Renewal Date, falling one day short of the 45-day requirement (deadline 17 September 2024), so it was not received in time to prevent renewal.\nCITATION: RULE \u2014 Notice of Non-Renewal must be received not less than 45 days prior to the Renewal Date; notices by registered post are deemed received on the 3rd business day after the date of posting.",
+      "char_count": 525,
+      "char_count_all_rounds": 1016,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-11-01",
+            "days": -45
+          },
+          "result": "2024-09-17"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-09-13",
+            "days": 3
+          },
+          "result": "2024-09-18"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-09-17"
+          },
+          "result": "Tuesday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-09-18"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 4,
+      "wall_s": 265.13,
+      "id": "B01",
+      "subset": "boundary",
+      "mechanism": [
+        "deemed_receipt",
+        "backward_count",
+        "roll_forward",
+        "business_days"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Friday, 17 May 2024\nCITATION: RULE (14 clear days before the Hearing Date, excluding filing and Hearing days; roll backward to the preceding business day) and FACTS (Hearing Date Monday 3 June 2024)",
+      "char_count": 206,
+      "char_count_all_rounds": 410,
+      "rounds": 3,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-05-19",
+            "end": "2024-06-03",
+            "unit": "days"
+          },
+          "result": 15
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-05-20",
+            "end": "2024-06-03",
+            "unit": "days"
+          },
+          "result": 14
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-05-19"
+          },
+          "result": "Sunday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-05-17"
+          },
+          "result": "Friday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-05-17"
+          },
+          "result": "Friday"
+        }
+      ],
+      "n_calls": 5,
+      "wall_s": 356.2,
+      "id": "B02",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "roll_backward",
+        "holiday"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes. The 90th calendar day following the Effective Date (7 Jan 2024) is Saturday 6 April 2024, so expiration rolls forward to 17:00 on Monday 8 April 2024. The notice emailed Friday 5 April 2024 at 19:15 (after 17:00) is deemed delivered at 09:00 on the following business day, Monday 8 April 2024, which is before the 17:00 expiration, so the option was validly exercised.\nCITATION: RULE \u2014 expiration at 17:00 on the 90th calendar day following the Effective Date; weekend roll-forward to 17:00 next business day; email sent after 17:00 deemed delivered at 09:00 on the following business day.",
+      "char_count": 602,
+      "char_count_all_rounds": 1206,
+      "rounds": 4,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-01-07",
+            "days": 90
+          },
+          "result": "2024-04-06"
+        },
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2024-04-05",
+            "direction": "forward"
+          },
+          "result": "2024-04-05"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-04-06"
+          },
+          "result": "Saturday"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-04-08"
+          },
+          "result": "Monday"
+        }
+      ],
+      "n_calls": 4,
+      "wall_s": 364.82,
+      "id": "B03",
+      "subset": "boundary",
+      "mechanism": [
+        "time_of_day_cutoff",
+        "roll_forward",
+        "deemed_receipt"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 17 November 2024\nCITATION: RULE \u2014 cure period of 15 business days from receipt of the default notice (16 October 2024, expiring 6 November 2024); final termination notice served on the first calendar day after expiry (7 November 2024); termination takes effect exactly 10 calendar days after service",
+      "char_count": 307,
+      "char_count_all_rounds": 605,
+      "rounds": 5,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-10-16",
+            "days": 15
+          },
+          "result": "2024-11-06"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-11-07",
+            "days": 10
+          },
+          "result": "2024-11-17"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-10-16"
+          },
+          "result": "Wednesday"
+        },
+        {
+          "name": "add_business_days",
+          "arguments": {
+            "date": "2024-10-16",
+            "days": 15
+          },
+          "result": "2024-11-06"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-11-07",
+            "days": 10
+          },
+          "result": "2024-11-17"
+        }
+      ],
+      "n_calls": 5,
+      "wall_s": 295.79,
+      "id": "B04",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "calendar_days",
+        "no_roll_trap"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 1 April 2024\nCITATION: RULE \u2014 Warranty Period expires 6 months from Delivery Date (31 Aug 2023 \u2192 29 Feb 2024); claims due 30 calendar days after expiry (30 Mar 2024); weekend deadlines roll to the next business day (1 Apr 2024)",
+      "char_count": 235,
+      "char_count_all_rounds": 472,
+      "rounds": 6,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2023-08-31",
+            "months": 6
+          },
+          "result": "2024-02-29"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-02-29",
+            "days": 30
+          },
+          "result": "2024-03-30"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-03-30"
+          },
+          "result": "Saturday"
+        },
+        {
+          "name": "roll_to_business_day",
+          "arguments": {
+            "date": "2024-03-30",
+            "direction": "forward"
+          },
+          "result": "2024-04-01"
+        },
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2024-04-01"
+          },
+          "result": "Monday"
+        }
+      ],
+      "n_calls": 5,
+      "wall_s": 138.98,
+      "id": "B05",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "roll_forward"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: USD 100,000\nCITATION: MSA Section 1.5 (SOW may not modify the MSA unless it explicitly references the specific Section intended to be modified) and MSA Section 10.2 (liability cap of USD 100,000)",
+      "char_count": 203,
+      "char_count_all_rounds": 408,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 96.13,
+      "id": "A01",
+      "subset": "ambiguity",
+      "mechanism": [
+        "precedence",
+        "ineffective_override"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No. The 15-day fast-track termination right exists only in Addendum B, and Clause 11.3 provides that addenda are effective only upon countersignature by both parties' Chief Legal Officers. Because the breaching party's CLO signature block is blank, Addendum B was never effective, so the 15-day notice is not legally effective and the standard 60-day notice period under Clause 8.1 applies instead.\nCITATION: Clause 11.3 (countersignature requirement for addenda); Clause 8.1 (60-day standard notice period)",
+      "char_count": 515,
+      "char_count_all_rounds": 1001,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "weekday",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "Wednesday"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 113.86,
+      "id": "A02",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_dependency",
+        "conditional_incorporation"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "length",
+      "response": "",
+      "char_count": 0,
+      "char_count_all_rounds": 0,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 423.49,
+      "id": "A03",
+      "subset": "ambiguity",
+      "mechanism": [
+        "circular_reference",
+        "tie_breaker"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not contain enough information to answer; the missing fact is whether the client provided written UAT sign-off (Condition B), which the rule requires in addition to on-schedule delivery.\nCITATION: RULE \u2014 bonus is payable only if Condition A (delivered on schedule) AND Condition B (written UAT sign-off) are both met.\n\n",
+      "char_count": 343,
+      "char_count_all_rounds": 343,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 98.32,
+      "id": "A04",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_premise",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No. Clause 7.1 prohibits reselling \"Products,\" which Section 1 defines as the software licences explicitly listed in Exhibit A (Acme Database v2.0). The Customer resold the complimentary physical server, not the software licence, so the resold item is not a \"Product\" and Clause 7.1 is not breached.\nCITATION: Section 1 definition of \"Products\"; Clause 7.1; Exhibit A (Acme Database v2.0)",
+      "char_count": 396,
+      "char_count_all_rounds": 794,
+      "rounds": 2,
+      "hit_round_cap": false,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-01-01",
+            "days": 0
+          },
+          "error": "no period given for '2025-01-01' - all of years/months/days/hours are 0. hint: pass at least one non-zero period, or you are asking for the input back and should not be calling this tool"
+        }
+      ],
+      "n_calls": 1,
+      "wall_s": 61.17,
+      "id": "A05",
+      "subset": "ambiguity",
+      "mechanism": [
+        "defined_term",
+        "scope_mismatch"
+      ]
+    }
+  ]
+}

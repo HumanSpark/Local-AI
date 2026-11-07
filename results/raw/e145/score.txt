@@ -1,0 +1,19 @@
+H Qwen3.6-35B UD-Q4_K_M            6/9  T1 3/3 T2 3/3 T3 0/3  mean repeat 294s  median attempt 114.9s  repeats [327, 306, 248]
+E Ornith 1.0 35B                   6/9  T1 3/3 T2 3/3 T3 0/3  mean repeat 179s  median attempt 79.0s  repeats [205, 189, 143]
+F Ornith 1.5 35B-A3B               6/9  T1 3/3 T2 3/3 T3 0/3  mean repeat 267s  median attempt 90.6s  repeats [246, 259, 296]
+G Qwen3.6-27B Q4_K_M               7/9  T1 3/3 T2 3/3 T3 1/3  mean repeat 1380s  median attempt 426.4s  repeats [1937, 1099, 1105]
+C(E143) Qwen3.6-35B UD-Q4_K_XL     6/9  T1 3/3 T2 3/3 T3 0/3  mean repeat 321s  median attempt 125.1s  repeats [278, 371, 315]
+A(E143) Qwen3.8-27B                5/9  T1 3/3 T2 2/3 T3 0/3  mean repeat 1719s  median attempt 440.6s  repeats [2266, 1257, 1636]
+B(E143) Flash-Next                 6/9  T1 3/3 T2 3/3 T3 0/3  mean repeat 707s  median attempt 237.2s  repeats [948, 677, 495]
+D(E143) Qwen3-Coder                5/9  T1 3/3 T2 0/3 T3 2/3  mean repeat 166s  median attempt 23.4s  repeats [208, 177, 113]
+
+P1 H.passes 6 (4-8)
+P2 H/C repeat time 0.913 (0.85-1.15)
+P3 E/H repeat time 0.61 (0.55-0.90)
+P4 E.passes 6 >= H.passes-2 = 4
+P5 F.passes 6 >= E.passes-1 = 5
+P6 G/H repeat time 4.7 (2.5-6)
+P7 G.passes 7 within 2 of H.passes 6 -> True
+P8 T3 passes per arm (<=1 of 3 in >=3 of 4): {'H Qwen3.6-35B UD-Q4_K_M': 0, 'E Ornith 1.0 35B': 0, 'F Ornith 1.5 35B-A3B': 0, 'G Qwen3.6-27B Q4_K_M': 1} -> True
+gap vs H (distinguished only if >=4): {'H Qwen3.6-35B UD-Q4_K_M': 0, 'E Ornith 1.0 35B': 0, 'F Ornith 1.5 35B-A3B': 0, 'G Qwen3.6-27B Q4_K_M': 1, 'C(E143) Qwen3.6-35B UD-Q4_K_XL': 0, 'A(E143) Qwen3.8-27B': 1, 'B(E143) Flash-Next': 0, 'D(E143) Qwen3-Coder': 1}
+F/E repeat time 1.49 | widget 'Ornith ~42% faster' -> E/H should be ~0.70

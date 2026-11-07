@@ -1,0 +1,74 @@
+=== BLOCK M - MLCommons harness, 4 of 20 trajectories ===
+M0 [llama.cpp MLPerf reference]: 206/206 turns ok (0 failed), duration 2650s, mean latency 12863 ms, median 8704, p95 33553, TTFT median 4479 ms, tps 6.36, out tokens 16843, accuracy 0.6371, finish {'stop': 0, 'length': 0, 'tool_calls': 206, 'content_filter': 0, 'function_call': 0, 'other': 0}
+M1 [Atlas-Inf HEAD 2d1aab8 (registered)]: VOID (no harness report)
+M1p [PATCHED Atlas-Inf HEAD (one-line W4A16_NVFP4 change; not the vendor's code)]: 206/206 turns ok (0 failed), duration 1917s, mean latency 9307 ms, median 6358, p95 25133, TTFT median 3432 ms, tps 8.56, out tokens 16420, accuracy 0.6222, finish {'stop': 0, 'length': 0, 'tool_calls': 206, 'content_filter': 0, 'function_call': 0, 'other': 0}
+M1s [MLPerf entry's shipped source, native-HIP reconstruction]: 206/206 turns ok (0 failed), duration 1947s, mean latency 9453 ms, median 6673, p95 23917, TTFT median 3656 ms, tps 6.75, out tokens 13138, accuracy 0.6055, finish {'stop': 0, 'length': 0, 'tool_calls': 206, 'content_filter': 0, 'function_call': 0, 'other': 0}
+M2 [E147: llama.cpp reference flags + Qwen3.6-27B DFlash drafter n=4]: 206/206 turns ok (0 failed), duration 1602s, mean latency 7775 ms, median 5790, p95 15720, TTFT median 3070 ms, tps 10.52, out tokens 16843, accuracy 0.6371, finish {'stop': 0, 'length': 0, 'tool_calls': 206, 'content_filter': 0, 'function_call': 0, 'other': 0}
+
+registered predictions, block M (PM3 is M0's; PM1, PM2, PM4-PM6 apply to each Atlas arm that served):
+  PM3 M0.mean_turn_latency_ms 8,000-16,000: 12863 -> HELD
+
+--- M1: Atlas-Inf HEAD 2d1aab8 (registered)
+  PM1 M1.serves: FALSIFIED (no harness report); PM2, PM4, PM5, PM6: VOID
+
+--- M1p: PATCHED Atlas-Inf HEAD (one-line W4A16_NVFP4 change; not the vendor's code)
+  PM1 serves: HELD (206 turns ok)
+  PM2 mean_turn_latency_ms 5,500-9,500: 9307 -> HELD
+  PM6 tps 7-14: 8.56 -> HELD
+  band, published Strix Halo latency (7058.99 ms, 5294-8824): 9307 ms -> NOT reproduced (1.32x published) - for THIS code only
+  paired turns: 206 (same turn set as M0: True)
+  paired ratio M1p/M0: sum-of-latency 0.724; mean of per-turn ratios 0.765; median 0.760; thirds [0.748, 0.717, 0.711]
+  PM4 paired ratio 0.45-0.90: 0.724 -> HELD
+  PM5 |accuracy - M0| <= 0.05: 0.622 vs 0.637 (diff 0.015) -> HELD
+  band vs reference: ratio 0.724, 3 of 3 thirds <= 0.85 -> ATLAS-CODE FASTER than the reference
+
+--- M1s: MLPerf entry's shipped source, native-HIP reconstruction
+  PM1 serves: HELD (206 turns ok)
+  PM2 mean_turn_latency_ms 5,500-9,500: 9453 -> HELD
+  PM6 tps 7-14: 6.75 -> FALSIFIED
+  band, published Strix Halo latency (7058.99 ms, 5294-8824): 9453 ms -> NOT reproduced (1.34x published) - for THIS code only
+  paired turns: 206 (same turn set as M0: True)
+  paired ratio M1s/M0: sum-of-latency 0.735; mean of per-turn ratios 0.813; median 0.781; thirds [0.794, 0.687, 0.738]
+  PM4 paired ratio 0.45-0.90: 0.735 -> HELD
+  PM5 |accuracy - M0| <= 0.05: 0.606 vs 0.637 (diff 0.032) -> HELD
+  band vs reference: ratio 0.735, 3 of 3 thirds <= 0.85 -> ATLAS-CODE FASTER than the reference
+
+--- M2: E147: llama.cpp reference flags + Qwen3.6-27B DFlash drafter n=4
+  PM1 serves: HELD (206 turns ok)
+  PM2 mean_turn_latency_ms 5,500-9,500: 7775 -> HELD
+  PM6 tps 7-14: 10.52 -> HELD
+  band, published Strix Halo latency (7058.99 ms, 5294-8824): 7775 ms -> REPRODUCED (1.10x published) - for THIS code only
+  paired turns: 206 (same turn set as M0: True)
+  paired ratio M2/M0: sum-of-latency 0.604; mean of per-turn ratios 0.662; median 0.652; thirds [0.741, 0.548, 0.554]
+  PM4 paired ratio 0.45-0.90: 0.604 -> HELD
+  PM5 |accuracy - M0| <= 0.05: 0.637 vs 0.637 (diff 0.000) -> HELD
+  band vs reference: ratio 0.604, 3 of 3 thirds <= 0.85 -> ATLAS-CODE FASTER than the reference
+
+=== E147 - Atlas against the best open configuration (M2) ===
+  M1p/M2 paired ratio 1.197, thirds [1.01, 1.308, 1.283] (206 turns) -> OPEN CONFIGURATION FASTER
+  E147 P5 M1p/M2 0.85-1.20: 1.197 -> HELD
+  M1s/M2 paired ratio 1.216, thirds [1.072, 1.253, 1.331] (206 turns) -> OPEN CONFIGURATION FASTER
+  E147 P1 M2.turns_ok 206: 206 -> HELD
+  E147 P2 M2.mean_turn_latency_ms 7,500-10,500: 7775 -> HELD
+  E147 P3 M2/M0 paired ratio 0.55-0.85: 0.604 -> HELD
+  E147 P4 |accuracy M2 - M0| <= 0.03: 0.637 vs 0.637 (diff 0.000) -> HELD
+
+=== BLOCK 1 - speed client (Qwen3.8-27B) ===
+Q0: CODE 10.347 CHAT 11.889 D1500 10.956 tok/s | P8K prefill 151.43 P32K prefill 141.8 (ttft 231.178 s) decode@32K 8.75 | determinism 1 distinct of 10 | peak GPU 28.51 GiB (baseline 26.58)
+Q1: CODE 23.556 CHAT 10.956 D1500 14.136 tok/s | P8K prefill 190.93 P32K prefill 138.98 (ttft 235.853 s) decode@32K 11.658 | determinism 1 distinct of 10 | peak GPU 32.4 GiB (baseline 29.7)
+X1: CODE 27.183 CHAT 15.271 D1500 15.966 tok/s | P8K prefill 174.77 P32K prefill 139.55 (ttft 234.898 s) decode@32K 13.255 | determinism 3 distinct of 10 | peak GPU 74.37 GiB (baseline 74.24)
+
+registered predictions, block 1:
+  P1 X1.serves YES: HELD
+  P2 X1.CODE decode 22-32: 27.183 -> HELD
+  P3 X1.CHAT decode 13-20: 15.271 -> HELD
+  P7 X1 decode at ~32K 9-16: 13.255 -> HELD
+  P8 X1 determinism 10 of 10 byte-equal: False -> FALSIFIED (the fresh-process half was not run)
+  P10 X1 peak GPU above the window-open baseline 20-32 GiB: 66.1 (peak 74.37) -> FALSIFIED
+  P4 X1/Q1 CODE 0.85-1.25: 1.154 -> HELD
+  P5 X1/Q1 CHAT 0.75-1.25: 1.394 -> FALSIFIED
+  P6 X1/Q1 P32K prefill 0.5-2.0: 1.004 -> HELD
+  band X1 vs Q1: CODE 1.15, CHAT 1.39 -> ATLAS FASTER on both
+  README claim 28.3-28.6 tok/s (Qwen3.8 K=4): X1 CODE 27.183 -> CONFIRMED
+  reference check: Q0 CODE 10.347 (E138 12.33), Q1 CODE 23.556 (E138 25.67)
+  P9 withdrawn (Amendment 1). P11 (block 2, Aider) not run in this window.

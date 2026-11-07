@@ -1,0 +1,46 @@
+# File: e8-32k.yaml
+# Purpose: E8 - 32K-context eval with cross-chunk reference questions (Scout chunked-attention quality fork).
+# Project: sparkbench | Date: 2026-07-04
+#
+# Overview: ~28.5K-token corpus of real project prose; fact positions
+# verified at build time (results/experiments.md E8). Q1-Q2 within-chunk
+# retrieval; Q3-Q6 combine facts >8K tokens apart (cross chunk
+# boundaries for llama4's 8192-token windows). Serial execution (-j 1)
+# maximizes shared-prefix cache reuse.
+
+description: "sparkbench E8 - 32K cross-chunk reference"
+
+providers:
+  - id: openai:chat:local-model
+    config:
+      apiBaseUrl: http://127.0.0.1:8100/v1
+      apiKey: dummy-key
+      temperature: 0
+      max_tokens: 400
+
+prompts:
+  - "{{prelude}}{{task}}"
+
+defaultTest:
+  vars:
+    prelude: file://data/corpus-32k.txt
+
+tests:
+  - description: e8-within-early-ttm
+    vars: { task: "\n\nFrom the document above: what numeric value was set for ttm.pages_limit on the kernel command line? Answer with just the number." }
+    assert: [{ type: javascript, value: "output.includes('27648000') || output.includes('27,648,000')" }]
+  - description: e8-within-late-trough
+    vars: { task: "\n\nFrom the document above: in the Scout sawtooth sweep (E1), the tg128 trough value of 16.23 occurred at which depth? Answer with just the number." }
+    assert: [{ type: javascript, value: "output.includes('7680')" }]
+  - description: e8-cross-dual-retrieval
+    vars: { task: "\n\nFrom the document above: list the tg128 (depth 0) recorded for GLM-4.5-Air in the step 6 matrix AND the tg128 recorded for Mixtral-8x7B in the Tier 2 survey. Give both numbers." }
+    assert: [{ type: javascript, value: "output.includes('23.90') && output.includes('26.45')" }]
+  - description: e8-cross-arith-mixtral-air
+    vars: { task: "\n\nFrom the document above: how much higher is Mixtral-8x7B's Tier 2 survey tg128 than GLM-4.5-Air's step 6 tg128, in tokens per second? Compute the difference; answer with just the number." }
+    assert: [{ type: javascript, value: "output.includes('2.55')" }]
+  - description: e8-cross-compare-pp
+    vars: { task: "\n\nFrom the document above: which is larger - Phi-4-mini's survey pp512 or Qwen3-30B-A3B's step 6 matrix pp512 - and by how many tokens per second? Compute the difference." }
+    assert: [{ type: javascript, value: "(output.toLowerCase().includes('phi')) && (output.includes('1012.29') || output.includes('1012.3') || output.includes('1012'))" }]
+  - description: e8-cross-arith-dsv2-workhorse
+    vars: { task: "\n\nFrom the document above: how much higher is DeepSeek-V2-Lite's survey tg128 (depth 0) than Qwen3-30B-A3B's step 6 matrix tg128? Compute the difference; answer with just the number." }
+    assert: [{ type: javascript, value: "output.includes('17.97') || output.includes('17.9')" }]

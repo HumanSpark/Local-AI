@@ -1,0 +1,15 @@
+=== arm A-no-kv-quant
+  server: --host 127.0.0.1 --port 8131 --no-webui -v -fa on
+  offload gate: 132 layers, 0 on CPU
+  R01  correct            answer='11 June 2026'   [correct (control)]
+  R09  off_by_calendar    answer='31 July 2026'   [off_by_calendar (control)]
+  R10  off_by_calendar    answer='17 June 2027'   [correct (control)]
+  R12  correct            answer='30 October 2026'   [correct (control)]
+=== arm B-q8_0-kv
+  server: --no-webui -v -fa on -ctk q8_0 -ctv q8_0
+  offload gate: 132 layers, 0 on CPU
+  R01  correct            answer='11 June 2026'   [correct (control)]
+  R09  off_by_calendar    answer='31 July 2026'   [off_by_calendar (control)]
+  R10  truncated          answer='None'   [correct (control)]
+  R12  correct            answer='30 October 2026'   [correct (control)]
+=== KV TEST COMPLETE

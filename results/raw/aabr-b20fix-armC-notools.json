@@ -1,0 +1,41 @@
+{
+  "label": "armC-frontier-subagent",
+  "condition": "no-tools",
+  "schema_version": null,
+  "model": "opus (Claude Code subagent - UNPINNED)",
+  "items_file": "spikes/aabr/items-b20-fixed.json",
+  "n_items": 1,
+  "ctx": null,
+  "max_tokens": null,
+  "max_rounds": 1,
+  "server_extra": "",
+  "full_offload_gate": {
+    "skipped": "subagent harness"
+  },
+  "total_tool_calls": 0,
+  "round_cap_hits": 0,
+  "wall_s": 5.73,
+  "note": "B20 re-run against the AMENDED item, which now states the month-clamp rule",
+  "results": [
+    {
+      "id": "B20",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "no_roll_trap_inert",
+        "short_chain"
+      ],
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 28 February 2025\nCITATION: The grant matures exactly 12 months from the Award Date of 29 February 2024, which would be 29 February 2025, but since that date does not exist in 2025 (not a leap year), it defaults to \"the last day of that resulting month\" per the stated rule.",
+      "char_count": 281,
+      "char_count_all_rounds": 281,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.73
+    }
+  ]
+}

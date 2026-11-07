@@ -1,0 +1,75 @@
+## 3.1 Speech-to-text: whisper.cpp - PASS, 28x real-time
+
+- Build: whisper.cpp master @ clone 2026-07-04, `-DGGML_VULKAN=ON`,
+  checkout at ~/sparkbench/whisper.cpp (gitignored). Built clean,
+  first try.
+- Vulkan acceleration CONFIRMED: model loaded to Vulkan0 (Radeon
+  8060S RADV GFX1151), 1.62GB on-device for large-v3-turbo.
+- Test audio: samples/jfk.wav (11s) + a 330s file made by
+  concatenating it 30x (stdlib wave; no ffmpeg on host - see
+  DEFERRED-ROOT note below).
+
+| Model | Audio | Total time | RTF | Transcript |
+|---|---|---|---|---|
+| large-v3-turbo (1.6GB) | 11s | 1.27s (incl. 0.31s load) | ~11x | correct |
+| large-v3-turbo | 330s | 11.69s | **~28x real-time** | correct |
+| small (466MB) | 330s | 11.87s | ~28x | correct |
+
+- **Finding: quality is free.** small and large-v3-turbo run at the
+  SAME speed on this stack (both ~28x; the bottleneck is not the
+  encoder GPU work at these sizes). Always use large-v3-turbo.
+- **Consulting question ("real-time meeting transcription?"): YES,
+  emphatically.** A 1-hour meeting transcribes in ~2 minutes with
+  the best turbo model; live streaming use leaves >25x headroom.
+- Caveats: single-speaker clean audio sample; repeated content may
+  flatter the decoder slightly. Real meeting audio (crosstalk,
+  accents) is a quality question for a later eval, not a throughput
+  one. ffmpeg absent (apt) - listed in DEFERRED-ROOT.md alongside
+  ROCm; stdlib wave sufficed here.
+
+## 3.2 Image generation: stable-diffusion.cpp - PASS (with one required flag)
+
+- Build: stable-diffusion.cpp master @ clone 2026-07-04, `-DSD_VULKAN=ON`,
+  at ~/sparkbench/stable-diffusion.cpp (gitignored). Built clean.
+  NOTE: the CLI binary is now `sd-cli`, not `sd` (briefing's command
+  is stale); FLUX split files load via `--diffusion-model`, not `-m`.
+- Model set (tool-local models/, provenance = size+sha256 verified at
+  fetch): flux1-schnell-Q4_0.gguf (6.77GB, city96, oid-matched);
+  ae.safetensors (335MB - SUBSTITUTION: black-forest-labs repo is
+  GATED (401), ungated second-state mirror used, byte-size identical,
+  oid-matched); clip_l (246MB) + t5xxl_fp16 (9.79GB) from
+  comfyanonymous, oid-matched.
+- VRAM: 15.94GB total (t5xxl 9.3GB dominates - fp8 variant would
+  halve this if VRAM ever matters).
+
+| Resolution | Sampling (4 steps) | VAE decode | Total gen | Verdict |
+|---|---|---|---|---|
+| 512x512 | 8.52s | 0.94s | **~9.5s** | clean image |
+| 1024x1024 (no flag) | 40.25s | FAILS | - | OOM at decode |
+| 1024x1024 --vae-tiling | 40.25s | 7.23s | **~48s** | clean image |
+
+- **FINDING - deployment gotcha:** at 1024x1024 the FLUX VAE requests
+  an 8.5GB contiguous compute buffer; RADV's single-allocation limit
+  (~4.3GB) rejects it AFTER 40s of successful sampling. `--vae-tiling`
+  is mandatory at 1024 on this stack (7.2s tiled decode, no quality
+  complaint visible). Failure mode is late and expensive - bake the
+  flag into any wrapper.
+- Quality: both images coherent, well-lit, artefact-free to my eye;
+  sent to Alastair 2026-07-04 for the subjective call.
+- **Consulting question ("local images instead of Midjourney/
+  DALL-E?"): qualified YES** - 9.5s at 512, 48s at 1024, on-prem,
+  no per-image billing; the qualification is FLUX-schnell's style
+  range vs commercial tools, a quality question not a speed one.
+
+### 3.2 addendum: 50-image style gallery + resolution ceiling (2026-07-04)
+
+- **Gallery batch (Alastair request):** 50 business-blog prompts
+  across 10 style families (photography, flat/isometric illustration,
+  watercolor, oil, cartoon/comic, 3D render, sketch/line art, pixel
+  art, business-concept), 1024x1024, seeds 1001-1050, prompts tracked
+  in results/flux-gallery-prompts.txt. **50/50 succeeded**, ~36s
+  sampling each, ~55 min wall total, images in results/flux-gallery/
+  (gitignored, 67MB) + zip delivered to Alastair. Sampling time was
+  style-invariant (35.9-36.1s across all families) - cost depends on
+  pixels, never on content or style.
+- **Resolution ceiling (Alastair request - 1080p/4

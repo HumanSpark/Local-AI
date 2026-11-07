@@ -1,0 +1,2098 @@
+{
+ "label": "H1",
+ "image": "ghcr.io/peonist-ai/halogen-flash-server@sha256:ec7ec0c6f955f48329bb444efa97286dc8216e9ab1b130bc40d7d8c3babdf6b2",
+ "cmd": [
+  "podman",
+  "run",
+  "--rm",
+  "--name",
+  "e152-H1",
+  "-p",
+  "127.0.0.1:8152:8731",
+  "--device",
+  "/dev/kfd",
+  "--device",
+  "/dev/dri",
+  "--group-add",
+  "keep-groups",
+  "--ipc=host",
+  "--ulimit",
+  "memlock=-1:-1",
+  "-v",
+  "/opt/models/staging/halogen-qwen3.8-flash-next:/models:ro",
+  "ghcr.io/peonist-ai/halogen-flash-server@sha256:ec7ec0c6f955f48329bb444efa97286dc8216e9ab1b130bc40d7d8c3babdf6b2"
+ ],
+ "identity": false,
+ "utc": "2026-09-27T02:01:15Z",
+ "runs": [
+  {
+   "t0": 1790474562.343675,
+   "t1": 1790474606.7600014,
+   "wall_s": 44.42,
+   "prompt_n": 32780,
+   "prompt_ms": 38760.8,
+   "prompt_per_second": 845.7,
+   "predicted_n": 195,
+   "predicted_per_second": 34.85,
+   "cache_n": 0,
+   "draft_n": 101,
+   "draft_n_accepted": 109,
+   "finish_reason": "stop",
+   "content": "The single most important finding is **F43**, which reveals that MoE concurrency is stream-diversity-bound, meaning 16 users asking different questions run 40% slower than 16 asking the same question, thereby exposing that the previously published fleet throughput of 193.5 t/s was a best-case artifact that overstated real capacity by 1.78x. This is critical because it corrects the operational understanding of the hardware's limits, showing that the box's actual serving peak is only about four concurrent users rather than the sixteen implied by earlier benchmarks. The evidence supporting this is a controlled experiment where length-matched distinct prompts caused the MoE workhorse to drop from 191.70 t/s to 108.86 t/s, while a dense model control showed no such penalty (-0.1%), proving the slowdown is caused by expert routing contention on a bandwidth-limited system.",
+   "prompt": "P32K",
+   "prompt_sha": "ac03f6dd8572ad64",
+   "drafter": null,
+   "power_w_mean": 84.6
+  },
+  {
+   "t0": 1790474606.762065,
+   "t1": 1790474654.2851396,
+   "wall_s": 47.52,
+   "prompt_n": 32779,
+   "prompt_ms": 38932.3,
+   "prompt_per_second": 841.95,
+   "predicted_n": 164,
+   "predicted_per_second": 19.36,
+   "cache_n": 0,
+   "draft_n": 86,
+   "draft_n_accepted": 87,
+   "finish_reason": "stop",
+   "content": "The single most important finding is that the incumbent workhorse model (Qwen3-30B-A3B) is fundamentally incapable of \"walking a calendar\" (calculating statutory periods, deadlines, or interest over time), scoring 0/8 on such tasks while performing adequately on static contract analysis. This failure is distinct from general weakness, as the model correctly retrieves and reads the relevant clauses but fails to compose multiple temporal constraints, a defect that persists across multiple experiments and even within long conversations. The evidence is drawn from experiments E54, E54b, and E55, where the workhorse consistently produced incorrect dates and financial figures for time-dependent questions while scoring 6/7 on non-temporal static analysis, confirming that the limitation is specific to temporal reasoning rather than general comprehension.",
+   "prompt": "P32K",
+   "prompt_sha": "abfef291bea2f498",
+   "drafter": null,
+   "power_w_mean": 84.5
+  },
+  {
+   "t0": 1790474654.2868192,
+   "t1": 1790474695.0996604,
+   "wall_s": 40.81,
+   "prompt_n": 32780,
+   "prompt_ms": 37352.8,
+   "prompt_per_second": 877.58,
+   "predicted_n": 115,
+   "predicted_per_second": 33.89,
+   "cache_n": 0,
+   "draft_n": 58,
+   "draft_n_accepted": 64,
+   "finish_reason": "stop",
+   "content": "The single most important finding is **F86**, which establishes that model ranking metrics are fundamentally misleading for engineering decisions because they ignore the distinction between model capability, workload performance, and system value. This hierarchy is supported by evidence showing that a \"fast\" model (Qwen3-8B) was actually slower for users due to excessive token generation, and that speculative decoding speedups (MTP) varied drastically by workload (2.08x for structured legal work vs. 1.32x for chat) despite using the same model and hardware.",
+   "prompt": "P32K",
+   "prompt_sha": "52176cf8e061ecf2",
+   "drafter": null,
+   "power_w_mean": 84.7
+  },
+  {
+   "t0": 1790474695.1007721,
+   "t1": 1790474702.2334173,
+   "wall_s": 7.13,
+   "prompt_n": 1738,
+   "prompt_ms": 3816.1,
+   "prompt_per_second": 455.44,
+   "predicted_n": 58,
+   "predicted_per_second": 17.59,
+   "cache_n": 0,
+   "draft_n": 36,
+   "draft_n_accepted": 40,
+   "finish_reason": "stop",
+   "content": "[{\"id\": \"functions.bash:4\", \"type\": \"function\", \"function\": {\"name\": \"bash\", \"arguments\": \"{\\\"command\\\": \\\"sed -n '742,800p' django/contrib/admin/checks.py\\\"}\"}}]",
+   "prompt": "CODE",
+   "prompt_sha": "5471dee966843819",
+   "drafter": null,
+   "power_w_mean": 84.6
+  },
+  {
+   "t0": 1790474702.2347114,
+   "t1": 1790474707.4833338,
+   "wall_s": 5.25,
+   "prompt_n": 1694,
+   "prompt_ms": 4231.0,
+   "prompt_per_second": 400.38,
+   "predicted_n": 56,
+   "predicted_per_second": 56.07,
+   "cache_n": 0,
+   "draft_n": 35,
+   "draft_n_accepted": 41,
+   "finish_reason": "stop",
+   "content": "[{\"id\": \"functions.bash:3\", \"type\": \"function\", \"function\": {\"name\": \"bash\", \"arguments\": \"{\\\"command\\\": \\\"sed -n '480,540p' sympy/core/function.py\\\"}\"}}]",
+   "prompt": "CODE",
+   "prompt_sha": "da91ff0bafc4fbae",
+   "drafter": null,
+   "power_w_mean": 84.3
+  },
+  {
+   "t0": 1790474707.4844315,
+   "t1": 1790474712.0130246,
+   "wall_s": 4.53,
+   "prompt_n": 1786,
+   "prompt_ms": 3672.7,
+   "prompt_per_second": 486.29,
+   "predicted_n": 47,
+   "predicted_per_second": 55.93,
+   "cache_n": 0,
+   "draft_n": 32,
+   "draft_n_accepted": 35,
+   "finish_reason": "stop",
+   "content": "[{\"id\": \"functions.bash:1\", \"type\": \"function\", \"function\": {\"name\": \"bash\", \"arguments\": \"{\\\"command\\\": \\\"cat /testbed/sphinx/parsers.py\\\"}\"}}]",
+   "prompt": "CODE",
+   "prompt_sha": "cbcfb27581209e54",
+   "drafter": null,
+   "power_w_mean": 84.6
+  },
+  {
+   "t0": 1790474712.0142276,
+   "t1": 1790474718.587629,
+   "wall_s": 6.57,
+   "prompt_n": 1321,
+   "prompt_ms": 5304.3,
+   "prompt_per_second": 249.04,
+   "predicted_n": 60,
+   "predicted_per_second": 47.8,
+   "cache_n": 0,
+   "draft_n": 35,
+   "draft_n_accepted": 40,
+   "finish_reason": "stop",
+   "content": "[{\"id\": \"functions.bash:1\", \"type\": \"function\", \"function\": {\"name\": \"bash\", \"arguments\": \"{\\\"command\\\": \\\"grep -n 'get_paths\\\\|set_paths\\\\|_paths' lib/matplotlib/contour.py\\\"}\"}}]",
+   "prompt": "CODE",
+   "prompt_sha": "d95d1b72440935f1",
+   "drafter": null,
+   "power_w_mean": 84.4
+  },
+  {
+   "t0": 1790474718.588794,
+   "t1": 1790474723.7810764,
+   "wall_s": 5.19,
+   "prompt_n": 1619,
+   "prompt_ms": 3485.5,
+   "prompt_per_second": 464.5,
+   "predicted_n": 70,
+   "predicted_per_second": 41.35,
+   "cache_n": 0,
+   "draft_n": 30,
+   "draft_n_accepted": 45,
+   "finish_reason": "stop",
+   "content": "I'll start by exploring the repository structure and finding the relevant file mentioned in the PR description.\n\n<tool_call>\n<function=bash>\n<parameter=command>\ncd /testbed && ls && echo \"---\" && cat astropy/utils/introspection.py | head -200\n</parameter>\n</function>\n</tool_call>",
+   "prompt": "CODE",
+   "prompt_sha": "7f9fbcb0d1e86508",
+   "drafter": null,
+   "power_w_mean": 84.3
+  },
+  {
+   "t0": 1790474723.7823718,
+   "t1": 1790474729.783111,
+   "wall_s": 6.0,
+   "prompt_n": 1814,
+   "prompt_ms": 3714.1,
+   "prompt_per_second": 488.41,
+   "predicted_n": 103,
+   "predicted_per_second": 45.33,
+   "cache_n": 0,
+   "draft_n": 52,
+   "draft_n_accepted": 66,
+   "finish_reason": "stop",
+   "content": "I'll start by exploring the repository structure and finding the relevant code mentioned in the PR description.\n\n<tool_call>\n<function=bash>\n<parameter=command>\ncd /testbed && ls && git log --oneline -5\n</parameter>\n</function>\n</tool_call>\n<tool_call>\n<function=bash>\n<parameter=command>\ncd /testbed && grep -n 'replace(\".\\[\"' src/_pytest/python.py\n</parameter>\n</function>\n</tool_call>",
+   "prompt": "CODE",
+   "prompt_sha": "87ebbb4557abf427",
+   "drafter": null,
+   "power_w_mean": 84.4
+  },
+  {
+   "t0": 1790474729.78629,
+   "t1": 1790474857.4661567,
+   "wall_s": 127.68,
+   "prompt_n": 100012,
+   "prompt_ms": 119248.3,
+   "prompt_per_second": 838.69,
+   "predicted_n": 181,
+   "predicted_per_second": 22.23,
+   "cache_n": 0,
+   "draft_n": 99,
+   "draft_n_accepted": 97,
+   "finish_reason": "stop",
+   "content": "The single most important finding is that **instrument saturation is a pervasive trap that renders benchmarks useless for comparing capable models, often leading to false conclusions about model equivalence or superiority.** This is supported by repeated instances where top-tier models (such as Qwen3.8-27B, DeepSeek-V4.1-Flash, and frontier arms) all scored identically at ceiling (e.g., 12/12 or 23/24) on banks like L3-hard and L5, despite significant differences in price, architecture, or underlying capability, proving the ruler had no resolution left to spend. The evidence shows that without harder, discriminating instruments, a tie at ceiling is a statement about the test's limitations rather than the models' actual parity, as demonstrated by F91, F142, F145, and F153.",
+   "prompt": "P100K",
+   "prompt_sha": "abbcfad151bd4271",
+   "drafter": null,
+   "power_w_mean": 84.6
+  },
+  {
+   "t0": 1790474857.4692283,
+   "t1": 1790474861.4690945,
+   "wall_s": 4.0,
+   "prompt_n": 215,
+   "prompt_ms": 1666.9,
+   "prompt_per_second": 128.98,
+   "predicted_n": 64,
+   "predicted_per_second": 29.44,
+   "cache_n": 100012,
+   "draft_n": 33,
+   "draft_n_accepted": 31,
+   "finish_reason": "length",
+   "content": "Experiment E57 is mentioned most often in the text, serving as the foundational \"held-out crossover\" design used to test whether models degrade when answering questions at deep context levels without seeing their own prior answers. It is repeatedly cited as the source for the critical finding that while the 27B model remains robust at",
+   "prompt": "FOLLOWUP",
+   "prompt_sha": "abbcfad151bd4271+followup",
+   "drafter": null,
+   "power_w_mean": 84.8
+  }
+ ],
+ "health": {
+  "status": "ok",
+  "model": "halogen-qwen3.8-flash-next",
+  "endpoints": [
+   "/v1/chat/completions",
+   "/v1/completions",
+   "/v1/models",
+   "/v1/responses"
+  ],
+  "cache_counters": "/cache",
+  "metrics": "/metrics",
+  "context": 262144,
+  "capability_probe": "ok",
+  "rope_scaling": null,
+  "indexer_budget": 2048,
+  "vision": {
+   "enabled": false,
+   "endpoints": [
+    "/v1/chat/completions",
+    "/v1/responses"
+   ],
+   "input": "data: URL or bare base64 in an image content part; http(s) URLs are refused",
+   "max_pixels": 3686400,
+   "size_multiple": 32,
+   "disabled_because": [
+    "the engine was started without a vision tower (HALOGEN_VISION_TOWER)"
+   ]
+  },
+  "version": {
+   "api": "0.14.0",
+   "engine": "0.14.0",
+   "match": true
+  },
+  "modes": [
+   "all",
+   "engine",
+   "api",
+   "bench",
+   "sweep",
+   "convert",
+   "inspect",
+   "verify",
+   "ppl",
+   "niah"
+  ],
+  "checkpoint_format": "hgn",
+  "chat_template": {
+   "path": "/models/tokenizer/chat_template.jinja",
+   "sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+   "probe": "passed",
+   "thinking_control": true
+  },
+  "engine": {
+   "responds": true,
+   "probe_s": 1.001
+  },
+  "busy": false,
+  "slots": 4,
+  "slot_ctx": 262144,
+  "kv_pool_positions": 262144,
+  "in_flight": 0,
+  "busy_for_s": 0,
+  "queued": 0,
+  "decode": "greedy at temperature 0 (the default); sampled at temperature > 0",
+  "drafters_available": [
+   "serial",
+   "mtp"
+  ],
+  "drafter_default": "mtp",
+  "prompt_lookup": {
+   "ngram": 3,
+   "chain": 3,
+   "applies_to": "greedy requests with the mtp drafter"
+  },
+  "shortlist_draft_head": false,
+  "drafter_weights_loaded": true,
+  "prompt_cache": {
+   "enabled": true,
+   "cap_mb": 110,
+   "mode": 2,
+   "snapshot_align": 64,
+   "bitwise_identical_to_cold": false
+  },
+  "composable_context": {
+   "enabled": false
+  },
+  "tool_calls": {
+   "wire_format": "qwen-xml (<function=>/<parameter=>)",
+   "streaming": true,
+   "tool_choice": [
+    "auto",
+    "none",
+    "required",
+    "{type: function, function: {name}}"
+   ],
+   "forced_call_is_a_prefill": true,
+   "required_is_exact": "named tool_choice, or one tool",
+   "parallel_tool_calls": true,
+   "constrained_decoding": false,
+   "forced_call_disables_thinking": true,
+   "argument_types_need_schema": true
+  },
+  "supported": [
+   "reasoning_effort",
+   "enable_thinking",
+   "preserve_thinking",
+   "max_thinking_tokens",
+   "thinking_budget_tokens",
+   "thinking_budget",
+   "thinking_token_budget",
+   "reasoning",
+   "thinking",
+   "tools",
+   "tool_choice",
+   "parallel_tool_calls",
+   "stop",
+   "max_tokens",
+   "max_completion_tokens",
+   "max_output_tokens",
+   "stream",
+   "stream_options"
+  ],
+  "token_budget_aliases": [
+   "max_tokens",
+   "max_completion_tokens",
+   "max_output_tokens"
+  ],
+  "max_tokens_default": 8192,
+  "reasoning_effort_default": "xhigh",
+  "reasoning_effort_values": [
+   "high",
+   "low",
+   "medium",
+   "minimal",
+   "none",
+   "xhigh"
+  ],
+  "token_budget_covers_reasoning": true,
+  "max_thinking_tokens_default": null,
+  "thinking_answer_room": "max(1024, 15% of max_tokens)",
+  "end_of_turn_guard": true,
+  "thinking_control_aliases": [
+   "thinking_budget_tokens",
+   "thinking_budget",
+   "thinking_token_budget",
+   "reasoning.{enabled,effort,max_tokens}",
+   "thinking.{type,budget_tokens}"
+  ],
+  "server_defaults": {},
+  "server_defaults_rule": "a field the request sends always wins; a default fills only a field the request omits. A request that sends temperature 0 decodes greedy and takes no sampling default",
+  "chat_template_kwargs": [
+   "reasoning_effort",
+   "enable_thinking",
+   "preserve_thinking"
+  ],
+  "error_format": "openai",
+  "accepted_but_ignored": [
+   "n"
+  ],
+  "not_implemented": [],
+  "structured_output": {
+   "enabled": true,
+   "reason": null,
+   "response_format": [
+    "json_schema",
+    "json_object"
+   ],
+   "text.format": [
+    "json_schema",
+    "json_object"
+   ],
+   "routes": [
+    "/v1/chat/completions",
+    "/v1/completions",
+    "/v1/responses"
+   ],
+   "sampling": "greedy only (temperature 0); sampled + schema is a 400",
+   "images": "a schema with images is a 400",
+   "thinking": "the reasoning block is unconstrained; the final text is constrained after </think>",
+   "tools": "a request with tools may open a <tool_call> instead of the JSON (the schema binds the final text, not a call)",
+   "keys": "object keys are emitted in schema order",
+   "enforced": [
+    "type",
+    "properties",
+    "required",
+    "additionalProperties",
+    "items",
+    "minItems",
+    "maxItems",
+    "minLength",
+    "maxLength",
+    "enum",
+    "const",
+    "anyOf",
+    "oneOf (as anyOf)",
+    "type: [..., \"null\"]",
+    "$ref",
+    "$defs"
+   ],
+   "accepted_not_enforced": [
+    "minimum",
+    "maximum",
+    "exclusiveMinimum",
+    "exclusiveMaximum",
+    "multipleOf",
+    "title",
+    "description",
+    "default",
+    "examples"
+   ],
+   "refused": [
+    "pattern",
+    "format",
+    "allOf",
+    "not",
+    "if",
+    "then",
+    "else",
+    "patternProperties",
+    "dependentRequired",
+    "dependentSchemas",
+    "uniqueItems",
+    "contains",
+    "propertyNames",
+    "unevaluatedProperties",
+    "unevaluatedItems",
+    "minProperties",
+    "maxProperties",
+    "prefixItems"
+   ]
+  },
+  "sampling": {
+   "implemented": [
+    "temperature",
+    "top_p",
+    "top_k",
+    "min_p",
+    "seed",
+    "presence_penalty",
+    "frequency_penalty",
+    "logit_bias",
+    "logprobs",
+    "top_logprobs"
+   ],
+   "decode": "temperature 0 (the default) is greedy: a forward pass and an argmax, byte-identical to serial greedy decode. temperature > 0 samples from the filtered target on the same drafter the request would otherwise get; with the MTP drafter the speculative accept/reject rule emits exactly the target distribution",
+   "filters": "top_k, top_p and min_p compose as an intersection (the HF/vLLM convention); top_p >= 1 and top_k = 0 disable a filter",
+   "seed": "reproduces a request on the same drafter; a sampled MTP run and a sampled serial run agree in distribution, not token for token",
+   "penalties": "presence and frequency count GENERATED tokens only; applied on both drafters",
+   "logprobs": "a sampled request carries the chosen token's logprob on every token; at temperature 0, and with top_logprobs (up to 20) at any temperature, the first generated token only, so those need max_tokens 1",
+   "not_implemented": [
+    "logprobs with stream=true",
+    "logprobs past the first token at temperature 0",
+    "n > 1"
+   ]
+  },
+  "max_tokens_cap": 65536,
+  "max_tokens_over_cap": "400"
+ },
+ "load_s": 86.8,
+ "memory": {
+  "baseline_gpu_gib": 6.34,
+  "peak_gpu_gib": 41.41,
+  "gpu_delta_gib": 35.06,
+  "min_memavailable_gib": 71.47,
+  "n_samples": 394
+ },
+ "power_samples_w": [
+  [
+   1790474475.5,
+   84.085
+  ],
+  [
+   1790474476.5,
+   85.039
+  ],
+  [
+   1790474477.5,
+   85.021
+  ],
+  [
+   1790474478.5,
+   84.078
+  ],
+  [
+   1790474479.5,
+   86.013
+  ],
+  [
+   1790474480.5,
+   84.088
+  ],
+  [
+   1790474481.5,
+   84.07
+  ],
+  [
+   1790474482.5,
+   77.068
+  ],
+  [
+   1790474483.5,
+   82.074
+  ],
+  [
+   1790474484.5,
+   84.023
+  ],
+  [
+   1790474485.5,
+   85.055
+  ],
+  [
+   1790474486.5,
+   85.067
+  ],
+  [
+   1790474487.5,
+   86.021
+  ],
+  [
+   1790474488.5,
+   85.087
+  ],
+  [
+   1790474489.5,
+   86.027
+  ],
+  [
+   1790474490.5,
+   85.019
+  ],
+  [
+   1790474491.5,
+   84.069
+  ],
+  [
+   1790474492.6,
+   84.087
+  ],
+  [
+   1790474493.6,
+   84.084
+  ],
+  [
+   1790474494.6,
+   83.075
+  ],
+  [
+   1790474495.6,
+   84.06
+  ],
+  [
+   1790474496.6,
+   84.068
+  ],
+  [
+   1790474497.6,
+   85.052
+  ],
+  [
+   1790474498.6,
+   85.018
+  ],
+  [
+   1790474499.6,
+   84.088
+  ],
+  [
+   1790474500.6,
+   85.025
+  ],
+  [
+   1790474501.6,
+   86.088
+  ],
+  [
+   1790474502.6,
+   84.07
+  ],
+  [
+   1790474503.6,
+   84.064
+  ],
+  [
+   1790474504.6,
+   84.067
+  ],
+  [
+   1790474505.6,
+   76.081
+  ],
+  [
+   1790474506.6,
+   83.098
+  ],
+  [
+   1790474507.6,
+   86.006
+  ],
+  [
+   1790474508.6,
+   85.09
+  ],
+  [
+   1790474509.6,
+   85.021
+  ],
+  [
+   1790474510.6,
+   86.016
+  ],
+  [
+   1790474511.6,
+   84.082
+  ],
+  [
+   1790474512.6,
+   84.02
+  ],
+  [
+   1790474513.6,
+   84.059
+  ],
+  [
+   1790474514.6,
+   85.08
+  ],
+  [
+   1790474515.6,
+   84.065
+  ],
+  [
+   1790474516.6,
+   84.006
+  ],
+  [
+   1790474517.6,
+   77.086
+  ],
+  [
+   1790474518.6,
+   86.096
+  ],
+  [
+   1790474519.6,
+   87.057
+  ],
+  [
+   1790474520.6,
+   86.015
+  ],
+  [
+   1790474521.6,
+   85.06
+  ],
+  [
+   1790474522.6,
+   85.002
+  ],
+  [
+   1790474523.6,
+   84.081
+  ],
+  [
+   1790474524.6,
+   70.066
+  ],
+  [
+   1790474525.6,
+   79.043
+  ],
+  [
+   1790474526.6,
+   84.039
+  ],
+  [
+   1790474527.6,
+   87.033
+  ],
+  [
+   1790474528.6,
+   88.01
+  ],
+  [
+   1790474529.6,
+   88.003
+  ],
+  [
+   1790474530.6,
+   84.091
+  ],
+  [
+   1790474531.6,
+   85.011
+  ],
+  [
+   1790474532.6,
+   73.05
+  ],
+  [
+   1790474533.6,
+   79.053
+  ],
+  [
+   1790474534.6,
+   89.023
+  ],
+  [
+   1790474535.6,
+   88.072
+  ],
+  [
+   1790474536.6,
+   85.024
+  ],
+  [
+   1790474537.6,
+   86.063
+  ],
+  [
+   1790474538.6,
+   85.085
+  ],
+  [
+   1790474539.6,
+   85.033
+  ],
+  [
+   1790474540.6,
+   85.009
+  ],
+  [
+   1790474541.6,
+   85.076
+  ],
+  [
+   1790474542.6,
+   84.069
+  ],
+  [
+   1790474543.6,
+   84.052
+  ],
+  [
+   1790474544.6,
+   84.006
+  ],
+  [
+   1790474545.6,
+   85.013
+  ],
+  [
+   1790474546.6,
+   85.03
+  ],
+  [
+   1790474547.6,
+   85.006
+  ],
+  [
+   1790474548.6,
+   86.088
+  ],
+  [
+   1790474549.6,
+   84.085
+  ],
+  [
+   1790474550.6,
+   84.073
+  ],
+  [
+   1790474551.6,
+   80.039
+  ],
+  [
+   1790474552.6,
+   84.029
+  ],
+  [
+   1790474553.6,
+   85.088
+  ],
+  [
+   1790474554.6,
+   85.09
+  ],
+  [
+   1790474555.6,
+   88.03
+  ],
+  [
+   1790474556.6,
+   85.012
+  ],
+  [
+   1790474557.6,
+   84.069
+  ],
+  [
+   1790474558.6,
+   83.024
+  ],
+  [
+   1790474559.6,
+   84.052
+  ],
+  [
+   1790474560.6,
+   82.067
+  ],
+  [
+   1790474561.6,
+   81.044
+  ],
+  [
+   1790474562.6,
+   83.066
+  ],
+  [
+   1790474563.6,
+   84.091
+  ],
+  [
+   1790474564.6,
+   86.045
+  ],
+  [
+   1790474565.6,
+   85.036
+  ],
+  [
+   1790474566.6,
+   85.013
+  ],
+  [
+   1790474567.6,
+   85.017
+  ],
+  [
+   1790474568.6,
+   85.045
+  ],
+  [
+   1790474569.6,
+   85.008
+  ],
+  [
+   1790474570.6,
+   85.041
+  ],
+  [
+   1790474571.6,
+   85.009
+  ],
+  [
+   1790474572.6,
+   84.062
+  ],
+  [
+   1790474573.6,
+   84.089
+  ],
+  [
+   1790474574.6,
+   84.037
+  ],
+  [
+   1790474575.6,
+   85.001
+  ],
+  [
+   1790474576.6,
+   85.007
+  ],
+  [
+   1790474577.6,
+   85.045
+  ],
+  [
+   1790474578.6,
+   84.09
+  ],
+  [
+   1790474579.6,
+   84.063
+  ],
+  [
+   1790474580.6,
+   85.01
+  ],
+  [
+   1790474581.7,
+   84.025
+  ],
+  [
+   1790474582.7,
+   84.069
+  ],
+  [
+   1790474583.7,
+   85.016
+  ],
+  [
+   1790474584.7,
+   85.03
+  ],
+  [
+   1790474585.7,
+   85.016
+  ],
+  [
+   1790474586.7,
+   85.031
+  ],
+  [
+   1790474587.7,
+   85.008
+  ],
+  [
+   1790474588.7,
+   85.05
+  ],
+  [
+   1790474589.7,
+   85.007
+  ],
+  [
+   1790474590.7,
+   84.055
+  ],
+  [
+   1790474591.7,
+   84.083
+  ],
+  [
+   1790474592.7,
+   84.091
+  ],
+  [
+   1790474593.7,
+   85.02
+  ],
+  [
+   1790474594.7,
+   85.011
+  ],
+  [
+   1790474595.7,
+   84.079
+  ],
+  [
+   1790474596.7,
+   85.014
+  ],
+  [
+   1790474597.7,
+   84.099
+  ],
+  [
+   1790474598.7,
+   84.085
+  ],
+  [
+   1790474599.7,
+   85.056
+  ],
+  [
+   1790474600.7,
+   84.085
+  ],
+  [
+   1790474601.7,
+   84.079
+  ],
+  [
+   1790474602.7,
+   84.096
+  ],
+  [
+   1790474603.7,
+   84.091
+  ],
+  [
+   1790474604.7,
+   85.001
+  ],
+  [
+   1790474605.7,
+   85.006
+  ],
+  [
+   1790474606.7,
+   84.098
+  ],
+  [
+   1790474607.7,
+   83.069
+  ],
+  [
+   1790474608.7,
+   84.014
+  ],
+  [
+   1790474609.7,
+   85.055
+  ],
+  [
+   1790474610.7,
+   85.051
+  ],
+  [
+   1790474611.7,
+   85.064
+  ],
+  [
+   1790474612.7,
+   85.026
+  ],
+  [
+   1790474613.7,
+   84.088
+  ],
+  [
+   1790474614.7,
+   84.095
+  ],
+  [
+   1790474615.7,
+   84.097
+  ],
+  [
+   1790474616.7,
+   84.077
+  ],
+  [
+   1790474617.7,
+   84.085
+  ],
+  [
+   1790474618.7,
+   84.086
+  ],
+  [
+   1790474619.7,
+   84.093
+  ],
+  [
+   1790474620.7,
+   84.088
+  ],
+  [
+   1790474621.7,
+   84.052
+  ],
+  [
+   1790474622.7,
+   85.023
+  ],
+  [
+   1790474623.7,
+   85.023
+  ],
+  [
+   1790474624.7,
+   85.007
+  ],
+  [
+   1790474625.7,
+   85.025
+  ],
+  [
+   1790474626.7,
+   85.002
+  ],
+  [
+   1790474627.7,
+   84.015
+  ],
+  [
+   1790474628.7,
+   84.091
+  ],
+  [
+   1790474629.7,
+   85.011
+  ],
+  [
+   1790474630.7,
+   85.001
+  ],
+  [
+   1790474631.7,
+   85.014
+  ],
+  [
+   1790474632.7,
+   85.043
+  ],
+  [
+   1790474633.7,
+   84.089
+  ],
+  [
+   1790474634.7,
+   84.07
+  ],
+  [
+   1790474635.7,
+   85.012
+  ],
+  [
+   1790474636.7,
+   84.028
+  ],
+  [
+   1790474637.7,
+   84.063
+  ],
+  [
+   1790474638.7,
+   85.014
+  ],
+  [
+   1790474639.7,
+   85.02
+  ],
+  [
+   1790474640.7,
+   85.011
+  ],
+  [
+   1790474641.7,
+   85.028
+  ],
+  [
+   1790474642.7,
+   85.013
+  ],
+  [
+   1790474643.7,
+   85.047
+  ],
+  [
+   1790474644.7,
+   83.099
+  ],
+  [
+   1790474645.7,
+   85.005
+  ],
+  [
+   1790474646.7,
+   84.087
+  ],
+  [
+   1790474647.7,
+   84.096
+  ],
+  [
+   1790474648.7,
+   85.01
+  ],
+  [
+   1790474649.7,
+   84.095
+  ],
+  [
+   1790474650.7,
+   85.001
+  ],
+  [
+   1790474651.7,
+   84.089
+  ],
+  [
+   1790474652.7,
+   84.098
+  ],
+  [
+   1790474653.7,
+   84.092
+  ],
+  [
+   1790474654.7,
+   85.08
+  ],
+  [
+   1790474655.7,
+   84.008
+  ],
+  [
+   1790474656.7,
+   85.057
+  ],
+  [
+   1790474657.7,
+   86.012
+  ],
+  [
+   1790474658.7,
+   84.081
+  ],
+  [
+   1790474659.7,
+   84.091
+  ],
+  [
+   1790474660.7,
+   85.037
+  ],
+  [
+   1790474661.7,
+   84.077
+  ],
+  [
+   1790474662.7,
+   84.067
+  ],
+  [
+   1790474663.7,
+   85.012
+  ],
+  [
+   1790474664.7,
+   84.031
+  ],
+  [
+   1790474665.7,
+   84.063
+  ],
+  [
+   1790474666.7,
+   85.009
+  ],
+  [
+   1790474667.7,
+   85.037
+  ],
+  [
+   1790474668.7,
+   85.017
+  ],
+  [
+   1790474669.8,
+   85.031
+  ],
+  [
+   1790474670.8,
+   85.008
+  ],
+  [
+   1790474671.8,
+   85.055
+  ],
+  [
+   1790474672.8,
+   85.026
+  ],
+  [
+   1790474673.8,
+   84.065
+  ],
+  [
+   1790474674.8,
+   85.026
+  ],
+  [
+   1790474675.8,
+   84.057
+  ],
+  [
+   1790474676.8,
+   84.086
+  ],
+  [
+   1790474677.8,
+   84.094
+  ],
+  [
+   1790474678.8,
+   85.036
+  ],
+  [
+   1790474679.8,
+   85.005
+  ],
+  [
+   1790474680.8,
+   85.036
+  ],
+  [
+   1790474681.8,
+   85.014
+  ],
+  [
+   1790474682.8,
+   84.093
+  ],
+  [
+   1790474683.8,
+   85.012
+  ],
+  [
+   1790474684.8,
+   85.059
+  ],
+  [
+   1790474685.8,
+   85.007
+  ],
+  [
+   1790474686.8,
+   84.096
+  ],
+  [
+   1790474687.8,
+   84.092
+  ],
+  [
+   1790474688.8,
+   85.007
+  ],
+  [
+   1790474689.8,
+   85.015
+  ],
+  [
+   1790474690.8,
+   85.031
+  ],
+  [
+   1790474691.8,
+   84.071
+  ],
+  [
+   1790474692.8,
+   85.003
+  ],
+  [
+   1790474693.8,
+   85.008
+  ],
+  [
+   1790474694.8,
+   85.007
+  ],
+  [
+   1790474695.8,
+   85.026
+  ],
+  [
+   1790474696.8,
+   84.094
+  ],
+  [
+   1790474697.8,
+   84.093
+  ],
+  [
+   1790474698.8,
+   84.083
+  ],
+  [
+   1790474699.8,
+   85.009
+  ],
+  [
+   1790474700.8,
+   85.003
+  ],
+  [
+   1790474701.8,
+   85.0
+  ],
+  [
+   1790474702.8,
+   84.081
+  ],
+  [
+   1790474703.8,
+   84.076
+  ],
+  [
+   1790474704.8,
+   84.095
+  ],
+  [
+   1790474705.8,
+   84.099
+  ],
+  [
+   1790474706.8,
+   85.03
+  ],
+  [
+   1790474707.8,
+   85.036
+  ],
+  [
+   1790474708.8,
+   85.002
+  ],
+  [
+   1790474709.8,
+   84.095
+  ],
+  [
+   1790474710.8,
+   84.097
+  ],
+  [
+   1790474711.8,
+   85.004
+  ],
+  [
+   1790474712.8,
+   85.009
+  ],
+  [
+   1790474713.8,
+   84.097
+  ],
+  [
+   1790474714.8,
+   84.095
+  ],
+  [
+   1790474715.8,
+   84.094
+  ],
+  [
+   1790474716.8,
+   84.088
+  ],
+  [
+   1790474717.8,
+   85.01
+  ],
+  [
+   1790474718.8,
+   85.041
+  ],
+  [
+   1790474719.8,
+   84.096
+  ],
+  [
+   1790474720.8,
+   84.094
+  ],
+  [
+   1790474721.8,
+   84.096
+  ],
+  [
+   1790474722.8,
+   84.079
+  ],
+  [
+   1790474723.8,
+   85.016
+  ],
+  [
+   1790474724.8,
+   84.097
+  ],
+  [
+   1790474725.8,
+   84.093
+  ],
+  [
+   1790474726.8,
+   84.09
+  ],
+  [
+   1790474727.8,
+   84.08
+  ],
+  [
+   1790474728.8,
+   85.025
+  ],
+  [
+   1790474729.8,
+   84.048
+  ],
+  [
+   1790474730.8,
+   84.039
+  ],
+  [
+   1790474731.8,
+   84.08
+  ],
+  [
+   1790474732.8,
+   85.037
+  ],
+  [
+   1790474733.8,
+   84.059
+  ],
+  [
+   1790474734.8,
+   85.02
+  ],
+  [
+   1790474735.8,
+   84.094
+  ],
+  [
+   1790474736.8,
+   84.091
+  ],
+  [
+   1790474737.8,
+   85.005
+  ],
+  [
+   1790474738.8,
+   85.018
+  ],
+  [
+   1790474739.8,
+   84.093
+  ],
+  [
+   1790474740.8,
+   85.007
+  ],
+  [
+   1790474741.8,
+   84.098
+  ],
+  [
+   1790474742.8,
+   85.017
+  ],
+  [
+   1790474743.8,
+   85.042
+  ],
+  [
+   1790474744.8,
+   84.087
+  ],
+  [
+   1790474745.8,
+   84.058
+  ],
+  [
+   1790474746.8,
+   85.011
+  ],
+  [
+   1790474747.8,
+   84.028
+  ],
+  [
+   1790474748.8,
+   85.006
+  ],
+  [
+   1790474749.8,
+   84.089
+  ],
+  [
+   1790474750.8,
+   85.046
+  ],
+  [
+   1790474751.8,
+   85.012
+  ],
+  [
+   1790474752.8,
+   84.059
+  ],
+  [
+   1790474753.8,
+   85.011
+  ],
+  [
+   1790474754.8,
+   85.058
+  ],
+  [
+   1790474755.9,
+   84.066
+  ],
+  [
+   1790474756.9,
+   85.018
+  ],
+  [
+   1790474757.9,
+   85.024
+  ],
+  [
+   1790474758.9,
+   85.015
+  ],
+  [
+   1790474759.9,
+   84.09
+  ],
+  [
+   1790474760.9,
+   85.005
+  ],
+  [
+   1790474761.9,
+   84.04
+  ],
+  [
+   1790474762.9,
+   84.096
+  ],
+  [
+   1790474763.9,
+   84.081
+  ],
+  [
+   1790474764.9,
+   85.005
+  ],
+  [
+   1790474765.9,
+   84.087
+  ],
+  [
+   1790474766.9,
+   84.094
+  ],
+  [
+   1790474767.9,
+   85.012
+  ],
+  [
+   1790474768.9,
+   85.002
+  ],
+  [
+   1790474769.9,
+   85.002
+  ],
+  [
+   1790474770.9,
+   85.043
+  ],
+  [
+   1790474771.9,
+   84.048
+  ],
+  [
+   1790474772.9,
+   84.095
+  ],
+  [
+   1790474773.9,
+   85.041
+  ],
+  [
+   1790474774.9,
+   85.008
+  ],
+  [
+   1790474775.9,
+   85.036
+  ],
+  [
+   1790474776.9,
+   85.012
+  ],
+  [
+   1790474777.9,
+   85.004
+  ],
+  [
+   1790474778.9,
+   85.005
+  ],
+  [
+   1790474779.9,
+   84.064
+  ],
+  [
+   1790474780.9,
+   84.091
+  ],
+  [
+   1790474781.9,
+   84.05
+  ],
+  [
+   1790474782.9,
+   85.006
+  ],
+  [
+   1790474783.9,
+   84.033
+  ],
+  [
+   1790474784.9,
+   84.061
+  ],
+  [
+   1790474785.9,
+   85.026
+  ],
+  [
+   1790474786.9,
+   84.058
+  ],
+  [
+   1790474787.9,
+   85.007
+  ],
+  [
+   1790474788.9,
+   84.063
+  ],
+  [
+   1790474789.9,
+   85.007
+  ],
+  [
+   1790474790.9,
+   85.003
+  ],
+  [
+   1790474791.9,
+   84.099
+  ],
+  [
+   1790474792.9,
+   84.086
+  ],
+  [
+   1790474793.9,
+   85.01
+  ],
+  [
+   1790474794.9,
+   84.081
+  ],
+  [
+   1790474795.9,
+   84.091
+  ],
+  [
+   1790474796.9,
+   85.043
+  ],
+  [
+   1790474797.9,
+   85.017
+  ],
+  [
+   1790474798.9,
+   85.041
+  ],
+  [
+   1790474799.9,
+   85.013
+  ],
+  [
+   1790474800.9,
+   84.09
+  ],
+  [
+   1790474801.9,
+   85.013
+  ],
+  [
+   1790474802.9,
+   84.049
+  ],
+  [
+   1790474803.9,
+   84.093
+  ],
+  [
+   1790474804.9,
+   84.083
+  ],
+  [
+   1790474805.9,
+   82.065
+  ],
+  [
+   1790474806.9,
+   84.08
+  ],
+  [
+   1790474807.9,
+   88.002
+  ],
+  [
+   1790474808.9,
+   84.094
+  ],
+  [
+   1790474809.9,
+   84.077
+  ],
+  [
+   1790474810.9,
+   84.052
+  ],
+  [
+   1790474811.9,
+   85.001
+  ],
+  [
+   1790474812.9,
+   85.031
+  ],
+  [
+   1790474813.9,
+   85.009
+  ],
+  [
+   1790474814.9,
+   85.033
+  ],
+  [
+   1790474815.9,
+   85.004
+  ],
+  [
+   1790474816.9,
+   84.097
+  ],
+  [
+   1790474817.9,
+   85.006
+  ],
+  [
+   1790474818.9,
+   84.091
+  ],
+  [
+   1790474819.9,
+   84.096
+  ],
+  [
+   1790474820.9,
+   84.098
+  ],
+  [
+   1790474821.9,
+   85.038
+  ],
+  [
+   1790474822.9,
+   85.018
+  ],
+  [
+   1790474823.9,
+   85.0
+  ],
+  [
+   1790474824.9,
+   84.091
+  ],
+  [
+   1790474825.9,
+   85.005
+  ],
+  [
+   1790474826.9,
+   85.0
+  ],
+  [
+   1790474827.9,
+   85.041
+  ],
+  [
+   1790474828.9,
+   84.097
+  ],
+  [
+   1790474829.9,
+   85.03
+  ],
+  [
+   1790474830.9,
+   85.013
+  ],
+  [
+   1790474831.9,
+   84.098
+  ],
+  [
+   1790474832.9,
+   85.016
+  ],
+  [
+   1790474833.9,
+   85.032
+  ],
+  [
+   1790474834.9,
+   85.003
+  ],
+  [
+   1790474835.9,
+   85.012
+  ],
+  [
+   1790474836.9,
+   84.092
+  ],
+  [
+   1790474837.9,
+   85.041
+  ],
+  [
+   1790474838.9,
+   85.019
+  ],
+  [
+   1790474839.9,
+   85.023
+  ],
+  [
+   1790474840.9,
+   85.025
+  ],
+  [
+   1790474841.9,
+   85.008
+  ],
+  [
+   1790474842.9,
+   84.064
+  ],
+  [
+   1790474843.9,
+   84.099
+  ],
+  [
+   1790474844.9,
+   85.015
+  ],
+  [
+   1790474845.9,
+   84.06
+  ],
+  [
+   1790474846.9,
+   85.011
+  ],
+  [
+   1790474848.0,
+   84.093
+  ],
+  [
+   1790474849.0,
+   85.002
+  ],
+  [
+   1790474850.0,
+   84.084
+  ],
+  [
+   1790474851.0,
+   85.099
+  ],
+  [
+   1790474852.0,
+   84.095
+  ],
+  [
+   1790474853.0,
+   84.089
+  ],
+  [
+   1790474854.0,
+   85.02
+  ],
+  [
+   1790474855.0,
+   84.094
+  ],
+  [
+   1790474856.0,
+   84.096
+  ],
+  [
+   1790474857.0,
+   85.013
+  ],
+  [
+   1790474858.0,
+   84.068
+  ],
+  [
+   1790474859.0,
+   85.057
+  ],
+  [
+   1790474860.0,
+   85.04
+  ],
+  [
+   1790474861.0,
+   85.026
+  ],
+  [
+   1790474862.0,
+   84.091
+  ],
+  [
+   1790474863.0,
+   85.033
+  ],
+  [
+   1790474864.0,
+   81.034
+  ],
+  [
+   1790474865.0,
+   81.018
+  ],
+  [
+   1790474866.0,
+   81.073
+  ],
+  [
+   1790474867.0,
+   81.002
+  ],
+  [
+   1790474868.0,
+   81.024
+  ],
+  [
+   1790474869.0,
+   80.061
+  ]
+ ],
+ "P32K_median_prefill_tps": 845.7,
+ "P32K_median_decode_tps": 33.89,
+ "P32K_median_wall_s": 44.42,
+ "CODE_mean_decode_tps": 44.01,
+ "CODE_decode_tps": [
+  17.59,
+  56.07,
+  55.93,
+  47.8,
+  41.35,
+  45.33
+ ],
+ "CODE_draft_accept_rate": 1.214,
+ "FOLLOWUP_wall_s": 4.0,
+ "FOLLOWUP_cache_n": 100012,
+ "FOLLOWUP_prompt_n": 215
+}

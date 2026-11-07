@@ -1,0 +1,910 @@
+{
+  "label": "e68-workhorse-l1-tools",
+  "tools": "on",
+  "model": "/opt/models/staging/Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+  "tier": "l1",
+  "distractors": null,
+  "ctx": 32768,
+  "max_tokens": 4096,
+  "max_rounds": 6,
+  "server_extra": "",
+  "pack_chars": 10741,
+  "question_ids": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "X1",
+    "X2",
+    "X3",
+    "U1",
+    "U2",
+    "U3",
+    "U4"
+  ],
+  "full_offload_gate": {
+    "layers_assigned": 98,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "correct": 11,
+  "total": 20,
+  "outcome_counts": {
+    "correct": 11,
+    "format_error": 5,
+    "partial": 2,
+    "wrong": 2
+  },
+  "class_counts": {
+    "correct_with_tool": 9,
+    "result_ignored": 8,
+    "correct_without_tool": 2,
+    "no_call": 1
+  },
+  "total_tool_calls": 68,
+  "wall_s": 65.43,
+  "results": [
+    {
+      "id": "R1",
+      "category": "retrieval",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "EUR 500,000",
+      "citation": "MSA-2024, clause 4.1",
+      "expected": "None",
+      "n_calls": 5,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-03-01",
+            "end": "2024-04-01",
+            "unit": "days"
+          },
+          "result": 31
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-03-01",
+            "months": 1
+          },
+          "result": "2024-04-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-03-01",
+            "years": 1
+          },
+          "result": "2025-03-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-03-01",
+            "months": 12
+          },
+          "result": "2025-03-01"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2024-03-01"
+          },
+          "result": "2024-03-31"
+        }
+      ],
+      "rounds": 6,
+      "wall_s": 7.12
+    },
+    {
+      "id": "R2",
+      "category": "retrieval",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "30",
+      "citation": "MSA-2024, clause 2.3",
+      "expected": "None",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-03-01T00:00",
+            "end": "2024-03-31T00:00",
+            "unit": "days"
+          },
+          "result": 30
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 1.51
+    },
+    {
+      "id": "R3",
+      "category": "retrieval",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "The Client's authorised representative for the purposes of change control is the Chief Financial Officer.",
+      "citation": "MSA-2024, Clause 7.2",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-06-30"
+          },
+          "result": "2025-06-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-06-30",
+            "months": 12
+          },
+          "result": "2026-06-30"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-04-01",
+            "end": "2026-06-30",
+            "unit": "days"
+          },
+          "result": 820
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 2.72
+    },
+    {
+      "id": "R4",
+      "category": "retrieval",
+      "outcome": "format_error",
+      "class": "result_ignored",
+      "answer": null,
+      "citation": null,
+      "expected": "None",
+      "n_calls": 6,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-04-01",
+            "end": "2026-09-30",
+            "unit": "days"
+          },
+          "result": 912
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-04-01",
+            "months": 24
+          },
+          "result": "2026-04-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-04-01",
+            "months": 25
+          },
+          "result": "2026-05-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-04-01",
+            "months": 26
+          },
+          "result": "2026-06-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-04-01",
+            "months": 27
+          },
+          "result": "2026-07-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-04-01",
+            "months": 28
+          },
+          "result": "2026-08-01"
+        }
+      ],
+      "rounds": 6,
+      "wall_s": 4.05
+    },
+    {
+      "id": "R5",
+      "category": "retrieval",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "48",
+      "citation": "MSA-2024, clause 5.4",
+      "expected": "None",
+      "n_calls": 1,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-03-01T00:00",
+            "end": "2024-03-01T00:00",
+            "unit": "hours"
+          },
+          "result": 0
+        }
+      ],
+      "rounds": 2,
+      "wall_s": 1.52
+    },
+    {
+      "id": "S1",
+      "category": "supersession",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "EUR 46,500",
+      "citation": "AMD-1",
+      "expected": "None",
+      "n_calls": 4,
+      "calls": [
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-01-01",
+            "months": 0,
+            "days": 0,
+            "hours": 0
+          },
+          "error": "no period given for '2025-01-01' - all of years/months/days/hours are 0. hint: pass at least one non-zero period, or you are asking for the input back and should not be calling this tool"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-01-01",
+            "months": 1,
+            "days": 0,
+            "hours": 0
+          },
+          "result": "2025-02-01"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-02-01",
+            "unit": "days"
+          },
+          "result": 31
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-01-01"
+          },
+          "result": "2025-01-31"
+        }
+      ],
+      "rounds": 5,
+      "wall_s": 3.62
+    },
+    {
+      "id": "S2",
+      "category": "supersession",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "120",
+      "citation": "AMD-2, clause 3.2",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-08-01"
+          },
+          "result": "2025-08-31"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-08-01",
+            "end": "2026-09-30",
+            "unit": "days"
+          },
+          "result": 425
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-08-01",
+            "months": 120
+          },
+          "result": "2035-08-01"
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 2.55
+    },
+    {
+      "id": "S3",
+      "category": "supersession",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "EUR 1,250,000",
+      "citation": "AMD-2",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-06-30"
+          },
+          "result": "2025-06-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-06-30",
+            "months": 1
+          },
+          "result": "2025-07-30"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-06-30",
+            "end": "2025-07-30",
+            "unit": "days"
+          },
+          "result": 30
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 2.49
+    },
+    {
+      "id": "S4",
+      "category": "supersession",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "12",
+      "citation": "AMD-2, clause 5.2",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2026-09-30"
+          },
+          "result": "2026-09-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-09-30",
+            "months": 12
+          },
+          "result": "2027-09-30"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2026-09-30",
+            "end": "2027-09-30",
+            "unit": "days"
+          },
+          "result": 365
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 2.54
+    },
+    {
+      "id": "C1",
+      "category": "computation",
+      "outcome": "format_error",
+      "class": "result_ignored",
+      "answer": null,
+      "citation": null,
+      "expected": "None",
+      "n_calls": 6,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-01-01",
+            "end": "2025-01-01",
+            "unit": "days"
+          },
+          "result": 366
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-01-01",
+            "end": "2024-12-31",
+            "unit": "days"
+          },
+          "result": 365
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-01-01",
+            "end": "2024-03-31",
+            "unit": "days"
+          },
+          "result": 90
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-04-01",
+            "end": "2024-06-30",
+            "unit": "days"
+          },
+          "result": 90
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-07-01",
+            "end": "2024-09-30",
+            "unit": "days"
+          },
+          "result": 91
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-10-01",
+            "end": "2024-12-31",
+            "unit": "days"
+          },
+          "result": 91
+        }
+      ],
+      "rounds": 6,
+      "wall_s": 4.92
+    },
+    {
+      "id": "C2",
+      "category": "computation",
+      "outcome": "format_error",
+      "class": "result_ignored",
+      "answer": null,
+      "citation": null,
+      "expected": "None",
+      "n_calls": 6,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-01-01",
+            "end": "2024-12-31",
+            "unit": "days"
+          },
+          "result": 365
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-01-01",
+            "end": "2024-12-31",
+            "unit": "hours"
+          },
+          "result": 8760
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-01-01",
+            "months": 3
+          },
+          "result": "2024-04-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-04-01",
+            "months": 3
+          },
+          "result": "2024-07-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-07-01",
+            "months": 3
+          },
+          "result": "2024-10-01"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2024-10-01",
+            "months": 3
+          },
+          "result": "2025-01-01"
+        }
+      ],
+      "rounds": 6,
+      "wall_s": 4.19
+    },
+    {
+      "id": "C3",
+      "category": "computation",
+      "outcome": "wrong",
+      "class": "result_ignored",
+      "answer": "11.5",
+      "citation": "FIN-SUMMARY",
+      "expected": "None",
+      "n_calls": 6,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-07-01",
+            "end": "2024-09-30",
+            "unit": "days"
+          },
+          "result": 91
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "unit": "days"
+          },
+          "result": 91
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-07-01",
+            "end": "2024-09-30",
+            "unit": "days"
+          },
+          "result": 91
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "unit": "days"
+          },
+          "result": 91
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2024-07-01",
+            "end": "2024-09-30",
+            "unit": "days"
+          },
+          "result": 91
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-07-01",
+            "end": "2025-09-30",
+            "unit": "days"
+          },
+          "result": 91
+        }
+      ],
+      "rounds": 4,
+      "wall_s": 4.9
+    },
+    {
+      "id": "C4",
+      "category": "computation",
+      "outcome": "format_error",
+      "class": "result_ignored",
+      "answer": null,
+      "citation": null,
+      "expected": "None",
+      "n_calls": 6,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-07-01",
+            "unit": "days"
+          },
+          "result": 181
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-07-01",
+            "unit": "days"
+          },
+          "result": 181
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-07-01",
+            "unit": "days"
+          },
+          "result": 181
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-07-01",
+            "unit": "days"
+          },
+          "result": 181
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-07-01",
+            "unit": "days"
+          },
+          "result": 181
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-07-01",
+            "unit": "days"
+          },
+          "result": 181
+        }
+      ],
+      "rounds": 6,
+      "wall_s": 5.0
+    },
+    {
+      "id": "X1",
+      "category": "conflict",
+      "outcome": "partial",
+      "class": "result_ignored",
+      "answer": "NO",
+      "citation": "AMD-2, 5.2",
+      "expected": "None",
+      "n_calls": 4,
+      "calls": [
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2026-09-30"
+          },
+          "result": "2026-09-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2026-09-30",
+            "months": 12
+          },
+          "result": "2027-09-30"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2026-09-30",
+            "end": "2027-09-30",
+            "unit": "days"
+          },
+          "result": 365
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2026-09-30",
+            "end": "2027-09-30",
+            "unit": "hours"
+          },
+          "result": 8760
+        }
+      ],
+      "rounds": 5,
+      "wall_s": 3.33
+    },
+    {
+      "id": "X2",
+      "category": "conflict",
+      "outcome": "wrong",
+      "class": "result_ignored",
+      "answer": "YES",
+      "citation": "BM-EXTRACTS, Extract 2",
+      "expected": "None",
+      "n_calls": 3,
+      "calls": [
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-06-30",
+            "unit": "days"
+          },
+          "result": 180
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-06-30",
+            "unit": "days"
+          },
+          "result": 180
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-01-01",
+            "end": "2025-06-30",
+            "unit": "days"
+          },
+          "result": 180
+        }
+      ],
+      "rounds": 3,
+      "wall_s": 2.85
+    },
+    {
+      "id": "X3",
+      "category": "conflict",
+      "outcome": "partial",
+      "class": "result_ignored",
+      "answer": "NO",
+      "citation": "MSA-2024 clause 6.1; POL-3.1 P-2.3",
+      "expected": "None",
+      "n_calls": 4,
+      "calls": [
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-09-30"
+          },
+          "result": "2025-09-30"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-09-30T00:00:00",
+            "end": "2025-09-30T00:00:00",
+            "unit": "days"
+          },
+          "result": 0
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-09-30",
+            "months": 1
+          },
+          "result": "2025-10-30"
+        },
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-10-30"
+          },
+          "result": "2025-10-31"
+        }
+      ],
+      "rounds": 5,
+      "wall_s": 3.48
+    },
+    {
+      "id": "U1",
+      "category": "unanswerable",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "NOT_IN_PACK",
+      "citation": "NONE",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.43
+    },
+    {
+      "id": "U2",
+      "category": "unanswerable",
+      "outcome": "correct",
+      "class": "correct_with_tool",
+      "answer": "NOT_IN_PACK",
+      "citation": "NONE",
+      "expected": "None",
+      "n_calls": 4,
+      "calls": [
+        {
+          "name": "last_day_of_month",
+          "arguments": {
+            "date": "2025-06-30"
+          },
+          "result": "2025-06-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-06-30",
+            "months": 12
+          },
+          "result": "2026-06-30"
+        },
+        {
+          "name": "add_period",
+          "arguments": {
+            "date": "2025-06-30",
+            "months": 12,
+            "days": 1
+          },
+          "result": "2026-07-01"
+        },
+        {
+          "name": "date_diff",
+          "arguments": {
+            "start": "2025-06-30",
+            "end": "2026-07-01",
+            "unit": "days"
+          },
+          "result": 366
+        }
+      ],
+      "rounds": 5,
+      "wall_s": 3.1
+    },
+    {
+      "id": "U3",
+      "category": "unanswerable",
+      "outcome": "correct",
+      "class": "correct_without_tool",
+      "answer": "NOT_IN_PACK",
+      "citation": "NONE",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.47
+    },
+    {
+      "id": "U4",
+      "category": "unanswerable",
+      "outcome": "format_error",
+      "class": "no_call",
+      "answer": null,
+      "citation": "NONE",
+      "expected": "None",
+      "n_calls": 0,
+      "calls": [],
+      "rounds": 1,
+      "wall_s": 0.43
+    }
+  ]
+}

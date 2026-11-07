@@ -1,0 +1,79 @@
+# E77 GATE 0 - serving spike evidence, 2026-08-28
+#
+# Distilled from seven llama-server logs run at -lv 6 (2.0 MB of per-layer debug
+# output, not banked). Every figure quoted in the E77 registration appears below.
+#
+# Binary: llama.cpp/wt/b10435/build/bin/llama-server, build 770, commit 9e40df63b
+# Kernel: 7.0.0-29-generic
+# Command shape, per arm:
+#   $BIN -m $MODEL -c 32768 -np 1 --host 127.0.0.1 --port $PORT \
+#        -ctk $KV -ctv $KV --no-webui -lv 6
+# GTT sampled from /sys/class/drm/card0/device/mem_info_gtt_used, twice before
+# each start (identical both times) and once three seconds after health returned.
+
+===== INSTRUMENT A: Qwen3-30B-A3B-Instruct-2507-Q4_K_M =====
+
+--- -ctk/-ctv f16 ---
+llama_context: flash_attn            = auto
+llama_kv_cache: size = 3072.00 MiB ( 32768 cells,  48 layers,  1/1 seqs), K (f16): 1536.00 MiB, V (f16): 1536.00 MiB
+load_tensors:      Vulkan0 model buffer size =     0.00 MiB
+load_tensors:      Vulkan0 model buffer size = 17524.42 MiB
+resolve_fused_ops: Flash Attention enabled
+filtered layers: 0   recurrent-state buffers: 0
+
+--- -ctk/-ctv q8_0 ---
+llama_context: flash_attn            = enabled
+llama_init_from_model: enabling flash_attn since it is required for quantized V cache
+llama_kv_cache: size = 1632.00 MiB ( 32768 cells,  48 layers,  1/1 seqs), K (q8_0):  816.00 MiB, V (q8_0):  816.00 MiB
+load_tensors:      Vulkan0 model buffer size =     0.00 MiB
+load_tensors:      Vulkan0 model buffer size = 17524.42 MiB
+filtered layers: 0   recurrent-state buffers: 0
+
+--- -ctk/-ctv q5_1 ---
+llama_context: flash_attn            = enabled
+llama_init_from_model: enabling flash_attn since it is required for quantized V cache
+llama_kv_cache: size = 1152.00 MiB ( 32768 cells,  48 layers,  1/1 seqs), K (q5_1):  576.00 MiB, V (q5_1):  576.00 MiB
+load_tensors:      Vulkan0 model buffer size =     0.00 MiB
+load_tensors:      Vulkan0 model buffer size = 17524.42 MiB
+filtered layers: 0   recurrent-state buffers: 0
+
+--- -ctk/-ctv q4_0 ---
+llama_context: flash_attn            = enabled
+llama_init_from_model: enabling flash_attn since it is required for quantized V cache
+llama_kv_cache: size =  864.00 MiB ( 32768 cells,  48 layers,  1/1 seqs), K (q4_0):  432.00 MiB, V (q4_0):  432.00 MiB
+load_tensors:      Vulkan0 model buffer size =     0.00 MiB
+load_tensors:      Vulkan0 model buffer size = 17524.42 MiB
+filtered layers: 0   recurrent-state buffers: 0
+
+GTT deltas (baseline 29.307 GiB, relay resident and stable):
+  f16  20.318 GiB   q8_0 18.912 GiB   q5_1 18.428 GiB   q4_0 18.162 GiB
+  f16-q8_0 = 1.406 GiB against 1440 MiB reported (exact)
+  f16-q4_0 = 2.156 GiB against 2208 MiB reported (exact)
+  f16-q5_1 = 1.890 GiB against 1920 MiB reported (15.7 MiB over - live shared counter)
+
+===== INSTRUMENT B: Qwen3.8-27B-Q4_K_M (Gated DeltaNet hybrid) =====
+print_info: n_layer = 64, n_layer_all = 65 (qwen35.block_count 65)
+  -> 16 layers hold a KV cache; the other 48 are filtered and keep recurrent state.
+Instrument A for comparison: print_info: n_layer = 48, n_layer_all = 48, 0 filtered.
+
+--- -ctk/-ctv f16 ---
+llama_context: flash_attn            = auto
+llama_kv_cache: size = 2048.00 MiB ( 32768 cells,  16 layers,  1/1 seqs), K (f16): 1024.00 MiB, V (f16): 1024.00 MiB
+llama_memory_recurrent:    Vulkan0 RS buffer size =   149.62 MiB
+
+--- -ctk/-ctv q8_0 ---
+llama_context: flash_attn            = enabled
+llama_init_from_model: enabling flash_attn since it is required for quantized V cache
+llama_kv_cache: size = 1088.00 MiB ( 32768 cells,  16 layers,  1/1 seqs), K (q8_0):  544.00 MiB, V (q8_0):  544.00 MiB
+llama_memory_recurrent:    Vulkan0 RS buffer size =   149.62 MiB
+
+--- -ctk/-ctv q4_0 ---
+llama_context: flash_attn            = enabled
+llama_init_from_model: enabling flash_attn since it is required for quantized V cache
+llama_kv_cache: size =  576.00 MiB ( 32768 cells,  16 layers,  1/1 seqs), K (q4_0):  288.00 MiB, V (q4_0):  288.00 MiB
+llama_memory_recurrent:    Vulkan0 RS buffer size =   149.62 MiB
+
+Coherence check, part 1 of the spike (-c 32768, temperature 0, 28-token prompt):
+  all four instrument-A arms returned byte-identical text -
+  "The capital of Ireland is Dublin, and one river that runs through it is the River Liffey."
+  which is why the flag was then proved from GTT rather than from the answer.

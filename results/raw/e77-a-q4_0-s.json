@@ -1,0 +1,320 @@
+{
+  "meta": {
+    "label": "e77-q4_0",
+    "bank": "kw",
+    "pack": "s",
+    "pack_chars": 55665,
+    "pack_docs": [
+      "memory-edge-deadlock",
+      "decode-hang",
+      "harness-rules",
+      "qwen38-report"
+    ],
+    "measured_prompt_tokens": 14717,
+    "ctx": 32768,
+    "max_tokens": 1024,
+    "system": "You are answering questions about the documents supplied below. Answer from those documents only. If the documents do not settle a question, say so explicitly rather than guessing. Be specific: give figures, names and dates exactly as they appear. Keep answers under 200 words.",
+    "tools_offered": false,
+    "started_at": "2026-08-28T13:35:33+0100",
+    "kernel": "7.0.0-29-generic"
+  },
+  "records": [
+    {
+      "id": "K01",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two different amdgpu-related failures are described in this material. For EACH, state the VRAM figure observed, and say whether a hard power cycle was required.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "**Failure 1: amdgpu SDMA-suballocator deadlock (memory-edge-deadlock.md)**  \n- **VRAM figure observed:** Exactly **2.00 GiB** (2,147,483,648 B)  \n- **Hard power cycle required:** Yes  \n\n**Failure 2: gpt-oss-120b decode hang (decode-hang.md)**  \n- **VRAM figure observed:** **1.90 GiB** (never parked)  \n- **Hard power cycle required:** No (the process was killed normally; GTT reclaimed from 64.07 GiB to 22.57 GiB)",
+      "ttft_s": 28.57,
+      "wall_s": 30.99,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 145,
+        "prompt_tokens": 14768,
+        "total_tokens": 14913,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "prompt_tokens": 14768,
+      "completion_tokens": 145,
+      "answer_chars": 415,
+      "hit_token_cap": false,
+      "within_30s": false,
+      "within_40s": true
+    },
+    {
+      "id": "K02",
+      "category": "implication",
+      "pack": "s",
+      "question": "A colleague proposes a monitor that raises an alarm whenever the llama-server process is in D (uninterruptible) state. Using this material, explain why that is a defect rather than a useful alarm.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The proposed monitor is a defect because it would raise false alarms during normal model loading. According to the documents, the `D` state is the *normal* condition while reading large models from disk, specifically during `folio_wait_bit_common` \u2014 an ordinary page-cache wait. The `wchan` value during this time is not `drm_suballoc_new`, so it is not the amdgpu deadlock. The guard chain already correctly reports `SUSPICIOUS` during normal loading, but this would train users to ignore alarms, which is worse than no check. Therefore, a monitor that alarms on `D` state during model load would be a false positive and a defect.",
+      "ttft_s": 0.34,
+      "wall_s": 2.67,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 138,
+        "prompt_tokens": 14775,
+        "total_tokens": 14913,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14775,
+      "completion_tokens": 138,
+      "answer_chars": 631,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K03",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs how many GPU consumers may run at once, and what does that rule say a contended measurement is?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Rule 9 governs how many GPU consumers may run at once.\n\nIt says: **One GPU consumer at a time.** Any second consumer makes both measurements void.\n\nA contended result is **deleted, not archived**, unless kept as evidence for a finding, and then it must be labelled as such.",
+      "ttft_s": 0.26,
+      "wall_s": 1.3,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 63,
+        "prompt_tokens": 14762,
+        "total_tokens": 14825,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14762,
+      "completion_tokens": 63,
+      "answer_chars": 273,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K04",
+      "category": "implication",
+      "pack": "s",
+      "question": "The harness rules forbid re-creating the deadlock's known triggers during routine benching. Name the ONE trigger this material describes as confirmed, and say what the operative mechanism is said to be.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The confirmed trigger is: **running heavy disk I/O concurrently with a near-edge GPU model load**.\n\nThe operative mechanism is: **memory pressure from concurrent I/O evicting model pages faster than they load, causing the total footprint to exceed 128 GB RAM**, which starves the amdgpu driver's small-buffer suballocator during VM page-table setup.",
+      "ttft_s": 0.33,
+      "wall_s": 1.6,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 76,
+        "prompt_tokens": 14773,
+        "total_tokens": 14849,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14773,
+      "completion_tokens": 76,
+      "answer_chars": 349,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K05",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "Based only on this material, what is the measured per-load probability that gpt-oss-120b will hang? Give the figure.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The measured per-load probability that gpt-oss-120b will hang is **1 in 12** (approximately 8.3%).\n\nThis is derived from the incident described in `docs/2026-08-19-gptoss120b-decode-hang.md`, which reports a single observed hang during a 12-question run. The model was loaded successfully, but during decoding, the server stopped responding and logging, and the process was eventually killed after 12 minutes. This occurred on one specific load attempt, with no prior or subsequent hangs reported in the provided documents. Therefore, based on the evidence, the observed frequency is 1 hang per 12 load attempts.",
+      "ttft_s": 0.35,
+      "wall_s": 2.87,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 151,
+        "prompt_tokens": 14765,
+        "total_tokens": 14916,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14765,
+      "completion_tokens": 151,
+      "answer_chars": 612,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K15",
+      "category": "compare",
+      "pack": "s",
+      "question": "Two models were given the same deterministic date calculator. Give the before-and-after score for EACH of them.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Based on the provided documents, specifically the **qwen38-report.md**:\n\n1. **Qwen3.8-27B**:\n   - **Before calculator**: 32 out of 40 on the date arithmetic half.\n   - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n2. **Frontier model**:\n   - **Before calculator**: 34 out of 40 on the date arithmetic half.\n   - **After calculator**: 38 out of 40 on the date arithmetic half.",
+      "ttft_s": 0.25,
+      "wall_s": 2.26,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 120,
+        "prompt_tokens": 14756,
+        "total_tokens": 14876,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14756,
+      "completion_tokens": 120,
+      "answer_chars": 394,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K16",
+      "category": "implication",
+      "pack": "s",
+      "question": "A third experimental condition was run to isolate WHY offering a tool changed a model's behaviour. Describe that condition and state what it showed.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The third experimental condition involved **telling the model the tools existed, but not actually attaching them**. This was tested on the everyday model (Qwen3.8) with 20 ordinary questions (no dates). The result showed that **offering a tool changed nothing** \u2014 the model's behavior remained unchanged, and it did not make any tool calls. This confirmed that the change in behavior observed when tools were attached was due to the **attachment itself**, not merely the presence of tool descriptions in the prompt.",
+      "ttft_s": 0.25,
+      "wall_s": 2.03,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 106,
+        "prompt_tokens": 14762,
+        "total_tokens": 14868,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14762,
+      "completion_tokens": 106,
+      "answer_chars": 515,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K17",
+      "category": "compare",
+      "pack": "s",
+      "question": "On twenty ordinary questions containing no dates at all, what happened to the everyday model once tools were attached? Give the score change and the number of tool calls.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "On twenty ordinary questions containing no dates at all, the everyday model dropped from **14 out of 20 to 11 out of 20** once tools were attached. It made **68 tool calls** on these questions.",
+      "ttft_s": 0.33,
+      "wall_s": 1.18,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 51,
+        "prompt_tokens": 14767,
+        "total_tokens": 14818,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14767,
+      "completion_tokens": 51,
+      "answer_chars": 193,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K18",
+      "category": "recommend",
+      "pack": "s",
+      "question": "What practical consequence does this material draw for a service that offers tools on every request by default? State the price and the form it is paid in.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The practical consequence of offering tools on every request by default is that the service pays a price in **lost answers** and **increased computational cost**.\n\nThe price is paid in the form of **no answer** rather than a wrong one. As demonstrated, offering a tool by default can cause a model to fail to answer questions it previously answered correctly, even when the tool is not used. For example, the everyday model dropped from 14 out of 20 to 11 out of 20 on ordinary questions, and produced no answer on five questions, having spent its entire budget going in circles. This failure mode is more expensive than a wrong answer because it results in a complete lack of response.\n\nAdditionally, the model made **68 tool calls** on questions unrelated to dates, indicating unnecessary computational overhead. Thus, the price is paid in both **reduced reliability** (no answer) and **increased resource consumption** (unnecessary tool calls), even on requests that do not require the tool.",
+      "ttft_s": 0.32,
+      "wall_s": 3.81,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 208,
+        "prompt_tokens": 14765,
+        "total_tokens": 14973,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14765,
+      "completion_tokens": 208,
+      "answer_chars": 994,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K19",
+      "category": "compare",
+      "pack": "s",
+      "question": "Which numbered harness rule governs model downloads, and what is the name of the file each download must be recorded in before first use?",
+      "outcome": "completed",
+      "error": null,
+      "answer": "Rule 4 governs model downloads. Each download must be recorded in the file `manifests/MANIFEST.md` before first use.",
+      "ttft_s": 0.25,
+      "wall_s": 0.73,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 29,
+        "prompt_tokens": 14762,
+        "total_tokens": 14791,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14762,
+      "completion_tokens": 29,
+      "answer_chars": 116,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    },
+    {
+      "id": "K20",
+      "category": "ambiguity",
+      "pack": "s",
+      "question": "What does it cost, in euros per year, to run this hardware? Answer from this material only.",
+      "outcome": "completed",
+      "error": null,
+      "answer": "The provided documents do not contain any information about the cost of running the hardware in euros per year. Therefore, the cost cannot be determined from the given material.",
+      "ttft_s": 0.25,
+      "wall_s": 0.81,
+      "reasoning_chars": 0,
+      "finish_reason": "stop",
+      "usage": {
+        "completion_tokens": 33,
+        "prompt_tokens": 14756,
+        "total_tokens": 14789,
+        "prompt_tokens_details": {
+          "cached_tokens": 14730
+        }
+      },
+      "prompt_tokens": 14756,
+      "completion_tokens": 33,
+      "answer_chars": 177,
+      "hit_token_cap": false,
+      "within_30s": true,
+      "within_40s": true
+    }
+  ]
+}

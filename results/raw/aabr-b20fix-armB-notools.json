@@ -1,0 +1,44 @@
+{
+  "label": "armB-qwen38-27b",
+  "condition": "no-tools",
+  "schema_version": null,
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "items_file": "spikes/aabr/items-b20-fixed.json",
+  "n_items": 1,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 132,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 0,
+  "round_cap_hits": 0,
+  "wall_s": 30.76,
+  "note": "transcript only - scoring is score_aabr.py over this file",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 28 February 2025\nCITATION: If a maturity date calculated in months lands on a non-existent calendar date, it defaults to the last day of that resulting month.",
+      "char_count": 166,
+      "char_count_all_rounds": 166,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 26.57,
+      "id": "B20",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "no_roll_trap_inert",
+        "short_chain"
+      ]
+    }
+  ]
+}

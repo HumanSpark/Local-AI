@@ -1,0 +1,23 @@
+L(E141)  {'correct': 12, 'wall': 756.37}
+O2       {'correct': 9, 'wall': 246.67000000000002}
+H-self    {'correct': 12, 'wall': 851.0, 'shipped_wrong': 0, 'escalated': 6}  ratio_vs_L=1.125  band=INCONCLUSIVE
+H-lp      {'correct': 12, 'wall': 759.7, 'shipped_wrong': 0, 'escalated': 9}  ratio_vs_L=1.004  band=INCONCLUSIVE
+H-oracle  {'correct': 12, 'wall': 503.2, 'shipped_wrong': 0, 'escalated': 3}  ratio_vs_L=0.665  band=ADOPT
+
+P1 O2.correct 9 | P2 O2.wall 246.7
+P3 H-lp.shipped_wrong 0 | P4 H-self.shipped_wrong 0
+P5 H-oracle/L 0.665 | P6 H-lp.escalated 9
+
+sweep (min ANSWER-line prob, O2 grade):
+  D1 0.5191782006025721     correct
+  D2 0.750654756656173      correct
+  D3 0.5232272741031747     correct
+  V1 0.9417006359958875     correct
+  V2 0.9881359337847679     correct
+  P1 0.5953016957835415     precedence_missed
+  P2 0.5197786103868642     correct
+  M1 0.34582862711480755    wrong
+  M2 0.36235379312571614    wrong
+  M3 0.8070898672021307     correct
+  N1 0.5266974693290949     correct
+  Z1 0.9939196110253012     correct

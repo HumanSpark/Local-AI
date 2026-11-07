@@ -1,0 +1,210 @@
+{
+  "label": "armA-gptoss120b",
+  "condition": "no-tools",
+  "schema_version": null,
+  "model": "/opt/models/staging/gpt-oss-120b-mxfp4-00001-of-00003.gguf",
+  "items_file": "spikes/aabr/items-40.json",
+  "n_items": 10,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 74,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 0,
+  "round_cap_hits": 0,
+  "wall_s": 145.02,
+  "note": "transcript only - scoring is score_aabr.py over this file",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the notice was not received in time to prevent renewal.  \nCITATION: Notice must be received not less than 45 days prior to the Renewal Date; registered post deemed received on the 3rd business day after posting.",
+      "char_count": 223,
+      "char_count_all_rounds": 223,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 12.16,
+      "id": "B01",
+      "subset": "boundary",
+      "mechanism": [
+        "deemed_receipt",
+        "backward_count",
+        "roll_forward",
+        "business_days"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Friday\u202f17\u202fMay\u202f2024  \nCITATION: Rule \u2013 \u201cSupplementary Evidence must be filed not less than 14 clear days before the Hearing Date\u2026 If the absolute final day to file falls on a weekend or public holiday, the deadline rolls backward to the preceding business day.\u201d and Facts \u2013 Hearing Date\u202f=\u202fMonday\u202f3\u202fJune\u202f2024; 27\u202fMay\u202f2024 is a public holiday.",
+      "char_count": 348,
+      "char_count_all_rounds": 348,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 22.25,
+      "id": "B02",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "roll_backward",
+        "holiday"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the option was validly exercised.\nCITATION: Rule: option expires at 17:00 on the 90th day (April\u202f6\u202f2024) rolling forward to 17:00 Monday\u202fApril\u202f8\u202f2024; email after\u202f17:00 deemed delivered at 09:00 next business day. Fact: Effective Date\u202f7\u202fJan\u202f2024; notice sent\u202f5\u202fApr\u202f2024\u202f19:15.",
+      "char_count": 289,
+      "char_count_all_rounds": 289,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 22.73,
+      "id": "B03",
+      "subset": "boundary",
+      "mechanism": [
+        "time_of_day_cutoff",
+        "roll_forward",
+        "deemed_receipt"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 17 November 2024  \nCITATION: The cure period for a material breach is 15 business days from the receipt of the default notice. If uncured, the aggrieved party may serve a final termination notice, which takes effect exactly 10 calendar days after the date of service.",
+      "char_count": 275,
+      "char_count_all_rounds": 275,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 22.01,
+      "id": "B04",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "calendar_days",
+        "no_roll_trap"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: The material does not provide enough information to determine the final deadline, as it lacks the number of days in February 2024 (i.e., whether it is a leap year). \nCITATION: The rule requires defaulting to the last day of February, but the facts do not specify if February 2024 has 28 or 29 days.",
+      "char_count": 306,
+      "char_count_all_rounds": 306,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.81,
+      "id": "B05",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "roll_forward"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: USD\u202f100,000  \nCITATION: MSA Section\u202f10.2 (liability cap) and MSA Section\u202f1.5 (SOW cannot modify terms without explicit reference)",
+      "char_count": 137,
+      "char_count_all_rounds": 137,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.32,
+      "id": "A01",
+      "subset": "ambiguity",
+      "mechanism": [
+        "precedence",
+        "ineffective_override"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the 15\u2011day termination notice is not legally effective because Addendum B has not been countersigned by both parties' Chief Legal Officers, so its fast\u2011track termination right does not apply.  \nCITATION: Clause\u202f11.3 (addenda effective only upon countersignature by both parties' CLOs)",
+      "char_count": 296,
+      "char_count_all_rounds": 296,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 7.33,
+      "id": "A02",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_dependency",
+        "conditional_incorporation"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Trade Secret obligations are no longer in effect because Clause\u202f5\u2019s five\u2011year survival period governs any conflict with Clause\u202f12.  \nCITATION: Clause\u202f5 (Confidentiality) survival 5\u202fyears; Clause\u202f12 final sentence stating conflicts are governed by Clause\u202f5.",
+      "char_count": 272,
+      "char_count_all_rounds": 272,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 9.55,
+      "id": "A03",
+      "subset": "ambiguity",
+      "mechanism": [
+        "circular_reference",
+        "tie_breaker"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Consultant is not legally entitled to the bonus because the required written UAT sign\u2011off (Condition\u202fB) is not shown to have been provided.  \nCITATION: RULE \u2013 entitlement requires both Condition\u202fA (on\u2011schedule delivery) AND Condition\u202fB (written UAT sign\u2011off).",
+      "char_count": 275,
+      "char_count_all_rounds": 275,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 5.5,
+      "id": "A04",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_premise",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Customer did not breach Clause 7.1.  \nCITATION: \"Products\" defined in Section\u202f1 as the software licences listed in Exhibit\u202fA; Clause\u202f7.1 prohibits reselling \"Products\".",
+      "char_count": 184,
+      "char_count_all_rounds": 184,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 6.12,
+      "id": "A05",
+      "subset": "ambiguity",
+      "mechanism": [
+        "defined_term",
+        "scope_mismatch"
+      ]
+    }
+  ]
+}

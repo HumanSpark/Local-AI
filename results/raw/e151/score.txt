@@ -1,0 +1,19 @@
+=== M6: 31 turns; server-side comparison on the same first 31 turns ===
+  M6: tok_step 1.267, p1 0.132, decode 4.90 tok/s, TTFT 57626 ms, est 74544 ms/turn
+  M3p: tok_step 1.177, p1 0.074, decode 4.62 tok/s, TTFT 4247 ms, est 21696 ms/turn
+    M6/M3p est ratio 3.436; identical output token counts 31/31
+  M1p: tok_step 1.709, p1 0.709, decode 15.53 tok/s, TTFT 4077 ms, est 8894 ms/turn
+    M6/M1p est ratio 8.381; identical output token counts 29/31
+acceptance: 0.179 tokens per step over 574 logged steps; 12,288-28,671 bucket 0.039
+acceptance by first-turn against later turns (31 turns matched to E148's order):
+  first turns, context       0-4095: steps    21, accepted/step 2.238
+  later turns, context       0-4095: steps     2, accepted/step 3.000
+  later turns, context    4096-8191: steps    81, accepted/step 0.346
+  later turns, context   8192-12287: steps   133, accepted/step 0.068
+  later turns, context       12288+: steps   337, accepted/step 0.039
+acceptance by first-turn against later turns, M3p on the same first turns (31 turns matched to E148's order):
+  first turns, context       0-4095: steps    21, accepted/step 2.429
+  later turns, context       0-4095: steps     3, accepted/step 1.667
+  later turns, context    4096-8191: steps    80, accepted/step 0.338
+  later turns, context   8192-12287: steps   142, accepted/step 0.000
+  later turns, context       12288+: steps   349, accepted/step 0.000

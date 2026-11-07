@@ -1,0 +1,29 @@
+=== BLOCK M - MLCommons harness, 4 of 20 trajectories ===
+M0: 206/206 turns ok (0 failed), duration 2650s, mean latency 12863 ms, median 8704, p95 33553, TTFT median 4479 ms, tps 6.36, out tokens 16843, accuracy 0.6371, finish {'stop': 0, 'length': 0, 'tool_calls': 206, 'content_filter': 0, 'function_call': 0, 'other': 0}
+M1: VOID (no harness report)
+
+registered predictions, block M:
+  PM1 M1.serves: FALSIFIED / VOID (no report). PM2, PM6: VOID
+  PM3 M0.mean_turn_latency_ms 8,000-16,000: 12863 -> HELD
+
+bands, block M:
+
+=== BLOCK 1 - speed client (Qwen3.8-27B) ===
+Q0: CODE 10.347 CHAT 11.889 D1500 10.956 tok/s | P8K prefill 151.43 P32K prefill 141.8 (ttft 231.178 s) decode@32K 8.75 | determinism 1 distinct of 10 | peak GPU 28.51 GiB (baseline 26.58)
+Q1: CODE 23.556 CHAT 10.956 D1500 14.136 tok/s | P8K prefill 190.93 P32K prefill 138.98 (ttft 235.853 s) decode@32K 11.658 | determinism 1 distinct of 10 | peak GPU 32.4 GiB (baseline 29.7)
+X1: CODE 27.183 CHAT 15.271 D1500 15.966 tok/s | P8K prefill 174.77 P32K prefill 139.55 (ttft 234.898 s) decode@32K 13.255 | determinism 3 distinct of 10 | peak GPU 74.37 GiB (baseline 74.24)
+
+registered predictions, block 1:
+  P1 X1.serves YES: HELD
+  P2 X1.CODE decode 22-32: 27.183 -> HELD
+  P3 X1.CHAT decode 13-20: 15.271 -> HELD
+  P7 X1 decode at ~32K 9-16: 13.255 -> HELD
+  P8 X1 determinism 10 of 10 byte-equal: False -> FALSIFIED (the fresh-process half was not run)
+  P10 X1 peak GPU above the window-open baseline 20-32 GiB: 66.1 (peak 74.37) -> FALSIFIED
+  P4 X1/Q1 CODE 0.85-1.25: 1.154 -> HELD
+  P5 X1/Q1 CHAT 0.75-1.25: 1.394 -> FALSIFIED
+  P6 X1/Q1 P32K prefill 0.5-2.0: 1.004 -> HELD
+  band X1 vs Q1: CODE 1.15, CHAT 1.39 -> ATLAS FASTER on both
+  README claim 28.3-28.6 tok/s (Qwen3.8 K=4): X1 CODE 27.183 -> CONFIRMED
+  reference check: Q0 CODE 10.347 (E138 12.33), Q1 CODE 23.556 (E138 25.67)
+  P9 withdrawn (Amendment 1). P11 (block 2, Aider) not run in this window.

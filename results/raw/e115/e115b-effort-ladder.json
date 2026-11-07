@@ -1,0 +1,94 @@
+{
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "prompt": "counting",
+  "max_tokens": 3072,
+  "utc": "2026-09-06T11:40:22Z",
+  "distinct_reasoning_char_values": [
+    337,
+    542,
+    633
+  ],
+  "levels_rejected_by_template": [
+    "minimal",
+    "high",
+    "max"
+  ],
+  "results": [
+    {
+      "reasoning_chars": 337,
+      "completion_tokens": 220,
+      "finish_reason": "stop",
+      "answer_tail": "\\[\n\\frac{\\binom{3}{3}+\\binom{4}{3}+\\binom{5}{3}}{\\binom{12}{3}}\n=\n\\frac{1+4+10}{220}\n=\n\\frac{15}{220}\n=\n\\boxed{\\frac{3}{44}}\n\\]",
+      "wall_s": 19.73,
+      "accepted": true,
+      "request_effort": "(none)",
+      "prompt": "counting"
+    },
+    {
+      "accepted": false,
+      "http_status": 500,
+      "server_message": "uting CallExpression at line 49, column 28 in source:\n...', 'low') %}\u21b5        {{- raise_exception('Unexpected reasoning effort ' ~ reason...\n                                           ^\nError: Jinja Exception: Unexpected reasoning effort minimal. Supported types are xhigh (default), medium, and low.",
+      "reasoning_chars": null,
+      "completion_tokens": null,
+      "finish_reason": null,
+      "answer_tail": "",
+      "wall_s": null,
+      "request_effort": "minimal",
+      "prompt": "counting"
+    },
+    {
+      "reasoning_chars": 542,
+      "completion_tokens": 416,
+      "finish_reason": "stop",
+      "answer_tail": "4}{3}$ | 4 |\n| All Green | $\\binom{5}{3}$ | 10 |\n\n$$\\text{Total favorable} = 1 + 4 + 10 = 15$$\n\n**Probability:**\n\n$$P = \\frac{15}{220} = \\boxed{\\dfrac{3}{44}}$$",
+      "wall_s": 36.33,
+      "accepted": true,
+      "request_effort": "low",
+      "prompt": "counting"
+    },
+    {
+      "reasoning_chars": 633,
+      "completion_tokens": 515,
+      "finish_reason": "stop",
+      "answer_tail": "Probability\n\n$$P = \\frac{15}{220} = \\frac{3}{44}$$\n\nSince 3 is prime and does not divide 44, the fraction is already in lowest terms.\n\n$$\\boxed{\\dfrac{3}{44}}$$",
+      "wall_s": 43.43,
+      "accepted": true,
+      "request_effort": "medium",
+      "prompt": "counting"
+    },
+    {
+      "accepted": false,
+      "http_status": 500,
+      "server_message": "xecuting CallExpression at line 49, column 28 in source:\n...', 'low') %}\u21b5        {{- raise_exception('Unexpected reasoning effort ' ~ reason...\n                                           ^\nError: Jinja Exception: Unexpected reasoning effort high. Supported types are xhigh (default), medium, and low.",
+      "reasoning_chars": null,
+      "completion_tokens": null,
+      "finish_reason": null,
+      "answer_tail": "",
+      "wall_s": null,
+      "request_effort": "high",
+      "prompt": "counting"
+    },
+    {
+      "reasoning_chars": 337,
+      "completion_tokens": 220,
+      "finish_reason": "stop",
+      "answer_tail": "\\[\n\\frac{\\binom{3}{3}+\\binom{4}{3}+\\binom{5}{3}}{\\binom{12}{3}}\n=\n\\frac{1+4+10}{220}\n=\n\\frac{15}{220}\n=\n\\boxed{\\frac{3}{44}}\n\\]",
+      "wall_s": 19.31,
+      "accepted": true,
+      "request_effort": "xhigh",
+      "prompt": "counting"
+    },
+    {
+      "accepted": false,
+      "http_status": 500,
+      "server_message": "executing CallExpression at line 49, column 28 in source:\n...', 'low') %}\u21b5        {{- raise_exception('Unexpected reasoning effort ' ~ reason...\n                                           ^\nError: Jinja Exception: Unexpected reasoning effort max. Supported types are xhigh (default), medium, and low.",
+      "reasoning_chars": null,
+      "completion_tokens": null,
+      "finish_reason": null,
+      "answer_tail": "",
+      "wall_s": null,
+      "request_effort": "max",
+      "prompt": "counting"
+    }
+  ]
+}

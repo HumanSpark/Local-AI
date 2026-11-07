@@ -1,0 +1,351 @@
+{
+  "meta": {
+    "reviewer": "qwen38",
+    "draft_arm": "workhorse",
+    "peer_arm": "gptoss",
+    "max_tokens": 2048,
+    "reasoning_effort": "medium",
+    "n_items": 7,
+    "drafts_reused_from": "E74 (not regenerated)",
+    "started_at": "2026-08-20T02:31:01+0100",
+    "kernel": "7.0.0-28-generic"
+  },
+  "records": [
+    {
+      "id": "K05",
+      "category": "ambiguity",
+      "pack": "s",
+      "draft": "The measured per-load probability that gpt-oss-120b will hang is **1 in 1**, based on the single observed incident on 2026-08-19, where the model hung during decode after a complete load. This is the only recorded instance of a hang for this model in the provided documents.",
+      "draft_wall_s": 1.63,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 10.85,
+        "outcome": "completed"
+      },
+      "peer_answer": "The supplied documents do not give a measured per\u2011load hang probability for\u202fgpt\u2011oss\u2011120b. They note that the model hung on its very first load (see the \u201cdecode\u2011hang\u201d and \u201cqwen38\u2011report\u201d sections) and that subsequent loads have run without hanging, but no quantitative figure or probability is provided.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The measured per-load probability is **1 in at least 14** (i.e., 1 hang out of 1 + \"more than a dozen\" subsequent successful loads). The qwen38-report (2026-08-19) states: \"The very first time we loaded this model it hung and produced nothing, and we still do not know why. It has behaved on every load since \u2013 more than a dozen now.\" So there was exactly one hang, followed by more than twelve successful loads, giving a measured rate of 1/(1 + >12) \u2248 1/14 or lower. The draft's \"1 in 1\" (100%) is wrong because it ignores the dozen-plus subsequent clean loads explicitly recorded in the re",
+        "final_answer": "The measured per-load probability is **1 in at least 14** (i.e., 1 hang out of 1 + \"more than a dozen\" subsequent successful loads). The qwen38-report (2026-08-19) states: \"The very first time we loaded this model it hung and produced nothing, and we still do not know why. It has behaved on every load since \u2013 more than a dozen now.\" So there was exactly one hang, followed by more than twelve successful loads, giving a measured rate of 1/(1 + >12) \u2248 1/14 or lower. The draft's \"1 in 1\" (100%) is wrong because it ignores the dozen-plus subsequent clean loads explicitly recorded in the report. A more precise figure cannot be given because the report does not state the exact count of later loads.",
+        "wall_s": 121.06,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1235,
+          "prompt_tokens": 15151,
+          "total_tokens": 16386,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 1 -> 2",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The documents do not give a precise per-load probability figure. What they do state is that gpt-oss-120b hung exactly once (its very first load, 2026-08-19) and then \"behaved on every load since \u2013 more than a dozen now.\" That puts the measured rate at **1 hang in more than 13 total loads** (i.e. less than 1/13, or under ~7.7 %). The draft's \"2 in 1\" is not a valid probability and ignores the dozen-plus subsequent successful loads explicitly recorded in the programme report.",
+        "final_answer": "The documents do not give a precise per-load probability figure. What they do state is that gpt-oss-120b hung exactly once (its very first load, 2026-08-19) and then \"behaved on every load since \u2013 more than a dozen now.\" That puts the measured rate at **1 hang in more than 13 total loads** (i.e. less than 1/13, or under ~7.7 %). The draft's \"2 in 1\" is not a valid probability and ignores the dozen-plus subsequent successful loads explicitly recorded in the programme report.",
+        "wall_s": 72.54,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1510,
+          "prompt_tokens": 15151,
+          "total_tokens": 16661,
+          "prompt_tokens_details": {
+            "cached_tokens": 14635
+          }
+        }
+      }
+    },
+    {
+      "id": "K06",
+      "category": "conflict",
+      "pack": "m",
+      "draft": "The recommendation that was corrected was the advice in the **routing guide (reports/2026-07-16-local-model-routing-guide.md)** that Mistral-Small-24B-Q4 was the best model for conditional tool use.\n\nThe correction was based on **E45**, which showed that Mistral-Small-24B-Q4 scored only **38%** on 13 paired conditional tasks, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The original recommendation was based on a 3-task sample that was not representative, and the corrected row now states that **Qwen3.8-27B at `reasoning_effort: medium`** is the best model for conditional tool use.",
+      "draft_wall_s": 133.77,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 12.71,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Recommendation that was corrected**  \n- **Original advice:**\u202f*\u201cAdd the `--jinja` flag (or be sure it is present) because a missing `--jinja` disables tool\u2011use on this box.\u201d* \u2013 this appeared in the early documentation of the dead\u2011lock\u2011prevention rule (Rule\u202f5 of **HARNESS\u2011RULES.md**) and in the earlier **routing\u2011guide** entry that warned operators to add `--jinja` to avoid tool\u2011use failures.\n\n**What the correction was**  \n- The advice was **retracted** and replaced with the statement that **`--jinja` is a no\u2011op on the current build** \u2013 the flag is already enabled by default, so its presence or absence does not affect tool\u2011use behaviour.\n\n**What the correction is based on**  \n- A dedicated control experiment (see `results/tool\u2011use/jinja\u2011default\u2011control.md`, dated\u202f2026\u201107\u201117) showed that toggling the flag made **no observable difference** in tool\u2011use performance. Consequently the earlier claim that the flag needed to be set was proven false and formally retracted in the documentation.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The recommendation that was corrected was the advice in the **routing guide (reports/2026-07-16-local-model-routing-guide.md)** that Mistral-Small-24B-Q4 was the best model for conditional tool use.\n\nThe correction was based on **E45**, which showed that Mistral-Small-24B-Q4 scored only **38%** on 13 paired conditional tasks, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The original recommendation was based on a 3-task sample that was not representative, and the corrected row now states that **Qwen3.8-27B at `reasoning_effort: medium`** is the best model for conditional tool use.",
+        "wall_s": 215.06,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 755,
+          "prompt_tokens": 38605,
+          "total_tokens": 39360,
+          "prompt_tokens_details": {
+            "cached_tokens": 14635
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 2026 -> 2027",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The recommendation that was corrected was the advice in the **routing guide (reports/2026-07-16-local-model-routing-guide.md)** that Mistral-Small-24B-Q4 was the best model for conditional tool use.\n\nThe correction was based on **E45**, which showed that Mistral-Small-24B-Q4 scored only **38%** on 13 paired conditional tasks, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The original recommendation was based on a 3-task sample that was not representative, and the corrected row now states that **Qwen3.8-27B at `reasoning_effort: medium`** is the best model for conditional tool use.",
+        "wall_s": 67.66,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1238,
+          "prompt_tokens": 38605,
+          "total_tokens": 39843,
+          "prompt_tokens_details": {
+            "cached_tokens": 38089
+          }
+        }
+      }
+    },
+    {
+      "id": "K08",
+      "category": "compare",
+      "pack": "m",
+      "draft": "For a batch of hard coding problems where correctness matters more than wait time, the material recommends **Qwen3.8-27B** with `reasoning_effort: medium` set.\n\nThe wall-time ratio against the alternative (Qwen3-Coder-30B) is **94x** (Qwen3.8-27B wall time: 6,223s; Qwen3-Coder-30B wall time: 66s).\n\nAbsolute wall-time figures:\n- Qwen3.8-27B: **6,223 seconds**\n- Qwen3-Coder-30B: **66 seconds**",
+      "draft_wall_s": 4.54,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 12.73,
+        "outcome": "completed"
+      },
+      "peer_answer": "",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "For a batch of hard coding problems where correctness matters more than wait time, the material recommends **Qwen3.8-27B** with `reasoning_effort: medium` set.\n\nThe wall-time ratio against the alternative (Qwen3-Coder-30B) is **94x** (Qwen3.8-27B wall time: 6,223s; Qwen3-Coder-30B wall time: 66s).\n\nAbsolute wall-time figures:\n- Qwen3.8-27B: **6,223 seconds**\n- Qwen3-Coder-30B: **66 seconds**",
+        "wall_s": 22.24,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 351,
+          "prompt_tokens": 38593,
+          "total_tokens": 38944,
+          "prompt_tokens_details": {
+            "cached_tokens": 38089
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 8 -> 9",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: For a batch of hard coding problems where correctness matters more than wait time, the material recommends **Qwen3.8-27B** with `reasoning_effort: medium` set.\n\nThe wall-time ratio against the alternative (Qwen3-Coder-30B) is **94x** (Qwen3.8-27B wall time: 6,223s; Qwen3-Coder-30B wall time: 66s).\n\nAbsolute wall-time figures:\n- Qwen3.8-27B: **6,223 seconds**\n- Qwen3-Coder-30B: **66 seconds**",
+        "final_answer": "For a batch of hard coding problems where correctness matters more than wait time, the material recommends **Qwen3.8-27B** with `reasoning_effort: medium` set.\n\nThe wall-time ratio against the alternative (Qwen3-Coder-30B) is **94x** (Qwen3.8-27B wall time: 6,223s; Qwen3-Coder-30B wall time: 66s).\n\nAbsolute wall-time figures:\n- Qwen3.8-27B: **6,223 seconds**\n- Qwen3-Coder-30B: **66 seconds**",
+        "wall_s": 37.24,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 691,
+          "prompt_tokens": 38593,
+          "total_tokens": 39284,
+          "prompt_tokens_details": {
+            "cached_tokens": 38089
+          }
+        }
+      }
+    },
+    {
+      "id": "K09",
+      "category": "implication",
+      "pack": "m",
+      "draft": "The operational restriction on gpt-oss-120b is that it **must not be run unattended** until the cause of a decode hang is understood.\n\nThe reason given is that **the first time gpt-oss-120b was loaded, it hung and produced nothing**, and this failure has not been reproduced or diagnosed. Although it has behaved correctly on every subsequent load (more than a dozen), the unexplained hang remains a risk, and the model is not to be left running unattended until this issue is resolved.",
+      "draft_wall_s": 3.66,
+      "agreement": {
+        "verdict": "UNCLEAR",
+        "raw": "",
+        "wall_s": 25.74,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Restriction** \u2013\u202fWhen gpt\u2011oss\u2011120b (\u2248\u202f60\u202fGiB\u2011plus weights) is being loaded you must **not run any heavy disk\u2011I/O at the same time and you must be present to power\u2011cycle the machine if the load stalls**.  \n\n**Why** \u2013\u202fThe dead\u2011lock fingerprint (see *memory\u2011edge\u2011deadlock.md*) shows that loading a near\u2011edge model while the system is under memory pressure (total RAM usage >\u202f128\u202fGB, most easily caused by concurrent large file\u2011hashes, downloads, backups, etc.) starves the amdgpu driver\u2019s small\u2011buffer suballocator. The wedged process becomes an uninterruptible D\u2011state task (`drm_suballoc_new`) that **SIGKILL cannot kill and a graceful `sudo reboot` stalls**; the only way to recover is a **hard physical power\u2011cycle**. Therefore the operational rule is to avoid concurrent heavy I/O during the load and to have an operator (Alastair) physically present to power\u2011cycle if the load ever hangs.",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The operational restriction on gpt-oss-120b is that it **must not be run unattended** until the cause of a decode hang is understood.\n\nThe reason given is that **the first time gpt-oss-120b was loaded, it hung and produced nothing**, and this failure has not been reproduced or diagnosed. Although it has behaved correctly on every subsequent load (more than a dozen), the unexplained hang remains a risk, and the model is not to be left running unattended until this issue is resolved.",
+        "wall_s": 86.19,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1732,
+          "prompt_tokens": 38562,
+          "total_tokens": 40294,
+          "prompt_tokens_details": {
+            "cached_tokens": 38089
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "appended a false citation",
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The operational restriction on gpt-oss-120b is that it **must not be run unattended** until the cause of a decode hang is understood.\n\nThe reason given is that **the first time gpt-oss-120b was loaded, it hung and produced nothing**, and this failure has not been reproduced or diagnosed. Although it has behaved correctly on every subsequent load (more than a dozen), the unexplained hang remains a risk, and the model is not to be left running unattended until this issue is resolved.",
+        "wall_s": 73.38,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1410,
+          "prompt_tokens": 38574,
+          "total_tokens": 39984,
+          "prompt_tokens_details": {
+            "cached_tokens": 38089
+          }
+        }
+      }
+    },
+    {
+      "id": "K10",
+      "category": "conflict",
+      "pack": "m",
+      "draft": "No.\n\nSupporting figure: The routing guide (2026-08-17) states that Mistral-Small-24B-Q4 is the **WORST arm** on the full set of conditional tasks, scoring **38%**, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The corrected row explicitly states: \"Mistral is the WORST arm on the full set (38%): it scores 0/5 on every category-routing, tool-selection and compound-condition task.\"",
+      "draft_wall_s": 4.05,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 10.86,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Yes.**  \n\nThe routing guide states that *\u201cMistral\u2019s\u202f75\u202f% is template\u2011confounded by the chain category; **excluding chains it is\u202f96\u202f%**, the strongest single\u2011tool and conditional model tested \u2013 but only after supplying a tool template by hand.\u201d* (docs/HARNESS\u2011RULES.md).",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "No.\n\nSupporting figure: The routing guide (2026-08-17) states that Mistral-Small-24B-Q4 is the **WORST arm** on the full set of conditional tasks, scoring **38%**, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The corrected row explicitly states: \"Mistral is the WORST arm on the full set (38%): it scores 0/5 on every category-routing, tool-selection and compound-condition task.\"",
+        "wall_s": 54.87,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1048,
+          "prompt_tokens": 38565,
+          "total_tokens": 39613,
+          "prompt_tokens_details": {
+            "cached_tokens": 38089
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 2026 -> 2027",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: No.\n\nSupporting figure: The routing guide (corrected 2026-08-16) states that Mistral-Small-24B-Q4 is the **WORST arm** on the full set of conditional tasks, scoring **38%**, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The corrected row explicitly states: \"Mistral is the WORST arm on the full set (38%): it scores 0/5 on every category-routing, tool-selection and compound-condition task.\"\n\n(The draft's date \"2027-08-17\" is wrong on both the year and the day; the correction was made on 2026-08-16.)",
+        "final_answer": "No.\n\nSupporting figure: The routing guide (corrected 2026-08-16) states that Mistral-Small-24B-Q4 is the **WORST arm** on the full set of conditional tasks, scoring **38%**, behind both the workhorse (68%) and Qwen3.8-27B at `medium` (86%). The corrected row explicitly states: \"Mistral is the WORST arm on the full set (38%): it scores 0/5 on every category-routing, tool-selection and compound-condition task.\"\n\n(The draft's date \"2027-08-17\" is wrong on both the year and the day; the correction was made on 2026-08-16.)",
+        "wall_s": 65.2,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 1256,
+          "prompt_tokens": 38565,
+          "total_tokens": 39821,
+          "prompt_tokens_details": {
+            "cached_tokens": 38089
+          }
+        }
+      }
+    },
+    {
+      "id": "K15",
+      "category": "compare",
+      "pack": "s",
+      "draft": "Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.",
+      "draft_wall_s": 2.52,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 17.54,
+        "outcome": "completed"
+      },
+      "peer_answer": "- **Fast everyday model** \u2013 before the calculator it scored **0\u202fout\u202fof\u202f6** on the six date\u2011arithmetic questions; after the calculator it scored **4\u202fout\u202fof\u202f6**.  \n\n- **gpt\u2011oss\u2011120b** \u2013 before the calculator it scored **5\u202fout\u202fof\u202f6**; after the calculator it dropped to **4\u202fout\u202fof\u202f6**.  \n\n(These figures are taken from the \u201cdate calculator\u201d experiment in the Qwen3.8 report.)",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.",
+        "wall_s": 30.67,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 689,
+          "prompt_tokens": 15199,
+          "total_tokens": 15888,
+          "prompt_tokens_details": {
+            "cached_tokens": 14635
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 8 -> 9",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.\n\n(The draft incorrectly named the model \"Qwen3.9-27B\"; the document consistently refers to it as \"Qwen3.8-27B\".)",
+        "final_answer": "Based on the provided documents, specifically the **qwen38-report.md** document:\n\n- **Qwen3.8-27B**:\n  - **Before calculator**: 32 out of 40 on the date arithmetic half.\n  - **After calculator**: 40 out of 40 on the date arithmetic half.\n\n- **gpt-oss-120b**:\n  - **Before calculator**: 36 out of 40 on the date arithmetic half.\n  - **After calculator**: 38 out of 40 on the date arithmetic half.\n\n(The draft incorrectly named the model \"Qwen3.9-27B\"; the document consistently refers to it as \"Qwen3.8-27B\".)",
+        "wall_s": 33.73,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 800,
+          "prompt_tokens": 15199,
+          "total_tokens": 15999,
+          "prompt_tokens_details": {
+            "cached_tokens": 14683
+          }
+        }
+      }
+    },
+    {
+      "id": "K24",
+      "category": "implication",
+      "pack": "m",
+      "draft": "The material recommends **Qwen3-8B with reasoning ON** for models that must fit in under 5 GiB.\n\nThe two limits it names are:\n1. Its context tops out at 40,960 tokens against the 27B's 262,144, so it cannot take a big folder at all.\n2. `enable_thinking: false` costs 4 points on the easy tier with every arithmetic item flipping to wrong - that setting is 12.6x faster and puts it BELOW the workhorse.",
+      "draft_wall_s": 3.8,
+      "agreement": {
+        "verdict": "DISAGREE",
+        "raw": "DISAGREE",
+        "wall_s": 22.35,
+        "outcome": "completed"
+      },
+      "peer_answer": "**Model:**\u202fThe only model the documents point to that fits under a 5\u202fGiB RAM budget is **Qwen\u20113\u202f8B** (the GGUF is listed as **4.68\u202fGiB**).\n\n**Two limits the material calls out for Qwen\u20113\u202f8B**\n\n1. **Speed limit** \u2013 it is *significantly slower on short\u2011question workloads* than the larger MoE workhorse (e.g.\u202f9.46\u202fs vs\u202f5.48\u202fs on a",
+      "review_real": {
+        "seeded_change": null,
+        "action": "accept",
+        "protocol_adhered": true,
+        "raw": "ACCEPT",
+        "final_answer": "The material recommends **Qwen3-8B with reasoning ON** for models that must fit in under 5 GiB.\n\nThe two limits it names are:\n1. Its context tops out at 40,960 tokens against the 27B's 262,144, so it cannot take a big folder at all.\n2. `enable_thinking: false` costs 4 points on the easy tier with every arithmetic item flipping to wrong - that setting is 12.6x faster and puts it BELOW the workhorse.",
+        "wall_s": 199.06,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 428,
+          "prompt_tokens": 38557,
+          "total_tokens": 38985,
+          "prompt_tokens_details": {
+            "cached_tokens": 14683
+          }
+        }
+      },
+      "review_seeded": {
+        "seeded_change": "number 5 -> 6",
+        "action": "correct",
+        "protocol_adhered": true,
+        "raw": "CORRECT: The material recommends **Qwen3-8B with reasoning ON** for models that must fit in under 5 GiB.\n\nThe two limits it names are:\n1. Its context tops out at 40,960 tokens against the 27B's 262,144, so it cannot take a big folder at all.\n2. `enable_thinking: false` costs 4 points on the easy tier with every arithmetic item flipping to wrong - that setting is 12.6x faster and puts it BELOW the workhorse.",
+        "final_answer": "The material recommends **Qwen3-8B with reasoning ON** for models that must fit in under 5 GiB.\n\nThe two limits it names are:\n1. Its context tops out at 40,960 tokens against the 27B's 262,144, so it cannot take a big folder at all.\n2. `enable_thinking: false` costs 4 points on the easy tier with every arithmetic item flipping to wrong - that setting is 12.6x faster and puts it BELOW the workhorse.",
+        "wall_s": 33.97,
+        "outcome": "completed",
+        "usage": {
+          "completion_tokens": 604,
+          "prompt_tokens": 38557,
+          "total_tokens": 39161,
+          "prompt_tokens_details": {
+            "cached_tokens": 38041
+          }
+        }
+      }
+    }
+  ]
+}

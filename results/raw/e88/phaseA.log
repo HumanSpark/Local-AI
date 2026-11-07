@@ -1,0 +1,60 @@
+### E88 Phase A start 2026-08-29T14:12:39+01:00
+### build: 067de9371
+### kernel: 7.0.0-29-generic
+=== c1-cpu-only rc=0 wall=13.051452008s gate busy=0 sclk=600
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |   0 |   q8_0 |   q8_0 |   1 |           pp512 |        344.38 ± 1.48 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |   0 |   q8_0 |   q8_0 |   1 |           tg128 |         33.39 ± 0.91 |
+
+build: 067de93 (200)
+=== depth-0 rc=0 wall=9.281126976s gate busy=0 sclk=636
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |           pp512 |       1083.71 ± 7.82 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |           tg128 |         90.67 ± 0.33 |
+
+build: 067de93 (200)
+=== depth-4096 rc=0 wall=15.755474147s gate busy=0 sclk=605
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |   pp512 @ d4096 |       667.65 ± 10.12 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |   tg128 @ d4096 |         76.38 ± 0.17 |
+
+build: 067de93 (200)
+=== depth-8192 rc=0 wall=24.549357956s gate busy=0 sclk=605
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |   pp512 @ d8192 |        486.34 ± 2.29 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |   tg128 @ d8192 |         68.87 ± 0.10 |
+
+build: 067de93 (200)
+=== depth-16384 rc=0 wall=49.098463075s gate busy=0 sclk=605
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |  pp512 @ d16384 |        312.48 ± 3.75 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |  tg128 @ d16384 |         59.13 ± 0.05 |
+
+build: 067de93 (200)
+=== depth-32768 rc=0 wall=124.505526547s gate busy=0 sclk=605
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |  pp512 @ d32768 |        191.21 ± 2.38 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |  tg128 @ d32768 |         44.82 ± 0.03 |
+
+build: 067de93 (200)
+=== depth-49152 rc=0 wall=236.699959611s gate busy=0 sclk=605
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |  pp512 @ d49152 |        131.15 ± 1.24 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |  tg128 @ d49152 |         36.29 ± 0.07 |
+
+build: 067de93 (200)
+=== c2-repro-depth0 rc=0 wall=9.299735430s gate busy=0 sclk=604
+| model                          |       size |     params | backend    | ngl | type_k | type_v |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | -----: | -----: | --: | --------------: | -------------------: |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |           pp512 |       1075.72 ± 2.64 |
+| qwen3moe 30B.A3B Q4_K - Medium |  17.28 GiB |    30.53 B | Vulkan     |  -1 |   q8_0 |   q8_0 |   1 |           tg128 |         90.90 ± 0.05 |
+
+build: 067de93 (200)
+### E88 Phase A done 2026-08-29T14:21:22+01:00

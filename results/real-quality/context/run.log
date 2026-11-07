@@ -1,0 +1,50 @@
+[09:08:51] PAUSE gateway for context-test batch
+[09:08:57] --- context test: qwen3-30b-workhorse ---
+[09:08:57]   using cached exemplars
+[09:08:57] === CONTEXT TEST qwen3-30b-workhorse : Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf ===
+[09:09:09]   server healthy after 10s
+[09:09:30]   draft-client-letter-delay 21s  leaks=2 ['Land Registry', 'Our Ref']
+[09:09:52]   summarise-agreement-plain 22s  leaks=0
+[09:10:31]   extract-engagement-terms 39s  leaks=4 ['Legal Services Regulation Act', 'The Client', 'The Firm']
+[09:11:06]   attendance-note 35s  leaks=2 ['County Kildare', 'Legal Practice Square']
+[09:12:01]   review-flag-clauses 55s  leaks=0
+[09:12:21]   client-email-chase 20s  leaks=2 ['Ireland  \n\nTel', 'Our Ref']
+[09:13:11]   explain-terms-plain 49s  leaks=1 ['€10,000']
+[09:13:26]   status-update 16s  leaks=0
+[09:14:12]   engagement-letter-draft 45s  leaks=10 ['Building Energy Rating', 'Fictional Legal', 'First Home Scheme']
+[09:14:19]   decline-conflict 7s  leaks=2 ['Ireland  \n\nTel', 'Solicitor  \nFor']
+[09:14:21]   judging baseline vs context (frontier)...
+
+=== CONTEXT TEST: qwen3-30b-workhorse (baseline vs frontier-exemplar in-context) ===
+  arm          use  faith  compl  tone  overall
+  baseline    2.50   2.90   4.00  4.00     3.15
+  context     2.20   2.60   4.00  4.30     2.85
+  --> usability lift from context: -0.30   (leakage flags total: 23)
+  reference: local plateau ~3.0-3.4 | frontier gpt-5.6-sol ~4.37
+[09:15:30] --- qwen3-30b-workhorse done (rc=0) ---
+[09:15:33] --- context test: mistral-24b ---
+[09:15:33]   using cached exemplars
+[09:15:33] === CONTEXT TEST mistral-24b : Mistral-Small-3.1-24B-Instruct-2503-Q4_K_M.gguf ===
+[09:15:39]   server healthy after 4s
+[09:17:06]   draft-client-letter-delay 88s  leaks=1 ['Our Ref']
+[09:18:45]   summarise-agreement-plain 99s  leaks=1 ['Term\nThe']
+[09:21:23]   extract-engagement-terms 158s  leaks=4 ['Legal Services Regulation Act', 'Managing Director', 'The Client']
+[09:23:15]   attendance-note 112s  leaks=2 ['County Kildare', 'Legal Practice Square']
+[09:25:40]   review-flag-clauses 146s  leaks=0
+[09:27:11]   client-email-chase 91s  leaks=1 ['Our Ref']
+[09:30:09]   explain-terms-plain 177s  leaks=1 ['€10,000']
+[09:31:11]   status-update 62s  leaks=0
+[09:33:54]   engagement-letter-draft 163s  leaks=4 ['Building Energy Rating', 'First Home Scheme', 'Stamp Duty']
+[09:34:31]   decline-conflict 37s  leaks=0
+[09:34:33]   judging baseline vs context (frontier)...
+
+=== CONTEXT TEST: mistral-24b (baseline vs frontier-exemplar in-context) ===
+  arm          use  faith  compl  tone  overall
+  baseline    2.80   4.30   3.60  4.20     3.50
+  context     2.40   3.00   3.60  4.30     2.95
+  --> usability lift from context: -0.40   (leakage flags total: 14)
+  reference: local plateau ~3.0-3.4 | frontier gpt-5.6-sol ~4.37
+[09:35:47] --- mistral-24b done (rc=0) ---
+[09:35:50] CONTEXT BATCH DONE
+[09:35:50] RESTORE gateway
+active

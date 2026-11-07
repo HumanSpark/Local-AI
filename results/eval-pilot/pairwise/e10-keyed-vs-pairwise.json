@@ -1,0 +1,249 @@
+{
+ "scores": {
+  "glm-4.7-flash": {
+   "elements": {
+    "1": "miss",
+    "2": "miss",
+    "3": "miss",
+    "4": "miss",
+    "5": "miss",
+    "6": "miss",
+    "7": "miss",
+    "8": "miss"
+   },
+   "hits": 0,
+   "total": 8,
+   "coverage": "0/8",
+   "contradictions": [],
+   "rows_found": 0,
+   "truncated": true,
+   "coverage_is_lower_bound": true
+  },
+  "gpt-oss-20b": {
+   "elements": {
+    "1": "miss",
+    "2": "miss",
+    "3": "miss",
+    "4": "miss",
+    "5": "miss",
+    "6": "miss",
+    "7": "miss",
+    "8": "miss"
+   },
+   "hits": 0,
+   "total": 8,
+   "coverage": "0/8",
+   "contradictions": [],
+   "rows_found": 0,
+   "truncated": true,
+   "coverage_is_lower_bound": true
+  },
+  "qwen3-30b-a3b": {
+   "elements": {
+    "1": "hit",
+    "2": "hit",
+    "3": "hit",
+    "4": "hit",
+    "5": "hit",
+    "6": "hit",
+    "7": "hit",
+    "8": "miss"
+   },
+   "hits": 7,
+   "total": 8,
+   "coverage": "7/8",
+   "contradictions": [
+    {
+     "kind": "trap",
+     "value": "253.5",
+     "why": "Step 4a tiny smoke test, phrased \"generation 253.5 t/s\". It is not a llama-bench tg128 measurement and has no depth-0 row. Reproducing it as table data asserts a benchmark figure the log does not contain."
+    }
+   ],
+   "rows_found": 8,
+   "truncated": true,
+   "coverage_is_lower_bound": true
+  },
+  "qwen3-4b": {
+   "elements": {
+    "1": "miss",
+    "2": "miss",
+    "3": "hit",
+    "4": "hit",
+    "5": "hit",
+    "6": "hit",
+    "7": "hit",
+    "8": "hit"
+   },
+   "hits": 6,
+   "total": 8,
+   "coverage": "6/8",
+   "contradictions": [
+    {
+     "kind": "trap",
+     "value": "253.5",
+     "why": "Step 4a tiny smoke test, phrased \"generation 253.5 t/s\". It is not a llama-bench tg128 measurement and has no depth-0 row. Reproducing it as table data asserts a benchmark figure the log does not contain."
+    },
+    {
+     "kind": "trap",
+     "value": "92.37",
+     "why": "Step 8 Block 3c contamination experiment - a tg figure under a deliberately perturbed condition, not a depth-0 headline. Nothing in the log attributes it to a model row."
+    }
+   ],
+   "rows_found": 9,
+   "truncated": true,
+   "coverage_is_lower_bound": true
+  },
+  "qwen3-coder-30b": {
+   "elements": {
+    "1": "hit",
+    "2": "hit",
+    "3": "hit",
+    "4": "hit",
+    "5": "hit",
+    "6": "hit",
+    "7": "miss",
+    "8": "miss"
+   },
+   "hits": 6,
+   "total": 8,
+   "coverage": "6/8",
+   "contradictions": [
+    {
+     "kind": "trap",
+     "value": "253.5",
+     "why": "Step 4a tiny smoke test, phrased \"generation 253.5 t/s\". It is not a llama-bench tg128 measurement and has no depth-0 row. Reproducing it as table data asserts a benchmark figure the log does not contain."
+    }
+   ],
+   "rows_found": 7,
+   "truncated": true,
+   "coverage_is_lower_bound": true
+  }
+ },
+ "rows": [
+  {
+   "pair": [
+    "glm-4.7-flash",
+    "gpt-oss-20b"
+   ],
+   "keyed": "tie",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "glm-4.7-flash",
+    "qwen3-30b-a3b"
+   ],
+   "keyed": "qwen3-30b-a3b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "glm-4.7-flash",
+    "qwen3-4b"
+   ],
+   "keyed": "qwen3-4b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "glm-4.7-flash",
+    "qwen3-coder-30b"
+   ],
+   "keyed": "qwen3-coder-30b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "gpt-oss-20b",
+    "qwen3-30b-a3b"
+   ],
+   "keyed": "qwen3-30b-a3b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "gpt-oss-20b",
+    "qwen3-4b"
+   ],
+   "keyed": "qwen3-4b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "gpt-oss-20b",
+    "qwen3-coder-30b"
+   ],
+   "keyed": "qwen3-coder-30b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "qwen3-30b-a3b",
+    "qwen3-4b"
+   ],
+   "keyed": "qwen3-30b-a3b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "qwen3-30b-a3b",
+    "qwen3-coder-30b"
+   ],
+   "keyed": "qwen3-30b-a3b",
+   "judge": "tie"
+  },
+  {
+   "pair": [
+    "qwen3-4b",
+    "qwen3-coder-30b"
+   ],
+   "keyed": "qwen3-coder-30b",
+   "judge": "tie"
+  }
+ ],
+ "agreement": {
+  "compared": 10,
+  "agree": 1,
+  "disagree": 9,
+  "excluded_position_dependent": 0,
+  "disagreement_rate": "9/10",
+  "disagreeing_pairs": [
+   [
+    "glm-4.7-flash",
+    "qwen3-30b-a3b"
+   ],
+   [
+    "glm-4.7-flash",
+    "qwen3-4b"
+   ],
+   [
+    "glm-4.7-flash",
+    "qwen3-coder-30b"
+   ],
+   [
+    "gpt-oss-20b",
+    "qwen3-30b-a3b"
+   ],
+   [
+    "gpt-oss-20b",
+    "qwen3-4b"
+   ],
+   [
+    "gpt-oss-20b",
+    "qwen3-coder-30b"
+   ],
+   [
+    "qwen3-30b-a3b",
+    "qwen3-4b"
+   ],
+   [
+    "qwen3-30b-a3b",
+    "qwen3-coder-30b"
+   ],
+   [
+    "qwen3-4b",
+    "qwen3-coder-30b"
+   ]
+  ]
+ }
+}

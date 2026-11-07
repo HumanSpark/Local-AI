@@ -1,0 +1,210 @@
+{
+  "label": "armB-qwen38-27b",
+  "condition": "no-tools",
+  "schema_version": null,
+  "model": "/opt/models/staging/Qwen3.8-27B-Q4_K_M.gguf",
+  "items_file": "spikes/aabr/items-40.json",
+  "n_items": 10,
+  "ctx": 32768,
+  "max_tokens": 5120,
+  "max_rounds": 8,
+  "server_extra": "",
+  "full_offload_gate": {
+    "layers_assigned": 132,
+    "devices": [
+      "Vulkan0"
+    ]
+  },
+  "total_tool_calls": 0,
+  "round_cap_hits": 0,
+  "wall_s": 1904.89,
+  "note": "transcript only - scoring is score_aabr.py over this file",
+  "results": [
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the notice was deemed received on Wednesday, 18 September 2024, which is after the 17 September 2024 deadline.\nCITATION: Notice must be received not less than 45 days prior to the Renewal Date; registered post notices are deemed received on the 3rd business day after posting.",
+      "char_count": 288,
+      "char_count_all_rounds": 288,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 130.13,
+      "id": "B01",
+      "subset": "boundary",
+      "mechanism": [
+        "deemed_receipt",
+        "backward_count",
+        "roll_forward",
+        "business_days"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Friday, 17 May 2024\nCITATION: Rule: 14 clear days excluding filing and hearing; weekend roll-back; Facts: Hearing 3 June 2024, 27 May 2024 public holiday",
+      "char_count": 161,
+      "char_count_all_rounds": 161,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 325.08,
+      "id": "B02",
+      "subset": "boundary",
+      "mechanism": [
+        "clear_days",
+        "roll_backward",
+        "holiday"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: Yes, the option was validly exercised because the 90th day following 7 January 2024 was Saturday 6 April 2024, so expiration rolled to Monday 8 April 2024 at 17:00, and the email sent Friday 5 April 2024 at 19:15 was deemed delivered at 09:00 on Monday 8 April 2024.\nCITATION: RULE: expiration at 17:00 on the 90th calendar day following the Effective Date, weekend roll-forward to the next business day, and email sent after 17:00 deemed delivered at 09:00 on the following business day.",
+      "char_count": 496,
+      "char_count_all_rounds": 496,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 315.04,
+      "id": "B03",
+      "subset": "boundary",
+      "mechanism": [
+        "time_of_day_cutoff",
+        "roll_forward",
+        "deemed_receipt"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "length",
+      "response": "",
+      "char_count": 0,
+      "char_count_all_rounds": 0,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 420.52,
+      "id": "B04",
+      "subset": "boundary",
+      "mechanism": [
+        "business_days",
+        "calendar_days",
+        "no_roll_trap"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: 1 April 2024\nCITATION: 6-month expiry with non-existent date default, 30 calendar days after expiry, and weekend roll to next business day",
+      "char_count": 146,
+      "char_count_all_rounds": 146,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 130.61,
+      "id": "B05",
+      "subset": "boundary",
+      "mechanism": [
+        "month_clamp",
+        "leap_year",
+        "roll_forward"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: USD 100,000\nCITATION: MSA Section 1.5 and Section 10.2",
+      "char_count": 62,
+      "char_count_all_rounds": 62,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 40.59,
+      "id": "A01",
+      "subset": "ambiguity",
+      "mechanism": [
+        "precedence",
+        "ineffective_override"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No; Addendum B was not effective because it lacked countersignature by both parties' CLOs, so the 15-day fast-track termination right was unavailable.\nCITATION: Clause 11.3",
+      "char_count": 180,
+      "char_count_all_rounds": 180,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 39.62,
+      "id": "A02",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_dependency",
+        "conditional_incorporation"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "length",
+      "response": "",
+      "char_count": 0,
+      "char_count_all_rounds": 0,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 420.5,
+      "id": "A03",
+      "subset": "ambiguity",
+      "mechanism": [
+        "circular_reference",
+        "tie_breaker"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No; the material does not contain enough information to establish entitlement because it does not state whether the client provided written UAT sign-off.\nCITATION: RULE: bonus requires Condition A and Condition B (written UAT sign-off)",
+      "char_count": 243,
+      "char_count_all_rounds": 243,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 38.05,
+      "id": "A04",
+      "subset": "ambiguity",
+      "mechanism": [
+        "missing_premise",
+        "unanswerable"
+      ]
+    },
+    {
+      "transport_status": 200,
+      "finish_reason": "stop",
+      "response": "ANSWER: No, the Customer did not breach Clause 7.1 because it resold the physical server, not the software licence listed in Exhibit A.\nCITATION: Clause 7.1 and Section 1 definition of \"Products\"",
+      "char_count": 195,
+      "char_count_all_rounds": 195,
+      "rounds": 1,
+      "hit_round_cap": false,
+      "calls": [],
+      "n_calls": 0,
+      "wall_s": 40.36,
+      "id": "A05",
+      "subset": "ambiguity",
+      "mechanism": [
+        "defined_term",
+        "scope_mismatch"
+      ]
+    }
+  ]
+}

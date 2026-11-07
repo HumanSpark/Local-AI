@@ -1,0 +1,23 @@
+loading pyannote/segmentation-3.0 as VAD ...
+HYBRID (pyannote-seg VAD + WeSpeaker + complete AHC) | AMI SDM
+
+meeting                  min DER(.25,skip)  vad_s  emb_s
+------------------------------------------------------------
+ES2004b.Array1-01.wav   39.1          9.4%   14.5   31.1
+TS3003b.Array1-01.wav   36.8         10.4%   13.6   26.6
+IS1009a.Array1-01.wav   14.0         22.8%    5.2    9.6
+IS1009d.Array1-01.wav   32.4         10.7%   11.5   23.9
+IS1009b.Array1-01.wav   34.2         27.4%   10.9   27.3
+EN2002d.Array1-01.wav   36.8         27.2%   11.8   29.4
+------------------------------------------------------------
+
+AGGREGATE over 6 meetings (HYBRID, SDM):
+
+scoring policy                   DER    miss      FA    conf
+------------------------------------------------------------
+collar0.25 overlap-skipped     16.9%    3.2%    3.7%   10.0%
+collar0.25 overlap-SCORED      26.3%   13.5%    2.9%    9.9%
+collar0.0  overlap-skipped     20.4%    4.0%    5.3%   11.1%
+collar0.0  overlap-SCORED      31.4%   17.0%    4.0%   10.4%
+
+SPEED: 193 min audio | VAD 68s + embed/cluster 148s = 54x real time (CPU; GPU free)

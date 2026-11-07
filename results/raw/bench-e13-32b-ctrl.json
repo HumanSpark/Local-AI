@@ -1,0 +1,81 @@
+{
+ "label": "e13-32b-ctrl",
+ "config": {
+  "model": "/opt/models/staging/Qwen3-32B-Q4_K_M.gguf",
+  "slots": 1,
+  "kv": "f16",
+  "fa": "auto",
+  "ctx_per_slot": 4096,
+  "duration": 45,
+  "gen_tokens": 128,
+  "port": 8100,
+  "load_timeout": 180.0,
+  "request_timeout": 120.0,
+  "label": "e13-32b-ctrl",
+  "out": "llama.cpp/bench-e13-32b-ctrl.json",
+  "extra": "",
+  "dry_run": false
+ },
+ "utc": "2026-07-04T18:51:06Z",
+ "offload_gate": {
+  "pass": true,
+  "assignments": {
+   "Vulkan0": 130
+  }
+ },
+ "summary": {
+  "requests_ok": 4,
+  "requests_failed": 0,
+  "min_requests_per_stream": 4,
+  "under_sampled": false,
+  "wall_s": 51.269,
+  "aggregate_gen_tps": 9.99,
+  "mean_stream_gen_tps": 10.9,
+  "ttft_ms_p50": 1027.0,
+  "ttft_ms_p95": 1037.3,
+  "streams": 1
+ },
+ "records": [
+  {
+   "thread": 0,
+   "seq": 0,
+   "start": 114654.038677227,
+   "end": 114666.852452414,
+   "prompt_n": 167,
+   "prompt_ms": 1021.183,
+   "predicted_n": 128,
+   "predicted_per_second": 10.900328840779833
+  },
+  {
+   "thread": 0,
+   "seq": 1,
+   "start": 114666.852483093,
+   "end": 114679.64724132,
+   "prompt_n": 167,
+   "prompt_ms": 1024.623,
+   "predicted_n": 128,
+   "predicted_per_second": 10.920893230095627
+  },
+  {
+   "thread": 0,
+   "seq": 2,
+   "start": 114679.647263849,
+   "end": 114692.452679431,
+   "prompt_n": 167,
+   "prompt_ms": 1037.288,
+   "predicted_n": 128,
+   "predicted_per_second": 10.92193690653032
+  },
+  {
+   "thread": 0,
+   "seq": 3,
+   "start": 114692.45270091,
+   "end": 114705.307767392,
+   "prompt_n": 167,
+   "prompt_ms": 1027.004,
+   "predicted_n": 128,
+   "predicted_per_second": 10.86643521159666
+  }
+ ],
+ "server_exit": 0
+}

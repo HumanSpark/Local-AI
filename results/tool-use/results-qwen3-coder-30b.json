@@ -1,0 +1,207 @@
+{
+  "label": "qwen3-coder-30b",
+  "base_url": "http://127.0.0.1:8401",
+  "results": [
+    {
+      "id": "01-delay-letter",
+      "kind": "single",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [],
+      "docs_written": [],
+      "final_text": "<function=create_word_document>\n<parameter=filename>\nmurphy-delay.docx\n</parameter>\n<parameter=title>\nApology for Conveyancing File Delay\n</parameter>\n<parameter=body_paragraphs>\n[Your Law Firm Letterhead]\n\n[Date]\n\nMr. Murphy\n[Client Address]\n\nDear Mr. Murphy,\n\nWe write to sincerely apologise for the significant delay in the progress of your conveyancing file, which has now been delayed by two weeks.\n\nWe understand the importance of timely resolution in property transactions and acknowledge that",
+      "score": {
+        "call_valid": false,
+        "select": false,
+        "complete": false,
+        "conditional": null
+      },
+      "seconds": 3.2
+    },
+    {
+      "id": "02-summary",
+      "kind": "grounded",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "summary.docx",
+            "body_paragraphs": [
+              "This document summarizes the key terms of your engagement with us. Your firm will be reviewing and negotiating a commercial lease for Fitzgerald Ltd. The total fee for this work is EUR 4,500, which is a fixed amount. The engagement will last for 3 months from the date we sign the agreement. Either you or we can end the agreement early by giving 14 days\u2019 written notice. If the agreement is ended early, you will still be responsible for paying for the work completed up to that point."
+            ],
+            "title": "Engagement Summary for Fitzgerald Ltd."
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "summary.docx"
+      ],
+      "final_text": "The document \"summary.docx\" has been created successfully. It contains a plain-English summary of the engagement terms for Fitzgerald Ltd., including the fee, scope, term, and termination conditions. Let me know if you need any further assistance.\n",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 3.1
+    },
+    {
+      "id": "03-extract",
+      "kind": "grounded",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [],
+      "docs_written": [],
+      "final_text": "<function=create_word_document>\n<parameter=filename>\nengagement-terms.docx\n</parameter>\n<parameter=title>\nEngagement Terms\n</parameter>\n<parameter=body_paragraphs>\n[\"Parties: Walsh & Co Solicitors and Deirdre O'Brien\", \"Fee: EUR 1,800 plus VAT and outlay\", \"Key Dates: Completion targeted for 30 September 2026\", \"Termination Terms: Either party may terminate on written notice; fees for work done to date remain payable.\"]\n</parameter>\n</function>\n</tool_call>",
+      "score": {
+        "call_valid": false,
+        "select": false,
+        "complete": false,
+        "conditional": null
+      },
+      "seconds": 1.7
+    },
+    {
+      "id": "04-attendance-note",
+      "kind": "grounded",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [],
+      "docs_written": [],
+      "final_text": "<function=create_word_document>\n<parameter=filename>\nattendance-note.docx\n</parameter>\n<parameter=title>\nAttendance Note\n</parameter>\n<parameter=body_paragraphs>\n[\"Date: 14 July 2023\", \"Client: Mr Byrne\", \"Duration: 15 minutes\", \"Meeting Type: Call\", \"Summary: Discussed probate timeline with Mr Byrne. He agreed to send the death certificate and the will by Friday. We will proceed with applying for the grant once these documents are received. Mr Byrne also inquired about CAT thresholds, and advis",
+      "score": {
+        "call_valid": false,
+        "select": false,
+        "complete": false,
+        "conditional": null
+      },
+      "seconds": 2.0
+    },
+    {
+      "id": "05-email-and-copy",
+      "kind": "single",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [],
+      "docs_written": [],
+      "final_text": "<function=create_word_document>\n<parameter=filename>\nbyrne-chaser.docx\n</parameter>\n<parameter=title>\nChasing Outstanding Documents - Byrne Probate File\n</parameter>\n<parameter=body_paragraphs>\n[\"Dear [Client Name],\", \"I hope this email finds you well. I am writing to follow up on the outstanding documents related to the Byrne probate file, which we have not yet received.\", \"As you are aware, these documents are essential for us to proceed with the administration of the estate. We would be grate",
+      "score": {
+        "call_valid": false,
+        "select": false,
+        "complete": false,
+        "conditional": null
+      },
+      "seconds": 2.2
+    },
+    {
+      "id": "06-two-tools",
+      "kind": "multi",
+      "expect": [
+        "add_reminder",
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "oconnor-fee.docx",
+            "body_paragraphs": []
+          },
+          "json_ok": true
+        },
+        {
+          "name": "add_reminder",
+          "args": {
+            "title": "Follow-up on O'Connor fee reminder",
+            "due": "in 14 days"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "oconnor-fee.docx"
+      ],
+      "final_text": "I've created the fee reminder letter for the O'Connor matter and saved it as \"oconnor-fee.docx\". I've also added a reminder to follow up in 14 days. However, the document is currently empty as no content was specified. Would you like me to add specific content to the letter?",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": null
+      },
+      "seconds": 2.6
+    },
+    {
+      "id": "07-conditional",
+      "kind": "conditional",
+      "expect": [
+        "create_word_document"
+      ],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "kelly-fee.docx",
+            "body_paragraphs": [
+              "Dear Ms. Kelly,",
+              "We write to you concerning the outstanding balance of EUR 7,400 on your account. This amount is past due and requires your immediate attention.",
+              "Please arrange for payment at your earliest convenience. Should you have already made arrangements for payment, please disregard this notice.",
+              "We look forward to resolving this matter promptly.",
+              "Sincerely,",
+              "Your Legal Team"
+            ],
+            "title": "URGENT: Fee Reminder for Kelly"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "kelly-fee.docx"
+      ],
+      "final_text": "The fee-reminder letter for the Kelly file has been created and saved as \"kelly-fee.docx\". The document includes the required details and is titled \"URGENT: Fee Reminder for Kelly\" due to the outstanding balance exceeding EUR 5,000. Let me know if you need any further assistance.\n",
+      "score": {
+        "call_valid": true,
+        "select": true,
+        "complete": true,
+        "conditional": true
+      },
+      "seconds": 3.2
+    },
+    {
+      "id": "08-no-tool-trap",
+      "kind": "no-tool",
+      "expect": [],
+      "called": [
+        {
+          "name": "create_word_document",
+          "args": {
+            "filename": "without_prejudice_explanation.docx",
+            "body_paragraphs": [
+              "\"Without prejudice\" is a legal term used on letters or communications to indicate that the contents are confidential and not admissible as evidence in court. It is commonly used during negotiations or dispute resolution processes to encourage open and honest discussions without fear that statements made will be used against the sender in legal proceedings. This protection encourages parties to reach settlements or compromises without the risk of their positions being disclosed in court."
+            ],
+            "title": "Explanation of 'Without Prejudice'"
+          },
+          "json_ok": true
+        }
+      ],
+      "docs_written": [
+        "without_prejudice_explanation.docx"
+      ],
+      "final_text": "I've created a Word document explaining the meaning of 'without prejudice' as requested. The document contains a single paragraph that describes how this legal term protects confidential communications during negotiations, ensuring that statements made cannot be used as evidence in court. The document is saved as \"without_prejudice_explanation.docx\".",
+      "score": {
+        "call_valid": true,
+        "select": false,
+        "complete": false,
+        "conditional": null
+      },
+      "seconds": 4.1
+    }
+  ]
+}
