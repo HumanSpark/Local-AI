@@ -1,3 +1,4 @@
+<!--
 # File: e143-results.md
 # Purpose: Results for E143 - the chat-recommended coding models (Flash-Next, 27B, 35B-A3B) and our incumbent Qwen3-Coder through Aider on the three E113 tasks.
 # Project: sparkbench | Date: 2026-09-24
@@ -6,6 +7,7 @@
 # One window 18:29-20:57, 8,831 s, four arms, 36 attempts, 0 void, 0 amdgpu fault lines. No arm is
 # distinguished from another on pass count; the arms differ 10x in time and have OPPOSITE task
 # profiles. Per-attempt evidence results/raw/e143/<arm>/r{1,2,3}.{json,log}. Registered as F164.
+-->
 
 # E143 RESULTS - four models tie on passes, and split the tasks in opposite ways (2026-09-24)
 

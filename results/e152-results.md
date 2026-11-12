@@ -1,3 +1,4 @@
+<!--
 # File: e152-results.md
 # Purpose: Results for E152 - halogen 0.14.0's served decode, coding-agent and 100K follow-up rows, measured with the TTS service actively rendering on the same GPU.
 # Project: sparkbench | Date: 2026-09-27
@@ -8,6 +9,7 @@
 # served its whole prefix from cache in a 4.0 s turn (1.8 s before generation began), identity held 4 of 4, and power sat at
 # 84.3-85.1 W throughout, the vendor's own envelope. Against E139 on the same box with the TTS service idle, prefill fell 27%
 # and serial decode 33%: the cost of sharing the APU, measured. Registered as F179.
+-->
 
 # E152 RESULTS - halogen 0.14.0 under contention: coding turns 44 tok/s, follow-up 4.0 s, identity holds (2026-09-27)
 

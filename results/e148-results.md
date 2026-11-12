@@ -1,3 +1,4 @@
+<!--
 # File: e148-results.md
 # Purpose: Results for E148 - Atlas's own DFlash speculative mode on the MLPerf model, the Atlas-side like-for-like of E147.
 # Project: sparkbench | Date: 2026-09-26
@@ -7,6 +8,7 @@
 # own MTP arm, because the drafter accepted 0.064 tokens per 15-token draft step. M3s (the MLPerf entry's source) voided
 # at G2: its HIP build has no kernel module for DFlash prefill. Scorer tools/score_e146.py (E148 section), acceptance
 # tools/e148_dflash_accept.py, output results/raw/e148/score.txt. Registered as F175.
+-->
 
 # E148 RESULTS - Atlas's DFlash mode is slower than its MTP mode and than the reference on this box (2026-09-26)
 

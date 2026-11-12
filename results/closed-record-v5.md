@@ -1,3 +1,4 @@
+<!--
 # File: closed-record-v5.md
 # Purpose: The v5 run - three local models over all 13 matters at one setting, plus the
 #          three new two-clocks/two-bases matters and the determinism measurement.
@@ -9,6 +10,7 @@
 # is unchanged - temperature 0, -np 1 -c 32768, --jinja - at max_tokens 12,000 for every arm.
 # Pre-registration and amendment A1: results/closed-record-prereg.md. The ten-matter table in
 # results/closed-record.md stands as what was measured at the time and is not superseded.
+-->
 
 ## Results - 13 matters, 65 propositions
 

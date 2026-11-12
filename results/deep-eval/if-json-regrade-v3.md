@@ -1,3 +1,4 @@
+<!--
 # File: if-json-regrade-v3.md
 # Purpose: Offline v3 re-grade of the three JSON instruction-following tests after the IIFE/body-wrap grader bug fix (commit ea316a1).
 # Project: sparkbench | Date: 2026-07-11
@@ -9,6 +10,7 @@
 # functions of the stored output text, so completed runs were RE-GRADED
 # offline (node, exact promptfoo body-wrap semantics) - no model re-runs
 # needed, fully deterministic, identical assertion both sides.
+-->
 
 ## Corrected instruction-following totals (v2 grader -> v3 re-grade)
 

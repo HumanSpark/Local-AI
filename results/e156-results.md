@@ -1,3 +1,4 @@
+<!--
 # File: e156-results.md
 # Purpose: Results of E156 - on harder real repo work, how close do the best local setups get to Sonnet 5.5 and Opus 5.5?
 # Project: sparkbench | Date: 2026-11-06
@@ -5,6 +6,7 @@
 # Overview: Scored against results/e156-prereg.md (P1-P7 and the headline defined before any arm ran). Raw records:
 # results/e156/raw/<arm>/<task>.json (cloud 7d8f64b, local 9e90488); full transcripts gitignored under
 # results/e156/transcripts/<arm> with sha256 in each record. Findings F183, F184.
+-->
 
 # E156 RESULTS - harder bank: two local setups reach Sonnet and Opus (2026-11-06)
 

@@ -1,3 +1,4 @@
+<!--
 # File: e152-prereg.md
 # Purpose: Pre-registration for E152 - halogen-flash-server 0.14.0's README rows that E139 did not test: served MTP decode at 32K, the coding-agent turn, the 100K follow-up.
 # Project: sparkbench | Date: 2026-09-27
@@ -8,6 +9,7 @@
 # ~2 s for a follow-up turn at 100,000 tokens of context through the prompt cache. One image (0.14.0 by digest), two arms,
 # the E139 method (server-reported timings, 1 Hz memory and power, thinking off), Chatterbox resident, IOMMU translated.
 # Written before any run; the image is pulled and the prompt set is built and committed.
+-->
 
 # E152 PRE-REGISTRATION - halogen 0.14.0: served decode, coding-agent turns, 100K follow-up (2026-09-27)
 

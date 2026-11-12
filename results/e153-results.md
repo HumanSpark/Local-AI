@@ -1,3 +1,4 @@
+<!--
 # File: e153-results.md
 # Purpose: E153 results - five Strix Halo engines serving Qwen3.8-Flash-Next on one box, timed by one client.
 # Project: sparkbench | Date: 2026-11-04
@@ -5,6 +6,7 @@
 # Overview: Scores results/e153-prereg.md (11 predictions, 4 gates, amendments 1-3) from the banked per-arm JSON in
 # results/e153/speed-<arm>.json. Three relay windows on 2026-11-04 (17:10-17:52, 17:59-18:30, 18:32-18:53), TTS gateway
 # resident throughout (5.5 GiB GTT baseline), kernel 7.0.0-38, Livepatch nothing-to-apply, IOMMU DMA-FQ.
+-->
 
 # E153 RESULTS - Halogen leads every bucket; four specialised engines are 2.2-3.2x llama.cpp on code (2026-11-04)
 

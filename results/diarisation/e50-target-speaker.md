@@ -1,5 +1,6 @@
 # E50: "Alastair vs Other" (target-speaker) works at ~92% and SIDESTEPS the auto-k problem (2026-07-17)
 
+<!--
 # File: results/diarisation/e50-target-speaker.md
 # Purpose: Reframe from full diarisation to target-speaker detection - the thing Alastair actually needs.
 # Project: sparkbench | Date: 2026-07-17
@@ -11,6 +12,7 @@
 # Other" across 4 real calls, from a voiceprint enrolled on a SEPARATE recording. The reframe also
 # inverts the difficulty curve: the webinar (most speakers, worst for diarisation) has the BEST
 # separation, because "me vs anyone else" gets easier with more other people, not harder.
+-->
 
 ## Result (voiceprint from the 4-min GMKtec solo intro; tested on 4 Otter-labelled calls)
 

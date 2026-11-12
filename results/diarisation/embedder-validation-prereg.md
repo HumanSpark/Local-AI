@@ -1,5 +1,6 @@
 # PRE-REGISTRATION: does the WeSpeaker embedding extractor actually discriminate speakers? (2026-07-17)
 
+<!--
 # File: results/diarisation/embedder-validation-prereg.md
 # Purpose: Predictions registered BEFORE running the speaker-embedder positive control.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # answer for both hypotheses - i.e. it discriminated nothing, so the probe could not distinguish
 # "model failed" from "fixture is wrong". This control is designed to discriminate: it must
 # separate same-speaker pairs from different-speaker pairs, on REAL audio as well as synthetic.
+-->
 
 ## Why this control exists
 

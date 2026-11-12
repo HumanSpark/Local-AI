@@ -1,3 +1,4 @@
+<!--
 # File: capability-probes.md
 # Purpose: Results log for non-LLM capability probes (briefing v2 Part 3: STT, image generation, TTS).
 # Project: sparkbench | Date: 2026-07-04
@@ -6,6 +7,7 @@
 # comprehensive benchmarks. One section per probe with the briefing's
 # capture fields, build provenance, and the consulting question answered.
 # Stack: Vulkan RADV / Mesa 25.2.8 / kernel 6.17.0-35 unless noted.
+-->
 
 ## 3.1 Speech-to-text: whisper.cpp - PASS, 28x real-time
 

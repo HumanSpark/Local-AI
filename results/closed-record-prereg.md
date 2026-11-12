@@ -1,3 +1,4 @@
+<!--
 # File: closed-record-prereg.md
 # Purpose: Predictions for the closed-record reasoning pilot, registered before any model ran.
 # Project: sparkbench | Date: 2026-08-12
@@ -6,6 +7,7 @@
 # three local models, temperature 0, scored against sealed keys. Predictions are pinned here and
 # committed BEFORE the run, per the standing rule; deviations are findings, not embarrassments.
 # Spec: docs/plans/2026-08-12-closed-record-reasoning-experiment.md.
+-->
 
 ## What is being run
 

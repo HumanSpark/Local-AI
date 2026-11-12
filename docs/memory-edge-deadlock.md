@@ -1,3 +1,4 @@
+<!--
 # File: memory-edge-deadlock.md
 # Purpose: Canonical, self-contained reference for the amdgpu SDMA-suballocator
 #          deadlock that near-edge model loads hit on benchhost under memory
@@ -14,6 +15,7 @@
 # F28 and the C1 live reproduction into one place: what the failure looks like,
 # what actually causes it, when it does and does NOT happen, and exactly how to
 # recover. Read this before any large-model (>~60 GiB weights) session.
+-->
 
 ## STATUS 2026-08-29: the SIZE trigger is retracted, the contention trigger did not reproduce
 

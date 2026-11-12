@@ -1,3 +1,4 @@
+<!--
 # File: e135-prereg.md
 # Purpose: Pre-registration for E135 - DeepSeek-V4.1-Flash capability, measured through the API because it cannot be served locally.
 # Project: sparkbench | Date: 2026-09-11
@@ -5,6 +6,7 @@
 # Overview: Registers the question, the arms, the instrument, its known
 # saturation, six predictions each naming the FIELD it is scored against, and
 # the decision rule - all BEFORE any arm runs, per the repo's standing rule.
+-->
 
 # E135 - PRE-REGISTRATION: what does DeepSeek-V4.1-Flash actually buy, and can we serve it? (2026-09-11)
 

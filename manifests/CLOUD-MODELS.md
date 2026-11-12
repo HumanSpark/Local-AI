@@ -1,3 +1,4 @@
+<!--
 # File: CLOUD-MODELS.md
 # Purpose: Pinned cloud comparator models for the deeper-research campaign (E28) - IDs, versions, prices, access dates, selection rationale.
 # Project: sparkbench | Date: 2026-07-11
@@ -8,6 +9,7 @@
 # FINDING about cloud (recorded, dated), not a flaw in the method. Prices are
 # vendor list prices via the OpenRouter catalogue / Mistral docs on the access
 # date, USD per million tokens.
+-->
 
 ## The three comparison points (brief Section 5)
 

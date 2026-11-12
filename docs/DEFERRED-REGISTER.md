@@ -1,3 +1,4 @@
+<!--
 # File: docs/DEFERRED-REGISTER.md
 # Purpose: Every piece of registered sparkbench work that was NOT run, why, what would justify running it, and which kind of question it is.
 # Project: sparkbench | Date: 2026-08-20
@@ -12,6 +13,7 @@
 # run merely to empty it. Both headline questions are answered and none of the
 # items below would change either answer; they would refine numbers whose
 # decisions are already made.
+-->
 
 **Status: sparkbench is DORMANT as of 2026-08-20.** Read `README.md` for what
 wakes it and `docs/NEW-MODEL-INTAKE.md` for how to test a new model against the

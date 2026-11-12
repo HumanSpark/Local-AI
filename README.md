@@ -8,40 +8,59 @@ This repository is the data package behind **[Local AI for a Small Firm: What a 
 - [In Practice](https://humanspark.ai/local-ai/in-practice/) - which model for which job, setup, media results
 - [The Evidence](https://humanspark.ai/local-ai/evidence/) - every finding, method, and correction, rendered readably
 
-This repository exists so that the numbers on those pages do not have to be taken on trust. Start with the current release below, and read [WITHHELD.md](WITHHELD.md) for what is deliberately not here.
+This repository exists so that the numbers on those pages do not have to be taken on trust.
 
-## Current release: r5.3 (findings through 7 November 2026)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/coding-results-dark.svg">
+  <img src="assets/coding-results-light.svg" alt="Bar chart of real coding fixes solved out of 10: Qwen3.8-Flash-Next 9 (local); Ornith 1.5 35B 9 (local); Qwen3.8-27B 8 (local); Tess 4.5 27B 8 (local); Raon-1 mini (preview) 8 (local); Claude Sonnet 5.5 8 (cloud); Claude Opus 5.5 8 (cloud); Ornith 1.5 122B 6 (local); Qwen3-Coder-30B 2 (local)." width="760">
+</picture>
 
-r5.3 amends finding F183 with the condition its headline was measured at. On 10 real multi-file fixes, Qwen3.8-Flash-Next on Halogen solved 9, but at reasoning effort `xhigh`, which its stock chat template applies when the caller sends no effort. That setting costs a median of about 59,000 output tokens and 21 minutes per task. Whether a lower effort keeps the score is being measured now (E159; the pre-registration is included). r5.3 also adds the provenance of two large models pinned for a quality-ceiling test that has no result yet, and two tooling fixes. r5.2 (7 November 2026) added findings F183 to F185 and ten claims from local coding on harder real repository work, and changed the local coding recommendation to Qwen3.8-Flash-Next with Ornith 1.5 35B as the fallback. r5.1 and r5.0 (September 2026) added findings F47 to F178. All are in [FINDINGS.md](FINDINGS.md), with the evidence behind them. [RELEASE-NOTES.md](RELEASE-NOTES.md) groups them by subject, lists the retractions and amendments, and says which published claims are under review.
+Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md), [F185](FINDINGS.md)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next is its highest setting; whether a lower one keeps the score is being measured. The best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5.
+
+## Start here
+
+| If you want to | Go to |
+|---|---|
+| See what was found | [FINDINGS.md](FINDINGS.md) - starts with an index of every finding, each linked to its entry |
+| Check a published number | [claims.md](claims.md) - every claim with its value, status and evidence links ([claims.yml](claims.yml) is the machine-readable copy) |
+| Read an experiment | [experiments.md](experiments.md) indexes the earlier experiments, one file each; [results/](results/) lists every experiment by number with its pre-registration, results and raw data |
+| See what changed in each release | [RELEASE-NOTES.md](RELEASE-NOTES.md) |
+| Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
+
+## Current release: r5.4 (findings through 7 November 2026)
+
+r5.4 makes the repository easier to browse and changes no finding, claim or evidence file: a linked index at the top of [FINDINGS.md](FINDINGS.md), a clickable claims table ([claims.md](claims.md)) and an experiments index ([results/](results/)). [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.3 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum now qualifies. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** r5.4 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) now qualifies. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
 
-1. Open `claims.yml`. Every published number is a claim with an id, a plain-English statement, its value, and the evidence file path(s) that back it.
+1. Open [claims.md](claims.md) (or [claims.yml](claims.yml)). Every published number is a claim with an id, a plain-English statement, its value, and the evidence file path(s) that back it.
 2. Follow the path. Raw benchmark outputs are in `results/`, evaluation outputs in `results/eval-pilot/` and `results/real-quality/`, text-to-speech evidence in `tts-bench/`, and the scripts that produced derived figures (such as the cost model) are in `tools/`.
-3. Cross-check provenance. `MANIFEST.md` lists every model file used, with source repository, revision, byte size, and SHA256.
+3. Cross-check provenance. [MANIFEST.md](MANIFEST.md) lists every model file used, with source repository, revision, byte size, and SHA256.
 
 A build-time completeness check enforces that every file path cited in `FINDINGS.md`, `experiments.md`, `claims.yml`, or an evidence document under `results/` either exists in this package or is listed in `WITHHELD.md` with a reason. A release cannot ship a citation it cannot account for.
 
 ## What's here
 
-- `claims.yml` - the claims registry: the contract between the published prose and this data
-- `FINDINGS.md` - the findings register (F1 onward), including negative results, retractions and lessons
-- `experiments.md` - pre-registrations and results; predictions were written down before each test ran, and the misses are published beside the hits
-- `integrated-technical-results-v2.md` - the compiled technical results, including the corrections log
-- `MANIFEST.md` - model provenance (source, revision, size, SHA256 for every model file)
-- `PHASE-A-LOG.md` - the dated execution log, kept as written
-- `results/` - benchmark, evaluation, tool-use, coding, and fine-tune outputs, including the pre-registration and results document for each experiment
-- `tts-bench/` - the text-to-speech engine evidence
-- `eval-suites/` - the evaluation suite definitions and data
-- `tools/` - scripts referenced by published claims and findings
-- `docs/` - design and measurement documents cited by the findings
-- `RELEASE-NOTES.md` - what changed in each release
-- `WITHHELD.md` - what is cited but not shipped, and why
+- [claims.md](claims.md) and [claims.yml](claims.yml) - the claims registry: the contract between the published prose and this data
+- [FINDINGS.md](FINDINGS.md) - the findings register (F1 onward), including negative results, retractions and lessons
+- [experiments.md](experiments.md) and [experiments/](experiments/) - pre-registrations and results for the earlier experiments, one file each (later ones have their own files in results/); predictions were written down before each test ran, and the misses are published beside the hits
+- [results/](results/) - benchmark, evaluation, tool-use, coding, and fine-tune outputs, including the pre-registration and results document for each later experiment
+- [integrated-technical-results-v2.md](integrated-technical-results-v2.md) - the compiled technical results, including the corrections log
+- [MANIFEST.md](MANIFEST.md) - model provenance (source, revision, size, SHA256 for every model file)
+- [PHASE-A-LOG.md](PHASE-A-LOG.md) - the dated execution log, kept as written
+- [tts-bench/](tts-bench/) - the text-to-speech engine evidence
+- [eval-suites/](eval-suites/) - the evaluation suite definitions and data
+- [tools/](tools/) - scripts referenced by published claims and findings
+- [docs/](docs/) - design and measurement documents cited by the findings
+- [RELEASE-NOTES.md](RELEASE-NOTES.md) - what changed in each release
+- [WITHHELD.md](WITHHELD.md) - what is cited but not shipped, and why
+- [assets/](assets/) - the chart above, generated from claims.yml at build time
+- [LICENSE](LICENSE), [tools/LICENSE](tools/LICENSE) and [CITATION.cff](CITATION.cff) - licences and how to cite this data
 
 ## Method in one paragraph
 

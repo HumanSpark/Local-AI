@@ -1,3 +1,4 @@
+<!--
 # File: e138-prereg.md
 # Purpose: Pre-registration for E138 - testing a public claim of ~73 tok/s from Ternary Bonsai 2 27B on Strix Halo.
 # Project: sparkbench | Date: 2026-09-22
@@ -6,6 +7,7 @@
 # PrismML fork against the Qwen3.8-27B Q4_K_M incumbent, each with and without a DFlash2
 # drafter), the four blocks (speed+memory, quality, agentic coding, pi harness), predictions
 # that each name the field they are scored against, and the stop rules. Written before any run.
+-->
 
 # E138 PRE-REGISTRATION - does Ternary Bonsai 2 27B do ~73 tok/s in 10.1 GB on this box? (2026-09-22)
 

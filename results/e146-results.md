@@ -1,3 +1,4 @@
+<!--
 # File: e146-results.md
 # Purpose: Results for E146 - does the Atlas inference engine deliver its published Strix Halo speed, and does it beat llama.cpp on the MLPerf edge-agentic metric?
 # Project: sparkbench | Date: 2026-09-25
@@ -7,6 +8,7 @@
 # Atlas (patched HEAD, and the MLPerf entry's shipped source) takes about 27% less time per turn than the llama.cpp reference
 # and stays within 0.03 of its inline accuracy; the published 7,059 ms is NOT reproduced (9.3-9.5 s here). The registered arm M1
 # could not load the checkpoint. Scorer: tools/score_e146.py; output results/raw/e146/score-final.txt. Registered as F168-F170.
+-->
 
 # E146 RESULTS - Atlas is about 27% faster than the llama.cpp reference here, and not as fast as published (2026-09-25)
 

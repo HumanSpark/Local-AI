@@ -1,3 +1,4 @@
+<!--
 # File: e138-results.md
 # Purpose: Results for E138 block 1 - the "~73 tok/s, 10.1 GB, Bonsai 2 on Strix Halo" claim, scored against the pre-registration.
 # Project: sparkbench | Date: 2026-09-23
@@ -6,6 +7,7 @@
 # arms), scored against results/e138-prereg.md and its two amendments. Speed is llama-server's own
 # timings.predicted_per_second, median of three reps; memory is peak amdgpu GTT+VRAM against the
 # idle baseline. Covers C1 (73 tok/s) and C2 (10.1 GB); C3-C6 wait for the second window.
+-->
 
 # E138 RESULTS - the speed claim does not reproduce, and the MEMORY figure identifies the config (2026-09-23)
 

@@ -1,3 +1,4 @@
+<!--
 # File: e140-prereg.md
 # Purpose: Pre-registration for E140 - does a workhorse draft reviewed by the 27B reach a correct answer faster than the 27B alone, without anchoring on a wrong draft?
 # Project: sparkbench | Date: 2026-09-24
@@ -8,6 +9,7 @@
 # workhorse draft -> 27B review, PLANTED-FLAW draft -> 27B review, and planted-CORRECT draft -> 27B
 # review. Primary metric is total elapsed time to a correct answer across every call (TTCA), read
 # only alongside correctness. Written before any run; no runner exists yet.
+-->
 
 # E140 PRE-REGISTRATION - the cascade: workhorse drafts, 27B reviews (2026-09-24)
 

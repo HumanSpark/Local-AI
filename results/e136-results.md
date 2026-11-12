@@ -1,3 +1,4 @@
+<!--
 # File: e136-results.md
 # Purpose: Results for E136 - Qwen-Image-2.1 on benchhost, diffusers vs stable-diffusion.cpp, scored against the pre-registration.
 # Project: sparkbench | Date: 2026-09-21
@@ -5,6 +6,7 @@
 # Overview: Scores P1-P7 plus amendment 2's prediction from results/e136-prereg.md, using
 # the per-image logs and metrics under results/e136/. Covers the attempt-1 wedge, the four
 # scoreable runs inside the relay window (16:32:27 onward), and the full-size final.
+-->
 
 # E136 - RESULTS: Qwen-Image-2.1 runs on benchhost, and the runtime ranking is not the one predicted (2026-09-21)
 

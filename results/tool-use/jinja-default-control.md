@@ -1,5 +1,6 @@
 # Control: does `--jinja` change tool-use behaviour on this build? (2026-07-17)
 
+<!--
 # File: results/tool-use/jinja-default-control.md
 # Purpose: The with/without-`--jinja` control that F39's original tool-use claim needed and never had.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # the pre-fix config was never exercised. This is the control that should have run first. It refutes
 # the claim: `--jinja` defaults to ENABLED on this build, so the flag was a no-op and tool use worked
 # all along. F39's tool-use half is retracted; its `-c` / KV half stands (measured, unaffected).
+-->
 
 ## The question
 

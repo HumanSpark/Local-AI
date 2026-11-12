@@ -1,3 +1,4 @@
+<!--
 # File: e140-results.md
 # Purpose: Results for E140 - the workhorse-draft -> 27B-review cascade against the 27B alone on L3-hard.
 # Project: sparkbench | Date: 2026-09-24
@@ -6,6 +7,7 @@
 # One run, 60 calls, live gateway, 2026-09-24. Verdict REJECT (speed): the review is perfectly
 # safe and slower than solving from scratch. Per-call evidence: results/e140/calls.jsonl; run log
 # results/e140/run-2026-09-24.log. Registered as F161.
+-->
 
 # E140 RESULTS - the cascade is safe and slower (2026-09-24)
 

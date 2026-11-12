@@ -1,3 +1,4 @@
+<!--
 # File: e145-results.md
 # Purpose: Results for E145 - the models from a third-party "approximate options for 128 GB" widget, plus Ornith 1.5, through Aider on the three E113 tasks, against E143's arms.
 # Project: sparkbench | Date: 2026-09-25
@@ -7,6 +8,7 @@
 # are the comparison, not re-run (same build daef7b6, harness, flags). No arm is distinguished from another
 # on pass count; the widget's speed ORDER holds and its speed SIZE does not. Scoring output
 # results/raw/e145/score.txt, per-attempt evidence results/raw/e145/<arm>/. Registered as F167.
+-->
 
 # E145 RESULTS - the widget's options tie with what we already ran (2026-09-25)
 

@@ -1,5 +1,6 @@
 # E37 PRE-REGISTRATION: is F43 batched expert-sharing? (2026-07-17)
 
+<!--
 # File: results/moe-diversity-prereg.md
 # Purpose: Predictions registered BEFORE the E37 runs - the two controls that settle F43's mechanism.
 # Project: sparkbench | Date: 2026-07-17
@@ -7,6 +8,7 @@
 # Overview: F43 (open) recorded that changing only the prompt moved the workhorse's aggregate
 # concurrent throughput 26% (192.19 -> 152.12 t/s @16 slots). E36's own data already narrows the
 # mechanism, and this registers the two controls that would confirm or kill it.
+-->
 
 ## What E36's data already tells us - and why it changes the hypothesis
 

@@ -1,5 +1,6 @@
 # E32 RESULTS: Tool-use / office-document creation (2026-07-14)
 
+<!--
 # File: results/tool-use/E32-results.md
 # Purpose: Results of the tool-use / Word-doc-creation benchmark (E32). Pre-registration: E32-preregistration.md.
 # Project: sparkbench | Date: 2026-07-14
@@ -8,6 +9,7 @@
 # real .docx, select among tools, and chain steps? Tested the workhorse (Qwen3-30B-Instruct, live gateway)
 # and the tool-call "specialist" (Qwen3-Coder-30B). 8 tasks each; two tools offered; calls executed for
 # real via python-docx; a subset rendered to Word-styled PNGs (results/tool-use/png/).
+-->
 
 ## Scores (8 tasks: single-tool, grounded, two-tool, conditional, no-tool trap)
 

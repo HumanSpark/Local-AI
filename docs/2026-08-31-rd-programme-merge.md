@@ -1,5 +1,6 @@
 # Merging the suggested R&D programme into sparkbench's actual queue
 
+<!--
 # File: docs/2026-08-31-rd-programme-merge.md
 # Purpose: Reconcile the 2026-08-31 suggested R&D programme with work already done and already queued.
 # Project: sparkbench | Date: 2026-08-31
@@ -10,6 +11,7 @@
 # blocked by platform reality. This page sorts them so nothing is planned twice
 # and nothing good is lost. It is a reconciliation, not a replacement: the
 # programme's own framing (Track A workload, Track B measurement) is adopted.
+-->
 
 ## 1. Already true - fold in as evidence, do not re-plan
 

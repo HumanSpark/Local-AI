@@ -1,3 +1,4 @@
+<!--
 # File: e148-prereg.md
 # Purpose: Pre-registration for E148 - Atlas's own DFlash speculative mode on the MLPerf model, the Atlas-side like-for-like of E147.
 # Project: sparkbench | Date: 2026-09-26
@@ -6,6 +7,7 @@
 # own DFlash mode, and z-lab's Qwen3.6-27B drafter is the checkpoint the E147 GGUF was converted from, so both engines
 # can run the same drafter lineage. One arm, same harness, same 206 turns, compared with the banked M0, M1p, M1s and M2.
 # Written before any run; the drafter is pinned and fetching.
+-->
 
 # E148 PRE-REGISTRATION - Atlas with DFlash against llama.cpp with DFlash (2026-09-26)
 

@@ -1,5 +1,6 @@
 # Diarisation probe 1: tinydiarize on synthetic 2-speaker audio - INCONCLUSIVE (2026-07-17)
 
+<!--
 # File: results/diarisation/tdrz-probe.md
 # Purpose: First diarisation test. Result: 0/7 turns detected - but the fixture is the prime suspect.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # TTS-generated and almost certainly out-of-distribution for a model fine-tuned on real speech.
 # The probe is recorded as inconclusive pending REAL multi-speaker audio. Investigation + the
 # verified landscape: docs/plans/2026-07-17-diarisation-investigation.md.
+-->
 
 ## What ran
 

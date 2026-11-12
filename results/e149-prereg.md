@@ -1,3 +1,4 @@
+<!--
 # File: e149-prereg.md
 # Purpose: Pre-registration for E149 - one arm testing the leading explanation for F175: Atlas served z-lab's DFlash drafter without its causal sliding-window layers.
 # Project: sparkbench | Date: 2026-09-26
@@ -9,6 +10,7 @@
 # reads for a drafter, and the M3p log confirms what ran: `causal=None, swa=None/None`. The GGUF that llama.cpp used in E147
 # carries the same window (`dflash.attention.sliding_window 2048`, pattern TTTTF) and accepted 14 of 19 drafts in its probe.
 # One arm, one change: the same weights through a config that supplies the three fields. Written before the run.
+-->
 
 # E149 PRE-REGISTRATION - the drafter's sliding-window layers, declared to Atlas (2026-09-26)
 

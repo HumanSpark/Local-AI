@@ -1,3 +1,4 @@
+<!--
 # File: e145-prereg.md
 # Purpose: Pre-registration for E145 - the models a third-party "approximate options for 128 GB" widget recommends, plus Ornith 1.5, through Aider on the three E113 tasks, against E143's arms.
 # Project: sparkbench | Date: 2026-09-24
@@ -6,6 +7,7 @@
 # and no stated method. This tests the models it names on the instrument E143 used, on the same
 # build and flags, so E143's four arms are the comparison and are not re-run. The widget's relative
 # claims are turned into field-named predictions. Written before any run.
+-->
 
 # E145 PRE-REGISTRATION - the widget's options through Aider (2026-09-24)
 

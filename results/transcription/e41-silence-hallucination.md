@@ -1,5 +1,6 @@
 # E41: Whisper invents "Thank you." out of pure digital silence - ~2/min, and the BIGGER model is the DANGEROUS one (2026-07-17)
 
+<!--
 # File: results/transcription/e41-silence-hallucination.md
 # Purpose: Systematic silence-hallucination benchmark. Pre-reg: ../diarisation/e41-silence-hallucination-prereg.md.
 # Project: sparkbench | Date: 2026-07-17
@@ -11,6 +12,7 @@
 # reversal: `small` emits MORE fabricated segments (298 vs 208) but 85% are self-declaring
 # annotations like [BLANK_AUDIO]; large-v3-turbo emits plausible speech. Counted by HARM rather than
 # volume, **large-v3-turbo is 4.9x worse than small** - "use the better model" makes it worse.
+-->
 
 ## Why this matters more than any DER number in this register
 

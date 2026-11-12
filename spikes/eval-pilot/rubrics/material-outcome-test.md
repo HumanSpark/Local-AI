@@ -1,3 +1,4 @@
+<!--
 # File: material-outcome-test.md
 # Purpose: Third-party LLM-judge rubric that scores answers by what materially changes for the
 #          client, not by polish, length or apparent sophistication.
@@ -7,6 +8,7 @@
 # adopted under its own explicit reuse invitation (quoted below). Body text below the provenance
 # block is UNMODIFIED - do not edit it in place. If we change the rubric, copy it to a new file so
 # the disagreement between our variant and the original stays measurable.
+-->
 
 ## Provenance
 

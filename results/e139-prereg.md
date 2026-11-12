@@ -1,3 +1,4 @@
+<!--
 # File: e139-prereg.md
 # Purpose: Pre-registration for E139 - testing halogen-flash-server's published prefill and decode claims for Qwen3.8-Flash-Next on this box.
 # Project: sparkbench | Date: 2026-09-24
@@ -7,6 +8,7 @@
 # GGUF, mainline llama.cpp on the same GGUF), one speed+memory block and one identity check,
 # predictions that each name the field they are scored against, and the stop rules. Written
 # before any run; the weights were still downloading when this was committed.
+-->
 
 # E139 PRE-REGISTRATION - does halogen-flash prefill 32K at ~1,424 tok/s on this box? (2026-09-24)
 

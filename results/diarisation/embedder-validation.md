@@ -1,5 +1,6 @@
 # Speaker IDENTITY works on this box, ungated - extractor validated, pipeline attributes 15/15 (2026-07-17)
 
+<!--
 # File: results/diarisation/embedder-validation.md
 # Purpose: The result that unblocked diarisation. Pre-registration: embedder-validation-prereg.md.
 # Project: sparkbench | Date: 2026-07-17
@@ -10,6 +11,7 @@
 # all across 45 pairs). The full pipeline attributed 15/15 text segments correctly on the
 # two-speaker fixture. Two honest caveats: the speaker COUNT was wrong (3 vs 2), and the fixture is
 # synthetic. Both are stated below rather than smoothed over.
+-->
 
 ## The headline: the gate was never the blocker
 

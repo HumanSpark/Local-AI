@@ -1,3 +1,4 @@
+<!--
 # File: e154-results.md
 # Purpose: E154 results - six coding agents (Sonnet 5.5 and five local setups) re-doing 15 real HumanSpark repo fixes.
 # Project: sparkbench | Date: 2026-11-05
@@ -6,6 +7,7 @@
 # tools/score_e154.py (output results/e154/score.json). S ran 2026-11-04 evening outside any window; H, Q, T27 in one relay
 # idle window (2026-11-04 ~21:28 - 2026-11-05 03:51); TL, QN in a second (03:52 - 08:42). Kernel 7.0.0-38. Local-arm task
 # files are committed without transcript/diff (full copies gitignored in results/e154/transcripts/, sha256 in each record).
+-->
 
 # E154 RESULTS - two local setups solve all 15 real fixes Sonnet solved, at about 15x the time (2026-11-05)
 

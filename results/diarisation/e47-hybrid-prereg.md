@@ -1,5 +1,6 @@
 # PRE-REGISTRATION: pyannote-VAD + our embeddings - can we close the false-alarm gap at our speed? (2026-07-17)
 
+<!--
 # File: results/diarisation/e47-hybrid-prereg.md
 # Purpose: Predictions BEFORE running the hybrid (pyannote segmentation-3.0 as VAD, our clustering).
 # Project: sparkbench | Date: 2026-07-17
@@ -10,6 +11,7 @@
 # whether swapping ONLY the VAD - pyannote/segmentation-3.0 in place of Silero, keeping our fast
 # WeSpeaker embeddings + complete-linkage clustering - closes the false-alarm half while keeping
 # most of our speed. Speed matters: ours ~60x real time GPU-free vs pyannote ~real time on CPU.
+-->
 
 Why: online calls are the deployment, they map to IHM (pyannote's biggest lead), and speed is a
 stated priority - so the winning config is "pyannote accuracy at our speed" IF the VAD swap delivers.

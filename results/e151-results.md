@@ -1,3 +1,4 @@
+<!--
 # File: e151-results.md
 # Purpose: Results for E151 - with Atlas's prefix cache off, the DFlash drafter accepts a little past 8K context instead of nothing; the cache is a minor contributor, not the cause. The Atlas DFlash investigation stops here.
 # Project: sparkbench | Date: 2026-09-26
@@ -8,6 +9,7 @@
 # first-turn control held (2.238 against 2.429). P1 and P2 falsified, P3, P4, P5 held. By E150's and E151's decision
 # rules, the remaining candidate is the HIP kernel path and this project does not pursue it. Scorer
 # tools/score_capped_atlas_arm.py, output results/raw/e151/score.txt. Registered as F178.
+-->
 
 # E151 RESULTS - the prefix cache is not the cause; Atlas DFlash on this box is left unexplained and unusable (2026-09-26)
 

@@ -1,3 +1,4 @@
+<!--
 # File: e153-prereg.md
 # Purpose: Pre-registration for E153 - gufo, Halogen, Strata and Talus against llama.cpp on Qwen3.8-Flash-Next, one client, one box.
 # Project: sparkbench | Date: 2026-11-04
@@ -7,6 +8,7 @@
 # E153 serves each engine at its LATEST release (owner rule 2026-11-04) in its shipped configuration, and times every engine
 # with one streaming HTTP client (tools/e153_speed.py) on one fixed prompt set (tools/e153_prompts.py), so the comparison
 # is the engines, not their harnesses. Written before any arm runs.
+-->
 
 # E153 PRE-REGISTRATION - five Flash-Next engines, one client (2026-11-04)
 

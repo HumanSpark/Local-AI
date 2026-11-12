@@ -1,3 +1,4 @@
+<!--
 # File: e150-results.md
 # Purpose: Results for E150 - lifting Atlas's DFlash context cap to the serving context changed nothing; the vendor's own explanation of its low acceptance does not hold on this workload.
 # Project: sparkbench | Date: 2026-09-26
@@ -7,6 +8,7 @@
 # (0.060 per step against 0.064; 0.008 past 12K), the same tokens per step (1.071 both), and the identical output length
 # on 127 of 128 turns. F176's cause claim is retracted. Scorer tools/score_capped_atlas_arm.py, output
 # results/raw/e150/score.txt. Registered as F177.
+-->
 
 # E150 RESULTS - the context cap is not the cause (2026-09-26)
 

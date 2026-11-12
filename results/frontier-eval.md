@@ -1,3 +1,4 @@
+<!--
 # File: frontier-eval.md
 # Purpose: Quality comparison of frontier cloud models vs local sparkbench models on the eval-pilot suite.
 # Project: sparkbench | Date: 2026-07-06
@@ -6,6 +7,7 @@
 # on identical deterministic prompts from spikes/eval-pilot/. Methodology:
 # same assertions, same temperature (0), single-shot prompts, bounded
 # API calls. Raw responses saved to results/raw/frontier-eval-*.json.
+-->
 
 ## Summary
 

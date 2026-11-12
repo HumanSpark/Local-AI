@@ -1,3 +1,4 @@
+<!--
 # File: e137-results.md
 # Purpose: Results for E137 - upscaling the Dispatches cover to 1500 and 3000 px, scored against the pre-registration.
 # Project: sparkbench | Date: 2026-09-22
@@ -5,6 +6,7 @@
 # Overview: Three arms (L Lanczos, R Real-ESRGAN x5 variants, Q Qwen-Image-2.1 edit), each run
 # solo on an idle GPU with the relay down. Faithfulness is PSNR of the output downscaled back to
 # 1254 against the source; text is judged on crop sheets. Figures from results/e137/scores.json.
+-->
 
 # E137 - RESULTS: upscaling the Dispatches cover (2026-09-22)
 

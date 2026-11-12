@@ -1,5 +1,6 @@
 # E42: large beats small on real speech (10.7% vs 13.7%) - but small OMITS and large FABRICATES (2026-07-17)
 
+<!--
 # File: results/transcription/e42-wer-model-size.md
 # Purpose: The missing half of E41 - does model size change quality on actual SPEECH?
 # Project: sparkbench | Date: 2026-07-17
@@ -10,6 +11,7 @@
 # i.e. small is ~28% worse. But the error COMPOSITION confirms and strengthens the E41 asymmetry:
 # small's errors are DELETIONS (267 vs 29 insertions) and large's are INSERTIONS (95 vs small's 29).
 # Small under-generates; large over-generates. Config answer: large-v3-turbo + VAD wins on BOTH axes.
+-->
 
 ## What this measures - and what it CANNOT
 

@@ -1,3 +1,4 @@
+<!--
 # File: e141-prereg.md
 # Purpose: Pre-registration for E141 - can a cheap decision in front of the 27B (escalate-or-ship, or pick the effort) beat a fixed setting on correct answers per second?
 # Project: sparkbench | Date: 2026-09-24
@@ -7,6 +8,7 @@
 # 27B's work. Two families, one bank (L3-hard, as E140), one live gateway: escalation gates (ship the
 # workhorse's answer or escalate to the 27B) and an effort router (the workhorse picks the 27B's
 # reasoning_effort per request - the "reasoning-gate" design). Written before any run.
+-->
 
 # E141 PRE-REGISTRATION - escalation gates and an effort router vs fixed effort (2026-09-24)
 

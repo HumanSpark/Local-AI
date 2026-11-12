@@ -1,5 +1,6 @@
 # E34: llama.cpp router mode - multiple models on call (2026-07-17)
 
+<!--
 # File: results/router-multimodel.md
 # Purpose: Does llama.cpp's router mode give us multiple models loaded on call, safely, on this box?
 # Project: sparkbench | Date: 2026-07-17
@@ -10,6 +11,7 @@
 # context, switching is 0.04s, and per-model presets solve the tool-template gap that a single
 # global flags line could not. Constraint: 2 models is the safe cap - 3 lands on the memory edge.
 # Box constraint honoured throughout: nothing approached the ~60 GiB deadlock edge; D-state 0 all run.
+-->
 
 ## Question
 

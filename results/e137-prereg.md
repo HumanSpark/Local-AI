@@ -1,3 +1,4 @@
+<!--
 # File: e137-prereg.md
 # Purpose: Pre-registration for E137 - can the models on benchhost upscale a text-heavy brand image to 1500 and 3000 px square.
 # Project: sparkbench | Date: 2026-09-22
@@ -5,6 +6,7 @@
 # Overview: Three arms along the METHOD axis (classical resample, a GAN super-resolution
 # network, a diffusion re-render), variants labelled inside their arm, predictions with fields,
 # written before any run.
+-->
 
 # E137 - PRE-REGISTRATION: upscaling the Dispatches cover (2026-09-22)
 

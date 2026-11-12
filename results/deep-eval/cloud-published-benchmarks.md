@@ -1,3 +1,4 @@
+<!--
 # File: cloud-published-benchmarks.md
 # Purpose: Vendor-published knowledge-benchmark citations for cloud models used in the deeper-research campaign (context, not comparison).
 # Project: sparkbench | Date: 2026-07-11
@@ -11,6 +12,7 @@
 # (vendor model cards, official announcements, system cards) marked; secondary
 # sources (leaderboards, press) noted as such. Where a pinned model has no findable
 # published score, absence is recorded explicitly.
+-->
 
 ## Vendor-published knowledge benchmarks
 

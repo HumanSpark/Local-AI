@@ -1,5 +1,6 @@
 # E43: against REAL ground truth our DER is 29.2%, not 3.51% - and 69% of the error is a VAD we never built (2026-07-17)
 
+<!--
 # File: results/diarisation/e43-ami-real-ground-truth.md
 # Purpose: The primary config vs AMI, human annotation, standard DER. Pre-reg: e43-ami-prereg.md.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # The dominant error is FALSE ALARM (20.2% of 29.2%), i.e. our speech detector; CONFUSION is only
 # 8.7% on speakers this embedder has never heard, including far-field. The speaker model is good;
 # the speech detector is a component we never built. 2 of 6 predictions hit.
+-->
 
 ## Corpus and method
 

@@ -1,3 +1,4 @@
+<!--
 # File: e139-results.md
 # Purpose: Results for E139 - does halogen-flash prefill 32K at ~1,424 tok/s on this box?
 # Project: sparkbench | Date: 2026-09-24
@@ -6,6 +7,7 @@
 # (21:02-21:32 main, 21:32 G0k, 21:33 G0m), Chatterbox TTS resident throughout (amendment 2).
 # C1 is REPRODUCED-CONDITIONALLY at 1,152 tok/s; 8 predictions held, P9 falsified, P7 unscorable
 # because G0 was killed twice by the 12 GiB memory guard. Raw: results/e139/. Registered as F165, F166.
+-->
 
 # E139 RESULTS - Halogen reaches 1,152 tok/s at 32K, 5.3x llama.cpp, but cannot serve our GGUF here (2026-09-24)
 

@@ -1,3 +1,4 @@
+<!--
 # File: e149-results.md
 # Purpose: Results for E149 - declaring the drafter's causal sliding-window layers to Atlas changed nothing; the cause of F175 is the drafter's 4,096-token context cap, in Atlas's own words.
 # Project: sparkbench | Date: 2026-09-26
@@ -8,6 +9,7 @@
 # the run and Atlas's source together point at instead: ATLAS_DFLASH_CTX_WINDOW=4096 truncates the prefix the drafter sees,
 # and Atlas's own comment says the drafter "was trained over the FULL captured prefix" and that the cap "cripples it".
 # Scorer tools/score_e149.py (server-side path), output results/raw/e149/score.txt. Registered as F176.
+-->
 
 # E149 RESULTS - the sliding-window declaration is inert; the context cap is the cause (2026-09-26)
 

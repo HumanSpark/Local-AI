@@ -1,3 +1,4 @@
+<!--
 # File: e150-prereg.md
 # Purpose: Pre-registration for E150 - one arm testing F176's cause: Atlas's DFlash drafter sees at most 4,096 tokens of prefix; raise the cap to the serving context.
 # Project: sparkbench | Date: 2026-09-26
@@ -7,6 +8,7 @@
 # from_weights.rs: the drafter was trained on the full captured prefix and the 4,096 ctx_window cap "cripples it". One arm,
 # one variable: ATLAS_DFLASH_CTX_WINDOW=36864 (the serving context, so the drafter always sees the whole prefix). Written
 # before the run; the scratch cost is the vendor's figure (about 250 MB per head at 4,096, linear).
+-->
 
 # E150 PRE-REGISTRATION - Atlas DFlash with the drafter's context cap lifted (2026-09-26)
 

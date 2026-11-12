@@ -1,5 +1,6 @@
 # E32: Tool-use / office-document creation (pre-registration)
 
+<!--
 # File: results/tool-use/E32-preregistration.md
 # Purpose: Pre-register predictions + method for the tool-use / Word-doc-creation test BEFORE any run.
 # Project: sparkbench | Date: 2026-07-14
@@ -10,6 +11,7 @@
 # (create_word_document), correctly CALL the tool to produce a real .docx, select among multiple
 # tools, and chain steps? This experiment fills that gap. Motivated by a direct question (2026-07-14):
 # "did we test tool use - Word doc creation for example?" Answer was no; this tests it.
+-->
 
 ## Method
 

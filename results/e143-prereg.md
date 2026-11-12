@@ -1,3 +1,4 @@
+<!--
 # File: e143-prereg.md
 # Purpose: Pre-registration for E143 - the coding models a Strix Halo chat recommended (Qwen3.8 Flash, the 27B, a 35B-A3B) run through Aider on our three real repo tasks, against our incumbent coding model.
 # Project: sparkbench | Date: 2026-09-24
@@ -6,6 +7,7 @@
 # "27b, with the 35b variants for little stuff". This tests those picks on the one coding
 # instrument that is not saturated (F151) and not rotted (F152): tools/aider-tasks.json, three real
 # tasks, independent verify. Four arms, ONE build, solo serving, relay down. Written before any run.
+-->
 
 # E143 PRE-REGISTRATION - chat-recommended coding models through Aider (2026-09-24)
 

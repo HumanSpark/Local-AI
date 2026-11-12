@@ -1,3 +1,4 @@
+<!--
 # File: e142-results.md
 # Purpose: Results for E142 - the 27B at `off` as first stage of an escalate-or-ship gate, against fixed `low`, on L3-hard.
 # Project: sparkbench | Date: 2026-09-24
@@ -6,6 +7,7 @@
 # calls, live gateway, 0 void, 1,365 s. Neither gate shipped a wrong answer, and neither saves
 # time. Per-call evidence results/e142/calls.jsonl, score output results/e142/score.txt.
 # Registered as F163.
+-->
 
 # E142 RESULTS - the 27B can gate itself, but the gate costs what it saves (2026-09-24)
 

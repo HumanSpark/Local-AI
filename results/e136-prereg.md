@@ -1,3 +1,4 @@
+<!--
 # File: e136-prereg.md
 # Purpose: Pre-registration for E136 - can benchhost run Qwen-Image-2.1, through which runtime, how fast, and does it fix FLUX's text failure.
 # Project: sparkbench | Date: 2026-09-21
@@ -5,6 +6,7 @@
 # Overview: Registers the question, the two runtime arms (one variant inside
 # the sd.cpp arm), the wallpaper briefs, and seven predictions each naming the FIELD
 # they are scored against - all BEFORE any generation runs.
+-->
 
 # E136 - PRE-REGISTRATION: Qwen-Image-2.1 on benchhost (2026-09-21)
 

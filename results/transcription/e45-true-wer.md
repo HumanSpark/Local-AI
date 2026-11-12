@@ -1,5 +1,6 @@
 # E45: true WER says large-v3-turbo 2.40%, small 3.35% - and the BROKEN harness had said the opposite (2026-07-17)
 
+<!--
 # File: results/transcription/e45-true-wer.md
 # Purpose: E42's model-size question, settled against real human ground truth.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # settles it on LibriSpeech test-clean - the standard benchmark, real human transcripts, and a
 # PUBLISHED expected value that doubles as a harness check. It caught a bug in my own harness that
 # had inverted the answer toward the hypothesis under test.
+-->
 
 ## Result
 

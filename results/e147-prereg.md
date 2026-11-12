@@ -1,3 +1,4 @@
+<!--
 # File: e147-prereg.md
 # Purpose: Pre-registration for E147 - the like-for-like arm E146 lacked: llama.cpp WITH a speculative drafter on Qwen3.6-27B, under MLCommons' edge-agentic harness, against the banked reference and Atlas arms.
 # Project: sparkbench | Date: 2026-09-25
@@ -6,6 +7,7 @@
 # speculation while Atlas runs MTP K=3. On Qwen3.8 a drafter closed most of the code-prompt gap (E146 block 1). This
 # run adds the missing arm on the same 206 turns, same harness, same flags plus a drafter, and asks whether Atlas beats
 # the best open configuration or only the reference. Written before any run; the drafter is pinned, not yet fetched.
+-->
 
 # E147 PRE-REGISTRATION - llama.cpp plus a drafter on the MLPerf metric (2026-09-25)
 

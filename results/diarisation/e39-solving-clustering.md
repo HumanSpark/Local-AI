@@ -1,5 +1,6 @@
 # E39: the diarisation failure was ONE WORD - and the sophisticated fix was the worst method (2026-07-17)
 
+<!--
 # File: results/diarisation/e39-solving-clustering.md
 # Purpose: Autonomous attempt to solve E38b's failures. Result: clustering SOLVED, counting NOT.
 # Project: sparkbench | Date: 2026-07-17
@@ -10,6 +11,7 @@
 # was REFUTED acoustically: the failure was ours. Speaker counting remains UNSOLVED - three
 # principled methods all failed, including the spectral eigengap work that consumed most of the
 # session and scored WORST of everything tried.
+-->
 
 ## Corpus
 

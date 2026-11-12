@@ -1,5 +1,6 @@
 # E44: a real VAD halves the error - DER 29.2% -> 20.2% held out, and far-field costs 0.9 points (2026-07-17)
 
+<!--
 # File: results/diarisation/e44-vad-fix.md
 # Purpose: Fixing E43's diagnosis - false alarm was 69% of all DER because we never built a VAD.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # voice detector. Replacing it with Silero (via whisper.cpp's own VAD tool) gives 20.2% DER on 13
 # HELD-OUT meetings, and confusion falls as a side effect. The far-field result is the surprise:
 # SDM costs 0.9 points over close-talk headsets.
+-->
 
 ## Result: held out, not tuned
 

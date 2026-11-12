@@ -1,3 +1,4 @@
+<!--
 # File: REPORT-STANDARD.md
 # Purpose: The standard for who writes what in sparkbench's published reports, and the path a report takes to the site.
 # Project: sparkbench | Date: 2026-11-06
@@ -7,6 +8,7 @@
 # marked DRAFT). Replaces the "Release-4.0 handoff spec" that tools/build_data_package.py used to cite: that document
 # was never found in sparkbench or webby. Sections: roles, the three kinds of artefact, the path to publication, rules,
 # and the history behind them.
+-->
 
 # Report standard: who writes what
 

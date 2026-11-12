@@ -1,3 +1,4 @@
+<!--
 # File: closed-record.md
 # Purpose: Results for closed-record professional reasoning - three local models against a
 #          ten-matter sealed-key corpus, plus the instrument defects the work surfaced.
@@ -11,6 +12,7 @@
 # open-ended drafting (F34). Second finding, and the one most likely to travel: the WORDING of the
 # answer-format instruction moved scores by up to 3 points in 10 with the model unchanged.
 # Pre-registration: results/closed-record-prereg.md, committed before the first model loaded.
+-->
 
 ## Results - full corpus
 

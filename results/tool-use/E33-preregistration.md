@@ -1,5 +1,6 @@
 # E33: Extensive tool-use benchmark (pre-registration)
 
+<!--
 # File: results/tool-use/E33-preregistration.md
 # Purpose: Pre-register the EXTENSIVE tool-use benchmark (E32 was the 8-task pilot). Predictions before runs.
 # Project: sparkbench | Date: 2026-07-14
@@ -9,6 +10,7 @@
 # that probe into a benchmark: 4 models, ~22 tasks across 7 categories, N=5 runs/task for RELIABILITY (the
 # production question is how OFTEN it works, not whether it can once), 6 tools for real selection difficulty,
 # error-recovery and ambiguity categories, structural scoring only (no API spend - decided 2026-07-14).
+-->
 
 ## Design
 

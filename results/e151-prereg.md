@@ -1,3 +1,4 @@
+<!--
 # File: e151-prereg.md
 # Purpose: Pre-registration for E151 - one arm testing whether Atlas's prefix cache is what starves its DFlash drafter on multi-turn work.
 # Project: sparkbench | Date: 2026-09-26
@@ -8,6 +9,7 @@
 # community-reported correctness regression on SM12.x with DFlash; outputs may be wrong on multi-turn cache hits". And
 # M3p's log, split by turn: at the SAME 4-8K context, first turns of a conversation (no cache hit possible) accept 1.125
 # per step and later turns 0.207. One arm, one variable: prefix caching off. Written before the run, while E150 runs.
+-->
 
 # E151 PRE-REGISTRATION - Atlas DFlash with the prefix cache off (2026-09-26)
 

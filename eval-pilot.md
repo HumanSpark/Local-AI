@@ -1,3 +1,4 @@
+<!--
 # File: eval-pilot.md
 # Purpose: Results matrix and prediction resolutions for the promptfoo eval pilot (spec: docs/plans/2026-07-04-eval-pilot.md).
 # Project: sparkbench | Date: 2026-07-04
@@ -6,6 +7,7 @@
 # (4 task types x short/long context), deterministic grading,
 # temperature 0, llama-server lifecycle per model. Raw promptfoo JSONs
 # + server logs in results/eval-pilot/. All servers reaped (ALL-CLEAN).
+-->
 
 ## Results matrix
 

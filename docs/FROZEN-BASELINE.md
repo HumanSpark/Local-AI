@@ -1,3 +1,4 @@
+<!--
 # File: docs/FROZEN-BASELINE.md
 # Purpose: The exact models, quantisations, provenance, build and runtime settings every sparkbench headline figure was measured on.
 # Project: sparkbench | Date: 2026-08-20
@@ -15,6 +16,7 @@
 # upstream LFS object ids, verified against local files on arrival. They are not
 # re-hashed here: hashing 63 GB of weights is the documented deadlock trigger
 # (docs/memory-edge-deadlock.md) and must never overlap a bench run.
+-->
 
 ## The hardware and the stack
 

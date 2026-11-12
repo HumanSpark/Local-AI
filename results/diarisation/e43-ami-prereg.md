@@ -1,5 +1,6 @@
 # PRE-REGISTRATION: the primary config against REAL ground truth (AMI) (2026-07-17)
 
+<!--
 # File: results/diarisation/e43-ami-prereg.md
 # Purpose: Predictions registered BEFORE the first run against human-annotated ground truth.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # I then blamed on the model for two write-ups), on four recordings that ALL contain Alastair's
 # voice. AMI removes every one of those crutches at once: human annotation, public corpus, unseen
 # speakers, far-field condition, and 17% overlapped speech.
+-->
 
 Why: our headline diarisation number is measured against a ruler we estimated and I typed by hand.
 Trigger: Alastair, 2026-07-17 - "go get us that Data and do a proper benchmark now with the primary

@@ -1,3 +1,4 @@
+<!--
 # File: e135-results.md
 # Purpose: E135 results - DeepSeek-V4.1-Flash capability vs frontier and vs its own predecessor.
 # Project: sparkbench | Date: 2026-09-11
@@ -5,6 +6,7 @@
 # Overview: Scores the six registered arms against the six predictions in
 # e135-prereg.md. The headline is a NULL: the knowledge-work banks cannot
 # separate these three models. Also records why the first matrix was rerun.
+-->
 
 # E135 - RESULTS: the banks cannot tell V4.1-Flash, its predecessor and a frontier model apart (2026-09-11)
 

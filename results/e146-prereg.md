@@ -1,3 +1,4 @@
+<!--
 # File: e146-prereg.md
 # Purpose: Pre-registration for E146 - does the Atlas inference engine deliver its published Strix Halo decode speed on Qwen3.8-27B, and does it beat llama.cpp with a drafter?
 # Project: sparkbench | Date: 2026-09-25
@@ -7,6 +8,7 @@
 # Two GitHub repositories both present themselves as Atlas and are in a declared dispute, so this
 # registration pins exact commits and takes no side. The fair comparator is llama.cpp WITH a drafter,
 # already measured in E138 (25.67 tok/s on code prompts). Written before any build or run.
+-->
 
 # E146 PRE-REGISTRATION - Atlas on Strix Halo vs llama.cpp with a drafter (2026-09-25)
 

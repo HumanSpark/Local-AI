@@ -1,5 +1,6 @@
 # E33 RESULTS: Extensive tool-use benchmark (2026-07-14)
 
+<!--
 # File: results/tool-use/E33-results.md
 # Purpose: Results of the extensive tool-use reliability benchmark. Pre-reg: E33-preregistration.md. Pilot: E32.
 # Project: sparkbench | Date: 2026-07-14
@@ -7,6 +8,7 @@
 # Overview: 4 models x 22 tasks x 5 runs = 440 task-runs, 6 tools, 7 categories, structural scoring, no API spend.
 # Headline: out-of-the-box tool-use support on llama.cpp is wildly model-dependent (a serving-config finding), and
 # the pilot's dramatic "Coder is much worse" verdict softens under rigorous measurement.
+-->
 
 ## Reliability comparison (success rate; N=5 per task)
 

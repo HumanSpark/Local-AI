@@ -1,3 +1,4 @@
+<!--
 # File: 2026-11-evidence-entries-coding.md
 # Purpose: Evidence-page entries for the November 2026 local coding results, written from the sources only, for the r5.2 data package.
 # Project: sparkbench | Date: 2026-11-06
@@ -8,6 +9,7 @@
 # are not buyer prose. Every number is a claim in tools/build_claims_json.py or a figure in the cited results file.
 # E158 entry F185 added 2026-11-07. Sources: results/e156-results.md, results/e156-prereg.md, results/e158-results.md,
 # results/e158-prereg.md, docs/FINDINGS.md F183-F185.
+-->
 
 # Evidence entries: local coding on real repository work (November 2026)
 

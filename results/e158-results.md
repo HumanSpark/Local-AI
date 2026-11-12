@@ -1,3 +1,4 @@
+<!--
 # File: e158-results.md
 # Purpose: Results of E158 - do newer local coding models beat Flash-Next's 9/10 on the frozen E156 bank?
 # Project: sparkbench | Date: 2026-11-07
@@ -6,6 +7,7 @@
 # records: results/e158/raw/<arm>/<task>.json (OR35 37bc8e6, OR122 086620e, TS45 ac5e54a, RA f9efc66); per-task
 # runner lines results/e158/raw/window.log; transcripts gitignored under results/e158/transcripts/<arm>. Comparators
 # are the E156 arms as scored (results/e156-results.md), not re-run. Finding F185.
+-->
 
 # E158 RESULTS - Ornith 1.5 35B ties Flash-Next at 9/10; nothing beats it (2026-11-07)
 

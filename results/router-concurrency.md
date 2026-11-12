@@ -1,5 +1,6 @@
 # E36 RESULTS: single-model concurrency under the router (2026-07-17)
 
+<!--
 # File: results/router-concurrency.md
 # Purpose: Does the router's proxy hop change F17's concurrency scaling? Pre-reg: router-concurrency-prereg.md.
 # Project: sparkbench | Date: 2026-07-17
@@ -9,6 +10,7 @@
 # not throughput. Bigger incidental finding: aggregate throughput moved 26% purely by changing the
 # PROMPT (152 -> 192 t/s), which means F17's headline 193.5 is measured on degenerate repetitive text.
 # Two ruler errors were caught and corrected before any of these numbers were trusted; both are recorded.
+-->
 
 ## Conditions
 

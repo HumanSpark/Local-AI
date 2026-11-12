@@ -1,3 +1,4 @@
+<!--
 # File: reasoning-extraction-regrade.md
 # Purpose: Document dual-view reasoning extraction and re-grading (E27 contamination resolution)
 # Project: sparkbench | Date: 2026-07-11
@@ -6,6 +7,7 @@
 # cloud Mistral magistral) contaminate outputs with thinking/reasoning text.
 # This document records: (1) contamination patterns observed, (2) extraction
 # rules applied, (3) per-run extraction results, (4) dual-view score tables.
+-->
 
 ## Executive Summary
 

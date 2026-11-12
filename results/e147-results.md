@@ -1,3 +1,4 @@
+<!--
 # File: e147-results.md
 # Purpose: Results for E147 - llama.cpp with a speculative drafter on the MLPerf edge-agentic metric, the like-for-like arm E146 lacked.
 # Project: sparkbench | Date: 2026-09-25
@@ -6,6 +7,7 @@
 # 0 amdgpu fault lines, all three gates passed. With a drafter, llama.cpp takes about 40% less time per turn than the
 # MLPerf reference and about 17-18% less than either Atlas build, at accuracy identical to the reference. Scorer
 # tools/score_e146.py (E147 section), output results/raw/e147/score.txt. Registered as F172.
+-->
 
 # E147 RESULTS - with a drafter, the open configuration beats Atlas on the MLPerf metric (2026-09-25)
 

@@ -1,3 +1,4 @@
+<!--
 # File: envelope-worked-example.md
 # Purpose: The E30 worked example - three solicitor-shaped questions against a ~46K-token document bundle at the measured usable limit.
 # Project: sparkbench | Date: 2026-07-11
@@ -8,6 +9,7 @@
 # class; served at -c 50176 on the Qwen3-30B workhorse, Vulkan, NP=1).
 # Ground truth = the fixture fact manifests. Raw answers:
 # e30-worked-example-raw.json; server log: e30-worked-example.serverlog.
+-->
 
 | # | Question | Answer (verbatim) | Time | Grade |
 |---|---|---|---|---|

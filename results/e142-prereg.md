@@ -1,3 +1,4 @@
+<!--
 # File: e142-prereg.md
 # Purpose: Pre-registration for E142 - does the 27B at `off` give a usable confidence signal as the first stage of an escalate-or-ship gate, where the workhorse did not (F162)?
 # Project: sparkbench | Date: 2026-09-24
@@ -5,6 +6,7 @@
 # Overview: E141 rejected the workhorse as gate (5 shipped-wrong, most confident answer wrong). The
 # 27B at `off` is 9/12 at a 23.8 s median, so a perfect gate on it saves more. This run measures
 # whether its own logprobs or a self-check can find its 3 wrong answers. Written before any run.
+-->
 
 # E142 PRE-REGISTRATION - 27B `off` as first stage (2026-09-24)
 

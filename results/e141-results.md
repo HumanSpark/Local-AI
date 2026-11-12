@@ -1,3 +1,4 @@
+<!--
 # File: e141-results.md
 # Purpose: Results for E141 - escalation gates and a workhorse effort router in front of the 27B, against fixed effort, on L3-hard.
 # Project: sparkbench | Date: 2026-09-24
@@ -6,6 +7,7 @@
 # One run, 76 calls, live gateway, 0 void, 2,343 s. All three deployable designs REJECTED; fixed
 # `low` is the best setting measured. Per-call evidence results/e141/calls.jsonl, log
 # results/e141/run-2026-09-24.log. Registered as F162.
+-->
 
 # E141 RESULTS - no cheap decision beats fixed `low` (2026-09-24)
 

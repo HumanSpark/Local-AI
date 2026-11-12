@@ -1,3 +1,4 @@
+<!--
 # File: model-survey.md
 # Purpose: Running results log for the capability-assessment model survey (briefing v2, 2026-07-04).
 # Project: sparkbench | Date: 2026-07-04
@@ -8,6 +9,7 @@
 # `-d 0,4096,8192` (split invocations for >~60GiB weights per F6). Corridor
 # predictions computed at pin time from artefact bytes (FINDINGS F10).
 # Provenance for every artefact: manifests/MANIFEST.md.
+-->
 
 ## Baseline (Phase A, do not re-run - briefing reference data)
 

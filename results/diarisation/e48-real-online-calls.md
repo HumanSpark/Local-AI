@@ -1,5 +1,6 @@
 # E48: on REAL online calls, ours and hybrid tie on attribution (~95%) - the AMI hybrid win shrinks (2026-07-17)
 
+<!--
 # File: results/diarisation/e48-real-online-calls.md
 # Purpose: ours vs hybrid on Alastair's actual 4 Otter-referenced online calls. The deployment check.
 # Project: sparkbench | Date: 2026-07-17
@@ -10,6 +11,7 @@
 # report COVERAGE (% of call labelled speech) and ATTRIBUTION ACCURACY (of a system's own speech,
 # duration-weighted % where its label maps to Otter's speaker). Result: on real online calls, ours
 # and hybrid tie on attribution (~95%); the dramatic AMI hybrid advantage does NOT clearly replicate.
+-->
 
 ## Result (4 real online calls, supplied k = Otter effective speaker count)
 

@@ -1,5 +1,6 @@
 # E40: whisper INVENTS SPEECH over silence - and the diarisation residual is physics, not model (2026-07-17)
 
+<!--
 # File: results/diarisation/e40-vad-and-limits.md
 # Purpose: Continued autonomous work on E39's open items. One correctness bug found, one limit proven.
 # Project: sparkbench | Date: 2026-07-17
@@ -11,6 +12,7 @@
 # Separately: clustering is DONE (unsupervised now equals the supervised ceiling) and the residual
 # error is proven to be the boundary-mixture problem - physics, not a model weakness. Speaker
 # counting remains UNSOLVED.
+-->
 
 ## THE HEADLINE IS A CORRECTNESS BUG, NOT AN ACCURACY ONE
 

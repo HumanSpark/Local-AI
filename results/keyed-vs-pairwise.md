@@ -1,3 +1,4 @@
+<!--
 # File: keyed-vs-pairwise.md
 # Purpose: Result of scoring the same five E10 answers by answer key and by blind pairwise
 #          judging, and what the disagreement between the two methods measures.
@@ -9,6 +10,7 @@
 # label orders. Headline: the two methods disagree on 9 of 10 pairings. Secondary and more
 # consequential: every one of the five answers is length-truncated, so the E10 evidence cannot
 # support capability claims about these models at all.
+-->
 
 ## Headline
 

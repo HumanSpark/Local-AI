@@ -1,3 +1,4 @@
+<!--
 # File: FINDINGS.md
 # Purpose: Numbered findings register for sparkbench - one durable, evidence-backed finding per item.
 # Project: sparkbench | Date: 2026-07-03
@@ -15,7 +16,209 @@
 # constants were MEASURED on, not the kernel running now - the box has been on
 # 7.0.0-28 since 2026-07-19, moved there by unattended-upgrades. Anything
 # measured after that date is a different amdgpu driver. See F57.
+-->
 
+## Findings index
+
+185 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+
+**By kind** (each finding's own tag):
+
+- **PLATFORM (72):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180)
+- **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
+- **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
+- **CAPABILITY (3):** [F181](#f181) [F183](#f183) [F185](#f185)
+
+| Finding | Title | Kind | Date | Experiment | Status |
+|---|---|---|---|---|---|
+| [F1](#f1) | llama-cli is chat-first; harness runs need llama-server | METHOD |  |  |  |
+| [F2](#f2) | download completion = byte/hash match vs origin authority, never exit 0 | METHOD |  |  |  |
+| [F3](#f3) | effective-bandwidth quant clusters (single-cluster reading) | PLATFORM |  |  |  |
+| [F4](#f4) | MoE-first on this silicon is empirical; dense Q4_K runs at ~naive ceiling | PLATFORM |  |  |  |
+| [F5](#f5) | depth slopes follow active-set/KV fraction; smooth, no cliffs | PLATFORM |  |  |  |
+| [F6](#f6) | memory-edge behaviour at ~68GiB weights | PLATFORM |  |  |  |
+| [F7](#f7) | DeltaNet hybrids carry a per-token cost the weight-bytes model misses | PLATFORM |  |  |  |
+| [F8](#f8) | GLM-4.7-Flash runs the deepseek2 (MLA) graph; MLA-MoE lands ~66% of naive | PLATFORM |  |  |  |
+| [F9](#f9) | "A3B" is a label, not a price | PLATFORM |  |  |  |
+| [F10](#f10) | corridor rule form (pre-screen pricing model) | PLATFORM |  |  |  |
+| [F11](#f11) | MXFP4 is a tg-only dequant tax, ~0.81 multiplier (same-model isolation) | PLATFORM |  |  |  |
+| [F12](#f12) | MLA-MoE ~0.66 is NOT a constant class; it was Flash-specific | PLATFORM |  |  |  |
+| [F13](#f13) | every instant badge dies with depth; the death depth is a measured number | PLATFORM |  |  |  |
+| [F14](#f14) | architecture rank is depth-dependent: the workhorse crossover at ~16K | PLATFORM |  |  |  |
+| [F15](#f15) | single-run noise is ~±1.5%; UMA bus contention arrives as jitter, not slowdown | METHOD |  |  |  |
+| [F16](#f16) | q8_0 KV cache is a working depth lever; flash attention is free | PLATFORM |  |  |  |
+| [F17](#f17) | concurrency scaling is architecture-dependent; the single-user ranking widens under fleet load | PLATFORM |  |  |  |
+| [F18](#f18) | MLA anti-scales under concurrency; concurrency behaviour now spans 3.8x by architecture | PLATFORM |  |  |  |
+| [F19](#f19) | the fleet's 12K-context capability floor is high; small-model tax is judgment, not context | MODEL |  |  |  |
+| [F20](#f20) | eval verdicts depend on serving config: the reasoning-channel budget tax | METHOD |  |  |  |
+| [F21](#f21) | speculative decoding spans 0.53x-3.73x by workload; silently inert without --spec-type | PLATFORM |  |  |  |
+| [F22](#f22) | Vulkan and ROCm split by workload phase (generation vs prefill) | PLATFORM |  |  |  |
+| [F23](#f23) | the Vulkan/ROCm split is architecture-dependent and depth-explosive | PLATFORM |  |  |  |
+| [F24](#f24) | under concurrent disk I/O, near-edge weight loads can deadlock in the amdgpu VM/SDMA suballocator, not just DeviceLost-abort | PLATFORM |  |  |  |
+| [F25](#f25) | ROCm loads the exact ~68GiB invocation that destabilises Vulkan; the constraint is Mesa/RADV's heap split, not the GTT pool | PLATFORM |  |  |  |
+| [F26](#f26) | F25's ROCm/Vulkan comparison was confounded by a concurrent GRUB change; Vulkan does not abort at either pool size when idle, and F6's original crash remains unreproduced | METHOD |  |  |  |
+| [F27](#f27) | F24's amdgpu SDMA suballocator deadlock recurred without F24's own confirmed trigger (no concurrent heavy I/O, and on the model with the MOST headroom in its batch) | PLATFORM |  |  |  |
+| [F28](#f28) | a third amdgpu suballocator deadlock, this time on an IMMEDIATE retry of a leg that had just crashed cleanly (DeviceLost) moments earlier - a new candidate trigger | PLATFORM |  |  |  |
+| [F29](#f29) | benchmark results are properties of the whole measurement stack, demonstrated eight times in one campaign | METHOD |  |  |  |
+| [F30](#f30) | compression preserves document-task competence to the ternary floor; knowledge bends first, below 2-bit | MODEL |  |  |  |
+| [F31](#f31) | the usable long-context envelope: 48K (Vulkan) / 64K (ROCm serving, v1.x evidence); accuracy holds to 80K+, speed is the only bind | PLATFORM |  |  |  |
+| [F32](#f32) | reasoning-emitting models are unsuitable for strict-format document work under this stack, and carry a 3-12x token tax | MODEL |  |  |  |
+| [F33](#f33) | document-benchmark strength does not predict coding-agent competence | METHOD |  |  |  |
+| [F34](#f34) | real-drafting usability is a different axis from fact-accuracy; the model is the lever, and the best safe local model matches cloud-Mistral but trails the OpenAI frontier | METHOD |  |  |  |
+| [F35](#f35) | the local drafting ceiling is the base model's raw generation quality: reasoning, raw size, self-critique, in-context exemplars, and Mixture-of-Agents all fail to raise it. The fine-tune is the lever - and it is doable ON-BOX (the "can't train on gfx1151" premise was wrong) | MODEL |  |  |  |
+| [F36](#f36) | on the coding axis, the local-vs-frontier gap on EASY tasks is efficiency + trustworthiness, not raw pass-rate; the dangerous failure mode (verification-gaming) is local-only | MODEL |  |  |  |
+| [F37](#f37) | the on-box house-style fine-tune is the first lever to improve local drafting beyond the base - modestly, without harm, from a tiny corpus, entirely on-prem | MODEL |  |  |  |
+| [F37](#f37-2) | v2 - the decisive fine-tune verdict: a house-VOICE lever (tone, reproducible), NOT a send-readiness lever; a 5x bigger corpus does not change it | MODEL |  |  |  |
+| [F38](#f38) | local office tool use works on the general workhorse via the standard function-calling API; the tool-call "specialist" is LESS reliable (format leakage), and reasoning inside the call is not | MODEL |  |  |  |
+| [F39](#f39) | production served 5.3x the KV it needed, because the serving flags had three writers (PARTIALLY RETRACTED: the "tool use was disabled" half was never measured, and is false) | METHOD |  |  | AMENDED |
+| [F40](#f40) | the box can hold two models on call at once (41 GiB, 0.04s switching) - "one model at a time" was a property of our launcher, not the hardware | PLATFORM |  |  |  |
+| [F41](#f41) | the box is memory-BANDWIDTH bound, so concurrency redistributes a fixed budget rather than adding one - and the split is 4.6:1 AGAINST the fast model: running a dense model alongside the MoE guts the MoE | PLATFORM |  |  |  |
+| [F42](#f42) | the router is FREE for single-model concurrency (within 0.7% of direct at every slot count, F17's 2.66x preserved); its cost is TAIL latency, not throughput | PLATFORM |  |  |  |
+| [F43](#f43) | MoE concurrency is STREAM-DIVERSITY-bound: 16 streams asking DIFFERENT questions run 40% slower than 16 asking the SAME one, a dense model shows no such penalty (-0.1%), and F17's headline therefore overstates real fleet throughput by 1.78x | PLATFORM |  |  |  |
+| [F44](#f44) | Whisper fabricates "Thank you." from PURE DIGITAL SILENCE at ~2/min, and by HARM the BIGGER model is 4.9x worse than the small one (the small one says "[BLANK_AUDIO]"; large says a sentence) | MODEL |  |  |  |
+| [F45](#f45) | on real speech the LARGER whisper model is more accurate (2.40% vs 3.35% WER), refuting our own "smaller is better" hypothesis - and a batching bug had INVERTED the answer until a public benchmark's known value caught it | MODEL |  |  |  |
+| [F46](#f46) | full speaker diarisation is genuinely hard (pyannote beats us 3x), but REFRAMING to "is it the host or someone else" hits 97.2% and is the abstraction the product actually needs | MODEL |  |  |  |
+| [F47](#f47) | on gfx1151/ROCm, TTS engine ARCHITECTURE (not "AMD is slow") decides throughput: a 200x realtime-factor spread on ONE GPU, and the "systemic MIOpen vocoder wall" was one engine's decoder, not the box | PLATFORM |  |  |  |
+| [F48](#f48) | vLLM does not run on gfx1151 (Strix Halo APU): every prebuilt image is MI300/CDNA on ROCm 6.x, and a source build STRIPS the gfx1xxx kernels - so TTS engines that assume vLLM serving must use native PyTorch routes on this box | PLATFORM |  |  |  |
+| [F49](#f49) | TTS throughput on this box is set by TWO compounding multipliers - autoregression (~150 sequential passes) x model size - and together they cost ~3000x, which a ~35x GPU advantage cannot recover: an 82M non-AR model on CPU beats every GPU engine by ~88x | PLATFORM |  |  |  |
+| [F50](#f50) | Fish s2-pro emits a REPRODUCIBLE 47-second, -48 dB non-speech render on a valid English sentence, returning HTTP 200 and a well-formed WAV - a silent-failure mode that disqualifies it for unattended batch work | MODEL |  |  |  |
+| [F51](#f51) | the recorded PyPI install route for 2 of the 3 remaining TTS engines does not lead to the upstream project at all: one is an abandoned third-party repackage predating the version we want, the other carries unedited cookiecutter placeholders - and a free licence pre-check cleared all three in seconds | METHOD |  |  |  |
+| [F52](#f52) | MegaTTS3 is Apache-2.0, publishes its weights, and STILL cannot clone a voice locally: ByteDance withholds the WavVAE *encoder*, so a licence-clear engine can be capability-blocked in a way no licence check detects | MODEL |  |  |  |
+| [F53](#f53) | Zonos v0.1 builds, imports and clones on gfx1151 but cannot be brought up: torch.compile fallback costs 15+ min at 0% GPU, and its own `.to(cuda, bfloat16)` never completes - while the platform moves the same 3.2 GB in 0.2s | PLATFORM |  |  |  |
+| [F54](#f54) | zero-shot voice cloning has an ACCENT COVERAGE limit that reference quality cannot fix: four architecturally-distinct engines, one clean reference, all four Americanised an Irish/neutral accent | MODEL |  |  |  |
+| [F54](#f54-2) | AMENDMENT + F52/W3 RETRACTION (2026-07-26, same day) - "CosyVoice3 WORKING" was WRONG: every one of its renders was garbled, and my own dtype "fix" is the likely cause | METHOD |  |  |  |
+| [F55](#f55) | CosyVoice3 is NOT VIABLE on gfx1151: it fails its OWN documented example, and three plausible root causes were each disproved by varying our inputs instead of testing the engine against itself | MODEL |  |  | CLOSED |
+| [F56](#f56) | the W3 narrator is SETTLED (VCTK p239 cloned by Chatterbox), and the pace figure that nearly triggered a tuning pass was a single-utterance artefact: 4.11 w/s on one 26-word take, 3.42 w/s over 227 words at the same config | MODEL |  |  |  |
+| [F57](#f57) | the kernel drifted 6.17 -> 7.0 under the register's "single stack" constant, installed by unattended-upgrades | PLATFORM |  |  |  |
+| [F58](#f58) | the repo.radeon.com apt pin is LOAD-BEARING: Ubuntu's ROCm sorts NEWER than AMD's and would silently downgrade the GPU stack | PLATFORM |  |  |  |
+| [F59](#f59) | llama-server generation at temperature 0 is BYTE-deterministic (10/10), and a like-for-like failure produced the opposite claim mid-session | METHOD |  |  |  |
+| [F60](#f60) | what makes a closed-record matter DISCRIMINATE is a period that must be WALKED, not a second base that is merely selected | METHOD |  |  |  |
+| [F61](#f61) | F10's DeltaNet 0.55 arch factor was a MoE accounting confound, not a DeltaNet penalty | METHOD |  |  |  |
+| [F62](#f62) | the DeltaNet hybrid buys depth-robustness, not peak speed | PLATFORM |  |  |  |
+| [F63](#f63) | the b9864 -> b10435 + kernel 6.17.0-35 -> 7.0.0-28 move is worth ~+3.3% tg | PLATFORM |  |  |  |
+| [F64](#f64) | two concurrent benches void BOTH numbers, and the contended value was plausible | METHOD |  |  |  |
+| [F65](#f65) | a pre-registration that names a concept instead of a FIELD is not falsifiable | METHOD |  |  |  |
+| [F66](#f66) | cloud arms are NOT deterministic at temperature 0, so a single cloud number is a sample and F59 does not transfer | METHOD |  |  |  |
+| [F67](#f67) | Qwen3.8-27B-Q4_K_M beats the workhorse on judged-free knowledge work by 6 of 20, and the whole gap is in the two hardest categories | MODEL |  |  |  |
+| [F68](#f68) | an eval that executes model code must bound MEMORY, because the bound is part of the grade and not just a safety rail | METHOD |  |  |  |
+| [F69](#f69) | reasoning effort is a ROUTING AXIS, not a quality dial: on knowledge work there is no middle setting | MODEL |  |  |  |
+| [F70](#f70) | temperature-0 determinism is SEQUENCE-scoped, not prompt-scoped | METHOD |  |  |  |
+| [F71](#f71) | on CODING, reasoning effort has an optimum in the MIDDLE, and the template's default overshoots it | MODEL |  |  |  |
+| [F72](#f72) | the ~100K prefill wall is `n_ubatch`, and 128 is an OPTIMUM (AMENDED TWICE, 2026-08-17) | PLATFORM |  |  |  |
+| [F73](#f73) | a 3-task category produced a published recommendation that INVERTS at 13 tasks | METHOD |  |  |  |
+| [F74](#f74) | retrieval under scale is a MEASURED STRENGTH: 12/12 at 90% of trained context, with no boundary anywhere below it | MODEL |  |  |  |
+| [F75](#f75) | request order changes the WORDING and not the ADVICE: 13/13 stable, 59/65 three times over | METHOD |  |  |  |
+| [F76](#f76) | the tool-use instrument is 5 runs at temperature 0.2, so intermediate per-task scores do NOT reproduce between sessions | METHOD |  |  |  |
+| [F77](#f77) | a 4.68 GiB model does the document work; what it needs is REASONING, not parameters | MODEL |  |  |  |
+| [F78](#f78) | naming the document and the party in the question is worth 2 of 12 to a small model, and INVISIBLE on a large one | METHOD |  |  |  |
+| [F79](#f79) | a correct citation is NOT evidence of a correct answer | METHOD |  |  |  |
+| [F80](#f80) | what the small local models cannot do is WALK A CALENDAR, and nothing else measured separates them | MODEL |  |  |  |
+| [F81](#f81) | these models do NOT agree with a confident user, and the composition failure survives a conversation intact | MODEL |  |  |  |
+| [F82](#f82) | a conversation at 75% of context does not decay, and what depth actually costs is the weakest model's resistance to a confident user | MODEL |  |  |  |
+| [F83](#f83) | held out from its own answer, the strong model does not decay at depth and the small one does | MODEL |  |  |  |
+| [F84](#f84) | MTP speculative decoding preserves the ANSWER and not the completion | PLATFORM |  |  |  |
+| [F85](#f85) | draft acceptance is a property of the WORKLOAD, and a speculative speedup does not transfer | METHOD |  |  |  |
+| [F86](#f86) | model evaluation and SYSTEM evaluation are different measurements, and ranking models gives wrong engineering answers | METHOD |  |  |  |
+| [F87](#f87) | a model can have good capability and still be a poor system component, because of its FAILURE MODE | METHOD |  |  |  |
+| [F88](#f88) | this arm is bit-deterministic across processes, which makes a repeat cheap and a single run still insufficient | METHOD |  |  |  |
+| [F89](#f89) | gpt-oss-120b survives depth, and its one failure is a boundary error that no amount of reasoning fixes | MODEL |  |  |  |
+| [F90](#f90) | compare latency only within a band of comparable OUTPUT VOLUME, or you are measuring brevity | METHOD |  |  |  |
+| [F91](#f91) | a tie at ceiling is a statement about the RULER, not about the models | METHOD |  |  |  |
+| [F92](#f92) | two very different models miscounted the same deadline to the same wrong day | MODEL |  |  |  |
+| [F93](#f93) | a tool helps a model that cannot do the subproblem and HARMS one that can | MODEL |  |  |  |
+| [F94](#f94) | offering a tool is never free, and its sign changes with the model AND the task | MODEL |  |  |  |
+| [F95](#f95) | a deterministic grader can be reproducible and still be systematically wrong, and reproducibility makes it MORE dangerous | METHOD |  |  |  |
+| [F57](#f57-2) | ADDENDUM 2 - the 7.0.0-28 -> 7.0.0-29 boundary, recorded BEFORE the reboot that crosses it | PLATFORM |  |  |  |
+| [F96](#f96) | byte-determinism survives a new PROCESS but not a repeated RUN inside one; within-process reps are not independent replicates | METHOD |  |  |  |
+| [F97](#f97) | Claude Code drives a LOCAL model end-to-end with no translation shim; llama-server build 9865 implements the Anthropic Messages API natively | PLATFORM |  |  |  |
+| [F98](#f98) | the Claude Code harness floor is 44,912 tokens, and it eliminates models by TRAINED CONTEXT before any quality question is asked | PLATFORM |  |  |  |
+| [F99](#f99) | tool-calling capability must be measured under `tool_choice: auto`, because `auto` is a MODEL property and `any` masks it | METHOD |  |  |  |
+| [F100](#f100) | a benchmark's GATE needs its own positive control, run BEFORE the arms; an unverified gate measures itself | METHOD |  |  |  |
+| [F101](#f101) | KAT-Coder-V2.5-Dev cannot serve tools through llama.cpp: its chat template refuses Claude Code's message order | PLATFORM |  |  |  |
+| [F102](#f102) | a local coder declared a 6-task WORKPLAN COMPLETE having done 1 task and ticked no boxes, with the gate GREEN | MODEL |  |  |  |
+| [F103](#f103) | the binding constraint on local agentic coding is llama.cpp's TOOL-SCHEMA plumbing, not model capability: 3 of 6 arms served ZERO requests | PLATFORM |  |  |  |
+| [F104](#f104) | the blocker is TOOL-SCHEMA BYTES in llama.cpp's grammar builder (~70KB for workhorse), shared by BOTH endpoints; Claude Code's floor is 73KB | PLATFORM |  |  |  |
+| [F105](#f105) | aider drives BOTH local models first-try, including the one Claude Code cannot drive at all: 761 tokens vs a 44,912-token floor | PLATFORM |  |  |  |
+| [F106](#f106) | Benchhost's thin inference path is at or above its hardware class; the hardware/runtime branch CLOSES | PLATFORM |  |  |  |
+| [F107](#f107) | Claude Code does not run SLOWLY on the workhorse, it fails in 95 ms; and the context tax is paid once per conversation, not per turn | PLATFORM |  |  |  |
+| [F108](#f108) | slot count is not the multi-turn variable; `--cache-ram` is, and writing `-np` down explicitly quarters your context | PLATFORM |  |  |  |
+| [F109](#f109) | the "~60 GiB" deadlock boundary does not exist on kernel 7.0.0-29, and neither does the contention trigger | PLATFORM |  |  |  |
+| [F110](#f110) | KV cache precision: q8_0 is free, 4-bit is a 5.6% cliff, and 100 perfect retrievals measured none of it | PLATFORM |  |  |  |
+| [F111](#f111) | `-ub 2048` is worth 22.9% on real prefill; speculative decoding is inapplicable; concurrency is serial | PLATFORM |  |  |  |
+| [F112](#f112) | Aider on the resident workhorse is fast enough to be invisible: a 3.9 s median first turn against Claude Code's 136.8 s | PLATFORM |  |  |  |
+| [F113](#f113) | Aider exits 0 whether or not it did anything: nine runs, nine zeros, four of them no-ops | METHOD |  |  |  |
+| [F114](#f114) | the edit format decides which jobs work, and no single format does both | MODEL |  |  |  |
+| [F115](#f115) | a plausible, reproducible, silently inert fix: `[tool:pytest]` four times out of four | MODEL |  |  |  |
+| [F116](#f116) | Qwen3.8-Flash-Next MATCHES the incumbent and never beats it, for 5.6x the memory and exclusive occupancy of the box | MODEL |  |  |  |
+| [F117](#f117) | a control that reproduces its own ITEMS, not just its score, is what licenses a cross-build comparison | METHOD |  |  |  |
+| [F118](#f118) | F80's "small models cannot walk a calendar" is a fact about the WORKHORSE, not about ~3B-active MoEs as a class | METHOD |  |  |  |
+| [F119](#f119) | a "coding specialist" that does not TERMINATE, and why the score is not the finding | MODEL |  |  |  |
+| [F120](#f120) | the community's Strix Halo speed table verifies twice on our own hardware | METHOD |  |  |  |
+| [F121](#f121) | the harness scored a run that never happened, and only a person had ever caught it | METHOD |  |  |  |
+| [F122](#f122) | abliteration cost this model nothing measurable, on either kind of refusal | MODEL |  |  |  |
+| [F123](#f123) | a readiness check that does not exercise the path under test certifies nothing | METHOD |  |  |  |
+| [F124](#f124) | model metadata can falsify an experimental arm before it is run | METHOD |  |  |  |
+| [F125](#f125) | a test double unfaithful on the axis under test produces a false green | METHOD |  |  |  |
+| [F126](#f126) | a saturated instrument cannot compare anything, including the thing it was chosen to compare | METHOD |  |  |  |
+| [F127](#f127) | a public ranking and local usability are different properties, and a refused score leaves hypotheses UNSCORABLE rather than failed | METHOD |  |  |  |
+| [F128](#f128) | a speedup quoted without its workload is not a number, and a flag can load without acting | METHOD |  |  |  |
+| [F129](#f129) | Vulkan did not fail under any controlled condition, and the original crash was never reproduced | PLATFORM |  |  |  |
+| [F130](#f130) | which models actually draft well: the local pick matches cloud-Mistral and trails the frontier | MODEL |  |  |  |
+| [F131](#f131) | omitting the context flag allocates the model's full trained context | PLATFORM |  |  |  |
+| [F132](#f132) | an external known value is what caught an inverted answer | METHOD |  |  |  |
+| [F133](#f133) | three measurement lessons from settling the narrator voice | METHOD |  |  |  |
+| [F134](#f134) | a gate is green when the missing work has no tests to fail | METHOD |  |  |  |
+| [F135](#f135) | three models stay resident for the price of one context, and switching between them is inside noise | PLATFORM |  |  |  |
+| [F136](#f136) | prefill collapses with prompt length, so the context a box can HOLD is not the context anyone will WAIT for | PLATFORM |  |  |  |
+| [F137](#f137) | two agreeing samples of a progress counter gave 1.4x the true rate | METHOD |  |  |  |
+| [F138](#f138) | the asymmetric context configuration works, and the pool is not shared | PLATFORM |  |  |  |
+| [F139](#f139) | a summarised page is not the page: a wrong defect report reached the edge of publication | METHOD |  |  |  |
+| [F140](#f140) | the reasoning-effort default costs 11 runaways of 18; the sampler fix the field recommends is worth 3 | MODEL |  |  |  |
+| [F141](#f141) | what looks like looping is NOT repetition, and every sampler knob aimed at it acts on the wrong mechanism | MODEL |  |  |  |
+| [F142](#f142) | the L5 bank is SATURATED: three models, zero separation, the same failing item | METHOD |  |  |  |
+| [F143](#f143) | ThinkingCap is a better DEFAULT and a worse CEILING, and the efficiency claim changes sign with the comparator | MODEL |  |  |  |
+| [F144](#f144) | the GSQ-RCO IQ3_S quant costs 3 of 8 on hard tasks, and three banks called it identical | MODEL |  |  |  |
+| [F145](#f145) | the same three models scored 0 points apart on one bank and 6 apart on another; the instrument chose the answer | METHOD |  |  |  |
+| [F146](#f146) | temperature does not cause fabrication on evidence work; what it costs is calendar arithmetic | MODEL |  |  |  |
+| [F147](#f147) | a harness's affordability is set by the MODEL it wraps, not by the harness | PLATFORM |  |  |  |
+| [F148](#f148) | agent scaffolding does not degrade evidence work, and does not fabricate; it costs COMPLETIONS | MODEL |  |  |  |
+| [F149](#f149) | Q4_K_M is the knee: 3-bit costs three of eight, 8-bit buys nothing for 55% more wall clock | MODEL |  |  |  |
+| [F150](#f150) | defeating a naive solution is necessary and nowhere near sufficient; the token cost is the tell | METHOD |  |  |  |
+| [F151](#f151) | a task defined by the wrong answers it defeats cannot locate the top of a competent model | METHOD |  |  |  |
+| [F152](#f152) | a 0/3 was two rotted tasks; repaired, the same set gives 2/3, and the one failure is an APPLICATION failure the harness called success | METHOD |  |  |  |
+| [F153](#f153) | the knowledge-work banks are saturated at the frontier: three models across a 40x price range score within one item | METHOD | 2026-09-11 | E135 | ESTABLISHED |
+| [F154](#f154) | DeepSeek-V4.1-Flash cannot be served on benchhost, and the blocker is not size alone | PLATFORM | 2026-09-11 | E135 | ESTABLISHED |
+| [F155](#f155) | Qwen-Image-2.1 runs on benchhost only with the gateway down and the VAE decode tiled | PLATFORM | 2026-09-21 | E136 | ESTABLISHED |
+| [F156](#f156) | an image DiT on gfx1151 is bound by weight traffic, and for BF16 diffusers beats sd.cpp | PLATFORM | 2026-09-21 | E136 | ESTABLISHED |
+| [F157](#f157) | Qwen-Image-2.1 edit keeps text and layout but only makes LOCAL changes; it cannot regrade or upscale | MODEL | 2026-09-22 | E136, E137 | ESTABLISHED |
+| [F158](#f158) | image tools here exit 0 on a blank output; check the pixels, not the status | METHOD | 2026-09-22 | E136, E137 | ESTABLISHED |
+| [F159](#f159) | a public "73 tok/s on Strix Halo" does not reproduce: 34.16 is the ceiling here, and the claim's own memory figure names the slow file | MODEL | 2026-09-23 | E138 | ESTABLISHED |
+| [F160](#f160) | the ternary PTQ1_0 file is a DECODE trap on AMD Vulkan, and speculation's gain is prompt-shaped | PLATFORM | 2026-09-23 | E138 | ESTABLISHED |
+| [F161](#f161) | a reviewer that re-solves saves nothing: the workhorse -> 27B cascade is safe and 30% slower on short-answer work | MODEL | 2026-09-24 | E140 | ESTABLISHED |
+| [F162](#f162) | the workhorse is most confident where it is wrong, so it cannot gate the 27B; an effort router lost to fixed `low` | MODEL | 2026-09-24 | E141 | ESTABLISHED |
+| [F163](#f163) | the 27B can gate its own `off` answers safely, but the gate costs what it saves | MODEL | 2026-09-24 | E142 | ESTABLISHED |
+| [F164](#f164) | four models tie on Aider passes and split the tasks in opposite ways; the incumbent is 2x to 10x faster | MODEL | 2026-09-24 | E143 | ESTABLISHED |
+| [F165](#f165) | Halogen prefills 32K at 1,152 tok/s here, 81% of its claim and 5.3x llama.cpp; the claim reproduces conditionally | PLATFORM | 2026-09-24 | E139 | ESTABLISHED |
+| [F166](#f166) | a maintenance window is not a clean box, and Halogen cannot serve our GGUF beside anything else | PLATFORM | 2026-09-24 | E139 | ESTABLISHED |
+| [F167](#f167) | the widget's options tie with the 35B we already ran; its speed order holds, its speed size does not | MODEL | 2026-09-25 | E145 | ESTABLISHED |
+| [F168](#f168) | an Atlas benchmark measures its configuration: a checkpoint label and one missing flag each cost the whole run | PLATFORM | 2026-09-25 | E146 | ESTABLISHED |
+| [F169](#f169) | on the MLPerf edge-agentic metric Atlas takes about 27% less time per turn than the llama.cpp reference here, and the published latency is not reproduced | PLATFORM | 2026-09-25 | E146 | ESTABLISHED |
+| [F170](#f170) | the vendor page's MLPerf figures do not match the MLCommons entry it cites | METHOD | 2026-09-25 | E146 (gate G5) | ESTABLISHED |
+| [F171](#f171) | every T3 failure across eight models is an edit that never reached the file; the "opposite task profiles" of F164 and F167 are partly a harness artefact | METHOD | 2026-09-25 | E143, E145 (diagnosis of banked results) | ESTABLISHED |
+| [F172](#f172) | with a drafter, llama.cpp beats Atlas on the MLPerf edge-agentic metric; F169's advantage was over a reference without speculation | PLATFORM | 2026-09-25 | E147 | ESTABLISHED |
+| [F173](#f173) | the ternary Bonsai 2 keeps the incumbent's answers on documents and core coding and loses on expert coding; it also runs away twice in 47 items | MODEL | 2026-09-25 | E138 blocks 2-4 | ESTABLISHED |
+| [F174](#f174) | on the same weights, pi passed the task Aider could not, because it applied the edit; the harness decided T3 | METHOD | 2026-09-25 | E138 block 4 | ESTABLISHED |
+| [F175](#f175) | Atlas's own DFlash mode is its slowest configuration on this box: the drafter accepts 0.064 tokens per 15-token step, and the MLPerf-era build cannot serve it on HIP at all | PLATFORM | 2026-09-26 | E148 | ESTABLISHED |
+| [F176](#f176) | F175's cause is Atlas's 4,096-token drafter context cap, stated in its own source; declaring the drafter's sliding-window layers is inert | PLATFORM | 2026-09-26 | E149 |  |
+| [F177](#f177) | Atlas's drafter context cap is not the cause of F175 either: lifted to 36,864, acceptance and output are identical to the shipped configuration; F176's cause claim is retracted | PLATFORM | 2026-09-26 | E150 | ESTABLISHED |
+| [F178](#f178) | Atlas's prefix cache is a 0.05-token contributor to its DFlash collapse, not the cause; three single-variable arms retire three explanations and the investigation stops | PLATFORM | 2026-09-26 | E151 | ESTABLISHED |
+| [F179](#f179) | halogen 0.14.0's coding-agent, served-decode and 100K-follow-up rows hold at 74-78% with the TTS service rendering beside it; sharing the APU costs 27% prefill and 33% serial decode at the same 85 W | PLATFORM | 2026-09-27 | E152 | ESTABLISHED |
+| [F180](#f180) | on one box and one client, Halogen 0.18.23 serves Flash-Next fastest in every bucket; gufo, Talus and Strata sit 2.2-2.6x above llama.cpp on code, Halogen 3.2x | PLATFORM | 2026-11-04 | E153 | ESTABLISHED |
+| [F181](#f181) | on 15 real HumanSpark fixes, two local setups solve all 15 that Sonnet 5.5 solves, at about 15x its time; the incumbent coder solves 11 | CAPABILITY | 2026-11-05 | E154 | ESTABLISHED |
+| [F182](#f182) | the coding harness sandbox is a working directory, not a jail: a local agent listed the vault's key names | METHOD | 2026-11-05 | E154 | ESTABLISHED |
+| [F183](#f183) | on harder real repo work, the best local setups reach Sonnet 5.5 and Opus 5.5; the old local coding default does not | CAPABILITY | 2026-11-06 | E156 | ESTABLISHED |
+| [F184](#f184) | hidden tests demand things a task prompt never says; reading the first failures found five, automated checks found none | METHOD | 2026-11-06 | E156 | ESTABLISHED |
+| [F185](#f185) | newer local coding models tie the best local result (9/10) but do not beat it; a bigger sibling scored lower and a small preview scored 8 | CAPABILITY | 2026-11-07 | E158 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -63,7 +266,11 @@ Each original carries a pointer to its other half, so neither can be read as
 the whole finding.
 
 
+<a id="f1"></a>
+
 ## F1 - llama-cli is chat-first; harness runs need llama-server
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -72,7 +279,11 @@ loops forever on the chat prompt. Scripted/harness runs use llama-server
 (or llama-completion) + HTTP, always timeout-wrapped.
 Evidence: step 4a entry. Status: ACTIVE (bound as HARNESS-RULES 1-3).
 
+<a id="f2"></a>
+
 ## F2 - download completion = byte/hash match vs origin authority, never exit 0
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -81,7 +292,11 @@ or never-ran fetches. Pin sizes/oids from the origin API first; verify on
 arrival. Evidence: step 4c entries. Status: ACTIVE (HARNESS-RULES Rule 4;
 promoted fleet-wide as download-integrity.md).
 
+<a id="f3"></a>
+
 ## F3 - effective-bandwidth quant clusters (single-cluster reading)
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -91,7 +306,11 @@ Evidence: step 5 gate (53.44 = 64%), step 7 Row A (77.76 = 68.8%).
 Status: SUPERSEDED by F11 (2026-07-03) - the clusters are real but the
 mechanism is a tg-only dequant tax; prefill pays no MXFP4 penalty.
 
+<a id="f4"></a>
+
 ## F4 - MoE-first on this silicon is empirical; dense Q4_K runs at ~naive ceiling
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -100,7 +319,11 @@ tg) while being the stronger model; the dense 14B sits at ~100% of its
 220/9.0GB naive ceiling. Dense-at-interactive-speed is physics-limited.
 Evidence: step 6 workhorse + 14B entries. Status: ACTIVE.
 
+<a id="f5"></a>
+
 ## F5 - depth slopes follow active-set/KV fraction; smooth, no cliffs
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -110,7 +333,11 @@ smaller the active set, the larger the KV-read fraction per token.
 Evidence: step 5/6/7 entries. Status: ACTIVE (Step 8 Block 1 extends
 every model from 2 depth points to 5-6).
 
+<a id="f6"></a>
+
 ## F6 - memory-edge behaviour at ~68GiB weights
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -120,7 +347,11 @@ matrix-typical 1-2%). Operational rule: models >~60GiB use split
 invocations; treat memory-pressured pp as low-confidence.
 Evidence: step 6 GLM-4.5-Air entry. Status: ACTIVE.
 
+<a id="f7"></a>
+
 ## F7 - DeltaNet hybrids carry a per-token cost the weight-bytes model misses
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -130,7 +361,11 @@ matrix. Recurrent-state read/write traffic and/or immature Vulkan
 recurrent kernels are the candidate drags (not separable via llama-bench).
 Evidence: step 7 Row B entry. Status: ACTIVE.
 
+<a id="f8"></a>
+
 ## F8 - GLM-4.7-Flash runs the deepseek2 (MLA) graph; MLA-MoE lands ~66% of naive
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -138,7 +373,11 @@ llama-bench identifies the artefact as deepseek2 30B.A3B; on Q4_K it
 achieves ~66% of naive - a distinct band below pure-MoE's ~84%.
 Evidence: step 7 Row C entry. Status: ACTIVE (generality test = F12).
 
+<a id="f9"></a>
+
 ## F9 - "A3B" is a label, not a price
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -147,7 +386,11 @@ Three A3B-class MoEs, same quant family, same hardware, span 1.57x on tg:
 count alone cannot price a model; architecture dominates.
 Evidence: step 7 Row C entry. Status: ACTIVE.
 
+<a id="f10"></a>
+
 ## F10 - corridor rule form (pre-screen pricing model)
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -165,7 +408,11 @@ METHOD (pre-registration, quant-isolation pairs, repeatability triplets,
 stack-fingerprinted tables, re-run triggers) is the durable asset, not
 the numbers.
 
+<a id="f11"></a>
+
 ## F11 - MXFP4 is a tg-only dequant tax, ~0.81 multiplier (same-model isolation)
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -178,7 +425,11 @@ the pre-declared caveat.
 Evidence: step 7 quant-isolation pre-registration + addendum entries.
 Status: ACTIVE.
 
+<a id="f12"></a>
+
 ## F12 - MLA-MoE ~0.66 is NOT a constant class; it was Flash-specific
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -196,7 +447,11 @@ replication: the MLA steep-depth signature holds and amplifies
 the pure-MoE rows).
 Evidence: step 8 Block 2d entry. Status: RESOLVED.
 
+<a id="f13"></a>
+
 ## F13 - every instant badge dies with depth; the death depth is a measured number
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -210,7 +465,11 @@ quote an instant claim without its expiry depth.
 Evidence: step 8 Block 1 entries + end-state badge table.
 Status: ACTIVE.
 
+<a id="f14"></a>
+
 ## F14 - architecture rank is depth-dependent: the workhorse crossover at ~16K
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -222,7 +481,11 @@ depth; model selection needs the workload's context profile.
 Evidence: step 8 Block 1 (Qwen3-30B + Qwen3.6-35B curves).
 Status: ACTIVE.
 
+<a id="f15"></a>
+
 ## F15 - single-run noise is ~±1.5%; UMA bus contention arrives as jitter, not slowdown
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -238,7 +501,11 @@ cross-evening pair (gpt-oss-20b, -3.3%/-4.4%) exceeds the triplet
 band - model-specific drift, watch.
 Evidence: step 8 3b/3c entries. Status: ACTIVE.
 
+<a id="f16"></a>
+
 ## F16 - q8_0 KV cache is a working depth lever; flash attention is free
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -251,7 +518,11 @@ capacity. Deployment rule of thumb: fresh-chat workloads skip it,
 long-context workloads want it.
 Evidence: step 8 Block 3d entry. Status: ACTIVE.
 
+<a id="f17"></a>
+
 ## F17 - concurrency scaling is architecture-dependent; the single-user ranking widens under fleet load
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -285,7 +556,11 @@ batch-level and does not touch a single user. Dense models show no such
 penalty (-0.1%), so this caveat is MoE-specific. See F43 and
 results/moe-diversity.md.
 
+<a id="f18"></a>
+
 ## F18 - MLA anti-scales under concurrency; concurrency behaviour now spans 3.8x by architecture
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -306,7 +581,11 @@ Status: ACTIVE. Attribution strengthened by E4 (Scout/chunked
 attention scales 2.72x@8 - best measured - so anti-scaling is not a
 general MoE trait).
 
+<a id="f19"></a>
+
 ## F19 - the fleet's 12K-context capability floor is high; small-model tax is judgment, not context
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -326,7 +605,11 @@ Status: ACTIVE. Extended by E10: under enumeration pressure the 4B
 MISATTRIBUTES real values to wrong models (worse than omission) -
 small models need source-checking on any generated table.
 
+<a id="f20"></a>
+
 ## F20 - eval verdicts depend on serving config: the reasoning-channel budget tax
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -388,7 +671,11 @@ Evidence + method: results/keyed-vs-pairwise.md,
 results/eval-pilot/ctxfix-ctxcheck.serverlog,
 spikes/eval-pilot/audit_ceiling.py (204 answers classified).
 
+<a id="f21"></a>
+
 ## F21 - speculative decoding spans 0.53x-3.73x by workload; silently inert without --spec-type
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -407,7 +694,11 @@ are split out as **F128** (2026-09-01).
 Evidence: results/experiments.md E13; raw bench-e13-*.
 Status: ACTIVE.
 
+<a id="f22"></a>
+
 ## F22 - Vulkan and ROCm split by workload phase (generation vs prefill)
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -433,7 +724,11 @@ Evidence: results/experiments.md E18; raw bench-e18-{vulkan,rocm}.md.
 Status: ACTIVE - but ARCHITECTURE-SPECIFIC; the ROCm-wins-prefill half
 holds only for pure MoE and INVERTS for MLA. See F23.
 
+<a id="f23"></a>
+
 ## F23 - the Vulkan/ROCm split is architecture-dependent and depth-explosive
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -459,7 +754,11 @@ the way standard-attention GEMMs do (not separable here).
 Evidence: results/experiments.md E18a/E18b; raw bench-e18a-deep-*,
 bench-e18b-glm-*. Status: ACTIVE.
 
+<a id="f24"></a>
+
 ## F24 - under concurrent disk I/O, near-edge weight loads can deadlock in the amdgpu VM/SDMA suballocator, not just DeviceLost-abort
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -511,7 +810,11 @@ and still D-state. This is the first deliberate, watched-in-real-time
 reproduction of the class; C2/C3/C4 (F27/F28's open candidate triggers) remain
 under investigation.
 
+<a id="f25"></a>
+
 ## F25 - ROCm loads the exact ~68GiB invocation that destabilises Vulkan; the constraint is Mesa/RADV's heap split, not the GTT pool
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -547,7 +850,11 @@ Evidence: docs/PHASE-A-LOG.md 2026-07-08 "Task 3: ROCm single-shot
 load" entry; results/raw/bench-t3-glm45air-rocm.md;
 docs/plans/2026-07-08-vulkan-memory-ceiling-investigation.md Task 3.
 
+<a id="f26"></a>
+
 ## F26 - F25's ROCm/Vulkan comparison was confounded by a concurrent GRUB change; Vulkan does not abort at either pool size when idle, and F6's original crash remains unreproduced
+
+[Back to index](#findings-index)
 
 **Kind: METHOD** - the confound. What the re-runs established about Vulkan
 itself is **F129**, split out 2026-09-01.
@@ -603,7 +910,11 @@ Evidence: docs/PHASE-A-LOG.md 2026-07-08 "Task 4: Vulkan re-run at the
 new 112GiB ceiling" entry; results/raw/bench-t4-glm45air-ttm112.md;
 docs/plans/2026-07-08-vulkan-memory-ceiling-investigation.md Task 4.
 
+<a id="f27"></a>
+
 ## F27 - F24's amdgpu SDMA suballocator deadlock recurred without F24's own confirmed trigger (no concurrent heavy I/O, and on the model with the MOST headroom in its batch)
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -709,7 +1020,11 @@ itself stays **ACTIVE/open** (unchanged): the repeatability campaign is
 designed to probe cumulative-state vs lighter-trigger by accumulating
 many load/unload cycles before the failure-repro phase.
 
+<a id="f28"></a>
+
 ## F28 - a third amdgpu suballocator deadlock, this time on an IMMEDIATE retry of a leg that had just crashed cleanly (DeviceLost) moments earlier - a new candidate trigger
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -812,7 +1127,11 @@ for this recovery - the required known-good small-model sanity bench
 auto-restarted on boot and is currently holding the 30B on the GPU (must
 be paused before the sanity bench, per the F24/F27/F28 one-model rule).
 
+<a id="f29"></a>
+
 ## F29 - benchmark results are properties of the whole measurement stack, demonstrated eight times in one campaign
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -831,7 +1150,11 @@ Evidence: results/experiments.md E28 corrigenda v1-v5, E30 correction,
 if-json-regrade-v3.md; corrections log in
 reports/integrated-technical-results-v2.md.
 
+<a id="f30"></a>
+
 ## F30 - compression preserves document-task competence to the ternary floor; knowledge bends first, below 2-bit
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -846,7 +1169,11 @@ speed at a third the size for no measured document-task cost. Reverses the
 pre-registered degradation-order prediction; published as a miss.
 Evidence: E29 entry, results/raw/mmlu-quant-ladder.json.
 
+<a id="f31"></a>
+
 ## F31 - the usable long-context envelope: 48K (Vulkan) / 64K (ROCm serving, v1.x evidence); accuracy holds to 80K+, speed is the only bind
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -861,7 +1188,11 @@ F13's dense depth penalty hits both axes). Worked example at the limit
 3/3 incl. a supersession trap. Evidence: E30 entries + correction,
 results/deep-eval/e30-*, envelope-worked-example.md.
 
+<a id="f32"></a>
+
 ## F32 - reasoning-emitting models are unsuitable for strict-format document work under this stack, and carry a 3-12x token tax
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -875,7 +1206,11 @@ implication: the token tax is a wall-clock tax locally and a money tax in
 cloud, for equal-or-worse graded output on these task shapes.
 Evidence: E31 entry, e31-cloud-summary.md, reasoning-extraction-regrade.md.
 
+<a id="f33"></a>
+
 ## F33 - document-benchmark strength does not predict coding-agent competence
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -890,7 +1225,11 @@ knowledge benchmarks; headline candidate for a developer-facing page.
 Evidence: docs/plans/2026-07-12-coding-screen-10-realproject-results.md,
 results/coding-screen/.
 
+<a id="f34"></a>
+
 ## F34 - real-drafting usability is a different axis from fact-accuracy; the model is the lever, and the best safe local model matches cloud-Mistral but trails the OpenAI frontier
+
+[Back to index](#findings-index)
 
 **Kind: METHOD** - the two-axes lesson. Which models actually draft well is
 **F130**, split out 2026-09-01.
@@ -934,7 +1273,11 @@ Evidence: results/real-quality/ (baseline + ablation + ablation2 + confirm),
 tools/real_quality_run.py + quality_ablation*.py + quality_confirm.py,
 docs/plans/2026-07-12-local-quality-experiments.md.
 
+<a id="f35"></a>
+
 ## F35 - the local drafting ceiling is the base model's raw generation quality: reasoning, raw size, self-critique, in-context exemplars, and Mixture-of-Agents all fail to raise it. The fine-tune is the lever - and it is doable ON-BOX (the "can't train on gfx1151" premise was wrong)
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1036,7 +1379,11 @@ tools/{big_model_test,reasoning_model_test,quality_pipeline}.py,
 docs/plans/2026-07-13-writing-quality-pipeline-design.md,
 docs/plans/2026-07-12-local-quality-experiments.md (steps 3-5).
 
+<a id="f36"></a>
+
 ## F36 - on the coding axis, the local-vs-frontier gap on EASY tasks is efficiency + trustworthiness, not raw pass-rate; the dangerous failure mode (verification-gaming) is local-only
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1076,7 +1423,11 @@ coding models by agentic trial, never by benchmark).
 Evidence: results/coding-screen/gap/, tools/{coding_harness (--api-key),
 run_coding_gap.sh, coding_gap_analysis}.py; F33 (the real-repo non-transfer finding).
 
+<a id="f37"></a>
+
 ## F37 - the on-box house-style fine-tune is the first lever to improve local drafting beyond the base - modestly, without harm, from a tiny corpus, entirely on-prem
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1117,7 +1468,11 @@ layout - identical copies previously sat in results/real-quality/bigmodel/ and w
 tools/{finetune_corpus,finetune_train,run_finetune_phase2,run_finetune_eval}.py/.sh;
 docs/plans/2026-07-13-house-style-finetune-design.md; F35 (the ceiling this dents).
 
+<a id="f37-2"></a>
+
 ## F37 v2 - the decisive fine-tune verdict: a house-VOICE lever (tone, reproducible), NOT a send-readiness lever; a 5x bigger corpus does not change it
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1149,7 +1504,11 @@ Evidence: results/finetune/{housestyle-ft-v2,base-q8-v2}.json; the v1->v2
 progression (corpus fixes: two-call grounded gen, retry, incremental writes);
 docs/plans/2026-07-13-house-style-finetune-design.md.
 
+<a id="f38"></a>
+
 ## F38 - local office tool use works on the general workhorse via the standard function-calling API; the tool-call "specialist" is LESS reliable (format leakage), and reasoning inside the call is not
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1192,7 +1551,11 @@ qwen3-coder-30b,mistral-24b}.json; harness tools/tooluse_harness_v2.py.
 Evidence (E32 pilot): results/tool-use/E32-{preregistration,results}.md; results-qwen3-30b.json,
 results-qwen3-coder-30b.json; rendered docs results/tool-use/png/qwen3-30b/; harness tools/tooluse_harness.py.
 
+<a id="f39"></a>
+
 ## F39 - production served 5.3x the KV it needed, because the serving flags had three writers (PARTIALLY RETRACTED: the "tool use was disabled" half was never measured, and is false)
+
+[Back to index](#findings-index)
 
 **Kind: METHOD** - one writer for serving flags, and the retraction. The memory
 measurement itself is **F131**, split out 2026-09-01.
@@ -1249,7 +1612,11 @@ tools/gateway/{serving.conf,model_swap.sh,systemd/llama-gateway.service};
 docs/plans/2026-07-16-production-serving-config-design.md; F38 (whose capability was never actually
 lost); F15 (the noise band, and why the throughput number above is not compared to it).
 
+<a id="f40"></a>
+
 ## F40 - the box can hold two models on call at once (41 GiB, 0.04s switching) - "one model at a time" was a property of our launcher, not the hardware
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1298,7 +1665,11 @@ Evidence: results/router-multimodel.md (full method, tables, caveats); F24 /
 docs/memory-edge-deadlock.md (the cap that sets models-max 2); F38/E33 (reproduced); F37 (the garbage
 fingerprint); F39 (the single-source-of-truth config this would extend).
 
+<a id="f41"></a>
+
 ## F41 - the box is memory-BANDWIDTH bound, so concurrency redistributes a fixed budget rather than adding one - and the split is 4.6:1 AGAINST the fast model: running a dense model alongside the MoE guts the MoE
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1354,7 +1725,11 @@ Evidence: results/router-loadtest.md (all 12 predictions resolved) + results/rou
 (registered first); F40 (the residency baseline); F24 (the edge); F34 (the dense/MoE ratio this
 explains); F17 (single-model concurrency knee - untouched, still the open question).
 
+<a id="f42"></a>
+
 ## F42 - the router is FREE for single-model concurrency (within 0.7% of direct at every slot count, F17's 2.66x preserved); its cost is TAIL latency, not throughput
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1387,7 +1762,11 @@ clients break on migration. `/v1/chat/completions` callers already send `model` 
 Evidence: results/router-concurrency.md; results/router-concurrency-prereg.md; control run via
 tools/serve_bench.py (F17's own harness) = 191.76 t/s @16; F17; F40; F41.
 
+<a id="f43"></a>
+
 ## F43 - MoE concurrency is STREAM-DIVERSITY-bound: 16 streams asking DIFFERENT questions run 40% slower than 16 asking the SAME one, a dense model shows no such penalty (-0.1%), and F17's headline therefore overstates real fleet throughput by 1.78x
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1478,7 +1857,11 @@ Evidence: results/moe-diversity.md; results/moe-diversity-prereg.md (registered 
 results/router-concurrency.md (E36, where the signal appeared); F17 (the number corrected); F41 (the
 bandwidth ceiling); F18 (architecture-dependent concurrency).
 
+<a id="f44"></a>
+
 ## F44 - Whisper fabricates "Thank you." from PURE DIGITAL SILENCE at ~2/min, and by HARM the BIGGER model is 4.9x worse than the small one (the small one says "[BLANK_AUDIO]"; large says a sentence)
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1588,7 +1971,11 @@ results/diarisation/e41-silence-hallucination-prereg.md (committed 5c7a64d BEFOR
 tools/silence_bench.py; results/transcription/silence-{large-novad,large-vad,small-novad}.json;
 results/diarisation/e40-vad-and-limits.md (the incidental discovery this systematises).
 
+<a id="f45"></a>
+
 ## F45 - on real speech the LARGER whisper model is more accurate (2.40% vs 3.35% WER), refuting our own "smaller is better" hypothesis - and a batching bug had INVERTED the answer until a public benchmark's known value caught it
+
+[Back to index](#findings-index)
 
 **Kind: MODEL** - the accuracy result. How the inverted answer was caught is
 **F132**, split out 2026-09-01.
@@ -1635,7 +2022,11 @@ Not swept: medium / large-v2 / non-turbo large-v3, decoding parameters, other la
 Evidence: results/transcription/e45-true-wer.md; results/transcription/e42-wer-model-size.md;
 tools/librispeech_wer.py; manifests/MANIFEST.md. Corpus: LibriSpeech (CC-BY-4.0, attribution required).
 
+<a id="f46"></a>
+
 ## F46 - full speaker diarisation is genuinely hard (pyannote beats us 3x), but REFRAMING to "is it the host or someone else" hits 97.2% and is the abstraction the product actually needs
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1687,7 +2078,11 @@ Evidence: results/diarisation/e43-ami-real-ground-truth.md; e44-vad-fix.md; e46-
 e47-hybrid-vad-swap.md; e48-real-online-calls.md; e49-batch-14-real-meetings.md; e50-target-speaker.md;
 tools/target_speaker.py.
 
+<a id="f47"></a>
+
 ## F47 - on gfx1151/ROCm, TTS engine ARCHITECTURE (not "AMD is slow") decides throughput: a 200x realtime-factor spread on ONE GPU, and the "systemic MIOpen vocoder wall" was one engine's decoder, not the box
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1744,7 +2139,11 @@ cudnn.benchmark / NHWC, hipBLASLt) are code changes recorded but not chased.
 Evidence: tts-bench/results/fish-s2-pro/MIOPEN-TUNING-AB.md + miopen-ab.json + tuned-log-evidence.txt
 + miopen-user-finddb.txt; config fish-speech-tts/serve_fish.sh, harness fish-speech-tts/miopen_ab.py.
 
+<a id="f48"></a>
+
 ## F48 - vLLM does not run on gfx1151 (Strix Halo APU): every prebuilt image is MI300/CDNA on ROCm 6.x, and a source build STRIPS the gfx1xxx kernels - so TTS engines that assume vLLM serving must use native PyTorch routes on this box
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1770,7 +2169,11 @@ and even then only if AMD ships gfx1151 vLLM kernels.
 
 Evidence: tts-bench/results/vllm-omni/BLOCKED-STATE.md; reports/2026-07-25-tts-stage1.md.
 
+<a id="f49"></a>
+
 ## F49 - TTS throughput on this box is set by TWO compounding multipliers - autoregression (~150 sequential passes) x model size - and together they cost ~3000x, which a ~35x GPU advantage cannot recover: an 82M non-AR model on CPU beats every GPU engine by ~88x
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1825,7 +2228,11 @@ achievable.
 Evidence: tts-bench/results/{kokoro,fish-s2-pro,f5-tts,qwen3-tts}/metrics.json;
 tts-bench/results/qwen3-tts/RESULTS.md; docs/W3-STAGE2-SWEEP.md (per-engine spike records).
 
+<a id="f50"></a>
+
 ## F50 - Fish s2-pro emits a REPRODUCIBLE 47-second, -48 dB non-speech render on a valid English sentence, returning HTTP 200 and a well-formed WAV - a silent-failure mode that disqualifies it for unattended batch work
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1855,7 +2262,11 @@ fleet rule `comparison-integrity.md`.
 Evidence: tts-bench/listening/now/fish__native*.wav (3 renders, gitignored - regenerable);
 docs/W3-STAGE2-SWEEP.md.
 
+<a id="f51"></a>
+
 ## F51 - the recorded PyPI install route for 2 of the 3 remaining TTS engines does not lead to the upstream project at all: one is an abandoned third-party repackage predating the version we want, the other carries unedited cookiecutter placeholders - and a free licence pre-check cleared all three in seconds
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -1889,7 +2300,11 @@ F5 outcome - an engine benchmarked at length and then disqualified on a fact ava
 Evidence: PyPI JSON API for `cosyvoice`/`zonos`; GitHub API for the three upstream repos; HF model
 API for the four weight repos. Route corrections applied to docs/W3-STAGE2-SWEEP.md.
 
+<a id="f52"></a>
+
 ## F52 - MegaTTS3 is Apache-2.0, publishes its weights, and STILL cannot clone a voice locally: ByteDance withholds the WavVAE *encoder*, so a licence-clear engine can be capability-blocked in a way no licence check detects
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -1926,7 +2341,11 @@ we have no transcript for the owner's reference clip: CosyVoice3 via
 Evidence: `github.com/bytedance/MegaTTS3/readme.md` (note: lowercase `readme.md`; `README.md` 404s);
 HF API file listing for `ByteDance/MegaTTS3`. Recorded in docs/W3-STAGE2-SWEEP.md.
 
+<a id="f53"></a>
+
 ## F53 - Zonos v0.1 builds, imports and clones on gfx1151 but cannot be brought up: torch.compile fallback costs 15+ min at 0% GPU, and its own `.to(cuda, bfloat16)` never completes - while the platform moves the same 3.2 GB in 0.2s
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -1990,7 +2409,11 @@ track is therefore **four** engines that actually rendered - Chatterbox, VoxCPM2
 Evidence: `zonos/model.py:216,238`; stage-timed spike output; the in-image allocation control above;
 docs/W3-STAGE2-SWEEP.md.
 
+<a id="f54"></a>
+
 ## F54 - zero-shot voice cloning has an ACCENT COVERAGE limit that reference quality cannot fix: four architecturally-distinct engines, one clean reference, all four Americanised an Irish/neutral accent
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -2053,7 +2476,11 @@ abundant in TTS training data, so the drift that killed the Irish accent is not 
 Evidence: tts-bench/listening/tra-{four-engines,accent-test,two-engines,f5,zeroshot}.mp3 (gitignored,
 regenerable); per-engine spike records in docs/W3-STAGE2-SWEEP.md.
 
+<a id="f54-2"></a>
+
 ## F54 AMENDMENT + F52/W3 RETRACTION (2026-07-26, same day) - "CosyVoice3 WORKING" was WRONG: every one of its renders was garbled, and my own dtype "fix" is the likely cause
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2115,7 +2542,11 @@ mixed-dtype matmul is *handled* rather than the weights force-converted. Queued 
 Evidence: `tts-bench/check_intelligibility.py` output, run over 8 renders; batch audit of all ~20
 renders in progress via `stage2-sweep/run_batch.sh` -> `tts-bench/results/narrator-batch-report.md`.
 
+<a id="f55"></a>
+
 ## F55 - CosyVoice3 is NOT VIABLE on gfx1151: it fails its OWN documented example, and three plausible root causes were each disproved by varying our inputs instead of testing the engine against itself
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -2187,7 +2618,11 @@ carefully for the gate and then not applied to the engine an hour later.
 Evidence: `stage2-sweep/out/spike_cosy_control.py` (the engine-level positive control),
 `tts-bench/results/narrator-batch-report.md`, gate output in `stage2-sweep/out/batch.log`.
 
+<a id="f56"></a>
+
 ## F56 - the W3 narrator is SETTLED (VCTK p239 cloned by Chatterbox), and the pace figure that nearly triggered a tuning pass was a single-utterance artefact: 4.11 w/s on one 26-word take, 3.42 w/s over 227 words at the same config
+
+[Back to index](#findings-index)
 
 **Kind: MODEL** - the narrator decision. The three measurement lessons in this
 run are **F133**, split out 2026-09-01.
@@ -2281,7 +2716,11 @@ invitation to keep hunting:
 (criterion #2) is unblocked for the first time - and per the F54 amendment it can now be measured
 legitimately, because the engine it would measure has passed the intelligibility gate.
 
+<a id="f57"></a>
+
 ## F57 - the kernel drifted 6.17 -> 7.0 under the register's "single stack" constant, installed by unattended-upgrades
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -2378,7 +2817,11 @@ Evidence: `/var/log/sparkbench-esm-enable.log`, `pro security-status --format js
 list), `canonical-livepatch status --verbose`, the volumedetect run above.
 Status: ACTIVE. Livepatch is now part of the stack fingerprint.
 
+<a id="f58"></a>
+
 ## F58 - the repo.radeon.com apt pin is LOAD-BEARING: Ubuntu's ROCm sorts NEWER than AMD's and would silently downgrade the GPU stack
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -2422,7 +2865,11 @@ Evidence: `/etc/apt/preferences.d/repo-radeon-pin-600` (priority 600 vs archive 
 `/usr/bin/unattended-upgrade` `find_kept_packages`/`kept_package_excuse`.
 Status: ACTIVE, permanent - this notice is expected for as long as ROCm comes from repo.radeon.com.
 
+<a id="f59"></a>
+
 ## F59 - llama-server generation at temperature 0 is BYTE-deterministic (10/10), and a like-for-like failure produced the opposite claim mid-session
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2460,7 +2907,11 @@ Evidence: `results/closed-record/v4-glm-4.7-flash.json` against `v5-glm-4.7-flas
 comparisons; `results/closed-record-v5.md`; amendments A1 and A2 in `results/closed-record-prereg.md`.
 Status: ACTIVE. Applies to any llama-server arm at temperature 0.
 
+<a id="f60"></a>
+
 ## F60 - what makes a closed-record matter DISCRIMINATE is a period that must be WALKED, not a second base that is merely selected
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2502,7 +2953,11 @@ Evidence: `results/closed-record-v5.md` (full per-matter table and prediction re
 `results/closed-record/v5-*.json` run files, `results/closed-record-prereg.md` P7-P12.
 Status: ACTIVE. m12 is a candidate for rework or retirement.
 
+<a id="f61"></a>
+
 ## F61 - F10's DeltaNet 0.55 arch factor was a MoE accounting confound, not a DeltaNet penalty
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2525,7 +2980,11 @@ Evidence: results/model-survey.md "RESULTS - Qwen3.8-27B", Leg B; raw
 results/raw/bench-20260815-014413-qwen38-legB-subject-27b.md. Pre-registered
 before the run. Status: ACTIVE - amends F10.
 
+<a id="f62"></a>
+
 ## F62 - the DeltaNet hybrid buys depth-robustness, not peak speed
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -2556,7 +3015,11 @@ workhorse, but by 8K that gap has closed to 5.6x.
 
 Evidence: as F61. Status: ACTIVE.
 
+<a id="f63"></a>
+
 ## F63 - the b9864 -> b10435 + kernel 6.17.0-35 -> 7.0.0-28 move is worth ~+3.3% tg
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -2584,7 +3047,11 @@ Evidence: results/model-survey.md Leg A;
 results/raw/bench-20260815-014413-qwen38-legA-control-30b.md.
 Status: ACTIVE - addendum to F57.
 
+<a id="f64"></a>
+
 ## F64 - two concurrent benches void BOTH numbers, and the contended value was plausible
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2627,7 +3094,11 @@ Evidence: results/raw/bench-20260815-020038-qwen38-triplet-{1,2,3}.md (VOID as
 measurements, KEPT as this finding's evidence) vs
 bench-20260815-020542-* (clean). Status: ACTIVE.
 
+<a id="f65"></a>
+
 ## F65 - a pre-registration that names a concept instead of a FIELD is not falsifiable
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2660,7 +3131,11 @@ pre-registration rather than to measurement.
 Evidence: results/experiments.md E32 + AMENDMENT 1; results/model-survey.md
 Leg A disposition note. Status: ACTIVE - binds all future pre-registrations.
 
+<a id="f66"></a>
+
 ## F66 - cloud arms are NOT deterministic at temperature 0, so a single cloud number is a sample and F59 does not transfer
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2723,7 +3198,11 @@ of which it is, so no time was spent separating them.
 **Cost of establishing it:** $0.0009 per solar run and $0.0383 per gemini run,
 six runs total - under $0.12 to convert an assumption into a measured bound.
 
+<a id="f67"></a>
+
 ## F67 - Qwen3.8-27B-Q4_K_M beats the workhorse on judged-free knowledge work by 6 of 20, and the whole gap is in the two hardest categories
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -2787,7 +3266,11 @@ per-item times sum to 11.8s; 213.4 appears in no result file and I cannot
 reconstruct its origin. The true ratio is 37.4x, so the original understated
 the cost gap by more than an order of magnitude.
 
+<a id="f68"></a>
+
 ## F68 - an eval that executes model code must bound MEMORY, because the bound is part of the grade and not just a safety rail
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2830,7 +3313,11 @@ both bounds at every site, not at the site where the incident happened. The
 03:12 OOM and the broken complexity gate are the same defect with two very
 different symptoms - one loud and immediate, one silent and permanent.
 
+<a id="f69"></a>
+
 ## F69 - reasoning effort is a ROUTING AXIS, not a quality dial: on knowledge work there is no middle setting
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -2889,7 +3376,11 @@ tools/analyse_thinking_matrix.py. Status: ACTIVE for knowledge work; the
 cross-task generalisation is OPEN pending the writing and coding rows.
 
 
+<a id="f70"></a>
+
 ## F70 - temperature-0 determinism is SEQUENCE-scoped, not prompt-scoped
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -2929,7 +3420,11 @@ byte-identical across a doubling of each. Two false findings avoided by
 checking rather than concluding.
 
 
+<a id="f71"></a>
+
 ## F71 - on CODING, reasoning effort has an optimum in the MIDDLE, and the template's default overshoots it
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -2975,7 +3470,11 @@ fourth time.
 set EXPLICITLY.** The default is the setting that fails.
 
 
+<a id="f72"></a>
+
 ## F72 - the ~100K prefill wall is `n_ubatch`, and 128 is an OPTIMUM (AMENDED TWICE, 2026-08-17)
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -3080,7 +3579,11 @@ folder of thirty competing agreements, 273,000 characters, 12/12 correct with
 next thing to try before concluding the ceiling is permanent.
 
 
+<a id="f73"></a>
+
 ## F73 - a 3-task category produced a published recommendation that INVERTS at 13 tasks
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3129,7 +3632,11 @@ branch where the correct action is to do nothing - the same defect as the
 branch is the failure, in every predicate type tested.**
 
 
+<a id="f74"></a>
+
 ## F74 - retrieval under scale is a MEASURED STRENGTH: 12/12 at 90% of trained context, with no boundary anywhere below it
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -3181,7 +3688,11 @@ untested, and after this prompt plus its generation `-c 262144` leaves only
 with more trained context than we can already fill.
 
 
+<a id="f75"></a>
+
 ## F75 - request order changes the WORDING and not the ADVICE: 13/13 stable, 59/65 three times over
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3222,7 +3733,11 @@ matter-runs. It does not establish that no ordering can change an answer, only
 that none of the three tested did.
 
 
+<a id="f76"></a>
+
 ## F76 - the tool-use instrument is 5 runs at temperature 0.2, so intermediate per-task scores do NOT reproduce between sessions
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3265,7 +3780,11 @@ number, which is exactly why the constant was fixed in the first place, so the
 new design has to carry both.
 
 
+<a id="f77"></a>
+
 ## F77 - a 4.68 GiB model does the document work; what it needs is REASONING, not parameters
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -3321,7 +3840,11 @@ smaller.
 Evidence: `results/experiments.md` E52, `results/raw/e52-20260817-8b-*.json`.
 
 
+<a id="f78"></a>
+
 ## F78 - naming the document and the party in the question is worth 2 of 12 to a small model, and INVISIBLE on a large one
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3370,7 +3893,11 @@ Evidence: `results/experiments.md` E52 Amendment 1,
 `results/raw/e52-20260817-8b-l2.json` vs `-l2-c32768.json` vs `-l3-n0.json`.
 
 
+<a id="f79"></a>
+
 ## F79 - a correct citation is NOT evidence of a correct answer
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3409,7 +3936,11 @@ Evidence: `results/experiments.md` E52 prediction 5,
 `results/raw/e52-20260817-8b-*.json`.
 
 
+<a id="f80"></a>
+
 ## F80 - what the small local models cannot do is WALK A CALENDAR, and nothing else measured separates them
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -3536,7 +4067,11 @@ single-miss claim about `N2` sayable at all.
 Evidence: `results/experiments.md` E54b, `results/raw/e54b-20260817-*.json`.
 
 
+<a id="f81"></a>
+
 ## F81 - these models do NOT agree with a confident user, and the composition failure survives a conversation intact
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -3618,7 +4153,11 @@ Evidence: `results/experiments.md` E55, `results/raw/e55-20260817-*.json`,
 instrument in `spikes/ps-eval/{conversation_l4,grade_multiturn}.py` with
 `tools/validate_multiturn.py` at 26/26.
 
+<a id="f82"></a>
+
 ## F82 - a conversation at 75% of context does not decay, and what depth actually costs is the weakest model's resistance to a confident user
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -3715,7 +4254,11 @@ instrument in `spikes/ps-eval/{conversation_long,grade_multiturn}.py` with
 predictions held; both falsifications were the models beating the band, the
 eleventh time in this programme. Neither registered falsifier fired.
 
+<a id="f83"></a>
+
 ## F83 - held out from its own answer, the strong model does not decay at depth and the small one does
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -3767,7 +4310,11 @@ instrument `spikes/ps-eval/conversation_heldout.py` with
 falsifications were the models beating the band, the twelfth and thirteenth time
 in this programme.
 
+<a id="f84"></a>
+
 ## F84 - MTP speculative decoding preserves the ANSWER and not the completion
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -3810,7 +4357,11 @@ and divergent.
 Evidence: `results/experiments.md` E59, `results/raw/e59mtp{2,4}-20260819-*.json`
 and their `-diff.json`, acceptance via `tools/mtp_acceptance.py`.
 
+<a id="f85"></a>
+
 ## F85 - draft acceptance is a property of the WORKLOAD, and a speculative speedup does not transfer
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3855,7 +4406,11 @@ both (1.32x vs 1.31x). Every previously published figure was measured under
 Evidence: `results/experiments.md` E60, `results/raw/e60-{balanced,performance}-20260819.json`.
 
 
+<a id="f86"></a>
+
 ## F86 - model evaluation and SYSTEM evaluation are different measurements, and ranking models gives wrong engineering answers
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3923,7 +4478,11 @@ Evidence: E57 (F83), E58, E59 (F84), E60 (F85), E61 in flight. This finding is a
 synthesis of measurements recorded under those entries rather than a new
 measurement of its own, and is marked as such deliberately.
 
+<a id="f87"></a>
+
 ## F87 - a model can have good capability and still be a poor system component, because of its FAILURE MODE
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -3994,7 +4553,11 @@ hides the other three.
 Evidence: `results/experiments.md` E61, `results/raw/e61-20260819-glm47flash-l3n0{,-budget16k}.json`,
 `results/raw/e61-20260819-gptoss120b-{smoke,bisect}.json`.
 
+<a id="f88"></a>
+
 ## F88 - this arm is bit-deterministic across processes, which makes a repeat cheap and a single run still insufficient
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -4044,7 +4607,11 @@ Evidence: `results/raw/e62-20260819-gptoss120b-l3n0-repeat.json` + `.serverlog`,
 `results/raw/e61-20260819-gptoss120b-l3n0-retry.json` + `.serverlog`,
 `results/experiments.md` E62.
 
+<a id="f89"></a>
+
 ## F89 - gpt-oss-120b survives depth, and its one failure is a boundary error that no amount of reasoning fixes
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -4096,7 +4663,11 @@ six consecutive clean.
 Evidence: `results/raw/e63-20260819-gptoss120b-heldout-{ab,ba}.json`,
 `results/raw/e63-gptoss120b-paired.json`, `results/experiments.md` E63.
 
+<a id="f90"></a>
+
 ## F90 - compare latency only within a band of comparable OUTPUT VOLUME, or you are measuring brevity
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -4166,7 +4737,11 @@ capture it.
 Evidence: `results/raw/e64-20260819-gptoss120b-latency.json`,
 `results/raw/latency-20260819.json`, `results/experiments.md` E64.
 
+<a id="f91"></a>
+
 ## F91 - a tie at ceiling is a statement about the RULER, not about the models
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -4221,7 +4796,11 @@ Evidence: `results/raw/e65-20260819-opus-subagent-l3n0.json`,
 `results/raw/e65-20260819-opus-subagent-l3n0-answers.json`,
 `results/experiments.md` E65.
 
+<a id="f92"></a>
+
 ## F92 - two very different models miscounted the same deadline to the same wrong day
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -4274,7 +4853,11 @@ Evidence: `results/raw/e66-20260819-opus-subagent-heldout.json`,
 `results/raw/e63-20260819-gptoss120b-heldout-{ab,ba}.json`,
 `results/experiments.md` E66.
 
+<a id="f93"></a>
+
 ## F93 - a tool helps a model that cannot do the subproblem and HARMS one that can
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -4365,7 +4948,11 @@ Evidence: `results/raw/e67-20260819-workhorse-{control,tools}.json`,
 `results/raw/e67-20260819-gptoss120b-{control,preamble-only,tools}.json`,
 `results/experiments.md` E67.
 
+<a id="f94"></a>
+
 ## F94 - offering a tool is never free, and its sign changes with the model AND the task
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -4421,7 +5008,11 @@ interval for unseen items.
 Evidence: `results/raw/e68-20260819-workhorse-l1-*.json`,
 `results/raw/e68-20260819-gptoss120b-l1-*.json`, `results/experiments.md` E68.
 
+<a id="f95"></a>
+
 ## F95 - a deterministic grader can be reproducible and still be systematically wrong, and reproducibility makes it MORE dangerous
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -4515,7 +5106,11 @@ Evidence: `results/raw/kw-scores-all.json`, `tools/score_kw_eval.py`,
 hyphen, `U+2010`, `U+2011`, `U+2012`, `U+2013`, `U+2014`, `U+2212`, no-break
 space, narrow no-break space, thin space and curly quotes).
 
+<a id="f57-2"></a>
+
 ## F57 ADDENDUM 2 - the 7.0.0-28 -> 7.0.0-29 boundary, recorded BEFORE the reboot that crosses it
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -4551,7 +5146,11 @@ of change that could alter that rate in either direction, and S-H2's 2.95%
 bound does not transfer across the boundary on its own.
 
 
+<a id="f96"></a>
+
 ## F96 - byte-determinism survives a new PROCESS but not a repeated RUN inside one; within-process reps are not independent replicates
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -4597,7 +5196,11 @@ Evidence: `results/raw/e87-{A,C}-s-r{1,2,3}.json` against
 `results/experiments.md` E87.
 Status: ACTIVE. Applies to any multi-rep llama-server run sharing one process.
 
+<a id="f97"></a>
+
 ## F97 - Claude Code drives a LOCAL model end-to-end with no translation shim; llama-server build 9865 implements the Anthropic Messages API natively
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -4626,7 +5229,11 @@ Evidence: `/opt/sparkrouter/llama.cpp/tools/server/server.cpp:222,239`;
 scratchpad.
 Status: ACTIVE. Re-check on any llama.cpp build bump - this is a young endpoint.
 
+<a id="f98"></a>
+
 ## F98 - the Claude Code harness floor is 44,912 tokens, and it eliminates models by TRAINED CONTEXT before any quality question is asked
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -4659,7 +5266,11 @@ Evidence: the 400-error text from llama-server; `tools/gguf_ctx_probe.py` across
 `/opt/models/staging`; `print_timing` lines in the arm's server log.
 Status: ACTIVE.
 
+<a id="f99"></a>
+
 ## F99 - tool-calling capability must be measured under `tool_choice: auto`, because `auto` is a MODEL property and `any` masks it
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -4697,7 +5308,11 @@ Evidence: the three probe results above, all against
 `Qwen3-Coder-30B-A3B-Instruct-Q4_K_M` on port 8500.
 Status: ACTIVE.
 
+<a id="f100"></a>
+
 ## F100 - a benchmark's GATE needs its own positive control, run BEFORE the arms; an unverified gate measures itself
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -4741,7 +5356,11 @@ Evidence: `results-VOID-makefile-bug.README` and the three control exit codes
 (0 / 0 / 2) in the session log.
 Status: ACTIVE. Applies to every gated benchmark in this repo.
 
+<a id="f101"></a>
+
 ## F101 - KAT-Coder-V2.5-Dev cannot serve tools through llama.cpp: its chat template refuses Claude Code's message order
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -4770,7 +5389,11 @@ as one if attempted.
 Evidence: `arm-kat-coder.server.log`, the void results README.
 Status: ACTIVE. Re-test on a llama.cpp bump; template parser generation is young.
 
+<a id="f102"></a>
+
 ## F102 - a local coder declared a 6-task WORKPLAN COMPLETE having done 1 task and ticked no boxes, with the gate GREEN
+
+[Back to index](#findings-index)
 
 **Kind: MODEL** - what the model did. Why the gate could not see it is
 **F134**, split out 2026-09-01.
@@ -4819,7 +5442,11 @@ Evidence: `results-validation-run-old-scoring.jsonl`; the arm's WORKPLAN with
 six unticked boxes; its HANDOFF carrying two `STATUS: COMPLETE` lines.
 Status: ACTIVE. Being re-measured across all 9 arms under the widened scoring.
 
+<a id="f103"></a>
+
 ## F103 - the binding constraint on local agentic coding is llama.cpp's TOOL-SCHEMA plumbing, not model capability: 3 of 6 arms served ZERO requests
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -4862,7 +5489,11 @@ counts, `results/coder-bakeoff.jsonl`.
 Status: ACTIVE. Re-test on any llama.cpp build change; both mechanisms are in
 young code.
 
+<a id="f104"></a>
+
 ## F104 - the blocker is TOOL-SCHEMA BYTES in llama.cpp's grammar builder (~70KB for workhorse), shared by BOTH endpoints; Claude Code's floor is 73KB
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -4919,7 +5550,11 @@ both-endpoint replay above; the 69 KB/73 KB pair.
 Status: ACTIVE. Re-test on any llama.cpp bump - the grammar builder is the thing
 that would change.
 
+<a id="f105"></a>
+
 ## F105 - aider drives BOTH local models first-try, including the one Claude Code cannot drive at all: 761 tokens vs a 44,912-token floor
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -4960,7 +5595,11 @@ Evidence: `scratchpad/aiderproj{,2}` git history (commits `2bba7bf`, `bfbf793`),
 aider's own token counters, pytest output.
 Status: ACTIVE.
 
+<a id="f106"></a>
+
 ## F106 - Benchhost's thin inference path is at or above its hardware class; the hardware/runtime branch CLOSES
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5008,7 +5647,11 @@ Evidence: `results/e88-baseline.md`, `results/raw/e88/*.md`,
 `results/raw/e88/*.telemetry.tsv`, `results/e88-prereg.md`.
 Status: ACTIVE. Re-test on a llama.cpp bump, a kernel move, or a backend change.
 
+<a id="f107"></a>
+
 ## F107 - Claude Code does not run SLOWLY on the workhorse, it fails in 95 ms; and the context tax is paid once per conversation, not per turn
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5063,7 +5706,11 @@ Evidence: `results/raw/e88/clients.json`, `results/raw/e88/cache-benefit.json`,
 silent stack elimination misread as a timing.
 Status: ACTIVE. Re-test the refusals on any llama.cpp bump.
 
+<a id="f108"></a>
+
 ## F108 - slot count is not the multi-turn variable; `--cache-ram` is, and writing `-np` down explicitly quarters your context
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5123,7 +5770,11 @@ unmeasured; `--cache-ram 512` cached at 2 conversations and evicted at 4 with a
 working set above the limit in BOTH cases, so bytes-per-token arithmetic is not
 shown to predict the boundary and no capacity figure is claimed from it (leg A10).
 
+<a id="f109"></a>
+
 ## F109 - the "~60 GiB" deadlock boundary does not exist on kernel 7.0.0-29, and neither does the contention trigger
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5180,7 +5831,11 @@ is emphatic (93% reduction, load 24.1 s -> 11.0 s) but the threshold was wrong a
 is recorded falsified, not restated. C-P3 not triggered. C-P6 falsified, C-P7
 confirmed.
 
+<a id="f110"></a>
+
 ## F110 - KV cache precision: q8_0 is free, 4-bit is a 5.6% cliff, and 100 perfect retrievals measured none of it
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5215,7 +5870,11 @@ Predictions: B-P8 confirmed (ordering exact, spread 5.76% > 1%). B-P9 **falsifie
 (registered `q4_1` within 0.5% of `q8_0`; measured 5.58%). B-P4 and B-P7 falsified -
 neither the decoy sweep nor the `q4_0` control discriminated.
 
+<a id="f111"></a>
+
 ## F111 - `-ub 2048` is worth 22.9% on real prefill; speculative decoding is inapplicable; concurrency is serial
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5260,7 +5919,11 @@ decoded tokens over total wall and so includes prefill; it is end-to-end
 throughput, not pure decode.
 
 
+<a id="f112"></a>
+
 ## F112 - Aider on the resident workhorse is fast enough to be invisible: a 3.9 s median first turn against Claude Code's 136.8 s
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5289,7 +5952,11 @@ auth-sidecar hop is an unquantified addition to every figure above.
 Evidence: `results/e90-aider-workflow.md`, `results/raw/e90/`.
 
 
+<a id="f113"></a>
+
 ## F113 - Aider exits 0 whether or not it did anything: nine runs, nine zeros, four of them no-ops
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5313,7 +5980,11 @@ that cannot fail is not a control" says about instruments.
 Evidence: `results/e90-aider-workflow.md`, `results/raw/e90/*.json` (`aider_rc` on every row).
 
 
+<a id="f114"></a>
+
 ## F114 - the edit format decides which jobs work, and no single format does both
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -5343,7 +6014,11 @@ Evidence: `results/e90-aider-workflow.md`, `results/raw/e90/run{2,3,5}-*.json`,
 `results/raw/e90/fmt-*.json`.
 
 
+<a id="f115"></a>
+
 ## F115 - a plausible, reproducible, silently inert fix: `[tool:pytest]` four times out of four
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -5375,7 +6050,11 @@ under `from __future__ import annotations`. Green tests are not a clean file; li
 Evidence: `results/e90-aider-workflow.md`,
 `results/raw/e90/T2-model-output-sparkrouter_discovery.py` (verbatim), `results/raw/e90/*.json`.
 
+<a id="f116"></a>
+
 ## F116 - Qwen3.8-Flash-Next MATCHES the incumbent and never beats it, for 5.6x the memory and exclusive occupancy of the box
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -5422,7 +6101,11 @@ not settle that, and no result here should be quoted as if it had.
 Evidence: `results/e91-results.md`, `results/raw/e91/`, scorer
 `tools/e91/score_e91.py`.
 
+<a id="f117"></a>
+
 ## F117 - a control that reproduces its own ITEMS, not just its score, is what licenses a cross-build comparison
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5465,7 +6148,11 @@ tier that does not exist yet.
 
 Evidence: `results/e91-results.md`, `results/raw/e91/`, F74, F80, F82, E85.
 
+<a id="f118"></a>
+
 ## F118 - F80's "small models cannot walk a calendar" is a fact about the WORKHORSE, not about ~3B-active MoEs as a class
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5509,7 +6196,11 @@ experiment it enabled.
 
 Evidence: `results/e92-results.md`, `results/raw/e92/`, F80, F117.
 
+<a id="f119"></a>
+
 ## F119 - a "coding specialist" that does not TERMINATE, and why the score is not the finding
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -5547,7 +6238,11 @@ thinking off changes what is measured.
 Evidence: `results/e92-results.md`, `results/raw/e92/e92-kwaipilot-expert*.json`,
 HARNESS-RULES Rule 13.
 
+<a id="f120"></a>
+
 ## F120 - the community's Strix Halo speed table verifies twice on our own hardware
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5575,7 +6270,11 @@ band. Active parameter count is not sufficient to predict decode rate.
 Evidence: `results/raw/e92/e92-*-bench.md`, `docs/DEFERRED-REGISTER.md` item 14
 and 15 (the claims as supplied), F41.
 
+<a id="f121"></a>
+
 ## F121 - the harness scored a run that never happened, and only a person had ever caught it
+
+[Back to index](#findings-index)
 
 **Kind: METHOD** - what this taught about measuring, not about any model.
 
@@ -5655,7 +6354,11 @@ Rule 13's, which has always had this shape. Withholding the number touches 12
 consumer tools and is a separate decision, so it is recorded as unmet rather
 than reinterpreted.
 
+<a id="f122"></a>
+
 ## F122 - abliteration cost this model nothing measurable, on either kind of refusal
+
+[Back to index](#findings-index)
 
 **Kind: MODEL** - what this taught about a model. E93's method findings are
 F123 and F125, recorded separately under the two-findings convention.
@@ -5718,7 +6421,11 @@ worth pricing rather than opening a line of work.
 abliteration as a technique, about Huihui's other builds, or about uncensored
 models as a class. F118 is this repo's worked example of exactly that error.
 
+<a id="f123"></a>
+
 ## F123 - a readiness check that does not exercise the path under test certifies nothing
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5752,7 +6459,11 @@ added rather than on the day it is first run against a model.
 
 **Cost of the instance:** one maintenance window, two arms, and a re-run.
 
+<a id="f124"></a>
+
 ## F124 - model metadata can falsify an experimental arm before it is run
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5784,7 +6495,11 @@ metadata or protocol mechanics already determine the answer. Record the
 mechanistic check even when it does not settle the question, so the next
 session knows it was asked.
 
+<a id="f125"></a>
+
 ## F125 - a test double unfaithful on the axis under test produces a false green
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5817,7 +6532,11 @@ it. The `ctxlimit` fault was added for exactly this - a hard 5,000-token limit -
 and the ceiling search bracketed it at 4,883 served / 5,358 refused before being
 pointed at the GPU.
 
+<a id="f126"></a>
+
 ## F126 - a saturated instrument cannot compare anything, including the thing it was chosen to compare
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5856,7 +6575,11 @@ it has no resolution left to give.
 a control" worth writing**, and it recurs: `pr1` scored 12/12 on both E93 arms
 on 2026-08-31, which is the same shape one bank later.
 
+<a id="f127"></a>
+
 ## F127 - a public ranking and local usability are different properties, and a refused score leaves hypotheses UNSCORABLE rather than failed
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5893,7 +6616,11 @@ both ends of what the incomplete data permits. Where it does, the hypothesis
 survives on partial evidence; where it does not, the honest outcome is
 `NO DECISION - MEASUREMENT INVALID`.
 
+<a id="f128"></a>
+
 ## F128 - a speedup quoted without its workload is not a number, and a flag can load without acting
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -5921,7 +6648,11 @@ reference it in F124. **The common shape is a setting that is accepted, recorded
 as applied, and has no effect** - so the result file describes a configuration
 that was never served.
 
+<a id="f129"></a>
+
 ## F129 - Vulkan did not fail under any controlled condition, and the original crash was never reproduced
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -5944,7 +6675,11 @@ kernel-level SDMA deadlock that became F24.
 as an observation with an unknown trigger, and F109 later retracted the size
 boundary that had been built on top of it.
 
+<a id="f130"></a>
+
 ## F130 - which models actually draft well: the local pick matches cloud-Mistral and trails the frontier
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -5977,7 +6712,11 @@ the quality is bought with time.
 local self-refine and higher precision all failed to move the workhorse off
 2.4-2.6. Changing the model did.
 
+<a id="f131"></a>
+
 ## F131 - omitting the context flag allocates the model's full trained context
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -6003,7 +6742,11 @@ figure. "No regression evident" is the claim; "within F15" is not.
 
 This is why CLAUDE.md carries a hard rule to always pass `-c` explicitly.
 
+<a id="f132"></a>
+
 ## F132 - an external known value is what caught an inverted answer
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6030,7 +6773,11 @@ both settings.
 **Where a public benchmark with a known value exists for the capability under
 test, run it as a calibration arm before trusting the private bank.**
 
+<a id="f133"></a>
+
 ## F133 - three measurement lessons from settling the narrator voice
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6056,7 +6803,11 @@ Irish male reference that **both** engines Americanised, and this one used
 English female references that one engine handles. **Ranking engines in the
 abstract is the error**; the verdict belongs to the engine-and-reference pair.
 
+<a id="f134"></a>
+
 ## F134 - a gate is green when the missing work has no tests to fail
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6081,7 +6832,11 @@ Related: **F100** (a gate needs its own positive control), **F123** (a readiness
 check that does not exercise the path certifies nothing), **F126** (a saturated
 instrument cannot compare anything).
 
+<a id="f135"></a>
+
 ## F135 - three models stay resident for the price of one context, and switching between them is inside noise
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -6116,7 +6871,11 @@ mixture-of-experts model. Residency and switching are not parallelism.
 Router mode is experimental upstream, so this is a case for a proposal to
 sparkrouter rather than a change to it.
 
+<a id="f136"></a>
+
 ## F136 - prefill collapses with prompt length, so the context a box can HOLD is not the context anyone will WAIT for
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -6208,7 +6967,11 @@ establish whether the allocated context was usable at all. **An experiment
 measuring capacity produced its most decision-relevant number as a side effect
 of checking that the capacity was real.**
 
+<a id="f137"></a>
+
 ## F137 - two agreeing samples of a progress counter gave 1.4x the true rate
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6253,7 +7016,11 @@ measure all along and the derived figures in F136 needed no correction.
    derivation of it**, where one exists. It is not a proxy, it costs nothing,
    and here it was sitting unread in a log the run had already written.
 
+<a id="f138"></a>
+
 ## F138 - the asymmetric context configuration works, and the pool is not shared
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -6294,7 +7061,11 @@ value while the run records itself as asymmetric. `run_e94.py --no-ctx-override`
 exists for this and the server log is the check: three distinct `n_ctx` values
 (262144, 65536, 32768) must appear for one server.
 
+<a id="f139"></a>
+
 ## F139 - a summarised page is not the page: a wrong defect report reached the edge of publication
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6372,7 +7143,11 @@ fetching. `/opt/models/staging/matraix-persona-1m/provenance.json`, revision
 `8b1073ab23d0c0ba0928386a041bac55e5365ddc`.
 
 
+<a id="f140"></a>
+
 ## F140 - the reasoning-effort default costs 11 runaways of 18; the sampler fix the field recommends is worth 3
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -6421,7 +7196,11 @@ Evidence: `results/experiments.md` E101 pre-registration + result,
 `results/raw/e101/*.json`, scored by `tools/score_e101.py`. See [[F71]], [[F72]].
 
 
+<a id="f141"></a>
+
 ## F141 - what looks like looping is NOT repetition, and every sampler knob aimed at it acts on the wrong mechanism
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -6469,7 +7248,11 @@ Evidence: `results/experiments.md` E101 result, `repetition_stats()` in
 See [[F140]], [[F119]].
 
 
+<a id="f142"></a>
+
 ## F142 - the L5 bank is SATURATED: three models, zero separation, the same failing item
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6517,7 +7300,11 @@ Evidence: `results/experiments.md` E102 + E103 results, `results/raw/e102/*.json
 `tools/score_l5_bands.py`. See [[F126]], [[F117]], [[F82]].
 
 
+<a id="f143"></a>
+
 ## F143 - ThinkingCap is a better DEFAULT and a worse CEILING, and the efficiency claim changes sign with the comparator
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -6561,7 +7348,11 @@ Evidence: `results/experiments.md` E103 result, `results/raw/e103/*.json`,
 `results/raw/e101/c1-greedy-medium.json`. See [[F140]], [[F71]], [[F142]].
 
 
+<a id="f144"></a>
+
 ## F144 - the GSQ-RCO IQ3_S quant costs 3 of 8 on hard tasks, and three banks called it identical
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -6605,7 +7396,11 @@ Evidence: `results/experiments.md` E102 / E102 second bank / E104 results;
 See [[F142]], [[F145]], [[F110]].
 
 
+<a id="f145"></a>
+
 ## F145 - the same three models scored 0 points apart on one bank and 6 apart on another; the instrument chose the answer
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6650,7 +7445,11 @@ Evidence: `results/experiments.md` E102, E102 second bank, E103, E104 results.
 See [[F126]], [[F142]], [[F144]], [[F117]].
 
 
+<a id="f146"></a>
+
 ## F146 - temperature does not cause fabrication on evidence work; what it costs is calendar arithmetic
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -6711,7 +7510,11 @@ Evidence: `results/experiments.md` E107 pre-registration + result,
 [[F142]], [[F80]].
 
 
+<a id="f147"></a>
+
 ## F147 - a harness's affordability is set by the MODEL it wraps, not by the harness
+
+[Back to index](#findings-index)
 
 **Kind: PLATFORM**
 
@@ -6762,7 +7565,11 @@ Evidence: `results/experiments.md` E109 pre-registration, Amendment 1 and
 result; `results/raw/e109/`. See [[F112]], [[F104]], [[F148]].
 
 
+<a id="f148"></a>
+
 ## F148 - agent scaffolding does not degrade evidence work, and does not fabricate; it costs COMPLETIONS
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -6827,7 +7634,11 @@ Evidence: `results/experiments.md` E109 result, `results/raw/e109/e109-armB-herm
 `tools/e109_harness_knowledge.py`. See [[F147]], [[F142]], [[F146]].
 
 
+<a id="f149"></a>
+
 ## F149 - Q4_K_M is the knee: 3-bit costs three of eight, 8-bit buys nothing for 55% more wall clock
+
+[Back to index](#findings-index)
 
 **Kind: MODEL**
 
@@ -6866,7 +7677,11 @@ Evidence: `results/experiments.md` E105 pre-registration + result,
 See [[F144]], [[F145]], [[F110]].
 
 
+<a id="f150"></a>
+
 ## F150 - defeating a naive solution is necessary and nowhere near sufficient; the token cost is the tell
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6914,7 +7729,11 @@ Evidence: `results/experiments.md` E110 pre-registration + result,
 `results/raw/e110/e110-incumbent-expert2.json`. See [[F145]], [[F142]].
 
 
+<a id="f151"></a>
+
 ## F151 - a task defined by the wrong answers it defeats cannot locate the top of a competent model
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -6972,7 +7791,11 @@ Evidence: `results/experiments.md` E111 pre-registration + result,
 See [[F150]], [[F145]], [[F142]], [[F144]].
 
 
+<a id="f152"></a>
+
 ## F152 - a 0/3 was two rotted tasks; repaired, the same set gives 2/3, and the one failure is an APPLICATION failure the harness called success
+
+[Back to index](#findings-index)
 
 **Kind: METHOD**
 
@@ -7027,7 +7850,11 @@ Evidence: `results/experiments.md` E113 pre-registration + result,
 `results/raw/e113/worktrees/T3-multifile-optional-dep-aider.log`,
 `tools/aider_task_runner.py`. See [[F113]], [[F148]], [[F151]].
 
+<a id="f153"></a>
+
 ## F153 - the knowledge-work banks are saturated at the frontier: three models across a 40x price range score within one item
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-11 | **Experiment:** E135 | **Status:** ESTABLISHED
 
@@ -7081,7 +7908,11 @@ Evidence: `results/e135-prereg.md`, `results/e135-results.md`,
 pass, retained as evidence, numbers NOT quotable).
 See [[F65]], [[F20]], [[F82]], [[F134]].
 
+<a id="f154"></a>
+
 ## F154 - DeepSeek-V4.1-Flash cannot be served on benchhost, and the blocker is not size alone
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-11 | **Experiment:** E135 | **Status:** ESTABLISHED
 
@@ -7124,7 +7955,11 @@ quant appear; track PR #28696.
 
 Evidence: `results/e135-prereg.md` section A. See [[F109]], [[F58]].
 
+<a id="f155"></a>
+
 ## F155 - Qwen-Image-2.1 runs on benchhost only with the gateway down and the VAE decode tiled
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-21 | **Experiment:** E136 | **Status:** ESTABLISHED
 
@@ -7163,7 +7998,11 @@ any torch/ROCm move.
 Evidence: `results/e136-prereg.md` amendments 1 and 4 and "NaN ATTRIBUTED";
 `results/e136/d-1376/run.log`; `results/e136/nan-diag-aotriton-1mp/`. See [[F24]], [[F109]], [[F157]].
 
+<a id="f156"></a>
+
 ## F156 - an image DiT on gfx1151 is bound by weight traffic, and for BF16 diffusers beats sd.cpp
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-21 | **Experiment:** E136 | **Status:** ESTABLISHED
 
@@ -7196,7 +8035,11 @@ End to end at steady state, **diffusers BF16 ~467.5 s vs sd.cpp BF16 ~665.4 s = 
 Evidence: `results/e136-results.md` timings and "What the misses say"; `results/e136/s-*`,
 `results/e136/d-1376-tiled/`, `results/e136/final-W2-2752/`. See [[F155]].
 
+<a id="f157"></a>
+
 ## F157 - Qwen-Image-2.1 edit keeps text and layout but only makes LOCAL changes; it cannot regrade or upscale
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-22 | **Experiment:** E136, E137 | **Status:** ESTABLISHED
 
@@ -7229,7 +8072,11 @@ A 1 MP edit costs ~1.9x a text-to-image render at the same size (887.87-893.49 s
 Evidence: `results/e136-results.md` "E1"; `results/e137-results.md`; `results/e137/scores.json`,
 crop sheets `results/e137/crops-*-3000.png`. See [[F155]], [[F158]].
 
+<a id="f158"></a>
+
 ## F158 - image tools here exit 0 on a blank output; check the pixels, not the status
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-22 | **Experiment:** E136, E137 | **Status:** ESTABLISHED
 
@@ -7255,7 +8102,11 @@ in a new place: completion is a property of the artefact.
 Evidence: commits `105f6c9`, `dedd625`; `results/e136-prereg.md` "AMENDMENT 4 RESULT";
 `results/e137-results.md` "Tools that exit 0 on failure". See [[F2]], [[F155]].
 
+<a id="f159"></a>
+
 ## F159 - a public "73 tok/s on Strix Halo" does not reproduce: 34.16 is the ceiling here, and the claim's own memory figure names the slow file
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-23 | **Experiment:** E138 | **Status:** ESTABLISHED
 
@@ -7293,7 +8144,11 @@ scored tighter than that.
 Evidence: `results/e138-results.md`, `results/e138/speed-*.json` (3 reps each, server-side
 timings), `results/e138/bench-*.stdout`. See [[F160]], [[F3]], [[F85]], [[F144]].
 
+<a id="f160"></a>
+
 ## F160 - the ternary PTQ1_0 file is a DECODE trap on AMD Vulkan, and speculation's gain is prompt-shaped
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-23 | **Experiment:** E138 | **Status:** ESTABLISHED
 
@@ -7331,7 +8186,11 @@ the fork - `results/e138/prism-e138-dflash2.patch`.
 Evidence: `results/e138-results.md`; `results/e138/speed-*.json`; `results/e138/bench-*.stdout`.
 See [[F159]], [[F3]], [[F85]].
 
+<a id="f161"></a>
+
 ## F161 - a reviewer that re-solves saves nothing: the workhorse -> 27B cascade is safe and 30% slower on short-answer work
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-24 | **Experiment:** E140 | **Status:** ESTABLISHED (n=12, one run)
 
@@ -7362,7 +8221,11 @@ would fail the same way on this bank.
 Evidence: `results/e140-results.md`, `results/e140/calls.jsonl`, prereg `results/e140-prereg.md`
 (+ amendment 1). See [[F86]], [[F91]], [[F69]].
 
+<a id="f162"></a>
+
 ## F162 - the workhorse is most confident where it is wrong, so it cannot gate the 27B; an effort router lost to fixed `low`
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-24 | **Experiment:** E141 | **Status:** ESTABLISHED (n=12, one run)
 
@@ -7396,7 +8259,11 @@ design lost to a constant.
 Evidence: `results/e141-results.md`, `results/e141/calls.jsonl`, prereg `results/e141-prereg.md`.
 See [[F161]], [[F69]], [[F71]].
 
+<a id="f163"></a>
+
 ## F163 - the 27B can gate its own `off` answers safely, but the gate costs what it saves
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-24 | **Experiment:** E142 | **Status:** ESTABLISHED (n=12, one run)
 
@@ -7427,7 +8294,11 @@ it could beat a constant.
 Evidence: `results/e142-results.md`, `results/e142/calls.jsonl`, prereg `results/e142-prereg.md`.
 See [[F162]], [[F161]].
 
+<a id="f164"></a>
+
 ## F164 - four models tie on Aider passes and split the tasks in opposite ways; the incumbent is 2x to 10x faster
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-24 | **Experiment:** E143 | **Status:** ESTABLISHED for these tasks (3 tasks x 3 repeats)
 
@@ -7454,7 +8325,11 @@ T2 and T3 are the two that do. The chat's picks were confirmed as not worse, not
 Evidence: `results/e143-results.md`, `results/raw/e143/`, prereg `results/e143-prereg.md`.
 See [[F152]], [[F117]], [[F151]].
 
+<a id="f165"></a>
+
 ## F165 - Halogen prefills 32K at 1,152 tok/s here, 81% of its claim and 5.3x llama.cpp; the claim reproduces conditionally
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-24 | **Experiment:** E139 | **Status:** ESTABLISHED (median of 3, one window per arm)
 
@@ -7475,7 +8350,11 @@ against a predicted 95-115; where the roughly 115 GiB of weights live is not est
 Evidence: `results/e139-results.md`, `results/e139/`, prereg `results/e139-prereg.md` (amendments 1-4).
 See [[F116]], [[F164]].
 
+<a id="f166"></a>
+
 ## F166 - a maintenance window is not a clean box, and Halogen cannot serve our GGUF beside anything else
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-24 | **Experiment:** E139 | **Status:** ESTABLISHED (two guard kills, one config error)
 
@@ -7496,7 +8375,11 @@ health response, `/cache` and startup warnings are accurate and worth reading be
 
 Evidence: `results/e139/speed-G0*.serverlog`, `results/e139/mem_guard.log`. See [[F165]].
 
+<a id="f167"></a>
+
 ## F167 - the widget's options tie with the 35B we already ran; its speed order holds, its speed size does not
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E145 | **Status:** ESTABLISHED for these tasks (3 tasks x 3 repeats)
 
@@ -7529,7 +8412,11 @@ with the provenance caveat.
 Evidence: `results/e145-results.md`, `results/raw/e145/`, prereg `results/e145-prereg.md`.
 See [[F164]], [[F151]], [[F126]].
 
+<a id="f168"></a>
+
 ## F168 - an Atlas benchmark measures its configuration: a checkpoint label and one missing flag each cost the whole run
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E146 | **Status:** ESTABLISHED (two independent failures, both reproduced from logs)
 
@@ -7547,7 +8434,11 @@ missing serving flag, not the model, decided a result.
 
 Evidence: `results/e146-results.md`, `results/raw/e146/M1/server.serverlog`, `results/raw/e146/M1p0/`, prereg amendments 2-3. See [[F39]], [[F108]], [[F128]].
 
+<a id="f169"></a>
+
 ## F169 - on the MLPerf edge-agentic metric Atlas takes about 27% less time per turn than the llama.cpp reference here, and the published latency is not reproduced
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E146 | **Status:** ESTABLISHED for this subset (206 turns, one run per arm)
 
@@ -7566,7 +8457,11 @@ distinct outputs in 10 identical greedy requests). It reserves its GPU pool up f
 
 Evidence: `results/e146-results.md`, `results/raw/e146/`, prereg `results/e146-prereg.md`. See [[F168]], [[F84]], [[F85]], [[F165]].
 
+<a id="f170"></a>
+
 ## F170 - the vendor page's MLPerf figures do not match the MLCommons entry it cites
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E146 (gate G5) | **Status:** ESTABLISHED as a comparison of the page against the results repository
 
@@ -7583,7 +8478,11 @@ page's "675 stars" and "PR #187" match the older repo's numbers, not the one it 
 
 Evidence: `results/e146-gates.md`. See [[F159]], [[F165]].
 
+<a id="f171"></a>
+
 ## F171 - every T3 failure across eight models is an edit that never reached the file; the "opposite task profiles" of F164 and F167 are partly a harness artefact
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E143, E145 (diagnosis of banked results) | **Status:** ESTABLISHED from the recorded diffs
 
@@ -7606,7 +8505,11 @@ task whose failures all carry the seed diff is scored "not applied", never "wron
 
 Evidence: `results/raw/e143/*/r?.json`, `results/raw/e145/*/r?.json` (fields `diff`, `aider_tail`, `verify_after_rc`). See [[F113]], [[F114]], [[F152]], [[F164]], [[F167]].
 
+<a id="f172"></a>
+
 ## F172 - with a drafter, llama.cpp beats Atlas on the MLPerf edge-agentic metric; F169's advantage was over a reference without speculation
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E147 | **Status:** ESTABLISHED for this subset (206 turns, one run)
 
@@ -7627,7 +8530,11 @@ drafter's per-turn acceptance not recorded per turn (this build's server log car
 
 Evidence: `results/e147-results.md`, `results/raw/e147/`, prereg `results/e147-prereg.md`. See [[F169]], [[F84]], [[F85]], [[F168]].
 
+<a id="f173"></a>
+
 ## F173 - the ternary Bonsai 2 keeps the incumbent's answers on documents and core coding and loses on expert coding; it also runs away twice in 47 items
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E138 blocks 2-4 | **Status:** ESTABLISHED (one run per bank)
 
@@ -7646,7 +8553,11 @@ found for the incumbent at the wrong effort default. The routing guide is not ch
 
 Evidence: `results/e138-results.md` (blocks 2-4), `results/e138/quality-*.json`, prereg amendments 3-4. See [[F159]], [[F160]], [[F144]], [[F140]], [[F59]].
 
+<a id="f174"></a>
+
 ## F174 - on the same weights, pi passed the task Aider could not, because it applied the edit; the harness decided T3
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-25 | **Experiment:** E138 block 4 | **Status:** ESTABLISHED (one run per harness)
 
@@ -7666,7 +8577,11 @@ Evidence: `results/e138/agentic-aider.json`, `results/e138/agentic-pi.json` (fie
 
 *F171 and F174 addendum, 2026-09-26:* `tools/aider_task_runner.py` now records `seed_diff_chars` and `edit_applied` (the final diff differs from the seed's, same pathspec) on every record, and `classify()` returns `fail-not-applied` for a verify failure with no applied edit. Tests: `tests/test_aider_task_runner_classify.py`. Records from E113 to E145 predate the field; the 978-character heuristic in `tools/score_e138_blocks.py` covers them.
 
+<a id="f175"></a>
+
 ## F175 - Atlas's own DFlash mode is its slowest configuration on this box: the drafter accepts 0.064 tokens per 15-token step, and the MLPerf-era build cannot serve it on HIP at all
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-26 | **Experiment:** E148 | **Status:** ESTABLISHED for this subset (206 turns, one run); cause OPEN
 
@@ -7692,7 +8607,11 @@ unexercised by the vendor. A prefix-caching WARN naming an SM12.x correctness re
 Evidence: `results/e148-results.md`, `results/raw/e148/` (M3p per-turn record, both server logs), prereg `results/e148-prereg.md`,
 `tools/e148_dflash_accept.py`. See [[F172]], [[F169]], [[F168]], [[F85]], [[F160]].
 
+<a id="f176"></a>
+
 ## F176 - F175's cause is Atlas's 4,096-token drafter context cap, stated in its own source; declaring the drafter's sliding-window layers is inert
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-26 | **Experiment:** E149 | **Status:** the sliding-window result is ESTABLISHED (one capped run, 109 turns); **the cause claim in the title is RETRACTED by E150 ([[F177]]): lifting the cap nine-fold changed nothing**
 
@@ -7716,7 +8635,11 @@ events file, so capped arms are compared server-side on Atlas's per-turn lines.
 Evidence: `results/e149-results.md`, `results/raw/e149/M4/`, prereg `results/e149-prereg.md` (amendment 1), `tools/score_e149.py`.
 See [[F175]], [[F172]], [[F85]].
 
+<a id="f177"></a>
+
 ## F177 - Atlas's drafter context cap is not the cause of F175 either: lifted to 36,864, acceptance and output are identical to the shipped configuration; F176's cause claim is retracted
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-26 | **Experiment:** E150 | **Status:** ESTABLISHED (one capped run, 128 turns); cause OPEN, prefix cache under test (E151)
 
@@ -7737,7 +8660,11 @@ this result was read) tests the cache. If that fails too, the HIP kernel path is
 Evidence: `results/e150-results.md`, `results/raw/e150/M5/`, prereg `results/e150-prereg.md`, `tools/score_capped_atlas_arm.py`.
 See [[F175]], [[F176]], [[F172]].
 
+<a id="f178"></a>
+
 ## F178 - Atlas's prefix cache is a 0.05-token contributor to its DFlash collapse, not the cause; three single-variable arms retire three explanations and the investigation stops
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-26 | **Experiment:** E151 | **Status:** ESTABLISHED (one capped run, 31 turns); the Atlas DFlash cause is CLOSED-UNEXPLAINED by decision
 
@@ -7759,7 +8686,11 @@ capped.
 Evidence: `results/e151-results.md`, `results/raw/e151/M6/`, prereg `results/e151-prereg.md`, `tools/score_capped_atlas_arm.py`
 (the M3p same-turns split). See [[F175]], [[F176]], [[F177]], [[F172]].
 
+<a id="f179"></a>
+
 ## F179 - halogen 0.14.0's coding-agent, served-decode and 100K-follow-up rows hold at 74-78% with the TTS service rendering beside it; sharing the APU costs 27% prefill and 33% serial decode at the same 85 W
+
+[Back to index](#findings-index)
 
 **Date:** 2026-09-27 | **Experiment:** E152 | **Status:** ESTABLISHED under contention (one run per arm); idle-box figures for 0.14.0 not measured
 
@@ -7782,7 +8713,11 @@ Evidence: `results/e152-results.md`, `results/e152/speed-H1.json`, `speed-H1-id.
 (amendment 1). See [[F165]], [[F166]], [[F159]].
 
 
+<a id="f180"></a>
+
 ## F180 - on one box and one client, Halogen 0.18.23 serves Flash-Next fastest in every bucket; gufo, Talus and Strata sit 2.2-2.6x above llama.cpp on code, Halogen 3.2x
+
+[Back to index](#findings-index)
 
 **Date:** 2026-11-04 | **Experiment:** E153 | **Status:** ESTABLISHED for speed (one run per arm, TTS gateway resident, ~85 W); quality NOT measured
 
@@ -7806,7 +8741,11 @@ start beside the TTS gateway (MemAvailable 114 -> 12.2 GiB in 30 s, guard kill),
 Evidence: `results/e153-results.md`, `results/e153/speed-{L0,S,T,G,H}.json`, prereg `results/e153-prereg.md` (amendments
 1-3). See [[F165]], [[F166]], [[F179]], [[F172]].
 
+<a id="f181"></a>
+
 ## F181 - on 15 real HumanSpark fixes, two local setups solve all 15 that Sonnet 5.5 solves, at about 15x its time; the incumbent coder solves 11
+
+[Back to index](#findings-index)
 
 **Date:** 2026-11-05 | **Experiment:** E154 | **Status:** ESTABLISHED on this bank (one sample per task per arm); bank is at its ceiling
 
@@ -7833,7 +8772,11 @@ index (`docs/CAPABILITY-INDEX.md`) uses these runs as its 2026-11 baseline.
 Evidence: `results/e154-results.md`, `results/e154/score.json`, `results/e154/raw/<arm>/`, prereg
 `results/e154-prereg.md` (amendments 1-5). See [[F180]], [[F102]], [[F151]], [[F182]].
 
+<a id="f182"></a>
+
 ## F182 - the coding harness sandbox is a working directory, not a jail: a local agent listed the vault's key names
+
+[Back to index](#findings-index)
 
 **Date:** 2026-11-05 | **Experiment:** E154 | **Status:** ESTABLISHED (observed in transcripts); fix not yet built
 
@@ -7856,7 +8799,11 @@ a sha256 (`tools/strip_task_transcripts.py`) - evidence kept, gate not bypassed.
 Evidence: prereg `results/e154-prereg.md` amendments 2 and 5; `results/e154/transcripts/H/` (gitignored, sha256 in
 `results/e154/raw/H/*.json`). See [[F181]].
 
+<a id="f183"></a>
+
 ## F183 - on harder real repo work, the best local setups reach Sonnet 5.5 and Opus 5.5; the old local coding default does not
+
+[Back to index](#findings-index)
 
 **Date:** 2026-11-06 | **Experiment:** E156 | **Status:** ESTABLISHED on 10 tasks (one sample each)
 
@@ -7890,7 +8837,11 @@ Qwen3.8-27B's coding optimum at `medium`, below its template's default. Communit
 the ordering. E159 (prereg `results/e159-prereg.md`) measures `low`, `medium` and `xhigh` on this bank. The 9/10 stands
 for `xhigh`.
 
+<a id="f184"></a>
+
 ## F184 - hidden tests demand things a task prompt never says; reading the first failures found five, automated checks found none
+
+[Back to index](#findings-index)
 
 **Date:** 2026-11-06 | **Experiment:** E156 | **Status:** ESTABLISHED (method)
 
@@ -7918,9 +8869,15 @@ Score every arm on the final prompts and keep the superseded runs.
 
 Evidence: `results/e156-prereg.md` amendments 1-4; `results/e156/raw/{S,O}/superseded/`. See [[F183]].
 
+<a id="f185"></a>
+
 ## F185 - newer local coding models tie the best local result (9/10) but do not beat it; a bigger sibling scored lower and a small preview scored 8
 
+[Back to index](#findings-index)
+
 **Date:** 2026-11-07 | **Experiment:** E158 | **Status:** ESTABLISHED (10 tasks, one attempt each)
+
+**Kind: CAPABILITY**
 
 **Plain English.** We ran four newer local coding models on the same 10 real fixes as E156. Ornith 1.5 35B solved 9,
 level with Flash-Next. Tess 4.5 and Raon-1 mini solved 8, level with Sonnet 5.5 and Opus 5.5. Ornith 1.5 122B solved

@@ -1,3 +1,4 @@
+<!--
 # File: e146-gates.md
 # Purpose: Record of the E146 pre-run gates (G1-G7) for the Atlas inference engine test, with what each found.
 # Project: sparkbench | Date: 2026-09-25
@@ -5,6 +6,7 @@
 # Overview: results/e146-prereg.md registered six CPU-only gates before any GPU window. This file records
 # their outcomes as measured on 2026-09-25 (00:00-01:20). Nothing has run on the GPU. G5 changed the design,
 # which Amendment 1 of the prereg declares. Sources are named beside each fact.
+-->
 
 # E146 GATE RECORD (2026-09-25)
 
