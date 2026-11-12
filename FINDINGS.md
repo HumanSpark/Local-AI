@@ -7880,6 +7880,16 @@ source-text tests, so it is not read as a local advantage. Without it, H 8, T27 
 Evidence: `results/e156-results.md`, prereg `results/e156-prereg.md`, raw `results/e156/raw/` (7d8f64b, 9e90488). See
 [[F181]], [[F182]], [[F184]].
 
+**Addendum 2026-11-12 - the condition H was measured at.** H ran at **reasoning effort `xhigh`**, and that was not a
+choice. The harness sent no `reasoning_effort`, and Halogen serves the model's stock chat template
+(sha256 c3cf9e34abf4f9e3), which resolves a missing effort to `xhigh` (`reasoning_effort|default('xhigh')`). That is
+also why H spends a median of 59,437 completion tokens (max 105,443) and 21.3 minutes per task. On 2026-11-12 a single
+production request showed the template applying a per-request effort (prompt_tokens: 93 with none sent, 81 at `low`, 51
+at `medium`), so a client can choose a lower effort. **Whether a lower effort keeps 9/10 is not measured.** F71 found
+Qwen3.8-27B's coding optimum at `medium`, below its template's default. Community reports for Flash-Next disagree on
+the ordering. E159 (prereg `results/e159-prereg.md`) measures `low`, `medium` and `xhigh` on this bank. The 9/10 stands
+for `xhigh`.
+
 ## F184 - hidden tests demand things a task prompt never says; reading the first failures found five, automated checks found none
 
 **Date:** 2026-11-06 | **Experiment:** E156 | **Status:** ESTABLISHED (method)

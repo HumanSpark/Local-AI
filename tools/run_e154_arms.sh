@@ -20,7 +20,16 @@
 # runtime is a fork), all on upstream llama.cpp e14a779; RA Raon-1-mini Q8_0 on KRAFTON's fork fb89566 (arch raon1 is
 # not upstream). Card sampling. After ready, GPU memory in use is logged as the offload evidence.
 #
-# Usage: tools/run_e154_arms.sh [--dry-run] ARM [ARM ...]    ARM in S O H Q QN T27 TL OR35 OR122 TS45 TS4 RA
+# E155 (2026-11-07): quality-ceiling arms on the frozen E156 bank, upstream llama.cpp cf659f2 - GL GLM-5.3-Flash
+# UD-IQ2_XXS (94.9 GiB) and DC DeepSeek-V4.1-Flash-1017 ISTA Coder IQ2_XXS (67.2 GiB resident + a 103 GiB Engram table
+# read from disk, card reasoning effort 50). Card sampling; prereg results/e155-prereg.md.
+#
+# E159 (2026-11-12): Flash-Next reasoning-effort sweep on the frozen E156 bank, production's Halogen image. HX HM HL =
+# stock template at xhigh / medium / low sent per request; HF HFL = froggeric's fixed template v22.5 (pinned,
+# var/e159/froggeric/chat_template.jinja, mounted over the stock one) at its default (medium) / low. Prereg
+# results/e159-prereg.md. E154_DEADLINE (epoch s) stops starting new tasks after the owner's window ends.
+#
+# Usage: tools/run_e154_arms.sh [--dry-run] ARM [ARM ...]    ARM in S O H Q QN T27 TL OR35 OR122 TS45 TS4 RA GL DC HX HM HL HF HFL
 
 set -u
 REPO=/home/bench/sparkbench
@@ -42,12 +51,15 @@ CODER=$M/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
 CODER_NEXT=$M/Qwen3-Coder-Next-Q4_K_M.gguf   # arm QN, prereg amendment 4
 LLAMA_NEW=$REPO/llama.cpp/wt/e14a779/build/bin/llama-server   # E158, upstream 2026-11-06
 LLAMA_RAON=$REPO/llama.cpp/wt/raon-fb89566/build/bin/llama-server   # E158 arm RA, KRAFTON fork
+LLAMA_E155=$REPO/llama.cpp/wt/cf659f2/build/bin/llama-server   # E155, upstream 2026-11-07 (b12183-4)
 TALUS=$ENG/talus-v0.1.3/talus-v0.1.3-linux-x86_64-gfx1151
 T27_CFG=$REPO/results/e154/talus-27b.json
 TL_CFG=$REPO/results/e154/talus-laguna.json
 LEDGER_DIR=${E154_LEDGER_DIR:-$REPO/results/e154}
 ISOLATE=${E154_ISOLATE:-podman}  # fail closed: 'none' runs agent shell on the host (F182)
 TASK_TIMEOUT=${E154_TASK_TIMEOUT:-1200}
+DEADLINE=${E154_DEADLINE:-0}   # 0 = none
+FROGGERIC=$REPO/var/e159/froggeric/chat_template.jinja
 ledger_for() { case "$1" in S) echo "$LEDGER_DIR/sonnet-ledger.jsonl" ;; O) echo "$LEDGER_DIR/opus-ledger.jsonl" ;; esac; }
 SONNET_BODY='{"usage":{"include":true},"reasoning":{"max_tokens":8000},"max_tokens":16000,"provider":{"order":["Anthropic"],"allow_fallbacks":false}}'
 
@@ -56,7 +68,7 @@ ARMS=()
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
-    S|O|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA) ARMS+=("$a") ;;
+    S|O|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL) ARMS+=("$a") ;;
     *) echo "unknown arg $a. hint: tools/run_e154_arms.sh [--dry-run] S H Q T27 TL"; exit 2 ;;
   esac
 done
@@ -80,7 +92,10 @@ N_BANK=$(grep -c . "$BANK")
 sampling() {  # vendor sampling per arm (Talus MODELS.md table; Qwen3-Coder card; Anthropic needs 1.0 with thinking)
   case "$1" in
     S|O) echo '{"temperature":1.0}' ;;
-    H) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0}' ;;
+    H|HF) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0}' ;;   # HF: no effort sent, template default
+    HX) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"reasoning_effort":"xhigh"}' ;;
+    HM) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"reasoning_effort":"medium"}' ;;
+    HL|HFL) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"reasoning_effort":"low"}' ;;
     Q) echo '{"temperature":0.7,"top_p":0.8,"top_k":20}' ;;
     QN) echo '{"temperature":1.0,"top_p":0.95,"top_k":40}' ;;   # Qwen3-Coder-Next card
     T27) echo '{"temperature":0.8,"top_p":0.95,"top_k":40,"min_p":0.05}' ;;
@@ -88,6 +103,8 @@ sampling() {  # vendor sampling per arm (Talus MODELS.md table; Qwen3-Coder card
     OR35|OR122) echo '{"temperature":0.6,"top_p":0.95,"top_k":20}' ;;   # Ornith cards: precise coding
     TS45|TS4) echo '{"temperature":1.0,"top_p":0.95,"top_k":20}' ;;     # Tess-4.5 card (Tess-4 card states none)
     RA) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"presence_penalty":0}' ;;   # Raon card, coding
+    GL) echo '{"temperature":0.95,"top_p":1.0}' ;;   # GLM-5.3-Flash card, its agentic-coding (DeepSWE) setting
+    DC) echo '{"temperature":1.0,"top_p":1.0}' ;;    # deepseek-ai V4.1-Flash-1017 card (the ISTA card states none)
   esac
 }
 
@@ -134,10 +151,12 @@ start() {
   local arm=$1 slog=$2
   local podman_gpu=(--device /dev/kfd --device /dev/dri --group-add keep-groups --ipc=host --ulimit memlock=-1:-1)
   case "$arm" in
-    H)
-      podman run -d --rm --name e154-H "${podman_gpu[@]}" -p "127.0.0.1:$PORT:8731" \
-        -v "$HALO:/models:ro" "$HALO_IMAGE" >>"$slog" 2>&1
-      (podman logs -f e154-H >>"$slog" 2>&1 &) ;;
+    H|HX|HM|HL|HF|HFL)
+      local tmpl=()
+      case "$arm" in HF|HFL) tmpl=(-v "$FROGGERIC:/models/tokenizer/chat_template.jinja:ro") ;; esac
+      podman run -d --rm --name "e154-$arm" "${podman_gpu[@]}" -p "127.0.0.1:$PORT:8731" \
+        -v "$HALO:/models:ro" "${tmpl[@]}" "$HALO_IMAGE" >>"$slog" 2>&1
+      (podman logs -f "e154-$arm" >>"$slog" 2>&1 &) ;;
     Q)
       "$LLAMA" -m "$CODER" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
@@ -157,6 +176,16 @@ start() {
         RA) bin=$LLAMA_RAON; gguf=$M/raon-1-mini-preview/raon-1-mini-preview-Q8_0.gguf ;;
       esac
       "$bin" -m "$gguf" "${extra[@]}" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
+    GL|DC)
+      local gguf extra=()
+      case "$arm" in
+        GL) gguf=$M/glm-5.3-flash/GLM-5.3-Flash-UD-IQ2_XXS-00001-of-00004.gguf ;;
+        # -m takes shard 1; llama.cpp opens 2-6 from the same dir (6 = the Engram symlink, mmapped from disk).
+        DC) gguf=$M/dsv41-flash-coder/DeepSeek-V4.1-Flash-1017-GSQ-RCO-Coder-IQ2_XXS-00001-of-00006.gguf
+            extra=(--reasoning on --reasoning-effort 50) ;;
+      esac
+      "$LLAMA_E155" -m "$gguf" "${extra[@]}" -c "${E155_CTX:-131072}" -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
   esac
 }
@@ -188,6 +217,7 @@ run_bank() {  # run_bank <arm> <model id> <endpoint> [extra harness args...]
   for id in "${TASK_IDS[@]}"; do
     k=$((k + 1))
     if [ -s "$RAW/$arm/$id.json" ]; then stamp "$arm $k/$N_BANK $id: already done, skipped"; continue; fi
+    if [ "$DEADLINE" -gt 0 ] && [ "$(date +%s)" -ge "$DEADLINE" ]; then stamp "$arm $k/$N_BANK $id: NOT RUN - past E154_DEADLINE"; continue; fi
     timeout $((TASK_TIMEOUT + 600)) python3 tools/coding_harness.py "$model" --task "$TASKDIR/$id.json" --endpoint "$endpoint" \
       --timeout "$TASK_TIMEOUT" --isolate "$ISOLATE" --sampling "$(sampling "$arm")" --output "$RAW/$arm/$id.json" "$@" >>"$RAW/$arm/harness.log" 2>&1
     rc=$?

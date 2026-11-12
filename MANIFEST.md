@@ -1932,3 +1932,28 @@ Raon load test 2026-11-05 (`results/e158/raon-load.serverlog`): the Q8_0 loaded 
 loaded", "listening"). That log shows no per-layer offload line at default verbosity, so it does not prove GPU offload;
 the E158 runner logs VRAM/GTT at ready instead (prereg "GPU offload evidence"). The DFlash draft file is fetched but not
 used by any E158 arm.
+
+## E155 quality-ceiling arms - GLM-5.3-Flash and DeepSeek-V4.1-Flash Coder (pinned and fetched 2026-11-07, sha256 verified on arrival 10/10)
+
+- **Role:** E155 arms on the frozen E156 bank. Served by upstream llama.cpp `cf659f240` (b12183-4, 2026-11-07, Vulkan,
+  `llama.cpp/wt/cf659f2`; build log `results/e155/llama-cf659f2-build.log`). Fetch logs `results/e155-fetch-{glm,dsc}.log`.
+- **Why these quants:** the largest that leave KV room under the ~105 GiB GTT ceiling. GLM UD-Q2_K_XL (101.3 GiB) is too
+  tight. The handoff's "DeepSeek V4.1 Flash IQ1_M" is 112.4 GiB (`ISTA-DASLab/...-GSQ-RCO-GGUF`) and does not fit; the
+  ISTA Coder build halves the experts (192 of 384 kept, RCO search on code/agentic calibration) to 67.2 GiB resident.
+- **unsloth/GLM-5.3-Flash-GGUF `UD-IQ2_XXS`** @ a38483c8cd5df544f53d70fb281afe97369d5ab6, licence MIT, 320B total / 18B
+  active, hybrid sparse + linear attention. Dir `/opt/models/staging/glm-5.3-flash/`:
+  - `GLM-5.3-Flash-UD-IQ2_XXS-00001-of-00004.gguf` 9,429,984 B, sha256 337870cefce5fb34b2aa3ade54a0fbf61676697f7f9a906670c20edde74561f4
+  - `-00002-of-00004.gguf` 49,896,298,080 B, sha256 d51a3d9ca05022d53e71753df75ee64ed5fd4e47655650ae023e9717b3ec158d
+  - `-00003-of-00004.gguf` 49,248,507,840 B, sha256 89180f13784dc1128586b98adf1ca876279881a20bc4f01747703ce352563372
+  - `-00004-of-00004.gguf` 2,690,716,000 B, sha256 9e0ef47daa1fdffce3cf2ac1594ce4634d176ad018be6e692729757f38d5fbf6
+- **ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-Coder-GGUF `IQ2_XXS`** @ 54229d38d588a66d1c6cff08af7b281b9326c656 (files
+  dated after the 2026-10-27 upstream-format change), licence MIT, 763.2B-parameter base, expert-pruned. Card requires
+  llama.cpp b11870+. Dir `/opt/models/staging/dsv41-flash-coder/`:
+  - `...-Coder-IQ2_XXS-00001-of-00006.gguf` 5,780,704 B, sha256 108e63d27240da2d99846250727a7b282e05a7fdf2448435e81904b9a98d8a4a
+  - `-00002-of-00006.gguf` 19,776,064,960 B, sha256 75079999eb3a492ad695f3466fd6a068a1cf1920980eac1c7f51406363fadf7a
+  - `-00003-of-00006.gguf` 19,939,989,696 B, sha256 ea964e525922f36d3b984299c1a5bb8d896f50b9c2942364cd221c37863331f2
+  - `-00004-of-00006.gguf` 19,682,533,472 B, sha256 2d95806d186597cb0ea32635c92f0b66a9a6afae1a399ff74b13aebaa4ac7a52
+  - `-00005-of-00006.gguf` 12,719,198,624 B, sha256 3665b48c3bd46330780caf286ee40a087ac11499e5b7df8c943b098d10f426d4
+  - `DeepSeek-V4.1-Flash-Engram-IQ4_NL.gguf` 110,595,290,816 B, sha256 3dac4c54893ad7aa89103c0028500eadc78e74112cef3a2930a97e67dc9fb4f3
+    - the two Engram lookup tables, shard 6 of the Coder (symlink `-00006-of-00006.gguf` -> this file, per the card).
+      Memory-mapped and read one row per token from disk, so it is NOT resident; page-cache pressure is an E155 variable.

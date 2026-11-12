@@ -51,11 +51,18 @@ FLAG="$RUNTIME/maintenance"
 # records what it stopped and `up` reads it back. Guessing between two conflicting units is
 # exactly the hazard this whole change exists to remove.
 UNIT_STATE="$RUNTIME/bench-window.unit"
+# Halogen solo (2026-11-07 onward): NO llama-gateway unit serves - sparkrouter-halogen is an idle unit
+# below. `down` then records this sentinel, so `up` knows there is no serving unit to start and still
+# clears the flag. Before 2026-11-12 it recorded nothing, `up` refused, and /relay/health stayed 503
+# "maintenance" after every window until the flag was removed by hand.
+NO_SERVING_UNIT=none
 # `idle-down` (2026-11-04, owner's call): an idle-box bench needs the WHOLE GPU, and the relay is not the
 # only tenant. These spark-infer user units hold GPU memory too (chatterbox-gateway ~5.7 GB on
 # 2026-11-04; E153's same-file Halogen arm was killed by the memory guard with it resident). Only the
 # ones ACTIVE at `idle-down` are stopped, and each is recorded so `up` restarts exactly those.
-IDLE_UNITS=(chatterbox-gateway.service flux-gateway.service)
+# sparkrouter-halogen (2026-11-07): the smart/code tiers' Flash-Next on Halogen pins ~62 GiB; left
+# resident, no large-model bench fits. Stopped and restored like the others when active.
+IDLE_UNITS=(chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service)
 IDLE_STATE="$RUNTIME/bench-window.idle-units"
 BENCH=/home/bench/sparkbench/tools/bench_qwen38.sh
 BENCH_TRIPLET=/home/bench/sparkbench/tools/bench_qwen38_triplet.sh
@@ -115,6 +122,10 @@ unit_for_up() {
         if as_si systemctl --user is-enabled --quiet "$u" 2>/dev/null; then enabled+=("$u"); fi
     done
     if [ "${#enabled[@]}" -eq 1 ]; then echo "${enabled[0]}"; return 0; fi
+    # Zero enabled is the configured state of a box that serves through no llama-gateway unit
+    # (Halogen solo): nothing would start at boot either, so there is nothing for `up` to start.
+    # Only TWO enabled is ambiguous - those conflict, and a guess can stop the right one.
+    if [ "${#enabled[@]}" -eq 0 ]; then echo "$NO_SERVING_UNIT"; return 0; fi
     echo "ERROR: cannot tell which serving unit to start - no record at $UNIT_STATE and" >&2
     echo "       ${#enabled[@]} of ${#UNIT_CANDIDATES[@]} candidates are enabled." >&2
     echo "hint: start the one you actually stopped, as $SI_USER:" >&2
@@ -174,7 +185,13 @@ window_down() {
     as_si bash -c 'printf "%s\n" "$1" > "$2"' _ "$reason" "$FLAG"
     local unit
     if ! unit="$(active_unit)"; then
-        echo "==> no serving unit is active (${UNIT_CANDIDATES[*]}) - window already open"
+        # Two cases look identical here: a second `down` on an open window (a record already
+        # exists - keep it, it names the unit that really was stopped) and Halogen solo, where
+        # no llama-gateway unit serves at all (no record - write the sentinel so `up` can close).
+        if [ -z "$(as_si cat "$UNIT_STATE" 2>/dev/null || true)" ]; then
+            as_si bash -c 'printf "%s\n" "$1" > "$2"' _ "$NO_SERVING_UNIT" "$UNIT_STATE"
+        fi
+        echo "==> no serving unit is active (${UNIT_CANDIDATES[*]}) - nothing to stop"
         return 0
     fi
     # Record BEFORE stopping: after the stop, liveness can no longer answer this question.
@@ -246,6 +263,14 @@ window_up() {
     # maintenance flag from being cleared just as a relay failure does.
     idle_up || return 1
     unit="$(unit_for_up)" || return 1
+    if [ "$unit" = "$NO_SERVING_UNIT" ]; then
+        echo "==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above"
+        echo "==> clearing maintenance flag"
+        as_si rm -f "$FLAG"
+        as_si rm -f "$UNIT_STATE"
+        echo "==> window CLOSED (idle units serving, flag clear)"
+        return 0
+    fi
     echo "==> starting $unit"
     as_si systemctl --user start "$unit" || true
     for _ in $(seq 1 60); do
