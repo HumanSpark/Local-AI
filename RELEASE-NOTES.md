@@ -1,29 +1,17 @@
-# Release Notes - sparkbench-data-r5.4
+# Release Notes - sparkbench-data-r5.5
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.4)
+## This release (r5.5)
 
 - **Findings:** 185 in FINDINGS.md, newest F185.
 - **Claims:** 60 active in claims.yml.
-- **Easier to browse; no finding, claim or evidence changed.** FINDINGS.md opens with an index of every
-  finding (title, kind, date, experiment and status copied from each entry, linked to it), grouped by kind, and every
-  finding has a link back to the index. New claims.md renders claims.yml as a table with clickable evidence links. New
-  results/README.md lists every experiment by number with its write-up, pre-registration, results and data. tools/,
-  docs/, eval-suites/ and tts-bench/ each gain a README listing their files with each file's own description.
-- **experiments.md split.** At 1 MB it was too large to browse; each experiment now has its own file in experiments/
-  (E1 to E134), and experiments.md is the index. Every line moved, none was edited, and every existing citation of
-  experiments.md still resolves.
-- **Internal file headers hidden.** The "File / Purpose / Overview" lines that opened most markdown files rendered on
-  GitHub as large headings; they are now inside an HTML comment. Nothing was removed.
-- **Repository metadata.** LICENSE (CC BY 4.0, for the data and documents) and tools/LICENSE (MIT) so GitHub shows the
-  licence the README already stated; CITATION.cff for a "Cite this repository" button; a .gitattributes so GitHub no
-  longer describes the repository as a Python project.
-- **One chart in the README:** real coding fixes solved out of 10, drawn at build time from the C-CODING-HARD claims
-  (F183, F185), in light and dark versions.
-- **INDEX.md removed.** It was stale (it listed findings to F79 and experiments to E54) and the generated indexes above
-  replace it.
+- **README: speed and the machine.** Under the coding chart, a table adds each setup's engine and median minutes
+  per task (from the E156 and E158 results tables). A second table shows one model, Qwen3.8-Flash-Next, on five
+  engines: decode speed, prefill at 32K tokens and time to first token, from F180 (E153). A callout box states the
+  machine's specification. Every figure in both tables is checked at build time against the results line it cites.
+- No finding, claim or evidence file changed.
 
 ## Changed claims (old -> new)
 

@@ -10,12 +10,44 @@ This repository is the data package behind **[Local AI for a Small Firm: What a 
 
 This repository exists so that the numbers on those pages do not have to be taken on trust.
 
+> [!NOTE]
+> **The machine**
+> - **Computer:** GMKtec EVO-X2 mini-PC, EUR 3,680
+> - **Processor and graphics:** AMD Ryzen AI Max+ 395 with Radeon 8060S integrated graphics
+> - **Memory:** 128 GB unified, shared by processor and graphics; about 105 GB of it usable by the graphics
+> - **Power:** 81 to 87 W package power while generating ([F180](FINDINGS.md#f180))
+> - **Measured:** one machine, July 2026 to 7 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/coding-results-dark.svg">
   <img src="assets/coding-results-light.svg" alt="Bar chart of real coding fixes solved out of 10: Qwen3.8-Flash-Next 9 (local); Ornith 1.5 35B 9 (local); Qwen3.8-27B 8 (local); Tess 4.5 27B 8 (local); Raon-1 mini (preview) 8 (local); Claude Sonnet 5.5 8 (cloud); Claude Opus 5.5 8 (cloud); Ornith 1.5 122B 6 (local); Qwen3-Coder-30B 2 (local)." width="760">
 </picture>
 
-Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md), [F185](FINDINGS.md)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next is its highest setting; whether a lower one keeps the score is being measured. The best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5.
+Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md#f183), [F185](FINDINGS.md#f185)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next is its highest setting; whether a lower one keeps the score is being measured. The best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5.
+
+| Setup | Runs on | Solved | Median minutes per task |
+|---|---|---|---|
+| Qwen3.8-Flash-Next | Halogen 0.18.23 (this machine) | 9/10 | 21.3 |
+| Ornith 1.5 35B | llama.cpp e14a7797 (this machine) | 9/10 | 30.4 |
+| Qwen3.8-27B | Talus v0.1.3 (this machine) | 8/10 | 23.6 |
+| Tess 4.5 27B | llama.cpp e14a7797, MTP draft (this machine) | 8/10 | 43.4 |
+| Raon-1 mini (preview) | KRAFTON llama.cpp fork fb895662d (this machine) | 8/10 | 20.0 |
+| Claude Sonnet 5.5 | Anthropic API (cloud) | 8/10 | 2.5 |
+| Claude Opus 5.5 | Anthropic API (cloud) | 8/10 | 5.3 |
+| Ornith 1.5 122B | llama.cpp e14a7797 (this machine) | 6/10 | 53.9 (over 9 of 10 tasks; one record missing) |
+| Qwen3-Coder-30B | llama.cpp 5851a8e (this machine) | 2/10 | 2.5 |
+
+### Speed: one model, five engines
+
+Qwen3.8-Flash-Next on this machine, one request at a time, thinking off ([F180](FINDINGS.md#f180)). Decode is generation speed on a code prompt; prefill is how fast a 32,000-token prompt is read before the first word appears.
+
+| Engine | Decode, code (tok/s) | Prefill at 32K tokens (tok/s) | Time to first token at 32K |
+|---|---|---|---|
+| Halogen 0.18.23 | 86.0 | 1,755 | 18.7 s |
+| gufo 0.29.0, MTP | 69.1 | 1,497 | 21.9 s |
+| Talus v0.1.3 | 67.9 | 1,258 | 26.1 s |
+| Strata 0.2.10, DFlash2 | 60.7 | 691 | 47.4 s |
+| llama.cpp 5851a8e, Vulkan | 27.1 | 315 | 104.1 s |
 
 ## Start here
 
@@ -27,13 +59,13 @@ Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.m
 | See what changed in each release | [RELEASE-NOTES.md](RELEASE-NOTES.md) |
 | Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
 
-## Current release: r5.4 (findings through 7 November 2026)
+## Current release: r5.5 (findings through 7 November 2026)
 
-r5.4 makes the repository easier to browse and changes no finding, claim or evidence file: a linked index at the top of [FINDINGS.md](FINDINGS.md), a clickable claims table ([claims.md](claims.md)) and an experiments index ([results/](results/)). [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r5.5 adds the engine, time per task and decode speed beside the coding results above, and a box with the machine's specification. It changes no finding, claim or evidence file. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.4 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) now qualifies. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** r5.5 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) now qualifies. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
