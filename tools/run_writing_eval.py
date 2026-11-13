@@ -220,6 +220,11 @@ def main() -> int:
                          "error, not a smaller run. A SUBSET run's aggregate "
                          "metrics are over the subset - do not compare them to a "
                          "full-run score")
+    ap.add_argument("--external", action="store_true",
+                    help="use an engine that is ALREADY serving on --port (e.g. Halogen in a container started "
+                         "by tools/run_e154_arms.sh) instead of launching llama-server. The llama.cpp offload gate "
+                         "cannot read another engine's log, so it is recorded as skipped and the caller must record "
+                         "its own offload evidence (the runner logs GTT use at engine start).")
     ap.add_argument("--port", type=int, default=8114)
     ap.add_argument("--load-timeout", type=float, default=300.0)
     ap.add_argument("--request-timeout", type=float, default=None,
@@ -267,7 +272,7 @@ def main() -> int:
     kinds = sorted({t["kind"] for t in tasks})
     print(f"{len(tasks)} tasks over {len(kinds)} kinds: {', '.join(kinds)}"
           + (f"  [SUBSET of {len(TASKS)}]" if len(tasks) != len(TASKS) else ""))
-    if not cloud:
+    if not cloud and not args.external:
         cmd = [args.server_bin, "-m", args.model, "-c", str(args.ctx), "-np", "1",
                "--host", "127.0.0.1", "--port", str(args.port), "--no-webui", "-v"]
         print(f"server: {' '.join(cmd)}")
@@ -290,7 +295,8 @@ def main() -> int:
             fit = {"skipped": "cloud arm - context is the provider's to manage"}
         else:
             wait_healthy(args.port, args.load_timeout)
-            gate = assert_full_offload(log_path)
+            gate = ({"skipped": "external engine on --port; offload evidence is the caller's (runner window.log GTT line)"} if args.external
+                    else assert_full_offload(log_path))
             fit = assert_context_fits(
                 f"http://127.0.0.1:{args.port}", [t["prompt"] for t in tasks],
                 args.max_tokens, args.ctx, args.request_timeout)

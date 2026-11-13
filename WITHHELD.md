@@ -60,6 +60,8 @@ Not shipped, and not evidence the findings depend on for their numbers. Each pre
 | results/e156-prereg.md | 1 | its amendments quote module, test and environment names from the owner's private repositories (F184's evidence); the scores are in results/e156-results.md |
 | results/e156/ | 1 | task prompts, per-task records and test output from the owner's private repositories (E156 bank) |
 | results/e158/ | 1 | per-task records and test output from the owner's private repositories (E158, on the E156 bank) |
+| results/e159/ | 2 | per-task records and test output from the owner's private repositories (E159, on the E156 bank) |
+| results/e160/ | 1 | raw answers and drafts that quote internal documents; the scores are in results/e160-results.md |
 | results/raw/e108/claudecode- | 2 | captured Claude Code requests; each embeds the owner's private instruction files in full |
 
 Cited by a shipped document:
@@ -72,6 +74,9 @@ Cited by a shipped document:
 | results/e156-prereg.md | FINDINGS.md |
 | results/e156/bank.jsonl | results/e158-prereg.md |
 | results/e158/raw/window.log | results/e158-results.md |
+| results/e159/raw/HF/harness.log | results/e159-prereg.md |
+| results/e159/raw/HF/superseded/sparkforge-baab4031f.interrupted-20261112T1923Z.json | results/e159-prereg.md |
+| results/e160/writing-judge.json | results/e160-results.md |
 
 ## Cited but not in the repository (4)
 

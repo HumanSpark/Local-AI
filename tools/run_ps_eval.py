@@ -412,6 +412,11 @@ def main() -> int:
                     help="server-side sampling seed. Set a DIFFERENT one per "
                          "replicate: at temperature > 0 two runs with the same "
                          "seed are one measurement, not two (F96).")
+    ap.add_argument("--external", action="store_true",
+                    help="use an engine that is ALREADY serving on --port (e.g. Halogen in a container started "
+                         "by tools/run_e154_arms.sh) instead of launching llama-server. The llama.cpp offload gate "
+                         "cannot read another engine's log, so it is recorded as skipped and the caller must record "
+                         "its own offload evidence (the runner logs GTT use at engine start).")
     ap.add_argument("--port", type=int, default=8112)
     ap.add_argument("--load-timeout", type=float, default=300.0)
     ap.add_argument("--request-timeout", type=float, default=None,
@@ -496,7 +501,7 @@ def main() -> int:
     print(f"=== PS eval {args.tier.upper()}: {args.label} ({args.provider}) ===")
     print(f"pack: {len(pack):,} chars over {len(tier['categories'])} question categories, "
           f"{len(questions)} questions")
-    if not cloud:
+    if not cloud and not args.external:
         cmd = [args.server_bin, "-m", args.model, "-c", str(args.ctx), "-np", "1",
                "--host", "127.0.0.1", "--port", str(args.port), "--no-webui", "-v"]
         cmd += shlex.split(args.server_extra)
@@ -524,7 +529,8 @@ def main() -> int:
             fit = {"skipped": "cloud arm - context is the provider's to manage"}
         else:
             wait_healthy(args.port, args.load_timeout)
-            gate = assert_full_offload(log_path)
+            gate = ({"skipped": "external engine on --port; offload evidence is the caller's (runner window.log GTT line)"} if args.external
+                    else assert_full_offload(log_path))
             fit = assert_context_fits(
                 f"http://127.0.0.1:{args.port}",
                 [template.format(pack=pack, question=q[qkey])

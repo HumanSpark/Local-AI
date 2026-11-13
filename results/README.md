@@ -158,7 +158,8 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E154 | two local setups solve all 15 real fixes Sonnet solved, at about 15x the time (2026-11-05) | [results](e154-results.md) |
 | E156 | harder bank: two local setups reach Sonnet and Opus (2026-11-06) | [results](e156-results.md) |
 | E158 | newer local coding candidates on the frozen E156 bank | [pre-registration](e158-prereg.md) · [results](e158-results.md) |
-| E159 | Flash-Next reasoning effort and the froggeric template | [pre-registration](e159-prereg.md) |
+| E159 | Flash-Next reasoning effort and the froggeric template | [pre-registration](e159-prereg.md) · [results](e159-results.md) |
+| E160 | production acceptance of community template + low (2026-11-13, revision 2) | [pre-registration](e160-prereg.md) · [results](e160-results.md) |
 
 ## Other evidence
 

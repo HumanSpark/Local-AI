@@ -20,14 +20,14 @@
 
 ## Findings index
 
-185 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+187 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
 - **PLATFORM (72):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180)
 - **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
-- **CAPABILITY (3):** [F181](#f181) [F183](#f183) [F185](#f185)
+- **CAPABILITY (5):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187)
 
 | Finding | Title | Kind | Date | Experiment | Status |
 |---|---|---|---|---|---|
@@ -219,6 +219,8 @@
 | [F183](#f183) | on harder real repo work, the best local setups reach Sonnet 5.5 and Opus 5.5; the old local coding default does not | CAPABILITY | 2026-11-06 | E156 | ESTABLISHED |
 | [F184](#f184) | hidden tests demand things a task prompt never says; reading the first failures found five, automated checks found none | METHOD | 2026-11-06 | E156 | ESTABLISHED |
 | [F185](#f185) | newer local coding models tie the best local result (9/10) but do not beat it; a bigger sibling scored lower and a small preview scored 8 | CAPABILITY | 2026-11-07 | E158 | ESTABLISHED |
+| [F186](#f186) | community template + low effort passes nearly every usage test at 0.41x the time of max thinking; what it gives up is completeness, not reasoning | CAPABILITY | 2026-11-13 | E160 | ESTABLISHED |
+| [F187](#f187) | on coding, every lower reasoning setting is within noise of max thinking; community template + low is the fastest at 0.30x the time | CAPABILITY | 2026-11-13 | E159 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -8827,7 +8829,7 @@ source-text tests, so it is not read as a local advantage. Without it, H 8, T27 
 Evidence: `results/e156-results.md`, prereg `results/e156-prereg.md`, raw `results/e156/raw/` (7d8f64b, 9e90488). See
 [[F181]], [[F182]], [[F184]].
 
-**Addendum 2026-11-12 - the condition H was measured at.** H ran at **reasoning effort `xhigh`**, and that was not a
+**Addendum 2026-11-12 - the condition H was measured at.** (Measured since: F187 - lower efforts are within noise on this bank.) H ran at **reasoning effort `xhigh`**, and that was not a
 choice. The harness sent no `reasoning_effort`, and Halogen serves the model's stock chat template
 (sha256 c3cf9e34abf4f9e3), which resolves a missing effort to `xhigh` (`reasoning_effort|default('xhigh')`). That is
 also why H spends a median of 59,437 completion tokens (max 105,443) and 21.3 minutes per task. On 2026-11-12 a single
@@ -8896,3 +8898,56 @@ arms tried; only Sonnet has solved it.
 the local coding default is the owner's call. OR122 is not a candidate. A one-task gap is not a ranking.
 
 Evidence: `results/e158-results.md`; `results/e158-prereg.md`; `results/e158/raw/<arm>/`. See [[F183]].
+
+<a id="f186"></a>
+
+## F186 - community template + low effort passes nearly every usage test at 0.41x the time of max thinking; what it gives up is completeness, not reasoning
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-13 | **Experiment:** E160 | **Status:** ESTABLISHED on single samples (temperature 0)
+
+**Kind: CAPABILITY**
+
+**Plain English.** We treated Flash-Next on the community chat template at low thinking as the production setting and
+tested it on eight kinds of work against today's setting (stock template, maximum thinking). It matched or beat maximum
+thinking on six. Writing was within noise. It fell short by 2 of 26 on answering from a large document pack. One of
+those misses is a grading artefact. In the other, low worked out a percentage the documents never state. The battery
+took 20.6 minutes at low against 49.9.
+
+**Claim.** KFL v KX: L5 23 v 23, pr1 12 v 12, kw-eval 24 v 26, writing 6 v 7, blind Opus judge 1 win / 4 ties / 2
+losses, conversation 9 v 8 and 18 v 15, tool use 33 v 33 of 36, H6 6 v 6. P2, P4 and P11 failed; the other eight held.
+Low's losses are in completeness: a dropped source figure in writing, and one volunteered unsupported figure (kw K05).
+It lost nothing on dates, precedence, conflicts, multi-step tool use or refusal judgement. Revision-following in
+conversation fails at both settings (1/4 v 0/4).
+
+**What it changes.** The setting is supported as the production default for all usage tested. Document answers where
+an unsupported figure is costly should route to a higher effort or a figure check. Adopting it is the owner's call.
+
+Evidence: `results/e160-results.md`, prereg `results/e160-prereg.md`, raw `results/e160/raw/` (c6c7878, 6560d5b),
+scorer `tools/score_e160.py`. See [[F69]], [[F183]].
+
+<a id="f187"></a>
+
+## F187 - on coding, every lower reasoning setting is within noise of max thinking; community template + low is the fastest at 0.30x the time
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-13 | **Experiment:** E159 | **Status:** ESTABLISHED on 10 tasks (one sample each)
+
+**Kind: CAPABILITY**
+
+**Plain English.** On the same ten real fixes, Flash-Next scored 8/10 at maximum thinking, and 8/10 at medium, at the
+community template's default, and at community template + low. The stock template at low scored 7. The community
+template at low was the fastest by far: 5.8 minutes per fix against 19.1, with about a third of the thinking.
+
+**Claim.** E159 pass counts: HX 8, HM 8, HL 7, HF 8, HFL 8. Median completion tokens: HX 50,114, HM 24,957, HL 24,185,
+HF 38,014, HFL 17,802. Median minutes per task: 19.1, 10.2, 8.3, 14.6, 5.8. P1, P2, P3 and P5 held. P4 failed (the
+community default thinks 52% more than stock medium) and P6 failed (medium was 1.9x faster than xhigh, not 3x). On the
+stock template, `low` and `medium` spend almost the same tokens. Only the community template makes `low` cheap.
+
+**What it changes.** F183's 9/10 was measured at an unchosen xhigh. A client can send a lower effort without measurable
+loss on this bank. The community template + low is the speed pick, and E160 (F186) tests it across all usage.
+
+Evidence: `results/e159-results.md`, prereg `results/e159-prereg.md`, raw `results/e159/raw/` (357e006). See [[F183]],
+[[F186]].

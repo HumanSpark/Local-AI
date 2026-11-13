@@ -77,9 +77,18 @@ def tokenize(port: int, text: str, timeout: float = 300.0) -> int:
 
 
 def ask(
-    port: int, pack: str, question: str, max_tokens: int, timeout: float
+    port: int,
+    pack: str,
+    question: str,
+    max_tokens: int,
+    timeout: float,
+    thinking: str = "default",
 ) -> dict[str, Any]:
-    """One streaming request. Every failure shape is a RESULT, never an exception."""
+    """One streaming request. Every failure shape is a RESULT, never an exception.
+
+    `thinking` "default" sends no reasoning_effort, exactly as every arm before E160 did (Qwen3.8's stock template
+    then resolves to xhigh). low/medium/xhigh send it as a top-level field, which Halogen applies per request.
+    """
     payload = {
         "messages": [
             {"role": "system", "content": SYSTEM},
@@ -94,6 +103,10 @@ def ask(
         # any arm had a comparable figure to lose.
         "stream_options": {"include_usage": True},
     }
+    if thinking in ("low", "medium", "xhigh"):
+        payload["reasoning_effort"] = thinking
+    elif thinking != "default":
+        raise ValueError(f"unknown thinking mode {thinking!r}. hint: one of default, low, medium, xhigh")
     req = urllib.request.Request(
         f"http://127.0.0.1:{port}/v1/chat/completions",
         data=json.dumps(payload).encode(),
@@ -169,6 +182,12 @@ def main() -> int:
         help="the -c the server was started with; used for the Rule 11 preflight",
     )
     ap.add_argument("--max-tokens", type=int, default=1024)
+    ap.add_argument(
+        "--thinking",
+        default="default",
+        choices=["default", "low", "medium", "xhigh"],
+        help="reasoning_effort to send; default sends nothing (Qwen3.8 stock template -> xhigh)",
+    )
     ap.add_argument("--timeout", type=float, default=600.0)
     ap.add_argument("--items", default=None, help="comma-separated ids")
     ap.add_argument(
@@ -281,6 +300,7 @@ def main() -> int:
         "measured_prompt_tokens": prompt_tokens,
         "ctx": args.ctx,
         "max_tokens": args.max_tokens,
+        "thinking": args.thinking,
         "system": SYSTEM,
         "tools_offered": False,
         "started_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
@@ -290,7 +310,7 @@ def main() -> int:
     }
     for n, it in enumerate(items, 1):
         print(f"[{n}/{len(items)}] {it['id']} ({it['category']}) ...", flush=True)
-        r = ask(args.port, pack, it["question"], args.max_tokens, args.timeout)
+        r = ask(args.port, pack, it["question"], args.max_tokens, args.timeout, args.thinking)
         rec = {
             "id": it["id"],
             "category": it["category"],

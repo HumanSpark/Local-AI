@@ -198,6 +198,9 @@ def main() -> int:
                     choices=["default", "off", "low", "medium", "xhigh"])
     ap.add_argument("--server-extra", default="", metavar="'FLAGS'",
                     help="extra llama-server flags as ONE quoted string. Recorded in the output.")
+    ap.add_argument("--external", action="store_true",
+                    help="use an engine already serving on --port (e.g. Halogen started by tools/run_e154_arms.sh); "
+                         "no llama-server is launched and the llama.cpp offload gate is recorded as skipped")
     ap.add_argument("--port", type=int, default=8117)
     ap.add_argument("--load-timeout", type=float, default=300.0)
     ap.add_argument("--request-timeout", type=float, default=None)
@@ -232,9 +235,12 @@ def main() -> int:
     cmd += shlex.split(args.server_extra)
     print(f"=== multi-turn eval: {args.label} ===")
     print(f"{len(TURNS)} turns, {len(GRADED)} graded, probes: {', '.join(PROBES)}")
-    print(f"server: {' '.join(cmd)}")
-    log_f = log_path.open("w")
-    proc = subprocess.Popen(cmd, stdout=log_f, stderr=subprocess.STDOUT)
+    proc = None
+    log_f = None
+    if not args.external:
+        print(f"server: {' '.join(cmd)}")
+        log_f = log_path.open("w")
+        proc = subprocess.Popen(cmd, stdout=log_f, stderr=subprocess.STDOUT)
 
     results: list[dict] = []
     messages: list[dict] = []
@@ -242,7 +248,8 @@ def main() -> int:
     fit_final: dict = {"skipped": "run did not reach the last turn"}
     try:
         wait_healthy(args.port, args.load_timeout)
-        gate = assert_full_offload(log_path)
+        gate = ({"skipped": "external engine on --port; offload evidence is the caller's"} if args.external
+                else assert_full_offload(log_path))
         print(f"full-offload gate: {gate}")
 
         # Rule 11, adapted. This bound EXCLUDES every assistant reply, so it is
@@ -302,13 +309,14 @@ def main() -> int:
                      "ctx": args.ctx,
                      "headroom": args.ctx - results[-1]["history_tokens"] - args.max_tokens}
     finally:
-        proc.terminate()
-        try:
-            proc.wait(timeout=30)
-        except subprocess.TimeoutExpired:
-            proc.kill()
-            proc.wait(timeout=30)
-        log_f.close()
+        if proc is not None:  # --external: the engine is the caller's to stop
+            proc.terminate()
+            try:
+                proc.wait(timeout=30)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                proc.wait(timeout=30)
+            log_f.close()
 
     graded = [r for r in results if r["graded"]]
     by_probe: dict[str, dict[str, int]] = {}

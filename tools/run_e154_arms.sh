@@ -68,7 +68,7 @@ ARMS=()
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
-    S|O|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL) ARMS+=("$a") ;;
+    S|O|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX) ARMS+=("$a") ;;
     *) echo "unknown arg $a. hint: tools/run_e154_arms.sh [--dry-run] S H Q T27 TL"; exit 2 ;;
   esac
 done
@@ -151,9 +151,9 @@ start() {
   local arm=$1 slog=$2
   local podman_gpu=(--device /dev/kfd --device /dev/dri --group-add keep-groups --ipc=host --ulimit memlock=-1:-1)
   case "$arm" in
-    H|HX|HM|HL|HF|HFL)
+    H|HX|HM|HL|HF|HFL|KFL|KM|KX)
       local tmpl=()
-      case "$arm" in HF|HFL) tmpl=(-v "$FROGGERIC:/models/tokenizer/chat_template.jinja:ro") ;; esac
+      case "$arm" in HF|HFL|KFL) tmpl=(-v "$FROGGERIC:/models/tokenizer/chat_template.jinja:ro") ;; esac
       podman run -d --rm --name "e154-$arm" "${podman_gpu[@]}" -p "127.0.0.1:$PORT:8731" \
         -v "$HALO:/models:ro" "${tmpl[@]}" "$HALO_IMAGE" >>"$slog" 2>&1
       (podman logs -f "e154-$arm" >>"$slog" 2>&1 &) ;;
@@ -197,6 +197,38 @@ wait_ready() {
     sleep 5
   done
   return 1
+}
+
+# E160 (prereg results/e160-prereg.md): knowledge-work and writing suites against the engine this runner started.
+# Each suite writes one file under $RAW/<arm>/ and is skipped when that file exists, so a relaunch resumes.
+kw_effort() { case "$1" in KFL) echo low ;; KM) echo medium ;; KX) echo xhigh ;; esac; }
+run_kw_suite() {
+  local arm=$1 eff out rc; eff=$(kw_effort "$arm"); mkdir -p "$RAW/$arm"
+  local common=(--port "$PORT" --ctx 262144 --max-tokens 32768 --thinking "$eff")
+  for suite in l5 pr1 writing kw mt-l4 mt-long tooluse h6-date; do
+    out=$RAW/$arm/$suite.json
+    if [ -s "$out" ]; then stamp "$arm $suite: already done, skipped"; continue; fi
+    stamp "$arm $suite start (reasoning_effort $eff)"
+    case "$suite" in
+      l5|pr1) timeout 21600 python3 "$REPO/tools/run_ps_eval.py" --model halogen-qwen3.8-flash-next --external \
+                --label "$arm-$suite" --tier "$suite" --out "$out" "${common[@]}" >>"$RAW/$arm/$suite.log" 2>&1 ;;
+      writing) timeout 21600 python3 "$REPO/tools/run_writing_eval.py" --model halogen-qwen3.8-flash-next --external \
+                --label "$arm-writing" --out "$out" "${common[@]}" >>"$RAW/$arm/$suite.log" 2>&1 ;;
+      kw) timeout 21600 python3 "$REPO/tools/run_kw_eval.py" --label "$arm-kw" --pack l --item-packs s,m,l \
+                --out "$out" "${common[@]}" >>"$RAW/$arm/$suite.log" 2>&1 ;;
+      mt-l4|mt-long) timeout 21600 python3 "$REPO/tools/run_multiturn_eval.py" --model halogen-qwen3.8-flash-next \
+                --external --conversation "${suite#mt-}" --label "$arm-$suite" --out "$out" "${common[@]}" \
+                >>"$RAW/$arm/$suite.log" 2>&1 ;;
+      tooluse) timeout 21600 "$REPO/var/tooluse-venv/bin/python3" "$REPO/tools/tooluse_harness_v2.py" --base-url "$URL" --label "e160-$arm" \
+                --runs 3 --max-rounds 4 --max-tokens 32768 --thinking "$eff" >>"$RAW/$arm/$suite.log" 2>&1 \
+                && cp "$REPO/results/tool-use/E33-results-e160-$arm.json" "$out" ;;
+      h6-date) timeout 21600 python3 "$REPO/tools/run_h6_date_arm.py" --model halogen-qwen3.8-flash-next \
+                --base-url "$URL" --tools on --tier l4-date --label "$arm-h6" --out "$out" --ctx 262144 \
+                --max-tokens 32768 --thinking "$eff" >>"$RAW/$arm/$suite.log" 2>&1 ;;
+    esac
+    rc=$?
+    stamp "$arm $suite: rc=$rc $(tail -1 "$RAW/$arm/$suite.log" | cut -c1-160)"
+  done
 }
 
 bank_arm() {  # commit + push one arm's raw results (bank both sides)
@@ -256,8 +288,11 @@ for arm in "${ARMS[@]}"; do
   start "$arm" "$slog"
   if ! model=$(wait_ready); then stamp "FAIL $arm: not ready after 900 s"; stop_engines; continue; fi
   stamp "$arm ready in $(( $(date +%s) - t0 ))s, model '$model'; GPU memory in use: VRAM $(( $(cat /sys/class/drm/card0/device/mem_info_vram_used) >> 20 )) MiB, GTT $(( $(cat /sys/class/drm/card0/device/mem_info_gtt_used) >> 20 )) MiB (offload evidence)"
-  mapfile -t extra < <(arm_args "$arm")
-  run_bank "$arm" "$model" "$URL/v1" "${extra[@]}"
+  case "$arm" in
+    KFL|KM|KX) run_kw_suite "$arm" ;;
+    *) mapfile -t extra < <(arm_args "$arm")
+       run_bank "$arm" "$model" "$URL/v1" "${extra[@]}" ;;
+  esac
   stop_engines
   bank_arm "$arm"
 done

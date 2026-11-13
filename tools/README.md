@@ -52,6 +52,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [grade_heldout_subagent.py](grade_heldout_subagent.py) | grade subagent-transport held-out depth arms with the repo's OWN multiturn grader. |
 | [harness_probe.py](harness_probe.py) | E108's recording proxy - capture what an agentic harness actually SENDS, without a GPU. |
 | [hybrid_bench.py](hybrid_bench.py) | Hybrid diarisation - pyannote/segmentation-3.0 as VAD, our WeSpeaker embeddings+clustering. |
+| [judge_writing_pairwise.py](judge_writing_pairwise.py) | Blind pairwise judging of writing-eval drafts from two or more arms by a frontier model that is not a contestant. |
 | [latency_matrix.py](latency_matrix.py) | Single-user time-to-answer for each candidate resident model, at the three prompt sizes the relay's own traffic shows. |
 | [librispeech_wer.py](librispeech_wer.py) | TRUE WER against human ground truth - validates or refutes E42's Otter-based figure. |
 | [mmlu_eval.py](mmlu_eval.py) | Deadlock-safe MMLU (multiple-choice world-knowledge) eval at scale. |
@@ -95,6 +96,8 @@ Every file in this folder with its own one-line description (a document's title,
 | [score_e146.py](score_e146.py) | Score E146 (Atlas vs llama.cpp on Strix Halo) against results/e146-prereg.md and Amendment 1. |
 | [score_e149.py](score_e149.py) | Score E149's arm M4 against its pre-registered predictions, server-side when the harness was capped. |
 | [score_e154.py](score_e154.py) | Score E154 arms from results/e154/raw/<arm>/<task>.json against the pre-registered fields and P1-P7. |
+| [score_e159.py](score_e159.py) | Score E159 arms against the prereg's fields (pass_count, tokens_median, wall_median_s) and P1-P6. |
+| [score_e160.py](score_e160.py) | Score E160 (KFL vs KX) against the prereg's fields and predictions P1-P11. |
 | [score_e77.py](score_e77.py) | Score E77 - the correct-to-wrong rate between an f16 KV baseline and each quantised arm, plus byte identity of the answers. |
 | [score_e77_timings.py](score_e77_timings.py) | Extract prefill and decode rates per KV precision from E77's quiet-GPU re-run server logs. |
 | [score_e79.py](score_e79.py) | Score E79 by BAND and by direction - what the tool converted, what it destroyed, and which of those was infrastructure. |
