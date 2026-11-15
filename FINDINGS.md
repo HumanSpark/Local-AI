@@ -20,7 +20,7 @@
 
 ## Findings index
 
-187 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+188 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
@@ -28,6 +28,7 @@
 - **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
 - **CAPABILITY (5):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187)
+- **SPEED (1):** [F188](#f188)
 
 | Finding | Title | Kind | Date | Experiment | Status |
 |---|---|---|---|---|---|
@@ -221,6 +222,7 @@
 | [F185](#f185) | newer local coding models tie the best local result (9/10) but do not beat it; a bigger sibling scored lower and a small preview scored 8 | CAPABILITY | 2026-11-07 | E158 | ESTABLISHED |
 | [F186](#f186) | community template + low effort passes nearly every usage test at 0.41x the time of max thinking; what it gives up is completeness, not reasoning | CAPABILITY | 2026-11-13 | E160 | ESTABLISHED |
 | [F187](#f187) | on coding, every lower reasoning setting is within noise of max thinking; community template + low is the fastest at 0.30x the time | CAPABILITY | 2026-11-13 | E159 | ESTABLISHED |
+| [F188](#f188) | MoE expert helpers (CPU cores, tandem.cpp's hot-expert cache) do not pay on unified memory; routing is concentrated but workload-specific | SPEED | 2026-11-15 | E161 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -8951,3 +8953,37 @@ loss on this bank. The community template + low is the speed pick, and E160 (F18
 
 Evidence: `results/e159-results.md`, prereg `results/e159-prereg.md`, raw `results/e159/raw/` (357e006). See [[F183]],
 [[F186]].
+
+<a id="f188"></a>
+
+## F188 - MoE expert helpers (CPU cores, tandem.cpp's hot-expert cache) do not pay on unified memory; routing is concentrated but workload-specific
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-15 | **Experiment:** E161 | **Status:** ESTABLISHED for Qwen3.8-Flash-Next on this box (one run per arm)
+
+**Kind: SPEED + MECHANISM**
+
+**Plain English.** Tandem's trick, keeping the busiest experts in fast graphics memory and having a helper compute the
+rest, made Flash-Next slower here in every form we could run. The machine has one shared memory pool, so there is no
+slow tier to cache experts out of. Moving experts to the CPU cost 10-32% of generation speed. tandem.cpp's own cache
+was 16% slower than the same engine without it, and its automatic sizing never switched the cache on. A few experts do
+most of the work (the busiest fifth take about 70% of routing), but which ones depends on the job: code uses a
+different set from documents and prose.
+
+**Claim.** CODE decode tok/s: llama.cpp e574a17 Vulkan, all experts on GPU 27.74; `--n-cpu-moe` 4 / 12 / 24 gives 24.82 /
+21.65 / 18.93. tandem.cpp 8fba592 (HIP, gfx1151): all on GPU 25.16; `-cmoe` with `--moe-cache-mib auto` 12.10 (the cache
+disabled itself: HIP reports the BIOS VRAM carve-out, not the shared pool, as free device memory); with an explicit
+24 GiB cache 21.09, at a minimum MemAvailable of 0.66 GiB (the experts sit in memory twice). Routing, llama-imatrix
+counts: the top 20% of experts take a median 0.70 (code), 0.68 (docs) and 0.68 (prose) of routes. Top-20% set overlap is
+0.19 for code-docs, 0.18 for code-prose and 0.70 for docs-prose (two random sets would give about 0.11). P3, P4 and P7
+failed (the CPU cost was milder than predicted, and routing was more concentrated); the other eight held.
+
+**What it changes.** Do not add CPU expert offload or a tandem-style cache to production here: keeping the model wholly
+on the GPU side is fastest. A tandem-style cache on this box also risks the memory edge, because it duplicates experts
+in one pool. Mixed precision by hotness (a possible E162) is not proposed as written, because the hot set does not
+carry across workloads. A version tuned for text work remains an untested hypothesis. It would need decode-time routing
+and DeepSeek-V4.1-Flash, where capacity binds.
+
+Evidence: `results/e161-results.md`, prereg `results/e161-prereg.md` (amendments 1-2), raw `results/e161/speed-*.json`,
+`results/e161/skew.json`. See [[F41]], [[F180]].

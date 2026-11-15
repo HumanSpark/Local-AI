@@ -45,6 +45,9 @@ Every file in this folder with its own one-line description (a document's title,
 | [e152_prompts.py](e152_prompts.py) | Build E152's fixed prompt set - E139's exact-token windows plus a 100K-context prompt and six coding-agent turns. |
 | [e153_prompts.py](e153_prompts.py) | Build E153's fixed prompt set - E152's exact-token windows and agent turns plus short code, prose and JSON prompts. |
 | [e153_speed.py](e153_speed.py) | E153 - time one already-running OpenAI-compatible engine on the fixed Flash-Next prompt set, on the client's clock. |
+| [e161_build.sh](e161_build.sh) | Build the two E161 engines - newest llama.cpp mainline (Vulkan) and tandem.cpp (HIP, gfx1151) - unprivileged. |
+| [e161_corpus.py](e161_corpus.py) | Build E161's three routing-skew corpora (code, docs, prose) as plain text for llama-imatrix. |
+| [e161_skew.py](e161_skew.py) | Read E161's llama-imatrix GGUF files and report how concentrated MoE expert routing is, per corpus and layer. |
 | [finetune_smoke.py](finetune_smoke.py) | DEFINITIVE proof that gfx1151 (Ryzen AI Max+ 395) can TRAIN, not just infer - the check that settles whether F35/Q6's "no ROCm training stack" wall is real. Runs the full training loop (forward -> loss -> backward -> optimizer step) with a PEFT LoRA adapter on the GPU, using a TINY model built from config (no download, no memory-edge risk). If loss goes down over a few steps, on-box training works. |
 | [fix_router_runpath.sh](fix_router_runpath.sh) | Repair the absolute RUNPATH in sparkrouter's llama-server build, then prove it by restarting. |
 | [gen_ctx_probe.py](gen_ctx_probe.py) | Generate deterministic long-context envelope-rung probes with needle re-planting |
@@ -76,6 +79,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e143_window.sh](run_e143_window.sh) | Run every E143 arm (chat-recommended coding models through Aider) in one gateway window, in pre-registered order. |
 | [run_e145_window.sh](run_e145_window.sh) | Run every E145 arm (the widget's option models through Aider) in one gateway window, in pre-registered order (H, E, F, G). |
 | [run_e154_arms.sh](run_e154_arms.sh) | Run E154 arms over the 15-task bank - Sonnet via OpenRouter under the $25 ledger, local engines in an idle window. |
+| [run_e161_window.sh](run_e161_window.sh) | Run E161 in one idle window: routing-skew imatrix runs, then the six speed arms, restoring production on exit. |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |

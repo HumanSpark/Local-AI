@@ -1,0 +1,483 @@
+[2026-11-15T03:19:36Z] === E161 window: arms skew M0 M4 M12 M24 T0 T1 ===
+[2026-11-15T03:19:37Z] kernel 7.0.0-42-generic; livepatch: 
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-15T03:19:42+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-15T03:19:37+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[2026-11-15T03:19:52Z] window open, VERIFIED: GPU holds 0 GiB
+[2026-11-15T03:19:52Z] skew: imatrix on code (--chunks 120)
+[2026-11-15T03:26:46Z] skew: code rc=0; computing over 120 chunks
+[2026-11-15T03:26:46Z] skew: imatrix on docs (--chunks 120)
+[2026-11-15T03:33:26Z] skew: docs rc=0; computing over 120 chunks
+[2026-11-15T03:33:26Z] skew: imatrix on prose (--chunks -1)
+[2026-11-15T03:35:52Z] skew: prose rc=0; computing over 35 chunks
+[2026-11-15T03:35:52Z] M0: starting e574a17  
+M0: ready after 42.0s, model id '/opt/models/staging/qwen3.8-flash-next-udiq4xs/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf'
+M0: warm-up 0.56s
+  M0 CODE-0: ttft 0.554s prefill 126.3 decode 27.75 tok/s, 512 tok [engine] (length), 79.4 W
+  M0 CODE-1: ttft 0.575s prefill 133.9 decode 27.74 tok/s, 512 tok [engine] (length), 82.3 W
+  M0 CODE-2: ttft 0.482s prefill 128.7 decode 27.85 tok/s, 207 tok [engine] (stop), 82.6 W
+  M0 CODE-3: ttft 0.507s prefill 132.1 decode 27.72 tok/s, 512 tok [engine] (length), 81.8 W
+  M0 PROSE-0: ttft 0.52s prefill 127.0 decode 27.72 tok/s, 512 tok [engine] (length), 81.3 W
+  M0 PROSE-1: ttft 0.486s prefill 115.3 decode 27.75 tok/s, 512 tok [engine] (length), 81.7 W
+  M0 PROSE-2: ttft 0.496s prefill 112.9 decode 27.72 tok/s, 512 tok [engine] (length), 82.4 W
+  M0 PROSE-3: ttft 0.524s prefill 112.6 decode 27.75 tok/s, 512 tok [engine] (length), 81.9 W
+  M0 JSON-0: ttft 0.623s prefill 142.9 decode 27.71 tok/s, 512 tok [engine] (length), 82.0 W
+  M0 JSON-1: ttft 0.652s prefill 136.5 decode 27.72 tok/s, 512 tok [engine] (length), 82.7 W
+  M0 JSON-2: ttft 0.53s prefill 126.4 decode 26.86 tok/s, 512 tok [engine] (length), 85.3 W
+  M0 P8K-0: ttft 21.961s prefill 373.6 decode 25.86 tok/s, 163 tok [engine] (stop), 84.9 W
+  M0 P8K-1: ttft 21.815s prefill 376.1 decode 25.95 tok/s, 142 tok [engine] (stop), 84.7 W
+  M0 P8K-2: ttft 21.943s prefill 373.9 decode 25.85 tok/s, 111 tok [engine] (stop), 84.9 W
+M0: {"CODE": [130.4, 27.74], "PROSE": [114.1, 27.73], "JSON": [136.5, 27.71], "P8K": [373.9, 25.86]}
+[2026-11-15T03:41:15Z] M0: speed client rc=0; peak GPU now 62 GiB
+[2026-11-15T03:41:22Z] M4: starting e574a17 --n-cpu-moe 4 
+M4: ready after 42.0s, model id '/opt/models/staging/qwen3.8-flash-next-udiq4xs/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf'
+M4: warm-up 0.6s
+  M4 CODE-0: ttft 0.582s prefill 120.4 decode 24.81 tok/s, 512 tok [engine] (length), 74.6 W
+  M4 CODE-1: ttft 0.604s prefill 127.6 decode 24.8 tok/s, 512 tok [engine] (length), 76.7 W
+  M4 CODE-2: ttft 0.503s prefill 123.2 decode 24.85 tok/s, 260 tok [engine] (stop), 76.8 W
+  M4 CODE-3: ttft 0.519s prefill 129.2 decode 24.83 tok/s, 512 tok [engine] (length), 77.4 W
+  M4 PROSE-0: ttft 0.54s prefill 122.1 decode 24.86 tok/s, 512 tok [engine] (length), 77.7 W
+  M4 PROSE-1: ttft 0.519s prefill 107.9 decode 24.85 tok/s, 512 tok [engine] (length), 78.1 W
+  M4 PROSE-2: ttft 0.523s prefill 107.1 decode 24.82 tok/s, 512 tok [engine] (length), 78.1 W
+  M4 PROSE-3: ttft 0.534s prefill 110.4 decode 24.8 tok/s, 512 tok [engine] (length), 78.3 W
+  M4 JSON-0: ttft 0.65s prefill 137.0 decode 24.92 tok/s, 512 tok [engine] (length), 78.4 W
+  M4 JSON-1: ttft 0.656s prefill 135.6 decode 24.81 tok/s, 512 tok [engine] (length), 78.2 W
+  M4 JSON-2: ttft 0.531s prefill 126.1 decode 24.79 tok/s, 512 tok [engine] (length), 78.4 W
+  M4 P8K-0: ttft 22.747s prefill 360.7 decode 24.13 tok/s, 123 tok [engine] (stop), 84.5 W
+  M4 P8K-1: ttft 22.745s prefill 360.7 decode 24.04 tok/s, 142 tok [engine] (stop), 84.0 W
+  M4 P8K-2: ttft 22.872s prefill 358.7 decode 24.19 tok/s, 111 tok [engine] (stop), 84.6 W
+M4: {"CODE": [125.4, 24.82], "PROSE": [109.15, 24.84], "JSON": [135.6, 24.81], "P8K": [360.7, 24.13]}
+[2026-11-15T03:47:12Z] M4: speed client rc=0; peak GPU now 63 GiB
+[2026-11-15T03:47:18Z] M12: starting e574a17 --n-cpu-moe 12 
+M12: ready after 42.0s, model id '/opt/models/staging/qwen3.8-flash-next-udiq4xs/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf'
+M12: warm-up 0.72s
+  M12 CODE-0: ttft 0.647s prefill 108.3 decode 21.53 tok/s, 512 tok [engine] (length), 70.0 W
+  M12 CODE-1: ttft 0.656s prefill 117.4 decode 21.62 tok/s, 512 tok [engine] (length), 72.6 W
+  M12 CODE-2: ttft 0.559s prefill 111.0 decode 21.77 tok/s, 207 tok [engine] (stop), 73.9 W
+  M12 CODE-3: ttft 0.57s prefill 117.6 decode 21.67 tok/s, 512 tok [engine] (length), 73.8 W
+  M12 PROSE-0: ttft 0.597s prefill 110.6 decode 21.63 tok/s, 512 tok [engine] (length), 73.4 W
+  M12 PROSE-1: ttft 0.564s prefill 99.3 decode 21.65 tok/s, 512 tok [engine] (length), 73.4 W
+  M12 PROSE-2: ttft 0.563s prefill 99.5 decode 21.61 tok/s, 512 tok [engine] (length), 73.3 W
+  M12 PROSE-3: ttft 0.58s prefill 101.7 decode 21.64 tok/s, 512 tok [engine] (length), 73.9 W
+  M12 JSON-0: ttft 0.708s prefill 125.7 decode 21.7 tok/s, 512 tok [engine] (length), 73.9 W
+  M12 JSON-1: ttft 0.716s prefill 124.2 decode 21.65 tok/s, 512 tok [engine] (length), 74.4 W
+  M12 JSON-2: ttft 0.582s prefill 115.2 decode 21.55 tok/s, 512 tok [engine] (length), 73.7 W
+  M12 P8K-0: ttft 23.984s prefill 342.1 decode 21.13 tok/s, 123 tok [engine] (stop), 83.9 W
+  M12 P8K-1: ttft 23.884s prefill 343.5 decode 21.07 tok/s, 142 tok [engine] (stop), 82.9 W
+  M12 P8K-2: ttft 24.02s prefill 341.6 decode 21.25 tok/s, 111 tok [engine] (stop), 84.2 W
+M12: {"CODE": [114.2, 21.65], "PROSE": [100.6, 21.63], "JSON": [124.2, 21.65], "P8K": [342.1, 21.13]}
+[2026-11-15T03:53:44Z] M12: speed client rc=0; peak GPU now 63 GiB
+[2026-11-15T03:53:50Z] M24: starting e574a17 --n-cpu-moe 24 
+M24: ready after 42.0s, model id '/opt/models/staging/qwen3.8-flash-next-udiq4xs/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf'
+M24: warm-up 0.77s
+  M24 CODE-0: ttft 0.671s prefill 104.4 decode 19.08 tok/s, 512 tok [engine] (length), 81.7 W
+  M24 CODE-1: ttft 0.721s prefill 106.7 decode 18.86 tok/s, 512 tok [engine] (length), 78.5 W
+  M24 CODE-2: ttft 0.613s prefill 101.1 decode 18.96 tok/s, 260 tok [engine] (stop), 82.4 W
+  M24 CODE-3: ttft 0.645s prefill 103.9 decode 18.9 tok/s, 512 tok [engine] (length), 77.9 W
+  M24 PROSE-0: ttft 0.665s prefill 99.2 decode 18.96 tok/s, 512 tok [engine] (length), 81.1 W
+  M24 PROSE-1: ttft 0.633s prefill 88.5 decode 18.89 tok/s, 512 tok [engine] (length), 78.9 W
+  M24 PROSE-2: ttft 0.679s prefill 82.5 decode 18.96 tok/s, 512 tok [engine] (length), 82.1 W
+  M24 PROSE-3: ttft 0.684s prefill 86.3 decode 18.81 tok/s, 512 tok [engine] (length), 78.1 W
+  M24 JSON-0: ttft 0.826s prefill 107.8 decode 18.93 tok/s, 512 tok [engine] (length), 83.5 W
+  M24 JSON-1: ttft 0.796s prefill 111.8 decode 18.78 tok/s, 512 tok [engine] (length), 77.9 W
+  M24 JSON-2: ttft 0.65s prefill 103.0 decode 18.91 tok/s, 512 tok [engine] (length), 78.8 W
+  M24 P8K-0: ttft 25.357s prefill 323.5 decode 18.52 tok/s, 123 tok [engine] (stop), 84.0 W
+  M24 P8K-1: ttft 25.321s prefill 324.0 decode 18.48 tok/s, 142 tok [engine] (stop), 84.2 W
+  M24 P8K-2: ttft 25.498s prefill 321.7 decode 18.38 tok/s, 102 tok [engine] (stop), 83.3 W
+M24: {"CODE": [104.15, 18.93], "PROSE": [87.4, 18.93], "JSON": [107.8, 18.91], "P8K": [323.5, 18.48]}
+[2026-11-15T04:01:01Z] M24: speed client rc=0; peak GPU now 63 GiB
+[2026-11-15T04:01:08Z] T0: starting tandem-f5222f25c  
+T0: ready after 39.3s, model id '/opt/models/staging/qwen3.8-flash-next-udiq4xs/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf'
+T0: warm-up 2.16s
+  T0 CODE-0: ttft 0.407s prefill 171.9 decode 25.08 tok/s, 512 tok [engine] (length), 86.8 W
+  T0 CODE-1: ttft 0.406s prefill 189.7 decode 25.17 tok/s, 512 tok [engine] (length), 85.0 W
+  T0 CODE-2: ttft 0.338s prefill 183.3 decode 25.33 tok/s, 201 tok [engine] (stop), 84.8 W
+  T0 CODE-3: ttft 0.35s prefill 191.5 decode 25.16 tok/s, 512 tok [engine] (length), 84.9 W
+  T0 PROSE-0: ttft 0.357s prefill 184.9 decode 25.15 tok/s, 512 tok [engine] (length), 85.0 W
+  T0 PROSE-1: ttft 0.342s prefill 163.9 decode 25.16 tok/s, 512 tok [engine] (length), 85.0 W
+  T0 PROSE-2: ttft 0.347s prefill 161.5 decode 25.16 tok/s, 512 tok [engine] (length), 85.0 W
+  T0 PROSE-3: ttft 0.351s prefill 168.3 decode 25.16 tok/s, 512 tok [engine] (length), 85.1 W
+  T0 JSON-0: ttft 0.427s prefill 208.4 decode 25.17 tok/s, 512 tok [engine] (length), 85.0 W
+  T0 JSON-1: ttft 0.423s prefill 210.6 decode 25.16 tok/s, 512 tok [engine] (length), 84.9 W
+  T0 JSON-2: ttft 0.351s prefill 191.1 decode 25.16 tok/s, 512 tok [engine] (length), 85.0 W
+  T0 P8K-0: ttft 16.59s prefill 494.5 decode 23.36 tok/s, 150 tok [engine] (stop), 85.0 W
+  T0 P8K-1: ttft 16.597s prefill 494.3 decode 23.37 tok/s, 147 tok [engine] (stop), 85.0 W
+  T0 P8K-2: ttft 16.619s prefill 493.7 decode 23.41 tok/s, 117 tok [engine] (stop), 85.0 W
+T0: {"CODE": [186.5, 25.16], "PROSE": [166.1, 25.16], "JSON": [208.4, 25.16], "P8K": [494.3, 23.37]}
+[2026-11-15T04:06:32Z] T0: speed client rc=0; peak GPU now 61 GiB
+[2026-11-15T04:06:39Z] T1: starting tandem-f5222f25c -cmoe --moe-cache-mib auto -lm none 
+T1: ready after 45.3s, model id '/opt/models/staging/qwen3.8-flash-next-udiq4xs/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf'
+T1: warm-up 3.85s
+  T1 CODE-0: ttft 0.774s prefill 90.4 decode 15.27 tok/s, 512 tok [engine] (length), 88.0 W
+  T1 CODE-1: ttft 0.751s prefill 102.6 decode 12.06 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 CODE-2: ttft 0.634s prefill 97.8 decode 12.13 tok/s, 202 tok [engine] (stop), 85.0 W
+  T1 CODE-3: ttft 0.676s prefill 99.1 decode 11.98 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 PROSE-0: ttft 0.698s prefill 94.6 decode 11.98 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 PROSE-1: ttft 0.694s prefill 80.7 decode 11.93 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 PROSE-2: ttft 0.68s prefill 82.3 decode 11.98 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 PROSE-3: ttft 0.693s prefill 85.1 decode 11.99 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 JSON-0: ttft 0.824s prefill 108.0 decode 11.98 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 JSON-1: ttft 0.814s prefill 109.3 decode 11.99 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 JSON-2: ttft 0.682s prefill 98.2 decode 12.0 tok/s, 512 tok [engine] (length), 85.0 W
+  T1 P8K-0: ttft 25.124s prefill 326.5 decode 15.07 tok/s, 138 tok [engine] (stop), 85.0 W
+  T1 P8K-1: ttft 24.834s prefill 330.4 decode 13.33 tok/s, 135 tok [engine] (stop), 85.0 W
+  T1 P8K-2: ttft 25.012s prefill 328.0 decode 15.2 tok/s, 112 tok [engine] (stop), 85.0 W
+T1: {"CODE": [98.45, 12.1], "PROSE": [83.7, 11.98], "JSON": [108.0, 11.99], "P8K": [328.0, 15.07]}
+[2026-11-15T04:16:33Z] T1: speed client rc=0; peak GPU now 7 GiB
+[2026-11-15T04:16:40Z] === E161 done in 3408s ===
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-15T04:16:40+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+prompt_tokens: no effort 43, low 43, medium 13 -> LOW DEFAULT LIVE
+[2026-11-15T04:18:14Z] production restored, VERIFIED: halogen_effort_check LOW DEFAULT LIVE
+[2026-11-15T04:18:18Z] === E161 window: arms T2 ===
+[2026-11-15T04:18:19Z] kernel 7.0.0-42-generic; livepatch: 
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-15T04:18:23+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-15T04:18:19+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[2026-11-15T04:18:33Z] window open, VERIFIED: GPU holds 0 GiB
+[2026-11-15T04:18:33Z] T2: starting tandem-f5222f25c -cmoe --moe-cache-mib 24576 -lm none 
+T2: ready after 75.8s, model id '/opt/models/staging/qwen3.8-flash-next-udiq4xs/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf'
+T2: warm-up 6.56s
+  T2 CODE-0: ttft 1.983s prefill 35.3 decode 16.49 tok/s, 512 tok [engine] (length), 86.0 W
+  T2 CODE-1: ttft 0.863s prefill 89.3 decode 22.03 tok/s, 512 tok [engine] (length), 85.0 W
+  T2 CODE-2: ttft 0.615s prefill 100.9 decode 22.08 tok/s, 201 tok [engine] (stop), 85.5 W
+  T2 CODE-3: ttft 2.612s prefill 25.7 decode 20.15 tok/s, 512 tok [engine] (length), 81.9 W
+  T2 PROSE-0: ttft 0.695s prefill 94.9 decode 22.91 tok/s, 512 tok [engine] (length), 86.2 W
+  T2 PROSE-1: ttft 0.678s prefill 82.6 decode 22.19 tok/s, 512 tok [engine] (length), 84.8 W
+  T2 PROSE-2: ttft 0.699s prefill 80.1 decode 22.85 tok/s, 512 tok [engine] (length), 85.1 W
+  T2 PROSE-3: ttft 0.799s prefill 73.9 decode 22.84 tok/s, 512 tok [engine] (length), 85.0 W
+  T2 JSON-0: ttft 0.994s prefill 89.5 decode 22.71 tok/s, 512 tok [engine] (length), 84.5 W
+  T2 JSON-1: ttft 0.897s prefill 99.2 decode 22.04 tok/s, 512 tok [engine] (length), 85.1 W
+  T2 JSON-2: ttft 0.71s prefill 94.3 decode 22.65 tok/s, 512 tok [engine] (length), 85.0 W
+  T2 P8K-0: ttft 97.588s prefill 84.1 decode 20.63 tok/s, 154 tok [engine] (stop), 65.9 W
+  T2 P8K-1: ttft 73.515s prefill 111.6 decode 20.55 tok/s, 141 tok [engine] (stop), 68.3 W
+  T2 P8K-2: ttft 36.152s prefill 226.9 decode 20.84 tok/s, 122 tok [engine] (stop), 84.5 W
+T2: {"CODE": [62.3, 21.09], "PROSE": [81.35, 22.84], "JSON": [94.3, 22.65], "P8K": [111.6, 20.63]}
+[2026-11-15T04:28:06Z] T2: speed client rc=0; peak GPU now 31 GiB
+[2026-11-15T04:28:14Z] === E161 done in 581s ===
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-15T04:28:14+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+Traceback (most recent call last):
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 47, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 36, in main
+    none = prompt_tokens({})
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/sparkrouter/ops/halogen_effort_check.py", line 31, in prompt_tokens
+    with urllib.request.urlopen(req, timeout=120) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+prompt_tokens: no effort 43, low 43, medium 13 -> LOW DEFAULT LIVE
+[2026-11-15T04:29:18Z] production restored, VERIFIED: halogen_effort_check LOW DEFAULT LIVE
