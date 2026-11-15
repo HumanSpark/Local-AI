@@ -161,6 +161,7 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E159 | Flash-Next reasoning effort and the froggeric template | [pre-registration](e159-prereg.md) · [results](e159-results.md) |
 | E160 | production acceptance of community template + low (2026-11-13, revision 2) | [pre-registration](e160-prereg.md) · [results](e160-results.md) |
 | E161 | expert helpers on unified memory, and routing skew (2026-11-15) | [data](e161/) · [pre-registration](e161-prereg.md) · [results](e161-results.md) |
+| E162 | client-shaped tasks, local vs frontier (2026-11-15) | [data](e162/) · [pre-registration](e162-prereg.md) · [results](e162-results.md) |
 
 ## Other evidence
 

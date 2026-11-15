@@ -20,7 +20,7 @@
 
 ## Findings index
 
-188 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+189 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
@@ -28,6 +28,7 @@
 - **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
 - **CAPABILITY (5):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187)
+- **QUALITY (1):** [F189](#f189)
 - **SPEED (1):** [F188](#f188)
 
 | Finding | Title | Kind | Date | Experiment | Status |
@@ -223,6 +224,7 @@
 | [F186](#f186) | community template + low effort passes nearly every usage test at 0.41x the time of max thinking; what it gives up is completeness, not reasoning | CAPABILITY | 2026-11-13 | E160 | ESTABLISHED |
 | [F187](#f187) | on coding, every lower reasoning setting is within noise of max thinking; community template + low is the fastest at 0.30x the time | CAPABILITY | 2026-11-13 | E159 | ESTABLISHED |
 | [F188](#f188) | MoE expert helpers (CPU cores, tandem.cpp's hot-expert cache) do not pay on unified memory; routing is concentrated but workload-specific | SPEED | 2026-11-15 | E161 | ESTABLISHED |
+| [F189](#f189) | on client-shaped drafting, GPT-6.1 Sol beats production Flash-Next at every effort; the losses are unsupported commitments, not invented figures | QUALITY | 2026-11-15 | E162 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -8987,3 +8989,49 @@ and DeepSeek-V4.1-Flash, where capacity binds.
 
 Evidence: `results/e161-results.md`, prereg `results/e161-prereg.md` (amendments 1-2), raw `results/e161/speed-*.json`,
 `results/e161/skew.json`. See [[F41]], [[F180]].
+
+<a id="f189"></a>
+
+## F189 - on client-shaped drafting, GPT-6.1 Sol beats production Flash-Next at every effort; the losses are unsupported commitments, not invented figures
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-15 | **Experiment:** E162 | **Status:** ESTABLISHED for these ten fictional tasks (one draft per arm, two blind judges)
+
+**Kind: QUALITY**
+
+**Plain English.** We gave ten realistic client jobs to the local model and two frontier models, and two blind judges
+compared every pair. GPT-6.1 Sol won 7 to 9 more jobs than it lost against the local model, at every effort level and
+with both judges. When the local model lost, it was usually because it added a promise or a conclusion the notes did
+not support, or left out something the reader needed. Polish mattered less. Our automatic checks for invented
+figures found nothing real in any model's drafts, and that kind of error is invisible to them. Thinking harder made
+the local drafts better, but not good enough to close the gap.
+
+**Claim.** Net pair wins over 10 tasks, grok-4.7 / kimi-k3.1-pro, decided only when both orders agree:
+
+- GPT over the local model: +7/+8 against low, +7/+9 against medium, +7/+9 against xhigh.
+- Claude Sonnet 5.5 over the local model: +3/+7 against low, +1/+4 against medium. Against xhigh the judges disagree
+  (-2/+4), so that result is not shown.
+- Higher local effort over low: medium +4/+2, xhigh +5/+4.
+- Judge agreement was 0.67.
+- Mechanical checks, raw: invented-figure flags were GPT 8, Claude 3, xhigh 1, low and medium 0. Hand adjudication
+  found all 12 false positives: euro-thousands conversions, labelled gross-profit calculations, and a wrong weekday in
+  our own prompt. Trap hits adjudicated to 0 real, with 3 borderline (2 low, 1 medium).
+- Two judge-cited errors in the low drafts were confirmed by hand. In C01, low said a pilot "fits within that window",
+  which the notes never say. In C03, low left out the €2,400 deposit and why it is not refundable, and promised a
+  follow-up nobody had offered.
+- P3, P4, P6 and P7 failed (P6 and P7 on raw checker counts); the other six held.
+- Kimi returned 51 empty replies of 200. Each was re-asked once with a larger cap (amendment 1, declared after the
+  tallies printed). The conclusions hold on first-pass verdicts alone.
+
+**What it changes.**
+
+- **Client-facing drafts go to a frontier model, or a person edits the local draft before it is sent.** This is the
+  prereg's decision rule, and it fired.
+- **In-house drafting:** prefer medium or xhigh over low.
+- **Method:** a figure and keyword checker cannot certify a draft. The errors that cost the local model were
+  unsupported commitments and missing context, and a regex cannot see them.
+
+Evidence: `results/e162-results.md`, prereg `results/e162-prereg.md` (amendment 1), `results/e162/score.json`,
+`results/e162/adjudication.json`, `results/e162/grade.json`, `results/e162/judge-grok-4.7.json`,
+`results/e162/judge-kimi-k3.1-pro.json`. See [[F186]], [[F187]].

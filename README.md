@@ -23,7 +23,7 @@ This repository exists so that the numbers on those pages do not have to be take
   <img src="assets/coding-results-light.svg" alt="Bar chart of real coding fixes solved out of 10: Qwen3.8-Flash-Next 9 (local); Ornith 1.5 35B 9 (local); Qwen3.8-27B 8 (local); Tess 4.5 27B 8 (local); Raon-1 mini (preview) 8 (local); Claude Sonnet 5.5 8 (cloud); Claude Opus 5.5 8 (cloud); Ornith 1.5 122B 6 (local); Qwen3-Coder-30B 2 (local)." width="760">
 </picture>
 
-Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md#f183), [F185](FINDINGS.md#f185)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next on its stock chat template is its highest setting. At that setting the best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5. A later sweep on the same ten fixes found a lower setting that keeps the score at under a third of the time ([F187](FINDINGS.md#f187)); production now runs it (below).
+Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md#f183), [F185](FINDINGS.md#f185)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next on its stock chat template is its highest setting. At that setting the best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5. A later sweep on the same ten fixes found a lower setting that keeps the score at under a third of the time ([F187](FINDINGS.md#f187)); production now runs it (below). The chart sorts by score, but a difference of one task is within noise ([F183](FINDINGS.md#f183)): a setup one fix ahead of another has not beaten it.
 
 | Setup | Runs on | Solved | Median minutes per task |
 |---|---|---|---|
@@ -34,7 +34,7 @@ Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.m
 | Raon-1 mini (preview) | KRAFTON llama.cpp fork fb895662d (this machine) | 8/10 | 20.0 |
 | Claude Sonnet 5.5 | Anthropic API (cloud) | 8/10 | 2.5 |
 | Claude Opus 5.5 | Anthropic API (cloud) | 8/10 | 5.3 |
-| Ornith 1.5 122B | llama.cpp e14a7797 (this machine) | 6/10 | 53.9 (over 9 of 10 tasks; one record missing) |
+| Ornith 1.5 122B | llama.cpp e14a7797 (this machine) | 6/10 | 53.9 over 9 tasks (the 10th was stopped at the 70-minute limit and scored as a fail) |
 | Qwen3-Coder-30B | llama.cpp 5851a8e (this machine) | 2/10 | 2.5 |
 
 ### Speed: one model, five engines
@@ -70,13 +70,13 @@ Coding is [F187](FINDINGS.md#f187) (a re-run of the same ten fixes on 13 Novembe
 | See what changed in each release | [RELEASE-NOTES.md](RELEASE-NOTES.md) |
 | Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
 
-## Current release: r5.8 (findings through 15 November 2026)
+## Current release: r5.9 (findings through 15 November 2026)
 
-r5.8 adds finding [F188](FINDINGS.md#f188): "expert helper" schemes such as Tandem, which keep a mixture-of-experts model's busiest experts in fast graphics memory and compute the rest elsewhere, were slower here in every form, because this machine has one shared memory pool. The busiest fifth of experts do take about 70% of the routing, but code and documents use different sets. The production setting below is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r5.9 adds finding [F189](FINDINGS.md#f189). On ten client-shaped drafting tasks judged blind, GPT-6.1 Sol beat the production local model at every effort level, with both judges. The local drafts mostly lost on promises and conclusions the notes did not support, not on invented figures. Drafts that go to a client under your name are therefore frontier-model work, or a local draft a person edits before sending. In-house drafts are better at medium or xhigh than at low. The production setting below is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.8 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) and F187 (r5.6) now qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** r5.9 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) and F187 (r5.6) now qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim

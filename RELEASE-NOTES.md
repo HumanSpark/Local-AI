@@ -1,24 +1,34 @@
-# Release Notes - sparkbench-data-r5.8
+# Release Notes - sparkbench-data-r5.9
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.8)
+## This release (r5.9)
 
-- **Findings:** 188 in FINDINGS.md, newest F188.
+- **Findings:** 189 in FINDINGS.md, newest F189.
 - **Claims:** 60 active in claims.yml.
-- **New finding F188 (E161): MoE "expert helpers" do not pay on this machine.** Tandem-style schemes keep the
-  busiest experts in fast graphics memory and have the CPU or a second card compute the rest. On this box's single
-  shared memory pool every version was slower than keeping the model wholly on the graphics side. Moving experts to the
-  CPU cost 10-32% of decode speed (llama.cpp `--n-cpu-moe` 4/12/24). tandem.cpp built and ran on this GPU, but its
-  automatic cache never switched on (it reads the small BIOS carve-out as the free graphics memory). A 24 GiB cache set
-  by hand came out 16% slower than the same engine without it, and nearly exhausted memory.
-- **Routing skew:** the busiest fifth of Flash-Next's 512 experts per layer take about 70% of routing on code, documents
-  and prose alike. Code uses a different hot set from documents and prose (overlap 0.18-0.19), while documents and
-  prose share theirs (0.70). Mixed precision by hotness is therefore not pursued as planned.
-- New evidence: `results/e161-prereg.md` (amendments 1-2, both declared before the runs they affect),
-  `results/e161-results.md`, `results/e161/speed-*.json`, `results/e161/skew.json`. The skew corpora quote private
-  repositories and the imatrix files are 1.1 GB each; neither ships.
+- **New finding F189 (E162): on client-shaped drafting, GPT-6.1 Sol beats production Flash-Next at every effort.**
+  The tasks were ten realistic jobs for invented businesses: a proposal section, meeting actions, a complaint reply, a
+  contract explainer and others. Five arms drafted them: production at low, medium and xhigh, Claude Sonnet 5.5 and
+  GPT-6.1 Sol. Two blind judges, grok-4.7 and kimi-k3.1-pro, compared every pair in both orders.
+  - GPT won 7 to 9 more tasks than it lost against every local effort, on both judges.
+  - Claude beat low on both judges. Against medium one judge gave +1, and against xhigh the judges disagreed.
+  - Medium and xhigh beat low, against the prediction.
+  - The judges' reasons, two of them confirmed by hand, are unsupported commitments and missing context. Invented
+    figures were not the problem: all 12 raw "invented figure" flags were false positives on review (euro-thousands
+    conversions, labelled calculations, and a wrong weekday in our own prompt).
+  - The pre-registered rule fired: client-facing drafting is frontier work, or a local draft a person edits.
+- **Amendment 1 is disclosed.** Kimi returned 51 of 200 replies empty. Each was re-asked once with only the token cap
+  raised, after the tallies had printed. First-pass and after-retry completion and costs are reported separately, and
+  the conclusions hold on the first pass alone.
+- **Coding harness: the task budget is now a hard cap, and every started task leaves a record** (HARNESS_VERSION
+  2026-11-15.1, `docs/HARNESS-RULES.md` Rule 15). This prompted no re-run. In E158, Ornith 1.5 122B's tenth task
+  stays marked missing and scored as a fail.
+- **README:**
+  - The chart caption now says a one-task difference is within noise (F183).
+  - Ornith 122B's minutes note now says its tenth task was stopped at the 70-minute limit and scored as a fail.
+- New evidence: `results/e162-prereg.md`, `results/e162-results.md`, `results/e162/score.json`,
+  `results/e162/adjudication.json`, `results/e162/grade.json`, the five draft files and both judges' verdict files.
 
 ## Changed claims (old -> new)
 

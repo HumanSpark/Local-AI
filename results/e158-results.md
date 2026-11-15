@@ -45,7 +45,9 @@ E156 comparators, same bank, not re-run: H Flash-Next on Halogen 9/10 (21.3 min)
   built for the card's own fork. The runner logged `FAIL TS4: not ready after 900 s` and moved on. This is a result
   about the file and engine pairing, not about Tess 4.
 - **OR122 clearmail-ea3f86782:** the task ran to the runner's outer 4,200 s kill (rc=124) and wrote no record. It is
-  scored as a fail. Its time is not in the median or total, so both understate OR122's time.
+  scored as a fail. Its time is not in the median or total, so both understate OR122's time. It stays marked missing:
+  no record is back-filled and the task is not re-run into this table. The harness fix it prompted
+  (HARNESS_VERSION 2026-11-15.1, docs/HARNESS-RULES.md Rule 15) applies to runs from 2026-11-15 on.
 
 ### Per task (P = pass, . = fail, X = killed with no record)
 

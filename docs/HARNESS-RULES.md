@@ -392,3 +392,40 @@ repaired by finding out why the server stopped answering.
 fails this gate has an unexplained cause - a dead server, a timeout below what
 `--max-tokens` needs (E33), an upstream error envelope. Find the cause; a green
 re-run with the cause still present is a coin flip recorded as a measurement.
+
+## Rule 15: A task budget is a hard cap, and every started task leaves a terminal record
+
+`tools/coding_harness.py` (HARNESS_VERSION `2026-11-15.1` onward, stamped in every record) bounds each model call
+by the task's REMAINING budget and cancels it at the deadline by shutting down the socket. Agent shell commands are
+capped at min(300 s, remaining). Every started task returns a record with `stop_reason` (model-done | timeout |
+max-iterations | model-error | budget-exhausted | unproductive | harness-error | killed), elapsed time, partial
+transcript, usage and diff. SIGTERM gives a `killed` record. A `started` stub is written first, so a SIGKILL leaves a
+file that says the task started and never finished. `harness-error` and `killed` exit 5 (Rule 13 owns 3, Rule 14 owns
+4). Scoring is unchanged: after a timeout, the diff on disk is still verified.
+
+- **Why:** before this, the budget was checked only at the start of each turn, and the OpenAI client waited up to
+  600 s per call with 2 retries. One last call could overrun the budget by up to 30 minutes, and a task killed from
+  outside left nothing at all. A task that overran or vanished is not comparable with one that ran to budget.
+- **Trigger:** E158, 2026-11-06. OR122 `clearmail-ea3f86782` started at 07:52:50Z and was killed by the runner's
+  outer `timeout` (4,200 s, rc=124) at 09:02:50Z with no record. Three other OR122 tasks ran 60.2, 60.3 and 62.7
+  minutes against a 60-minute budget. Fixed on owner instruction, 2026-11-15.
+- **Closing a client does NOT cancel a call.** `httpx.Client.close()` from another thread leaves the worker blocked
+  in `recv`, and the server never sees a disconnect (measured against a local server). The socket must be shut down
+  (`SHUT_RDWR`). `tests/test_coding_harness_budget.py` pins this against a real local HTTP server: the server must
+  SEE the disconnect near the deadline.
+- **Cancellation reaches the engine only when the route passes the disconnect on** (2026-11-15, measured with
+  Halogen's `llamacpp:requests_processing` and `tokens_predicted_total`, against an uncancelled 300-token control
+  that added 300 to the counter):
+  - **Halogen direct (127.0.0.1:8433):** cancelled. The engine went idle 20.2 s after the disconnect, and the
+    aborted request added nothing to the counter. A full run would take about 2 minutes.
+  - **Through model-guard (127.0.0.1:8402):** NOT cancelled. Halogen generated the full 12,000-token cap and went
+    idle 120.4 s after the disconnect. The harness stops waiting, but the engine keeps working and shares the GPU
+    with the next call. Coding arms call the engine directly (`run_e154_arms.sh` uses `127.0.0.1:$PORT`), so they
+    are unaffected. Never point a timed coding run at the guard.
+  - **llama-server:** not verified live (no small chat model on disk to test with without displacing production).
+  - **OpenRouter:** not verifiable from the client. A cancelled call may still be generated and billed upstream.
+- **Partial text from a call cut mid-flight is not recoverable**, because calls are not streamed. The record says so.
+- **The runner's outer timeout is a backstop, not the budget.** `run_e154_arms.sh` now uses
+  `timeout -k 60 $((TASK_TIMEOUT + 1500))`, sized for both verifies plus setup.
+- **Do not back-fill.** Records written before 2026-11-15.1 stay as they are. E158's OR122 `clearmail-ea3f86782`
+  stays marked `X` (killed, no record) and scored as a fail. It is not re-run into that table.

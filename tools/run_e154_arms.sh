@@ -250,7 +250,10 @@ run_bank() {  # run_bank <arm> <model id> <endpoint> [extra harness args...]
     k=$((k + 1))
     if [ -s "$RAW/$arm/$id.json" ]; then stamp "$arm $k/$N_BANK $id: already done, skipped"; continue; fi
     if [ "$DEADLINE" -gt 0 ] && [ "$(date +%s)" -ge "$DEADLINE" ]; then stamp "$arm $k/$N_BANK $id: NOT RUN - past E154_DEADLINE"; continue; fi
-    timeout $((TASK_TIMEOUT + 600)) python3 tools/coding_harness.py "$model" --task "$TASKDIR/$id.json" --endpoint "$endpoint" \
+    # The harness enforces TASK_TIMEOUT itself (HARNESS_VERSION 2026-11-15.1). This outer bound is a backstop sized
+    # for the fail-before and after verifies (up to 600 s each) plus setup; SIGTERM first so the harness writes a
+    # "killed" record, SIGKILL 60 s later leaves its "started" stub. E158's +600 killed OR122 clearmail with no record.
+    timeout -k 60 $((TASK_TIMEOUT + 1500)) python3 tools/coding_harness.py "$model" --task "$TASKDIR/$id.json" --endpoint "$endpoint" \
       --timeout "$TASK_TIMEOUT" --isolate "$ISOLATE" --sampling "$(sampling "$arm")" --output "$RAW/$arm/$id.json" "$@" >>"$RAW/$arm/harness.log" 2>&1
     rc=$?
     stamp "$arm $k/$N_BANK $id: rc=$rc $(python3 -c "import json;r=json.load(open('$RAW/$arm/$id.json'));print(r['status'],'turns',r['turns'],'wall',round(r['wall_time']),'s cost',round(r['usage']['cost_usd'],4))" 2>&1 | tail -1)"

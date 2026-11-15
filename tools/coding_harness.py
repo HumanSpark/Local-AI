@@ -11,25 +11,50 @@
 # per-task rootless podman container that sees ONLY the host's /usr and /etc (read-only), the user's Python
 # site-packages (read-only) and the task tree (read-write), with no network. The vault (/opt/vault), home
 # directories, /tmp and the harness's environment are absent. Default "none" keeps E154's behaviour.
+#
+# Task budget (HARNESS_VERSION 2026-11-15.1, owner 2026-11-15): --timeout is a hard per-task budget. Before this,
+# the budget was checked only at the start of each turn and the OpenAI client waited up to 600 s per call with 2
+# retries, so the last call could overrun by up to 30 minutes. In E158, OR122's clearmail task was killed by the
+# runner's outer timeout and left no record at all. Now:
+#   - every model call runs on its own connection in a worker thread, bounded by the task's remaining time. At the
+#     deadline the socket is shut down (closing the client from another thread does NOT wake a blocked recv, so the
+#     server would keep generating), which servers that watch for disconnect take as a cancel. The SDK's own retries
+#     are off; transient errors are retried at most twice, only while budget remains.
+#   - agent shell commands are capped at min(300 s, remaining budget).
+#   - every started task returns a terminal record: stop_reason is model-done | timeout | max-iterations |
+#     model-error | budget-exhausted | unproductive | harness-error | killed, with elapsed time, partial transcript,
+#     usage and diff. SIGTERM (the runner's outer timeout) becomes a "killed" record, and main() writes a "started"
+#     stub first, so even SIGKILL leaves a file saying the task started and never finished.
+#   - scoring is unchanged: after a timeout the diff on disk is still verified, as before.
+# Partial text from a call cancelled mid-flight is not recoverable (calls are not streamed); the record says so.
 
 from __future__ import annotations
 
 import argparse
 import json
 import logging
+import math
 import os
 import shutil
 import shlex
+import signal
+import socket
 import subprocess
 import sys
 import tempfile
 import time
+import traceback
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FutureTimeout
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
 
 try:
     # capability-bypass: sparkbench compares raw providers; that IS the product
+    import httpcore
+    import httpx
+    import openai
     from openai import OpenAI
 except ImportError:
     print("Error: OpenAI library not found. Install with: pip install openai", file=sys.stderr)
@@ -37,6 +62,49 @@ except ImportError:
 
 
 logger = logging.getLogger(__name__)
+
+# Bump on any change to how a task is run, stopped or recorded; every result record carries it.
+HARNESS_VERSION = "2026-11-15.1"
+TRANSIENT_RETRIES = 2
+
+
+class CallDeadline(Exception):
+    """The task budget ran out before or during a model call; .info says where and what was cancelled."""
+
+    def __init__(self, info: dict[str, Any]) -> None:
+        super().__init__(f"task budget exhausted ({info['phase']})")
+        self.info = info
+
+
+class HarnessTerminated(BaseException):
+    """Raised in the main thread by the SIGTERM handler so the task can still write a terminal record.
+
+    BaseException, so the agent loop's and tool runner's `except Exception` handlers cannot absorb it as an error.
+    """
+
+
+class _SocketTrackingBackend(httpcore.SyncBackend):
+    """Keeps each socket it opens, so a call past its deadline can be shut down from another thread."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.sockets: list[socket.socket] = []
+
+    def connect_tcp(self, *args: Any, **kwargs: Any) -> Any:
+        stream = super().connect_tcp(*args, **kwargs)
+        self.sockets.append(stream._sock)
+        return stream
+
+    def shutdown_all(self) -> int:
+        n = 0
+        for sock in self.sockets:
+            try:
+                sock.shutdown(socket.SHUT_RDWR)
+                n += 1
+            except OSError:
+                # Expected when the socket is already closed (the call finished or failed first): nothing to cancel.
+                pass
+        return n
 
 # Isolation image: only its loader is used - /usr and /etc come from the host, read-only (see Overview).
 ISOLATION_IMAGE = "docker.io/library/python:3.12-slim"
@@ -217,6 +285,9 @@ class SandboxedCodeEnvironment:
         self.fixture_path = Path(fixture_path)
         if not self.fixture_path.exists():
             raise FileNotFoundError(f"Fixture not found: {fixture_path}")
+
+        # Set by the harness to the task's deadline (epoch seconds); caps agent shell commands. None = 300 s each.
+        self.deadline: Optional[float] = None
 
         # Create temporary sandbox
         self.sandbox_dir = Path(tempfile.mkdtemp(prefix="coding-screen-"))
@@ -414,7 +485,10 @@ class SandboxedCodeEnvironment:
             }
 
         # Run command
-        result = self.run_shell(cmd, work_dir, 300)  # 5 min timeout per command
+        limit = 300  # 5 min per command
+        if self.deadline is not None:
+            limit = max(1, min(limit, math.ceil(self.deadline - time.time())))
+        result = self.run_shell(cmd, work_dir, limit)
 
         return {
             "stdout": result.stdout,
@@ -530,8 +604,13 @@ class CodingHarness:
         self.task_id = "adhoc"
         self.status: Optional[str] = None
 
-        # OpenAI client
+        # OpenAI client. Real calls get a fresh per-call client (see _call_model); self.client stays as the
+        # injection point for tests, which replace it with a scripted fake.
+        self._api_key = api_key
         self.client = OpenAI(api_key=api_key, base_url=endpoint)
+        self._own_client = self.client
+        self.stop_reason: Optional[str] = None
+        self.partial: dict[str, Any] = {}
 
         # Transcript
         self.transcript = []
@@ -575,6 +654,7 @@ class CodingHarness:
         try:
             result = self._agent_loop(env, task_prompt)
             result["score"] = self._score_task(env)
+            result["harness_version"] = HARNESS_VERSION
             return result
         finally:
             env.cleanup()
@@ -590,12 +670,41 @@ class CodingHarness:
         before it. The verify output is never shown to the model.
         """
         self.task_id = spec["id"]
-        if "test_files" not in spec:
-            # Bank form: paths only, read from the fix commit. Keeps fixture text out of
-            # the bank file (the secret-scan hook matched test data, 2026-11-04).
-            spec = {**spec, "test_files": read_test_files(spec["repo"], spec["fix_sha"], spec["test_paths"])}
         self.transcript = []
         self.status = None
+        self.stop_reason = None
+        self.partial = {}
+        self.start_time = time.time()
+        try:
+            if "test_files" not in spec:
+                # Bank form: paths only, read from the fix commit. Keeps fixture text out of
+                # the bank file (the secret-scan hook matched test data, 2026-11-04).
+                spec = {**spec, "test_files": read_test_files(spec["repo"], spec["fix_sha"], spec["test_paths"])}
+            return self._run_task_spec(spec)
+        except (Exception, HarnessTerminated) as e:
+            # Terminal record for anything that stops the task early: a crash, a lost sandbox, or SIGTERM.
+            killed = isinstance(e, HarnessTerminated)
+            rec: dict[str, Any] = {
+                "task": self.task_id,
+                "status": "killed" if killed else "harness-error",
+                "passed": False,
+                "stop_reason": "killed" if killed else "harness-error",
+                "agent_stop_reason": self.stop_reason,
+                "error": f"{type(e).__name__}: {e}",
+                "traceback": traceback.format_exc()[-4000:],
+                "transcript": self.transcript,
+                "turns": self.partial.get("turns", 0),
+                "usage": self.partial.get("usage", {"cost_usd": 0.0, "calls": 0}),
+                "verify": {"before_rc": self.partial.get("before_rc"), "after_rc": None},
+                "diff": self.partial.get("diff"),
+                "diff_error": self.partial.get("diff_error"),
+                "wall_time": time.time() - self.start_time,
+                "isolation": self.isolate,
+                "harness_version": HARNESS_VERSION,
+            }
+            return rec
+
+    def _run_task_spec(self, spec: dict[str, Any]) -> dict[str, Any]:
         setup_cmd = spec.get("setup_cmd")
         verify_timeout = int(spec.get("verify_timeout", 600))
 
@@ -608,9 +717,12 @@ class CodingHarness:
             before_rc, _ = self._verify(before_env, spec["test_files"], spec["verify_cmd"], verify_timeout)
         finally:
             before_env.cleanup()
+        self.partial["before_rc"] = before_rc
         if before_rc == 0:
             return {
                 "task": self.task_id,
+                "harness_version": HARNESS_VERSION,
+                "stop_reason": "invalid-precondition",
                 "status": "invalid-precondition",
                 "passed": False,
                 "verify": {"before_rc": before_rc, "after_rc": None},
@@ -624,8 +736,15 @@ class CodingHarness:
         try:
             result = self._agent_loop(env, spec["prompt"])
             diff = result["diff"]
+            self.partial["diff"] = diff
             after_rc, after_out = self._verify(env, spec["test_files"], spec["verify_cmd"], verify_timeout)
         finally:
+            if "diff" not in self.partial:
+                # The agent loop did not finish (crash or SIGTERM): keep the work on disk for the terminal record.
+                try:
+                    self.partial["diff"] = env.get_diff()
+                except Exception as de:
+                    self.partial["diff_error"] = f"{type(de).__name__}: {de}"
             env.cleanup()
             self.end_time = time.time()
 
@@ -639,6 +758,7 @@ class CodingHarness:
                 "diff": diff,
                 "wall_time": self.end_time - self.start_time,
                 "isolation": self.isolate,
+                "harness_version": HARNESS_VERSION,
             }
         )
         return result
@@ -666,6 +786,61 @@ class CodingHarness:
         r = env.run_shell(verify_cmd, root, timeout)
         return r.returncode, r.stdout + r.stderr
 
+    def _call_model(self, deadline: float, **kw: Any) -> Any:
+        """One chat completion bounded by the task deadline; raises CallDeadline when the budget runs out."""
+        attempt = 0
+        while True:
+            remaining = deadline - time.time()
+            if remaining <= 0:
+                raise CallDeadline({"phase": "before-call", "attempt": attempt})
+            if self.client is not self._own_client:
+                # Injected test double: no socket to cancel, so no deadline enforcement on this path.
+                return self.client.chat.completions.create(**kw)
+            backend = _SocketTrackingBackend()
+            transport = httpx.HTTPTransport()
+            # httpx 0.28 exposes no public hook for the network backend; tests pin this (test_coding_harness_budget).
+            transport._pool._network_backend = backend
+            http = httpx.Client(transport=transport, timeout=httpx.Timeout(remaining + 30))
+            client = OpenAI(api_key=self._api_key, base_url=self.endpoint, http_client=http, max_retries=0)
+            pool = ThreadPoolExecutor(max_workers=1)
+            t0 = time.time()
+            fut = pool.submit(client.chat.completions.create, **kw)
+            try:
+                return fut.result(timeout=remaining)
+            except FutureTimeout:
+                shut = backend.shutdown_all()
+                try:
+                    fut.result(timeout=10)
+                    worker = "returned"
+                except FutureTimeout:
+                    worker = "still-blocked"
+                except Exception as e:
+                    worker = f"raised {type(e).__name__}"
+                raise CallDeadline(
+                    {
+                        "phase": "during-call",
+                        "attempt": attempt,
+                        "call_s": round(time.time() - t0, 2),
+                        "sockets_shut": shut,
+                        "worker_after_shutdown": worker,
+                        "partial_text": "not recoverable (non-streamed call)",
+                    }
+                ) from None
+            except (openai.APIConnectionError, openai.InternalServerError, openai.RateLimitError) as e:
+                attempt += 1
+                left = deadline - time.time()
+                if attempt > TRANSIENT_RETRIES or left < 10:
+                    raise
+                self.transcript.append({"type": "retry", "error": f"{type(e).__name__}: {e}", "attempt": attempt})
+                time.sleep(min(2.0**attempt, left / 4))
+            except BaseException:
+                # SIGTERM/KeyboardInterrupt while waiting: cancel the request before unwinding.
+                backend.shutdown_all()
+                raise
+            finally:
+                pool.shutdown(wait=False)
+                http.close()
+
     def _agent_loop(self, env: SandboxedCodeEnvironment, initial_prompt: str) -> dict[str, Any]:
         """Run the agentic loop.
 
@@ -684,13 +859,19 @@ class CodingHarness:
         last_action: Optional[str] = None
         turns = 0
         usage = {"prompt_tokens": 0, "completion_tokens": 0, "reasoning_tokens": 0, "cost_usd": 0.0, "calls": 0}
+        # Shared with run_task_spec so a crash or SIGTERM still records what was spent.
+        self.partial = {"usage": usage, "turns": 0}
+        self.stop_reason = "max-iterations"
+        deadline = self.start_time + self.timeout
+        env.deadline = deadline
 
         for iteration in range(self.max_iterations):
-            # Check timeout
-            if time.time() - self.start_time > self.timeout:
+            if time.time() >= deadline:
+                self.stop_reason = "timeout"
                 self.transcript.append({
                     "type": "timeout",
-                    "reason": "Exceeded 20-minute budget",
+                    "phase": "between-calls",
+                    "reason": f"Exceeded {self.timeout}s budget",
                     "iteration": iteration
                 })
                 break
@@ -700,6 +881,7 @@ class CodingHarness:
                     self.ledger.check()
                 except BudgetExceeded as e:
                     self.status = "budget-exhausted"
+                    self.stop_reason = "budget-exhausted"
                     self.transcript.append({"type": "budget", "reason": str(e), "iteration": iteration})
                     break
 
@@ -713,14 +895,21 @@ class CodingHarness:
             if extra:
                 kwargs["extra_body"] = extra
             try:
-                response = self.client.chat.completions.create(
+                response = self._call_model(
+                    deadline,
                     model=self.model_path,
                     messages=with_cache_breakpoint(messages) if self.prompt_cache else messages,
                     tools=self._get_tools(),
                     tool_choice="auto",
                     **kwargs,
                 )
+            except CallDeadline as e:
+                self.stop_reason = "timeout"
+                self.transcript.append({"type": "timeout", "reason": f"Exceeded {self.timeout}s budget",
+                                        "iteration": iteration, **e.info})
+                break
             except Exception as e:
+                self.stop_reason = "model-error"
                 self.transcript.append({
                     "type": "error",
                     "error": str(e),
@@ -730,6 +919,7 @@ class CodingHarness:
 
             # Extract content and tool calls from response
             if not response.choices:
+                self.stop_reason = "model-error"
                 self.transcript.append({
                     "type": "error",
                     "error": "No choices in response",
@@ -738,6 +928,7 @@ class CodingHarness:
                 break
 
             turns += 1
+            self.partial["turns"] = turns
             u = _usage_numbers(getattr(response, "usage", None))
             if self.ledger is not None:
                 if u["cost"] is None:
@@ -767,6 +958,7 @@ class CodingHarness:
 
             # Check if model is done (stop_reason can be "stop", "tool_calls", "length", etc.)
             if finish_reason not in ["tool_calls"] or not response_tool_calls:
+                self.stop_reason = "model-done"
                 self.transcript.append({
                     "type": "done",
                     "reason": "Model indicated completion",
@@ -854,6 +1046,7 @@ class CodingHarness:
                         "content": cap_tool_output(result),
                     })
                     if recoverable_errors >= 6:
+                        self.stop_reason = "unproductive"
                         self.transcript.append({
                             "type": "terminated",
                             "reason": "6+ recoverable tool errors (unproductive loop)",
@@ -864,6 +1057,7 @@ class CodingHarness:
             if not has_valid_call:
                 failed_cycles += 1
                 if failed_cycles >= 3:
+                    self.stop_reason = "unproductive"
                     self.transcript.append({
                         "type": "terminated",
                         "reason": "3+ failed cycles without valid action",
@@ -883,6 +1077,7 @@ class CodingHarness:
             "tool_calls": tool_calls_made,
             "malformed_calls": malformed_calls,
             "last_action": last_action,
+            "stop_reason": self.stop_reason,
         }
 
     def _execute_tool(self, env: SandboxedCodeEnvironment, tool_call: Any) -> str:
@@ -1193,6 +1388,25 @@ def main():
     harness.setup_cmd = args.setup_cmd
     harness.isolate = args.isolate
 
+    def _on_sigterm(signum: int, frame: Any) -> None:
+        raise HarnessTerminated("SIGTERM received (runner's outer timeout?)")
+
+    signal.signal(signal.SIGTERM, _on_sigterm)
+    if args.task and args.output:
+        # Overwritten by the terminal record. If this survives, the process died without one (SIGKILL, OOM).
+        Path(args.output).write_text(json.dumps({
+            "task": json.loads(Path(args.task).read_text())["id"],
+            "status": "started",
+            "passed": False,
+            "stop_reason": "no-terminal-record",
+            "turns": 0,
+            "usage": {"cost_usd": 0.0, "calls": 0},
+            "wall_time": None,
+            "started_at": datetime.now().isoformat(timespec="seconds"),
+            "harness_version": HARNESS_VERSION,
+            "note": "the harness started this task and never wrote a terminal record; score it as missing, not as run",
+        }, indent=2))
+
     if args.task:
         result = harness.run_task_spec(json.loads(Path(args.task).read_text()))
     else:
@@ -1205,6 +1419,10 @@ def main():
         print(f"Results written to {args.output}")
     else:
         print(output)
+    if result.get("status") in ("harness-error", "killed"):
+        # The record is written; the exit code still tells the caller this task did not run to an end.
+        # Exit 5: HARNESS-RULES Rule 13 owns 3 (truncation) and Rule 14 owns 4 (transport); Rule 15 owns 5.
+        sys.exit(5)
 
 
 if __name__ == "__main__":

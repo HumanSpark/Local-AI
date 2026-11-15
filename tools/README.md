@@ -80,6 +80,8 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e145_window.sh](run_e145_window.sh) | Run every E145 arm (the widget's option models through Aider) in one gateway window, in pre-registered order (H, E, F, G). |
 | [run_e154_arms.sh](run_e154_arms.sh) | Run E154 arms over the 15-task bank - Sonnet via OpenRouter under the $25 ledger, local engines in an idle window. |
 | [run_e161_window.sh](run_e161_window.sh) | Run E161 in one idle window: routing-skew imatrix runs, then the six speed arms, restoring production on exit. |
+| [run_e162.py](run_e162.py) | Run E162 - ten client-shaped tasks drafted by production Flash-Next (low/medium/xhigh) and two frontier models, |
+| [run_e162.sh](run_e162.sh) | Run all of E162 unattended in the prereg's order: local drafts against production, cloud drafts alongside, grade, judges. |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |
@@ -102,6 +104,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [score_e154.py](score_e154.py) | Score E154 arms from results/e154/raw/<arm>/<task>.json against the pre-registered fields and P1-P7. |
 | [score_e159.py](score_e159.py) | Score E159 arms against the prereg's fields (pass_count, tokens_median, wall_median_s) and P1-P6. |
 | [score_e160.py](score_e160.py) | Score E160 (KFL vs KX) against the prereg's fields and predictions P1-P11. |
+| [score_e162.py](score_e162.py) | Score E162 against its pre-registration: pair-level nets per judge, judge agreement, completion before and |
 | [score_e77.py](score_e77.py) | Score E77 - the correct-to-wrong rate between an f16 KV baseline and each quantised arm, plus byte identity of the answers. |
 | [score_e77_timings.py](score_e77_timings.py) | Extract prefill and decode rates per KV precision from E77's quiet-GPU re-run server logs. |
 | [score_e79.py](score_e79.py) | Score E79 by BAND and by direction - what the tool converted, what it destroyed, and which of those was infrastructure. |

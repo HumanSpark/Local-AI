@@ -1,0 +1,25 @@
+{
+ "note": "Hand adjudication of every raw fabrication candidate and trap hit in grade.json (2026-11-15). Verdicts: real | borderline | false-positive. Prereg scored predictions on RAW counts; this file gives the adjudicated counts beside them.",
+ "fabrication_candidates": [
+  {"arm": "G", "task": "C05", "items": ["1.614", "15000", "16000", "43000", "456000", "503000", "655000", "74000"], "verdict": "false-positive", "why": "the source table is in EUR thousands; GPT wrote each figure out in euros (EUR 1.614 million, EUR 74,000, ...). Every conversion is correct; the checker does not normalise thousands."},
+  {"arm": "C", "task": "C05", "items": ["36", "5.5", "52"], "verdict": "false-positive", "why": "gross profit worked out from revenue x margin and labelled 'By our calculation'. Summing the stores gives a fall of EUR 36.3k (5.5%) and Athlone EUR 51.6k, which match. (From the rounded total margins it would be EUR 37.1k; the per-store sum is the better method.) Legitimate derived figures the checker's derived list lacked."},
+  {"arm": "X", "task": "C02", "items": ["16"], "verdict": "false-positive (task defect)", "why": "'Monday 16 November 2026' is the real calendar's next Monday. The task prompt itself is wrong: it calls 13 November 2026 a Thursday, which is a Friday. xhigh mixed the prompt's weekday (Friday 14) with the real calendar (Monday 16, Tuesday 17). The inconsistency comes from our prompt, not from the model."}
+ ],
+ "trap_hits": [
+  {"arm": "C", "task": "C08", "verdict": "false-positive", "why": "restates the contract's 'CPI plus 3 percentage points'; its 'if CPI were 2%, the rise would be 5%' is a labelled worked example, not a claim about current CPI."},
+  {"arm": "G", "task": "C08", "verdict": "false-positive", "why": "restates 'CPI plus 3 percentage points, capped at 8%'."},
+  {"arm": "L", "task": "C08", "verdict": "false-positive", "why": "restates 'CPI plus 3%, capped at 8%'."},
+  {"arm": "L", "task": "C06", "verdict": "borderline", "why": "'We have added monitoring ... so this does not happen again.' The monitoring is in the log; 'so this does not happen again' states a purpose that edges towards a promise of no recurrence."},
+  {"arm": "L", "task": "C09", "verdict": "borderline", "why": "'If Zapier goes down or changes its terms, the link breaks.' A conditional dependency risk the notes do not raise; it does not claim Zapier is unreliable."},
+  {"arm": "M", "task": "C09", "verdict": "borderline", "why": "'If Zapier breaks or changes its terms ... That risk is not worth the saving.' Same conditional risk, plus a judgement the notes do not make."}
+ ],
+ "adjudicated_counts": {
+  "fabrication_real": {"C": 0, "G": 0, "L": 0, "M": 0, "X": 0},
+  "trap_real": {"C": 0, "G": 0, "L": 0, "M": 0, "X": 0},
+  "trap_borderline": {"C": 0, "G": 0, "L": 2, "M": 1, "X": 0}
+ },
+ "judge_cited_errors_spot_checked": [
+  {"arm": "L", "task": "C01", "confirmed": true, "what": "'A 6-week pilot at Trim, followed by a phased rollout to the other two clinics, fits within that window' (March 2027). The notes give the pilot and the deadline, never that one fits the other. Also adds 'We will confirm in writing before any pilot begins.'"},
+  {"arm": "L", "task": "C03", "confirmed": true, "what": "omits the EUR 2,400 deposit and why it is not refundable; promises the operations manager 'will come back to you' and a follow-up 'shortly'. The notes make neither promise."}
+ ]
+}
