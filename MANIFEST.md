@@ -1957,3 +1957,17 @@ used by any E158 arm.
   - `DeepSeek-V4.1-Flash-Engram-IQ4_NL.gguf` 110,595,290,816 B, sha256 3dac4c54893ad7aa89103c0028500eadc78e74112cef3a2930a97e67dc9fb4f3
     - the two Engram lookup tables, shard 6 of the Coder (symlink `-00006-of-00006.gguf` -> this file, per the card).
       Memory-mapped and read one row per token from disk, so it is NOT resident; page-cache pressure is an E155 variable.
+
+## 2026-11-12 - Qwen3.8 Flash-Next community chat template (E159, E160; production candidate)
+
+**Recorded late:** this entry should have been written before E159's first use (2026-11-12 00:36Z). The pin and hash were
+in `results/e159-prereg.md` from the start; the MANIFEST entry was missed until 2026-11-13.
+
+- **froggeric/Qwen-Fixed-Chat-Templates** @ 855bffc49448e299789730ff92c9b8d834d6cc14, template v22.5 for
+  Qwen3.8-Flash-Next. Default `reasoning_effort` medium; maps minimal/low -> low, high/xhigh/max -> xhigh, none/off ->
+  thinking off. Pinned copy `var/e159/froggeric/chat_template.jinja`, 
+  sha256 e57684bae4156211a55473c5a63be976a405a37ab5be5ae0e5abf1df5349c4b2. Halogen 0.18.23 reports this hash and "thinking
+  control probe passed" on load. Mounted over `/models/tokenizer/chat_template.jinja` for arms HF, HFL (E159) and KFL
+  (E160). The stock template it replaces: sha256 c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041.
+- 2026-11-13: copied byte-identical (same sha256) to sparkrouter `templates/qwen38-flash-next-froggeric-v22.5.jinja` for
+  the production switch (owner 2026-11-13).

@@ -23,7 +23,7 @@ This repository exists so that the numbers on those pages do not have to be take
   <img src="assets/coding-results-light.svg" alt="Bar chart of real coding fixes solved out of 10: Qwen3.8-Flash-Next 9 (local); Ornith 1.5 35B 9 (local); Qwen3.8-27B 8 (local); Tess 4.5 27B 8 (local); Raon-1 mini (preview) 8 (local); Claude Sonnet 5.5 8 (cloud); Claude Opus 5.5 8 (cloud); Ornith 1.5 122B 6 (local); Qwen3-Coder-30B 2 (local)." width="760">
 </picture>
 
-Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md#f183), [F185](FINDINGS.md#f185)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next is its highest setting; whether a lower one keeps the score is being measured. The best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5.
+Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md#f183), [F185](FINDINGS.md#f185)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next on its stock chat template is its highest setting. At that setting the best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5. A later sweep on the same ten fixes found a lower setting that keeps the score at under a third of the time ([F187](FINDINGS.md#f187)); production now runs it (below).
 
 | Setup | Runs on | Solved | Median minutes per task |
 |---|---|---|---|
@@ -49,6 +49,17 @@ Qwen3.8-Flash-Next on this machine, one request at a time, thinking off ([F180](
 | Strata 0.2.10, DFlash2 | 60.7 | 691 | 47.4 s |
 | llama.cpp 5851a8e, Vulkan | 27.1 | 315 | 104.1 s |
 
+### What production runs now
+
+Since 13 November 2026 the machine serves Qwen3.8-Flash-Next on Halogen with a community chat template (froggeric v22.5, recorded in [MANIFEST.md](MANIFEST.md)) and reasoning effort `low` unless a request asks for more. The template is what makes `low` take effect: on the stock template, low thinks barely less than medium.
+
+| setting | coding fixes solved | median minutes per fix | eight kinds of work vs maximum effort |
+|---|---|---|---|
+| stock template, maximum effort (the chart above) | 8/10 | 19.1 | baseline, 49.9 min in total |
+| **community template, low (production)** | **8/10** | **5.8** | **within noise on 7 of 8, 20.6 min in total** |
+
+Coding is [F187](FINDINGS.md#f187) (a re-run of the same ten fixes on 13 November, where maximum effort scored 8 rather than F183's 9; one fix is within noise). The eight kinds of work are [F186](FINDINGS.md#f186): hard document questions, refuse-or-comply judgement, conversations, tool use and dates matched or beat maximum effort, and writing was one draft behind on the automatic check and a near-tie with a blind judge. The one shortfall was answering from a large document pack (24 against 26 of 26): once, low worked out a figure the documents never state. Answers where an unsupported figure would be costly therefore ask for a higher effort; medium was not measured on those tests, so that routing is a judgement, not a result.
+
 ## Start here
 
 | If you want to | Go to |
@@ -59,13 +70,13 @@ Qwen3.8-Flash-Next on this machine, one request at a time, thinking off ([F180](
 | See what changed in each release | [RELEASE-NOTES.md](RELEASE-NOTES.md) |
 | Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
 
-## Current release: r5.6 (findings through 13 November 2026)
+## Current release: r5.7 (findings through 13 November 2026)
 
-r5.6 adds two findings on reasoning effort. On coding, every lower setting scored within noise of the maximum, and the community chat template at low thinking ran at 0.30x the time ([F187](FINDINGS.md#f187)). Tested as the production setting on eight kinds of work, that setting matched maximum thinking on all but one at 0.41x the time ([F186](FINDINGS.md#f186)). [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r5.7 adds what production runs now: Qwen3.8-Flash-Next with a community chat template at reasoning effort low by default, which on coding kept 8/10 at 0.30x the time ([F187](FINDINGS.md#f187)) and across eight kinds of work matched maximum thinking within noise on all but one at 0.41x the time ([F186](FINDINGS.md#f186)). It changes no finding, claim or evidence file. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.6 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) and F187 (r5.6) now qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** r5.7 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) and F187 (r5.6) now qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
