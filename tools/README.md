@@ -48,6 +48,9 @@ Every file in this folder with its own one-line description (a document's title,
 | [e161_build.sh](e161_build.sh) | Build the two E161 engines - newest llama.cpp mainline (Vulkan) and tandem.cpp (HIP, gfx1151) - unprivileged. |
 | [e161_corpus.py](e161_corpus.py) | Build E161's three routing-skew corpora (code, docs, prose) as plain text for llama-imatrix. |
 | [e161_skew.py](e161_skew.py) | Read E161's llama-imatrix GGUF files and report how concentrated MoE expert routing is, per corpus and layer. |
+| [e163_model_proxy.py](e163_model_proxy.py) | E163 amendment 1 - give Loom the `model` field the E160 suites do not send, changing nothing else. |
+| [e163_smoke.py](e163_smoke.py) | E163 transport smoke - learn which request shapes an engine accepts before any scored prompt is sent. |
+| [e163_speed.py](e163_speed.py) | E163 speed block - time E139's fixed prompts against ANY OpenAI-compatible server with one client-side ruler. |
 | [finetune_smoke.py](finetune_smoke.py) | DEFINITIVE proof that gfx1151 (Ryzen AI Max+ 395) can TRAIN, not just infer - the check that settles whether F35/Q6's "no ROCm training stack" wall is real. Runs the full training loop (forward -> loss -> backward -> optimizer step) with a PEFT LoRA adapter on the GPU, using a TINY model built from config (no download, no memory-edge risk). If loss goes down over a few steps, on-box training works. |
 | [fix_router_runpath.sh](fix_router_runpath.sh) | Repair the absolute RUNPATH in sparkrouter's llama-server build, then prove it by restarting. |
 | [gen_ctx_probe.py](gen_ctx_probe.py) | Generate deterministic long-context envelope-rung probes with needle re-planting |
@@ -105,6 +108,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [score_e159.py](score_e159.py) | Score E159 arms against the prereg's fields (pass_count, tokens_median, wall_median_s) and P1-P6. |
 | [score_e160.py](score_e160.py) | Score E160 (KFL vs KX) against the prereg's fields and predictions P1-P11. |
 | [score_e162.py](score_e162.py) | Score E162 against its pre-registration: pair-level nets per judge, judge agreement, completion before and |
+| [score_e163.py](score_e163.py) | Score E163 (Loom LM, llama.cpp LC, Halogen HS) against results/e163-prereg.md P1-P8. |
 | [score_e77.py](score_e77.py) | Score E77 - the correct-to-wrong rate between an f16 KV baseline and each quantised arm, plus byte identity of the answers. |
 | [score_e77_timings.py](score_e77_timings.py) | Extract prefill and decode rates per KV precision from E77's quiet-GPU re-run server logs. |
 | [score_e79.py](score_e79.py) | Score E79 by BAND and by direction - what the tool converted, what it destroyed, and which of those was infrastructure. |

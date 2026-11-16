@@ -1,34 +1,28 @@
-# Release Notes - sparkbench-data-r5.9
+# Release Notes - sparkbench-data-r5.10
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.9)
+## This release (r5.10)
 
-- **Findings:** 189 in FINDINGS.md, newest F189.
+- **Findings:** 190 in FINDINGS.md, newest F190.
 - **Claims:** 60 active in claims.yml.
-- **New finding F189 (E162): on client-shaped drafting, GPT-6.1 Sol beats production Flash-Next at every effort.**
-  The tasks were ten realistic jobs for invented businesses: a proposal section, meeting actions, a complaint reply, a
-  contract explainer and others. Five arms drafted them: production at low, medium and xhigh, Claude Sonnet 5.5 and
-  GPT-6.1 Sol. Two blind judges, grok-4.7 and kimi-k3.1-pro, compared every pair in both orders.
-  - GPT won 7 to 9 more tasks than it lost against every local effort, on both judges.
-  - Claude beat low on both judges. Against medium one judge gave +1, and against xhigh the judges disagreed.
-  - Medium and xhigh beat low, against the prediction.
-  - The judges' reasons, two of them confirmed by hand, are unsupported commitments and missing context. Invented
-    figures were not the problem: all 12 raw "invented figure" flags were false positives on review (euro-thousands
-    conversions, labelled calculations, and a wrong weekday in our own prompt).
-  - The pre-registered rule fired: client-facing drafting is frontier work, or a local draft a person edits.
-- **Amendment 1 is disclosed.** Kimi returned 51 of 200 replies empty. Each was re-asked once with only the token cap
-  raised, after the tallies had printed. First-pass and after-retry completion and costs are reported separately, and
-  the conclusions hold on the first pass alone.
-- **Coding harness: the task budget is now a hard cap, and every started task leaves a record** (HARNESS_VERSION
-  2026-11-15.1, `docs/HARNESS-RULES.md` Rule 15). This prompted no re-run. In E158, Ornith 1.5 122B's tenth task
-  stays marked missing and scored as a fail.
-- **README:**
-  - The chart caption now says a one-task difference is within noise (F183).
-  - Ornith 122B's minutes note now says its tenth task was stopped at the 70-minute limit and scored as a fail.
-- New evidence: `results/e162-prereg.md`, `results/e162-results.md`, `results/e162/score.json`,
-  `results/e162/adjudication.json`, `results/e162/grade.json`, the five draft files and both judges' verdict files.
+- **New finding F190 (E163): AMD's agent-ported HRX Loom engine beats llama.cpp, but not production Halogen.**
+  AMD announced on 2026-11-13 that coding agents ported 51 models, including our production Flash-Next, to its new
+  Loom engine in four days. We ran Loom (dev build 0.2.0.dev0), upstream llama.cpp `9fba51d` on the same GGUF, and
+  production's Halogen engine, all timed by one client.
+  - Against llama.cpp the claim holds: 2.69x on 32K-token prefill (979 against 364 tok/s), 1.49x on decode.
+  - Against Halogen it does not: about level on 32K prefill (979 against 879, Halogen's runs spread 791 to 1,239),
+    0.61x at 8K and 0.72x on decode.
+  - On the E160 suites at effort low, Loom matched Halogen on document Q&A, refuse/comply, kw-eval and conversation,
+    and fell behind on writing (4 against 6 of 7, derived figures) and tool use (28 against 33 of 36). On conditional
+    tool tasks it looked the client up and then stopped.
+  - The prereg rule: production stays on Halogen.
+- **Two transport amendments are disclosed.** Loom rejects requests with no or an unknown `model` and serves
+  `/healthz` rather than `/health`, so the suites reached it through a small proxy that fixed only those. One suite
+  (L5) sent no item before the second fix and was re-run whole.
+- New evidence: `results/e163-prereg.md`, `results/e163-results.md`, `results/e163/score.json`, the three arms'
+  `speed.json` files and the suite results.
 
 ## Changed claims (old -> new)
 

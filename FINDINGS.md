@@ -20,11 +20,11 @@
 
 ## Findings index
 
-189 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+190 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
-- **PLATFORM (72):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180)
+- **PLATFORM (73):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180) [F190](#f190)
 - **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
 - **CAPABILITY (5):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187)
@@ -225,6 +225,7 @@
 | [F187](#f187) | on coding, every lower reasoning setting is within noise of max thinking; community template + low is the fastest at 0.30x the time | CAPABILITY | 2026-11-13 | E159 | ESTABLISHED |
 | [F188](#f188) | MoE expert helpers (CPU cores, tandem.cpp's hot-expert cache) do not pay on unified memory; routing is concentrated but workload-specific | SPEED | 2026-11-15 | E161 | ESTABLISHED |
 | [F189](#f189) | on client-shaped drafting, GPT-6.1 Sol beats production Flash-Next at every effort; the losses are unsupported commitments, not invented figures | QUALITY | 2026-11-15 | E162 | ESTABLISHED |
+| [F190](#f190) | AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and loses tool tasks | PLATFORM | 2026-11-16 | E163 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -9035,3 +9036,40 @@ the local drafts better, but not good enough to close the gap.
 Evidence: `results/e162-results.md`, prereg `results/e162-prereg.md` (amendment 1), `results/e162/score.json`,
 `results/e162/adjudication.json`, `results/e162/grade.json`, `results/e162/judge-grok-4.7.json`,
 `results/e162/judge-kimi-k3.1-pro.json`. See [[F186]], [[F187]].
+
+<a id="f190"></a>
+
+## F190 - AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and loses tool tasks
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-16 | **Experiment:** E163 | **Status:** ESTABLISHED for hrx-loom 0.2.0.dev0 (`314238a8`) and these suites (one sample per item; tool use 3 runs)
+
+**Kind: PLATFORM + QUALITY**
+
+**Plain English.** AMD said coding agents ported 51 models to its new Loom engine in four days, running long prompts
+about 1.5 times faster than llama.cpp. On our production model the claim holds and then some: 2.7 times faster on a
+32,000-token document. But we do not run llama.cpp; we run Halogen. Loom is about level with Halogen on that long
+document, slower on shorter ones, and writes answers more slowly. On document questions it matches Halogen, but on
+tool tasks it often looked something up and then stopped, and it passed 28 of 36 against 33. Production stays on
+Halogen.
+
+**Claim.** Client-timed medians on E139's prompts, thinking off (Loom / llama.cpp `9fba51d` / Halogen):
+
+- Prefill at 32K: 979 / 364 / 879 tok/s (Halogen's runs 791-1,239). At 8K: 968 / 433 / 1,579.
+- Decode, short prompt: 40.8 / 27.4 / 56.3 tok/s; after a 32K prompt: 37.4 / 23.6 / 49.9.
+- AMD's card (1,196 tok/s at 32K) came out 18% high here; its decode figure (41.9) reproduced.
+- E160 suites at effort low, Loom vs Halogen (both on the stock template): L5 23/23, pr1 12/12, kw-eval 25/26, writing
+  4/6, conversation 8/9 and 17/18, H6 4/5, tool use 28/33 of 36. Zero tool-call leaks on both.
+- Loom's tool losses: on three conditional tasks it called `lookup_client` and stopped in 9 of 9 runs; on a reminder
+  task it called no tool. Why is not established (no transcripts). Its two extra writing flags are derived figures
+  (tokens converted to words; a doubled price), not invented facts.
+- P1 and P3 (Loom beats llama.cpp) and P8 held; P2, P4-P7 failed.
+
+**Use.** AMD's speed claim is a claim against llama.cpp. It says nothing about Halogen, which this box already runs.
+Loom needs a stock-template-only setup, a dev build that expires 2026-11-22, and better tool chaining before it is a
+production candidate.
+
+Evidence: `results/e163-results.md`, `results/e163/`, prereg `results/e163-prereg.md` (amendments 1, 1b). See [[F165]],
+[[F186]].
+

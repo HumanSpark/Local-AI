@@ -29,6 +29,13 @@
 # var/e159/froggeric/chat_template.jinja, mounted over the stock one) at its default (medium) / low. Prereg
 # results/e159-prereg.md. E154_DEADLINE (epoch s) stops starting new tasks after the owner's window ends.
 #
+# E163 (2026-11-16): AMD HRX Loom vs production Halogen vs llama.cpp on Flash-Next. LM = loom-serve (hrx-loom 0.2.0.dev0,
+# hrx-system 314238a) on the loom-fun package over our unsloth UD-Q4_K_XL GGUF + MTP Q8_0 (rev 766911a); LC = upstream
+# llama.cpp 9fba51d on the same GGUF with the same MTP draft (speed only); HS = production's Halogen image, own
+# checkpoint, STOCK template (Loom's chat program renders the stock framing), effort low per request. LM and HS run
+# tools/e163_speed.py then the E160 suites at low; LC runs the speed block only. E163_SMOKE=1 runs tools/e163_smoke.py
+# (unscored) instead. Prereg results/e163-prereg.md.
+#
 # Usage: tools/run_e154_arms.sh [--dry-run] ARM [ARM ...]    ARM in S O H Q QN T27 TL OR35 OR122 TS45 TS4 RA GL DC HX HM HL HF HFL
 
 set -u
@@ -60,6 +67,12 @@ ISOLATE=${E154_ISOLATE:-podman}  # fail closed: 'none' runs agent shell on the h
 TASK_TIMEOUT=${E154_TASK_TIMEOUT:-1200}
 DEADLINE=${E154_DEADLINE:-0}   # 0 = none
 FROGGERIC=$REPO/var/e159/froggeric/chat_template.jinja
+LLAMA_E163=$REPO/llama.cpp/wt/9fba51d/build/bin/llama-server   # E163, upstream 2026-11-16
+LOOM_SERVE=/home/bench/loom-e163/sdk/.venv/bin/loom-serve
+LOOM_PKG=/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/model.json
+FN_GGUF=$M/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf
+FN_MTP=$M/qwen3.8-flash-next-mtp-766911a/mtp-Qwen3.8-Flash-Next-Q8_0.gguf
+SMOKE=${E163_SMOKE:-0}
 ledger_for() { case "$1" in S) echo "$LEDGER_DIR/sonnet-ledger.jsonl" ;; O) echo "$LEDGER_DIR/opus-ledger.jsonl" ;; esac; }
 SONNET_BODY='{"usage":{"include":true},"reasoning":{"max_tokens":8000},"max_tokens":16000,"provider":{"order":["Anthropic"],"allow_fallbacks":false}}'
 
@@ -68,7 +81,7 @@ ARMS=()
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
-    S|O|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX) ARMS+=("$a") ;;
+    S|O|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
     *) echo "unknown arg $a. hint: tools/run_e154_arms.sh [--dry-run] S H Q T27 TL"; exit 2 ;;
   esac
 done
@@ -123,15 +136,15 @@ stop_engines() {
   [ -n "$SERVER_PID" ] && kill "$SERVER_PID" 2>/dev/null
   SERVER_PID=""
   podman ps -q --filter name=e154- | xargs -r podman stop -t 20 >/dev/null 2>&1
-  pkill -u "$(id -u)" -x 'llama-server|talus-server|talus-cli' 2>/dev/null
+  pkill -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' 2>/dev/null
   local i
-  for i in $(seq 1 15); do pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli' >/dev/null || break; sleep 2; done
-  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli' >/dev/null; then
-    stamp "engine ignored SIGTERM for 30 s; SIGKILL $(pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli' | xargs)"
-    pkill -9 -u "$(id -u)" -x 'llama-server|talus-server|talus-cli' 2>/dev/null
+  for i in $(seq 1 15); do pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' >/dev/null || break; sleep 2; done
+  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' >/dev/null; then
+    stamp "engine ignored SIGTERM for 30 s; SIGKILL $(pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' | xargs)"
+    pkill -9 -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' 2>/dev/null
     sleep 3
   fi
-  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli' >/dev/null; then stamp "FATAL: our engine survived SIGKILL"; return 1; fi
+  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' >/dev/null; then stamp "FATAL: our engine survived SIGKILL"; return 1; fi
   return 0
 }
 relay_serving() { sudo -n "$WINDOW" status 2>/dev/null | grep -q 'ACTIVE (serving)'; }
@@ -151,12 +164,20 @@ start() {
   local arm=$1 slog=$2
   local podman_gpu=(--device /dev/kfd --device /dev/dri --group-add keep-groups --ipc=host --ulimit memlock=-1:-1)
   case "$arm" in
-    H|HX|HM|HL|HF|HFL|KFL|KM|KX)
+    H|HX|HM|HL|HF|HFL|KFL|KM|KX|HS)
       local tmpl=()
       case "$arm" in HF|HFL|KFL) tmpl=(-v "$FROGGERIC:/models/tokenizer/chat_template.jinja:ro") ;; esac
       podman run -d --rm --name "e154-$arm" "${podman_gpu[@]}" -p "127.0.0.1:$PORT:8731" \
         -v "$HALO:/models:ro" "${tmpl[@]}" "$HALO_IMAGE" >>"$slog" 2>&1
       (podman logs -f "e154-$arm" >>"$slog" 2>&1 &) ;;
+    LM)  # flags from the package README; cwd = package dir so relative card paths resolve
+      (cd "$(dirname "$LOOM_PKG")" && exec "$LOOM_SERVE" --model="$LOOM_PKG" '--device=amdgpu://?completion_spin_ns=4294967295' \
+        --pool_backing=fixed --listen=127.0.0.1:$PORT) >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
+    LC)  # AMD's 1-stream baseline flags (-cram 0, MTP draft, -np 1, -c 65536) on our build; -fa on as every arm here
+      "$LLAMA_E163" -m "$FN_GGUF" -md "$FN_MTP" --spec-type draft-mtp -ngl 999 -ngld 999 -cram 0 -c 65536 -np 1 -fa on \
+        --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
     Q)
       "$LLAMA" -m "$CODER" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
@@ -201,10 +222,11 @@ wait_ready() {
 
 # E160 (prereg results/e160-prereg.md): knowledge-work and writing suites against the engine this runner started.
 # Each suite writes one file under $RAW/<arm>/ and is skipped when that file exists, so a relaunch resumes.
-kw_effort() { case "$1" in KFL) echo low ;; KM) echo medium ;; KX) echo xhigh ;; esac; }
+kw_effort() { case "$1" in KFL|LM|HS) echo low ;; KM) echo medium ;; KX) echo xhigh ;; esac; }
 run_kw_suite() {
   local arm=$1 eff out rc; eff=$(kw_effort "$arm"); mkdir -p "$RAW/$arm"
-  local common=(--port "$PORT" --ctx 262144 --max-tokens 32768 --thinking "$eff")
+  local sport=${SUITE_PORT:-$PORT}; local surl=http://127.0.0.1:$sport
+  local common=(--port "$sport" --ctx 262144 --max-tokens 32768 --thinking "$eff")
   for suite in l5 pr1 writing kw mt-l4 mt-long tooluse h6-date; do
     out=$RAW/$arm/$suite.json
     if [ -s "$out" ]; then stamp "$arm $suite: already done, skipped"; continue; fi
@@ -219,11 +241,11 @@ run_kw_suite() {
       mt-l4|mt-long) timeout 21600 python3 "$REPO/tools/run_multiturn_eval.py" --model halogen-qwen3.8-flash-next \
                 --external --conversation "${suite#mt-}" --label "$arm-$suite" --out "$out" "${common[@]}" \
                 >>"$RAW/$arm/$suite.log" 2>&1 ;;
-      tooluse) timeout 21600 "$REPO/var/tooluse-venv/bin/python3" "$REPO/tools/tooluse_harness_v2.py" --base-url "$URL" --label "e160-$arm" \
+      tooluse) timeout 21600 "$REPO/var/tooluse-venv/bin/python3" "$REPO/tools/tooluse_harness_v2.py" --base-url "$surl" --label "e160-$arm" \
                 --runs 3 --max-rounds 4 --max-tokens 32768 --thinking "$eff" >>"$RAW/$arm/$suite.log" 2>&1 \
                 && cp "$REPO/results/tool-use/E33-results-e160-$arm.json" "$out" ;;
       h6-date) timeout 21600 python3 "$REPO/tools/run_h6_date_arm.py" --model halogen-qwen3.8-flash-next \
-                --base-url "$URL" --tools on --tier l4-date --label "$arm-h6" --out "$out" --ctx 262144 \
+                --base-url "$surl" --tools on --tier l4-date --label "$arm-h6" --out "$out" --ctx 262144 \
                 --max-tokens 32768 --thinking "$eff" >>"$RAW/$arm/$suite.log" 2>&1 ;;
     esac
     rc=$?
@@ -292,6 +314,27 @@ for arm in "${ARMS[@]}"; do
   if ! model=$(wait_ready); then stamp "FAIL $arm: not ready after 900 s"; stop_engines; continue; fi
   stamp "$arm ready in $(( $(date +%s) - t0 ))s, model '$model'; GPU memory in use: VRAM $(( $(cat /sys/class/drm/card0/device/mem_info_vram_used) >> 20 )) MiB, GTT $(( $(cat /sys/class/drm/card0/device/mem_info_gtt_used) >> 20 )) MiB (offload evidence)"
   case "$arm" in
+    LM|LC|HS)
+      if [ "$SMOKE" = 1 ]; then
+        stamp "$arm smoke (unscored)"; python3 "$REPO/tools/e163_smoke.py" --base "$URL" >"$RAW/$arm-smoke.jsonl" 2>&1
+        stamp "$arm smoke rc=$? -> $RAW/$arm-smoke.jsonl"
+      else
+        mkdir -p "$RAW/$arm"; toff=kwargs; [ "$arm" = LM ] && toff=top
+        if [ -s "$RAW/$arm/speed.json" ]; then stamp "$arm speed: already done, skipped"
+        else
+          stamp "$arm speed start"
+          timeout 3600 python3 "$REPO/tools/e163_speed.py" --label "$arm" --base "$URL" --thinking-off "$toff" \
+            --out "$RAW/$arm/speed.json" >>"$RAW/$arm/speed.log" 2>&1
+          stamp "$arm speed: rc=$? $(tail -1 "$RAW/$arm/speed.log" | cut -c1-220)"
+        fi
+        if [ "$arm" = LM ]; then  # amendment 1: suites reach Loom through the model-field proxy
+          python3 "$REPO/tools/e163_model_proxy.py" --listen 8163 --upstream "$PORT" >>"$RAW/LM/proxy.log" 2>&1 &
+          PROXY_PID=$!
+          for _ in $(seq 1 30); do python3 -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8163/v1/models',timeout=3)" 2>/dev/null && break; sleep 1; done
+          SUITE_PORT=8163 run_kw_suite "$arm"
+          kill "$PROXY_PID" 2>/dev/null
+        elif [ "$arm" = HS ]; then run_kw_suite "$arm"; fi
+      fi ;;
     KFL|KM|KX) run_kw_suite "$arm" ;;
     *) mapfile -t extra < <(arm_args "$arm")
        run_bank "$arm" "$model" "$URL/v1" "${extra[@]}" ;;

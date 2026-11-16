@@ -421,7 +421,11 @@ file that says the task started and never finished. `harness-error` and `killed`
   - **Through model-guard (127.0.0.1:8402):** NOT cancelled. Halogen generated the full 12,000-token cap and went
     idle 120.4 s after the disconnect. The harness stops waiting, but the engine keeps working and shares the GPU
     with the next call. Coding arms call the engine directly (`run_e154_arms.sh` uses `127.0.0.1:$PORT`), so they
-    are unaffected. Never point a timed coding run at the guard.
+    are unaffected. **Fixed and verified the same day:** sparkrouter 089e7ce raced only the body read, which a
+    non-streamed Halogen reply never reaches before it is finished, because Halogen sends its headers last. The fix
+    races the send as well. It was deployed by the owner at 15:30Z. The same test through 8402 then went idle 20.1 s
+    after the disconnect with nothing added to the counter, matching the direct route. Timed coding runs still go to
+    the engine directly.
   - **llama-server:** not verified live (no small chat model on disk to test with without displacing production).
   - **OpenRouter:** not verifiable from the client. A cancelled call may still be generated and billed upstream.
 - **Partial text from a call cut mid-flight is not recoverable**, because calls are not streamed. The record says so.

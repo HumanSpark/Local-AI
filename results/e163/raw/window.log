@@ -1,0 +1,161 @@
+[2026-11-16T05:37:55+00:00] arm requested: LM
+[2026-11-16T05:37:55+00:00] === opening idle window ===
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-16T05:38:08+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-16T05:37:55+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[2026-11-16T05:38:08+00:00] window open, VERIFIED: no llama-server; kernel 7.0.0-42-generic; GPU busy 0%
+[2026-11-16T05:38:09+00:00] LM start
+[2026-11-16T05:38:19+00:00] LM ready in 10s, model 'unsloth-Qwen3.8-Flash-Next-loom'; GPU memory in use: VRAM 305 MiB, GTT 92436 MiB (offload evidence)
+[2026-11-16T05:38:19+00:00] LM smoke (unscored)
+[2026-11-16T05:38:56+00:00] LM smoke rc=0 -> /home/bench/sparkbench/results/e163/raw/LM-smoke.jsonl
+[2026-11-16T05:38:58+00:00] arm LM: banking left to the caller (E154_NOBANK=1)
+[2026-11-16T05:38:58+00:00] === arms done: LM ===
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-16T05:38:59+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+[2026-11-16T05:38:59+00:00] WARNING: relay NOT serving after 'up' - run: sudo /usr/local/sbin/relay_bench_window.sh up, then /usr/local/sbin/relay_bench_window.sh status
+[2026-11-16T05:41:24+00:00] arm requested: LM
+[2026-11-16T05:41:24+00:00] arm requested: LC
+[2026-11-16T05:41:24+00:00] arm requested: HS
+[2026-11-16T05:41:24+00:00] === opening idle window ===
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-16T05:41:28+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-16T05:41:24+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[2026-11-16T05:41:28+00:00] window open, VERIFIED: no llama-server; kernel 7.0.0-42-generic; GPU busy 1%
+[2026-11-16T05:41:28+00:00] LM start
+[2026-11-16T05:41:38+00:00] LM ready in 10s, model 'unsloth-Qwen3.8-Flash-Next-loom'; GPU memory in use: VRAM 278 MiB, GTT 92436 MiB (offload evidence)
+[2026-11-16T05:41:38+00:00] LM speed start
+[2026-11-16T05:44:41+00:00] LM speed: rc=0 {"label": "LM", "summary": {"P8K": {"prefill_tps": 967.5, "decode_tps": 37.69, "ttft_s": 8.48}, "P32K": {"prefill_tps": 979.4, "decode_tps": 37.4, "ttft_s": 33.47}, "D1500": {"prefill_tps": 1036.0, "decode_tps": 40.79, "
+[2026-11-16T05:44:42+00:00] LM l5 start (reasoning_effort low)
+[2026-11-16T05:49:43+00:00] LM l5: rc=1 RuntimeError: server not healthy on port 8163 within 300.0s (last: HTTP Error 404: Not Found). hint: read the server log for a load failure before assuming a po
+[2026-11-16T05:49:43+00:00] LM pr1 start (reasoning_effort low)
+[2026-11-16T05:52:47+00:00] LM pr1: rc=0 written: /home/bench/sparkbench/results/e163/raw/LM/pr1.json
+[2026-11-16T05:52:47+00:00] LM writing start (reasoning_effort low)
+[2026-11-16T05:58:27+00:00] LM writing: rc=0 written: /home/bench/sparkbench/results/e163/raw/LM/writing.json
+[2026-11-16T05:58:27+00:00] LM kw start (reasoning_effort low)
+[2026-11-16T06:07:16+00:00] LM kw: rc=0   written         : /home/bench/sparkbench/results/e163/raw/LM/kw.json
+[2026-11-16T06:07:16+00:00] LM mt-l4 start (reasoning_effort low)
+[2026-11-16T06:09:55+00:00] LM mt-l4: rc=0 written: /home/bench/sparkbench/results/e163/raw/LM/mt-l4.json
+[2026-11-16T06:09:55+00:00] LM mt-long start (reasoning_effort low)
+[2026-11-16T06:18:29+00:00] LM mt-long: rc=0 written: /home/bench/sparkbench/results/e163/raw/LM/mt-long.json
+[2026-11-16T06:18:29+00:00] LM tooluse start (reasoning_effort low)
+[2026-11-16T06:39:37+00:00] LM tooluse: rc=0   -> /home/bench/sparkbench/results/tool-use/E33-results-e160-LM.json
+[2026-11-16T06:39:37+00:00] LM h6-date start (reasoning_effort low)
+[2026-11-16T06:41:33+00:00] LM h6-date: rc=0 written /home/bench/sparkbench/results/e163/raw/LM/h6-date.json
+[2026-11-16T06:41:35+00:00] arm LM: banking left to the caller (E154_NOBANK=1)
+[2026-11-16T06:41:35+00:00] LC start
+[2026-11-16T06:43:22+00:00] LC ready in 107s, model '/opt/models/staging/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf'; GPU memory in use: VRAM 162 MiB, GTT 84568 MiB (offload evidence)
+[2026-11-16T06:43:22+00:00] LC speed start
+[2026-11-16T06:49:33+00:00] LC speed: rc=0 {"label": "LC", "summary": {"P8K": {"prefill_tps": 433.4, "decode_tps": 28.72, "ttft_s": 18.93}, "P32K": {"prefill_tps": 364.0, "decode_tps": 23.62, "ttft_s": 90.04}, "D1500": {"prefill_tps": 408.0, "decode_tps": 27.39, 
+[2026-11-16T06:50:03+00:00] engine ignored SIGTERM for 30 s; SIGKILL 3440951
+[2026-11-16T06:50:06+00:00] arm LC: banking left to the caller (E154_NOBANK=1)
+[2026-11-16T06:50:06+00:00] HS start
+[2026-11-16T06:51:05+00:00] HS ready in 59s, model 'halogen-qwen3.8-flash-next'; GPU memory in use: VRAM 250 MiB, GTT 28355 MiB (offload evidence)
+[2026-11-16T06:51:05+00:00] HS speed start
+[2026-11-16T06:53:26+00:00] HS speed: rc=0 {"label": "HS", "summary": {"P8K": {"prefill_tps": 1578.6, "decode_tps": 58.55, "ttft_s": 5.2}, "P32K": {"prefill_tps": 879.0, "decode_tps": 49.94, "ttft_s": 37.29}, "D1500": {"prefill_tps": 662.6, "decode_tps": 56.32, "
+[2026-11-16T06:53:26+00:00] HS l5 start (reasoning_effort low)
+[2026-11-16T06:57:49+00:00] HS l5: rc=0 written: /home/bench/sparkbench/results/e163/raw/HS/l5.json
+[2026-11-16T06:57:49+00:00] HS pr1 start (reasoning_effort low)
+[2026-11-16T06:59:14+00:00] HS pr1: rc=0 written: /home/bench/sparkbench/results/e163/raw/HS/pr1.json
+[2026-11-16T06:59:14+00:00] HS writing start (reasoning_effort low)
+[2026-11-16T07:04:03+00:00] HS writing: rc=0 written: /home/bench/sparkbench/results/e163/raw/HS/writing.json
+[2026-11-16T07:04:03+00:00] HS kw start (reasoning_effort low)
+[2026-11-16T07:08:08+00:00] HS kw: rc=0   written         : /home/bench/sparkbench/results/e163/raw/HS/kw.json
+[2026-11-16T07:08:08+00:00] HS mt-l4 start (reasoning_effort low)
+[2026-11-16T07:09:43+00:00] HS mt-l4: rc=0 written: /home/bench/sparkbench/results/e163/raw/HS/mt-l4.json
+[2026-11-16T07:09:43+00:00] HS mt-long start (reasoning_effort low)
+[2026-11-16T07:12:16+00:00] HS mt-long: rc=0 written: /home/bench/sparkbench/results/e163/raw/HS/mt-long.json
+[2026-11-16T07:12:16+00:00] HS tooluse start (reasoning_effort low)
+[2026-11-16T07:26:51+00:00] HS tooluse: rc=0   -> /home/bench/sparkbench/results/tool-use/E33-results-e160-HS.json
+[2026-11-16T07:26:51+00:00] HS h6-date start (reasoning_effort low)
+[2026-11-16T07:28:45+00:00] HS h6-date: rc=0 written /home/bench/sparkbench/results/e163/raw/HS/h6-date.json
+[2026-11-16T07:28:48+00:00] arm HS: banking left to the caller (E154_NOBANK=1)
+[2026-11-16T07:28:48+00:00] === arms done: LM LC HS ===
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-16T07:28:48+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+[2026-11-16T07:28:48+00:00] WARNING: relay NOT serving after 'up' - run: sudo /usr/local/sbin/relay_bench_window.sh up, then /usr/local/sbin/relay_bench_window.sh status
+[2026-11-16T07:28:56+00:00] arm requested: LM
+[2026-11-16T07:28:56+00:00] === opening idle window ===
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-16T07:29:28+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-16T07:28:56+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[2026-11-16T07:29:28+00:00] window open, VERIFIED: no llama-server; kernel 7.0.0-42-generic; GPU busy 8%
+[2026-11-16T07:29:28+00:00] LM start
+[2026-11-16T07:29:38+00:00] LM ready in 10s, model 'unsloth-Qwen3.8-Flash-Next-loom'; GPU memory in use: VRAM 285 MiB, GTT 92436 MiB (offload evidence)
+[2026-11-16T07:29:38+00:00] LM speed: already done, skipped
+[2026-11-16T07:29:38+00:00] LM l5 start (reasoning_effort low)
+[2026-11-16T07:35:49+00:00] LM l5: rc=0 written: /home/bench/sparkbench/results/e163/raw/LM/l5.json
+[2026-11-16T07:35:49+00:00] LM pr1: already done, skipped
+[2026-11-16T07:35:49+00:00] LM writing: already done, skipped
+[2026-11-16T07:35:49+00:00] LM kw: already done, skipped
+[2026-11-16T07:35:49+00:00] LM mt-l4: already done, skipped
+[2026-11-16T07:35:49+00:00] LM mt-long: already done, skipped
+[2026-11-16T07:35:49+00:00] LM tooluse: already done, skipped
+[2026-11-16T07:35:49+00:00] LM h6-date: already done, skipped
+[2026-11-16T07:35:51+00:00] arm LM: banking left to the caller (E154_NOBANK=1)
+[2026-11-16T07:35:51+00:00] === arms done: LM ===
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-16T07:35:51+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+[2026-11-16T07:35:52+00:00] WARNING: relay NOT serving after 'up' - run: sudo /usr/local/sbin/relay_bench_window.sh up, then /usr/local/sbin/relay_bench_window.sh status

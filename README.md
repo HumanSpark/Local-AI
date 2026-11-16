@@ -16,7 +16,7 @@ This repository exists so that the numbers on those pages do not have to be take
 > - **Processor and graphics:** AMD Ryzen AI Max+ 395 with Radeon 8060S integrated graphics
 > - **Memory:** 128 GB unified, shared by processor and graphics; about 105 GB of it usable by the graphics
 > - **Power:** 81 to 87 W package power while generating ([F180](FINDINGS.md#f180))
-> - **Measured:** one machine, July 2026 to 15 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
+> - **Measured:** one machine, July 2026 to 16 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/coding-results-dark.svg">
@@ -70,13 +70,13 @@ Coding is [F187](FINDINGS.md#f187) (a re-run of the same ten fixes on 13 Novembe
 | See what changed in each release | [RELEASE-NOTES.md](RELEASE-NOTES.md) |
 | Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
 
-## Current release: r5.9 (findings through 15 November 2026)
+## Current release: r5.10 (findings through 16 November 2026)
 
-r5.9 adds finding [F189](FINDINGS.md#f189). On ten client-shaped drafting tasks judged blind, GPT-6.1 Sol beat the production local model at every effort level, with both judges. The local drafts mostly lost on promises and conclusions the notes did not support, not on invented figures. Drafts that go to a client under your name are therefore frontier-model work, or a local draft a person edits before sending. In-house drafts are better at medium or xhigh than at low. The production setting below is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r5.10 adds finding [F190](FINDINGS.md#f190). AMD's new HRX Loom engine, whose Flash-Next port was written by coding agents in four days, reads a 32,000-token document 2.7 times faster than llama.cpp on this machine, as AMD says. But it is only level with Halogen, the engine production uses, on that document. It is slower on shorter prompts and when writing, and it passed 28 of 36 tool tasks against Halogen's 33. Production stays on Halogen, and the production setting below is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.9 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) and F187 (r5.6) now qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** r5.10 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3) and F187 (r5.6) now qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
@@ -107,7 +107,7 @@ A build-time completeness check enforces that every file path cited in `FINDINGS
 
 ## Method in one paragraph
 
-Single machine, run from July 2026 to 15 November 2026; the findings register in this release is current to 2026-11-15. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
+Single machine, run from July 2026 to 16 November 2026; the findings register in this release is current to 2026-11-16. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
 
 ## Versioning
 

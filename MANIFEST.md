@@ -1971,3 +1971,21 @@ in `results/e159-prereg.md` from the start; the MANIFEST entry was missed until 
   (E160). The stock template it replaces: sha256 c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041.
 - 2026-11-13: copied byte-identical (same sha256) to sparkrouter `templates/qwen38-flash-next-froggeric-v22.5.jinja` for
   the production switch (owner 2026-11-13).
+
+## E163 (2026-11-16): HRX Loom package inputs for Qwen3.8 Flash-Next
+
+- **unsloth/Qwen3.8-Flash-Next-GGUF `mmproj-BF16.gguf`** (rev `766911a6`), into `/opt/models/staging/qwen3.8-flash-next-udq4kxl/`:
+  907,542,944 B, sha256 `2e788f8c511d8093c7b43cb87b2fd7e14228340318057f8fb20c86df2efe2355` (matches the loom-fun package lock).
+  Loom's vision-mtp preset needs it present; E163 sends text only. Licence: Qwen Community 1.0.
+- **unsloth/Qwen3.8-Flash-Next-GGUF `mtp-Qwen3.8-Flash-Next-Q8_0.gguf`** (rev `766911a6`, repo root), into
+  `/opt/models/staging/qwen3.8-flash-next-mtp-766911a/`: 4,137,429,120 B, sha256
+  `58a47d6a216307e9b97172d5bfdc3436a8994b632f5e436b9bb6edf8951da8d1` (matches the lock; E163 LM and LC draft).
+  NOTE: a same-named, same-size file already in `qwen3.8-flash-next-udq4kxl/` (2026-11-04, no manifest entry until now)
+  hashes `cd87e5d1a4dadaeed63e35929f3b2f28d13e081b4cd32e00f2835095ec09351e`: an earlier upload, kept, not used by E163.
+- **Qwen/Qwen3.8-Flash-Next `tokenizer.json`** (rev `de4b8e4d`), into `/opt/models/staging/qwen3.8-flash-next-checkpoint-tok/`:
+  12,809,320 B, sha256 `0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3` (matches the lock).
+- **loom-fun/unsloth-Qwen3.8-Flash-Next-loom** package (programs sha `baf0749836d9...`), materialised by `loom-fetch` with
+  `--origin` pointing at links to the files above and the existing UD-Q4_K_XL shards (hashes re-verified by loom-fetch,
+  rc 0, `results/e163/loom-fetch.log`) into `/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/` (hard links, no copy).
+- **hrx-loom 0.2.0.dev0** wheel, ROCm/hrx-system CI artifact 13628412621 (`314238a8`), sha256 `9dc1e352f51e...`, venv
+  `/home/bench/loom-e163/sdk/.venv` (`results/e163/loom-install.json`). Licence Apache-2.0 WITH LLVM-exception.
