@@ -17,9 +17,13 @@ import argparse
 import http.client
 import json
 import sys
+import threading
+import time
+from pathlib import Path
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
+LOG_LOCK = threading.Lock()
 HOP = {
     "connection",
     "keep-alive",
@@ -32,7 +36,9 @@ HOP = {
 }
 
 
-def make_handler(upstream: int, model_id: str) -> type[BaseHTTPRequestHandler]:
+def make_handler(
+    upstream: int, model_id: str, log_bodies: Path | None = None
+) -> type[BaseHTTPRequestHandler]:
     class H(BaseHTTPRequestHandler):
         protocol_version = (
             "HTTP/1.0"  # close-delimited bodies: no re-chunking of the upstream stream
@@ -47,6 +53,7 @@ def make_handler(upstream: int, model_id: str) -> type[BaseHTTPRequestHandler]:
                 headers["Content-Length"] = str(len(body))
             conn.request(self.command, self.path, body=body, headers=headers)
             r = conn.getresponse()
+            captured: list[bytes] = []
             self.send_response(r.status, r.reason)
             for k, v in r.getheaders():
                 if k.lower() not in HOP:
@@ -59,7 +66,20 @@ def make_handler(upstream: int, model_id: str) -> type[BaseHTTPRequestHandler]:
                     break
                 self.wfile.write(chunk)
                 self.wfile.flush()
+                if log_bodies is not None:
+                    captured.append(chunk)
             conn.close()
+            if log_bodies is not None and self.command == "POST":
+                # Diagnostic transcript (E163 follow-up): the request as forwarded and the raw response, one JSON line.
+                rec = {
+                    "t": time.time(),
+                    "path": self.path,
+                    "status": r.status,
+                    "request": json.loads(body) if body else None,
+                    "response": b"".join(captured).decode(errors="replace"),
+                }
+                with LOG_LOCK, log_bodies.open("a") as f:
+                    f.write(json.dumps(rec) + "\n")
 
         def do_GET(self) -> None:  # noqa: N802 - http.server API
             # ps-eval, writing and multiturn poll llama-server's /health; loom-serve names it /healthz (2026-11-16,
@@ -97,6 +117,12 @@ def main() -> int:
     )
     ap.add_argument("--listen", type=int, default=8163)
     ap.add_argument("--upstream", type=int, default=8154)
+    ap.add_argument(
+        "--log-bodies",
+        type=Path,
+        default=None,
+        help="append each POST's forwarded request and raw response as a JSON line (diagnostics only)",
+    )
     a = ap.parse_args()
     with urllib.request.urlopen(
         f"http://127.0.0.1:{a.upstream}/v1/models", timeout=30
@@ -109,7 +135,7 @@ def main() -> int:
     model_id = data[0]["id"]
     print(f"proxy 127.0.0.1:{a.listen} -> :{a.upstream}, model {model_id}", flush=True)
     ThreadingHTTPServer(
-        ("127.0.0.1", a.listen), make_handler(a.upstream, model_id)
+        ("127.0.0.1", a.listen), make_handler(a.upstream, model_id, a.log_bodies)
     ).serve_forever()
     return 0
 

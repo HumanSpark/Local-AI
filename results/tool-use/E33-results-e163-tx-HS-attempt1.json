@@ -1,0 +1,178 @@
+{
+  "label": "e163-tx-HS",
+  "runs": 3,
+  "thinking": "low",
+  "max_tokens": 32768,
+  "request_timeout": 5581,
+  "only": "n1-email,n2-reminder,c4-date-before,c4b-date-before-onlyif,c5b-date-after-onlyif",
+  "tasks_run": [
+    "n1-email",
+    "n2-reminder",
+    "c4-date-before",
+    "c4b-date-before-onlyif",
+    "c5b-date-after-onlyif"
+  ],
+  "task_set_size": 36,
+  "results": [
+    {
+      "id": "n1-email",
+      "cat": "nondoc",
+      "kind": "tool",
+      "success_rate": 0.6666666666666666,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "send_email"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "send_email"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": false,
+          "tools": [
+            "lookup_client",
+            "send_email"
+          ],
+          "leaked": false
+        }
+      ]
+    },
+    {
+      "id": "n2-reminder",
+      "cat": "nondoc",
+      "kind": "tool",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "add_reminder"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "add_reminder"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "add_reminder"
+          ],
+          "leaked": false
+        }
+      ]
+    },
+    {
+      "id": "c4-date-before",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        }
+      ]
+    },
+    {
+      "id": "c4b-date-before-onlyif",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        }
+      ]
+    },
+    {
+      "id": "c5b-date-after-onlyif",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false
+        }
+      ]
+    }
+  ]
+}

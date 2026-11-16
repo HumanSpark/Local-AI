@@ -8,7 +8,7 @@
 # under results/e163/raw/LM and HS, graded by score_e160.arm_fields unchanged. Finding F190.
 -->
 
-# E163 RESULTS - AMD's Loom beats llama.cpp by 2.7x on long prompts, but not production Halogen, and it loses tool tasks (2026-11-16)
+# E163 RESULTS - AMD's Loom beats llama.cpp by 2.7x on long prompts, but not production Halogen; on tool tasks it asks where Halogen acts (2026-11-16)
 
 ## In plain English
 
@@ -23,13 +23,15 @@ Against Halogen it is mixed, and not good enough to switch. Loom read the 32,000
 Halogen, slightly faster on the median. On an 8,000-token document Halogen was 1.6 times faster, and Halogen writes
 answers 1.4 times faster.
 
-Quality is where Loom fell short. On reading documents and answering questions it matched Halogen. On tasks that
-use tools it did not. It passed 28 of 36 tool tasks against Halogen's 33. In the conditional tasks it looked up the
-client and then stopped, never producing the document. It also had two more writing drafts flagged for adding figures
-the source did not give: it converted tokens into words and doubled a price.
+On quality, Loom matched Halogen on reading documents and answering questions. On tool tasks it scored lower, 28 of
+36 against 33, but the transcripts show why, and it is not a fault. When a client lookup came back empty, or when it
+did not know today's date, Loom stopped and asked the user, which is what the test's own instructions say to do when
+information is missing. Halogen pressed on and did the task, and the test rewards that. Loom also had two more writing
+drafts flagged for adding figures the source did not give: it converted tokens into words and doubled a price.
 
-What it means: production stays on Halogen. Loom is worth watching, because a four-day agent port that already
-matches Halogen on long prompts is impressive. But its tool use is not yet reliable enough for unattended work here.
+What it means: production stays on Halogen, because Halogen is faster where it counts and Loom would also force a
+change of chat template. Loom is worth watching: a four-day agent port that already matches Halogen on long prompts is
+impressive, and its tool calling works.
 
 ## Arms and run
 
@@ -85,9 +87,25 @@ passes them on the community template, so those two look template-related.
 | n2-reminder | called no tool (3 of 3 runs) | `add_reminder`, 3/3 |
 | n1-email | passed 1 run; in 2 it looked the client up first, then sent | 3/3 |
 
-The harness keeps the tools called, not the transcript. So whether Loom judged the condition false or lost the tool
-result from its history is **not established**. The pattern is consistent: it stops after one tool where Halogen
-goes on. Its extra H6 miss (N2) is a wrong date, "1 December 2026" for 31 December. Both engines missed P3 by one day,
+**Transcripts (diagnostic re-run, unscored, 08:53-09:00Z).** The harness keeps only the tools called, so the five
+tasks were run again, 3 runs each on both engines, with the proxy recording every request and response
+(`results/e163/raw/transcripts/{LM,HS}.jsonl`). The re-run reproduced the pattern: Loom c4 and c4b 0/3, c5b 2/3,
+n2 2/3, n1 3/3; Halogen 3/3 on all but c4b (2/3).
+
+- **The tool result is not lost.** In c4 the task's `lookup_client` returns "ERROR: no client record found for that
+  surname". Loom's reasoning reads the error, works out the condition correctly (15 September is before 1 October, so
+  EXPEDITED), then decides it lacks the client's details and asks for them. Halogen, on the same error, decides it has
+  enough and writes the letter with the EXPEDITED title.
+- **n2:** Loom says it does not know today's date and asks which date to use; Halogen picks one and calls
+  `add_reminder`.
+- **The task's own system prompt supports Loom's choice:** "If a request is missing information you need, ask a brief
+  clarifying question instead of guessing." The grader scores these tasks as success only when the document or
+  reminder is created.
+
+So Loom's tool-use deficit is a behaviour difference: it asks where Halogen acts. It is not a tool-protocol defect.
+Whether the difference comes from the weights (unsloth's GGUF against Halogen's checkpoint) or Loom's chat program
+is not established. A first attempt at this re-run (08:44-08:52Z) went through a stale proxy with no logging and is
+kept aside (`results/e163/raw/transcripts/first-attempt-no-log/`); its pass/fail matched. Its extra H6 miss (N2) is a wrong date, "1 December 2026" for 31 December. Both engines missed P3 by one day,
 as production does.
 
 **What Loom lost on writing.** Two drafts that Halogen passed were flagged for figures not in the source. Both are
@@ -118,12 +136,12 @@ P4 and P5 failed in Loom's favour: I predicted it would be further behind Haloge
 ## Decision (the prereg's rule)
 
 Loom is slower than Halogen on decode (0.72x) and 8K prefill (0.61x), so the second branch applies: **production stays on
-Halogen.** P6 and P7 failed as well, so the third branch also applies: the losses are recorded per item above.
-Reporting them to AMD (loom-fun/loom-skills) would be outward-facing and needs the owner's approval; nothing has been
-sent.
+Halogen.** P6 and P7 failed as well, so the third branch also applies: the losses are recorded per item above. The
+owner chose to capture transcripts before deciding on a report to AMD. They show a behaviour difference, not a
+defect, so no report is recommended; nothing has been sent.
 
 The routing guide gains one line: AMD's 1.5x is measured against llama.cpp; on this box Loom roughly matches Halogen
-on 32K prompts, trails it elsewhere, and loses tool tasks.
+on 32K prompts, trails it elsewhere, and on tool tasks asks clarifying questions where Halogen acts.
 
 ## Limits
 
@@ -134,7 +152,7 @@ on 32K prompts, trails it elsewhere, and loses tool tasks.
 - **Template.** Loom renders the stock template; production uses the community one. HS ran stock to match. Loom
   cannot yet run the community template, so a production switch would also change the template.
 - **A development build.** hrx-loom 0.2.0.dev0 from a CI artifact that expires 2026-11-22. A later build may differ.
-- **No transcripts for tool use**, so the cause of the stop-after-one-tool pattern is open.
+- **Tool-use transcripts cover five tasks only** (the ones Loom lost), from an unscored re-run.
 
 ## Evidence files
 

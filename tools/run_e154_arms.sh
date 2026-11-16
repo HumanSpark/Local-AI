@@ -73,6 +73,8 @@ LOOM_PKG=/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/model.json
 FN_GGUF=$M/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf
 FN_MTP=$M/qwen3.8-flash-next-mtp-766911a/mtp-Qwen3.8-Flash-Next-Q8_0.gguf
 SMOKE=${E163_SMOKE:-0}
+TRANSCRIPTS=${E163_TRANSCRIPTS:-0}   # 1 = diagnostic re-run of LM's five lost tool tasks with full transcripts (unscored)
+E163_TX_TASKS=n1-email,n2-reminder,c4-date-before,c4b-date-before-onlyif,c5b-date-after-onlyif
 ledger_for() { case "$1" in S) echo "$LEDGER_DIR/sonnet-ledger.jsonl" ;; O) echo "$LEDGER_DIR/opus-ledger.jsonl" ;; esac; }
 SONNET_BODY='{"usage":{"include":true},"reasoning":{"max_tokens":8000},"max_tokens":16000,"provider":{"order":["Anthropic"],"allow_fallbacks":false}}'
 
@@ -315,7 +317,22 @@ for arm in "${ARMS[@]}"; do
   stamp "$arm ready in $(( $(date +%s) - t0 ))s, model '$model'; GPU memory in use: VRAM $(( $(cat /sys/class/drm/card0/device/mem_info_vram_used) >> 20 )) MiB, GTT $(( $(cat /sys/class/drm/card0/device/mem_info_gtt_used) >> 20 )) MiB (offload evidence)"
   case "$arm" in
     LM|LC|HS)
-      if [ "$SMOKE" = 1 ]; then
+      if [ "$TRANSCRIPTS" = 1 ]; then
+        mkdir -p "$RAW/transcripts"
+        python3 "$REPO/tools/e163_model_proxy.py" --listen 8163 --upstream "$PORT" \
+          --log-bodies "$RAW/transcripts/$arm.jsonl" >>"$RAW/transcripts/$arm-proxy.log" 2>&1 &
+        PROXY_PID=$!
+        for _ in $(seq 1 30); do python3 -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8163/v1/models',timeout=3)" 2>/dev/null && break; sleep 1; done
+        # 2026-11-16: a stale hand-started proxy held :8163, this one died on EADDRINUSE and the run went through the
+        # stale one with no logging. Our proxy must be the one alive.
+        if ! kill -0 "$PROXY_PID" 2>/dev/null; then stamp "FATAL $arm: transcript proxy did not start ($(tail -1 "$RAW/transcripts/$arm-proxy.log"))"; stop_engines; continue; fi
+        stamp "$arm transcripts start (unscored diagnostic: $E163_TX_TASKS)"
+        timeout 7200 "$REPO/var/tooluse-venv/bin/python3" "$REPO/tools/tooluse_harness_v2.py" --base-url http://127.0.0.1:8163 \
+          --label "e163-tx-$arm" --only "$E163_TX_TASKS" --runs 3 --max-rounds 4 --max-tokens 32768 --thinking low \
+          >>"$RAW/transcripts/$arm.log" 2>&1
+        stamp "$arm transcripts: rc=$? $(tail -1 "$RAW/transcripts/$arm.log" | cut -c1-160)"
+        kill "$PROXY_PID" 2>/dev/null
+      elif [ "$SMOKE" = 1 ]; then
         stamp "$arm smoke (unscored)"; python3 "$REPO/tools/e163_smoke.py" --base "$URL" >"$RAW/$arm-smoke.jsonl" 2>&1
         stamp "$arm smoke rc=$? -> $RAW/$arm-smoke.jsonl"
       else

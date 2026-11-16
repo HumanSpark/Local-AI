@@ -225,7 +225,7 @@
 | [F187](#f187) | on coding, every lower reasoning setting is within noise of max thinking; community template + low is the fastest at 0.30x the time | CAPABILITY | 2026-11-13 | E159 | ESTABLISHED |
 | [F188](#f188) | MoE expert helpers (CPU cores, tandem.cpp's hot-expert cache) do not pay on unified memory; routing is concentrated but workload-specific | SPEED | 2026-11-15 | E161 | ESTABLISHED |
 | [F189](#f189) | on client-shaped drafting, GPT-6.1 Sol beats production Flash-Next at every effort; the losses are unsupported commitments, not invented figures | QUALITY | 2026-11-15 | E162 | ESTABLISHED |
-| [F190](#f190) | AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and loses tool tasks | PLATFORM | 2026-11-16 | E163 | ESTABLISHED |
+| [F190](#f190) | AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and asks where Halogen acts on tool tasks | PLATFORM | 2026-11-16 | E163 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -9039,7 +9039,7 @@ Evidence: `results/e162-results.md`, prereg `results/e162-prereg.md` (amendment 
 
 <a id="f190"></a>
 
-## F190 - AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and loses tool tasks
+## F190 - AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and asks where Halogen acts on tool tasks
 
 [Back to index](#findings-index)
 
@@ -9050,9 +9050,9 @@ Evidence: `results/e162-results.md`, prereg `results/e162-prereg.md` (amendment 
 **Plain English.** AMD said coding agents ported 51 models to its new Loom engine in four days, running long prompts
 about 1.5 times faster than llama.cpp. On our production model the claim holds and then some: 2.7 times faster on a
 32,000-token document. But we do not run llama.cpp; we run Halogen. Loom is about level with Halogen on that long
-document, slower on shorter ones, and writes answers more slowly. On document questions it matches Halogen, but on
-tool tasks it often looked something up and then stopped, and it passed 28 of 36 against 33. Production stays on
-Halogen.
+document, slower on shorter ones, and writes answers more slowly. On document questions it matches Halogen. On tool
+tasks it passed 28 of 36 against 33, but the transcripts show it asking for missing details (an empty client lookup,
+today's date) where Halogen pressed on, which the test's own instructions allow. Production stays on Halogen.
 
 **Claim.** Client-timed medians on E139's prompts, thinking off (Loom / llama.cpp `9fba51d` / Halogen):
 
@@ -9062,13 +9062,16 @@ Halogen.
 - E160 suites at effort low, Loom vs Halogen (both on the stock template): L5 23/23, pr1 12/12, kw-eval 25/26, writing
   4/6, conversation 8/9 and 17/18, H6 4/5, tool use 28/33 of 36. Zero tool-call leaks on both.
 - Loom's tool losses: on three conditional tasks it called `lookup_client` and stopped in 9 of 9 runs; on a reminder
-  task it called no tool. Why is not established (no transcripts). Its two extra writing flags are derived figures
-  (tokens converted to words; a doubled price), not invented facts.
+  task it called no tool. Transcripts from an unscored re-run show why: the lookup returns "no client record found"
+  and Loom asks for the details, and it asks for today's date rather than guess one. The task's system prompt says to
+  ask when information is missing; the grader rewards acting. Not a tool-protocol defect; weights versus chat program
+  as the cause is not established. Its two extra writing flags are derived figures (tokens converted to words; a
+  doubled price), not invented facts.
 - P1 and P3 (Loom beats llama.cpp) and P8 held; P2, P4-P7 failed.
 
 **Use.** AMD's speed claim is a claim against llama.cpp. It says nothing about Halogen, which this box already runs.
-Loom needs a stock-template-only setup, a dev build that expires 2026-11-22, and better tool chaining before it is a
-production candidate.
+Loom would mean a stock-template-only setup and a dev build that expires 2026-11-22, and it is slower than Halogen
+outside 32K prompts.
 
 Evidence: `results/e163-results.md`, `results/e163/`, prereg `results/e163-prereg.md` (amendments 1, 1b). See [[F165]],
 [[F186]].
