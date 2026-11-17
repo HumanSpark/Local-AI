@@ -163,6 +163,8 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E161 | expert helpers on unified memory, and routing skew (2026-11-15) | [data](e161/) · [pre-registration](e161-prereg.md) · [results](e161-results.md) |
 | E162 | client-shaped tasks, local vs frontier (2026-11-15) | [data](e162/) · [pre-registration](e162-prereg.md) · [results](e162-results.md) |
 | E163 | AMD HRX Loom vs production Halogen vs llama.cpp on Flash-Next (2026-11-16) | [data](e163/) · [pre-registration](e163-prereg.md) · [results](e163-results.md) |
+| E164 | Qwen4 Max against production and the cloud references (2026-11-17) | [data](e164/) · [pre-registration](e164-prereg.md) · [results](e164-results.md) |
+| E165 | re-running the corrected tests on every arm (2026-11-17) | [data](e165/) · [pre-registration](e165-prereg.md) · [results](e165-results.md) |
 
 ## Other evidence
 

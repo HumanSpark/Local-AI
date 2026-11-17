@@ -75,6 +75,11 @@ from corpus_l5 import (  # noqa: E402
 )
 from questions import _matches, _numbers, parse_response  # noqa: E402, F401
 from questions_l2 import _is_decline as _shared_is_decline  # noqa: E402
+from questions_l2 import leading_verdict_or_none  # noqa: E402
+
+# GRADER_VERSION 2026-11-17.1 (E165 test audit): yes/no items read a leading Yes/No first (E07 lost a correct "No -
+# ... applies only where the Call-Off Order is silent" to the decline check); R09's key corrected to 31 July 2026.
+GRADER_VERSION = "2026-11-17.1"
 
 # The shared vocabulary is written in the singular past - "does not state",
 # "not stated" - and misses the form models actually use for a multi-document
@@ -145,7 +150,12 @@ TOTAL_DUE = INTEREST + FIXED_COMP  # 493.99
 DAYS_FROM_RECEIPT = (INVOICE_PAID - INVOICE_RECEIVED).days
 
 DATA_ONE_MONTH = months_after(DATA_REQUEST_RECEIVED, 1)  # 2026-06-30
-DATA_PARALLEL = months_after(DATA_REQUEST_RECEIVED, 3)  # 2026-08-31
+# R09 KEY CORRECTED 2026-11-17 (E165 audit). The item says the two-month extension runs from the SAME date of
+# receipt, in parallel, later expiry governing, and FA 4.4 says parallel periods "are not added to one another".
+# From 31 May: one month -> 30 June, two months -> 31 July; the later is 31 July. The old key, 31 August, adds the
+# months, which the item forbids. All five arms through E164 answered 31 July and were scored off_by_calendar.
+DATA_PARALLEL = months_after(DATA_REQUEST_RECEIVED, 2)  # 2026-07-31
+DATA_ADDED_TRAP = months_after(DATA_REQUEST_RECEIVED, 3)  # 2026-08-31, the months added (the pre-audit key)
 DATA_SEQUENTIAL_TRAP = months_after(DATA_ONE_MONTH, 2)  # 2026-08-30
 
 LIMITATION_PLAIN = years_after(EARLIER_ACCRUAL, 6)  # 2026-09-14
@@ -377,7 +387,10 @@ QUESTIONS_L5: list[dict] = [
                 # L4 recorded the same thing after its first run.
                 # RELABELS ONLY: this moves Qwen3.8's R09 from `wrong` to
                 # `off_by_calendar`. No `correct` count moves, on any arm.
-                months_after(DATA_REQUEST_RECEIVED, 2),
+                # SUPERSEDED 2026-11-17 (E165): 31 July was never an error. It
+                # is the right answer under the item's own text (see
+                # DATA_PARALLEL); the trap that remains is the added months.
+                DATA_ADDED_TRAP,
                 *_off_by_one(DATA_PARALLEL),
             ],
         },
@@ -713,6 +726,9 @@ def _grade_by_kind(question: dict, answer: str, spec: dict, kind: str) -> str:
         return "wrong"
 
     if kind == "yes_no":
+        lead = leading_verdict_or_none(answer)
+        if lead is not None:
+            return "correct" if spec["want"] == lead else "wrong"
         if _is_decline(answer):
             # "The record does not state" contains "not" and would otherwise
             # parse as "no" - scoring a decline correct on every no-answer item.

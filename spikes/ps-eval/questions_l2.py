@@ -81,6 +81,18 @@ def _is_decline(answer: str) -> bool:
     return any(p in low for p in DECLINE_PATTERNS)
 
 
+def leading_verdict_or_none(answer: str) -> str | None:
+    """'yes' or 'no' when the answer OPENS with one, else None (no leading verdict is the normal case).
+
+    Added 2026-11-17 (E165 audit) for the L5 and multiturn yes/no branches; L2's own grader does not call it, so
+    banked L2 verdicts are unchanged. A leading verdict is the answer; words later in the sentence - "applies only
+    where the order is silent" - are reasoning, and must not turn a correct "No" into a decline.
+    """
+    head = re.sub(r"^[\s*#>_`\-]*(answer\s*:\s*)?[\s*_`]*", "", (answer or "").lower())
+    m = re.match(r"(yes|no)\b", head)
+    return m.group(1) if m else None
+
+
 QUESTIONS_L2: list[dict] = [
     # ---------------------------------------------------------------- dates
     {

@@ -55,7 +55,25 @@ cases = [
     ("c12-arith-under",   rec([(SS,{"filename":"quote-a.xlsx","headers":["Item","Amount"],"rows":[["Fee","1850"],["VAT","425.50"],["Total","2275.50"],["APPROVAL REQUIRED",""]]})]), False, "added the flag without checking the total"),
     ("c13-arith-over",    rec([(SS,{"filename":"quote-b.xlsx","headers":["Item","Amount"],"rows":[["Fee","1900"],["VAT","437.00"],["Total","2337.00"],["APPROVAL REQUIRED",""]]})]), True,  "computed 2337, added the flag"),
     ("c13-arith-over",    rec([(SS,{"filename":"quote-b.xlsx","headers":["Item","Amount"],"rows":[["Fee","1900"],["VAT","437.00"],["Total","2337.00"]]})]),                          False, "missed a flag it should have added"),
+    # E165 audit (task set v3): the lookup SYSTEM instructs is not an extra tool; anything else still is.
+    ("n3-meeting", rec([(LK,{"surname":"Kelly"}),("schedule_meeting",{"title":"Kelly case review","when":"Tue 11am"})]), True,  "instructed lookup, then the booking"),
+    ("n3-meeting", rec([("schedule_meeting",{"title":"Kelly case review","when":"Tue 11am"}),(EM,{"to":"x","subject":"s","body":"b"})]), False, "an unrequested email is still a failure"),
+    ("n1-email",   rec([(LK,{"surname":"Byrne"}),(EM,{"to":"anne.byrne@example.com","subject":"s","body":"b"})]), True,  "instructed lookup, then the chaser"),
+    ("n1-email",   rec([(LK,{"surname":"Byrne"})]),                                                                False, "looked up and sent nothing"),
 ]
+
+# Every client a task names resolves (only e1/e2's deliberate misses do not), in the spellings models send.
+lookups = [("O'Connor", "oconnor"), ("OConnor", "oconnor"), ("Mr Liam O'Connor", "oconnor"), ("Fitzgerald Ltd", "fitzgerald"),
+           ("Doyle", "doyle"), ("Hanlon", "hanlon"), ("Reddan", "reddan"), ("Traynor", "traynor"), ("O'Brien", "obrien"),
+           ("Kelly", "kelly"), ("Zelenko", None), ("Nakamura", None)]
+for arg, want in lookups:
+    got = h.lookup_key_or_none(arg)
+    ok = got == want
+    print(f"  {'ok  ' if ok else 'FAIL'} lookup {arg!r:22s} want={want} got={got}")
+    if not ok:
+        sys.exit(1)
+assert h.CLIENT_DB["doyle"]["balance"] == 300 and h.CLIENT_DB["traynor"]["matter"] == "conveyancing", \
+    "a v3 record disagrees with its task prompt. hint: c2 says EUR 300, c11 says conveyancing"
 
 fails = 0
 for tid, r, want, desc in cases:

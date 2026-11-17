@@ -20,7 +20,7 @@
 
 ## Findings index
 
-190 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+192 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
@@ -28,7 +28,8 @@
 - **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
 - **CAPABILITY (5):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187)
-- **QUALITY (1):** [F189](#f189)
+- **QUALITY (2):** [F189](#f189) [F191](#f191)
+- **INSTRUMENT (1):** [F192](#f192)
 - **SPEED (1):** [F188](#f188)
 
 | Finding | Title | Kind | Date | Experiment | Status |
@@ -226,6 +227,8 @@
 | [F188](#f188) | MoE expert helpers (CPU cores, tandem.cpp's hot-expert cache) do not pay on unified memory; routing is concentrated but workload-specific | SPEED | 2026-11-15 | E161 | ESTABLISHED |
 | [F189](#f189) | on client-shaped drafting, GPT-6.1 Sol beats production Flash-Next at every effort; the losses are unsupported commitments, not invented figures | QUALITY | 2026-11-15 | E162 | ESTABLISHED |
 | [F190](#f190) | AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and asks where Halogen acts on tool tasks | PLATFORM | 2026-11-16 | E163 | ESTABLISHED |
+| [F191](#f191) | Qwen4 Max (cloud only) beats production on client drafting by a small margin, trails GPT-6.1 Sol clearly, and matches production on the E160 suites once two test defects are allowed for | QUALITY | 2026-11-17 | E164 | ESTABLISHED |
+| [F192](#f192) | The E160 suites were marking models down for following their own instructions; corrected, tool use reaches 36/36 on every arm and the conversation revision gaps close | INSTRUMENT | 2026-11-17 | E165 (test audit) | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -9075,4 +9078,65 @@ outside 32K prompts.
 
 Evidence: `results/e163-results.md`, `results/e163/`, prereg `results/e163-prereg.md` (amendments 1, 1b). See [[F165]],
 [[F186]].
+
+**Addendum 2026-11-17 (E165, [[F192]]).** The tool-use shortfall was the test, not Loom: corrected (task set v3) Loom
+and Halogen both pass 36/36. The conversation and H6 rows also move (corrected: conversation 10/11 and 19/20, H6 5/6;
+writing re-graded 6/7, kw-eval 26/26). The claim's tool-use clause is withdrawn; the speed claims stand.
+
+
+<a id="f191"></a>
+
+## F191 - Qwen4 Max (cloud only) beats production on client drafting by a small margin, trails GPT-6.1 Sol clearly, and matches production on the E160 suites once two test defects are allowed for
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-17 | **Experiment:** E164 | **Status:** ESTABLISHED for `qwen/qwen4-max` on OpenRouter at provider default effort (one sample per item; one judge)
+
+**Kind: QUALITY (reference arm)**
+
+**Plain English.** Qwen4 Max is the first Qwen4 model and runs only in the cloud. On ten client-drafting jobs a blind
+judge put it a little ahead of production (4 wins to 2), level with Claude Sonnet 5.5 (4 to 5) and well behind GPT-6.1
+Sol (1 to 7). It invented no figures. On the everyday suites it matched production. Its low tool-use score (24 of 36
+against 33) is mostly the test: 8 failures are letters to clients missing from the test's pretend database, where it
+asked for details as its instructions allow, and 1-2 are a grading rule that fails a correct booking for an extra
+lookup. Nothing changes in production; this is the yardstick for open Qwen4 models when they ship.
+
+Evidence: `results/e164-results.md`, `results/e164/score.json`, prereg `results/e164-prereg.md` (amendment 1). Test
+defects queued for the owner-ordered test audit (2026-11-17): L5 decline detector fires on "silent" (E07); tool-use v2
+missing client records and `kind: tool` exact-set rule. See [[F162]], [[F189]], [[F190]].
+
+**Addendum 2026-11-17 (E165, [[F192]]).** Audited and corrected: Qwen4 Max scores 36/36 on tool use v3 (level with
+production), 24/24 on L5, 7/7 writing, 11/11 and 20/20 on the conversations. The drafting result is unaffected.
+
+
+<a id="f192"></a>
+
+## F192 - The E160 suites were marking models down for following their own instructions; corrected, tool use reaches 36/36 on every arm and the conversation revision gaps close
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-17 | **Experiment:** E165 (test audit) | **Status:** ESTABLISHED (fixes regression-tested; re-runs on 5 arms, P1-P10 all held)
+
+**Kind: INSTRUMENT**
+
+**Plain English.** An audit ordered by the owner found five suites where either the instructions given to the model
+contradicted what the grader rewarded, or the grader marked correct answers wrong. The tool-use test asked for
+letters to clients missing from its database while telling the model to look clients up and ask when information is
+missing; the conversation test told the model to reject contradictions of the record and then marked it for not
+applying a correction. Every model, production included, lost marks to these. Corrected, all five arms score 36/36 on
+tool use and apply corrections without accepting the planted false claims. Production's setting stands; the tool-use
+suite is now too easy to separate these models.
+
+**Claim.** Original -> corrected (KFL / KX / HS / LM / Q): tool use 33/33/33/28/24 -> 36 all; conversation l4
+9/8/9/8/10 -> 10/10/10/10/11; conversation long 18/15/18/17/19 -> 20/19/20/19/20; L5 23/23/23/23/22 -> 24 all
+(R09 key and E07 grader); writing 6/7/6/4/6 -> 7/7/7/6/7; kw-eval KFL 24 -> 25, LM 25 -> 26 (K07); H6 HS 5 -> 6,
+LM 4 -> 5. Drafting checker flags now equal the hand adjudication (18 raw -> 5). Every fix fails its validator on the
+pre-fix code.
+
+**Use.** Results on tool use v2, conversations before CONVERSATION_VERSION 2026-11-17.1, and H6 before
+CORPUS_L4_VERSION 2026-11-17.1 understate every model; read them beside E165's corrected columns. Where every arm
+fails an item the same way, suspect the item first.
+
+Evidence: `results/e165-results.md`, `results/e165/score.json`, prereg `results/e165-prereg.md`, fixes 9b6090c.
+Corrects [[F190]] (tool-use clause withdrawn) and [[F191]]. See [[F186]].
 

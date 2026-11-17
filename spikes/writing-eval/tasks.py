@@ -50,6 +50,12 @@ from source import ALLOWED_NUMBERS, BRIEF, NEGATIVE_FINDINGS  # noqa: E402
 # statistic and counting it as one would make the metric meaningless.
 STRUCTURAL_ALLOWED = {2024.0, 2025.0, 2026.0}
 
+# GRADER_VERSION 2026-11-17.1 (E165 test audit). The 0.5% tolerance was meant to allow honest rounding ("roughly 92"
+# for 92.28) but missed the identical rounding of a smaller figure: "about 11" for 10.89 is 1.0% off and was scored
+# a fabrication on three arms. Rounding a stated decimal to a whole number or one decimal place is now allowed
+# outright, except on the task that forbids rounding (exact_figures), which withdraws it as before.
+GRADER_VERSION = "2026-11-17.1"
+
 NUM_RE = re.compile(r"\d[\d,]*\.?\d*")
 
 
@@ -75,6 +81,9 @@ def fabricated(text: str, exact_only: bool = False) -> list[float]:
     if exact_only:
         # The no-rounding task withdraws the rounded derivations.
         allowed -= {8.0, 9.0, 4.0, 7.0}
+    else:
+        decimals = [a for a in ALLOWED_NUMBERS if a != int(a)]
+        allowed |= {float(round(a)) for a in decimals} | {round(a, 1) for a in decimals}
     bad = []
     for value in extract_numbers(text):
         if any(abs(value - a) <= max(0.005 * abs(a), 0.005) for a in allowed):

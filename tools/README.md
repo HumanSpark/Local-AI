@@ -19,6 +19,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [ch1_sandbox_guard.py](ch1_sandbox_guard.py) | Confine an autonomous coding agent to its sandbox, and record every destructive attempt as a MEASUREMENT. |
 | [ch1_tasks.py](ch1_tasks.py) | The C-H1 coding suite - real sparkbench commits as tasks, with the ORIGINAL tests held out as ground truth. |
 | [climb_envelope.py](climb_envelope.py) | Execute the envelope rung climb with server management |
+| [cloud_proxy.py](cloud_proxy.py) | Let the local-only eval runners call one OpenRouter model, with the vaulted key and a hard USD ceiling. |
 | [coding_harness.py](coding_harness.py) | Coding-model screening harness (minimal OpenAI-compatible agent loop) |
 | [compare_heldout.py](compare_heldout.py) | Join E57's two crossover runs into the shallow-versus-deep table that neither run can report on its own. |
 | [cost_model.py](cost_model.py) | Generate every cost figure in the report from formulas + canonical inputs (C-01/02/03). |
@@ -85,6 +86,8 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e161_window.sh](run_e161_window.sh) | Run E161 in one idle window: routing-skew imatrix runs, then the six speed arms, restoring production on exit. |
 | [run_e162.py](run_e162.py) | Run E162 - ten client-shaped tasks drafted by production Flash-Next (low/medium/xhigh) and two frontier models, |
 | [run_e162.sh](run_e162.sh) | Run all of E162 unattended in the prereg's order: local drafts against production, cloud drafts alongside, grade, judges. |
+| [run_e164.sh](run_e164.sh) | Run E164 unattended - Qwen4 Max on the E160 suites via cloud_proxy, then E162 drafting, grade and one judge. |
+| [run_e165.sh](run_e165.sh) | Run E165 unattended - the test audit's re-runs (tool use v3, mt-l4, mt-long, H6) on arms Q, KFL, KX, HS, LM. |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |
@@ -109,6 +112,8 @@ Every file in this folder with its own one-line description (a document's title,
 | [score_e160.py](score_e160.py) | Score E160 (KFL vs KX) against the prereg's fields and predictions P1-P11. |
 | [score_e162.py](score_e162.py) | Score E162 against its pre-registration: pair-level nets per judge, judge agreement, completion before and |
 | [score_e163.py](score_e163.py) | Score E163 (Loom LM, llama.cpp LC, Halogen HS) against results/e163-prereg.md P1-P8. |
+| [score_e164.py](score_e164.py) | Score E164 (Qwen4 Max) against results/e164-prereg.md: E160 suite fields, drafting nets, spend. |
+| [score_e165.py](score_e165.py) | Score E165 (test audit): every arm's original suite scores beside the corrected graders' and the re-runs'. |
 | [score_e77.py](score_e77.py) | Score E77 - the correct-to-wrong rate between an f16 KV baseline and each quantised arm, plus byte identity of the answers. |
 | [score_e77_timings.py](score_e77_timings.py) | Extract prefill and decode rates per KV precision from E77's quiet-GPU re-run server logs. |
 | [score_e79.py](score_e79.py) | Score E79 by BAND and by direction - what the tool converted, what it destroyed, and which of those was infrastructure. |

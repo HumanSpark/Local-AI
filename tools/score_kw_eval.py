@@ -52,7 +52,14 @@ from kw_items import load_items  # noqa: E402
 #                   abstention); Qwen3-30B-A3B K05 critical -> correct. No other
 #                   arm or cell changed. NOTHING WAS REGENERATED - the same
 #                   banked completions were re-scored.
-SCORER_VERSION = "v2-2026-08-20"
+#   v3  2026-11-17  E165 TEST AUDIT - a must_not_say phrase inside a QUOTATION
+#                   is the source being quoted, not the answer asserting it.
+#                   K07's trap "use the workhorse" fired on answers that open
+#                   "Do NOT use the workhorse" and then quote the routing guide:
+#                   "Use the workhorse to read a contract; never to work out a
+#                   date." Cells that moved v2 -> v3: KFL (E160) and LM (E163)
+#                   K07 wrong -> correct. Same banked completions, re-scored.
+SCORER_VERSION = "v3-2026-11-17"
 
 _UNDETERMINED = (
     "cannot determine",
@@ -220,7 +227,9 @@ def _says_without_negation(answer: str, phrase: str) -> bool:
         i = a.find(p, start)
         if i == -1:
             return False
-        if not _NEGATION.search(a[max(0, i - 40) : i]):
+        # An odd number of straight quotes before the phrase puts it inside a quotation (_norm folds curly quotes).
+        quoted = a[:i].count('"') % 2 == 1
+        if not quoted and not _NEGATION.search(a[max(0, i - 40) : i]):
             return True
         start = i + 1
 

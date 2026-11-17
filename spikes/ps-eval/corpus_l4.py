@@ -139,10 +139,17 @@ EXTRACTS - LIMITATION OF ACTIONS
    the breach is discovered and not on the date of the contract.
 
 3. The period begins on the day after the cause of action accrued and
-   expires at the end of the corresponding day in the sixth year following.
+   expires at the end of the day in the sixth year following that bears the
+   same date as the day on which the cause of action accrued.
    Proceedings issued on that day are in time; proceedings issued on the
    following day are out of time.
 """
+
+# STAT-LIM 3 REWORDED 2026-11-17 (E165 test audit, CORPUS_L4_VERSION 2026-11-17.1). "the corresponding day" could
+# mean the day matching the accrual date (the key, 14 September) or the day matching the day the period BEGINS (15
+# September); HS and LM computed both in E163 and chose the second. The wording now names the accrual date, which is
+# the key's reading, so the item tests the trigger and the count rather than a reading of an ambiguous phrase.
+CORPUS_L4_VERSION = "2026-11-17.1"
 
 CALENDAR = """\
 DOCUMENT ID: CAL-2026

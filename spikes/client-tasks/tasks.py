@@ -21,6 +21,24 @@ from __future__ import annotations
 
 import re
 
+# CHECKER_VERSION 2026-11-17.1 (E165 test audit). Every hard flag on E162 and E164 drafts was a false positive on
+# hand review; the causes are fixed here, each validated against results/e162/adjudication.json and the E164 review:
+# the C08 CPI trap matched the contract's own "capped at 8%"; C05 did not convert euros written out in full back to
+# the table's EUR thousands, nor allow worked-out gross profit; 12-hour times ("8.55am" for 08:55) were flagged;
+# three negatives missed plain paraphrases ("sent again", "does not allow automatic connection", "ties us in").
+CHECKER_VERSION = "2026-11-17.1"
+
+# C05: gross profit worked out from the table (revenue x margin, EUR thousands), per store and in total, both years,
+# and the changes - the figures a careful board summary derives. Whole numbers and one decimal place.
+_C05_ROWS = {"A": (612, 655, 41.0, 40.2), "B": (488, 503, 39.5, 38.9), "C": (530, 456, 40.8, 36.1)}
+_C05_GP = {k: (r25 * m25 / 100, r26 * m26 / 100) for k, (r25, r26, m25, m26) in _C05_ROWS.items()}
+_C05_SUM = (sum(v[0] for v in _C05_GP.values()), sum(v[1] for v in _C05_GP.values()))
+_C05_TOT = (1630 * 40.5 / 100, 1614 * 38.6 / 100)
+_C05_VALUES = [x for pair in [*_C05_GP.values(), _C05_SUM, _C05_TOT] for x in pair]
+_C05_VALUES += [a - b for a, b in [*_C05_GP.values(), _C05_SUM, _C05_TOT]]
+_C05_VALUES += [100 * (a - b) / a for a, b in [_C05_SUM, _C05_TOT]]
+C05_GROSS_PROFIT = sorted({f"{abs(v):.0f}" for v in _C05_VALUES} | {f"{abs(v):.1f}" for v in _C05_VALUES})
+
 HOUSE = (
     "House style: plain British/Irish English, short sentences, no jargon, no exclamation marks. "
     "Use only facts given below. If something the reader would want is not given, say it is to be confirmed "
@@ -55,7 +73,10 @@ DISCOVERY CALL NOTES (Wed 5 Nov 2026, 45 min, with Orla Brennan, practice manage
         "negatives": [
             (
                 "no API: bookings need export/import or manual entry",
-                [r"no api", r"(manual|by hand|export|import)"],
+                [
+                    r"(no api|(not|n't)[^.]{0,60}(connect|link|integrat|talk to)|(need|would|must|have to)[^.]{0,40}(export|import|by hand|manual))",
+                    r"(manual|by hand|export|import)",
+                ],
             ),
         ],
         "traps": [
@@ -265,7 +286,9 @@ Notes from the finance manager:
             "1.6",
             "1.61",
             "1.63",
+            *C05_GROSS_PROFIT,
         ],
+        "thousands": True,  # the table is in EUR thousands; "EUR 655,000" and "EUR 1.614 million" are its figures
         "negatives": [
             (
                 "Store C revenue fell about 14%",
@@ -315,7 +338,7 @@ INCIDENT LOG - Feeney & Walsh Chartered Accountants, client portal (Fri 14 Nov 2
             (
                 "some uploads failed and must be resubmitted",
                 [
-                    r"(resubmit|re-submit|upload again|re-upload|send (them|it|your documents) again)"
+                    r"(resubmit|re-submit|re-?upload|(upload|send|submit)\w*[^.]{0,30}\bagain|sent again)"
                 ],
             ),
         ],
@@ -417,7 +440,9 @@ EXTRACT - Linen and laundry services agreement, Brightwash Services Ltd and the 
             ),
             (
                 "a CPI figure the extract never gives",
-                r"cpi[^.]{0,40}(is|of|at|currently|running)[^.]{0,10}\d",
+                # A claim about what CPI IS. The old pattern matched "CPI plus 3%, capped at 8%" - the contract's own
+                # terms - on all four arms; a labelled hypothetical ("if CPI were 2%") is not a claim either.
+                r"(current(ly)?|latest|today'?s)[^.]{0,25}\bcpi\b[^.]{0,25}\d|\bcpi\b[^.]{0,15}\b(is|stands at|running at|currently)\b[^.]{0,12}\d",
             ),
         ],
     },
@@ -459,7 +484,7 @@ The accounts team (Gerard) says the Xero link is essential: they re-key every in
         "negatives": [
             (
                 "Larchmont needs a 12-month minimum commitment",
-                [r"12[- ]month", r"(minimum|commit|lock)"],
+                [r"12[- ]month", r"(minimum|commit|lock|ties? (us |you )?in|tie-in)"],
             ),
             (
                 "staff preferred Pipewell's interface in the trial",
@@ -547,6 +572,14 @@ def check(task: dict, draft: str) -> dict:
     ]
     allowed = set(_numbers(task["prompt"])) | {_norm(d) for d in task["derived"]}
     allowed |= {a.lstrip("-") for a in allowed}
+    # A source time hh:mm may be written in 12-hour form ("8.55am" for 08:55).
+    for h, mm in re.findall(r"\b(\d{1,2}):(\d{2})\b", task["prompt"]):
+        allowed.add(_norm(f"{int(h) % 12 or 12}.{mm}"))
+    if task.get("thousands"):
+        base = set(allowed)
+        for scale in (1000, 1_000_000):
+            allowed |= {_norm(f"{float(a) * scale:.0f}") for a in base}
+        allowed |= {_norm(f"{float(a) / 1000:.3f}") for a in base}
     fab = []
     for n in _numbers(draft):
         bare = n.lstrip("-")

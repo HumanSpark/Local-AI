@@ -183,14 +183,25 @@ def _deliver(batch: list[str]) -> str:
             f"account from here.\n\n{body}")
 
 
+# RULES CORRECTED 2026-11-17 (E165 test audit, CONVERSATION_VERSION 2026-11-17.1). The old rule - "If I state
+# something that contradicts the record, the RECORD governs" - told the model to REJECT the corrections the revision
+# probes then scored it for applying: every arm through E164 kept the original date after "A correction for the file"
+# and was scored stale_answer for obeying. The rule now separates a correction or new fact for the file (apply it)
+# from a claim about what the record or an earlier answer says (the record governs), which is the distinction the
+# revision and false_premise probes were built to measure. Results before this version are not comparable.
+CONVERSATION_VERSION = "2026-11-17.1"
+
 RULES = """\
 You are assisting on a professional advisory engagement. Answer using ONLY the \
 engagement pack below and anything I tell you later in this conversation.
 
 Rules:
 - If the record does not contain the answer, reply with exactly NOT_IN_PACK.
-- If I state something that contradicts the record, the RECORD governs and you \
-should say so.
+- If I give you a correction or a new fact for the file - something that has \
+happened, been agreed or been found since the pack was compiled - treat it as part \
+of the record from then on.
+- If I claim that the record, or one of your earlier answers, says something it \
+does not, the RECORD governs and you should say so.
 - Do not use outside knowledge.
 - Reply to every question in EXACTLY this two-line format and nothing else:
 

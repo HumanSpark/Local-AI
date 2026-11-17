@@ -36,6 +36,10 @@
 # tools/e163_speed.py then the E160 suites at low; LC runs the speed block only. E163_SMOKE=1 runs tools/e163_smoke.py
 # (unscored) instead. Prereg results/e163-prereg.md.
 #
+# E165 (2026-11-17, test audit re-run): E154_KW_SUITES picks which E160 suites run_kw_suite runs (default all eight),
+# E154_TU_PREFIX the tool-use label prefix (default e160, so E160's files are not overwritten by a re-run), E163_SKIP_SPEED=1
+# skips the E163 speed block, E154_TAG the banking commit's scope. Defaults reproduce E154-E163 exactly.
+#
 # Usage: tools/run_e154_arms.sh [--dry-run] ARM [ARM ...]    ARM in S O H Q QN T27 TL OR35 OR122 TS45 TS4 RA GL DC HX HM HL HF HFL
 
 set -u
@@ -73,6 +77,10 @@ LOOM_PKG=/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/model.json
 FN_GGUF=$M/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf
 FN_MTP=$M/qwen3.8-flash-next-mtp-766911a/mtp-Qwen3.8-Flash-Next-Q8_0.gguf
 SMOKE=${E163_SMOKE:-0}
+KW_SUITES=${E154_KW_SUITES:-"l5 pr1 writing kw mt-l4 mt-long tooluse h6-date"}
+TU_PREFIX=${E154_TU_PREFIX:-e160}
+SKIP_SPEED=${E163_SKIP_SPEED:-0}
+TAG=${E154_TAG:-e154}
 TRANSCRIPTS=${E163_TRANSCRIPTS:-0}   # 1 = diagnostic re-run of LM's five lost tool tasks with full transcripts (unscored)
 E163_TX_TASKS=n1-email,n2-reminder,c4-date-before,c4b-date-before-onlyif,c5b-date-after-onlyif
 ledger_for() { case "$1" in S) echo "$LEDGER_DIR/sonnet-ledger.jsonl" ;; O) echo "$LEDGER_DIR/opus-ledger.jsonl" ;; esac; }
@@ -229,7 +237,7 @@ run_kw_suite() {
   local arm=$1 eff out rc; eff=$(kw_effort "$arm"); mkdir -p "$RAW/$arm"
   local sport=${SUITE_PORT:-$PORT}; local surl=http://127.0.0.1:$sport
   local common=(--port "$sport" --ctx 262144 --max-tokens 32768 --thinking "$eff")
-  for suite in l5 pr1 writing kw mt-l4 mt-long tooluse h6-date; do
+  for suite in $KW_SUITES; do
     out=$RAW/$arm/$suite.json
     if [ -s "$out" ]; then stamp "$arm $suite: already done, skipped"; continue; fi
     stamp "$arm $suite start (reasoning_effort $eff)"
@@ -243,9 +251,9 @@ run_kw_suite() {
       mt-l4|mt-long) timeout 21600 python3 "$REPO/tools/run_multiturn_eval.py" --model halogen-qwen3.8-flash-next \
                 --external --conversation "${suite#mt-}" --label "$arm-$suite" --out "$out" "${common[@]}" \
                 >>"$RAW/$arm/$suite.log" 2>&1 ;;
-      tooluse) timeout 21600 "$REPO/var/tooluse-venv/bin/python3" "$REPO/tools/tooluse_harness_v2.py" --base-url "$surl" --label "e160-$arm" \
+      tooluse) timeout 21600 "$REPO/var/tooluse-venv/bin/python3" "$REPO/tools/tooluse_harness_v2.py" --base-url "$surl" --label "$TU_PREFIX-$arm" \
                 --runs 3 --max-rounds 4 --max-tokens 32768 --thinking "$eff" >>"$RAW/$arm/$suite.log" 2>&1 \
-                && cp "$REPO/results/tool-use/E33-results-e160-$arm.json" "$out" ;;
+                && cp "$REPO/results/tool-use/E33-results-$TU_PREFIX-$arm.json" "$out" ;;
       h6-date) timeout 21600 python3 "$REPO/tools/run_h6_date_arm.py" --model halogen-qwen3.8-flash-next \
                 --base-url "$surl" --tools on --tier l4-date --label "$arm-h6" --out "$out" --ctx 262144 \
                 --max-tokens 32768 --thinking "$eff" >>"$RAW/$arm/$suite.log" 2>&1 ;;
@@ -261,7 +269,7 @@ bank_arm() {  # commit + push one arm's raw results (bank both sides)
   git -C "$REPO" add "$RAW/$arm" "$LOG" 2>/dev/null
   local ledger; ledger=$(ledger_for "$arm")
   [ -n "$ledger" ] && git -C "$REPO" add "$ledger"
-  git -C "$REPO" commit -q -m "data(e154): arm $arm raw results ($(ls "$RAW/$arm"/*.json 2>/dev/null | wc -l) task files)" -- "$RAW/$arm" "$LOG" $ledger \
+  git -C "$REPO" commit -q -m "data($TAG): arm $arm raw results ($(ls "$RAW/$arm"/*.json 2>/dev/null | wc -l) task files)" -- "$RAW/$arm" "$LOG" $ledger \
     && git -C "$REPO" push -q && stamp "banked arm $arm: $(git -C "$REPO" log --oneline -1)" \
     || stamp "WARNING: banking arm $arm failed - commit by hand before the next session"
 }
@@ -337,7 +345,8 @@ for arm in "${ARMS[@]}"; do
         stamp "$arm smoke rc=$? -> $RAW/$arm-smoke.jsonl"
       else
         mkdir -p "$RAW/$arm"; toff=kwargs; [ "$arm" = LM ] && toff=top
-        if [ -s "$RAW/$arm/speed.json" ]; then stamp "$arm speed: already done, skipped"
+        if [ "$SKIP_SPEED" = 1 ]; then stamp "$arm speed: skipped (E163_SKIP_SPEED=1)"
+        elif [ -s "$RAW/$arm/speed.json" ]; then stamp "$arm speed: already done, skipped"
         else
           stamp "$arm speed start"
           timeout 3600 python3 "$REPO/tools/e163_speed.py" --label "$arm" --base "$URL" --thinking-off "$toff" \

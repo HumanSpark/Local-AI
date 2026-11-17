@@ -35,7 +35,11 @@ from tasks import TASKS, check  # noqa: E402
 
 GUARD = "http://127.0.0.1:8402/v1/chat/completions"
 LOCAL = {"L": None, "M": "medium", "X": "xhigh"}
-CLOUD = {"C": "anthropic/claude-sonnet-5.5", "G": "openai/gpt-6.1-sol"}
+CLOUD = {
+    "C": "anthropic/claude-sonnet-5.5",
+    "G": "openai/gpt-6.1-sol",
+    "Q": "qwen/qwen4-max",
+}  # Q added for E164
 LOCAL_MAX_TOKENS = 32768
 CLOUD_MAX_TOKENS = 16000
 
@@ -323,7 +327,17 @@ def cmd_judge(args: argparse.Namespace) -> int:
                 f"  [{k}/{n}] {t['id']} {x} v {y}: {outcome} ({verdicts[0][0]}/{verdicts[1][0]})",
                 flush=True,
             )
-    tally = {a: {"win": 0, "tie": 0, "loss": 0} for a in arms}
+    # Every arm in the records, not only --arms: E164 judged into a file that also holds E162's M and X verdicts.
+    tally = {
+        a: {"win": 0, "tie": 0, "loss": 0}
+        for a in sorted(
+            {
+                *arms,
+                *(r["x"] for r in data["records"]),
+                *(r["y"] for r in data["records"]),
+            }
+        )
+    }
     for r in data["records"]:
         if r["outcome"] == "x":
             tally[r["x"]]["win"] += 1
@@ -347,6 +361,12 @@ def main() -> int:
         epilog="examples: tools/run_e162.py draft --arm L | tools/run_e162.py grade | "
         "tools/run_e162.py judge --judge x-ai/grok-4.7",
     )
+    ap.add_argument(
+        "--out-dir",
+        type=Path,
+        default=ROOT / "results/e162",
+        help="where drafts, grade and judge files live (E164 uses results/e164/drafting)",
+    )
     sub = ap.add_subparsers(dest="cmd", required=True)
     d = sub.add_parser("draft", help="draft every task for one arm (resumable)")
     d.add_argument("--arm", required=True, choices=[*LOCAL, *CLOUD])
@@ -369,6 +389,8 @@ def main() -> int:
         "--max-tokens", type=int, default=16000, help="cap for --redo-empty calls"
     )
     args = ap.parse_args()
+    global OUT  # noqa: PLW0603 - one module-level output root, set once here
+    OUT = args.out_dir
     OUT.mkdir(parents=True, exist_ok=True)
     return {"draft": cmd_draft, "grade": cmd_grade, "judge": cmd_judge}[args.cmd](args)
 

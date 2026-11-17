@@ -324,6 +324,26 @@ check(
     "the positive match must run BEFORE the decline check",
 )
 
+# E165 audit regressions (2026-11-17). E07: a correct leading "No" whose reasoning contains a decline word
+# ("silent") was scored a decline. R09: the key added the parallel months; the item's own text gives 31 July.
+_e07 = next(q for q in QUESTIONS_L5 if q["id"] == "E07")
+check(
+    grade_answer_l5(
+        _e07,
+        "No - the Site B (CO-2) cap is EUR 96,000, not EUR 250,000; the Framework default "
+        "applies only where the Call-Off Order is silent.",
+    )
+    == "correct",
+    "E07: a leading 'No' was overridden by a decline word in its reasoning",
+)
+check(
+    grade_answer_l5(_e07, "Yes - the Framework default applies where the order is silent.") == "wrong",
+    "E07: a leading wrong verdict must still score wrong",
+)
+_r09 = next(q for q in QUESTIONS_L5 if q["id"] == "R09")
+check(grade_answer_l5(_r09, "31 July 2026") == "correct", "R09: 31 July is the key (parallel, not added)")
+check(grade_answer_l5(_r09, "31 August 2026") == "off_by_calendar", "R09: 31 August adds the months - a trap")
+
 # ------------------------------------------------------------------- report
 
 print(

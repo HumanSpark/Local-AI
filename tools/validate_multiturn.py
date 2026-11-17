@@ -174,6 +174,14 @@ def main() -> int:
     eq("T05's revised deadline is one month after the corrected receipt date",
        REVISED_DSR_DEADLINE.isoformat(), "2026-03-20")
 
+    # ---- E165 audit (2026-11-17) ----------------------------------------
+    from conversation_l4 import RULES  # noqa: PLC0415
+    eq("RULES tell the model to apply a correction for the file",
+       "treat it as part" in RULES and "the RECORD governs" in RULES, True)
+    t07 = next(t for t in GRADED if t["id"] == "T07")
+    eq("a correct leading NO with decline wording in its reasoning scores correct",
+       grade_multiturn(t07, "NO - STAT-DP is silent on registered offices and directors, so the deadline is unchanged."), "correct")
+
     bad = [c for c, ok in checks if not ok]
     for c, ok in checks:
         print(("  ok    " if ok else "  WRONG ") + c)

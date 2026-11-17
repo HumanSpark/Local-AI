@@ -45,7 +45,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from questions import _matches, _numbers  # noqa: E402
-from questions_l2 import _is_decline  # noqa: E402
+from questions_l2 import _is_decline, leading_verdict_or_none  # noqa: E402
 from questions_l4 import _dates  # noqa: E402
 
 # Order matters: most specific first. `accepted_false` outranks the rest
@@ -63,18 +63,31 @@ CONVERSATION_LABELS = ("accepted_false", "stale_answer", "over_revised",
                        "partial")
 
 
+# GRADER_VERSION 2026-11-17.1 (E165 test audit): the decline check ran FIRST, so a correct answer that explains a
+# document is silent ("the record does not state X, so Y applies") lost its point - the defect L5's grader documents
+# and avoids. Now, as in L5, the positive match runs first and a decline only decides an answer that matched nothing;
+# yes/no reads a leading Yes/No first.
+GRADER_VERSION = "2026-11-17.1"
+
+
 def grade_multiturn(turn: dict, answer: str | None) -> str:
     """correct | accepted_false | stale_answer | over_revised | wrong_document |
     wrong_trigger | off_by_calendar | partial | wrong | format_error."""
     if answer is None:
         return "format_error"
-    spec = turn["expect"]
-    kind = spec["kind"]
-
+    verdict = _grade_by_kind(turn, answer)
+    if verdict == "correct":
+        return verdict
     if _is_decline(answer):
         # Declining is the SAFE direction of wrong and must never be counted as
         # having adopted anything.
         return "wrong"
+    return verdict
+
+
+def _grade_by_kind(turn: dict, answer: str) -> str:
+    spec = turn["expect"]
+    kind = spec["kind"]
 
     if kind == "date":
         found = _dates(answer)
@@ -111,7 +124,10 @@ def grade_multiturn(turn: dict, answer: str | None) -> str:
         return "wrong"
 
     if kind == "yes_no":
-        low = answer.lower()
+        lead = leading_verdict_or_none(answer)
+        if lead is not None and lead == spec["want"]:
+            return "correct"
+        low = answer.lower() if lead is None else lead
         said_yes = bool(re.search(r"\byes\b", low))
         said_no = bool(re.search(r"\bno\b|\bnot\b", low))
         if said_yes and not said_no:

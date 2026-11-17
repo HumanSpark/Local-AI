@@ -9,6 +9,15 @@
 # error - does the model adapt or fabricate?), no-tool traps, and ambiguous (should ask, not guess). Each task
 # runs N times; the headline is SUCCESS RATE per task, plus PARSE RATE (structured tool_calls vs native format
 # leaked as text - the E32 Coder failure). Saves incrementally. See E33-preregistration.md.
+#
+# TASK_SET_VERSION v3 (2026-11-17, E165 test audit). Three conflicts between SYSTEM and the grader were removed:
+# (1) nine tasks named clients absent from CLIENT_DB, so a model obeying "look them up first" got "no record" and,
+# obeying "ask when information is missing", asked - and failed. Every client a task names now has a record that
+# agrees with the prompt; only e1/e2's Zelenko and Nakamura stay missing, on purpose. Surnames match on letters only
+# (O'Connor = OConnor). (2) SYSTEM gives today's date, so "in 14 days" needs no question. (3) `kind: tool` passed
+# only on the EXACT expected set, failing the lookup SYSTEM instructs; an extra lookup_client is now allowed, any
+# other extra tool still fails. Each run also stores its final text and tool arguments so a later audit can re-grade
+# without re-running. v2 results are not comparable with v3.
 
 from __future__ import annotations
 
@@ -23,6 +32,7 @@ from typing import Any
 
 import docx
 
+TASK_SET_VERSION = "v3-2026-11-17"
 ROOT = Path(__file__).resolve().parent.parent
 DOCS_DIR = ROOT / "results/tool-use/docs-v2"
 LOG = ROOT / "results/tool-use/toolcalls-v2.log"
@@ -31,7 +41,27 @@ CLIENT_DB = {
     "murphy": {"name": "Mr John Murphy", "address": "14 Marley Grove, Dublin 16", "matter": "conveyancing", "balance": 0},
     "byrne": {"name": "Ms Anne Byrne", "address": "3 Oak Rise, Cork", "matter": "probate", "balance": 0},
     "kelly": {"name": "Mr Sean Kelly", "address": "22 Hill Road, Galway", "matter": "litigation", "balance": 7400},
+    # v3: every client a task names, with the facts its prompt states (Doyle EUR 300, Traynor conveyancing EUR 7,400).
+    "oconnor": {"name": "Mr Liam O'Connor", "address": "9 Strand Road, Bray", "matter": "debt recovery", "balance": 2350},
+    "doyle": {"name": "Ms Mary Doyle", "address": "41 Church Street, Athlone", "matter": "conveyancing", "balance": 300},
+    "hanlon": {"name": "Mr Peter Hanlon", "address": "7 Bridge Street, Kilkenny", "matter": "conveyancing", "balance": 0},
+    "reddan": {"name": "Ms Claire Reddan", "address": "18 Quay Road, Limerick", "matter": "conveyancing", "balance": 0},
+    "traynor": {"name": "Mr David Traynor", "address": "5 Main Street, Navan", "matter": "conveyancing", "balance": 7400},
+    "fitzgerald": {"name": "Fitzgerald Ltd", "address": "Unit 4, Park West, Dublin 12", "matter": "commercial lease review", "balance": 0},
+    "obrien": {"name": "Ms Deirdre O'Brien", "address": "2 Seafield Avenue, Clontarf, Dublin 3", "matter": "conveyancing", "balance": 0},
 }
+_NOT_NAME = {"mr", "ms", "mrs", "dr", "ltd", "limited", "the", "client", "file"}
+
+
+def lookup_key_or_none(surname: str) -> str | None:
+    """CLIENT_DB key for a lookup argument, letters only, or None - a miss is the documented 'no record' outcome."""
+    words = [re.sub(r"[^a-z]", "", w) for w in surname.lower().split()]
+    words = [w for w in words if w and w not in _NOT_NAME]
+    for cand in ("".join(words), words[-1] if words else ""):
+        if cand in CLIENT_DB:
+            return cand
+    return None
+
 
 TOOLS: list[dict[str, Any]] = [
     {"type": "function", "function": {"name": "create_word_document",
@@ -68,7 +98,7 @@ TOOL_NAMES = {t["function"]["name"] for t in TOOLS}
 
 SYSTEM = (
     "You are a legal-practice assistant with tools: create_word_document, create_spreadsheet, send_email, "
-    "add_reminder, schedule_meeting, lookup_client. Call the tool(s) a task needs. If you need a client's "
+    "add_reminder, schedule_meeting, lookup_client. Today is Monday 16 November 2026. Call the tool(s) a task needs. If you need a client's "
     "details, look them up first, then use the result. For a plain question that needs no file, message, or "
     "record, answer in text and call no tool. If a request is missing information you need, ask a brief "
     "clarifying question instead of guessing. Document bodies are plain text - do not use markdown."
@@ -198,8 +228,8 @@ def _exec_tool(name: str, args: dict[str, Any], run_dir: Path, inject: dict[str,
     if name in inject:
         return inject[name]
     if name == "lookup_client":
-        rec = CLIENT_DB.get(str(args.get("surname", "")).strip().lower())
-        return json.dumps(rec) if rec else "ERROR: no client record found for that surname."
+        key = lookup_key_or_none(str(args.get("surname", "")))
+        return json.dumps(CLIENT_DB[key]) if key else "ERROR: no client record found for that surname."
     if name == "create_word_document":
         fn = re.sub(r"[^A-Za-z0-9._-]", "_", str(args.get("filename") or "untitled.docx"))
         if not fn.endswith(".docx"):
@@ -307,7 +337,8 @@ def score(task: dict[str, Any], rec: dict[str, Any]) -> bool:
     if kind == "doc":
         return "create_word_document" in names
     if kind == "tool":
-        return names == task["expect"]
+        # v3: the expected tool(s), plus at most the lookup SYSTEM tells the model to make first.
+        return task["expect"].issubset(names) and names <= task["expect"] | {"lookup_client"}
     if kind == "multi":
         return task["expect"].issubset(names)
     if kind == "conditional":
@@ -428,11 +459,12 @@ def main() -> None:
             ok = score(task, rec)
             succ += int(ok)
             leak_ct += int(rec["leaked"])
-            per_run.append({"ok": ok, "tools": [c["name"] for c in rec["called"]], "leaked": rec["leaked"]})
+            per_run.append({"ok": ok, "tools": [c["name"] for c in rec["called"]], "leaked": rec["leaked"],
+                            "calls": rec["called"], "final_text": rec["final_text"]})
         rate = succ / args.runs
         results.append({"id": task["id"], "cat": task["cat"], "kind": task["kind"],
                         "success_rate": rate, "leak_runs": leak_ct, "per_run": per_run})
-        out.write_text(json.dumps({"label": args.label, "runs": args.runs,
+        out.write_text(json.dumps({"label": args.label, "task_set_version": TASK_SET_VERSION, "runs": args.runs,
                                    "thinking": args.thinking, "max_tokens": args.max_tokens,
                                    "request_timeout": timeout, "only": args.only,
                                    "tasks_run": [t["id"] for t in tasks],
