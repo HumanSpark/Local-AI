@@ -20,14 +20,14 @@
 
 ## Findings index
 
-192 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+195 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
-- **PLATFORM (73):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180) [F190](#f190)
+- **PLATFORM (74):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180) [F190](#f190) [F193](#f193)
 - **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
-- **CAPABILITY (5):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187)
+- **CAPABILITY (7):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195)
 - **QUALITY (2):** [F189](#f189) [F191](#f191)
 - **INSTRUMENT (1):** [F192](#f192)
 - **SPEED (1):** [F188](#f188)
@@ -229,6 +229,9 @@
 | [F190](#f190) | AMD's agent-ported HRX Loom beats llama.cpp 2.7x on 32K prompts, roughly matches Halogen there, trails it elsewhere, and asks where Halogen acts on tool tasks | PLATFORM | 2026-11-16 | E163 | ESTABLISHED |
 | [F191](#f191) | Qwen4 Max (cloud only) beats production on client drafting by a small margin, trails GPT-6.1 Sol clearly, and matches production on the E160 suites once two test defects are allowed for | QUALITY | 2026-11-17 | E164 | ESTABLISHED |
 | [F192](#f192) | The E160 suites were marking models down for following their own instructions; corrected, tool use reaches 36/36 on every arm and the conversation revision gaps close | INSTRUMENT | 2026-11-17 | E165 (test audit) | ESTABLISHED |
+| [F193](#f193) | the amdgpu suballocator deadlock is back on kernel 7.0.0-42: a 75 GiB load wedged after a DeviceLost earlier the same day | PLATFORM | 2026-11-18 | E166 (load diagnosis) | OBSERVED |
+| [F194](#f194) | on ten large multi-file changes with the tests visible, the best local setup passes 5/10 against a frontier model's 10/10 | CAPABILITY | 2026-11-18 | E167 | ESTABLISHED |
+| [F195](#f195) | hiding the tests on the same ten changes drops both local setups to 1/10; most of their large-change skill is building to a shown specification | CAPABILITY | 2026-11-19 | E168 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -9140,3 +9143,92 @@ fails an item the same way, suspect the item first.
 Evidence: `results/e165-results.md`, `results/e165/score.json`, prereg `results/e165-prereg.md`, fixes 9b6090c.
 Corrects [[F190]] (tool-use clause withdrawn) and [[F191]]. See [[F186]].
 
+
+<a id="f193"></a>
+
+## F193 - the amdgpu suballocator deadlock is back on kernel 7.0.0-42: a 75 GiB load wedged after a DeviceLost earlier the same day
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-18 | **Experiment:** E166 (load diagnosis) | **Status:** OBSERVED (one occurrence, fingerprint exact)
+
+**Kind: PLATFORM**
+
+**Plain English.** The machine froze its graphics memory the way it did in July, and only a physical power cycle
+clears it. It happened while loading a large model a few hours after a different model had crashed the GPU at load.
+The August conclusion that newer kernels had fixed this was too optimistic.
+
+**Claim.** On kernel 7.0.0-42-generic (Livepatch client v11.1.0), llama.cpp `52975342f` loading Flash-Next
+UD-Q4_K_XL (`-c 131072 -fa on -ngl 999`) stuck in `D` state with wchan `drm_suballoc_new`, VRAM parked at exactly
+2,147,483,648 B, GTT 80.6 GB, VmRSS 82 MB, read_bytes 50.6 MB, unkillable - every signal in
+`docs/memory-edge-deadlock.md`'s fingerprint. Preceding state: Nemotron-3.5-Super on the same build failed at load
+at 02:32Z with `radv/amdgpu: Not enough memory for command submission` then `ErrorDeviceLost` (no reboot since);
+at 07:56Z the load started with 49 GiB free and 69 GiB page cache, while the E167 GS arm was starting podman
+containers on the same box. Both candidate triggers the deadlock doc names - a load after a DeviceLost without a
+reboot (F28) and concurrent I/O under memory pressure (F24) - were present, so this does not separate them.
+
+**Use.** F109's "the SIZE trigger is retracted" stands only for clean-state loads; the deadlock itself is not fixed in
+7.0.x. Before any load over ~60 GiB: reboot after any DeviceLost, no concurrent heavy I/O or container churn, and an
+owner within reach of the power button. The Nemotron load failure (DeviceLost at 6 s) is unexplained and is not
+retried until after a clean reboot.
+
+Evidence: `results/e166/diag/deadlock-evidence.txt`, `results/e166/diag/diag.log`, `results/e166/smoke/NM.serverlog`.
+Qualifies [[F109]]. See [[F24]], [[F28]].
+
+
+<a id="f194"></a>
+
+## F194 - on ten large multi-file changes with the tests visible, the best local setup passes 5/10 against a frontier model's 10/10
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-18 | **Experiment:** E167 | **Status:** ESTABLISHED on 10 tasks (one sample each)
+
+**Kind: CAPABILITY**
+
+**Plain English.** On big real changes, 150 to 2,400 lines across 3 to 9 files, the best cloud model passed all
+ten, at about two minutes a task. The best local setup passed five, at about eleven minutes a task, and the next
+best passed three. Each model had the project's own tests in full view. The gap is in getting it right, not in
+speed: both local models stopped on their own and said they were done while tests were still failing.
+
+**Claim.** GPT-6.1 Sol (GS) 10/10, median 125 s, $1.95. Flash-Next on Halogen (H) 5/10, median 685 s. Ornith-1.5-35B
+Q8_0 (OR35) 3/10, median 1,925 s, with 3 of its 7 failures at the 131,072-token context limit. Every H run and 7 of
+10 OR35 runs ended `model-done` well inside the 3,600 s limit. P3 (best local >= GS - 2) FALSIFIED. P4
+(|H - OR35| <= 2) held at its bound; P6 (H at least 5x slower than GS) held at 5.5x.
+
+**Use.** Do not route large multi-file changes to the local setups unattended, even with an executable
+specification. On small issue-style changes the local setups still match Sonnet and Opus ([[F183]]). Flash-Next on
+Halogen stays the local default: it beats OR35 here and is 2.8x faster. A larger `-c` for OR35 is a configuration
+test, not a capability fix.
+
+Evidence: `results/e167-results.md`, `results/e167/raw/`, prereg `results/e167-prereg.md`. See [[F183]], [[F185]].
+
+
+<a id="f195"></a>
+
+## F195 - hiding the tests on the same ten changes drops both local setups to 1/10; most of their large-change skill is building to a shown specification
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-19 | **Experiment:** E168 | **Status:** ESTABLISHED within-task (10 tasks, one sample each); no comparable frontier score
+
+**Kind: CAPABILITY**
+
+**Plain English.** We ran the same ten changes again but hid the tests. Each model got only the developer's own
+note and a list of the names the change adds. The better local setup fell from five passes to one, and the other
+from three to one. Both passed only the same, easiest task. Working out what "done" means on a big change is where
+the local models fall down. The cloud model could not be scored on this version: it ran out of budget after five
+tasks on an earlier version of the bank.
+
+**Claim.** On the A2 bank (sha256 prefix `35efc8ac52e8bbde`), H 1/10 (E167: 5), median 950 s; OR35 1/10 (E167: 3),
+median 2,007 s, with 4 context overflows at 131,072. Both passed only clearmail-7fe0a79c1. Three of H's four lost
+tasks were near misses (275/276, 105/111 and 100/106 graded tests). P5 (|H - OR35| <= 2) held at 0. P1 held and P2
+falsified on GS's partial 1/5 on the A1 bank. P3 and P4 VOID (amendment A2).
+
+**Use.** For unattended local coding on large changes, the specification has to be written down as tests, and
+even then expect half to fail ([[F194]]). This is a within-arm comparison: it does not say how far local trails the
+frontier when the tests are hidden. Answering that needs a cloud run on the A2 bank, which the owner has not
+funded.
+
+Evidence: `results/e168-results.md`, `results/e168/raw/`, prereg `results/e168-prereg.md` (amendments A1, A2). See
+[[F194]], [[F184]].

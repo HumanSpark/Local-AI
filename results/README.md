@@ -165,6 +165,9 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E163 | AMD HRX Loom vs production Halogen vs llama.cpp on Flash-Next (2026-11-16) | [data](e163/) · [pre-registration](e163-prereg.md) · [results](e163-results.md) |
 | E164 | Qwen4 Max against production and the cloud references (2026-11-17) | [data](e164/) · [pre-registration](e164-prereg.md) · [results](e164-results.md) |
 | E165 | re-running the corrected tests on every arm (2026-11-17) | [data](e165/) · [pre-registration](e165-prereg.md) · [results](e165-results.md) |
+| E166 |  | [data](e166/) |
+| E167 | harder coding bank, visible tests (2026-11-18) | [results](e167-results.md) |
+| E168 | same ten changes, tests hidden (2026-11-19) | [results](e168-results.md) |
 
 ## Other evidence
 

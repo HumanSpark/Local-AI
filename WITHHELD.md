@@ -62,6 +62,10 @@ Not shipped, and not evidence the findings depend on for their numbers. Each pre
 | results/e158/ | 1 | per-task records and test output from the owner's private repositories (E158, on the E156 bank) |
 | results/e159/ | 2 | per-task records and test output from the owner's private repositories (E159, on the E156 bank) |
 | results/e160/ | 1 | raw answers and drafts that quote internal documents; the scores are in results/e160-results.md |
+| results/e167-prereg.md | 1 | names files, tests and commits from the owner's private repositories; the scores are in results/e167-results.md |
+| results/e167/ | 2 | task prompts, audits, per-task records and test output from the owner's private repositories (E167 bank) |
+| results/e168-prereg.md | 1 | quotes commit notes and test names from the owner's private repositories; the scores are in results/e168-results.md |
+| results/e168/ | 3 | task prompts built from private commit notes, per-task records and test output (E168 bank) |
 | results/raw/e108/claudecode- | 2 | captured Claude Code requests; each embeds the owner's private instruction files in full |
 
 Cited by a shipped document:
@@ -77,6 +81,13 @@ Cited by a shipped document:
 | results/e159/raw/HF/harness.log | results/e159-prereg.md |
 | results/e159/raw/HF/superseded/sparkforge-baab4031f.interrupted-20261112T1923Z.json | results/e159-prereg.md |
 | results/e160/writing-judge.json | results/e160-results.md |
+| results/e167-prereg.md | FINDINGS.md |
+| results/e167/bank.jsonl | results/e167-results.md |
+| results/e167/raw/window.log | results/e167-results.md |
+| results/e168-prereg.md | FINDINGS.md |
+| results/e168/bank.jsonl | results/e168-results.md |
+| results/e168/gold-A2.log | results/e168-results.md |
+| results/e168/raw/window.log | results/e168-results.md |
 
 ## Cited but not in the repository (4)
 

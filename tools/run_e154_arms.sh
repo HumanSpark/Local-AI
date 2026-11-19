@@ -9,7 +9,7 @@
 # Anthropic, thinking on, prompt cache on, CostLedger ceiling $25 (a BudgetExceeded stops the arm, it is not retried).
 # Local arms H Q T27 TL open ONE idle window (relay_bench_window.sh idle-down), start each engine on 127.0.0.1:8154,
 # wait for /v1/models, run the bank, stop the engine; the EXIT trap restores and VERIFIES the relay. After each arm the
-# raw directory is committed and pushed (bank both sides). Prereg: results/e154-prereg.md (written before any arm).
+# raw directory is stripped (full copies to gitignored ../transcripts/<arm>), committed and pushed (bank both sides). Prereg: results/e154-prereg.md (written before any arm).
 #
 # E156 (2026-11-05): arm O = Opus 5.5 (same route and body as S, own ledger); env E154_ISOLATE=podman runs every
 # task in the harness's isolation container (F182); E154_TASK_TIMEOUT sets the per-task budget (default 1200 s);
@@ -39,6 +39,11 @@
 # E165 (2026-11-17, test audit re-run): E154_KW_SUITES picks which E160 suites run_kw_suite runs (default all eight),
 # E154_TU_PREFIX the tool-use label prefix (default e160, so E160's files are not overwritten by a re-run), E163_SKIP_SPEED=1
 # skips the E163 speed block, E154_TAG the banking commit's scope. Defaults reproduce E154-E163 exactly.
+#
+# E167 (2026-11-18, harder coding bank): arm GS = openai/gpt-6.1-sol on OpenRouter, provider pinned to OpenAI, provider
+# default reasoning (as E162), temperature 1.0, no --prompt-cache (OpenAI caches automatically; the flag adds Anthropic
+# cache_control), own ledger, hard ceiling E154_GS_CEILING (default 5, owner 2026-11-18). Arm NM = Nemotron-3.5-Super
+# 120B-A12B UD-Q4_K_XL on upstream llama.cpp 5297534 (2026-11-18), card sampling, -c 131072 (E166 and E167).
 #
 # Usage: tools/run_e154_arms.sh [--dry-run] ARM [ARM ...]    ARM in S O H Q QN T27 TL OR35 OR122 TS45 TS4 RA GL DC HX HM HL HF HFL
 
@@ -76,6 +81,8 @@ LOOM_SERVE=/home/bench/loom-e163/sdk/.venv/bin/loom-serve
 LOOM_PKG=/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/model.json
 FN_GGUF=$M/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf
 FN_MTP=$M/qwen3.8-flash-next-mtp-766911a/mtp-Qwen3.8-Flash-Next-Q8_0.gguf
+LLAMA_E166=$REPO/llama.cpp/wt/5297534/build/bin/llama-server   # E166/E167, upstream 2026-11-18
+NM_GGUF=$M/nemotron-3.5-super-120b-udq4kxl/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-UD-Q4_K_XL-00001-of-00003.gguf
 SMOKE=${E163_SMOKE:-0}
 KW_SUITES=${E154_KW_SUITES:-"l5 pr1 writing kw mt-l4 mt-long tooluse h6-date"}
 TU_PREFIX=${E154_TU_PREFIX:-e160}
@@ -83,7 +90,9 @@ SKIP_SPEED=${E163_SKIP_SPEED:-0}
 TAG=${E154_TAG:-e154}
 TRANSCRIPTS=${E163_TRANSCRIPTS:-0}   # 1 = diagnostic re-run of LM's five lost tool tasks with full transcripts (unscored)
 E163_TX_TASKS=n1-email,n2-reminder,c4-date-before,c4b-date-before-onlyif,c5b-date-after-onlyif
-ledger_for() { case "$1" in S) echo "$LEDGER_DIR/sonnet-ledger.jsonl" ;; O) echo "$LEDGER_DIR/opus-ledger.jsonl" ;; esac; }
+ledger_for() { case "$1" in S) echo "$LEDGER_DIR/sonnet-ledger.jsonl" ;; O) echo "$LEDGER_DIR/opus-ledger.jsonl" ;; GS) echo "$LEDGER_DIR/gpt61sol-ledger.jsonl" ;; esac; }
+GS_BODY='{"usage":{"include":true},"max_tokens":16000,"provider":{"order":["OpenAI"],"allow_fallbacks":false}}'
+GS_CEILING=${E154_GS_CEILING:-5}
 SONNET_BODY='{"usage":{"include":true},"reasoning":{"max_tokens":8000},"max_tokens":16000,"provider":{"order":["Anthropic"],"allow_fallbacks":false}}'
 
 DRY=0
@@ -91,7 +100,7 @@ ARMS=()
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
-    S|O|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
+    S|O|GS|NM|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
     *) echo "unknown arg $a. hint: tools/run_e154_arms.sh [--dry-run] S H Q T27 TL"; exit 2 ;;
   esac
 done
@@ -114,7 +123,7 @@ N_BANK=$(grep -c . "$BANK")
 
 sampling() {  # vendor sampling per arm (Talus MODELS.md table; Qwen3-Coder card; Anthropic needs 1.0 with thinking)
   case "$1" in
-    S|O) echo '{"temperature":1.0}' ;;
+    S|O|GS) echo '{"temperature":1.0}' ;;
     H|HF) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0}' ;;   # HF: no effort sent, template default
     HX) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"reasoning_effort":"xhigh"}' ;;
     HM) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"reasoning_effort":"medium"}' ;;
@@ -128,6 +137,7 @@ sampling() {  # vendor sampling per arm (Talus MODELS.md table; Qwen3-Coder card
     RA) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"presence_penalty":0}' ;;   # Raon card, coding
     GL) echo '{"temperature":0.95,"top_p":1.0}' ;;   # GLM-5.3-Flash card, its agentic-coding (DeepSWE) setting
     DC) echo '{"temperature":1.0,"top_p":1.0}' ;;    # deepseek-ai V4.1-Flash-1017 card (the ISTA card states none)
+    NM) echo '{"temperature":1.0,"top_p":0.95}' ;;   # Nemotron-3.5-Super card, text; thinking = template default
   esac
 }
 
@@ -157,15 +167,33 @@ stop_engines() {
   if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' >/dev/null; then stamp "FATAL: our engine survived SIGKILL"; return 1; fi
   return 0
 }
-relay_serving() { sudo -n "$WINDOW" status 2>/dev/null | grep -q 'ACTIVE (serving)'; }
+# A serving unit (gateway, or Halogen solo) AND a clear flag: a set flag answers 503 whatever is running.
+relay_serving() {
+  local s
+  s=$(sudo -n "$WINDOW" status 2>/dev/null)
+  grep -q 'ACTIVE (serving' <<<"$s" && grep -q 'maintenance flag: clear' <<<"$s"
+}
+# "active" is not "answering": Halogen takes 1-2 min to load after `up` (2026-11-18: an immediate check warned NOT
+# serving over a box that passed the probe minutes later). Poll the unit, then prove it end to end with the
+# production probe's code check (--dry-run writes nothing).
+verify_restored() {  # the probe is the authority; the status line is reported beside it, never instead of it
+  local t st
+  for t in $(seq 1 24); do
+    if timeout 120 python3 "$REPO/tools/production_probe.py" --dry-run --only code >>"$LOG" 2>&1; then
+      relay_serving && st="window status agrees" || st="window status DISAGREES (installed relay_bench_window.sh older than a7918e8?)"
+      stamp "relay restored, VERIFIED: production probe (code) passed; $st"; return 0
+    fi
+    sleep 15
+  done
+  stamp "WARNING: production probe still failing 6+ min after 'up' - run: sudo $WINDOW up, then $WINDOW status; log $LOG"; return 1
+}
 cleanup() {
   # Only a run that opened the window owns engines. A cloud-only run (S/O) must not pkill a concurrent local run's
   # engine when it exits (E156 runs cloud and local arms side by side).
   [ "$WINDOW_OPEN" -eq 1 ] && stop_engines
   if [ "$WINDOW_OPEN" -eq 1 ]; then
     sudo "$WINDOW" up 2>&1 | tee -a "$LOG"
-    if relay_serving; then stamp "relay restored, VERIFIED: status reports the gateway ACTIVE (serving)"
-    else stamp "WARNING: relay NOT serving after 'up' - run: sudo $WINDOW up, then $WINDOW status"; fi
+    verify_restored
   fi
 }
 trap cleanup EXIT
@@ -218,13 +246,20 @@ start() {
       esac
       "$LLAMA_E155" -m "$gguf" "${extra[@]}" -c "${E155_CTX:-131072}" -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
+    NM)  # E166: -m takes shard 1 of 3; -np omitted (auto slots keep the unified KV pool, E89)
+      "$LLAMA_E166" -m "$NM_GGUF" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
   esac
 }
 
-wait_ready() {
+wait_ready() {  # wait_ready <arm>; 0 = ready, 1 = not ready in 900 s, 2 = the engine died while loading
   local t id
   for t in $(seq 1 180); do
     id=$(python3 -c "import json,urllib.request;print(json.load(urllib.request.urlopen('$URL/v1/models',timeout=5))['data'][0]['id'])" 2>/dev/null) && { echo "$id"; return 0; }
+    # A dead engine never becomes ready: E166's NM smoke died 6 s into the load (ErrorDeviceLost) and this loop kept
+    # polling for the full 900 s. A process engine has SERVER_PID; a Halogen engine is the e154-<arm> container.
+    if [ -n "$SERVER_PID" ] && ! kill -0 "$SERVER_PID" 2>/dev/null; then return 2; fi
+    if [ -z "$SERVER_PID" ] && [ -z "$(podman ps -q --filter "name=e154-$1" 2>/dev/null)" ] && [ "$t" -gt 2 ]; then return 2; fi
     sleep 5
   done
   return 1
@@ -266,6 +301,15 @@ run_kw_suite() {
 bank_arm() {  # commit + push one arm's raw results (bank both sides)
   local arm=$1
   [ "$NOBANK" = 1 ] && { stamp "arm $arm: banking left to the caller (E154_NOBANK=1)"; return 0; }
+  # Strip transcripts/diffs BEFORE committing: full records quote private repos (E168 8754e7f pushed them unstripped).
+  # Full copies go to the gitignored sibling transcripts/<arm>; refuse to bank if that directory would be tracked.
+  local keep; keep="$(dirname "$RAW")/transcripts/$arm"
+  if ! git -C "$REPO" check-ignore -q "$keep/probe.json"; then
+    stamp "WARNING: $keep is not gitignored - NOT banking arm $arm; strip and commit by hand"; return 0
+  fi
+  if ! python3 "$REPO/tools/strip_task_transcripts.py" "$RAW/$arm" "$keep" >>"$LOG" 2>&1; then
+    stamp "WARNING: stripping arm $arm failed - NOT banking; strip and commit by hand"; return 0
+  fi
   git -C "$REPO" add "$RAW/$arm" "$LOG" 2>/dev/null
   local ledger; ledger=$(ledger_for "$arm")
   [ -n "$ledger" ] && git -C "$REPO" add "$ledger"
@@ -289,7 +333,7 @@ run_bank() {  # run_bank <arm> <model id> <endpoint> [extra harness args...]
       --timeout "$TASK_TIMEOUT" --isolate "$ISOLATE" --sampling "$(sampling "$arm")" --output "$RAW/$arm/$id.json" "$@" >>"$RAW/$arm/harness.log" 2>&1
     rc=$?
     stamp "$arm $k/$N_BANK $id: rc=$rc $(python3 -c "import json;r=json.load(open('$RAW/$arm/$id.json'));print(r['status'],'turns',r['turns'],'wall',round(r['wall_time']),'s cost',round(r['usage']['cost_usd'],4))" 2>&1 | tail -1)"
-    if { [ "$arm" = S ] || [ "$arm" = O ]; } && grep -q BudgetExceeded "$RAW/$arm/harness.log"; then stamp "S: budget ceiling reached - arm stops here"; break; fi
+    if { [ "$arm" = S ] || [ "$arm" = O ] || [ "$arm" = GS ]; } && grep -q BudgetExceeded "$RAW/$arm/harness.log"; then stamp "$arm: budget ceiling reached - arm stops here"; break; fi
   done
 }
 
@@ -297,6 +341,17 @@ for a in "${ARMS[@]}"; do stamp "arm requested: $a"; done
 [ "$DRY" -eq 1 ] && { stamp "dry run: ${#TASK_IDS[@]} tasks split to $TASKDIR"; exit 0; }
 
 for arm in "${ARMS[@]}"; do
+  if [ "$arm" = GS ]; then
+    ledger=$(ledger_for GS); mkdir -p "$(dirname "$ledger")"
+    ORK="$(python3 /opt/vault/tools/vault_get.py SPARKBENCH_OPENROUTER_API_KEY)" || { stamp "FATAL: vault read failed"; exit 1; }
+    export ORK
+    stamp "GS start (openai/gpt-6.1-sol, isolate $ISOLATE, ceiling \$$GS_CEILING); ledger spent so far \$$(python3 -c "import sys;sys.path.insert(0,'tools');from coding_harness import CostLedger;print(round(CostLedger('$ledger',$GS_CEILING).spent(),4))")"
+    run_bank GS openai/gpt-6.1-sol https://openrouter.ai/api/v1 --api-key env:ORK \
+      --usd-ceiling "$GS_CEILING" --ledger "$ledger" --extra-body "$GS_BODY"
+    unset ORK
+    bank_arm GS
+    continue
+  fi
   if [ "$arm" = S ] || [ "$arm" = O ]; then
     [ "$arm" = S ] && cmodel=anthropic/claude-sonnet-5.5 || cmodel=anthropic/claude-opus-5.5
     ledger=$(ledger_for "$arm"); mkdir -p "$(dirname "$ledger")"
@@ -321,7 +376,9 @@ for arm in "${ARMS[@]}"; do
   stamp "$arm start"
   t0=$(date +%s)
   start "$arm" "$slog"
-  if ! model=$(wait_ready); then stamp "FAIL $arm: not ready after 900 s"; stop_engines; continue; fi
+  model=$(wait_ready "$arm"); wr=$?
+  if [ "$wr" -eq 2 ]; then stamp "FAIL $arm: engine exited while loading - see $slog"; stop_engines; continue; fi
+  if [ "$wr" -ne 0 ]; then stamp "FAIL $arm: not ready after 900 s"; stop_engines; continue; fi
   stamp "$arm ready in $(( $(date +%s) - t0 ))s, model '$model'; GPU memory in use: VRAM $(( $(cat /sys/class/drm/card0/device/mem_info_vram_used) >> 20 )) MiB, GTT $(( $(cat /sys/class/drm/card0/device/mem_info_gtt_used) >> 20 )) MiB (offload evidence)"
   case "$arm" in
     LM|LC|HS)

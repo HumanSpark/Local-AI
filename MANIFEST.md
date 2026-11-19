@@ -1989,3 +1989,19 @@ in `results/e159-prereg.md` from the start; the MANIFEST entry was missed until 
   rc 0, `results/e163/loom-fetch.log`) into `/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/` (hard links, no copy).
 - **hrx-loom 0.2.0.dev0** wheel, ROCm/hrx-system CI artifact 13628412621 (`314238a8`), sha256 `9dc1e352f51e...`, venv
   `/home/bench/loom-e163/sdk/.venv` (`results/e163/loom-install.json`). Licence Apache-2.0 WITH LLVM-exception.
+
+## E166 (2026-11-18): Nemotron-3.5-Super 120B-A12B (pinned and fetched 2026-11-18, sha256 verified on arrival 3/3)
+
+- **Role:** next candidate from the first weekly model scan (`results/model-scan/2026-11-17.md`, rank 2). Fetch
+  command `results/e166/fetch.cmd`, log `results/e166/fetch.log`.
+- **Why this quant:** UD-Q4_K_XL is the same quant family as production's Flash-Next GGUF; 86.9 GB (80.9 GiB) leaves
+  KV room under the ~105 GiB GTT ceiling. The ggml-org Q4_0 (72.1 GB) and the MTP draft head are the alternatives.
+- **unsloth/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-GGUF `UD-Q4_K_XL`** @ 75a5829055f69a0359085ae6bbd0a81b60bc05c6,
+  124B total / 12B active, VL (mmproj not fetched: text-only benches). Dir
+  `/opt/models/staging/nemotron-3.5-super-120b-udq4kxl/`. Sizes and LFS oids (sha256) from the HF API; the locally
+  computed sha256 of all three equals its oid (`results/e166/sha256-arrival.txt`). Served by upstream llama.cpp
+  `52975342f` (2026-11-18, Vulkan Release, LLAMA_CURL=OFF, `llama.cpp/wt/5297534`; build log
+  `results/e166/llama-5297534-build.log`):
+  - `...-UD-Q4_K_XL-00001-of-00003.gguf` 7,874,568 B, oid 04e0b45e70ab5c86c6b5d3b0133cc35fc10861015bac7dcff867dcf115dc81c5
+  - `-00002-of-00003.gguf` 49,851,272,832 B, oid 868a7fa360ff10bc7e072e4bb4f8771b280ca35a087a55125bc21f7ebb9962b7
+  - `-00003-of-00003.gguf` 37,048,096,032 B, oid 684abb5b5306b18a046ee69e3375a0e863d14d265e0ffa52c33442d375d08b7d

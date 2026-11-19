@@ -14,6 +14,10 @@
 # runner stops loudly. The ledger is re-read at start, so the ceiling holds across restarts and across suites.
 # Amendment 1 (E164): /tokenize answers a UTF-8 byte count (an upper bound) and /props answers --ctx, because the
 # runners' context preflight needs both and OpenRouter has neither. Streaming is refused (no runner uses it, and its usage arrives in a chunk this proxy would have to parse).
+# Hardening (2026-11-17, security review): the proxy spends money on behalf of whoever reaches it. A request whose Host
+# header is not this listener's own address is refused (defeats DNS rebinding from a browser), and a POST must carry
+# Content-Type application/json (a cross-site form cannot send that without a CORS preflight, which this proxy never
+# answers). Every runner already sends both. Another local account can still reach 127.0.0.1; the USD ceiling bounds it.
 
 from __future__ import annotations
 
@@ -69,7 +73,30 @@ def make_handler(
             self.end_headers()
             self.wfile.write(data)
 
+        def _refused(self, post: bool) -> bool:
+            host = self.headers.get("Host", "")
+            if host not in (f"127.0.0.1:{args.listen}", f"localhost:{args.listen}"):
+                self._reply(
+                    403,
+                    {
+                        "error": f"cloud_proxy refuses Host {host!r}. hint: call http://127.0.0.1:{args.listen}"
+                    },
+                )
+                return True
+            ctype = self.headers.get("Content-Type", "").split(";")[0].strip().lower()
+            if post and ctype != "application/json":
+                self._reply(
+                    415,
+                    {
+                        "error": f"cloud_proxy needs Content-Type application/json, got {ctype!r}"
+                    },
+                )
+                return True
+            return False
+
         def do_GET(self) -> None:  # noqa: N802 - http.server API
+            if self._refused(post=False):
+                return
             if self.path == "/health":
                 self._reply(
                     200, {"status": "ok", "proxy": "cloud_proxy", "model": args.model}
@@ -93,6 +120,8 @@ def make_handler(
                 )
 
         def do_POST(self) -> None:  # noqa: N802
+            if self._refused(post=True):
+                return
             if self.path == "/tokenize":
                 # E164 amendment 1: OpenRouter has no tokenizer endpoint. A byte-level BPE token covers at least
                 # one byte, so the UTF-8 byte count is a strict UPPER bound: the context preflight can over-refuse,

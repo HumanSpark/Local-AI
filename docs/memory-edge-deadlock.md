@@ -17,6 +17,12 @@
 # recover. Read this before any large-model (>~60 GiB weights) session.
 -->
 
+## STATUS 2026-11-18: IT REPRODUCED on kernel 7.0.0-42 (F193) - the deadlock is NOT fixed
+
+A 75 GiB load wedged in `drm_suballoc_new` (exact fingerprint, VRAM parked at 2.00 GiB) hours after a DeviceLost on
+the same box with no reboot between, while container churn ran beside it. Power cycle required. Treat rules 1, 5 and
+6 below as binding again for any load over ~60 GiB. The 2026-08-29 status below holds only for clean-state loads.
+
 ## STATUS 2026-08-29: the SIZE trigger is retracted, the contention trigger did not reproduce
 
 E89 (F109) ran a five-rung ladder to **105.15 GiB absolute GTT**, all rungs served,

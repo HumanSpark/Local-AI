@@ -12,6 +12,13 @@
 # site-packages (read-only) and the task tree (read-write), with no network. The vault (/opt/vault), home
 # directories, /tmp and the harness's environment are absent. Default "none" keeps E154's behaviour.
 #
+# Created files (HARNESS_VERSION 2026-11-19.1, E168 A2): get_diff() also records untracked files the agent created,
+# excluding harness-planted visible tests and the graded runner. Before this, saved diffs omitted new files.
+# Visible tests (HARNESS_VERSION 2026-11-18.1, E167, owner 2026-11-18): a task spec with "visible_tests": true gets its
+# test files, plus .graded_tests.sh holding the exact verify command, written into the agent's tree before the agent
+# starts. Verify is unchanged: a fresh container, test files rewritten from the fix commit, so editing them gains
+# nothing. Specs without the key run exactly as before (hidden tests).
+#
 # Task budget (HARNESS_VERSION 2026-11-15.1, owner 2026-11-15): --timeout is a hard per-task budget. Before this,
 # the budget was checked only at the start of each turn and the OpenAI client waited up to 600 s per call with 2
 # retries, so the last call could overrun by up to 30 minutes. In E158, OR122's clearmail task was killed by the
@@ -64,8 +71,9 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 # Bump on any change to how a task is run, stopped or recorded; every result record carries it.
-HARNESS_VERSION = "2026-11-15.1"
+HARNESS_VERSION = "2026-11-19.1"
 TRANSIENT_RETRIES = 2
+VISIBLE_RUNNER = ".graded_tests.sh"  # visible-test tasks: the exact verify command, so the agent runs what grading runs
 
 
 class CallDeadline(Exception):
@@ -544,11 +552,22 @@ class SandboxedCodeEnvironment:
         git = "git -c core.fsmonitor=false -c core.hooksPath=/dev/null --no-pager diff --no-ext-diff --no-textconv"
         committed = self.run_shell(f"{git} {self.initial_sha}..HEAD", self.sandbox_dir, 120).stdout
         working = self.run_shell(git, self.sandbox_dir, 120).stdout
+        # Files the agent CREATED are untracked, so plain `git diff` never shows them (E168 A2: GS's saved diffs could
+        # not be re-applied). Harness-planted files (visible tests, the graded runner) are excluded by pathspec.
+        excludes = " ".join(shlex.quote(f":(exclude){p}") for p in getattr(self, "diff_exclude", []))
+        untracked = self.run_shell(
+            "git -c core.fsmonitor=false ls-files --others --exclude-standard -z -- . "
+            f"{excludes} | xargs -0 -r -n1 {git} --no-index -- /dev/null",
+            self.sandbox_dir,
+            120,
+        ).stdout
         out = ""
         if committed:
             out += f"### committed since {self.initial_sha[:12]}\n{committed}"
         if working:
             out += f"\n### uncommitted working tree\n{working}"
+        if untracked:
+            out += f"\n### created (untracked)\n{untracked}"
         return out if out else "(no changes)"
 
 
@@ -734,6 +753,9 @@ class CodingHarness:
         )
         self.start_time = time.time()
         try:
+            if spec.get("visible_tests"):
+                self._write_files(env, {**spec["test_files"], VISIBLE_RUNNER: spec["verify_cmd"] + "\n"})
+                env.diff_exclude = [*spec["test_files"], VISIBLE_RUNNER]
             result = self._agent_loop(env, spec["prompt"])
             diff = result["diff"]
             self.partial["diff"] = diff
@@ -773,18 +795,24 @@ class CodingHarness:
         if getattr(env, "container", None) is not None:
             # Fresh container first: nothing the agent started may touch the hidden tests or the verify run.
             env.fresh_container()
-            for rel, content in test_files.items():
+        CodingHarness._write_files(env, test_files)
+        r = env.run_shell(verify_cmd, root, timeout)
+        return r.returncode, r.stdout + r.stderr
+
+    @staticmethod
+    def _write_files(env: SandboxedCodeEnvironment, files: dict[str, str]) -> None:
+        """Write repo-relative files into the task tree (through the container when there is one)."""
+        root = env.sandbox_dir.resolve()
+        if getattr(env, "container", None) is not None:
+            for rel, content in files.items():
                 env.file_op("write", rel, content=content)
-            r = env.run_shell(verify_cmd, root, timeout)
-            return r.returncode, r.stdout + r.stderr
-        for rel, content in test_files.items():
+            return
+        for rel, content in files.items():
             target = (root / rel).resolve()
             if not target.is_relative_to(root):
                 raise ValueError(f"test file escapes sandbox: {rel}; hint: bank entries must use repo-relative paths")
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(content)
-        r = env.run_shell(verify_cmd, root, timeout)
-        return r.returncode, r.stdout + r.stderr
 
     def _call_model(self, deadline: float, **kw: Any) -> Any:
         """One chat completion bounded by the task deadline; raises CallDeadline when the budget runs out."""

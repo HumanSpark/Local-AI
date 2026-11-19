@@ -1,0 +1,39 @@
+captured 2026-11-18T08:04:34+00:00 kernel 7.0.0-42-generic
+client-version: v11.1.0
+machine-id: e973fa03675c40c7bdcad95722304b8e
+architecture: amd64
+cpu-model: AMD RYZEN AI MAX+ 395 w/ Radeon 8060S
+last-check: 2026-11-18T07:24:36Z
+--- pid 3893005 cmdline
+/home/bench/sparkbench/llama.cpp/wt/5297534/build/bin/llama-server -m /opt/models/staging/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port 8166 --no-webui 
+wchan: drm_suballoc_new
+State:	D (disk sleep)
+VmSize:	109642336 kB
+VmRSS:	   82528 kB
+--- io
+rchar: 23663765
+wchar: 664
+syscr: 6016
+syscw: 22
+read_bytes: 50597888
+write_bytes: 8192
+cancelled_write_bytes: 0
+--- amdgpu
+mem_info_vram_used 2147483648
+mem_info_gtt_used 80576790528
+mem_info_vis_vram_used 2147483648
+--- D-state tasks
+    PID STAT     ELAPSED WCHAN                            COMMAND
+3893005 D          08:16 drm_suballoc_new                 llama-server
+--- free
+               total        used        free      shared  buff/cache   available
+Mem:          124124       96914        1474           0       27346       27210
+Swap:           8191        1147        7044
+--- vmstat
+procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu-------
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st gu
+17  0 1175488 1510132 116704 27885776   42   60  3893   340 1938    0  1  0 99  0  0  0
+16  0 1175488 1733244 116704 27886512    0    0   104     4 21407 1706 50  0 49  0  0  0
+16  0 1175488 1742096 116704 27886748    0    0   184     0 19313 1235 47  0 53  0  0  0
+--- dmesg (may be denied)
+dmesg: read kernel buffer failed: Operation not permitted

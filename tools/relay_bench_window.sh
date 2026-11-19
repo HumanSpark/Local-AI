@@ -63,6 +63,10 @@ NO_SERVING_UNIT=none
 # sparkrouter-halogen (2026-11-07): the smart/code tiers' Flash-Next on Halogen pins ~62 GiB; left
 # resident, no large-model bench fits. Stopped and restored like the others when active.
 IDLE_UNITS=(chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service)
+# Under Halogen solo this idle unit IS production. `status` reported "NONE ACTIVE" with it serving (2026-11-18: the
+# bench runner's relay check printed "NOT serving" over a production probe that passed), so status names it as the
+# serving unit when no llama-gateway unit is up. Only status reads this; down/up still treat it as an idle unit.
+SOLO_UNIT=sparkrouter-halogen.service
 IDLE_STATE="$RUNTIME/bench-window.idle-units"
 BENCH=/home/bench/sparkbench/tools/bench_qwen38.sh
 BENCH_TRIPLET=/home/bench/sparkbench/tools/bench_qwen38_triplet.sh
@@ -138,10 +142,12 @@ status() {
     local serving
     if serving="$(active_unit)"; then
         echo "  serving unit    : $serving : ACTIVE (serving)"
+    elif unit_active "$SOLO_UNIT"; then
+        echo "  serving unit    : $SOLO_UNIT : ACTIVE (serving, Halogen solo)"
     else
         # Say which units were CHECKED. "inactive" against one hardcoded name is what made the
         # 2026-09-04 reading look like a stopped gateway beside four running llama-servers.
-        echo "  serving unit    : NONE ACTIVE of: ${UNIT_CANDIDATES[*]}"
+        echo "  serving unit    : NONE ACTIVE of: ${UNIT_CANDIDATES[*]} $SOLO_UNIT"
     fi
     if [ -e "$FLAG" ]; then
         echo "  maintenance flag: SET -> $(cat "$FLAG" 2>/dev/null)"

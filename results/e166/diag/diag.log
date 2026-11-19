@@ -1,0 +1,36 @@
+[2026-11-18T07:56:15+00:00] opening idle window
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-18T07:56:18+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-18T07:56:15+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[2026-11-18T07:56:19+00:00] window open; kernel 7.0.0-42-generic
+[2026-11-18T07:56:19+00:00] C start: 5297534 Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf; GTT used 0 GiB; free 49 GiB, cache 69 GiB
+[2026-11-18T08:02:59+00:00] C verdict timeout after 400 s; GTT used 75 GiB; key lines: 
+[2026-11-18T08:03:28+00:00] B start: 9fba51d NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-UD-Q4_K_XL-00001-of-00003.gguf; GTT used 75 GiB; free 23 GiB, cache 20 GiB
+[2026-11-18T08:03:33+00:00] B verdict EXITED after 10 s; GTT used 75 GiB; key lines: 
+[2026-11-18T08:03:38+00:00] A start: 5297534 NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-UD-Q4_K_XL-00001-of-00003.gguf; GTT used 75 GiB; free 23 GiB, cache 20 GiB
+[2026-11-18T08:03:43+00:00] A verdict EXITED after 10 s; GTT used 75 GiB; key lines: 
+[2026-11-18T08:03:48+00:00] done
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-18T08:03:51+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service
+  maintenance flag: clear
+  llama-server processes: 3893005 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+[2026-11-18T08:03:51+00:00] relay up requested (verify with the production probe, not the window status: it looks for retired units)
