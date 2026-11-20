@@ -1,37 +1,33 @@
-# Release Notes - sparkbench-data-r5.13
+# Release Notes - sparkbench-data-r5.14
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.13)
+## This release (r5.14)
 
 - **Findings:** 195 in FINDINGS.md, newest F195.
 - **Claims:** 60 active in claims.yml.
-- **New finding F194 (E167): on big multi-file changes the best local setup passes half of what a frontier model does.**
-  Ten real changes of 150-2,400 lines across 3-9 files, each with the project's own tests in full view. GPT-6.1 Sol
-  passed 10 of 10, at about two minutes a task and $1.95 in all. Production (Flash-Next on Halogen) passed 5, at about
-  eleven minutes a task; Ornith 35B passed 3. The local models stopped and declared the work done while tests still
-  failed, so more time would not have helped.
-- **New finding F195 (E168): hide the tests and both local setups fall to 1 of 10.** Same ten changes, with only the
-  developer's own note and a list of the names the change adds. Production fell from 5 to 1, Ornith from 3 to 1. Most
-  of the local models' skill on big changes is building to a specification they are shown. The cloud model could not be
-  scored on this version (its budget ran out after five tasks on an earlier version), so this does not say how far
-  local trails the frontier with the tests hidden.
-- **New finding F193: the graphics-memory deadlock is back on kernel 7.0.0-42.** A 75 GiB model load froze the GPU
-  after an earlier load had crashed it the same day, and only a power cycle cleared it. F109's "newer kernels fixed
-  it" now holds only for loads on a freshly rebooted machine.
-- New evidence: `results/e167-results.md`, `results/e168-results.md`, `results/e166/`. The E167/E168 task banks and
-  per-task records are withheld (WITHHELD.md): they quote private repositories.
+- **README: what production runs now covers speech too.** The section gains a table of all three production jobs:
+  the language model (unchanged), speech to text (Whisper large-v3-turbo with voice-activity detection and
+  host-versus-other tagging, since 18 July 2026, F44-F46) and text to speech (Chatterbox cloning VCTK speaker p239,
+  since 1 August 2026, F56; Kokoro bf_emma as the opt-in fallback).
+- **New page VOICES.md with eleven audio samples** in `voices/`: the two VCTK reference recordings, the production voice
+  (a short take and the 68-second sample that closed the narrator search), the runner-up voice, VoxCPM2's clones of
+  both voices, Kokoro bf_emma, and one garbled CosyVoice3 render (F55). Most read the same line. F5-TTS and Fish
+  s2-pro samples are not published (licence). The VCTK CC BY 4.0 attribution is on the page.
+- **VOICES.md documents how numbers, dates and symbols are written out before speaking**, with a before/after pair
+  in the production voice (samples 10 and 11): Chatterbox does no number handling, and the Whisper intelligibility
+  check cannot see a misread number. Ships the rewriter `tts-bench/speakable.py` and its 183 tests,
+  `tests/test_speakable.py`.
+- No finding, claim or evidence file changes.
 
 ## Changed claims (old -> new)
 
-- Coding recommendation: "the best local setups match Sonnet 5.5 and Opus 5.5 on real repository work" (F183) ->
-  holds for small issue-style fixes; large multi-file changes are frontier work (F194, F195).
-- F109 (deadlock not reproduced on kernel 7.0): -> holds for clean-state loads only (F193).
+- (none.)
 
 ## Retracted claims
 
-- None.
+- (none.)
 
 ## Completeness
 

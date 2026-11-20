@@ -51,6 +51,14 @@ Qwen3.8-Flash-Next on this machine, one request at a time, thinking off ([F180](
 
 ### What production runs now
 
+| job | engine | model or voice | in service since | evidence |
+|---|---|---|---|---|
+| Language model | Halogen 0.18.23 | Qwen3.8-Flash-Next, community template, effort `low` by default | 13 November 2026 | [F186](FINDINGS.md#f186), [F187](FINDINGS.md#f187) |
+| Speech to text | whisper.cpp | Whisper large-v3-turbo with Silero voice-activity detection, plus host-versus-other speaker tagging | 18 July 2026 | [F44](FINDINGS.md#f44), [F45](FINDINGS.md#f45), [F46](FINDINGS.md#f46) |
+| Text to speech | Chatterbox | British female voice cloned from VCTK speaker p239; Kokoro `bf_emma` is an opt-in fallback | 1 August 2026 | [F56](FINDINGS.md#f56), [VOICES.md](VOICES.md) |
+
+Everything runs on this one machine and no audio or text leaves it. Speech to text turns a meeting recording into a transcript at about 28 times real time, with each line tagged as the host or someone else (97.2% correct across four real calls). Voice-activity detection is not optional: without it Whisper invents "Thank you." over silence. Text to speech narrates written pieces; [VOICES.md](VOICES.md) has the samples behind the choice, including the voices and engines that lost.
+
 Since 13 November 2026 the machine serves Qwen3.8-Flash-Next on Halogen with a community chat template (froggeric v22.5, recorded in [MANIFEST.md](MANIFEST.md)) and reasoning effort `low` unless a request asks for more. The template is what makes `low` take effect: on the stock template, low thinks barely less than medium.
 
 | setting | coding fixes solved | median minutes per fix | eight kinds of work vs maximum effort |
@@ -68,15 +76,16 @@ Coding is [F187](FINDINGS.md#f187) (a re-run of the same ten fixes on 13 Novembe
 | Check a published number | [claims.md](claims.md) - every claim with its value, status and evidence links ([claims.yml](claims.yml) is the machine-readable copy) |
 | Read an experiment | [experiments.md](experiments.md) indexes the earlier experiments, one file each; [results/](results/) lists every experiment by number with its pre-registration, results and raw data |
 | See what changed in each release | [RELEASE-NOTES.md](RELEASE-NOTES.md) |
+| Hear the production voice and the candidates it beat | [VOICES.md](VOICES.md) |
 | Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
 
-## Current release: r5.13 (findings through 19 November 2026)
+## Current release: r5.14 (findings through 19 November 2026)
 
-r5.13 adds three findings. [F194](FINDINGS.md#f194): on ten big multi-file changes with the tests in view, GPT-6.1 Sol passed all ten and production passed five. [F195](FINDINGS.md#f195): with the tests hidden, both local setups passed one. Small fixes stay local; big changes are frontier work. [F193](FINDINGS.md#f193): the graphics-memory deadlock recurred on a newer kernel, so large model loads need a freshly rebooted machine. Production and its setting below are unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r5.14 says what production runs for speech as well as text: the table under "What production runs now" adds speech to text (Whisper large-v3-turbo) and text to speech (a Chatterbox voice cloned from VCTK speaker p239). A new page, [VOICES.md](VOICES.md), has audio samples of the production voice and the voices and engines it was chosen over, and shows how numbers and dates are written out so the voice reads them correctly. No finding, claim or evidence file changes. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.13 qualifies the coding recommendation (F194, F195) and F109 (F193) and changes no `claims.yml` entry. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3), F187 (r5.6) and now F194/F195 qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims, which F192 also bears on). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** r5.14 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3), F187 (r5.6) and F194/F195 (r5.13) qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims, which F192 also bears on). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
