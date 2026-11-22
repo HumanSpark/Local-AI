@@ -52,6 +52,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [e163_model_proxy.py](e163_model_proxy.py) | E163 amendment 1 - give Loom the `model` field the E160 suites do not send, changing nothing else. |
 | [e163_smoke.py](e163_smoke.py) | E163 transport smoke - learn which request shapes an engine accepts before any scored prompt is sent. |
 | [e163_speed.py](e163_speed.py) | E163 speed block - time E139's fixed prompts against ANY OpenAI-compatible server with one client-side ruler. |
+| [fetch_hf_model.sh](fetch_hf_model.sh) | Resumable, size-verified download of HF model file(s) to staging. |
 | [finetune_smoke.py](finetune_smoke.py) | DEFINITIVE proof that gfx1151 (Ryzen AI Max+ 395) can TRAIN, not just infer - the check that settles whether F35/Q6's "no ROCm training stack" wall is real. Runs the full training loop (forward -> loss -> backward -> optimizer step) with a PEFT LoRA adapter on the GPU, using a TINY model built from config (no download, no memory-edge risk). If loss goes down over a few steps, on-box training works. |
 | [fix_router_runpath.sh](fix_router_runpath.sh) | Repair the absolute RUNPATH in sparkrouter's llama-server build, then prove it by restarting. |
 | [gen_ctx_probe.py](gen_ctx_probe.py) | Generate deterministic long-context envelope-rung probes with needle re-planting |
@@ -88,6 +89,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e162.sh](run_e162.sh) | Run all of E162 unattended in the prereg's order: local drafts against production, cloud drafts alongside, grade, judges. |
 | [run_e164.sh](run_e164.sh) | Run E164 unattended - Qwen4 Max on the E160 suites via cloud_proxy, then E162 drafting, grade and one judge. |
 | [run_e165.sh](run_e165.sh) | Run E165 unattended - the test audit's re-runs (tool use v3, mt-l4, mt-long, H6) on arms Q, KFL, KX, HS, LM. |
+| [run_e170.py](run_e170.py) | Run and score E170 - memory-extraction jobs (the nightly "propose memory entries" shape) across local models. |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |

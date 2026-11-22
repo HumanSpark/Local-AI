@@ -1,29 +1,28 @@
-# Release Notes - sparkbench-data-r5.14
+# Release Notes - sparkbench-data-r5.15
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.14)
+## This release (r5.15)
 
-- **Findings:** 195 in FINDINGS.md, newest F195.
+- **Findings:** 197 in FINDINGS.md, newest F197.
 - **Claims:** 60 active in claims.yml.
-- **README: what production runs now covers speech too.** The section gains a table of all three production jobs:
-  the language model (unchanged), speech to text (Whisper large-v3-turbo with voice-activity detection and
-  host-versus-other tagging, since 18 July 2026, F44-F46) and text to speech (Chatterbox cloning VCTK speaker p239,
-  since 1 August 2026, F56; Kokoro bf_emma as the opt-in fallback).
-- **New page VOICES.md with eleven audio samples** in `voices/`: the two VCTK reference recordings, the production voice
-  (a short take and the 68-second sample that closed the narrator search), the runner-up voice, VoxCPM2's clones of
-  both voices, Kokoro bf_emma, and one garbled CosyVoice3 render (F55). Most read the same line. F5-TTS and Fish
-  s2-pro samples are not published (licence). The VCTK CC BY 4.0 attribution is on the page.
-- **VOICES.md documents how numbers, dates and symbols are written out before speaking**, with a before/after pair
-  in the production voice (samples 10 and 11): Chatterbox does no number handling, and the Whisper intelligibility
-  check cannot see a misread number. Ships the rewriter `tts-bench/speakable.py` and its 183 tests,
-  `tests/test_speakable.py`.
-- No finding, claim or evidence file changes.
+- **New finding F196 (E170): on memory-keeping jobs, production, Inkling-2-Mini and Tencent's Hy-Memory are all
+  near-perfect.** Fifty invented memory jobs full of traps. Inkling made no mistakes, production one, Hy-Memory a few
+  (it kept suggestions the person had turned down). Inkling was 6.5 times slower and gave no answer on 5 of 20
+  updates, so production runs the nightly memory job. Caveat: that slowdown was our conversion on plain llama.cpp with
+  no drafter, plus an undefined key in our own test, not the model alone; a fuller Inkling test is planned.
+- **New finding F197 (E171): Tencent's Hy4-Flash (220B) runs stably on this machine but slowly, and an hour per task
+  is too short for it.** Packed by the community Strata engine, it loaded in 38 seconds and ran all day without
+  trouble. It wrote about 24 tokens a second, a third of its packager's figure. On the ten big coding changes it
+  passed 3 to production's 5, and every task used its full hour. The two passed different tasks; production's
+  passes all took more steps than Hy4 managed in an hour. Too slow for this budget, not shown to be less capable.
+- New evidence: `results/e170-results.md`, `results/e170/`, `results/e171-results.md`, `results/e171/`. E171's
+  per-task records are withheld (WITHHELD.md): they quote private repositories.
 
 ## Changed claims (old -> new)
 
-- (none.)
+- (none. Production and its setting are unchanged.)
 
 ## Retracted claims
 

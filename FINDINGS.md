@@ -20,14 +20,14 @@
 
 ## Findings index
 
-195 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+197 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
 - **PLATFORM (74):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180) [F190](#f190) [F193](#f193)
 - **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
-- **CAPABILITY (7):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195)
+- **CAPABILITY (9):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195) [F196](#f196) [F197](#f197)
 - **QUALITY (2):** [F189](#f189) [F191](#f191)
 - **INSTRUMENT (1):** [F192](#f192)
 - **SPEED (1):** [F188](#f188)
@@ -232,6 +232,8 @@
 | [F193](#f193) | the amdgpu suballocator deadlock is back on kernel 7.0.0-42: a 75 GiB load wedged after a DeviceLost earlier the same day | PLATFORM | 2026-11-18 | E166 (load diagnosis) | OBSERVED |
 | [F194](#f194) | on ten large multi-file changes with the tests visible, the best local setup passes 5/10 against a frontier model's 10/10 | CAPABILITY | 2026-11-18 | E167 | ESTABLISHED |
 | [F195](#f195) | hiding the tests on the same ten changes drops both local setups to 1/10; most of their large-change skill is building to a shown specification | CAPABILITY | 2026-11-19 | E168 | ESTABLISHED |
+| [F196](#f196) | on templated memory-extraction jobs production Flash-Next, Inkling-2-Mini and Hy-Memory are all near-perfect; Inkling is 6.5x slower and gives no answer on 5 of 20 updates, so production runs the nightly memory job | CAPABILITY | 2026-11-21 | E170 | ESTABLISHED |
+| [F197](#f197) | Hy4-Flash (Strata SQ-96) runs stably here at 24 tok/s decode, a third of its maker's figure, and an hour per task is too short for it: 3/10 on the E167 bank, every task timed out | CAPABILITY | 2026-11-22 | E171 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -9232,3 +9234,60 @@ funded.
 
 Evidence: `results/e168-results.md`, `results/e168/raw/`, prereg `results/e168-prereg.md` (amendments A1, A2). See
 [[F194]], [[F184]].
+
+<a id="f196"></a>
+
+## F196 - on templated memory-extraction jobs production Flash-Next, Inkling-2-Mini and Hy-Memory are all near-perfect; Inkling is 6.5x slower and gives no answer on 5 of 20 updates, so production runs the nightly memory job
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-21 | **Experiment:** E170 | **Status:** ESTABLISHED on a templated 50-task bank (one sample each); the bank does not separate the top on accuracy
+
+**Kind: CAPABILITY**
+
+**Plain English.** A community report said Inkling Mini beats our production model at memory work. We tested it,
+with Tencent's memory model Hy-Memory, on fifty memory-keeping jobs full of traps. All three read conversations
+almost perfectly. Inkling made no mistakes, production one, Hy-Memory a few. Inkling was much slower and, on a
+quarter of the update jobs, thought until it ran out of room. Hy-Memory stored suggestions the person had turned
+down. The pre-written rule picks production for the nightly memory job.
+
+**Claim.** Extract F1: F 0.997, I 1.000, H 0.987. Trust errors: F 0, I 0, H 11 (all rejected suggestions kept as
+`suggestion`). Updates exactly right: F 17/20, I 15/20 (5 no-answer at the 16,384-token cap, 15/15 of those answered),
+H 8/20 (15/20 ignoring blank placeholders, post-hoc). Median s/task (indicative): F 6.45, H 3.04, I 42.21. P1
+falsified (no arm below 0.95), P2-P5 held.
+
+**Use.** The nightly "propose memory entries" job runs on production Flash-Next. Separating production from Inkling
+on accuracy needs a harder, real-length bank. Inkling's arm is our Q8_0 conversion on llama.cpp support one day old;
+its runaway thinking may differ on a native-precision engine. Caveat (2026-11-22): the 6.5x is engine + file + bank defect together (plain llama.cpp, our Q8_0, no drafter, beside production); E172 separates them. Diagnostic: Inkling's runaway on U01 is a repetition
+loop over an undefined key in OUR bank (`day_rate_eur`: the user's rate, or what they pay consultants?). Three of
+its five runaways and all three of production's inexact updates are day-rate tasks. So the update scores partly
+measure handling of an undefined key. Lessons for the job: define every key in the prompt, and cap thinking with a
+"could not decide" outcome.
+
+Evidence: `results/e170-results.md`, `results/e170/`, prereg `results/e170-prereg.md` (18eedfb). See [[F186]].
+
+<a id="f197"></a>
+
+## F197 - Hy4-Flash (Strata SQ-96) runs stably here at 24 tok/s decode, a third of its maker's figure, and an hour per task is too short for it: 3/10 on the E167 bank, every task timed out
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-22 | **Experiment:** E171 | **Status:** ESTABLISHED for this config (SQ-96, Engram O_DIRECT, 3,600 s cap); capability against production UNRESOLVED
+
+**Kind: CAPABILITY**
+
+**Plain English.** Tencent's big model loaded and ran all day without trouble, but slowly. It finished 3 of our 10
+hard coding tasks to production's 5, and every task used its whole hour. The two models solved different tasks, and
+the ones production solved needed more steps than Hy4 could take in an hour. Too slow for our budget, not proven
+less capable.
+
+**Claim.** Load 38 s, memory flat (~28 GiB available), no DeviceLost. Decode 23.69 tok/s and prefill 591.5 tok/s at
+8K (maker: 51-60 / 728 on SQ-64). Engram reads 16.2 GiB over the speed block. Bank: 3/10, 10/10 stopped on timeout,
+25-47 turns per task; H 5/10, all model-done. Pass sets disjoint; all H passes took 101-174 turns. P2 falsified,
+P1/P3-P6 held.
+
+**Use.** Do not route work to Hy4-Flash on Strata. It is the first >100B model to run here stably, but it is not a
+production candidate at this speed. A fair capability test needs an uncapped run plus an O_DIRECT-off arm, on an
+owner-present day (F193). Production unchanged.
+
+Evidence: `results/e171-results.md`, `results/e171/`, prereg `results/e171-prereg.md` (66ab0de).

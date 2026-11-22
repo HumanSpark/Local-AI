@@ -2005,3 +2005,51 @@ in `results/e159-prereg.md` from the start; the MANIFEST entry was missed until 
   - `...-UD-Q4_K_XL-00001-of-00003.gguf` 7,874,568 B, oid 04e0b45e70ab5c86c6b5d3b0133cc35fc10861015bac7dcff867dcf115dc81c5
   - `-00002-of-00003.gguf` 49,851,272,832 B, oid 868a7fa360ff10bc7e072e4bb4f8771b280ca35a087a55125bc21f7ebb9962b7
   - `-00003-of-00003.gguf` 37,048,096,032 B, oid 684abb5b5306b18a046ee69e3375a0e863d14d265e0ffa52c33442d375d08b7d
+
+## E170 (2026-11-21): Inkling-2-Mini (self-converted) and Hy-Memory-30B-A3B for memory-extraction jobs
+
+- **Role:** E170 arms I and H (`results/e170-prereg.md`): which local model runs the nightly "propose memory entries"
+  job. Prompted by a Strix Halo community report that Inkling Mini beats production Flash-Next on memory work. Fetch
+  script `results/e170/` (driver logged in `results/e170/fetch.log`); sizes and LFS oids pinned from the HF API
+  2026-11-21 before fetching.
+- **thinkingmachines/Inkling-2-Mini** @ ed40e7da625f594fc9c4990f5f66be24873c22d7, 26.4B params,
+  `Inkling2LoopForConditionalGeneration`, shipped pre-quantised (`hf_quant_config.json`, quant_method `inkling2`:
+  block-scaled expert weights the converter dequantises). Licence Apache-2.0. Dir `/opt/models/staging/inkling-2-mini/`.
+  sha256 computed on arrival equals the oid for every LFS file:
+  - `model-00001-of-00001.safetensors` 19,526,019,168 B, 65e60f51aa1284d4fb022584908c315270334d991828bb774af60584523539d1
+  - `mtp.safetensors` 635,801,416 B, 7c3b651317f01f73bcf4e1dceba66ef8b7e1a1eac6bc171e882e690a4b10a1d2
+  - `tokenizer.json` 26,178,678 B, 7f332727f9a3f093dd452a39cc978e6757627e5dad1b0673aa4e75174f236dd6
+  - `tiktoken/tokenizer.model` 3,386,494 B, f170372dd655728909228220d77cf6b8104a59f38a91262a7d2c4027906ec0d8
+  - plus config, chat template, tokenizer config and index files at their pinned sizes.
+- **Inkling-2-Mini-Q8_0.gguf (our conversion)**: upstream llama.cpp `e412c6f46` (2026-11-21; Inkling 2 Mini support
+  `29b52d398`, merged 2026-11-20) `convert_hf_to_gguf.py --outtype q8_0`, venv from that tree's pinned
+  `requirements-convert_hf_to_gguf.txt` (torch 2.11.0+cpu, transformers 4.57.6; `llama.cpp/wt/e412c6f/.venv-convert`).
+  Log `results/e170/convert-inkling.log` (rc 0). Output `Inkling-2-Mini-Q8_0.gguf` 27,820,099,136 B, 704 tensors,
+  sha256 3bdcbeb26cfe4e3f945a726915ce3f675eff2abde48b40f7ad2dce7feae7445e.
+- **tencent/Hy-Memory-30B-A3B-GGUF `Hy-Memory-30B-A3B-Q8_0.gguf`** @ 38e10a37701e1caff4a6dc3831448aaf8c2e15d1,
+  31,985,728,896 B, oid 3ba2897dbb7e21e618cb65cec4b31498e59eca2960b381c5e0a0590e7ce8526b, 30.1B total / 3B active,
+  `HYV3ForCausalLM`, Licence Apache-2.0 (official Tencent GGUF). Dir `/opt/models/staging/hy-memory-30b-a3b/`.
+  Arrival sha256 equals the oid (`results/e170/fetch.log`).
+- **Served by:** upstream llama.cpp `e412c6f46`, Vulkan Release (`llama.cpp/wt/e412c6f`, build log
+  `results/e170/llama-e412c6f-build.log`), `-c 16384 -np 1`.
+
+## E171 (2026-11-22): Hy4-Flash SQ-96 + Engram (Strata packs) and Strata 0.2.18
+
+- **Role:** E171 arm HY (`results/e171-prereg.md`): Tencent Hy4-Flash (220B total, 12B active, 64B of it in the
+  Engram lookup) against production on the E167 bank. Owner 2026-11-22: "Go ahead. Test it."
+- **strata-engine/Hy4-Flash-Strata** @ 995bac227ab7e0d221772be641e2b5954a9fac06 (uploaded 2026-11-21), quantized from
+  tencent/Hy4-flash, Tencent Hy License (no territory exclusion found; 100M-MAU clause). Dir
+  `/opt/models/staging/hy4-flash-strata/`. Fetched with `tools/fetch_hf_model.sh` (REVISION pinned), log
+  `results/e171/fetch.log`. Arrival sha256 equals the LFS oid and the card's `SHA256SUMS.txt` for both:
+  - `Hy4-Flash-SQ-96.strata` 89,577,742,336 B, 3b1c5755a220c69892b3d2dbad506b8593a30be24b17a390ecbd1642c0c1e14c
+  - `Hy4-Flash-Engram-Q8.strata` 67,584,905,216 B, ab0cf9b3f9c64bd25f6212d4508e7443ab8b9bc133fbccc7bdfb83510a20c2c1
+  - NOT fetched: SQ-64, SQ-128, Vision shard.
+- **Strata v0.2.18** (github.com/Niko1221/Strata release, 2026-11-21) in `var/engines/strata-0.2.18/` (gitignored); each
+  archive's sha256 equals the release `SHA256SUMS.txt`:
+  - `strata-control-0.1.64-linux-x86_64.tar.gz` 94,485,451 B (sha256 prefix 85836931810ca5de)
+  - `strata-engine-0.1.64-linux-x86_64-hip-halo.tar.gz` 270,228,559 B (cad9353b7481110b)
+  - `strata-hy4-0.1.64-linux-x86_64-hip-halo.tar.gz` 95,796,091 B (0349e0eb12535ec1), build `6e38f588a646+rocm`, gfx1151
+- **Tokenizer:** exported from the SQ-96 pack (`strata-hy4 --export-tokenizer`), converted by Strata's
+  `tools/hy4_tokenizer.py` into `var/e171/tokenizer/` (vocab 120,832; bos 120000, eos 120025, pad 120002).
+- **Served by:** `serve/server.py --engine strata --config results/e171/strata-hy4-sq96.json`, `HY4_ENGRAM_ODIRECT=1`.
+- **Disk:** 157 GB; root filesystem at 60 GB free (97%) after the fetch. Owner 2026-11-22: watch the filesystem size.

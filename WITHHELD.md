@@ -66,6 +66,7 @@ Not shipped, and not evidence the findings depend on for their numbers. Each pre
 | results/e167/ | 2 | task prompts, audits, per-task records and test output from the owner's private repositories (E167 bank) |
 | results/e168-prereg.md | 1 | quotes commit notes and test names from the owner's private repositories; the scores are in results/e168-results.md |
 | results/e168/ | 3 | task prompts built from private commit notes, per-task records and test output (E168 bank) |
+| results/e171/raw/ | 2 | per-task records, harness and server logs from the owner's private repositories (E171, on the E167 bank) |
 | results/raw/e108/claudecode- | 2 | captured Claude Code requests; each embeds the owner's private instruction files in full |
 
 Cited by a shipped document:
@@ -88,6 +89,8 @@ Cited by a shipped document:
 | results/e168/bank.jsonl | results/e168-results.md |
 | results/e168/gold-A2.log | results/e168-results.md |
 | results/e168/raw/window.log | results/e168-results.md |
+| results/e171/raw/HY/speed.json | results/e171-prereg.md |
+| results/e171/raw/mem_guard.log | results/e171-results.md |
 
 ## Cited but not in the repository (4)
 

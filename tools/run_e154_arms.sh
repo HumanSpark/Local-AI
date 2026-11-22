@@ -82,6 +82,9 @@ LOOM_PKG=/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/model.json
 FN_GGUF=$M/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf
 FN_MTP=$M/qwen3.8-flash-next-mtp-766911a/mtp-Qwen3.8-Flash-Next-Q8_0.gguf
 LLAMA_E166=$REPO/llama.cpp/wt/5297534/build/bin/llama-server   # E166/E167, upstream 2026-11-18
+STRATA18=$ENG/strata-0.2.18   # E171 arm HY: control 0.1.64 serve/server.py + strata-hy4 0.1.64 hip-halo
+HY_CFG=$REPO/results/e171/strata-hy4-sq96.json
+GUARD_PID=""
 NM_GGUF=$M/nemotron-3.5-super-120b-udq4kxl/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-UD-Q4_K_XL-00001-of-00003.gguf
 SMOKE=${E163_SMOKE:-0}
 KW_SUITES=${E154_KW_SUITES:-"l5 pr1 writing kw mt-l4 mt-long tooluse h6-date"}
@@ -100,7 +103,7 @@ ARMS=()
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
-    S|O|GS|NM|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
+    S|O|GS|NM|HY|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
     *) echo "unknown arg $a. hint: tools/run_e154_arms.sh [--dry-run] S H Q T27 TL"; exit 2 ;;
   esac
 done
@@ -137,7 +140,8 @@ sampling() {  # vendor sampling per arm (Talus MODELS.md table; Qwen3-Coder card
     RA) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"min_p":0,"presence_penalty":0}' ;;   # Raon card, coding
     GL) echo '{"temperature":0.95,"top_p":1.0}' ;;   # GLM-5.3-Flash card, its agentic-coding (DeepSWE) setting
     DC) echo '{"temperature":1.0,"top_p":1.0}' ;;    # deepseek-ai V4.1-Flash-1017 card (the ISTA card states none)
-    NM) echo '{"temperature":1.0,"top_p":0.95}' ;;   # Nemotron-3.5-Super card, text; thinking = template default
+    NM) echo '{"temperature":1.0,"top_p":0.95}' ;;
+    HY) echo '{"temperature":0.9,"top_p":1.0}' ;;   # Hy4-Flash card: 0.9 / 1.0 / top_k off   # Nemotron-3.5-Super card, text; thinking = template default
   esac
 }
 
@@ -155,16 +159,18 @@ stop_engines() {
   # next idle-down refused and pgrep mistook it for the relay). Escalate to SIGKILL and prove our engines are gone.
   [ -n "$SERVER_PID" ] && kill "$SERVER_PID" 2>/dev/null
   SERVER_PID=""
+  [ -n "$GUARD_PID" ] && kill "$GUARD_PID" 2>/dev/null
+  GUARD_PID=""
   podman ps -q --filter name=e154- | xargs -r podman stop -t 20 >/dev/null 2>&1
-  pkill -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' 2>/dev/null
+  pkill -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' 2>/dev/null
   local i
-  for i in $(seq 1 15); do pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' >/dev/null || break; sleep 2; done
-  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' >/dev/null; then
-    stamp "engine ignored SIGTERM for 30 s; SIGKILL $(pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' | xargs)"
-    pkill -9 -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' 2>/dev/null
+  for i in $(seq 1 15); do pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' >/dev/null || break; sleep 2; done
+  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' >/dev/null; then
+    stamp "engine ignored SIGTERM for 30 s; SIGKILL $(pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' | xargs)"
+    pkill -9 -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' 2>/dev/null
     sleep 3
   fi
-  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve' >/dev/null; then stamp "FATAL: our engine survived SIGKILL"; return 1; fi
+  if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' >/dev/null; then stamp "FATAL: our engine survived SIGKILL"; return 1; fi
   return 0
 }
 # A serving unit (gateway, or Halogen solo) AND a clear flag: a set flag answers 503 whatever is running.
@@ -246,6 +252,12 @@ start() {
       esac
       "$LLAMA_E155" -m "$gguf" "${extra[@]}" -c "${E155_CTX:-131072}" -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
+    HY)  # E171: Strata serve wraps strata-hy4 (line protocol); O_DIRECT keeps Engram reads out of the page cache (F193)
+      (cd "$STRATA18/control" && exec env HY4_ENGRAM_ODIRECT=1 "$STRATA18/control/python/bin/python3.12" serve/server.py \
+        --engine strata --config "$HY_CFG" --port "$PORT") >"$slog" 2>&1 &
+      SERVER_PID=$!
+      "$REPO/qwen-image/mem_guard.sh" proc:strata-hy4 12 >>"$RAW/mem_guard.log" 2>&1 &
+      GUARD_PID=$! ;;
     NM)  # E166: -m takes shard 1 of 3; -np omitted (auto slots keep the unified KV pool, E89)
       "$LLAMA_E166" -m "$NM_GGUF" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
@@ -316,6 +328,20 @@ bank_arm() {  # commit + push one arm's raw results (bank both sides)
   git -C "$REPO" commit -q -m "data($TAG): arm $arm raw results ($(ls "$RAW/$arm"/*.json 2>/dev/null | wc -l) task files)" -- "$RAW/$arm" "$LOG" $ledger \
     && git -C "$REPO" push -q && stamp "banked arm $arm: $(git -C "$REPO" log --oneline -1)" \
     || stamp "WARNING: banking arm $arm failed - commit by hand before the next session"
+}
+
+hy_speed() {  # E171: E163 speed block once, with the engine's disk reads around it (P6: Engram is read during decode)
+  mkdir -p "$RAW/HY"
+  if [ -s "$RAW/HY/speed.json" ]; then stamp "HY speed: already done, skipped"; return 0; fi
+  local pid r0 r1; pid=$(pgrep -u "$(id -u)" -x strata-hy4 | head -1)
+  r0=$(awk '/^read_bytes/ {print $2}' "/proc/$pid/io" 2>/dev/null)
+  stamp "HY speed start (engine pid $pid, read_bytes $r0)"
+  timeout 3600 python3 "$REPO/tools/e163_speed.py" --label HY --base "$URL" --thinking-off kwargs \
+    --out "$RAW/HY/speed.json" >>"$RAW/HY/speed.log" 2>&1
+  stamp "HY speed: rc=$? $(tail -1 "$RAW/HY/speed.log" | cut -c1-220)"
+  r1=$(awk '/^read_bytes/ {print $2}' "/proc/$pid/io" 2>/dev/null)
+  printf '{"pid": %s, "read_bytes_before": %s, "read_bytes_after": %s}\n' "${pid:-null}" "${r0:-null}" "${r1:-null}" >"$RAW/HY/engine_io.json"
+  stamp "HY engine read_bytes over speed block: before $r0 after $r1"
 }
 
 run_bank() {  # run_bank <arm> <model id> <endpoint> [extra harness args...]
@@ -419,7 +445,8 @@ for arm in "${ARMS[@]}"; do
         elif [ "$arm" = HS ]; then run_kw_suite "$arm"; fi
       fi ;;
     KFL|KM|KX) run_kw_suite "$arm" ;;
-    *) mapfile -t extra < <(arm_args "$arm")
+    *) [ "$arm" = HY ] && hy_speed
+       mapfile -t extra < <(arm_args "$arm")
        run_bank "$arm" "$model" "$URL/v1" "${extra[@]}" ;;
   esac
   stop_engines

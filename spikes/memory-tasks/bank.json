@@ -1,0 +1,4851 @@
+{
+ "seed": 170,
+ "keys": {
+  "home_city": "text",
+  "employer": "text",
+  "job_title": "text",
+  "preferred_contact": "text",
+  "day_rate_eur": "integer",
+  "meeting_day": "text",
+  "project_deadline": "ISO date YYYY-MM-DD",
+  "crm": "text",
+  "team_size": "integer"
+ },
+ "tasks": [
+  {
+   "id": "X01",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "WhatsApp is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I work at Moyola Foods."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Our CRM is Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Cork, or I was - we moved to Sligo in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Ciaran, who I used to work with, is at Brightwater Logistics now. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "I did interview at Harbourline Insurance years ago, but that went nowhere. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Tuesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. We have to launch by 15 January 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "preferred_contact": "WhatsApp",
+    "employer": "Moyola Foods",
+    "crm": "Monday.com",
+    "home_city": "Sligo",
+    "project_deadline": "2027-01-15"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Cork",
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Brightwater Logistics",
+     "trap": "colleague"
+    },
+    {
+     "key": "employer",
+     "value": "Harbourline Insurance",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Tuesday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X02",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "The sales team lives in Salesforce."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Let's always meet on Tuesdays."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We live in Sligo these days."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "The deadline is 18 June 2027 - sorry, no, it moved to 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Sinead's previous company used HubSpot. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Kilkenny. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "assistant",
+     "text": "Would phone be easier for quick questions?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I'm with Copperleaf Studio."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "crm": "Salesforce",
+    "meeting_day": "Tuesday",
+    "home_city": "Sligo",
+    "project_deadline": "2027-03-10",
+    "employer": "Copperleaf Studio"
+   },
+   "suggestion": {
+    "preferred_contact": "phone"
+   },
+   "wrong": [
+    {
+     "key": "project_deadline",
+     "value": "2027-06-18",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "HubSpot",
+     "trap": "colleague"
+    },
+    {
+     "key": "home_city",
+     "value": "Kilkenny",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X03",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Home is Galway for me."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I'm with Brightwater Logistics."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Hard deadline is 30 April 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We pay €1500 a day - actually, correction, it was raised to €650."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "My colleague Ciaran lives in Sligo, mind you. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "I did interview at Fernhill Dental years ago, but that went nowhere. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered HubSpot? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I'm the office manager there."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "home_city": "Galway",
+    "employer": "Brightwater Logistics",
+    "project_deadline": "2027-04-30",
+    "day_rate_eur": 650,
+    "job_title": "office manager"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1500,
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Sligo",
+     "trap": "colleague"
+    },
+    {
+     "key": "employer",
+     "value": "Fernhill Dental",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "crm",
+     "value": "HubSpot",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X04",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Hard deadline is 15 January 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "I'm with Moyola Foods."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "The sales team lives in Pipedrive."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "We pay €1500 a day - actually, correction, it was raised to €650."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Padraig's previous company used Zoho. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We looked at Zoho once and decided against it. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Mondays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. There are 25 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "project_deadline": "2027-01-15",
+    "employer": "Moyola Foods",
+    "crm": "Pipedrive",
+    "day_rate_eur": 650,
+    "team_size": 25
+   },
+   "suggestion": {
+    "meeting_day": "Monday"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1500,
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "colleague"
+    },
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X05",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Our budget is €1500 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Let's always meet on Thursdays."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "We live in Sligo these days."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "The deadline is 26 February 2027 - sorry, no, it moved to 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "My colleague Sinead lives in Limerick, mind you. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "If it were up to me we'd pay €800, but it isn't. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered Monday.com? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I work at Kestrel Analytics."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "day_rate_eur": 1500,
+    "meeting_day": "Thursday",
+    "home_city": "Sligo",
+    "project_deadline": "2027-03-10",
+    "employer": "Kestrel Analytics"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "project_deadline",
+     "value": "2027-02-26",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Limerick",
+     "trap": "colleague"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 800,
+     "trap": "hypothetical"
+    },
+    {
+     "key": "crm",
+     "value": "Monday.com",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X06",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I keep Thursdays free for calls."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "There are 4 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "I prefer phone for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Galway, or I was - we moved to Kilkenny in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Dara's team is 7 people. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "If the funding comes through we might grow to 12. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered Salesforce? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. Our budget is €1200 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "meeting_day": "Thursday",
+    "team_size": 4,
+    "preferred_contact": "phone",
+    "home_city": "Kilkenny",
+    "day_rate_eur": 1200
+   },
+   "suggestion": {
+    "crm": "Salesforce"
+   },
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Galway",
+     "trap": "stale"
+    },
+    {
+     "key": "team_size",
+     "value": 7,
+     "trap": "colleague"
+    },
+    {
+     "key": "team_size",
+     "value": 12,
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X07",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I prefer Slack for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "We have to launch by 26 February 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I work at Kestrel Analytics."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Limerick, or I was - we moved to Cork in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Dara, who I used to work with, is at Moyola Foods now. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Athlone. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered Zoho? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I keep Mondays free for calls."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "preferred_contact": "Slack",
+    "project_deadline": "2027-02-26",
+    "employer": "Kestrel Analytics",
+    "home_city": "Cork",
+    "meeting_day": "Monday"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Limerick",
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Moyola Foods",
+     "trap": "colleague"
+    },
+    {
+     "key": "home_city",
+     "value": "Athlone",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X08",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I'm the office manager there."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Our budget is €1500 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I prefer phone for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Dundalk, or I was - we moved to Athlone in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Padraig only ever answers on WhatsApp. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "If it were up to me we'd pay €950, but it isn't. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Wednesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. There are 4 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "job_title": "office manager",
+    "day_rate_eur": 1500,
+    "preferred_contact": "phone",
+    "home_city": "Athlone",
+    "team_size": 4
+   },
+   "suggestion": {
+    "meeting_day": "Wednesday"
+   },
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Dundalk",
+     "trap": "stale"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "WhatsApp",
+     "trap": "colleague"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 950,
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X09",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Dundalk."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Mondays work best for meetings."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "My role is practice owner."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "The deadline is 10 March 2027 - sorry, no, it moved to 21 May 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Sinead's own project is due 18 June 2027. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Sligo. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "assistant",
+     "text": "Would email be easier for quick questions?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. The sales team lives in Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "home_city": "Dundalk",
+    "meeting_day": "Monday",
+    "job_title": "practice owner",
+    "project_deadline": "2027-05-21",
+    "crm": "Monday.com"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "project_deadline",
+     "value": "2027-03-10",
+     "trap": "stale"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-06-18",
+     "trap": "colleague"
+    },
+    {
+     "key": "home_city",
+     "value": "Sligo",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X10",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I'm the practice owner there."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Day rate we agreed internally is €650."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Best to reach me by WhatsApp."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Cork, or I was - we moved to Waterford in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Niamh said their last consultant charged €1500 a day. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Someday I'd like to be managing director, but not yet. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Tuesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. There are 12 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "job_title": "practice owner",
+    "day_rate_eur": 650,
+    "preferred_contact": "WhatsApp",
+    "home_city": "Waterford",
+    "team_size": 12
+   },
+   "suggestion": {
+    "meeting_day": "Tuesday"
+   },
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Cork",
+     "trap": "stale"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 1500,
+     "trap": "colleague"
+    },
+    {
+     "key": "job_title",
+     "value": "managing director",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X11",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Headcount is 4 right now."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Our budget is €1500 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "WhatsApp is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "It's Salesforce - no wait, we switched to Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Ciaran only ever answers on email. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "If it were up to me we'd pay €800, but it isn't. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Tuesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I took over as head of sales last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "team_size": 4,
+    "day_rate_eur": 1500,
+    "preferred_contact": "WhatsApp",
+    "crm": "Monday.com",
+    "job_title": "head of sales"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "crm",
+     "value": "Salesforce",
+     "trap": "stale"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "colleague"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 800,
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Tuesday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X12",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "We pay consultants €1500 a day."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I took over as office manager last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Headcount is 60 right now."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "It's Monday.com - no wait, we switched to HubSpot."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Ciaran's team is 4 people. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Someday I'd like to be practice owner, but not yet. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Tuesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. We live in Galway these days."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "day_rate_eur": 1500,
+    "job_title": "office manager",
+    "team_size": 60,
+    "crm": "HubSpot",
+    "home_city": "Galway"
+   },
+   "suggestion": {
+    "meeting_day": "Tuesday"
+   },
+   "wrong": [
+    {
+     "key": "crm",
+     "value": "Monday.com",
+     "trap": "stale"
+    },
+    {
+     "key": "team_size",
+     "value": 4,
+     "trap": "colleague"
+    },
+    {
+     "key": "job_title",
+     "value": "practice owner",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X13",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Day rate we agreed internally is €1200."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Our CRM is Salesforce."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We have to launch by 15 January 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "We're 25 people - well, 18 since the last hires."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Eoin said their last consultant charged €800 a day. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "If it were up to me we'd pay €1500, but it isn't. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "assistant",
+     "text": "Would Thursdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I work at Fernhill Dental."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "day_rate_eur": 1200,
+    "crm": "Salesforce",
+    "project_deadline": "2027-01-15",
+    "team_size": 18,
+    "employer": "Fernhill Dental"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "team_size",
+     "value": 25,
+     "trap": "stale"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 800,
+     "trap": "colleague"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 1500,
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Thursday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X14",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "We run everything through Pipedrive."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "WhatsApp is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "I'm with Brightwater Logistics."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "The deadline is 10 March 2027 - sorry, no, it moved to 15 January 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Roisin's previous company used Zoho. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "I did interview at Moyola Foods years ago, but that went nowhere. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Fridays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I took over as practice owner last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "crm": "Pipedrive",
+    "preferred_contact": "WhatsApp",
+    "employer": "Brightwater Logistics",
+    "project_deadline": "2027-01-15",
+    "job_title": "practice owner"
+   },
+   "suggestion": {
+    "meeting_day": "Friday"
+   },
+   "wrong": [
+    {
+     "key": "project_deadline",
+     "value": "2027-03-10",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "colleague"
+    },
+    {
+     "key": "employer",
+     "value": "Moyola Foods",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X15",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "We're a team of 25."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Hard deadline is 30 April 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "The sales team lives in Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Galway, or I was - we moved to Kilkenny in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "My colleague Padraig lives in Cork, mind you. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Originally someone floated 21 May 2027, but that was never agreed. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Wednesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I'm with Ashgrove Veterinary."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "team_size": 25,
+    "project_deadline": "2027-04-30",
+    "crm": "Monday.com",
+    "home_city": "Kilkenny",
+    "employer": "Ashgrove Veterinary"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Galway",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Cork",
+     "trap": "colleague"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-05-21",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Wednesday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X16",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "My company is Kestrel Analytics."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I took over as managing director last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "We have to launch by 21 May 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We pay €950 a day - actually, correction, it was raised to €650."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Padraig is the operations manager on our side. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Originally someone floated 10 March 2027, but that was never agreed. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Wednesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. Best to reach me by WhatsApp."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "employer": "Kestrel Analytics",
+    "job_title": "managing director",
+    "project_deadline": "2027-05-21",
+    "day_rate_eur": 650,
+    "preferred_contact": "WhatsApp"
+   },
+   "suggestion": {
+    "meeting_day": "Wednesday"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 950,
+     "trap": "stale"
+    },
+    {
+     "key": "job_title",
+     "value": "operations manager",
+     "trap": "colleague"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-03-10",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X17",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Hard deadline is 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "My role is head of sales."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "We're a team of 7."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Dundalk, or I was - we moved to Kilkenny in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "My colleague Dara lives in Limerick, mind you. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Originally someone floated 26 February 2027, but that was never agreed. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "assistant",
+     "text": "Would Mondays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. My company is Kestrel Analytics."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "project_deadline": "2027-03-10",
+    "job_title": "head of sales",
+    "team_size": 7,
+    "home_city": "Kilkenny",
+    "employer": "Kestrel Analytics"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Dundalk",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Limerick",
+     "trap": "colleague"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-02-26",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Monday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X18",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "We're a team of 4."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "We live in Athlone these days."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Day rate we agreed internally is €800."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "It's Pipedrive - no wait, we switched to Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Ciaran's previous company used Salesforce. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We looked at Salesforce once and decided against it. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "assistant",
+     "text": "Would Wednesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. Phone is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "team_size": 4,
+    "home_city": "Athlone",
+    "day_rate_eur": 800,
+    "crm": "Monday.com",
+    "preferred_contact": "phone"
+   },
+   "suggestion": {
+    "meeting_day": "Wednesday"
+   },
+   "wrong": [
+    {
+     "key": "crm",
+     "value": "Pipedrive",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Salesforce",
+     "trap": "colleague"
+    },
+    {
+     "key": "crm",
+     "value": "Salesforce",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X19",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Home is Kilkenny for me."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "There are 12 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I keep Tuesdays free for calls."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "The deadline is 10 March 2027 - sorry, no, it moved to 26 February 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Aoife can only do Thursdays. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Dundalk. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Slack be easier for quick questions?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I'm with Ashgrove Veterinary."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "home_city": "Kilkenny",
+    "team_size": 12,
+    "meeting_day": "Tuesday",
+    "project_deadline": "2027-02-26",
+    "employer": "Ashgrove Veterinary"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "project_deadline",
+     "value": "2027-03-10",
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Thursday",
+     "trap": "colleague"
+    },
+    {
+     "key": "home_city",
+     "value": "Dundalk",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "Slack",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X20",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I'm with Ashgrove Veterinary."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We have to launch by 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Fridays work best for meetings."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We pay €800 a day - actually, correction, it was raised to €950."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Niamh, who I used to work with, is at Copperleaf Studio now. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "If it were up to me we'd pay €1500, but it isn't. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "assistant",
+     "text": "Would email be easier for quick questions?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. We run everything through HubSpot."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "employer": "Ashgrove Veterinary",
+    "project_deadline": "2027-03-10",
+    "meeting_day": "Friday",
+    "day_rate_eur": 950,
+    "crm": "HubSpot"
+   },
+   "suggestion": {
+    "preferred_contact": "email"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 800,
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Copperleaf Studio",
+     "trap": "colleague"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 1500,
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X21",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I took over as managing director last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We have to launch by 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "I'm with Moyola Foods."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "We're 18 people - well, 12 since the last hires."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Roisin, who I used to work with, is at Ashgrove Veterinary now. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Originally someone floated 26 February 2027, but that was never agreed. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Thursdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I'm based in Athlone."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "job_title": "managing director",
+    "project_deadline": "2027-03-10",
+    "employer": "Moyola Foods",
+    "team_size": 12,
+    "home_city": "Athlone"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "team_size",
+     "value": 18,
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Ashgrove Veterinary",
+     "trap": "colleague"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-02-26",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Thursday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X22",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "We have to launch by 21 May 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Our budget is €650 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I work at Tidewell Engineering."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We're 4 people - well, 25 since the last hires."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Aoife's team is 40 people. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "I did interview at Kestrel Analytics years ago, but that went nowhere. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered Monday.com? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. Slack is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "project_deadline": "2027-05-21",
+    "day_rate_eur": 650,
+    "employer": "Tidewell Engineering",
+    "team_size": 25,
+    "preferred_contact": "Slack"
+   },
+   "suggestion": {
+    "crm": "Monday.com"
+   },
+   "wrong": [
+    {
+     "key": "team_size",
+     "value": 4,
+     "trap": "stale"
+    },
+    {
+     "key": "team_size",
+     "value": 40,
+     "trap": "colleague"
+    },
+    {
+     "key": "employer",
+     "value": "Kestrel Analytics",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X23",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Day rate we agreed internally is €650."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I keep Tuesdays free for calls."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Hard deadline is 30 April 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Galway, or I was - we moved to Waterford in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Ciaran can only do Fridays. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Galway. Sorry, the line is bad today."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "assistant",
+     "text": "Would email be easier for quick questions?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I'm the finance director there."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "day_rate_eur": 650,
+    "meeting_day": "Tuesday",
+    "project_deadline": "2027-04-30",
+    "home_city": "Waterford",
+    "job_title": "finance director"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Galway",
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Friday",
+     "trap": "colleague"
+    },
+    {
+     "key": "home_city",
+     "value": "Galway",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X24",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "My role is practice owner."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "We're a team of 60."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "The go-live date is 26 February 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Galway, or I was - we moved to Sligo in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "My colleague Padraig lives in Dundalk, mind you. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Cork. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered HubSpot? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. Our budget is €950 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "job_title": "practice owner",
+    "team_size": 60,
+    "project_deadline": "2027-02-26",
+    "home_city": "Sligo",
+    "day_rate_eur": 950
+   },
+   "suggestion": {
+    "crm": "HubSpot"
+   },
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Galway",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Dundalk",
+     "trap": "colleague"
+    },
+    {
+     "key": "home_city",
+     "value": "Cork",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X25",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I'm the head of sales there."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Our budget is €650 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Our CRM is HubSpot."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Galway, or I was - we moved to Athlone in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Aoife said their last consultant charged €1200 a day. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "If it were up to me we'd pay €800, but it isn't. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Fridays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. Hard deadline is 30 April 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "job_title": "head of sales",
+    "day_rate_eur": 650,
+    "crm": "HubSpot",
+    "home_city": "Athlone",
+    "project_deadline": "2027-04-30"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Galway",
+     "trap": "stale"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 1200,
+     "trap": "colleague"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 800,
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Friday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X26",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I prefer WhatsApp for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "The sales team lives in Pipedrive."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Day rate we agreed internally is €800."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Limerick, or I was - we moved to Galway in the summer."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "My colleague Niamh lives in Athlone, mind you. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We looked at Salesforce once and decided against it. Okay, go on."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Tuesdays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I'm the practice owner there."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "preferred_contact": "WhatsApp",
+    "crm": "Pipedrive",
+    "day_rate_eur": 800,
+    "home_city": "Galway",
+    "job_title": "practice owner"
+   },
+   "suggestion": {
+    "meeting_day": "Tuesday"
+   },
+   "wrong": [
+    {
+     "key": "home_city",
+     "value": "Limerick",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Athlone",
+     "trap": "colleague"
+    },
+    {
+     "key": "crm",
+     "value": "Salesforce",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X27",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "We're a team of 60."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "The go-live date is 15 January 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Home is Galway for me."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "We pay €1200 a day - actually, correction, it was raised to €1500."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "My colleague Sinead lives in Athlone, mind you. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "If the funding comes through we might grow to 40. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "assistant",
+     "text": "Would Mondays work as a regular slot?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. We run everything through HubSpot."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "team_size": 60,
+    "project_deadline": "2027-01-15",
+    "home_city": "Galway",
+    "day_rate_eur": 1500,
+    "crm": "HubSpot"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1200,
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Athlone",
+     "trap": "colleague"
+    },
+    {
+     "key": "team_size",
+     "value": 40,
+     "trap": "hypothetical"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Monday",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X28",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Phone is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Hard deadline is 21 May 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I'm with Tidewell Engineering."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We pay €1500 a day - actually, correction, it was raised to €800."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Padraig's own project is due 18 June 2027. Good, let's keep moving."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "In theory I could use email, but I never check it. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered Pipedrive? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. We're a team of 25."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "preferred_contact": "phone",
+    "project_deadline": "2027-05-21",
+    "employer": "Tidewell Engineering",
+    "day_rate_eur": 800,
+    "team_size": 25
+   },
+   "suggestion": {
+    "crm": "Pipedrive"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1500,
+     "trap": "stale"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-06-18",
+     "trap": "colleague"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "X29",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "Day rate we agreed internally is €650."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "We live in Limerick these days."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "The go-live date is 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "It's Zoho - no wait, we switched to Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "My colleague Padraig lives in Dundalk, mind you. Can you summarise that for me later?"
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We looked at Pipedrive once and decided against it. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "assistant",
+     "text": "Would WhatsApp be easier for quick questions?"
+    },
+    {
+     "role": "user",
+     "text": "No, that wouldn't work for us."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. My role is operations manager."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "day_rate_eur": 650,
+    "home_city": "Limerick",
+    "project_deadline": "2027-03-10",
+    "crm": "Monday.com",
+    "job_title": "operations manager"
+   },
+   "suggestion": {},
+   "wrong": [
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Dundalk",
+     "trap": "colleague"
+    },
+    {
+     "key": "crm",
+     "value": "Pipedrive",
+     "trap": "hypothetical"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "WhatsApp",
+     "trap": "rejected"
+    }
+   ]
+  },
+  {
+   "id": "X30",
+   "job": "extract",
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Hi - tell me a bit about you and the business."
+    },
+    {
+     "role": "user",
+     "text": "I'm the finance director there."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "We live in Galway these days."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "I keep Fridays free for calls."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "We pay €1200 a day - actually, correction, it was raised to €650."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Eoin said their last consultant charged €800 a day. Right, makes sense."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Waterford. Thanks, that's helpful."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "assistant",
+     "text": "Have you considered Monday.com? It suits teams your size."
+    },
+    {
+     "role": "user",
+     "text": "Maybe - I'll think about it and come back to you."
+    },
+    {
+     "role": "user",
+     "text": "Oh, and one more thing. I prefer phone for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted, thanks."
+    }
+   ],
+   "truth": {
+    "job_title": "finance director",
+    "home_city": "Galway",
+    "meeting_day": "Friday",
+    "day_rate_eur": 650,
+    "preferred_contact": "phone"
+   },
+   "suggestion": {
+    "crm": "Monday.com"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1200,
+     "trap": "stale"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 800,
+     "trap": "colleague"
+    },
+    {
+     "key": "home_city",
+     "value": "Waterford",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U01",
+   "job": "update",
+   "memory_before": {
+    "meeting_day": "Thursday",
+    "preferred_contact": "WhatsApp",
+    "project_deadline": "2027-05-21",
+    "day_rate_eur": 1500,
+    "crm": "Pipedrive",
+    "job_title": "finance director"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Actually, the go-live date is 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Yes - we pay consultants €1200 a day."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: WhatsApp is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "My company is Brightwater Logistics."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Ciaran only ever answers on email."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "meeting_day": "Thursday",
+    "preferred_contact": "WhatsApp",
+    "project_deadline": "2027-03-10",
+    "day_rate_eur": 1200,
+    "crm": "Pipedrive",
+    "job_title": "finance director",
+    "employer": "Brightwater Logistics"
+   },
+   "changed": {
+    "project_deadline": "2027-03-10",
+    "day_rate_eur": 1200
+   },
+   "wrong": [
+    {
+     "key": "project_deadline",
+     "value": "2027-05-21",
+     "trap": "stale"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 1500,
+     "trap": "stale"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U02",
+   "job": "update",
+   "memory_before": {
+    "job_title": "office manager",
+    "team_size": 25,
+    "preferred_contact": "WhatsApp",
+    "day_rate_eur": 800,
+    "employer": "Copperleaf Studio",
+    "meeting_day": "Thursday"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: we pay consultants €950 a day."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Yes - let's always meet on Mondays."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: My role is office manager."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We run everything through Pipedrive."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "In theory I could use Slack, but I never check it."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "job_title": "office manager",
+    "team_size": 25,
+    "preferred_contact": "WhatsApp",
+    "day_rate_eur": 950,
+    "employer": "Copperleaf Studio",
+    "meeting_day": "Monday",
+    "crm": "Pipedrive"
+   },
+   "changed": {
+    "day_rate_eur": 950,
+    "meeting_day": "Monday"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 800,
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Thursday",
+     "trap": "stale"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "Slack",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U03",
+   "job": "update",
+   "memory_before": {
+    "job_title": "operations manager",
+    "team_size": 12,
+    "preferred_contact": "email",
+    "employer": "Tidewell Engineering",
+    "day_rate_eur": 650,
+    "meeting_day": "Monday"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - we're a team of 60."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Yes - I prefer WhatsApp for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: My company is Tidewell Engineering."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Home is Limerick for me."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Ciaran can only do Fridays."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "job_title": "operations manager",
+    "team_size": 60,
+    "preferred_contact": "WhatsApp",
+    "employer": "Tidewell Engineering",
+    "day_rate_eur": 650,
+    "meeting_day": "Monday",
+    "home_city": "Limerick"
+   },
+   "changed": {
+    "team_size": 60,
+    "preferred_contact": "WhatsApp"
+   },
+   "wrong": [
+    {
+     "key": "team_size",
+     "value": 12,
+     "trap": "stale"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Friday",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U04",
+   "job": "update",
+   "memory_before": {
+    "job_title": "managing director",
+    "meeting_day": "Monday",
+    "employer": "Harbourline Insurance",
+    "crm": "Monday.com",
+    "project_deadline": "2027-05-21",
+    "home_city": "Athlone"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: my role is head of sales."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Actually, I'm with Ashgrove Veterinary."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: Hard deadline is 21 May 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Our budget is €650 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Fridays would be nice if my diary ever cleared."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "job_title": "head of sales",
+    "meeting_day": "Monday",
+    "employer": "Ashgrove Veterinary",
+    "crm": "Monday.com",
+    "project_deadline": "2027-05-21",
+    "home_city": "Athlone",
+    "day_rate_eur": 650
+   },
+   "changed": {
+    "job_title": "head of sales",
+    "employer": "Ashgrove Veterinary"
+   },
+   "wrong": [
+    {
+     "key": "job_title",
+     "value": "managing director",
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Harbourline Insurance",
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Friday",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U05",
+   "job": "update",
+   "memory_before": {
+    "employer": "Harbourline Insurance",
+    "project_deadline": "2027-01-15",
+    "crm": "Monday.com",
+    "job_title": "practice owner",
+    "preferred_contact": "Slack",
+    "meeting_day": "Thursday"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Actually, the sales team lives in HubSpot."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Actually, email is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: I'm the practice owner there."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "We live in Sligo these days."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Aoife is the operations manager on our side."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "employer": "Harbourline Insurance",
+    "project_deadline": "2027-01-15",
+    "crm": "HubSpot",
+    "job_title": "practice owner",
+    "preferred_contact": "email",
+    "meeting_day": "Thursday",
+    "home_city": "Sligo"
+   },
+   "changed": {
+    "crm": "HubSpot",
+    "preferred_contact": "email"
+   },
+   "wrong": [
+    {
+     "key": "crm",
+     "value": "Monday.com",
+     "trap": "stale"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "Slack",
+     "trap": "stale"
+    },
+    {
+     "key": "job_title",
+     "value": "operations manager",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U06",
+   "job": "update",
+   "memory_before": {
+    "meeting_day": "Tuesday",
+    "home_city": "Galway",
+    "job_title": "operations manager",
+    "day_rate_eur": 1200,
+    "preferred_contact": "email",
+    "employer": "Moyola Foods"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - we pay consultants €800 a day."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - I'm with Fernhill Dental."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: I took over as operations manager last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We run everything through HubSpot."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "If we ever moved I'd probably look at Limerick."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "meeting_day": "Tuesday",
+    "home_city": "Galway",
+    "job_title": "operations manager",
+    "day_rate_eur": 800,
+    "preferred_contact": "email",
+    "employer": "Fernhill Dental",
+    "crm": "HubSpot"
+   },
+   "changed": {
+    "day_rate_eur": 800,
+    "employer": "Fernhill Dental"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1200,
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Moyola Foods",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Limerick",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U07",
+   "job": "update",
+   "memory_before": {
+    "employer": "Harbourline Insurance",
+    "team_size": 18,
+    "crm": "Pipedrive",
+    "home_city": "Waterford",
+    "preferred_contact": "Slack",
+    "meeting_day": "Friday"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - headcount is 60 right now."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Actually, let's always meet on Thursdays."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: I'm based in Waterford."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Hard deadline is 21 May 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Eoin, who I used to work with, is at Tidewell Engineering now."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "employer": "Harbourline Insurance",
+    "team_size": 60,
+    "crm": "Pipedrive",
+    "home_city": "Waterford",
+    "preferred_contact": "Slack",
+    "meeting_day": "Thursday",
+    "project_deadline": "2027-05-21"
+   },
+   "changed": {
+    "team_size": 60,
+    "meeting_day": "Thursday"
+   },
+   "wrong": [
+    {
+     "key": "team_size",
+     "value": 18,
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Friday",
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Tidewell Engineering",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U08",
+   "job": "update",
+   "memory_before": {
+    "team_size": 60,
+    "home_city": "Sligo",
+    "preferred_contact": "email",
+    "day_rate_eur": 650,
+    "crm": "Salesforce",
+    "employer": "Ashgrove Veterinary"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: I prefer Slack for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Actually, our CRM is Pipedrive."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: We live in Sligo these days."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Tuesdays work best for meetings."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "If it were up to me we'd pay €950, but it isn't."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "team_size": 60,
+    "home_city": "Sligo",
+    "preferred_contact": "Slack",
+    "day_rate_eur": 650,
+    "crm": "Pipedrive",
+    "employer": "Ashgrove Veterinary",
+    "meeting_day": "Tuesday"
+   },
+   "changed": {
+    "preferred_contact": "Slack",
+    "crm": "Pipedrive"
+   },
+   "wrong": [
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Salesforce",
+     "trap": "stale"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 950,
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U09",
+   "job": "update",
+   "memory_before": {
+    "meeting_day": "Friday",
+    "team_size": 4,
+    "day_rate_eur": 1200,
+    "home_city": "Athlone",
+    "project_deadline": "2027-01-15",
+    "crm": "HubSpot"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: there are 7 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Yes - home is Limerick for me."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: Our budget is €1200 per day for outside help."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "I prefer Slack for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Ciaran said their last consultant charged €950 a day."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "meeting_day": "Friday",
+    "team_size": 7,
+    "day_rate_eur": 1200,
+    "home_city": "Limerick",
+    "project_deadline": "2027-01-15",
+    "crm": "HubSpot",
+    "preferred_contact": "Slack"
+   },
+   "changed": {
+    "team_size": 7,
+    "home_city": "Limerick"
+   },
+   "wrong": [
+    {
+     "key": "team_size",
+     "value": 4,
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Athlone",
+     "trap": "stale"
+    },
+    {
+     "key": "day_rate_eur",
+     "value": 950,
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U10",
+   "job": "update",
+   "memory_before": {
+    "project_deadline": "2027-06-18",
+    "crm": "Monday.com",
+    "employer": "Tidewell Engineering",
+    "home_city": "Limerick",
+    "preferred_contact": "email",
+    "day_rate_eur": 1200
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - we pay consultants €800 a day."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "One update: I prefer Slack for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: Our CRM is Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Headcount is 25 right now."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "We looked at HubSpot once and decided against it."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "project_deadline": "2027-06-18",
+    "crm": "Monday.com",
+    "employer": "Tidewell Engineering",
+    "home_city": "Limerick",
+    "preferred_contact": "Slack",
+    "day_rate_eur": 800,
+    "team_size": 25
+   },
+   "changed": {
+    "day_rate_eur": 800,
+    "preferred_contact": "Slack"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1200,
+     "trap": "stale"
+    },
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "HubSpot",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U11",
+   "job": "update",
+   "memory_before": {
+    "meeting_day": "Thursday",
+    "preferred_contact": "phone",
+    "crm": "Zoho",
+    "project_deadline": "2027-03-10",
+    "home_city": "Kilkenny",
+    "employer": "Harbourline Insurance"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - I prefer email for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Yes - the sales team lives in Pipedrive."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: We have to launch by 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "There are 25 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Eoin can only do Mondays."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "meeting_day": "Thursday",
+    "preferred_contact": "email",
+    "crm": "Pipedrive",
+    "project_deadline": "2027-03-10",
+    "home_city": "Kilkenny",
+    "employer": "Harbourline Insurance",
+    "team_size": 25
+   },
+   "changed": {
+    "preferred_contact": "email",
+    "crm": "Pipedrive"
+   },
+   "wrong": [
+    {
+     "key": "preferred_contact",
+     "value": "phone",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Monday",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U12",
+   "job": "update",
+   "memory_before": {
+    "crm": "Salesforce",
+    "preferred_contact": "phone",
+    "home_city": "Dundalk",
+    "employer": "Harbourline Insurance",
+    "project_deadline": "2027-06-18",
+    "team_size": 4
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: best to reach me by email."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Yes - there are 7 of us on the team."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: We live in Dundalk these days."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Let's always meet on Wednesdays."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Originally someone floated 10 March 2027, but that was never agreed."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "crm": "Salesforce",
+    "preferred_contact": "email",
+    "home_city": "Dundalk",
+    "employer": "Harbourline Insurance",
+    "project_deadline": "2027-06-18",
+    "team_size": 7,
+    "meeting_day": "Wednesday"
+   },
+   "changed": {
+    "preferred_contact": "email",
+    "team_size": 7
+   },
+   "wrong": [
+    {
+     "key": "preferred_contact",
+     "value": "phone",
+     "trap": "stale"
+    },
+    {
+     "key": "team_size",
+     "value": 4,
+     "trap": "stale"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-03-10",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U13",
+   "job": "update",
+   "memory_before": {
+    "crm": "Monday.com",
+    "preferred_contact": "Slack",
+    "project_deadline": "2027-05-21",
+    "meeting_day": "Tuesday",
+    "employer": "Kestrel Analytics",
+    "day_rate_eur": 650
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: thursdays work best for meetings."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Yes - I work at Tidewell Engineering."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: Slack is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "I took over as managing director last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Dara's previous company used Zoho."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "crm": "Monday.com",
+    "preferred_contact": "Slack",
+    "project_deadline": "2027-05-21",
+    "meeting_day": "Thursday",
+    "employer": "Tidewell Engineering",
+    "day_rate_eur": 650,
+    "job_title": "managing director"
+   },
+   "changed": {
+    "meeting_day": "Thursday",
+    "employer": "Tidewell Engineering"
+   },
+   "wrong": [
+    {
+     "key": "meeting_day",
+     "value": "Tuesday",
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Kestrel Analytics",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U14",
+   "job": "update",
+   "memory_before": {
+    "crm": "Zoho",
+    "meeting_day": "Tuesday",
+    "employer": "Moyola Foods",
+    "day_rate_eur": 1200,
+    "preferred_contact": "WhatsApp",
+    "job_title": "managing director"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: I prefer email for anything urgent."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "One update: our CRM is Pipedrive."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: Let's always meet on Tuesdays."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We're a team of 25."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Thursdays would be nice if my diary ever cleared."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "crm": "Pipedrive",
+    "meeting_day": "Tuesday",
+    "employer": "Moyola Foods",
+    "day_rate_eur": 1200,
+    "preferred_contact": "email",
+    "job_title": "managing director",
+    "team_size": 25
+   },
+   "changed": {
+    "preferred_contact": "email",
+    "crm": "Pipedrive"
+   },
+   "wrong": [
+    {
+     "key": "preferred_contact",
+     "value": "WhatsApp",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Zoho",
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Thursday",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U15",
+   "job": "update",
+   "memory_before": {
+    "job_title": "office manager",
+    "preferred_contact": "email",
+    "home_city": "Limerick",
+    "meeting_day": "Wednesday",
+    "team_size": 4,
+    "project_deadline": "2027-03-10"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - let's always meet on Fridays."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Yes - I'm based in Galway."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: We have to launch by 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Our CRM is Zoho."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Aoife's own project is due 30 April 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "job_title": "office manager",
+    "preferred_contact": "email",
+    "home_city": "Galway",
+    "meeting_day": "Friday",
+    "team_size": 4,
+    "project_deadline": "2027-03-10",
+    "crm": "Zoho"
+   },
+   "changed": {
+    "meeting_day": "Friday",
+    "home_city": "Galway"
+   },
+   "wrong": [
+    {
+     "key": "meeting_day",
+     "value": "Wednesday",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Limerick",
+     "trap": "stale"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-04-30",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U16",
+   "job": "update",
+   "memory_before": {
+    "home_city": "Athlone",
+    "employer": "Kestrel Analytics",
+    "crm": "Pipedrive",
+    "day_rate_eur": 1200,
+    "preferred_contact": "email",
+    "job_title": "finance director"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Yes - we pay consultants €650 a day."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Yes - we run everything through Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: I'm based in Athlone."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "We're a team of 7."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "I did interview at Tidewell Engineering years ago, but that went nowhere."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "home_city": "Athlone",
+    "employer": "Kestrel Analytics",
+    "crm": "Monday.com",
+    "day_rate_eur": 650,
+    "preferred_contact": "email",
+    "job_title": "finance director",
+    "team_size": 7
+   },
+   "changed": {
+    "day_rate_eur": 650,
+    "crm": "Monday.com"
+   },
+   "wrong": [
+    {
+     "key": "day_rate_eur",
+     "value": 1200,
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Pipedrive",
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Tidewell Engineering",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U17",
+   "job": "update",
+   "memory_before": {
+    "day_rate_eur": 1200,
+    "job_title": "office manager",
+    "meeting_day": "Monday",
+    "crm": "Salesforce",
+    "employer": "Tidewell Engineering",
+    "team_size": 12
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: I took over as operations manager last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Yes - we run everything through Monday.com."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: Let's always meet on Mondays."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I'm based in Sligo."
+    },
+    {
+     "role": "assistant",
+     "text": "That helps, thank you."
+    },
+    {
+     "role": "user",
+     "text": "Eoin can only do Thursdays."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "day_rate_eur": 1200,
+    "job_title": "operations manager",
+    "meeting_day": "Monday",
+    "crm": "Monday.com",
+    "employer": "Tidewell Engineering",
+    "team_size": 12,
+    "home_city": "Sligo"
+   },
+   "changed": {
+    "job_title": "operations manager",
+    "crm": "Monday.com"
+   },
+   "wrong": [
+    {
+     "key": "job_title",
+     "value": "office manager",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Salesforce",
+     "trap": "stale"
+    },
+    {
+     "key": "meeting_day",
+     "value": "Thursday",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U18",
+   "job": "update",
+   "memory_before": {
+    "crm": "HubSpot",
+    "meeting_day": "Friday",
+    "employer": "Kestrel Analytics",
+    "job_title": "managing director",
+    "preferred_contact": "email",
+    "project_deadline": "2027-04-30"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Actually, phone is the easiest way to get me."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Yes - hard deadline is 26 February 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: I work at Kestrel Analytics."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Home is Cork for me."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "We looked at Monday.com once and decided against it."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "crm": "HubSpot",
+    "meeting_day": "Friday",
+    "employer": "Kestrel Analytics",
+    "job_title": "managing director",
+    "preferred_contact": "phone",
+    "project_deadline": "2027-02-26",
+    "home_city": "Cork"
+   },
+   "changed": {
+    "preferred_contact": "phone",
+    "project_deadline": "2027-02-26"
+   },
+   "wrong": [
+    {
+     "key": "preferred_contact",
+     "value": "email",
+     "trap": "stale"
+    },
+    {
+     "key": "project_deadline",
+     "value": "2027-04-30",
+     "trap": "stale"
+    },
+    {
+     "key": "crm",
+     "value": "Monday.com",
+     "trap": "hypothetical"
+    }
+   ]
+  },
+  {
+   "id": "U19",
+   "job": "update",
+   "memory_before": {
+    "project_deadline": "2027-01-15",
+    "crm": "Pipedrive",
+    "job_title": "managing director",
+    "employer": "Copperleaf Studio",
+    "home_city": "Limerick",
+    "preferred_contact": "email"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "One update: hard deadline is 10 March 2027."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Yes - I'm based in Sligo."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: My company is Copperleaf Studio."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "I keep Thursdays free for calls."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Roisin, who I used to work with, is at Tidewell Engineering now."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "project_deadline": "2027-03-10",
+    "crm": "Pipedrive",
+    "job_title": "managing director",
+    "employer": "Copperleaf Studio",
+    "home_city": "Sligo",
+    "preferred_contact": "email",
+    "meeting_day": "Thursday"
+   },
+   "changed": {
+    "project_deadline": "2027-03-10",
+    "home_city": "Sligo"
+   },
+   "wrong": [
+    {
+     "key": "project_deadline",
+     "value": "2027-01-15",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Limerick",
+     "trap": "stale"
+    },
+    {
+     "key": "employer",
+     "value": "Tidewell Engineering",
+     "trap": "colleague"
+    }
+   ]
+  },
+  {
+   "id": "U20",
+   "job": "update",
+   "memory_before": {
+    "home_city": "Sligo",
+    "day_rate_eur": 800,
+    "preferred_contact": "phone",
+    "job_title": "office manager",
+    "crm": "Monday.com",
+    "employer": "Harbourline Insurance"
+   },
+   "conversation": [
+    {
+     "role": "assistant",
+     "text": "Good to talk again - anything changed since last time?"
+    },
+    {
+     "role": "user",
+     "text": "Actually, my company is Copperleaf Studio."
+    },
+    {
+     "role": "assistant",
+     "text": "Okay. Anything else I should know?"
+    },
+    {
+     "role": "user",
+     "text": "One update: we live in Waterford these days."
+    },
+    {
+     "role": "assistant",
+     "text": "Understood."
+    },
+    {
+     "role": "user",
+     "text": "Nothing new on this, but to confirm: I took over as office manager last year."
+    },
+    {
+     "role": "assistant",
+     "text": "Makes sense. Let's start there."
+    },
+    {
+     "role": "user",
+     "text": "Let's always meet on Thursdays."
+    },
+    {
+     "role": "assistant",
+     "text": "Got it - noted."
+    },
+    {
+     "role": "user",
+     "text": "Someday I'd like to be operations manager, but not yet."
+    },
+    {
+     "role": "assistant",
+     "text": "Noted."
+    }
+   ],
+   "truth": {
+    "home_city": "Waterford",
+    "day_rate_eur": 800,
+    "preferred_contact": "phone",
+    "job_title": "office manager",
+    "crm": "Monday.com",
+    "employer": "Copperleaf Studio",
+    "meeting_day": "Thursday"
+   },
+   "changed": {
+    "employer": "Copperleaf Studio",
+    "home_city": "Waterford"
+   },
+   "wrong": [
+    {
+     "key": "employer",
+     "value": "Harbourline Insurance",
+     "trap": "stale"
+    },
+    {
+     "key": "home_city",
+     "value": "Sligo",
+     "trap": "stale"
+    },
+    {
+     "key": "job_title",
+     "value": "operations manager",
+     "trap": "hypothetical"
+    }
+   ]
+  }
+ ]
+}

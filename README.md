@@ -16,7 +16,7 @@ This repository exists so that the numbers on those pages do not have to be take
 > - **Processor and graphics:** AMD Ryzen AI Max+ 395 with Radeon 8060S integrated graphics
 > - **Memory:** 128 GB unified, shared by processor and graphics; about 105 GB of it usable by the graphics
 > - **Power:** 81 to 87 W package power while generating ([F180](FINDINGS.md#f180))
-> - **Measured:** one machine, July 2026 to 19 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
+> - **Measured:** one machine, July 2026 to 22 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/coding-results-dark.svg">
@@ -79,13 +79,13 @@ Coding is [F187](FINDINGS.md#f187) (a re-run of the same ten fixes on 13 Novembe
 | Hear the production voice and the candidates it beat | [VOICES.md](VOICES.md) |
 | Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
 
-## Current release: r5.14 (findings through 19 November 2026)
+## Current release: r5.15 (findings through 22 November 2026)
 
-r5.14 says what production runs for speech as well as text: the table under "What production runs now" adds speech to text (Whisper large-v3-turbo) and text to speech (a Chatterbox voice cloned from VCTK speaker p239). A new page, [VOICES.md](VOICES.md), has audio samples of the production voice and the voices and engines it was chosen over, and shows how numbers and dates are written out so the voice reads them correctly. No finding, claim or evidence file changes. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r5.15 adds two findings. [F196](FINDINGS.md#f196): on fifty memory-keeping jobs, production, Inkling-2-Mini and Tencent's Hy-Memory were all near-perfect; Inkling was 6.5 times slower on our setup, so production runs the nightly memory job. [F197](FINDINGS.md#f197): Tencent's 220-billion-parameter Hy4-Flash runs stably on this machine but at about 24 tokens a second, and passed 3 of ten big coding changes to production's 5 with every task hitting its one-hour limit, so it is too slow for that budget rather than shown to be weaker. Production and its setting below are unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.14 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3), F187 (r5.6) and F194/F195 (r5.13) qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims, which F192 also bears on). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **The older claims have not been re-reviewed.** r5.15 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3), F187 (r5.6) and F194/F195 (r5.13) qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims, which F192 also bears on). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
@@ -116,7 +116,7 @@ A build-time completeness check enforces that every file path cited in `FINDINGS
 
 ## Method in one paragraph
 
-Single machine, run from July 2026 to 19 November 2026; the findings register in this release is current to 2026-11-19. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
+Single machine, run from July 2026 to 22 November 2026; the findings register in this release is current to 2026-11-22. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
 
 ## Versioning
 

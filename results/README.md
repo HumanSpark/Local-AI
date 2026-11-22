@@ -168,6 +168,8 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E166 |  | [data](e166/) |
 | E167 | harder coding bank, visible tests (2026-11-18) | [results](e167-results.md) |
 | E168 | same ten changes, tests hidden (2026-11-19) | [results](e168-results.md) |
+| E170 | memory extraction, three local models (2026-11-21) | [data](e170/) · [pre-registration](e170-prereg.md) · [results](e170-results.md) |
+| E171 | Hy4-Flash on Strata (2026-11-22) | [data](e171/) · [pre-registration](e171-prereg.md) · [results](e171-results.md) |
 
 ## Other evidence
 
