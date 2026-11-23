@@ -21,8 +21,7 @@ about eight times longer. Each entry says what we tested, what happened, what it
 
 ## F183 - On harder real repository work, the best local setups solved as many tasks as Sonnet 5.5 and Opus 5.5
 
-**Finding.** On 10 real fixes from our own repositories, Qwen3.8-Flash-Next on Halogen (local) solved 9, Qwen3.8-27B
-on Talus (local) solved 8, and Claude Sonnet 5.5 and Claude Opus 5.5 (cloud) solved 8 each. Qwen3-Coder-30B, our
+**Finding.** On 10 real fixes from our own repositories, Qwen3.8-Flash-Next on Halogen (local; Halogen is a closed-source engine for the largest Qwen model this box can hold) solved 9, Qwen3.8-27B on Talus (local; Talus is an open-source engine for this AMD chip) solved 8, and Claude Sonnet 5.5 and Claude Opus 5.5 (cloud) solved 8 each. Qwen3-Coder-30B, our
 earlier local coding recommendation, solved 2.
 
 **Why we tested it.** An earlier test (E154, 15 smaller tasks) could not separate the strongest setups: Sonnet and the

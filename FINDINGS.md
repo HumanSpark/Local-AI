@@ -3409,7 +3409,7 @@ answers, then reproduced one of them exactly.
 | 1 of 1 | 3,645 | 301.0 | `23038d6b0a77bbfc` |
 | 2 of 3 | 3,950 | 327.7 | `8b87187d40cabe0b` |
 | 12 of 13 | 3,222 | 268.1 | `9979e5aa040e731b` |
-| 12 of 13 (E43 arm B, days earlier) | **3,222** | - | **`9979e5aa040e731b`** |
+| 12 of 13 (E43's `xhigh` run, days earlier) | **3,222** | - | **`9979e5aa040e731b`** |
 
 **Mechanism.** llama-server reuses the KV-cache prefix it shares with the
 preceding request, so how much of a prompt is recomputed - and in what batch
@@ -3419,7 +3419,7 @@ different logits; at temperature 0 that is enough to flip one token, after
 which the generations diverge.
 
 **Nothing here is random.** Each sequence is individually reproducible, which
-is why the 12-of-13 cell reproduced E43 arm B bit for bit across several days.
+is why the 12-of-13 cell reproduced E43's `xhigh` run bit for bit across several days.
 This does not contradict F59 - it scopes it. F59's determinism tests re-ran
 whole sequences, and whole sequences do reproduce.
 
@@ -3448,7 +3448,7 @@ is harmless; on coding maximum effort is actively worse than a middle setting,
 and Qwen3.8's chat template resolves `reasoning_effort` to **xhigh when the
 caller says nothing**.
 
-**`interval_map`, one task, four settings** (E42 coding row + E44 arm C2):
+**`interval_map`, one task, four settings** (E42's expert coding set + E44's `interval_map` run at `xhigh`):
 
 | effort | budget | outcome | completion tokens | wall |
 |---|---|---|---|---|
@@ -3457,7 +3457,7 @@ caller says nothing**.
 | **medium** | **24,576** | **pass** | **14,916** | **20m 47s** |
 | xhigh | 100,000 | truncated | 100,000 | **2h 46m** |
 
-**The five "capped" coding tasks, at xhigh vs medium** (E44 arm C1 vs E47):
+**The five "capped" coding tasks, at xhigh vs medium** (E44's capped tasks at `xhigh` vs E47):
 
 | | xhigh, 100,000 budget | **medium, 24,576 budget** |
 |---|---|---|
@@ -3550,9 +3550,7 @@ corpus can build.
 Note the direction of the correction: **faster AND more stable together.**
 There is no throughput-for-survival trade, which means a dispatch-duration
 watchdog does not explain it - a watchdog story predicts the safe setting is
-slower. Memory pressure at `-ub 512` is the obvious candidate and E49 is
-registered to separate `-b` from `-ub` and test it, because arm B changed both
-flags and so cannot attribute its own result.
+slower. Memory pressure at `-ub 512` is the obvious candidate and E49 is registered to separate `-b` from `-ub` and test it, because E48's tuned-batch run changed both flags and so cannot attribute its own result.
 
 **Original finding, kept as recorded:**
 
@@ -5729,9 +5727,7 @@ Status: ACTIVE. Re-test the refusals on any llama.cpp bump.
 
 **Kind: PLATFORM**
 
-Recorded 2026-08-29 from E89 arm A, 11 legs plus 3 forced-eviction legs and a
-causal control. Build 067de93. Scored on `prompt_n` - llama.cpp's own count of
-tokens it actually prefilled - rather than on latency, which is a consequence.
+Recorded 2026-08-29 from E89's prefill-parallelism test, 11 legs plus 3 forced-eviction legs and a causal control. Build 067de93. Scored on `prompt_n` - llama.cpp's own count of tokens it actually prefilled - rather than on latency, which is a consequence.
 
 **Half one - `-np` explicit is a different configuration from `-np` auto.**
 `--kv-unified` defaults on ONLY when the slot count is auto. Measured from the
@@ -5793,12 +5789,9 @@ shown to predict the boundary and no capacity figure is claimed from it (leg A10
 
 **Kind: PLATFORM**
 
-Recorded 2026-08-29 from E89 arm C (5 rungs) and leg C6 (deliberate contention
-reproduction). Llama-3.3-70B-Instruct-Q4_K_M, 39.6 GiB weights, f16 KV, fresh
-process per rung, production relay co-resident throughout. `gtt_peak` is absolute
-`mem_info_gtt_used` and includes the relay's ~26.2 GiB.
+Recorded 2026-08-29 from E89's VRAM-ceiling test (5 rungs) and leg C6 (deliberate contention reproduction). Llama-3.3-70B-Instruct-Q4_K_M, 39.6 GiB weights, f16 KV, fresh process per rung, production relay co-resident throughout. `gtt_peak` is absolute `mem_info_gtt_used` and includes the relay's ~26.2 GiB.
 
-**Arm C - size alone, quiet box.**
+**VRAM-ceiling test - size alone, quiet box.**
 
 | ctx | load | absolute GTT | `read_bytes` | served | `drm_suballoc_new` |
 |---:|---:|---:|---:|:-:|:-:|
@@ -5854,7 +5847,7 @@ confirmed.
 
 **Kind: PLATFORM**
 
-Recorded 2026-08-30 from E89 arm B. `llama-perplexity` built from the same commit
+Recorded 2026-08-30 from E89's KV-cache precision test. `llama-perplexity` built from the same commit
 (067de93, Release, `GGML_VULKAN=ON`); corpus is this repository's own prose
 (`docs/` + `reports/`, 420,959 words), 40 chunks at `-c 8192`, identical across
 every leg so cache type is the only variable.
@@ -6556,9 +6549,9 @@ pointed at the GPU.
 **Kind: METHOD**
 
 **Status:** split out of F110 on 2026-09-01 under the two-findings convention.
-Measured 2026-08-30, E89 arm B. Scope tag: **general**.
+Measured 2026-08-30 from E89's KV-cache precision test. Scope tag: **general**.
 
-Before perplexity settled the KV-precision question, arm B ran a needle sweep at
+Before perplexity settled the KV-precision question, the KV-cache precision test ran a needle sweep at
 4,096-65,536 tokens across five depths, then a harder sweep with five decoy
 records of identical form:
 
@@ -7323,7 +7316,7 @@ Evidence: `results/experiments.md` E102 + E103 results, `results/raw/e102/*.json
 
 **Kind: MODEL**
 
-E103 arm B, six coding tasks, greedy, identical payload to E101 cell 1.
+E103's coding-efficiency run, six coding tasks, greedy, identical payload to E101 cell 1.
 
 | config | pass | tokens |
 |---|---|---|
@@ -7588,9 +7581,7 @@ result; `results/raw/e109/`. See [[F112]], [[F104]], [[F148]].
 
 **Kind: MODEL**
 
-E109 arm B. The same 24 L5 questions, the same grader, the same model - but the
-ten documents written to DISK as files for an agent to find, rather than pasted
-into one request.
+E109's Hermes knowledge-work run. The same 24 L5 questions, the same grader, the same model - but the ten documents written to DISK as files for an agent to find, rather than pasted into one request.
 
 | | bare API (control, reproduced 3x) | Hermes, docs on disk |
 |---|---|---|
@@ -7814,7 +7805,7 @@ See [[F150]], [[F145]], [[F142]], [[F144]].
 
 **Kind: METHOD**
 
-E113. `tools/aider-tasks.json` scored **0/3** in E109 arm A. Two of the three
+E113. `tools/aider-tasks.json` scored **0/3** in E109's Aider coding run. Two of the three
 were `invalid-precondition` - the work they described had since been done and
 committed, so their `verify` passed BEFORE the model ran and `classify()`
 correctly refused to score them. Only T1 was a genuine fail. **A 0/3 with no
@@ -8350,9 +8341,7 @@ See [[F152]], [[F117]], [[F151]].
 
 **Kind: PLATFORM**
 
-**Claim.** The published "~1,424 tok/s prefill at 32K" for `halogen-flash-server` 0.13.8 measures
-**1,152 tok/s** on this box (IOMMU translated, Chatterbox resident): REPRODUCED-CONDITIONALLY, above the
-1,000 floor and below the 1,210 bar. Mainline llama.cpp on our unsloth GGUF measures **216.5 tok/s** at 32K,
+**Claim.** The published "~1,424 tok/s prefill at 32K" for `halogen-flash-server` 0.13.8 (Halogen - a closed-source engine for the largest Qwen model this box can hold) measures **1,152 tok/s** on this box (IOMMU translated, Chatterbox resident): REPRODUCED-CONDITIONALLY, above the 1,000 floor and below the 1,210 bar. Mainline llama.cpp on our unsloth GGUF measures **216.5 tok/s** at 32K,
 so an end-to-end 32K request takes 33.4 s against 162.1 s (0.21x). MTP speculation is byte-identical to
 serial decode on 4 of 4 prompts and on the image's own bench. Decode at 32K is 38.1 tok/s.
 
@@ -8437,7 +8426,7 @@ See [[F164]], [[F151]], [[F126]].
 
 **Kind: PLATFORM**
 
-**Claim.** Atlas-Inf HEAD (2d1aab8) built native-HIP on gfx1151 fails on the MLPerf entry's checkpoint, and the same engine is 6.5x slower on an
+**Claim.** Atlas-Inf HEAD (2d1aab8) (Atlas - an inference engine written in Rust) built native-HIP on gfx1151 fails on the MLPerf entry's checkpoint, and the same engine is 6.5x slower on an
 agentic workload unless prefix caching is switched on. (1) `nvidia/Qwen3.6-27B-NVFP4` labels its 193 MLP layers `W4A16_NVFP4`; the detector counts a layer as
 NVFP4 only when `quant_algo == "NVFP4"`, so the model routes to the FP8 path and dies at `mlp.gate_proj` ("Expected FP8E4M3, got UInt8") after loading 20.4 GB.
 One line fixes it. The MLPerf-era source snapshot predates that branch and loads the checkpoint unpatched. (2) `--enable-prefix-caching` is off by default, and for a
@@ -8738,10 +8727,7 @@ Evidence: `results/e152-results.md`, `results/e152/speed-H1.json`, `speed-H1-id.
 
 **Kind: PLATFORM**
 
-**Claim.** Five engines served Qwen3.8-Flash-Next on this EVO-X2, each at its latest release in its shipped configuration,
-timed by one streaming client on 23 fixed requests (greedy, thinking off). Decode on code, tok/s: Halogen 0.18.23 (own v2
-checkpoint) **86.0**, gufo 0.29.0 (UD-Q4_K_XL, MTP) 69.1, Talus v0.1.3 (UD-IQ4_XS, ROCm 7.14.1 fallback) 67.9, Strata 0.2.10
-(UD-IQ4_XS, DFlash2) 60.7, llama.cpp `5851a8e` (UD-IQ4_XS, no drafter) 27.1. Prose: 58.3 / 38.6 / 46.7 / 41.2 / 26.2. Prefill at
+**Claim.** Five engines served Qwen3.8-Flash-Next on this EVO-X2, each at its latest release in its shipped configuration, timed by one streaming client on 23 fixed requests (greedy, thinking off). Strata and Talus are open-source engines for this chip (Talus is a fork of Strata). Decode on code, tok/s: Halogen 0.18.23 (own v2 checkpoint) **86.0**, gufo 0.29.0 (UD-Q4_K_XL, MTP) 69.1, Talus v0.1.3 (UD-IQ4_XS, ROCm 7.14.1 fallback) 67.9, Strata 0.2.10 (UD-IQ4_XS, DFlash2) 60.7, llama.cpp `5851a8e` (UD-IQ4_XS, no drafter) 27.1. Prose: 58.3 / 38.6 / 46.7 / 41.2 / 26.2. Prefill at
 32K: 1,755 / 1,497 / 1,258 / 691 / 315 tok/s (time to first token 18.7 s against llama.cpp's 104.1 s). Halogen over gufo on
 code is 1.245x, the community-reported gap. Halogen's and Talus's README rows hold (101-118% and 85-92%); Strata's MTP-era
 8K figures do not (709 / 37.7 against 1,159 / 53.1). llama.cpp mainline decodes 27.1 against 16.6 on the production build
@@ -8801,10 +8787,7 @@ Evidence: `results/e154-results.md`, `results/e154/score.json`, `results/e154/ra
 on the machine. One local model looked at the names in the password vault (not the passwords). Before any cloud model
 is tested this way again, the agent has to run as a user that cannot see the vault at all.
 
-**Claim.** In E154, arm H ran `ls /opt/vault` and listed vault key NAMES on workstation-dotfiles-cac330761 (no
-`vault_get` call, no value read) and `cd`'d outside its task tree on others. All 15 Sonnet transcripts were scanned: every
-vault, .env or OpenRouter string in them is repo code the task concerned, so nothing beyond Tier B code reached OpenRouter.
-A separate fix during the S arm (prereg amendment 2) already strips the API key from the harness's environment.
+**Claim.** In E154, Flash-Next on Halogen ran `ls /opt/vault` and listed vault key NAMES on workstation-dotfiles-cac330761 (no `vault_get` call, no value read) and `cd`'d outside its task tree on others. All 15 Sonnet transcripts were scanned: every vault, .env or OpenRouter string in them is repo code the task concerned, so nothing beyond Tier B code reached OpenRouter. A separate fix during E154's Strata setup (prereg amendment 2) already strips the API key from the harness's environment.
 
 **What it changes.** No cloud arm runs again until the harness runs as an account with no vault access (or in a
 container with only the task tree mounted). Task transcripts quote repo code that trips the pre-commit secret gate on
@@ -9055,8 +9038,7 @@ Evidence: `results/e162-results.md`, prereg `results/e162-prereg.md` (amendment 
 
 **Kind: PLATFORM + QUALITY**
 
-**Plain English.** AMD said coding agents ported 51 models to its new Loom engine in four days, running long prompts
-about 1.5 times faster than llama.cpp. On our production model the claim holds and then some: 2.7 times faster on a
+**Plain English.** AMD said coding agents ported 51 models to its new Loom engine (AMD's HRX Loom - an inference engine still in development) in four days, running long prompts about 1.5 times faster than llama.cpp. On our production model the claim holds and then some: 2.7 times faster on a
 32,000-token document. But we do not run llama.cpp; we run Halogen. Loom is about level with Halogen on that long
 document, slower on shorter ones, and writes answers more slowly. On document questions it matches Halogen. On tool
 tasks it passed 28 of 36 against 33, but the transcripts show it asking for missing details (an empty client lookup,
@@ -9251,10 +9233,7 @@ almost perfectly. Inkling made no mistakes, production one, Hy-Memory a few. Ink
 quarter of the update jobs, thought until it ran out of room. Hy-Memory stored suggestions the person had turned
 down. The pre-written rule picks production for the nightly memory job.
 
-**Claim.** Extract F1: F 0.997, I 1.000, H 0.987. Trust errors: F 0, I 0, H 11 (all rejected suggestions kept as
-`suggestion`). Updates exactly right: F 17/20, I 15/20 (5 no-answer at the 16,384-token cap, 15/15 of those answered),
-H 8/20 (15/20 ignoring blank placeholders, post-hoc). Median s/task (indicative): F 6.45, H 3.04, I 42.21. P1
-falsified (no arm below 0.95), P2-P5 held.
+**Claim.** Extract F1: production 0.997, Inkling 1.000, Hy-Memory 0.987. Trust errors: production 0, Inkling 0, Hy-Memory 11 (all rejected suggestions kept as `suggestion`). Updates exactly right: production 17/20, Inkling 15/20 (5 no-answer at the 16,384-token cap, 15/15 of those answered), Hy-Memory 8/20 (15/20 ignoring blank placeholders, post-hoc). Median s/task (indicative): production 6.45, Hy-Memory 3.04, Inkling 42.21. P1 falsified (no arm below 0.95), P2-P5 held.
 
 **Use.** The nightly "propose memory entries" job runs on production Flash-Next. Separating production from Inkling
 on accuracy needs a harder, real-length bank. Inkling's arm is our Q8_0 conversion on llama.cpp support one day old;
@@ -9281,8 +9260,7 @@ hard coding tasks to production's 5, and every task used its whole hour. The two
 the ones production solved needed more steps than Hy4 could take in an hour. Too slow for our budget, not proven
 less capable.
 
-**Claim.** Load 38 s, memory flat (~28 GiB available), no DeviceLost. Decode 23.69 tok/s and prefill 591.5 tok/s at
-8K (maker: 51-60 / 728 on SQ-64). Engram reads 16.2 GiB over the speed block. Bank: 3/10, 10/10 stopped on timeout,
+**Claim.** Load 38 s, memory flat (~28 GiB available), no DeviceLost. Decode 23.69 tok/s and prefill 591.5 tok/s at 8K (maker: 51-60 / 728 on SQ-64). Engram (part of the model, not of Strata - a "conditional memory" of large lookup tables, shipped as a separate weights file and read from disk a few rows per token instead of held in memory) reads 16.2 GiB over the speed block. Bank: 3/10, 10/10 stopped on timeout,
 25-47 turns per task; H 5/10, all model-done. Pass sets disjoint; all H passes took 101-174 turns. P2 falsified,
 P1/P3-P6 held.
 

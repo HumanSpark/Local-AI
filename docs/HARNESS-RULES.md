@@ -406,7 +406,7 @@ file that says the task started and never finished. `harness-error` and `killed`
 - **Why:** before this, the budget was checked only at the start of each turn, and the OpenAI client waited up to
   600 s per call with 2 retries. One last call could overrun the budget by up to 30 minutes, and a task killed from
   outside left nothing at all. A task that overran or vanished is not comparable with one that ran to budget.
-- **Trigger:** E158, 2026-11-06. OR122 `clearmail-ea3f86782` started at 07:52:50Z and was killed by the runner's
+- **Trigger:** E158, 2026-11-06. Ornith 122B (OR122) `clearmail-ea3f86782` started at 07:52:50Z and was killed by the runner's
   outer `timeout` (4,200 s, rc=124) at 09:02:50Z with no record. Three other OR122 tasks ran 60.2, 60.3 and 62.7
   minutes against a 60-minute budget. Fixed on owner instruction, 2026-11-15.
 - **Closing a client does NOT cancel a call.** `httpx.Client.close()` from another thread leaves the worker blocked

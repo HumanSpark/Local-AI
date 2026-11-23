@@ -4,7 +4,7 @@
 # Project: sparkbench | Date: 2026-11-22
 #
 # Overview: scores the six pre-registered predictions (results/e171-prereg.md, 66ab0de) from results/e171/raw/HY/.
-# Production comparison is E167 arm H (results/e167/raw/H/), same bank, same runner settings, 2026-11-18.
+# Production comparison is E167's Flash-Next on Halogen (results/e167/raw/H/), same bank, same runner settings, 2026-11-18.
 -->
 
 # E171 RESULTS - Hy4-Flash on Strata (2026-11-22)

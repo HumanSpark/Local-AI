@@ -38,7 +38,7 @@ hidden. Like-for-like end to end, steady state: **D ~467.5 s vs S ~665.4 s** (65
 
 | # | field | predicted | observed | verdict |
 |---|---|---|---|---|
-| P1 | `D.completes` | 6/6 | 5/5 text-to-image in the window (attempt 1 wedged, see amendment 1); E1 not run - no reference file | **HELD for 5/5 T2I; E1 unscored** |
+| P1 | `D.completes` | 6/6 | 5/5 text-to-image in the window (attempt 1 wedged, see amendment 1); E1 (the image-edit run) not run - no reference file | **HELD for 5/5 T2I; E1 unscored** |
 | P2 | `S.completes` | yes (~70%) | 5/5, and 5/5 for each variant | **HELD** |
 | P3 | `S.sec_per_image` sampling | 100-400 s | 654.46 s mean | **FALSIFIED** - 1.6x over the top of the band |
 | P4 | `D/S` sec per image | > 1.0 | 0.703 (467.5 / 665.4, end to end, steady state) | **FALSIFIED** - diffusers is the faster BF16 runtime |
@@ -93,7 +93,7 @@ empty as briefed. File: `results/e136/final-W2-2752/W2-2752x1536.png` (4,460,615
 ## E1 - editing the owner's original (amendment 3)
 
 Arm D, relay down, 1248x832 (output_resolution 1024 at the original's 3:2), 40 steps, seed 42.
-E1 1157.17 s (first edit, includes a one-off), E1b 893.49 s, E1c 887.87 s; peak 42.19-42.22 GiB;
+image edits E1 1157.17 s (first edit, includes a one-off), E1b 893.49 s, E1c 887.87 s; peak 42.19-42.22 GiB;
 guard never fired. The reference image roughly doubles the sequence, so an edit costs ~1.9x a
 text-to-image render at the same size.
 

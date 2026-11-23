@@ -36,7 +36,7 @@ sending every request at `low`.
 
 ## What the 27B does that the workhorse did not
 
-O2 got the same three items wrong as E141's arm O (P1 `precedence_missed`, M1, M2) and both gates
+O2 got the same three items wrong as E141's 27B `off` arm (P1 `precedence_missed`, M1, M2) and both gates
 caught all three. The self-check answered ESCALATE on P1, M1, M2 and also on D2, P2, M3 (all
 correct); it shipped six answers, all correct. The workhorse's self-check shipped 5 wrong (F162).
 
