@@ -100,6 +100,7 @@ A build-time completeness check enforces that every file path cited in `FINDINGS
 
 - [claims.md](claims.md) and [claims.yml](claims.yml) - the claims registry: the contract between the published prose and this data
 - [FINDINGS.md](FINDINGS.md) - the findings register (F1 onward), including negative results, retractions and lessons
+- [GLOSSARY.md](GLOSSARY.md) - plain-English meanings of the experiment and finding numbers, setup codes, engine names and recurring terms
 - [experiments.md](experiments.md) and [experiments/](experiments/) - pre-registrations and results for the earlier experiments, one file each (later ones have their own files in results/); predictions were written down before each test ran, and the misses are published beside the hits
 - [results/](results/) - benchmark, evaluation, tool-use, coding, and fine-tune outputs, including the pre-registration and results document for each later experiment
 - [integrated-technical-results-v2.md](integrated-technical-results-v2.md) - the compiled technical results, including the corrections log
