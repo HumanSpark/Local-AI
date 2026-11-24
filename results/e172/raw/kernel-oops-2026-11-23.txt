@@ -1,0 +1,66 @@
+# Excerpt of the kdump vmcore dmesg, 2026-11-23 01:18Z panic (boot 6e6e7de4, uptime 395,465 s).
+# Source: VmCoreDmesg field of /var/crash/linux-image-7.0.0-43-generic-202611230118.crash (apport, world-readable),
+# base64+gzip decoded. Full vmcore: /var/crash/202611230118/dump.202611230118 (19,694,725,884 B, root-only).
+[392375.828465] [    T215] audit: type=1400 audit(1795393601.017:195): apparmor="DENIED" operation="capable" class="cap" profile="unprivileged_userns" pid=2268615 comm="(sweep.sh)" capability=21  capname="sys_admin"
+[394055.890543] [    T215] audit: type=1400 audit(1795395281.018:196): apparmor="AUDIT" operation="userns_create" class="namespace" info="Userns create - transitioning profile" profile="unconfined" pid=2270606 comm="(sweep.sh)" requested="userns_create" target="unprivileged_userns" execpath="/usr/lib/systemd/systemd-executor"
+[394055.891470] [    T215] audit: type=1400 audit(1795395281.019:197): apparmor="DENIED" operation="capable" class="cap" profile="unprivileged_userns" pid=2270606 comm="(sweep.sh)" capability=21  capname="sys_admin"
+[394386.938409] [T2271253] overlayfs: fs on '/home/spark-infer/.local/share/containers/storage/overlay/l/HYCGCJNVYLHONXTU25ZQW3ETRU' does not support file handles, falling back to xino=off.
+[394386.994646] [T2271311] overlayfs: fs on '/home/spark-infer/.local/share/containers/storage/overlay/l/PYBCZ6IBBJZUNGVH7LMQ7354L3' does not support file handles, falling back to xino=off.
+[395465.288958] [T2273890] [drm:amdgpu_gem_va_update_vm [amdgpu]] *ERROR* Couldn't update BO_VA (-12)
+[395465.305279] [T2273890] [drm:amdgpu_gem_va_update_vm [amdgpu]] *ERROR* Couldn't update BO_VA (-12)
+[395467.004133] [T2273908] BUG: unable to handle page fault for address: ffffcd0d873fb8c8
+[395467.004158] [T2273908] #PF: supervisor read access in kernel mode
+[395467.004163] [T2273908] #PF: error_code(0x0000) - not-present page
+[395467.004167] [T2273908] PGD 100000067 P4D 100000067 PUD 10061d067 PMD 12cbf9067 PTE 0
+[395467.004175] [T2273908] Oops: Oops: 0000 [#1] SMP NOPTI
+[395467.004182] [T2273908] CPU: 6 UID: 1001 PID: 2273908 Comm: llama-server Kdump: loaded Not tainted 7.0.0-43-generic #43~24.04.1-Ubuntu PREEMPT(lazy) 
+[395467.004191] [T2273908] Hardware name: GMKtec NucBox_EVO-X2/GMKtec, BIOS EVO-X2 1.12 12/09/2025
+[395467.004196] [T2273908] RIP: 0010:amdgpu_vm_pt_free+0x61/0xd0 [amdgpu]
+[395467.004646] [T2273908] Code: 00 00 00 00 00 48 8b 43 08 48 8d 78 48 e8 37 71 66 ff 48 8b 03 48 8d 78 38 e8 0b bb 05 d3 48 8b 43 20 48 8b 53 18 48 8d 7b 18 <48> 3b 38 75 57 48 3b 7a 08 75 51 48 89 42 08 48 89 10 48 b8 00 01
+[395467.004650] [T2273908] RSP: 0018:ffffcd0d876639b8 EFLAGS: 00010246
+[395467.004654] [T2273908] RAX: ffffcd0d873fb8c8 RBX: ffff89de52bddac8 RCX: 0000000000000000
+[395467.004657] [T2273908] RDX: ffffcd0d873fb8c8 RSI: 0000000000000000 RDI: ffff89de52bddae0
+[395467.004659] [T2273908] RBP: ffffcd0d876639c0 R08: 0000000000000000 R09: 0000000000000000
+[395467.004661] [T2273908] R10: 0000000000000000 R11: 0000000000000000 R12: ffff89de52bddac8
+[395467.004663] [T2273908] R13: ffff89d66e000000 R14: ffff89d641a98258 R15: ffff89d641a98258
+[395467.004666] [T2273908] FS:  0000000000000000(0000) GS:ffff89f4a8edb000(0000) knlGS:0000000000000000
+[395467.004669] [T2273908] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[395467.004671] [T2273908] CR2: ffffcd0d873fb8c8 CR3: 0000000cc5644000 CR4: 0000000000f50ef0
+[395467.004673] [T2273908] PKRU: 55555554
+[395467.004675] [T2273908] Call Trace:
+[395467.004678] [T2273908]  <TASK>
+[395467.004682] [T2273908]  amdgpu_vm_pt_free_root+0x7a/0xb0 [amdgpu]
+[395467.004834] [T2273908]  amdgpu_vm_fini+0x317/0x650 [amdgpu]
+[395467.004981] [T2273908]  ? amdgpu_vm_bo_del+0x393/0x430 [amdgpu]
+[395467.005127] [T2273908]  amdgpu_driver_postclose_kms+0x1b1/0x2b0 [amdgpu]
+[395467.005265] [T2273908]  drm_file_free+0x244/0x300
+[395467.005273] [T2273908]  drm_release+0xcb/0x170
+[395467.005276] [T2273908]  amdgpu_drm_release+0x5b/0xb0 [amdgpu]
+[395467.005411] [T2273908]  __fput+0xed/0x2e0
+[395467.005417] [T2273908]  ____fput+0x15/0x20
+[395467.005420] [T2273908]  task_work_run+0x60/0xa0
+[395467.005426] [T2273908]  do_exit+0x220/0x4d0
+[395467.005431] [T2273908]  do_group_exit+0x34/0x90
+[395467.005433] [T2273908]  get_signal+0x8a4/0x8b0
+[395467.005437] [T2273908]  arch_do_signal_or_restart+0x38/0x110
+[395467.005444] [T2273908]  exit_to_user_mode_loop+0x93/0x540
+[395467.005449] [T2273908]  do_syscall_64+0x220/0x5a0
+[395467.005456] [T2273908]  ? exit_to_user_mode_loop+0x39d/0x540
+[395467.005458] [T2273908]  ? arch_exit_to_user_mode_prepare.isra.0+0xd/0xe0
+[395467.005464] [T2273908]  ? do_syscall_64+0x116/0x5a0
+[395467.005467] [T2273908]  ? arch_exit_to_user_mode_prepare.isra.0+0xd/0x100
+[395467.005469] [T2273908]  ? irqentry_exit+0x9d/0x640
+[395467.005472] [T2273908]  ? exc_page_fault+0x92/0x1c0
+[395467.005476] [T2273908]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
+[395467.005480] [T2273908] RIP: 0033:0x7b930d698e31
+[395467.005484] [T2273908] Code: Unable to access opcode bytes at 0x7b930d698e07.
+[395467.005487] [T2273908] RSP: 002b:00007b92eaff9080 EFLAGS: 00000246 ORIG_RAX: 00000000000000ca
+[395467.005490] [T2273908] RAX: fffffffffffffe00 RBX: 000059bd12f75df8 RCX: 00007b930d698e31
+[395467.005493] [T2273908] RDX: 0000000000000000 RSI: 0000000000000189 RDI: 000059bd12f75e20
+[395467.005496] [T2273908] RBP: 00007b92eaff90c0 R08: 0000000000000000 R09: 00000000ffffffff
+[395467.005498] [T2273908] R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+[395467.005500] [T2273908] R13: 0000000000000000 R14: 000059bd12f75e28 R15: 000059bd12f75e20
+[395467.005503] [T2273908]  </TASK>
+[395467.005505] [T2273908] Modules linked in: udp_diag tcp_diag inet_diag tls rfcomm xt_connmark xt_conntrack xt_MASQUERADE xt_tcpudp xt_mark nft_compat nft_chain_nat nf_nat nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables overlay qrtr cmac algif_hash algif_skcipher af_alg bnep sch_fq_codel sp5100_tco binfmt_misc intel_rapl_msr nls_iso8859_1 intel_rapl_common amdgpu mt7925e edac_mce_amd mt7925_common mt792x_lib mt76_connac_lib mt76 snd_hda_codec_senarytech snd_hda_codec_atihdmi snd_hda_codec_generic snd_hda_codec_hdmi mac80211 snd_hda_intel snd_hda_codec snd_hda_core snd_intel_dspcfg kvm_amd snd_intel_sdw_acpi snd_hwdep snd_pcm btusb amdxcp drm_panel_backlight_quirks kvm btmtk drm_buddy snd_seq_midi btrtl drm_ttm_helper snd_seq_midi_event amdxdna btbcm ttm snd_rawmidi btintel drm_exec amd_pmf drm_suballoc_helper irqbypass amdtee rapl snd_seq spd5118 drm_display_helper snd_seq_device amd_sfh bluetooth snd_timer cec tee rc_core cfg80211 wmi_bmof snd gpu_sched i2c_piix4 i2c_algo_bit hid libarc4 soundcore input_leds i2c_smbus ccp
+[395467.005565] [T2273908]  k10temp amd_pmc serio_raw mac_hid dm_multipath netconsole msr parport_pc ppdev lp parport efi_pstore nfnetlink dmi_sysfs ip_tables x_tables autofs4 btrfs libblake2b raid10 raid456 async_raid6_recov async_memcpy async_pq async_xor async_tx xor raid6_pq raid1 raid0 linear nvme sdhci_pci nvme_core r8169 sdhci_uhs2 video ghash_clmulni_intel nvme_keyring thunderbolt sdhci psmouse realtek nvme_auth phylink hkdf cqhci wmi aesni_intel
+[395467.005612] [T2273908] CR2: ffffcd0d873fb8c8

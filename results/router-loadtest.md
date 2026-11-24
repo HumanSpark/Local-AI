@@ -1,6 +1,7 @@
-# E35 RESULTS: router load/unload + concurrent inference (2026-07-17)
+# RT35 RESULTS: router load/unload + concurrent inference (2026-07-17)
 
-<!--
+_Public ID RT35; published as E35 before Local-AI r5.17, which collided with a different August experiment (experiments/E35.md). The file name is unchanged._
+
 # File: results/router-loadtest.md
 # Purpose: Results for the four items F40 left untested. Pre-registration: router-loadtest-prereg.md.
 # Project: sparkbench | Date: 2026-07-17
@@ -12,7 +13,6 @@
 # Methodology note: the first concurrency measurement said 1.37 (prediction MISS) and was a
 # partial-overlap artifact; measuring per-token timestamps inside the provable overlap window gave
 # 1.05 (HIT). The artifact, not the number, is the transferable lesson.
--->
 
 ## Conditions
 

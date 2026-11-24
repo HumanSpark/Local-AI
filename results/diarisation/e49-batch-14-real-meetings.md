@@ -1,6 +1,7 @@
-# E49: 14 real meetings (11 hours) through the fast path - transcription solid, auto-k is the deployment gap (2026-07-17)
+# MT49: 14 real meetings (11 hours) through the fast path - transcription solid, auto-k is the deployment gap (2026-07-17)
 
-<!--
+_Public ID MT49; published as E49 before Local-AI r5.17, which collided with a different August experiment (experiments/E49.md). The file name is unchanged so old links keep working._
+
 # File: results/diarisation/e49-batch-14-real-meetings.md
 # Purpose: Batch fast-path run over Alastair's real meeting archive. Robustness + the k-in-production gap.
 # Project: sparkbench | Date: 2026-07-17
@@ -14,7 +15,6 @@
 #
 # Content is real client data (names, businesses): transcripts are gitignored. Only de-identified
 # stats (duration, estimated k, speaker-share SHAPE, speech %, speed) appear here.
--->
 
 ## Run: 14/14 succeeded, ~28x real time
 

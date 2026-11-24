@@ -5,6 +5,7 @@ Every file in this folder with its own one-line description (a document's title,
 | File | Description |
 |---|---|
 | [arms-narrator-pairs.json](arms-narrator-pairs.json) |  |
+| [build_listening_set.py](build_listening_set.py) | Assemble a loudness-normalised, blind-labelled listening set from whatever engines have already rendered. |
 | [check_intelligibility.py](check_intelligibility.py) | Gate TTS renders on whether they are actually intelligible English, by ASR-vs-known-text WER. |
 | [render_longform.py](render_longform.py) | Render minutes-long narration with Chatterbox at a NAMED config, by sentence-chunking so no single generate() call approaches the model's token ceiling. |
 | [speakable.py](speakable.py) | Turn numerals, years, ordinals and dates into the WORDS a TTS engine must be given, because Chatterbox does no number handling of its own. |

@@ -1,0 +1,61 @@
+[2026-11-24T00:53:33+00:00] E175 start: kernel 7.0.0-43-generic; server /home/bench/sparkbench/var/engines/llama-94f3af3d0/build/bin/llama-server
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-24T00:53:40+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service sparkrouter-halogen.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-24T00:53:33+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[2026-11-24T00:53:55+00:00] GTT baseline 17 MiB
+[evict] 200 files, 0.4s
+[evict] 212 files fadvised, 0 unopenable; Cached 84486 -> 2121 MiB (82365 MiB freed) in 0.8s
+[2026-11-24T00:53:55+00:00] evict rc=0
+[2026-11-24T00:54:06+00:00] stock: server start
+0.08.911.761 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 8192, kv_unified = 'true'
+[e175] stock template_tool_response: pass [] (4.57s)
+[e175] stock template_tool_response_twin: pass [] (3.26s)
+[e175] stock template_multi_turn: pass [] (1.71s)
+[e175] stock template_multi_turn_twin: pass [] (0.65s)
+[e175] stock summary {'pass': 4}
+[2026-11-24T00:54:26+00:00] stock: server stopped
+[2026-11-24T00:54:36+00:00] broken-tool-content: server start
+0.02.171.790 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 8192, kv_unified = 'true'
+[e175] broken-tool-content template_tool_response: fail ["missing 'QX7R2M'", "missing 'delayed'"] (7.47s)
+[e175] broken-tool-content template_tool_response_twin: pass [] (2.92s)
+[e175] broken-tool-content template_multi_turn: pass [] (1.34s)
+[e175] broken-tool-content template_multi_turn_twin: pass [] (0.71s)
+[e175] broken-tool-content summary {'fail': 1, 'pass': 3}
+[2026-11-24T00:54:54+00:00] broken-tool-content: server stopped
+[2026-11-24T00:54:54+00:00] E175 done
+[2026-11-24T00:54:54+00:00] restoring relay
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-24T00:54:54+00:00) ---
+  serving unit    : sparkrouter-halogen.service : ACTIVE (serving, Halogen solo)
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+[2026-11-24T00:54:54+00:00] relay up rc=0
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] code: running (baseline decode 80.7)
+[probe] code: ok decode 80.9 prefill 489.7 check pass wall 3.6 s 
+[2026-11-24T00:56:00+00:00] relay restored, VERIFIED: production probe (code) passed

@@ -89,9 +89,10 @@ def chat(url: str, model: str, prompt: str, max_tokens: int) -> dict:
 
 
 def cmd_run(args: argparse.Namespace) -> int:
-    bank = json.loads(BANK.read_text())
-    OUT.mkdir(parents=True, exist_ok=True)
-    path = OUT / f"out-{args.arm}.json"
+    bank = json.loads(Path(args.bank).read_text())
+    out_dir = Path(args.out)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / f"out-{args.arm}.json"
     done = json.loads(path.read_text()) if path.exists() else {}
     for i, t in enumerate(bank["tasks"], 1):
         if t["id"] in done:
@@ -178,9 +179,10 @@ def grade_update(t: dict, parsed: object) -> dict:
 
 
 def cmd_grade(args: argparse.Namespace) -> int:
-    bank = json.loads(BANK.read_text())
+    bank = json.loads(Path(args.bank).read_text())
+    out_dir = Path(args.out)
     score: dict = {"bank_seed": bank["seed"], "arms": {}}
-    for path in sorted(OUT.glob("out-*.json")):
+    for path in sorted(out_dir.glob("out-*.json")):
         arm = path.stem.split("-", 1)[1]
         runs = json.loads(path.read_text())
         rows = {}
@@ -210,7 +212,7 @@ def cmd_grade(args: argparse.Namespace) -> int:
         score["arms"][arm] = {"extract": extract, "update": update,
                               "wall_s_median": round(statistics.median(walls), 2) if walls else None,
                               "wall_s_total": round(sum(walls), 1), "tasks": rows}
-    (OUT / "score.json").write_text(json.dumps(score, indent=1))
+    (out_dir / "score.json").write_text(json.dumps(score, indent=1))
     print("arm | X f1 | P | R | trust err (stale/coll/hypo/rej/promo) | X valid | U exact | U stale kept | "
           "U unchanged lost | U traps | median s")
     for arm, a in score["arms"].items():
@@ -227,6 +229,8 @@ def main() -> int:
                                  epilog="examples:\n  run_e170.py run --arm F --url http://127.0.0.1:8402/v1/chat/"
                                         "completions --model local_smart\n  run_e170.py grade",
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--bank", default=str(BANK), help="bank JSON (E172 uses spikes/memory-tasks/bank_e170b.json)")
+    ap.add_argument("--out", default=str(OUT), help="directory for out-<arm>.json and score.json")
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run", help="run one arm over the bank (resumable)")
     r.add_argument("--arm", required=True, help="F (production), I (Inkling-2-Mini), H (Hy-Memory)")

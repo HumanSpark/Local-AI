@@ -170,10 +170,15 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E168 | same ten changes, tests hidden (2026-11-19) | [results](e168-results.md) |
 | E170 | memory extraction, three local models (2026-11-21) | [data](e170/) · [pre-registration](e170-prereg.md) · [results](e170-results.md) |
 | E171 | Hy4-Flash on Strata (2026-11-22) | [data](e171/) · [pre-registration](e171-prereg.md) · [results](e171-results.md) |
+| E172 | Inkling-2-Mini, four setups, one ruler | [data](e172/) · [pre-registration](e172-prereg.md) |
+| E173 | (DRAFT) - can this box write a song? | [data](e173/) · [pre-registration](e173-prereg.md) · [results](e173-results.md) |
+| E174 | KV cache type on Flash-Next (llama.cpp) | [data](e174/) · [pre-registration](e174-prereg.md) · [results](e174-results.md) |
+| E175 | chat-template pair negative control | [data](e175/) · [pre-registration](e175-prereg.md) · [results](e175-results.md) |
+| E177 | Flash-Next on HTR vs production Halogen (2026-11-24) | [data](e177/) · [pre-registration](e177-prereg.md) · [results](e177-results.md) |
 
 ## Other evidence
 
-The router and moe-diversity files number their experiments E34 to E37 independently of experiments.md, so an E37 there is not the E37 in experiments.md. Each file is the authority for its own numbers.
+The July router and multi-user files are RT35 to RT37 (published as E35 to E37 before r5.17, which clashed with different August experiments) plus E34, which has no August twin. [GLOSSARY.md](../GLOSSARY.md#renamed-experiment-ids) lists every renamed ID.
 
 | File or folder | Title |
 |---|---|
@@ -182,12 +187,12 @@ The router and moe-diversity files number their experiments E34 to E37 independe
 | [closed-record.md](closed-record.md) | Results for closed-record professional reasoning - three local models against a ten-matter sealed-key corpus, plus the instrument defects the work surfaced. |
 | [frontier-eval.md](frontier-eval.md) | Quality comparison of frontier cloud models vs local sparkbench models on the eval-pilot suite. |
 | [keyed-vs-pairwise.md](keyed-vs-pairwise.md) | Result of scoring the same five E10 answers by answer key and by blind pairwise judging, and what the disagreement between the two methods measures. |
-| [moe-diversity-prereg.md](moe-diversity-prereg.md) | E37 PRE-REGISTRATION: is F43 batched expert-sharing? (2026-07-17) |
-| [moe-diversity.md](moe-diversity.md) | E37 RESULTS: MoE concurrency is stream-diversity-bound - F17's headline is a same-question artifact (2026-07-17) |
-| [router-concurrency-prereg.md](router-concurrency-prereg.md) | E36 PRE-REGISTRATION: single-model concurrency UNDER THE ROUTER (2026-07-17) |
-| [router-concurrency.md](router-concurrency.md) | E36 RESULTS: single-model concurrency under the router (2026-07-17) |
-| [router-loadtest-prereg.md](router-loadtest-prereg.md) | E35 PRE-REGISTRATION: router load/unload + concurrent inference (2026-07-17) |
-| [router-loadtest.md](router-loadtest.md) | E35 RESULTS: router load/unload + concurrent inference (2026-07-17) |
+| [moe-diversity-prereg.md](moe-diversity-prereg.md) | RT37 PRE-REGISTRATION: is F43 batched expert-sharing? (2026-07-17) |
+| [moe-diversity.md](moe-diversity.md) | RT37 RESULTS: MoE concurrency is stream-diversity-bound - F17's headline is a same-question artifact (2026-07-17) |
+| [router-concurrency-prereg.md](router-concurrency-prereg.md) | RT36 PRE-REGISTRATION: single-model concurrency UNDER THE ROUTER (2026-07-17) |
+| [router-concurrency.md](router-concurrency.md) | RT36 RESULTS: single-model concurrency under the router (2026-07-17) |
+| [router-loadtest-prereg.md](router-loadtest-prereg.md) | RT35 PRE-REGISTRATION: router load/unload + concurrent inference (2026-07-17) |
+| [router-loadtest.md](router-loadtest.md) | RT35 RESULTS: router load/unload + concurrent inference (2026-07-17) |
 | [router-multimodel.md](router-multimodel.md) | E34: llama.cpp router mode - multiple models on call (2026-07-17) |
 | [closed-record/](closed-record/) | |
 | [coding-screen/](coding-screen/) | |

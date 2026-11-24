@@ -1,6 +1,7 @@
-# E35 PRE-REGISTRATION: router load/unload + concurrent inference (2026-07-17)
+# RT35 PRE-REGISTRATION: router load/unload + concurrent inference (2026-07-17)
 
-<!--
+_Public ID RT35; published as E35 before Local-AI r5.17, which collided with a different August experiment (experiments/E35.md). The file name is unchanged._
+
 # File: results/router-loadtest-prereg.md
 # Purpose: Predictions registered BEFORE the E35 runs - the three things F40 listed as untested.
 # Project: sparkbench | Date: 2026-07-17
@@ -10,7 +11,6 @@
 # inference against both models, or sustained residency. This registers falsifiable predictions for
 # all four BEFORE any run (house rule: pre-register, deviations are findings). Results land in
 # results/router-loadtest.md; this file is not edited after the first run except by declared amendment.
--->
 
 ## What is being tested
 

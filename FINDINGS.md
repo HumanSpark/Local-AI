@@ -20,17 +20,19 @@
 
 ## Findings index
 
-197 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+202 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
 - **PLATFORM (74):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180) [F190](#f190) [F193](#f193)
-- **METHOD (62):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184)
+- **METHOD (63):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184) [F200](#f200)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
-- **CAPABILITY (9):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195) [F196](#f196) [F197](#f197)
+- **CAPABILITY (11):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195) [F196](#f196) [F197](#f197) [F201](#f201) [F202](#f202)
 - **QUALITY (2):** [F189](#f189) [F191](#f191)
 - **INSTRUMENT (1):** [F192](#f192)
+- **PERFORMANCE (1):** [F199](#f199)
 - **SPEED (1):** [F188](#f188)
+- **STABILITY (1):** [F198](#f198)
 
 | Finding | Title | Kind | Date | Experiment | Status |
 |---|---|---|---|---|---|
@@ -234,6 +236,11 @@
 | [F195](#f195) | hiding the tests on the same ten changes drops both local setups to 1/10; most of their large-change skill is building to a shown specification | CAPABILITY | 2026-11-19 | E168 | ESTABLISHED |
 | [F196](#f196) | on templated memory-extraction jobs production Flash-Next, Inkling-2-Mini and Hy-Memory are all near-perfect; Inkling is 6.5x slower and gives no answer on 5 of 20 updates, so production runs the nightly memory job | CAPABILITY | 2026-11-21 | E170 | ESTABLISHED |
 | [F197](#f197) | Hy4-Flash (Strata SQ-96) runs stably here at 24 tok/s decode, a third of its maker's figure, and an hour per task is too short for it: 3/10 on the E167 bank, every task timed out | CAPABILITY | 2026-11-22 | E171 | ESTABLISHED |
+| [F198](#f198) | starting a GPU engine one second after another exits can panic the kernel: the new engine runs out of GPU address space and amdgpu crashes tearing it down | STABILITY | 2026-11-23 | E172 (IL -> IM transition) | CRASH OBSERVED |
+| [F199](#f199) | a q8_0 KV cache never helps Flash-Next on llama.cpp: prompt reading up to 8% slower, long-context generation 10% slower | PERFORMANCE | 2026-11-23 | E174 | MEASURED |
+| [F200](#f200) | a paired tool-result question catches a silently broken chat template that otherwise reads as a polite, plausible answer | METHOD | 2026-11-24 | E175 | MEASURED |
+| [F201](#f201) | three local music models run here; ACE-Step is the only fast one and ties for clearest words, but none matched the owner's taste in style | CAPABILITY | 2026-11-24 | E173 | MEASURED |
+| [F202](#f202) | Flash-Next compressed with HTR (Halo Trellis) keeps production's coding quality but is slower than Halogen | CAPABILITY | 2026-11-24 | E177 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -564,7 +571,7 @@ repetitive prompt, which lets a MoE batch share expert loads. Sixteen
 streams asking sixteen DIFFERENT questions measure 108.86 t/s on the same
 box, build and slot count - the headline overstates real fleet throughput
 by 1.78x. The number reproduces exactly under its own stated conditions
-(E36: 192.19), so nothing here is wrong; but this finding's own
+(RT36: 192.19), so nothing here is wrong; but this finding's own
 client-facing framing - "what the fleet gets at burst" - should cite
 108.86, not 193.5. The 1-slot number (72.9) is unaffected: the penalty is
 batch-level and does not touch a single user. Dense models show no such
@@ -1550,10 +1557,10 @@ Decision-grade: local tool use for document creation is real and usable on the w
 human-review discipline as any draft, and with model selection made by measured parse-reliability rather
 than by reputation.
 
-**E33 EXTENSIVE UPDATE (4 models x 22 tasks x 5 runs) - two revisions to the pilot:**
+**TU33 EXTENSIVE UPDATE (4 models x 22 tasks x 5 runs) - two revisions to the pilot:**
 - **The pilot OVERSTATED Coder's weakness.** At scale with an explicit system prompt, Qwen3-Coder scored 82%
   with only 5/110 format leaks (not ~50%). It is competitive, just slightly less reliable than the workhorse
-  (91%, 0 leaks) and gpt-oss-20b (88%, 0 leaks), with weaker no-tool discipline. The E32 "much worse" verdict
+  (91%, 0 leaks) and gpt-oss-20b (88%, 0 leaks), with weaker no-tool discipline. The TU32 "much worse" verdict
   was single-run + terse-prompt noise - a caution about pilot-scale conclusions, corrected by N=5.
 - **The core finding is serving-config sensitivity.** Same build, same --jinja: workhorse + gpt-oss emit clean
   tool_calls instantly; Mistral-Small-3.1 SILENTLY REFUSES (its GGUF ships no tool template - fixed only by
@@ -1561,9 +1568,9 @@ than by reputation.
   tool use on your stack." AND: conditional reasoning-in-call is BROKEN for the Qwen family + gpt-oss (they add
   "URGENT" unconditionally) but CORRECT for Mistral - exposed only by testing BOTH branches (the true-branch
   alone falsely passed for everyone). Mistral's multi-tool chaining was template-confounded, not cleanly measured.
-Evidence (E33): results/tool-use/E33-{preregistration,results}.md; E33-results-{qwen3-30b,gpt-oss-20b,
+Evidence (TU33): results/tool-use/E33-{preregistration,results}.md; E33-results-{qwen3-30b,gpt-oss-20b,
 qwen3-coder-30b,mistral-24b}.json; harness tools/tooluse_harness_v2.py.
-Evidence (E32 pilot): results/tool-use/E32-{preregistration,results}.md; results-qwen3-30b.json,
+Evidence (TU32 pilot): results/tool-use/E32-{preregistration,results}.md; results-qwen3-30b.json,
 results-qwen3-coder-30b.json; rendered docs results/tool-use/png/qwen3-30b/; harness tools/tooluse_harness.py.
 
 <a id="f39"></a>
@@ -1659,12 +1666,12 @@ deadlock edge (F24); a third at ~20 GiB lands ON it. `--models-max` defaults to 
 but models need different flags: a Mistral swap would silently lose tool use, because Mistral needs a
 chat-template the workhorse does not. A preset carries `chat-template-file` per model, and Mistral
 then does tool calls and still chats. Three sub-results, all measured:
-- **E33/F38 independently reproduced:** Mistral-Small-3.1 on its own template REFUSES tool calls with
-  E33's exact refusal string, reached by a completely different serving path.
+- **TU33/F38 independently reproduced:** Mistral-Small-3.1 on its own template REFUSES tool calls with
+  TU33's exact refusal string, reached by a completely different serving path.
 - **The BUILT-IN `mistral-v7-tekken` template is a trap for this model:** setting it produced
   pretraining/forum-post garbage - F37's chat-template fingerprint from the opposite cause (F37 had a
   MISSING template; this is a WRONG one overriding a working one). A plausible name in the built-in
-  list is not a fit for your GGUF. E33's hand-written mistral-v7-tool.jinja is the one that works.
+  list is not a fit for your GGUF. TU33's hand-written mistral-v7-tool.jinja is the one that works.
 - **Safety property, not convenience: use `--models-preset`, never `--models-dir`,** while
   /opt/models/staging holds 100 GB+ artefacts. `--models-dir` + autoload (default on) + models-max 4
   could load a 397B straight through the memory edge. A preset names exactly what is allowed.
@@ -1677,7 +1684,7 @@ EXPERIMENTAL ("not recommended in untrusted environments"), and concurrent infer
 models, sustained residency, and unload/TTL behaviour under models-max pressure are all untested.
 That gap between "measured working" and "serving production" is the honest state.
 Evidence: results/router-multimodel.md (full method, tables, caveats); F24 /
-docs/memory-edge-deadlock.md (the cap that sets models-max 2); F38/E33 (reproduced); F37 (the garbage
+docs/memory-edge-deadlock.md (the cap that sets models-max 2); F38/TU33 (reproduced); F37 (the garbage
 fingerprint); F39 (the single-source-of-truth config this would extend).
 
 <a id="f41"></a>
@@ -1688,7 +1695,7 @@ fingerprint); F39 (the single-source-of-truth config this would extend).
 
 **Kind: PLATFORM**
 
-Status: confirmed (2026-07-17, E35, pre-registered deef627 BEFORE the runs; attended, D-state 0
+Status: confirmed (2026-07-17, RT35, pre-registered deef627 BEFORE the runs; attended, D-state 0
 throughout, box restored to its exact pre-test state). Resolves the three items F40 left untested.
 
 **The physical result.** Both models are memory-bandwidth bound, not compute bound: Qwen3-30B-A3B
@@ -1714,7 +1721,7 @@ slower than Mistral running alone. **Never serve the MoE and a dense model concu
 This also re-explains F34's "Mistral is 5-8x slower" as a bandwidth ratio - the same arithmetic
 predicts both the solo speeds and the contended split.
 
-**Load/unload is safe and clean** (the rest of E35, all HIT): `--models-max 2` EVICTS BEFORE LOADING -
+**Load/unload is safe and clean** (the rest of RT35, all HIT): `--models-max 2` EVICTS BEFORE LOADING -
 GTT sampled every 50ms across a third model's load peaked at exactly the existing 2-model level
 (32.71 GiB), never holding three. That makes the cap a real memory guard against the ~60 GiB edge
 (F24), not a hint. Eviction is LRU; `POST /models/unload` returns memory to the system (0.02 GiB);
@@ -1748,7 +1755,7 @@ explains); F17 (single-model concurrency knee - untouched, still the open questi
 
 **Kind: PLATFORM**
 
-Status: confirmed (2026-07-17, E36, pre-registered a8d2df8 BEFORE the runs; attended, D-state 0,
+Status: confirmed (2026-07-17, RT36, pre-registered a8d2df8 BEFORE the runs; attended, D-state 0,
 box restored exactly). Closes the last item F40/F41 left open.
 
 Both arms measured in the SAME session on the SAME build with ONE driver - F17's banked numbers were
@@ -1785,7 +1792,7 @@ tools/serve_bench.py (F17's own harness) = 191.76 t/s @16; F17; F40; F41.
 
 **Kind: PLATFORM**
 
-Status: **confirmed + MECHANISM ESTABLISHED** (2026-07-17, E37, pre-registered a02f09b BEFORE the
+Status: **confirmed + MECHANISM ESTABLISHED** (2026-07-17, RT37, pre-registered a02f09b BEFORE the
 runs; dense control decisive). **This supersedes F43's original "output diversity" framing, which was
 confounded** - see the correction below. Attended, D-state 0, box restored exactly.
 
@@ -1842,7 +1849,7 @@ measure **108.86 t/s** on the same box, build and slot count:
 
 > **F17 headline 193.5 t/s | real fleet load 108.86 t/s | overstatement 1.78x**
 
-F17 is not fabricated - its conditions are stated and it reproduces exactly (E36: 192.19 under those
+F17 is not fabricated - its conditions are stated and it reproduces exactly (RT36: 192.19 under those
 conditions). It is a best case that READS as a fleet number. The single user is unaffected: at 1 slot
 there is no penalty at all (89.02 vs 89.94 across prompts). **This is a finding about fleets, not
 people** - and it does not change any single-operator recommendation.
@@ -1859,7 +1866,7 @@ practice does, and F17's method section is accurate about it - the practice is s
 dense architectures and wrong for MoE. **For MoE, concurrency benchmarks must use DISTINCT prompts per
 stream or they measure expert locality rather than serving capacity.**
 
-Prediction resolution: A1 (dense shows no effect) HIT at 1.001. B1 (identical reproduces E36) HIT at
+Prediction resolution: A1 (dense shows no effect) HIT at 1.001. B1 (identical reproduces RT36) HIT at
 191.70. B2 (diverse <= 170) HIT far beyond at 108.86. **A2 (MoE ratio >= 1.15 at the same slot count)
 MARGINAL MISS at 1.133** - the prediction assumed a fixed effect size; the penalty in fact scales with
 batch size (1.75x at 16 slots), so the prediction was wrong about the SHAPE. Recorded as a miss rather
@@ -1869,7 +1876,7 @@ Limits: one MoE family, one dense comparator, 4 and 16 slots, one diversity cond
 intermediate diversity; other MoE families (F17/F18 show concurrency behaviour already varies by
 architecture, so this may too); interaction with F18's MLA anti-scaling; >16 slots.
 Evidence: results/moe-diversity.md; results/moe-diversity-prereg.md (registered first);
-results/router-concurrency.md (E36, where the signal appeared); F17 (the number corrected); F41 (the
+results/router-concurrency.md (RT36, where the signal appeared); F17 (the number corrected); F41 (the
 bandwidth ceiling); F18 (architecture-dependent concurrency).
 
 <a id="f44"></a>
@@ -1880,7 +1887,7 @@ bandwidth ceiling); F18 (architecture-dependent concurrency).
 
 **Kind: MODEL**
 
-Status: **confirmed** (2026-07-17, E41, pre-registered 5c7a64d BEFORE any run; 72 conditions x 3
+Status: **confirmed** (2026-07-17, MT41, pre-registered 5c7a64d BEFORE any run; 72 conditions x 3
 runs). **The core phenomenon is NOT NOVEL - it is well-established prior art.** See "Prior art and
 what is actually ours" below; this is a REPRODUCTION plus one reframing, and it must never be
 published as a discovery.
@@ -1995,7 +2002,7 @@ results/diarisation/e40-vad-and-limits.md (the incidental discovery this systema
 **Kind: MODEL** - the accuracy result. How the inverted answer was caught is
 **F132**, split out 2026-09-01.
 
-Status: **confirmed** (2026-07-17, E42 + E45). This refutes a hypothesis we registered.
+Status: **confirmed** (2026-07-17, MT42 + MT45). This refutes a hypothesis we registered.
 
 ### The measurement
 
@@ -2008,7 +2015,7 @@ benchmark: real human transcripts, 200 utterances, 4542 reference words):
 | small | 3.35% | 130 | 14 | 8 |
 
 **2.40% matches the published figure for whisper large-v3 on test-clean (~2-3%)**, which validates
-the harness as well as the number. On real meeting audio the same ordering holds (E42, vs an Otter
+the harness as well as the number. On real meeting audio the same ordering holds (MT42, vs an Otter
 reference with a ~2% floor): large 10.7% disagreement, small 13.7% - large ~28% better in both
 settings.
 
@@ -2030,7 +2037,7 @@ benchmark with a known value is not just data - it is an instrument check.**
 ### Scope
 
 LibriSpeech is clean, single-speaker read audiobook speech - the EASY case. **2.40% must never be
-quoted as our meeting transcription accuracy** (that figure is unknown; the ~10.6% E42 disagreement
+quoted as our meeting transcription accuracy** (that figure is unknown; the ~10.6% MT42 disagreement
 carries the reference's own floor). What this establishes is the model COMPARISON and a sound harness.
 Not swept: medium / large-v2 / non-turbo large-v3, decoding parameters, other languages.
 
@@ -2045,7 +2052,7 @@ tools/librispeech_wer.py; manifests/MANIFEST.md. Corpus: LibriSpeech (CC-BY-4.0,
 
 **Kind: MODEL**
 
-Status: **confirmed** (2026-07-17, E43-E50). Two honest halves: we are NOT best-in-class at general
+Status: **confirmed** (2026-07-17, MT43-MT50). Two honest halves: we are NOT best-in-class at general
 diarisation, and we do not need to be.
 
 ### Half one - general diarisation, measured against real ground truth and a strong baseline
@@ -2055,15 +2062,15 @@ held-out meetings:
 
 | system | IHM (headset) | SDM (one table mic) |
 |---|---|---|
-| ours, energy-gate VAD (E43) | 29.2% | 33.1% |
-| ours, Silero VAD (E44) | 20.2% | 21.1% |
-| ours + pyannote VAD (hybrid, E47) | **10.5%** | 16.9% |
-| **pyannote 3.1 full pipeline (E46)** | **6.5%** | **13.8%** |
+| ours, energy-gate VAD (MT43) | 29.2% | 33.1% |
+| ours, Silero VAD (MT44) | 20.2% | 21.1% |
+| ours + pyannote VAD (hybrid, MT47) | **10.5%** | 16.9% |
+| **pyannote 3.1 full pipeline (MT46)** | **6.5%** | **13.8%** |
 
 Three things worth keeping: (a) replacing a naive energy gate with a real VAD nearly halved our error
-(E44); (b) **a far-field table mic is almost free - SDM 21.1% vs IHM headset 20.2%, ~1 point, against
-a predicted 8+** (E44), so an on-prem meeting box does not need per-person headsets; (c) pyannote's
-own published pipeline still beats ours ~3x on close-talk (E46). We report that plainly - our general
+(MT44); (b) **a far-field table mic is almost free - SDM 21.1% vs IHM headset 20.2%, ~1 point, against
+a predicted 8+** (MT44), so an on-prem meeting box does not need per-person headsets; (c) pyannote's
+own published pipeline still beats ours ~3x on close-talk (MT46). We report that plainly - our general
 diarisation is decent, not state-of-the-art.
 
 ### Half two - the reframe that makes it a product
@@ -2071,7 +2078,7 @@ diarisation is decent, not state-of-the-art.
 The host's real need is not "count and separate every speaker". It is "when am I speaking vs when is
 someone else". That is a BINARY target-speaker problem: enroll ONE voiceprint (the host), score each
 window against it, threshold. No clustering, no speaker count - the entire auto-k failure mode that
-blocks general diarisation on real meetings (E49: k defaults to 2, explodes to 8 on a webinar) simply
+blocks general diarisation on real meetings (MT49: k defaults to 2, explodes to 8 on a webinar) simply
 disappears.
 
 Measured on 4 real calls, voiceprint enrolled on a SEPARATE 4-minute recording (genuine
@@ -3605,7 +3612,7 @@ behaviour depends on a condition, and called that "the one place the workhorse
 is unsafe". E45 expanded the conditional category from 3 tasks to 13 paired
 ones and the ranking turned over.
 
-| arm | 3-task category (E33) | **13-task category (E45)** |
+| arm | 3-task category (TU33) | **13-task category (E45)** |
 |---|---|---|
 | Mistral-Small-24B | **~100%, "the champion"** | **38% - the WORST arm** |
 | workhorse (Qwen3-30B-A3B) | "UNSAFE" | **68%** |
@@ -3613,14 +3620,14 @@ ones and the ranking turned over.
 
 Zero format leaks in all 325 runs, so nothing here is a harness effect.
 
-**Why the small sample lied.** E33's category was c1-urgent, c2-not-urgent and
+**Why the small sample lied.** TU33's category was c1-urgent, c2-not-urgent and
 c3-vat. Mistral scores 5/5, 4/5 and 5/5 on exactly those. The 2026-08-16
 expansion added category routing, tool selection and compound conditions -
 **Mistral scores 0/5 on all six of them**, while the Qwen family and the
 workhorse score 5/5. The recommendation was built on the three tasks the
 recommended model happens to be good at.
 
-**The original observation was CORRECT and is not retracted.** The defect E33
+**The original observation was CORRECT and is not retracted.** The defect TU33
 named - applying a conditional flag unconditionally - is still visible in the
 c1/c2 pair, and Mistral is still the only model that correctly withholds the
 flag on the false branch (4/5, against 0/5, 1/5 and 2/5 for the Qwen arms and
@@ -3755,7 +3762,7 @@ that none of the three tested did.
 **Kind: METHOD**
 
 `tooluse_harness_v2.py` fixes `temperature` at 0.2 and `runs` at 5. Both are
-deliberate - it keeps every E33-lineage figure comparable, and the file says so
+deliberate - it keeps every TU33-lineage figure comparable, and the file says so
 at the call site. The consequence was never characterised until E50 re-ran the
 thirteen unchanged conditional tasks in a fresh session.
 
@@ -3788,7 +3795,7 @@ scored 5/5 on its "only if" variant. The guides are corrected; the model
 RANKING they carry is unaffected.
 
 **Fix, not yet run:** a powered design - more runs, or temperature 0, or both.
-Registered as E53. Raising runs breaks comparability with every E33-lineage
+Registered as E53. Raising runs breaks comparability with every TU33-lineage
 number, which is exactly why the constant was fixed in the first place, so the
 new design has to carry both.
 
@@ -6758,7 +6765,7 @@ This is why CLAUDE.md carries a hard rule to always pass `-c` explicitly.
 
 **Kind: METHOD**
 
-**Status:** split out of F45 on 2026-09-01. Measured 2026-07-17, E42 + E45. Scope tag: **general**.
+**Status:** split out of F45 on 2026-09-01. Measured 2026-07-17, MT42 + MT45. Scope tag: **general**.
 
 We registered a hypothesis that smaller Whisper models might transcribe better,
 and the first measurements agreed with it. **A batching defect in our own
@@ -9269,3 +9276,153 @@ production candidate at this speed. A fair capability test needs an uncapped run
 owner-present day (F193). Production unchanged.
 
 Evidence: `results/e171-results.md`, `results/e171/`, prereg `results/e171-prereg.md` (66ab0de).
+
+<a id="f198"></a>
+
+## F198 - starting a GPU engine one second after another exits can panic the kernel: the new engine runs out of GPU address space and amdgpu crashes tearing it down
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-23 | **Experiment:** E172 (IL -> IM transition) | **Status:** CRASH OBSERVED once (kdump-captured); cause of the -ENOMEM is a HYPOTHESIS; cooldown fix untested
+
+**Kind: STABILITY**
+
+**Plain English.** The box rebooted itself at 01:18 overnight. One test engine had just shut down and the next one
+started a second later. The new one ran out of graphics memory while loading, gave up, and the graphics driver
+crashed while cleaning up after it. That took the whole machine down. The old engine had probably not handed its
+memory back yet: the process ends at once, but the driver frees its memory in the background.
+
+**Claim.** 01:17:56 IL (Loom 0.3, 29.4 GiB GTT at load) finished; `stop_engines` saw no engine process. 01:18:00 IM
+(llama.cpp 94f3af3d0, Inkling-2-Mini UD-Q4_K_XL) started. Two `amdgpu_gem_va_update_vm ... Couldn't update BO_VA
+(-12)`, then on llama-server's exit `BUG: unable to handle page fault` at `amdgpu_vm_pt_free+0x61` via
+`amdgpu_vm_fini` / `drm_release`. Kernel 7.0.0-43, not tainted, BIOS 1.12. `panic_on_oops=1` -> kdump saved the
+vmcore -> reboot 01:23. Not the F193 deadlock: no DeviceLost, no wedge, model 17-28 GiB, a different code path.
+Earlier in the same boot: `kfd_process_wq_release hogged CPU >10000us 11 times`, the asynchronous release named
+above. Collateral: file data written after ~01:03 never reached disk (log tails zero-filled, 10 git objects
+zero-length, HEAD among them; repaired from origin, nothing committed was lost). Why fifteen minutes of writeback
+was lost rather than seconds is UNEXPLAINED.
+
+**Use.** Two things are true whatever caused the -ENOMEM: the amdgpu error path on a failed load can take the box
+down, and back-to-back engine starts are where it fired. `tools/run_e154_arms.sh` now waits before every local
+engine start until GTT is back within 2 GiB of the level measured (once stable) at window open, plus 10 s, and
+refuses the arm if that does not happen in 180 s. The hypothesis is tested by the IM re-run: a clean load after a
+settle supports it; an -ENOMEM with GTT at baseline refutes it. Any other runner that starts engines back to back
+needs the same wait. Commit + push before every arm (bank both sides) already held: it is why nothing was lost.
+**Addendum 2026-11-23 (E174, F199):** the same `BO_VA (-12)` fired on a 103.7 GiB load with GTT at its 17 MiB
+baseline and ~68 GB page cache, and did not recur once page cache was evicted. So a GTT not handed back is not the
+only route to this -ENOMEM; page cache is a second candidate. The GTT settle stays; large loads also evict first.
+
+Evidence: `results/e172/raw/kernel-oops-2026-11-23.txt` (oops excerpt from kdump's dmesg),
+`/var/crash/202611230118/` (full vmcore, root-only), `results/e172/raw/IL/memory.log` (IL end 01:17:56),
+`results/e172/raw/IM.serverlog` (created 01:18:00, empty), prereg amendment A2 in `results/e172-prereg.md`.
+
+<a id="f199"></a>
+
+## F199 - a q8_0 KV cache never helps Flash-Next on llama.cpp: prompt reading up to 8% slower, long-context generation 10% slower
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-23 | **Experiment:** E174 | **Status:** MEASURED once (r=3 per cell); page-cache trigger for the attempt-1 DeviceLost is SUPPORTED, not proven
+
+**Kind: PERFORMANCE**
+
+**Plain English.** Halving the size of the model's conversation memory made Flash-Next slower or no faster at every
+context length tested on llama.cpp. Keep full precision unless memory runs out. Production runs Halogen, not
+llama.cpp, so nothing in production changes.
+
+**Claim.** llama.cpp 94f3af3d0 Vulkan, Flash-Next UD-Q4_K_XL, `-fa on`. q8_0/q8_0 vs f16/f16: pp512 −7.7% (d0),
+−2.0% (d8192), −1.4% (d32768, noise); tg128 −0.4% (d0, noise), −0.1% (d8192, noise), −10.2% (d32768; sd 1.37 on
+q8_0). Mixed K/V types are slower than either matched pair on prefill. All three predictions falsified. Unlike F16
+(the earlier workhorse model, where q8_0 won at depth), on this hybrid model q8_0 does not win at 32K.
+
+**Use.** Any llama.cpp serving or benching of Flash-Next uses f16 KV; q8_0 only as a memory lever, with the speed
+cost stated. Loads over ~100 GiB: evict the model files from page cache first (`tools/evict_page_cache.py`, no
+root). Attempt 1 DeviceLost at load with ~68 GB cached; attempt 2 with 1-6 GB cached loaded three times cleanly.
+
+**Kernel side of attempt 1 (read 2026-11-23 21:48Z, owner ran it as alastair):** 20:26:50 eight
+`amdgpu_gem_va_update_vm ... Couldn't update BO_VA (-12)` - the SAME -ENOMEM signature as F198 - then the Vulkan
+DeviceLost. No GPU reset, no ring timeout, no oops (unlike F198 the teardown did not crash the box). GTT was at its
+17 MiB baseline, so a GTT not yet handed back (F198's hypothesis) cannot be the cause here; system memory for the
+page-table update is the candidate, which fits the page-cache reading. Also 20:25:57 `svm_range_restore_work hogged
+CPU >10000us 1027 times` (KFD/SVM, before the load; unexplained).
+
+Evidence: `results/e174/attempt1-kernel.txt`, `results/e174-results.md`, `results/e174/bench-d*.md`, `results/e174/run.log`, `results/e174/attempt1-*`.
+
+<a id="f200"></a>
+
+## F200 - a paired tool-result question catches a silently broken chat template that otherwise reads as a polite, plausible answer
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-24 | **Experiment:** E175 | **Status:** MEASURED once (one model, one break type, temperature 0)
+
+**Kind: METHOD**
+
+**Plain English.** Ask the same question twice, once with the answer arriving as a tool result and once as plain text.
+When we broke the chat template on purpose so tool results were silently dropped, the tool version failed and the
+plain version still passed, which points straight at the template. The broken run did not crash: the model said the
+lookup "didn't return any information". A broken template looks like a sensible answer unless you check for it.
+
+**Claim.** gbench @ d3e4283 (Apache-2.0) chat-template cases on Qwen3.8-27B UD-IQ4_XS, llama.cpp 94f3af3d0, temperature
+0, thinking off. Stock template: 4/4 pass. Template with `{{- content }}` deleted from the tool branch: tool-response
+case fail, its twin pass, both multi-turn controls pass. All three predictions held. llama-server accepted the cases'
+JSON-string tool arguments without error.
+
+**Use.** Add the tool-response pair to `tools/production_probe.py`; take its leak list from the template the server
+actually applies (Halogen: the community template), not from the tokenizer. Scope: shows the check CAN catch a silent
+break, not that it catches every break. Origin: scouting/gbench/REPORT.md.
+
+Evidence: `results/e175-results.md`, `results/e175/*.jsonl`, `results/e175/run.log`.
+
+<a id="f201"></a>
+
+## F201 - three local music models run here; ACE-Step is the only fast one and ties for clearest words, but none matched the owner's taste in style
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-24 | **Experiment:** E173 | **Status:** MEASURED once (one render per song, one listener, no ranks)
+
+**Kind: CAPABILITY**
+
+**Plain English.** The box can make songs with sung lyrics locally. ACE-Step 1.5 makes a two-minute song in about 95
+seconds; YuE2 takes about four minutes and MiniMax Music 3 about half an hour. On clear words the three are close, and
+each dropped about half of the key phrases. The owner, judging sound quality and words, would play ACE-Step or YuE2 on
+three songs of five, MiniMax on one; he liked the musical style of none of them.
+
+**Claim.** audio.cpp Vulkan, BF16, seed 7, five frozen prompts. RTF median YuE2 2.168 / MiniMax 18.133 / ACE-Step
+0.787; peak GTT 7.1 / 17.4 / 11.3 GiB; lyric WER median 0.184 / 0.242 / 0.179 (whisper large-v3-turbo; one MiniMax
+transcript is a whisper loop); key phrases 6/13 each; owner "room" ticks 3 / 1 (of 4 heard) / 3 of 5. P1-P3, P6 held;
+P4 falsified; P5 unscored (rank control broken).
+
+**Use.** For SparkForge music videos: ACE-Step is the candidate (fast, publishable licence, tied-best words); YuE2 is
+internal only (CC BY-NC); MiniMax is too slow here for iteration. The open lever is style prompting, not the engine.
+Before any second listening round: fix the rank control, shuffle song order, human-listen the key-phrase misses.
+
+Evidence: `results/e173-results.md`, `results/e173/renders.tsv`, `results/e173/score.json`, `results/e173/owner-notes-1.md`.
+
+<a id="f202"></a>
+
+## F202 - Flash-Next compressed with HTR (Halo Trellis) keeps production's coding quality but is slower than Halogen
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-24 | **Experiment:** E177 | **Status:** ESTABLISHED on 10 tasks (one sample each) and one speed session
+
+**Kind: CAPABILITY**
+
+**Plain English.** A community build of our production model, compressed with the HTR method and served by its own
+vLLM build, solved 6 of our 10 hard real coding fixes, against production's 5 on Halogen. So the compression costs no
+quality we can measure. It is slower than production, though: Halogen writes short answers about 30% faster and reads
+long prompts about 1.6 times faster. Keep Halogen; HTR is a credible fallback engine for the same model.
+
+**Claim.** Qwen3.8 Flash-Next HTR Htr5Core v0.2.4 on `ghcr.io/hawgauto/vllm-htr@sha256:cbd53758...`: decode 47.8 tok/s
+(short prompt) and 44.1 (after 32K) vs Halogen 62.5 and 43.7 measured live the same day; prefill 969 / 924 tok/s at
+8K / 32K vs 1,492 / 1,462. Hard coding bank (E167 bank) pass_count 6/10 vs production 5/10 (2026-11-18); each solved
+two tasks the other missed. Four HTR tasks hit the 131,072-token context limit set for the run (two had already
+passed). Load: ~70-76 GiB in GPU memory plus a 95 GiB table read from SSD; ready in ~7.5 min; no DeviceLost.
+
+**What it changes.** Nothing in production. HTR becomes the known-good second engine for Flash-Next. A larger context
+(the card qualifies up to 262K with 8-bit KV) would turn its two context-limit failures into scored attempts.
+
+**Evidence.** `results/e177-results.md`, `results/e177/raw/` (HS, HT), `results/e177/security-scan.md`.
+

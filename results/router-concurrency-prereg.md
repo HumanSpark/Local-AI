@@ -1,6 +1,7 @@
-# E36 PRE-REGISTRATION: single-model concurrency UNDER THE ROUTER (2026-07-17)
+# RT36 PRE-REGISTRATION: single-model concurrency UNDER THE ROUTER (2026-07-17)
 
-<!--
+_Public ID RT36; published as E36 before Local-AI r5.17, which collided with a different August experiment (experiments/E36.md). The file name is unchanged._
+
 # File: results/router-concurrency-prereg.md
 # Purpose: Predictions registered BEFORE the E36 runs - does the router change F17's concurrency knee?
 # Project: sparkbench | Date: 2026-07-17
@@ -10,7 +11,6 @@
 # the router instead of directly. F17 measured this on a direct llama-server: workhorse 72.9 -> 193.5
 # t/s aggregate from 1 to 16 slots (2.66x, no sharp knee). The question is whether the router's proxy
 # hop changes that. Results land in results/router-concurrency.md.
--->
 
 ## The methodological point that shapes the design
 

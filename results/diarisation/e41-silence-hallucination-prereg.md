@@ -1,6 +1,7 @@
 # PRE-REGISTRATION: when does Whisper invent speech out of silence? (2026-07-17)
 
-<!--
+_Pre-registration for MT41 (public ID; published as E41 before Local-AI r5.17, which collided with a different August experiment, experiments/E41.md)._
+
 # File: results/diarisation/e41-silence-hallucination-prereg.md
 # Purpose: Predictions registered BEFORE the silence-hallucination benchmark runs.
 # Project: sparkbench | Date: 2026-07-17
@@ -11,7 +12,6 @@
 # recording. This benchmark asks the questions that make it a FINDING rather than an anecdote: is it
 # reliable or sporadic? What triggers it? Does it depend on model size, silence type, duration, or
 # position? Does VAD actually eliminate it, or just reduce it?
--->
 
 Why: transcription is a production capability of this box (published at 28x real time since Phase A)
 and it is the input to the diarisation stack. A system that INVENTS SPEECH is a correctness failure,

@@ -1,0 +1,66 @@
+[2026-11-23T20:57:06+00:00] E174 start: kernel 7.0.0-43-generic; bench /home/bench/sparkbench/var/engines/llama-94f3af3d0/build/bin/llama-bench
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-23T20:57:09+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service sparkrouter-halogen.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-23T20:57:06+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[evict] 200 files, 0.1s
+[evict] 212 files fadvised, 0 unopenable; Cached 83472 -> 6438 MiB (77034 MiB freed) in 0.4s
+[2026-11-23T20:57:10+00:00] evict rc=0 | used 2790 free 115625 cache 6769 MiB
+[2026-11-23T20:57:20+00:00] GTT baseline 17 MiB
+[evict] 200 files, 0.0s
+[evict] 212 files fadvised, 0 unopenable; Cached 6438 -> 6438 MiB (0 MiB freed) in 0.0s
+[2026-11-23T20:57:20+00:00] evict rc=0 | used 2777 free 115639 cache 6767 MiB
+[2026-11-23T20:57:30+00:00] d0 start
+[2026-11-23T20:59:31+00:00] d0 rc=0
+[evict] 200 files, 0.3s
+[evict] 212 files fadvised, 0 unopenable; Cached 10727 -> 1002 MiB (9725 MiB freed) in 0.3s
+[2026-11-23T20:59:32+00:00] evict rc=0 | used 2766 free 121177 cache 1237 MiB
+[2026-11-23T20:59:42+00:00] d8192 start
+[2026-11-23T21:03:01+00:00] d8192 rc=0
+state_seq_set_data: error loading state: failed to restore kv cache
+state_seq_set_data: error loading state: failed to restore kv cache
+state_seq_set_data: error loading state: failed to restore kv cache
+[evict] 200 files, 0.3s
+[evict] 212 files fadvised, 0 unopenable; Cached 5208 -> 992 MiB (4216 MiB freed) in 0.3s
+[2026-11-23T21:03:01+00:00] evict rc=0 | used 2736 free 121221 cache 1223 MiB
+[2026-11-23T21:03:11+00:00] d32768 start
+[2026-11-23T21:11:25+00:00] d32768 rc=0
+state_seq_set_data: error loading state: failed to restore kv cache
+state_seq_set_data: error loading state: failed to restore kv cache
+state_seq_set_data: error loading state: failed to restore kv cache
+[2026-11-23T21:11:25+00:00] E174 done
+[2026-11-23T21:11:25+00:00] restoring relay
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-23T21:11:25+00:00) ---
+  serving unit    : sparkrouter-halogen.service : ACTIVE (serving, Halogen solo)
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+[2026-11-23T21:11:25+00:00] relay up rc=0
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] code: running (baseline decode 80.7)
+[probe] code: ok decode 80.7 prefill 464.6 check pass wall 3.6 s 
+[2026-11-23T21:12:31+00:00] relay restored, VERIFIED: production probe (code) passed

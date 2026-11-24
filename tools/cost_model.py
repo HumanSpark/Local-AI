@@ -17,7 +17,9 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-ROOT = Path("/home/bench/sparkbench")
+# The repo or Local-AI package root: tools/ sits directly under both. Was a fixed /home/bench path, which broke
+# recalculation from a clean checkout of the public package (webby rewrite plan, Phase 1 item f, 2026-11-24).
+ROOT = Path(__file__).resolve().parent.parent
 PRICING = ROOT / "results/deep-eval/cloud-pricing.yml"
 
 # ---- Canonical local inputs (measured / stated) ----

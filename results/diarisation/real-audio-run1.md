@@ -1,6 +1,7 @@
-# E38: real audio breaks the synthetic verdict - the margin was measured in the wrong universe (2026-07-17)
+# MT38: real audio breaks the synthetic verdict - the margin was measured in the wrong universe (2026-07-17)
 
-<!--
+_Public ID MT38; published as E38 before Local-AI r5.17, which collided with a different August experiment (experiments/E38.md). The file name is unchanged._
+
 # File: results/diarisation/real-audio-run1.md
 # Purpose: First diarisation run on REAL meeting audio. Predictions + findings. R&D record.
 # Project: sparkbench | Date: 2026-07-17
@@ -12,7 +13,6 @@
 # +0.588 to ~+0.075. First run reported 94 speakers on a ~4-speaker meeting. Diagnosis: not a
 # threshold error - a long tail of fragment clusters. Speaker COUNT remains unresolved: three
 # principled methods give two different answers and nothing on hand can adjudicate.
--->
 
 ## Corpus (privacy-bounded)
 

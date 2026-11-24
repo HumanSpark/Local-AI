@@ -54,6 +54,14 @@ def ask(
     }
     if thinking_off == "top":
         payload["enable_thinking"] = False
+    elif thinking_off == "effort-none-kwargs":
+        # llama.cpp / Loom pass chat_template_kwargs straight to the template (E172 A4)
+        payload["chat_template_kwargs"] = {"reasoning_effort": "none"}
+    elif thinking_off == "effort0":
+        # CIRU's Inkling template has no enable_thinking; its off switch is reasoning_effort "none" -> 0.0 (default 0.9).
+        # Must be the top-level request field: vLLM merges its own reasoning_effort (None when unset) OVER
+        # chat_template_kwargs, so a kwargs value never reaches the template. E172 A3 notes 2-3.
+        payload["reasoning_effort"] = "none"
     else:
         payload["chat_template_kwargs"] = {"enable_thinking": False}
     req = urllib.request.Request(
@@ -84,10 +92,11 @@ def ask(
                     timings = ev["timings"]
                 for ch in ev.get("choices") or []:
                     d = ch.get("delta") or {}
+                    # llama.cpp/Loom stream thinking as reasoning_content; vLLM 0.34 (CIRU, E172 IC) as reasoning
                     piece = (d.get("content") or "") + (
-                        d.get("reasoning_content") or ""
+                        d.get("reasoning_content") or d.get("reasoning") or ""
                     )
-                    reasoning_chars += len(d.get("reasoning_content") or "")
+                    reasoning_chars += len(d.get("reasoning_content") or d.get("reasoning") or "")
                     if piece:
                         now = time.time()
                         t_first = t_first or now
@@ -137,9 +146,12 @@ def main() -> int:
     ap.add_argument("--base", default="http://127.0.0.1:8154")
     ap.add_argument(
         "--thinking-off",
-        choices=["top", "kwargs"],
+        choices=["top", "kwargs", "effort0", "effort-none-kwargs", "auto-off", "min-thinking"],
         required=True,
-        help="top = enable_thinking:false (Loom); kwargs = chat_template_kwargs (llama-server, Halogen)",
+        help="top = enable_thinking:false (Loom); kwargs = chat_template_kwargs (llama-server, Halogen); "
+        "effort0 = top-level reasoning_effort none (vLLM); effort-none-kwargs = chat_template_kwargs reasoning_effort none; "
+        "auto-off = probe those switches on one short request, keep the first that streams content with zero reasoning, "
+        "and refuse to measure if none does (E172 A4)",
     )
     ap.add_argument("--prompts", default=str(ROOT / "results/e139/prompts.json"))
     ap.add_argument("--timeout", type=float, default=900.0)
@@ -147,6 +159,49 @@ def main() -> int:
     a = ap.parse_args()
     P = json.loads(Path(a.prompts).read_text())["prompts"]
     model = served_model(a.base)
+    mode = a.thinking_off
+    probe_log = []
+    if mode == "min-thinking":
+        # E172 A5: Inkling-2-Mini never reaches zero reasoning; use the switch that leaves the LEAST reasoning before a
+        # real answer, and record how much remained. Default thinking (no switch effect) is probed as the baseline.
+        best = None
+        for cand in ("effort0", "effort-none-kwargs", "kwargs", "top"):
+            try:
+                r = ask(a.base, model, "In one sentence, what is a spreadsheet?", 128, cand, a.timeout)
+            except RuntimeError as e:
+                probe_log.append({"switch": cand, "error": str(e)[:200]})
+                print(f"[{a.label}] min-thinking probe {cand}: error {str(e)[:120]}", flush=True)
+                continue
+            has = bool(r["content_head"].strip())
+            probe_log.append({"switch": cand, "reasoning_chars": r["reasoning_chars"], "content": has,
+                              "content_head": r["content_head"][:80]})
+            print(f"[{a.label}] min-thinking probe {cand}: reasoning_chars {r['reasoning_chars']}, content {has}", flush=True)
+            if has and (best is None or r["reasoning_chars"] < best[1]):
+                best = (cand, r["reasoning_chars"])
+        if best is None:
+            raise SystemExit(f"[{a.label}] no switch produced an answer ({probe_log}). hint: read the serverlog")
+        mode = best[0]
+        print(f"[{a.label}] min-thinking: using {mode} (probe reasoning_chars {best[1]})", flush=True)
+    if mode == "auto-off":
+        mode = None
+        for cand in ("effort0", "effort-none-kwargs", "kwargs", "top"):
+            try:
+                r = ask(a.base, model, "In one sentence, what is a spreadsheet?", 128, cand, a.timeout)
+                ok = r["reasoning_chars"] == 0 and bool(r["content_head"].strip())
+                probe_log.append({"switch": cand, "ok": ok, "reasoning_chars": r["reasoning_chars"],
+                                  "content_head": r["content_head"][:80]})
+                print(f"[{a.label}] thinking-off probe {cand}: reasoning_chars {r['reasoning_chars']}, "
+                      f"content {r['content_head'][:60]!r} -> {'OK' if ok else 'no'}", flush=True)
+            except RuntimeError as e:
+                probe_log.append({"switch": cand, "ok": False, "error": str(e)[:200]})
+                print(f"[{a.label}] thinking-off probe {cand}: error {str(e)[:120]}", flush=True)
+                continue
+            if ok:
+                mode = cand
+                break
+        if mode is None:
+            raise SystemExit(f"[{a.label}] no switch turned thinking off ({probe_log}). "
+                             "hint: report this arm as 'thinking cannot be disabled'; do not measure it as thinking-off")
     plan = (
         [("P8K", p, 256) for p in P["P8K"]]
         + [("P32K", p, 256) for p in P["P32K"]]
@@ -160,7 +215,7 @@ def main() -> int:
             f"elapsed {time.time() - t_start:.0f}s",
             flush=True,
         )
-        r = ask(a.base, model, p["text"], mt, a.thinking_off, a.timeout)
+        r = ask(a.base, model, p["text"], mt, mode, a.timeout)
         r.update(
             {"prompt": name, "rep": p["rep"], "sha256": p["sha256"], "max_tokens": mt}
         )
@@ -188,6 +243,9 @@ def main() -> int:
         "base": a.base,
         "model": model,
         "thinking_off": a.thinking_off,
+        "thinking_off_switch_used": mode,
+        "thinking_off_probe": probe_log,
+        "requests_with_reasoning": sum(1 for r in rows if r["reasoning_chars"]),
         "prompts_file": a.prompts,
         "summary": summary,
         "requests": rows,

@@ -10,6 +10,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [FROZEN-BASELINE.md](FROZEN-BASELINE.md) | The exact models, quantisations, provenance, build and runtime settings every sparkbench headline figure was measured on. |
 | [HARNESS-RULES.md](HARNESS-RULES.md) | Harness hard rules (Phase B design constraints) |
 | [REPORT-STANDARD.md](REPORT-STANDARD.md) | Report standard: who writes what |
+| [TOOLCHAIN.md](TOOLCHAIN.md) | Record of user-level toolchain installs on benchhost - what, where, why, how to remove or make permanent. |
 | [W3-STAGE2-SWEEP.md](W3-STAGE2-SWEEP.md) | W3 Stage-2 quality-first sweep - engine spike records |
 | [memory-edge-deadlock.md](memory-edge-deadlock.md) | Canonical, self-contained reference for the amdgpu SDMA-suballocator deadlock that near-edge model loads hit on benchhost under memory pressure - its fingerprint, mechanism, triggers, recovery, and the rules that prevent it. |
 | [w3-audio-rename-log.csv](w3-audio-rename-log.csv) |  |

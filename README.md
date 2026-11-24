@@ -16,7 +16,7 @@ This repository exists so that the numbers on those pages do not have to be take
 > - **Processor and graphics:** AMD Ryzen AI Max+ 395 with Radeon 8060S integrated graphics
 > - **Memory:** 128 GB unified, shared by processor and graphics; about 105 GB of it usable by the graphics
 > - **Power:** 81 to 87 W package power while generating ([F180](FINDINGS.md#f180))
-> - **Measured:** one machine, July 2026 to 22 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
+> - **Measured:** one machine, July 2026 to 24 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/coding-results-dark.svg">
@@ -49,6 +49,7 @@ Qwen3.8-Flash-Next on this machine, one request at a time, thinking off ([F180](
 | Strata 0.2.10, DFlash2 | 60.7 | 691 | 47.4 s |
 | llama.cpp 5851a8e, Vulkan | 27.1 | 315 | 104.1 s |
 
+<!-- Keep this heading text unchanged: humanspark.ai links to #what-production-runs-now (webby, 2026-11-24). -->
 ### What production runs now
 
 | job | engine | model or voice | in service since | evidence |
@@ -79,13 +80,13 @@ Coding is [F187](FINDINGS.md#f187) (a re-run of the same ten fixes on 13 Novembe
 | Hear the production voice and the candidates it beat | [VOICES.md](VOICES.md) |
 | Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
 
-## Current release: r5.16 (findings through 22 November 2026)
+## Current release: r5.17 (findings through 24 November 2026)
 
-r5.16 changes no finding, claim or number. It replaces letter codes that were too short to identify a test setup ("E43 arm B", "F 0.997, I 1.000, H 0.987") with short names, and gives each engine a one-line description where it first appears. r5.15 added [F196](FINDINGS.md#f196) and [F197](FINDINGS.md#f197). [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what this release changed.
+r5.17 makes every claim say when it was tested, whether it still holds, and where its exact evidence is: each claim in `claims.yml` (and the new `claims.json`) now carries a test date, a review date, a status (current, qualified, historical or superseded), a track, plain and technical names for the setup, the exact record pinned to this release, and how far a reader can check it. Three July experiment series get their own IDs (TU32-TU33, RT35-RT37, MT38-MT50) because their numbers clashed with August experiments. It also adds five findings, including [F202](FINDINGS.md#f202): production's model compressed with the community HTR method keeps its coding quality but runs slower than Halogen, so production is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 Two things to know before relying on it:
 
-- **The older claims have not been re-reviewed.** r5.16 changes no claim. `claims.yml` gained ten claims in r5.2 for the November coding tests and five in r5.1 for the September tests (Bonsai speed, Halogen prefill, Atlas MLPerf latency, Atlas determinism, the recommended coding models), and r5.2 changed the coding recommendation, whose evidence the F183 addendum (r5.3), F187 (r5.6) and F194/F195 (r5.13) qualify. The other 44 claims are unchanged since r4.6 and were last checked against the data on 2026-07-17, which the `claims.yml` header states. Later findings bear on some of them (the long-context and ROCm-versus-Vulkan claims, the local reasoning-model claim, the tool-use claims, which F192 also bears on). RELEASE-NOTES.md names each and the findings that bear on it. None is withdrawn here; none has been re-verified.
+- **Every claim was reviewed on 2026-11-24.** 23 are current, 17 qualified, 18 historical and 3 superseded; `claims.md` lists each with its status and dates, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
 - **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
 
 ## How to verify a claim
@@ -100,7 +101,6 @@ A build-time completeness check enforces that every file path cited in `FINDINGS
 
 - [claims.md](claims.md) and [claims.yml](claims.yml) - the claims registry: the contract between the published prose and this data
 - [FINDINGS.md](FINDINGS.md) - the findings register (F1 onward), including negative results, retractions and lessons
-- [GLOSSARY.md](GLOSSARY.md) - plain-English meanings of the experiment and finding numbers, setup codes, engine names and recurring terms
 - [experiments.md](experiments.md) and [experiments/](experiments/) - pre-registrations and results for the earlier experiments, one file each (later ones have their own files in results/); predictions were written down before each test ran, and the misses are published beside the hits
 - [results/](results/) - benchmark, evaluation, tool-use, coding, and fine-tune outputs, including the pre-registration and results document for each later experiment
 - [integrated-technical-results-v2.md](integrated-technical-results-v2.md) - the compiled technical results, including the corrections log
@@ -117,7 +117,7 @@ A build-time completeness check enforces that every file path cited in `FINDINGS
 
 ## Method in one paragraph
 
-Single machine, run from July 2026 to 22 November 2026; the findings register in this release is current to 2026-11-22. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
+Single machine, run from July 2026 to 24 November 2026; the findings register in this release is current to 2026-11-24. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
 
 ## Versioning
 

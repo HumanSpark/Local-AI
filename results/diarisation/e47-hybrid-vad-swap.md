@@ -1,6 +1,7 @@
-# E47: swapping in pyannote's VAD cuts our online-call error 48% (20.3% -> 10.5%) at 55x real time (2026-07-17)
+# MT47: swapping in pyannote's VAD cuts our online-call error 48% (20.3% -> 10.5%) at 55x real time (2026-07-17)
 
-<!--
+_Public ID MT47; published as E47 before Local-AI r5.17, which collided with a different August experiment (experiments/E47.md). The file name is unchanged so old links keep working._
+
 # File: results/diarisation/e47-hybrid-vad-swap.md
 # Purpose: The hybrid result. Pre-registration: e47-hybrid-prereg.md (committed 466ffb2 BEFORE).
 # Project: sparkbench | Date: 2026-07-17
@@ -10,7 +11,6 @@
 # clustering. Result on IHM: 20.3% -> 10.5% (a 48% error cut), at 55x real time vs pyannote's ~1x.
 # The confusion drop (8.6% -> 4.1%) REFUTES pre-registered H2 and reveals our VAD was hurting us
 # twice: false alarm AND clustering pollution.
--->
 
 ## The three-way, same 6 held-out AMI meetings, collar 0.25 overlap-skipped
 

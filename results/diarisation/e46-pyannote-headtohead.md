@@ -1,6 +1,7 @@
-# E46: pyannote 3.1 vs our stack, like-for-like - 6.5% vs 20.3% on close-talk, and WHERE the gap lives (2026-07-17)
+# MT46: pyannote 3.1 vs our stack, like-for-like - 6.5% vs 20.3% on close-talk, and WHERE the gap lives (2026-07-17)
 
-<!--
+_Public ID MT46; published as E46 before Local-AI r5.17, which collided with a different August experiment (experiments/E46.md). The file name is unchanged so old links keep working._
+
 # File: results/diarisation/e46-pyannote-headtohead.md
 # Purpose: The honest head-to-head. Same AMI meetings, same metric, same collar/overlap, same k.
 # Project: sparkbench | Date: 2026-07-17
@@ -11,7 +12,6 @@
 # Result: pyannote wins clearly (IHM 6.5% vs 20.3%, SDM 13.8% vs 21.7%), and the component breakdown
 # shows the gap is TWO things - a cleaner VAD (false alarm) and much better close-talk clustering
 # (confusion) - the second of which was a genuine surprise.
--->
 
 ## Setup (identical for both systems)
 

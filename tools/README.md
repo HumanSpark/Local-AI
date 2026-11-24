@@ -52,6 +52,8 @@ Every file in this folder with its own one-line description (a document's title,
 | [e163_model_proxy.py](e163_model_proxy.py) | E163 amendment 1 - give Loom the `model` field the E160 suites do not send, changing nothing else. |
 | [e163_smoke.py](e163_smoke.py) | E163 transport smoke - learn which request shapes an engine accepts before any scored prompt is sent. |
 | [e163_speed.py](e163_speed.py) | E163 speed block - time E139's fixed prompts against ANY OpenAI-compatible server with one client-side ruler. |
+| [e175_template_pairs.py](e175_template_pairs.py) | Send gbench's four chat-template pair cases to a local OpenAI-compatible server and score each one. |
+| [evict_page_cache.py](evict_page_cache.py) | Evict the page cache held by files under given paths, without root, and report how much Cached fell. |
 | [fetch_hf_model.sh](fetch_hf_model.sh) | Resumable, size-verified download of HF model file(s) to staging. |
 | [finetune_smoke.py](finetune_smoke.py) | DEFINITIVE proof that gfx1151 (Ryzen AI Max+ 395) can TRAIN, not just infer - the check that settles whether F35/Q6's "no ROCm training stack" wall is real. Runs the full training loop (forward -> loss -> backward -> optimizer step) with a PEFT LoRA adapter on the GPU, using a TINY model built from config (no download, no memory-edge risk). If loss goes down over a few steps, on-box training works. |
 | [fix_router_runpath.sh](fix_router_runpath.sh) | Repair the absolute RUNPATH in sparkrouter's llama-server build, then prove it by restarting. |
@@ -67,6 +69,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [moa_test.py](moa_test.py) | Mixture-of-Agents on the local model stable - do N diverse local proposers, aggregated by a faithful local model, beat the best single local model on real drafting? Training-free, exploits our diverse-model asset. Same 10 tasks + frontier judge as every other quality run, so it slots into the comparison. |
 | [mtp_acceptance.py](mtp_acceptance.py) | Extract ACTUAL speculative-decoding draft behaviour from a llama-server log, rather than trusting the flag that was requested. |
 | [prefill_curve.py](prefill_curve.py) | Compare llama-server prefill throughput between runs at MATCHED depth. |
+| [production_probe.py](production_probe.py) | Nightly check that production (Halogen solo, through model-guard) is still as fast and as correct as it was. |
 | [pyannote_bench.py](pyannote_bench.py) | Score pyannote 3.1 on the SAME AMI harness as our stack - the honest head-to-head. |
 | [real_quality_run.py](real_quality_run.py) | Weekend "is it actually any good?" run - real professional use cases, quality-judged. |
 | [realaudio_bench.py](realaudio_bench.py) | ours vs hybrid vs pyannote on the REAL Otter-referenced online calls - the deployment test. |
@@ -90,6 +93,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e164.sh](run_e164.sh) | Run E164 unattended - Qwen4 Max on the E160 suites via cloud_proxy, then E162 drafting, grade and one judge. |
 | [run_e165.sh](run_e165.sh) | Run E165 unattended - the test audit's re-runs (tool use v3, mt-l4, mt-long, H6) on arms Q, KFL, KX, HS, LM. |
 | [run_e170.py](run_e170.py) | Run and score E170 - memory-extraction jobs (the nightly "propose memory entries" shape) across local models. |
+| [run_e173_renders.sh](run_e173_renders.sh) | Render the 15 scored E173 songs (3 music models x 5 frozen prompts) on audio.cpp Vulkan, one engine at a time. |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |

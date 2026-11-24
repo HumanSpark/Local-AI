@@ -2053,3 +2053,99 @@ in `results/e159-prereg.md` from the start; the MANIFEST entry was missed until 
   `tools/hy4_tokenizer.py` into `var/e171/tokenizer/` (vocab 120,832; bos 120000, eos 120025, pad 120002).
 - **Served by:** `serve/server.py --engine strata --config results/e171/strata-hy4-sq96.json`, `HY4_ENGRAM_ODIRECT=1`.
 - **Disk:** 157 GB; root filesystem at 60 GB free (97%) after the fetch. Owner 2026-11-22: watch the filesystem size.
+
+## ARCHIVED TO LANHOST 2026-11-22 (moved off /opt/models/staging for disk space)
+
+- **Where:** COPY set at `lanhost:/mnt/storage/archive/benchhost-2026-11-22/models-staging/<name>`, each with `<name>.sha256`
+  beside it. VERIFY set: already backed up at `lanhost:/mnt/storage/backups/models/benchhost-staging/`; the benchhost hash list
+  was uploaded there as `<name>.sha256.2026-11-22` (existing lists not overwritten) and checked against that copy.
+  Every file was sha256-hashed on benchhost and passed `sha256sum -c` on lanhost before the local copy was deleted: 14/14 OK,
+  0 FAIL (`results/e171/offload/offload.log`, lists in `results/e171/offload/*.sha256`). Restore: `rsync -a` back into
+  `/opt/models/staging/` and re-run `sha256sum -c`. The entries above stay authoritative for provenance.
+- **Why:** owner 2026-11-22 ("let's free up a lot of disk space"); root had 60 GB free after the E171 fetch. All belong to
+  finished experiments; none is loaded by sparkrouter (production Halogen pack, FLUX and Mistral-24B paths checked present).
+- **Moved (9):** dsv41-flash-coder/, qwen3.8-flash-next-udq4kxl/, glm-5.3-flash/, qwen3.8-flash-next-udiq4xs/, laguna-s-2.1/,
+  Qwen3-Coder-Next-Q4_K_M.gguf, tess-4-35b-a3b/, tess-4.5-27b/, raon-1-mini-preview/.
+- **Deleted locally, backup copy verified (5):** GLM-4.7-Flash-Q4_K_M.gguf, Llama-3.3-70B-Instruct-Q4_K_M.gguf,
+  Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf, Qwen3.8-27B-Q4_K_M.gguf, Qwen3.8-27B-Q8_0.gguf.
+- **Restore before use:** `~/.hermes/config.yaml` still names `Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf` as its default model.
+- **Also the same day:** unused podman images pruned for bench (kept `python:3.12-slim` and
+  `halogen-flash-server:0.18.23`). Root free space 60 GB -> 104 GB (prune) -> 787 GB (archive), 22:33Z.
+
+## E172 (2026-11-23) - Inkling-2-Mini: unsloth GGUFs, Loom 0.3.0 package, llama.cpp 94f3af3d0, CIRU bundle
+
+- **unsloth/Inkling-2-Mini-GGUF @ `45fd08764f2b0bf16b03a5483a80e5c7aaec8772`** -> `/opt/models/staging/inkling-2-mini-unsloth/`
+  (fetched with `tools/fetch_hf_model.sh`, REVISION pinned; log `results/e172/fetch-unsloth.log`):
+  - `Inkling-2-Mini-UD-Q4_K_XL.gguf` 17,629,759,456 B, sha256 `e62d463c135ffe283df8d94b279a96ca145ac128b52ce854478613045bf4de15` (verified on arrival = HF LFS oid).
+  - `dspark-Inkling-2-Mini-Q8_0.gguf` 402,278,560 B, sha256 `2ec78510da837e8fc3be54a14757a0c5fbd2d8d9e85a0d92853fafdf674f3773` (verified on arrival = HF LFS oid).
+  - `Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file` (stored flat as `Inkling-2-Mini-UD-Q4_K_XL.gguf_file`) 17,629,760,736 B,
+    sha256 `e64276656f072e9b2197a61723667cbdb71da66a716ffd966e572c21088f3cd3` (verified on arrival = HF LFS oid, 2026-11-23 00:1xZ).
+- **loom-fun/unsloth-Inkling-2-Mini-loom @ `a8354e77a701cd71f749e0a41ce0c41e33799156`** -> `/opt/models/staging/inkling-2-mini-loom/`
+  (14 package files; `tokenizer.json` sha256 `a45fdc4e7e66a035...` = its lock). Its `model.json.lock` pins the two GGUFs above by
+  sha256 (from unsloth rev `ea0c79b2`, same bytes); hard-linked into `parameter/`.
+- **Loom 0.3.0** release wheel `hrx_loom-0.3.0-py3-none-manylinux_2_39_x86_64.whl` (ROCm/hrx-system v0.3.0, merge `e2c41a72`),
+  sha256 `6252bb0df262351175bdb2c4aaca22ffa63d80d791659aa4d2fa5c92a0af426f` (checked against the release SHA256SUMS), installed with
+  no dependencies into `/home/bench/loom-e172/venv` (removal: delete that directory).
+- **llama.cpp `94f3af3d0`** (build 2979, 2026-11-22), Vulkan, worktree `var/engines/llama-94f3af3d0` (build log `results/e172/`).
+- Arm IQ reuses E170's `inkling-2-mini/Inkling-2-Mini-Q8_0.gguf` (E170 entry).
+- **CIRU bundle** jcbtc/Inkling-2-Mini-CIRU-Halo-Agent-gfx1151 @ `1eb42fed695d73da84a880faa5b82bee2e615a34` -> `/opt/models/staging/inkling-2-mini-ciru/`
+  (`scratchpad fetch_ciru.py`: sizes vs HF API, sha256 vs LFS oids and the bundle's MANIFEST/WEIGHTS lists; log `results/e172/fetch-ciru.log`).
+  Runtime NOT installed (2026-11-23: the install used `pip install --extra-index-url https://wheels.vllm.ai/rocm/0.34.0/rocm100/`, which the standing settings deny rule `Bash(pip install --extra-index-url*)` blocks - user-level and project settings. Not an owner decision; corrected 2026-11-23 13:10Z).
+- **CIRU runtime, installed 2026-11-23 13:1xZ (owner choice: pinned files, not `--extra-index-url`):** 16 files from the vLLM
+  ROCm index `https://wheels.vllm.ai/rocm/0.34.0/rocm100/` (vllm, torch, torchaudio, torchvision, triton, amd-aiter,
+  flash-attn, amdsmi) and AMD `stable.repo.amd.com/rocm/whl-next/` (gfx1151/gfx115x device wheels, rocm-sdk-core/-libraries/
+  -device-gfx1151, rocm-bootstrap 0.3.0, rocm 10.0.0 sdist) -> `/home/bench/ciru-e172/wheels/` + `SHA256SUMS`. The index
+  publishes no hashes: each file's Content-Length was checked against bytes written and its sha256 computed on arrival
+  (`results/e172/ciru-wheels.log`) - that list is the provenance record. Only gfx1151 device packages fetched (vLLM's metadata
+  names nine GPU families; the others cannot run here). Installed `--no-deps` from those files into
+  `/home/bench/ciru-e172/venv` (CPython 3.12), then every other dependency from PyPI alone with
+  `-c local-constraints.txt` pinning all 16 index projects to the local versions; `pip check` clean
+  (`results/e172/ciru-venv-install.log`, freeze `ciru-e172/pip-freeze.txt`). Removal: delete `/home/bench/ciru-e172`.
+  Not yet run: CIRU's `scripts/install.sh` (vLLM fork + transformers commit + overlay/patch; its bundled prebuilt `.so`
+  files are excluded by the prereg rule).
+
+## E173 (2026-11-23) - song generators on audio.cpp: YuE2, MiniMax Music 3, ACE-Step 1.5 Turbo (all BF16)
+
+Fetched with `tools/fetch_hf_model.sh` (REVISION pinned per repo, subfolders kept via DEST) into
+`/opt/models/staging/audio-cpp/`; log `results/e173-fetch.log` (sha256 of every file). 21 files, 0 mismatches: every
+file's byte count = HF API size, every LFS file's sha256 = its HF LFS oid (small config/sidecar files have no oid; their
+logged sha256 is the provenance record).
+- **audio-cpp/Yue2-3B-GGUF @ `cca74d8980c00f30ab8d52248a367c01ad633ec2`** -> `Yue2-3B-GGUF/`:
+  `yue2-3b-bf16.gguf` 7,261,484,576 B `4cf3fdffbaaed2d8e30a3122ac7cd27d0c96f8921805f173da9758c685b3c7d6`;
+  `yue2-vae-f32.gguf` 530,537,760 B `cf3b71c6ef13b8b7970f8c1013b899e4af6ff9756c93bda45bef542dd6e10546`; 4 `sidecars/` files.
+  Licence CC BY-NC 4.0 (+ individual-creator permission): outputs not publishable by HumanSpark.
+- **audio-cpp/MiniMax-Music3-GGUF @ `46fe77f8bb395ccdbe797d784225f7b84866e7ce`** -> `MiniMax-Music3-GGUF/`:
+  `language_model_bf16.gguf` 17,169,013,056 B `61692fa58e77f83dd5014d6bb70a6ebbba95e79b3c3619c495b2c4949c0aa6f2`;
+  `transformer_bf16.gguf` 9,727,687,200 B `bd6f9cd595684f782650a5bed3e3f3715b949c7d78762dab036ff7b4e8ac4576`;
+  `rvq_depth_decoder_bf16.gguf` 1,292,062,336 B `986ca48662fcf64dd249ee8bc07d479724d195fa6cf1ace72b582140f1d4db7b`;
+  `condition_encoder.gguf` 100,678,368 B `ae4be8b6...`; `vocoder.gguf` 216,705,376 B `5d40e6d5...`; `config.json`, `LICENSE`,
+  5 `config/` and 2 `tokenizer/` files. The engine defaults to q4_0/q8_0 components: BF16 must be selected with
+  `--session-option minimax_music3.{language_model,rvq_depth_decoder,flow_transformer}_gguf=...`. Licence MiniMax-Music3
+  Community (attribution; >US$20M revenue needs approval).
+- **audio-cpp/audio.cpp-gguf @ `8aa1ea478487ca24608573bbc7c4f4e3ecac3f91`** -> `ACE-Step1.5-GGUF/turbo/`:
+  `ace-step-1.5-turbo-bf16.gguf` 10,090,406,336 B `7aa8cc911bb7e47647bba619cf25afc22a42e35c568a102cd9a3b28a54b94013`
+  (self-contained package per audio.cpp docs). Licence MIT.
+- **Engine: audio.cpp v0.9.6 `04a37f2e80ff2dbcdd84cc67848a970bd02a73e0`** (0xShug0/audio.cpp), source clone `~/audio.cpp`,
+  `scripts/build_linux.sh --deployment-build --target audiocpp_cli` twice: `--backend hip --gpu-targets gfx1151` (clang 22,
+  ROCm 7.2.4) and `--backend vulkan` (gcc 13.3); logs `results/e173/audiocpp-{hip,vulkan}-build.log`. Removal: delete `~/audio.cpp`.
+
+## Scouting (2026-11-24) - Ling-3.2-air Q3_K_M (bartowski), entered BEFORE fetch
+
+- **bartowski/Ling-3.2-air-GGUF @ `2073edb5da4296cb37b334584b858aa6141e352f`** -> `/opt/models/staging/ling-3.2-air/`
+  (base model inclusionAI/Ling-3.2-air, MIT; 124B total / 5.5B active hybrid-linear MoE, arch `bailingmoe3` read from the
+  GGUF header). Fetched with `tools/fetch_hf_model.sh`, REVISION pinned; log `results/scout-ling32/fetch.log`. Expected:
+  - `Ling-3.2-air-Q3_K_M-00001-of-00002.gguf` 39,762,728,672 B, sha256 `e071f035602ea1353d8d1808c4bd206bc0b1892ed2257b4c8c19629aa56830f0` (HF LFS oid).
+  - `Ling-3.2-air-Q3_K_M-00002-of-00002.gguf` 21,736,771,360 B, sha256 `c634a2a299518de0fc14ee5eb70606abd49f835c5fbc3980a60ec227795a8a2a` (HF LFS oid).
+  Quant choice: Q3_K_M (57.3 GiB) is the largest bartowski quant under the ~60 GiB memory-edge line (F193), so the spike
+  can run without the owner beside the power button. IQ4_XS is 66.3 GiB and Q4_K_M 74.9 GiB.
+
+## E177 (2026-11-24) - Qwen3.8 Flash-Next in HTR (Halo Trellis) format + its vLLM runtime, entered BEFORE fetch
+
+- **hstolte/Qwen3.8-Flash-Next-HTR @ tag v0.2.4 = `5bca35b934674df7ff49e7abc919f4d169b103ac`**, variant `Htr5Core` (+ root
+  `meta.yaml`) -> `/opt/models/staging/qwen3.8-flash-next-htr/` (folder layout kept). 64 files, 173,759,296,105 B per the
+  card (161.8 GiB); every path, size and LFS sha256 from the HF API is in `results/e177/htr-files.json`, verified on arrival.
+  Licence: qwen-community-1.0 (base model's). Quantization: HawgAuto HTR v0.2.x (github.com/HawgAuto/HTR, MIT).
+  Card: ~65.7 GiB model allocation in GPU memory; a 95.4 GiB n-gram (PLE) table is read from SSD at run time.
+- **Runtime:** `ghcr.io/hawgauto/vllm-htr@sha256:cbd537589cc7f2e6e9d73940d5da49a9d956ffbfd795277f54b15787284eeab5`
+  (the card's pinned digest for v0.2.4), pulled with rootless podman as bench; run with the card's hardening
+  (no-new-privileges, read-only model mount, loopback port only).

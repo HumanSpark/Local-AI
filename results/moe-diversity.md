@@ -1,6 +1,7 @@
-# E37 RESULTS: MoE concurrency is stream-diversity-bound - F17's headline is a same-question artifact (2026-07-17)
+# RT37 RESULTS: MoE concurrency is stream-diversity-bound - F17's headline is a same-question artifact (2026-07-17)
 
-<!--
+_Public ID RT37; published as E37 before Local-AI r5.17, which collided with a different August experiment (experiments/E37.md). The file name is unchanged._
+
 # File: results/moe-diversity.md
 # Purpose: The controls that settled F43's mechanism. Pre-registration: moe-diversity-prereg.md.
 # Project: sparkbench | Date: 2026-07-17
@@ -11,7 +12,6 @@
 # which identifies expert routing as the mechanism. Consequence: F17's headline 193.5 t/s overstates
 # real fleet throughput by 1.78x, because every stream in that benchmark asked the same question.
 # F43's original framing ("output diversity") was itself confounded and is corrected here.
--->
 
 ## Conditions
 

@@ -45,6 +45,15 @@
 # cache_control), own ledger, hard ceiling E154_GS_CEILING (default 5, owner 2026-11-18). Arm NM = Nemotron-3.5-Super
 # 120B-A12B UD-Q4_K_XL on upstream llama.cpp 5297534 (2026-11-18), card sampling, -c 131072 (E166 and E167).
 #
+# E176 (2026-11-24): arm LG = Ling-3.2-air (inclusionAI, 124B-A5.5B, bailingmoe3) bartowski Q3_K_M on upstream llama.cpp
+# ae6a7ad2c (2026-11-24), card sampling (temperature 1.0, top_p 0.95, top_k 20), thinking = template default (on),
+# -c 131072, -np omitted (E89). Prereg results/e176-prereg.md.
+#
+# E177 (2026-11-24): arm HT = Qwen3.8 Flash-Next in HTR (Halo Trellis) Htr5Core @ v0.2.4 on the pinned vllm-htr image
+# (rootless podman, card hardening, keep-id), --max-model-len 131072, 8 GiB BF16 KV, MTP3, card sampling; tool choice and
+# reasoning parser come from the image's own server-argv. Its ~70 GiB load is over the F193 line: the page cache for the
+# model and container storage is evicted before start and every 20 s until ready (E177 showed 74 GiB of cache at load).
+#
 # Usage: tools/run_e154_arms.sh [--dry-run] ARM [ARM ...]    ARM in S O H Q QN T27 TL OR35 OR122 TS45 TS4 RA GL DC HX HM HL HF HFL
 
 set -u
@@ -79,9 +88,25 @@ FROGGERIC=$REPO/var/e159/froggeric/chat_template.jinja
 LLAMA_E163=$REPO/llama.cpp/wt/9fba51d/build/bin/llama-server   # E163, upstream 2026-11-16
 LOOM_SERVE=/home/bench/loom-e163/sdk/.venv/bin/loom-serve
 LOOM_PKG=/home/bench/loom-e163/Qwen3.8-Flash-Next-loom/model.json
+# E172 (results/e172-prereg.md): Inkling-2-Mini on llama.cpp 94f3af3d0 (IQ our Q8_0, IM unsloth mainline Q4) and Loom 0.3.0 (IL).
+LLAMA_E172=$REPO/var/engines/llama-94f3af3d0/build/bin/llama-server
+INK_Q8=/opt/models/staging/inkling-2-mini/Inkling-2-Mini-Q8_0.gguf
+INK_UQ4=/opt/models/staging/inkling-2-mini-unsloth/Inkling-2-Mini-UD-Q4_K_XL.gguf_file
+LOOM3_SERVE=/home/bench/loom-e172/venv/bin/loom-serve
+INK_LOOM_PKG=/opt/models/staging/inkling-2-mini-loom/model.json
+# IC (A3): CIRU v1.4.0 launcher installed by its own install.sh into ciru-e172/prefix, venv from pinned local wheels only;
+# both bundled prebuilt binaries removed (prefill .so JIT-built from the shipped .hip; stock ROCm 10 ROCr).
+CIRU_SERVE=/home/bench/ciru-e172/prefix/serve.sh
+INK_CIRU=/opt/models/staging/inkling-2-mini-ciru
+E172_MEMORY=${E172_MEMORY:-0}   # 1 = speed + E170b memory bank instead of the coding bank
 FN_GGUF=$M/qwen3.8-flash-next-udq4kxl/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf
 FN_MTP=$M/qwen3.8-flash-next-mtp-766911a/mtp-Qwen3.8-Flash-Next-Q8_0.gguf
 LLAMA_E166=$REPO/llama.cpp/wt/5297534/build/bin/llama-server   # E166/E167, upstream 2026-11-18
+LLAMA_E176=$REPO/var/engines/llama-ae6a7ad2c/build/bin/llama-server   # E176, upstream 2026-11-24
+LING_GGUF=$M/ling-3.2-air/Ling-3.2-air-Q3_K_M-00001-of-00002.gguf
+HTR_IMG=ghcr.io/hawgauto/vllm-htr@sha256:cbd537589cc7f2e6e9d73940d5da49a9d956ffbfd795277f54b15787284eeab5
+HTR_MODEL=$M/qwen3.8-flash-next-htr/Htr5Core
+HTR_WS=$REPO/var/e177/htr-workspace-131k
 STRATA18=$ENG/strata-0.2.18   # E171 arm HY: control 0.1.64 serve/server.py + strata-hy4 0.1.64 hip-halo
 HY_CFG=$REPO/results/e171/strata-hy4-sq96.json
 GUARD_PID=""
@@ -103,7 +128,7 @@ ARMS=()
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
-    S|O|GS|NM|HY|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
+    S|O|GS|NM|LG|HT|HY|IQ|IM|IL|IC|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
     *) echo "unknown arg $a. hint: tools/run_e154_arms.sh [--dry-run] S H Q T27 TL"; exit 2 ;;
   esac
 done
@@ -141,7 +166,9 @@ sampling() {  # vendor sampling per arm (Talus MODELS.md table; Qwen3-Coder card
     GL) echo '{"temperature":0.95,"top_p":1.0}' ;;   # GLM-5.3-Flash card, its agentic-coding (DeepSWE) setting
     DC) echo '{"temperature":1.0,"top_p":1.0}' ;;    # deepseek-ai V4.1-Flash-1017 card (the ISTA card states none)
     NM) echo '{"temperature":1.0,"top_p":0.95}' ;;
-    HY) echo '{"temperature":0.9,"top_p":1.0}' ;;   # Hy4-Flash card: 0.9 / 1.0 / top_k off   # Nemotron-3.5-Super card, text; thinking = template default
+    HY) echo '{"temperature":0.9,"top_p":1.0}' ;;
+    LG|HT) echo '{"temperature":1.0,"top_p":0.95,"top_k":20}' ;;   # Ling-3.2-air card; HTR card (launch_recommended.py)
+    IQ|IM|IL) echo '{"temperature":1.0}' ;;   # Inkling generation_config.json: do_sample, temperature 1.0   # Hy4-Flash card: 0.9 / 1.0 / top_k off   # Nemotron-3.5-Super card, text; thinking = template default
   esac
 }
 
@@ -163,6 +190,7 @@ stop_engines() {
   GUARD_PID=""
   podman ps -q --filter name=e154- | xargs -r podman stop -t 20 >/dev/null 2>&1
   pkill -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' 2>/dev/null
+  pkill -u "$(id -u)" -f '/home/bench/ciru-e172/venv/bin/python' 2>/dev/null  # IC: vLLM API + EngineCore children
   local i
   for i in $(seq 1 15); do pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' >/dev/null || break; sleep 2; done
   if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' >/dev/null; then
@@ -172,6 +200,27 @@ stop_engines() {
   fi
   if pgrep -u "$(id -u)" -x 'llama-server|talus-server|talus-cli|loom-serve|strata-hy4' >/dev/null; then stamp "FATAL: our engine survived SIGKILL"; return 1; fi
   return 0
+}
+# F198: an engine's PROCESS exit is not its GPU memory release - amdgpu frees the VM asynchronously (kfd_process_wq_release).
+# 2026-11-23 01:18Z: IM's llama-server started 1 s after IL's Loom engine (29 GiB GTT) exited, got -ENOMEM updating
+# BO_VA, died, and amdgpu_vm_pt_free oopsed on its teardown - kernel panic, kdump, reboot. Before every local engine
+# start, wait for GTT to fall back to the level measured when the window opened, then settle; refuse the arm otherwise.
+GTT_BASELINE_MIB=""
+gtt_mib() { echo $(( $(cat /sys/class/drm/card0/device/mem_info_gtt_used) >> 20 )); }
+gpu_settle() {  # gpu_settle <arm>; 0 = GTT back within 2 GiB of baseline (then 10 s settle), 1 = not within 180 s
+  local i g
+  [ -n "$GTT_BASELINE_MIB" ] || { stamp "FATAL: gpu_settle before a GTT baseline was taken"; return 1; }
+  for i in $(seq 1 90); do
+    g=$(gtt_mib)
+    if [ "$g" -le $((GTT_BASELINE_MIB + 2048)) ]; then
+      sleep 10
+      stamp "$1 GPU settle: GTT ${g} MiB (baseline ${GTT_BASELINE_MIB}) after $(( (i - 1) * 2 ))s + 10s settle"
+      return 0
+    fi
+    sleep 2
+  done
+  stamp "FAIL $1: GTT still $(gtt_mib) MiB after 180 s (baseline ${GTT_BASELINE_MIB}) - previous engine's GPU memory not released, arm not started"
+  return 1
 }
 # A serving unit (gateway, or Halogen solo) AND a clear flag: a set flag answers 503 whatever is running.
 relay_serving() {
@@ -258,6 +307,36 @@ start() {
       SERVER_PID=$!
       "$REPO/qwen-image/mem_guard.sh" proc:strata-hy4 12 >>"$RAW/mem_guard.log" 2>&1 &
       GUARD_PID=$! ;;
+    IQ|IM)  # E172: same build and flags for both files; -np 1 as E170
+      local gguf=$INK_Q8; [ "$arm" = IM ] && gguf=$INK_UQ4
+      "$LLAMA_E172" -m "$gguf" -c 65536 -np 1 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
+    IL)  # E172: package README flags minus --parameter_mode=preload (A1: 0.3.0 rejects it); cwd = package dir so relative card paths resolve
+      (cd "$(dirname "$INK_LOOM_PKG")" && exec "$LOOM3_SERVE" --model="$INK_LOOM_PKG" '--device=amdgpu://?completion_spin_ns=4294967295' \
+        --pool_backing=fixed --listen=127.0.0.1:$PORT) >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
+    IC)  # E172 A3: CIRU single mode (one stream, DSpark K=7, as the card's B=1 default), 64K context like IQ/IM
+      "$CIRU_SERVE" --model "$INK_CIRU" --mode single --context 65536 --seqs 1 --tools --host 127.0.0.1 --port "$PORT" >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
+    LG)  # E176: -m takes shard 1 of 2; -np omitted (auto slots keep the unified KV pool, E89)
+      "$LLAMA_E176" -m "$LING_GGUF" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
+      SERVER_PID=$! ;;
+    HT)  # E177: evict model + container-storage page cache, then keep evicting every 20 s until the port answers
+      mkdir -p "$HTR_WS"
+      python3 "$REPO/tools/evict_page_cache.py" "$HTR_MODEL" "$HOME/.local/share/containers/storage" >>"$LOG" 2>&1
+      podman run -d --rm --init --pull=never --name "e154-$arm" \
+        --device /dev/kfd --device /dev/dri --group-add keep-groups --userns=keep-id:uid=1000,gid=1000 \
+        --pids-limit 8192 --shm-size 16g --ulimit core=0 --security-opt no-new-privileges:true \
+        -e VLLM_NO_USAGE_STATS=1 -e DO_NOT_TRACK=1 -p "127.0.0.1:$PORT:8000" \
+        --mount "type=bind,src=$HTR_MODEL,dst=/model,readonly" --mount "type=bind,src=$HTR_WS,dst=/workspace" \
+        "$HTR_IMG" /model --host 0.0.0.0 --port 8000 --max-model-len 131072 --max-num-seqs 1 \
+        --max-num-batched-tokens 2048 --kv-cache-memory-bytes 8589934592 >>"$slog" 2>&1
+      (podman logs -f "e154-$arm" >>"$slog" 2>&1 &)
+      ( for _ in $(seq 1 120); do
+          timeout 4 python3 -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:$PORT/v1/models', timeout=3)" 2>/dev/null && break
+          python3 "$REPO/tools/evict_page_cache.py" "$HTR_MODEL" "$HOME/.local/share/containers/storage" 2>&1 | tail -1 >>"$LOG"
+          sleep 20
+        done ) & ;;
     NM)  # E166: -m takes shard 1 of 3; -np omitted (auto slots keep the unified KV pool, E89)
       "$LLAMA_E166" -m "$NM_GGUF" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
@@ -265,8 +344,10 @@ start() {
 }
 
 wait_ready() {  # wait_ready <arm>; 0 = ready, 1 = not ready in 900 s, 2 = the engine died while loading
-  local t id
-  for t in $(seq 1 180); do
+  local t id n=180
+  [ "$1" = IC ] && n=720
+  [ "$1" = HT ] && n=360   # HT: first start with a new profile compiles (E177: 458 s at 40K context)   # IC: first vLLM start JIT-builds the HIP prefill kernel and Triton caches (up to 1 h)
+  for t in $(seq 1 $n); do
     id=$(python3 -c "import json,urllib.request;print(json.load(urllib.request.urlopen('$URL/v1/models',timeout=5))['data'][0]['id'])" 2>/dev/null) && { echo "$id"; return 0; }
     # A dead engine never becomes ready: E166's NM smoke died 6 s into the load (ErrorDeviceLost) and this loop kept
     # polling for the full 900 s. A process engine has SERVER_PID; a Halogen engine is the e154-<arm> container.
@@ -396,8 +477,19 @@ for arm in "${ARMS[@]}"; do
     WINDOW_OPEN=1   # set BEFORE the call: a half-done idle-down must still be restored
     sudo "$WINDOW" idle-down 2>&1 | tee -a "$LOG"
     if pgrep -x llama-server >/dev/null; then stamp "FATAL: llama-server still running after idle-down"; exit 1; fi
-    stamp "window open, VERIFIED: no llama-server; kernel $(uname -r); GPU busy $(cat /sys/class/drm/card0/device/gpu_busy_percent)%"
+    # The baseline has the same race: idle-down stops Halogen, whose GTT also frees asynchronously. Take it only once
+    # three consecutive 5 s readings agree within 256 MiB (cap 180 s), or a still-falling level reads as idle.
+    prev=$(gtt_mib); same=0
+    for _ in $(seq 1 36); do
+      sleep 5; g=$(gtt_mib)
+      if [ $(( g > prev ? g - prev : prev - g )) -le 256 ]; then same=$((same + 1)); else same=0; fi
+      prev=$g; [ "$same" -ge 2 ] && break
+    done
+    [ "$same" -ge 2 ] || { stamp "FATAL: GTT never stabilised after idle-down (last ${prev} MiB)"; exit 1; }
+    GTT_BASELINE_MIB=$prev
+    stamp "window open, VERIFIED: no llama-server; kernel $(uname -r); GPU busy $(cat /sys/class/drm/card0/device/gpu_busy_percent)%; GTT baseline ${GTT_BASELINE_MIB} MiB"
   fi
+  gpu_settle "$arm" || continue
   slog=$RAW/$arm.serverlog
   stamp "$arm start"
   t0=$(date +%s)
@@ -445,6 +537,32 @@ for arm in "${ARMS[@]}"; do
         elif [ "$arm" = HS ]; then run_kw_suite "$arm"; fi
       fi ;;
     KFL|KM|KX) run_kw_suite "$arm" ;;
+    IQ|IM|IL|IC)
+      mkdir -p "$RAW/$arm"; toff=kwargs; [ "$arm" = IL ] && toff=top  # IC uses kwargs like IQ/IM (A3 note 4)
+      if [ "${E172_SPEEDREDO:-0}" = 1 ]; then  # E172 A4: speed with thinking verifiably off; thinking-on files kept
+        stamp "$arm speed (thinking off, A4) start"
+        timeout 3600 python3 "$REPO/tools/e163_speed.py" --label "$arm" --base "$URL" --thinking-off "${E172_TOFF:-auto-off}" \
+          --out "$RAW/$arm/speed-off.json" >>"$RAW/$arm/speed-off.log" 2>&1
+        stamp "$arm speed (thinking off): rc=$? $(grep -h -E 'thinking-off probe|min-thinking: using' "$RAW/$arm/speed-off.log" | tail -1 | cut -c1-140)"
+        stop_engines; bank_arm "$arm"; continue
+      fi
+      if [ -s "$RAW/$arm/speed.json" ]; then stamp "$arm speed: already done, skipped"
+      else
+        stamp "$arm speed start"
+        timeout 3600 python3 "$REPO/tools/e163_speed.py" --label "$arm" --base "$URL" --thinking-off "$toff" \
+          --out "$RAW/$arm/speed.json" >>"$RAW/$arm/speed.log" 2>&1
+        stamp "$arm speed: rc=$? $(tail -1 "$RAW/$arm/speed.log" | cut -c1-220)"
+      fi
+      if [ "$E172_MEMORY" = 1 ]; then
+        stamp "$arm E170b memory bank start"
+        timeout 14400 python3 "$REPO/tools/run_e170.py" --bank "$REPO/spikes/memory-tasks/bank_e170b.json" \
+          --out "$REPO/results/e172/memory" run --arm "$arm" --url "$URL/v1/chat/completions" --model "$model" \
+          >>"$RAW/$arm/memory.log" 2>&1
+        stamp "$arm E170b memory: rc=$? $(tail -1 "$RAW/$arm/memory.log" | cut -c1-200)"
+      else
+        mapfile -t extra < <(arm_args "$arm")
+        run_bank "$arm" "$model" "$URL/v1" "${extra[@]}"
+      fi ;;
     *) [ "$arm" = HY ] && hy_speed
        mapfile -t extra < <(arm_args "$arm")
        run_bank "$arm" "$model" "$URL/v1" "${extra[@]}" ;;
