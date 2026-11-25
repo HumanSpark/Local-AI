@@ -1,4 +1,4 @@
-# Fine-tuning (r6.0)
+# Fine-tuning (r6.1)
 
 Training a model on the box on your own examples.
 

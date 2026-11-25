@@ -1,4 +1,4 @@
-# Voice output (r6.0)
+# Voice output (r6.1)
 
 Reading text aloud in a natural voice (narration).
 

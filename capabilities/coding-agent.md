@@ -1,4 +1,4 @@
-# Coding agents (r6.0)
+# Coding agents (r6.1)
 
 Fixing and changing real software on its own, checked by each project's tests.
 

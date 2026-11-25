@@ -1,4 +1,4 @@
-# Memory (r6.0)
+# Memory (r6.1)
 
 Keeping an assistant's notes about a person up to date without inventing or keeping rejected facts.
 

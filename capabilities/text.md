@@ -1,4 +1,4 @@
-# Text and reasoning (r6.0)
+# Text and reasoning (r6.1)
 
 Answering questions, summarising and pulling facts from documents, everyday writing.
 

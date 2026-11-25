@@ -1,12 +1,22 @@
-# Release Notes - sparkbench-data-r6.0
+# Release Notes - sparkbench-data-r6.1
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r6.0)
+## This release (r6.1)
 
 - **Findings:** 204 in FINDINGS.md, newest F204.
 - **Claims:** 64 in claims.yml (26 current, 18 historical, 17 qualified, 3 superseded).
+- **Rewritten to lead with what works and what to do.** The README opens with what the box does well, where it
+  falls short and what I'd do, in place of a dated list of recent results (those stay in this file). The five kinds
+  of work are ordered by how much a firm leans on them, each with a plain answer. Capabilities follow the same
+  business order, with coding last. The frontier page opens the same way.
+
+
+## Earlier releases
+
+### r6.0
+
 - **New page: [how it compares with frontier models](FRONTIER.md).** Quality and speed are kept apart. The box is
   level with Anthropic's models on everyday and medium coding fixes, much slower, and clearly behind on large changes
   and on client drafting. It does not claim to beat the labs' hardware.
@@ -17,8 +27,6 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
   and `meta.capability_frontier` in `setups.json`; `claims[].experiments` in `claims.json`. All additive; nothing renamed.
 - Each capability page now opens with one line on how it compares with the frontier.
 
-
-## Earlier releases
 
 ### r5.19
 

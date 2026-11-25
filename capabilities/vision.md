@@ -1,4 +1,4 @@
-# Vision (r6.0)
+# Vision (r6.1)
 
 Understanding images and scanned pages.
 

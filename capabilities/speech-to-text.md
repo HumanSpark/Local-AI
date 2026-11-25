@@ -1,4 +1,4 @@
-# Speech to text (r6.0)
+# Speech to text (r6.1)
 
 Turning recordings into text.
 

@@ -1,4 +1,4 @@
-# Music (r6.0)
+# Music (r6.1)
 
 Generating songs with sung lyrics.
 
