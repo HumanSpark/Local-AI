@@ -31,23 +31,23 @@ voice, images, music, coding) and for engines: [capabilities/](capabilities/READ
 
 ## What it does well, where it falls short, what I'd do
 
-**What it does well now:** working from your own documents, transcribing calls, keeping an assistant's notes up to date
-overnight, and everyday coding fixes. Free per use, and nothing leaves the building.
+**What it does well now:** working from your own documents. Transcribing calls. Keeping an assistant's notes up to
+date overnight. Everyday coding fixes. It costs nothing per use, and nothing leaves the building.
 
-**Where it falls short:** client-ready drafts and large, multi-step software changes. Frontier models handle these; the
-local model adds promises the notes don't support, or finishes about half the changes.
+**Where it falls short:** client-ready drafts. The local model adds promises the notes don't support. Large,
+multi-step software changes: it finishes about half, where frontier models finish all of them.
 
-**What I'd do:** run routine and confidential work locally; send client-facing drafts and big changes to a frontier
+**What I'd do:** run routine and confidential work locally. Send client-facing drafts and big changes to a frontier
 model, or have a person check them.
 
 [How it compares with frontier models](FRONTIER.md) · [What works best for each job](capabilities/README.md) ·
 [What changed in each release](RELEASE-NOTES.md)
 
-## Current release: r6.1 (findings through 25 November 2026)
+## Current release: r6.2 (findings through 25 November 2026)
 
-r6.1 rewrites this page and the [frontier comparison](FRONTIER.md) to lead with what works and what to do, and orders [each kind of job](capabilities/README.md) by how much a firm leans on it, coding last. No result changed.
+r6.2 adds [energy per answer](results/energy-per-answer.md), measured at the wall and compared with a fridge-freezer, the final Ling-3.2-air coding results, the newer HTR release, and a card for each engine with a project link. No earlier result changed.
 
-- **Every claim carries a status and dates.** 26 current, 17 qualified, 18 historical and 3 superseded: the 24 November review plus three frontier comparisons added on 25 November; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
+- **Every claim carries a status and dates.** 26 current, 17 qualified, 18 historical and 3 superseded; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
 - **Not everything is here.** Verbose server logs, internal design documents and files with private content are withheld, among them the per-task records of the coding tests, which quote private repositories. [WITHHELD.md](WITHHELD.md) lists each with the reason.
 
 ## The five kinds of work I tested
@@ -56,11 +56,11 @@ Every test belongs to one of five tracks, ordered here by how much a firm leans 
 
 | Track | The question | Where it stands |
 |---|---|---|
-| [Documents](tracks/documents.md) | Can it work from what you give it? | Yes: 25 of 26 answers right on a large document pack; the miss was a figure the documents never state |
-| [Meetings](tracks/meetings.md) | Can it turn a private call into a record? | Yes for transcripts: it tells the host from the other speakers on 97% of lines and transcribes about 28 times faster than real time |
-| [Drafting](tracks/drafting.md) | Would a professional send it? | Not yet: frontier models write better client drafts; a local draft needs a person to check every promise and figure |
-| [Running it](tracks/running-it.md) | Speed, capacity, cost, stability | Writes about 62 tokens a second (a token is roughly three-quarters of a word) and starts answering a long document in about 22s; one machine at about 85 W |
-| [Unattended work](tracks/unattended-work.md) | Can it finish a long job alone? | Everyday coding fixes, yes, but slowly; large changes, about half, where frontier models finish all of them |
+| [Documents](tracks/documents.md) | Can it work from what you give it? | Yes. 25 of 26 answers right on a large document pack. The one miss was a figure the documents never state. |
+| [Meetings](tracks/meetings.md) | Can it turn a private call into a record? | Yes, for transcripts. It tells the host from the other speakers on 97% of lines. It transcribes about 28 times faster than real time. |
+| [Drafting](tracks/drafting.md) | Would a professional send it? | Not yet. Frontier models write better client drafts. A local draft needs a person to check every promise and figure. |
+| [Running it](tracks/running-it.md) | Speed, capacity, cost, stability | It writes about 62 tokens a second. A token is roughly three-quarters of a word. It starts answering a long document in about 22s, on one machine at about 85 W. |
+| [Unattended work](tracks/unattended-work.md) | Can it finish a long job alone? | Everyday coding fixes, yes, but slowly. Large changes, about half. Frontier models finish all of them. |
 
 Each track page lists its claims with their evidence. The engine speed table is on the Running it page and the
 coding chart on the Unattended work page.

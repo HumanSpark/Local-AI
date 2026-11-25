@@ -26,6 +26,7 @@
 | 8 | Meeting notes: we measure transcription, not time to checked notes | Time a recording to checked notes with owners and deadlines, local pipeline against manual | minutes per hour of audio to an approved record (unmeasured) | needs a real call and a person | needs owner |
 | 9 | Hidden tests: local solves 1/10 when it cannot see what "done" means (F195) | Ask the model to write its own tests first, then fix | hidden-test pass_count (1/10) | ~4h GPU | queued |
 | 11 | HTR v0.2.4 wrote at 47.8 tok/s against Halogen's 62.5 (E177) | HTR v0.2.5 (24 Nov): 18 new kernels for this chip, same weights, no download; maker's figures +5.7% single-request decode, +28% at 4 users, prefill unchanged | client-timed speed (47.8 tok/s, 924 tok/s at 32K), then the hard bank (6/10) | ~1h speed + ~5h bank, owner at the box (load over 60 GiB) | queued |
+| 12 | Local runs of recurring jobs lack the instructions a frontier session worked out | skill-distill: Claude turns one good session into task-specific instructions for production, tested until the local run matches (scouting/skill-distill) | match rate against the Claude reference on fresh inputs of the same job | Claude subscription + ~1-2h GPU per job | queued, pick the job |
 | 10 | Production on Halogen: no recent version check | Newer Halogen release, same model, same prompts | decode and prefill (62.5 tok/s, 1,462 tok/s at 32K live) | ~30 min | watch for a release |
 
 ## Ideas parked, with the reason
@@ -41,3 +42,11 @@
 2. The same bank, harness and grading as the baseline, so the change is the only difference.
 3. A win changes a setup's status in `tools/experiments_registry.py` (and so the capability pages); a loss is recorded
    here as parked, with its finding.
+
+## Queue order (owner, 2026-11-25)
+
+"In general, we should be testing the fastest thing first in order to get results back faster." When several runs are
+queued, the shortest expected run goes first, so a result arrives sooner and a broken setup shows in minutes. Two rules
+outrank it: runs another depends on go first, and risky loads (over 60 GiB, able to wedge the box) go last in an
+unattended window, so a wedge costs nothing already done. The coding-bank ladder (15 everyday fixes, then 10 bigger,
+then 10 large) already runs fastest first.

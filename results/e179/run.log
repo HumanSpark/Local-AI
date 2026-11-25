@@ -1,0 +1,59 @@
+[2026-11-25T06:53:21+00:00] E179 start: kernel 7.0.0-43-generic
+[2026-11-25T06:53:21+00:00] phase 1: Halogen (production, live) speed
+[2026-11-25T06:54:55+00:00] phase 1 rc=0
+[2026-11-25T06:54:55+00:00] phase 2: HTR
+==> setting advisory maintenance flag
+==> no serving unit is active (llama-gateway-router.service llama-gateway.service) - nothing to stop
+==> stopping chatterbox-gateway.service
+==> stopping flux-gateway.service
+==> stopping sparkrouter-halogen.service
+==> idle window OPEN (relay and chatterbox-gateway.service flux-gateway.service sparkrouter-halogen.service down)
+--- sparkrouter window status (2026-11-25T06:54:59+00:00) ---
+  serving unit    : NONE ACTIVE of: llama-gateway-router.service llama-gateway.service sparkrouter-halogen.service
+  maintenance flag: SET -> maintenance window opened by bench at 2026-11-25T06:54:55+00:00 via relay_bench_window.sh - gateway intentionally stopped; restore with 'relay_bench_window.sh up'
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : inactive
+  idle unit       : flux-gateway.service : inactive
+  idle unit       : sparkrouter-halogen.service : inactive
+[evict] 200 files, 0.1s
+[evict] 291 files fadvised, 0 unopenable; Cached 73648 -> 5855 MiB (67793 MiB freed) in 1.2s
+[2026-11-25T06:55:01+00:00] evict rc=0 | used 2515 free 115637 cache 7113 MiB
+[2026-11-25T06:55:11+00:00] GTT baseline 17 MiB
+83a0a54125480934544fd195843f264556f248992ff80432556842119758ca6e
+[2026-11-25T06:57:04+00:00] loading 59s: GTT 17 MiB | used 4968 free 41085 cache 79212 MiB
+[2026-11-25T06:58:08+00:00] loading 123s: GTT 21 MiB | used 6612 free 39436 cache 79221 MiB
+[2026-11-25T06:59:11+00:00] loading 186s: GTT 21 MiB | used 5863 free 40184 cache 79222 MiB
+[2026-11-25T07:00:15+00:00] loading 250s: GTT 21 MiB | used 6536 free 39495 cache 79239 MiB
+[2026-11-25T07:01:19+00:00] loading 314s: GTT 62732 MiB | used 77792 free 2974 cache 44586 MiB
+[2026-11-25T07:02:23+00:00] loading 378s: GTT 73396 MiB | used 87495 free 15324 cache 22695 MiB
+[2026-11-25T07:03:05+00:00] HTR ready in 420s; GTT 72544 MiB | used 87255 free 22013 cache 16769 MiB
+[2026-11-25T07:06:04+00:00] phase 2 speed rc=0 | GTT 73970 MiB | used 88735 free 16846 cache 20464 MiB
+[2026-11-25T07:06:04+00:00] E179 speed leg done
+[2026-11-25T07:06:08+00:00] restoring relay
+==> starting chatterbox-gateway.service
+==> starting flux-gateway.service
+==> starting sparkrouter-halogen.service
+==> no serving unit to start (none was serving at down; Halogen solo) - idle units restored above
+==> clearing maintenance flag
+==> window CLOSED (idle units serving, flag clear)
+--- sparkrouter window status (2026-11-25T07:06:09+00:00) ---
+  serving unit    : sparkrouter-halogen.service : ACTIVE (serving, Halogen solo)
+  maintenance flag: clear
+  llama-server processes: 
+  idle unit       : chatterbox-gateway.service : ACTIVE
+  idle unit       : flux-gateway.service : ACTIVE
+  idle unit       : sparkrouter-halogen.service : ACTIVE
+[2026-11-25T07:06:09+00:00] relay up rc=0
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] guard not serving (unreachable: HTTP Error 503: Service Unavailable); recording skip
+[probe] dry-run NOT ok: code=skipped
+[probe] code: running (baseline decode 80.7)
+[probe] code: ok decode 81.2 prefill 242.5 check pass wall 3.9 s 
+[2026-11-25T07:07:30+00:00] relay restored, VERIFIED: production probe (code) passed

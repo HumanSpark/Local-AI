@@ -1,4 +1,4 @@
-# Unattended work (r6.1)
+# Unattended work (r6.2)
 
 **The question:** Can it finish a long, multi-step job while nobody watches?
 

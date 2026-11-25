@@ -9450,7 +9450,12 @@ at 131,072 tokens, 2 time-limit stops, 3 false "done"; tool calls parsed cleanly
 
 **What it changes.** Nothing in production. Do not spend a larger quant or a bigger download on it for this role.
 
-**Evidence.** `results/e176-results.md`, `results/e176/` (bench-*.md, raw/LG/).
+**Addendum (2026-11-25, E176 A1 and A2).** On the 15 everyday fixes production solves, Ling solved 1 (every task hit
+the 20-minute limit; 14 changed no code, at a median 100s per turn). With thinking switched off it solved 0 of 5: turns
+became 14 times faster but it looped (one search repeated 175 times in 200 turns) and changed no code. Thinking was
+what kept it from looping, and neither setting makes it a coding candidate.
+
+**Evidence.** `results/e176-results.md`, `results/e176/` (bench-*.md, raw/LG/, raw-e154/LG/, raw-a2/LGN/).
 
 
 <a id="f204"></a>

@@ -1,4 +1,4 @@
-# Who said what (r6.1)
+# Who said what (r6.2)
 
 Tagging each line of a transcript with who said it.
 

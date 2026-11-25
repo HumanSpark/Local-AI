@@ -177,6 +177,7 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E176 | Ling-3.2-air on benchhost (2026-11-24) | [data](e176/) · [pre-registration](e176-prereg.md) · [results](e176-results.md) |
 | E177 | Flash-Next on HTR vs production Halogen (2026-11-24) | [data](e177/) · [pre-registration](e177-prereg.md) · [results](e177-results.md) |
 | E178 | Anthropic models on the hard coding bank, as subagents (2026-11-25) | [pre-registration](e178-prereg.md) · [results](e178-results.md) |
+| E179 | HTR v0.2.5: same model, newer engine release (prereg, 2026-11-25) | [data](e179/) · [pre-registration](e179-prereg.md) · [results](e179-results.md) |
 
 ## Other evidence
 
@@ -187,6 +188,7 @@ The July router and multi-user files are E34 and E35A to E37A; the A marks a Jul
 | [closed-record-prereg.md](closed-record-prereg.md) | Predictions for the closed-record reasoning pilot, registered before any model ran. |
 | [closed-record-v5.md](closed-record-v5.md) | The v5 run - three local models over all 13 matters at one setting, plus the three new two-clocks/two-bases matters and the determinism measurement. |
 | [closed-record.md](closed-record.md) | Results for closed-record professional reasoning - three local models against a ten-matter sealed-key corpus, plus the instrument defects the work surfaced. |
+| [energy-per-answer.md](energy-per-answer.md) | Energy per answer, and what a fridge uses |
 | [frontier-eval.md](frontier-eval.md) | Quality comparison of frontier cloud models vs local sparkbench models on the eval-pilot suite. |
 | [keyed-vs-pairwise.md](keyed-vs-pairwise.md) | Result of scoring the same five E10 answers by answer key and by blind pairwise judging, and what the disagreement between the two methods measures. |
 | [moe-diversity-prereg.md](moe-diversity-prereg.md) | E37A PRE-REGISTRATION: is F43 batched expert-sharing? (2026-07-17) |
@@ -200,6 +202,7 @@ The July router and multi-user files are E34 and E35A to E37A; the A marks a Jul
 | [coding-screen/](coding-screen/) | |
 | [deep-eval/](deep-eval/) | |
 | [diarisation/](diarisation/) | |
+| [energy/](energy/) | |
 | [eval-pilot/](eval-pilot/) | |
 | [finetune/](finetune/) | |
 | [phase-a-raw/](phase-a-raw/) | |

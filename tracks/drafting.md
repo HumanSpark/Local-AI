@@ -1,4 +1,4 @@
-# Drafting (r6.1)
+# Drafting (r6.2)
 
 **The question:** Would a professional send what it writes?
 

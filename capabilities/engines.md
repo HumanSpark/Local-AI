@@ -1,4 +1,4 @@
-# Engines (r6.1)
+# Engines (r6.2)
 
 An engine is the software that runs a model, and the same model can run very differently on different engines. Comparing engines fairly needs the same model on each, so the comparisons at the end are same-model runs. Engine speed also depends on the work (code or prose, idle or live), and each row says which.
 
@@ -42,9 +42,10 @@ An engine is the software that runs a model, and the same model can run very dif
 | Experiment | Date | Result | What happened | Evidence |
 |---|---|---|---|---|
 | One model, five engines (E153) | 2026-11-04 | adopted | Halogen fastest in every bucket (86 tok/s on code, 18.7 s to first word at 32K); it became the production engine. | [results/e153-results.md](../results/e153-results.md) |
+| The newer HTR release, same model (E179) | 2026-11-25 | informational | No measurable speed change at one user (about 44 tokens a second both releases); 3 of 3 large changes still solved. | [results/e179-results.md](../results/e179-results.md) |
 | Atlas against llama.cpp (E146) | 2026-09-25 | informational | About 27% faster than llama.cpp here, and not as fast as published. | [results/e146-results.md](../results/e146-results.md) |
 | Atlas against llama.cpp with a draft model (E147) | 2026-09-25 | informational | With a drafter, the open configuration beat Atlas on the MLPerf metric. | [results/e147-results.md](../results/e147-results.md) |
 | Checking Halogen's published long-prompt speed (E139) | 2026-09-24 | informational | 1,152 tok/s at 32K, 5.3 times llama.cpp, short of the published 1,424. | [results/e139-results.md](../results/e139-results.md) |
-| Production's model on the HTR engine (E177) | 2026-11-24 | not adopted | Same coding quality (6/10 against 5/10) but slower than Halogen; kept as a fallback. | [results/e177-results.md](../results/e177-results.md) |
+| Production's model on the HTR engine (E177) | 2026-11-24 | not adopted | 6/10 against Halogen's 5/10 on large changes, comparable on this small test, but slower; kept as a fallback. | [results/e177-results.md](../results/e177-results.md) |
 | AMD's Loom against Halogen and llama.cpp (E163) | 2026-11-16 | not adopted | Loom reads long prompts 2.7 times faster than llama.cpp but is not faster than Halogen. | [results/e163-results.md](../results/e163-results.md) |
 

@@ -54,6 +54,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [e163_speed.py](e163_speed.py) | E163 speed block - time E139's fixed prompts against ANY OpenAI-compatible server with one client-side ruler. |
 | [e175_template_pairs.py](e175_template_pairs.py) | Send gbench's four chat-template pair cases to a local OpenAI-compatible server and score each one. |
 | [e178_subagent_bank.py](e178_subagent_bank.py) | E178 - prepare hard-bank task trees for Claude Code subagents and grade them with the bank's own tests. |
+| [energy_per_answer.py](energy_per_answer.py) | Energy per task and per correct answer for a coding-bank run, with a fridge-freezer comparison, from records we already keep. |
 | [evict_page_cache.py](evict_page_cache.py) | Evict the page cache held by files under given paths, without root, and report how much Cached fell. |
 | [fetch_hf_model.sh](fetch_hf_model.sh) | Resumable, size-verified download of HF model file(s) to staging. |
 | [finetune_smoke.py](finetune_smoke.py) | DEFINITIVE proof that gfx1151 (Ryzen AI Max+ 395) can TRAIN, not just infer - the check that settles whether F35/Q6's "no ROCm training stack" wall is real. Runs the full training loop (forward -> loss -> backward -> optimizer step) with a PEFT LoRA adapter on the GPU, using a TINY model built from config (no download, no memory-edge risk). If loss goes down over a few steps, on-box training works. |
@@ -97,6 +98,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e173_renders.sh](run_e173_renders.sh) | Render the 15 scored E173 songs (3 music models x 5 frozen prompts) on audio.cpp Vulkan, one engine at a time. |
 | [run_e176.sh](run_e176.sh) | Run E176 end to end - verify the Ling-3.2-air shards, speed leg, then the E167 bank as arm LG. |
 | [run_e176_speed.sh](run_e176_speed.sh) | E176 speed leg - llama-bench on Ling-3.2-air Q3_K_M at depths 0/8192/32768 on two llama.cpp builds. |
+| [run_e179_htr025.sh](run_e179_htr025.sh) | E179 speed leg - E177 speed leg unchanged except the HTR image (v0.2.5). |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |

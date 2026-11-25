@@ -1,19 +1,33 @@
-# Release Notes - sparkbench-data-r6.1
+# Release Notes - sparkbench-data-r6.2
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r6.1)
+## This release (r6.2)
 
 - **Findings:** 204 in FINDINGS.md, newest F204.
 - **Claims:** 64 in claims.yml (26 current, 18 historical, 17 qualified, 3 superseded).
+- **Energy per answer, against a fridge-freezer** ([results/energy-per-answer.md](results/energy-per-answer.md)): the
+  box draws about 120 W at the wall while working and about 7 W idle (measured on a Tapo smart plug; the plug's export
+  and app screenshots are in results/energy/). An everyday coding fix uses about 20 Wh, what a fridge-freezer uses in
+  27 minutes, or under a cent of electricity on the actual tariff.
+- **Ling-3.2-air, final:** 1 of 15 everyday fixes and 0 of 10 large changes; switching its thinking off made it loop
+  ([F203](FINDINGS.md#f203)).
+- **The newer HTR release (v0.2.5):** no measurable speed change at one user, and 3 of 3 large changes still solved
+  ([E179](results/e179-results.md)); it stays the backup engine.
+- **Engine cards** for each engine: who makes it, what sets it apart, licence, versions tested, test dates and a project
+  link, in `setups.json` (`meta.engines`). Each claim's review date is now never earlier than its test date.
+
+
+## Earlier releases
+
+### r6.1
+
 - **Rewritten to lead with what works and what to do.** The README opens with what the box does well, where it
   falls short and what I'd do, in place of a dated list of recent results (those stay in this file). The five kinds
   of work are ordered by how much a firm leans on them, each with a plain answer. Capabilities follow the same
   business order, with coding last. The frontier page opens the same way.
 
-
-## Earlier releases
 
 ### r6.0
 

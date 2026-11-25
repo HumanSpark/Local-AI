@@ -1,4 +1,4 @@
-# What works best, by capability (r6.1)
+# What works best, by capability (r6.2)
 
 Each row is one kind of job this machine was tested on, with the setup in production today and the best alternative found. Click a capability for why, what else was tried, and the experiments behind it, best results first. A setup is a model running on an engine (the software that runs it) with a setting; engines have [their own page](engines.md).
 

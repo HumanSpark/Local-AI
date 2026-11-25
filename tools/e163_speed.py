@@ -238,6 +238,21 @@ def main() -> int:
         }
         for p in ("P8K", "P32K", "D1500")
     }
+    # Spread beside the medians (2026-11-25, E179: a 7.6% "regression" was one request against one request, while
+    # repeats of one prompt varied ~15% under speculative decoding). Compare setups on `spread`, never a lone median.
+    def spread(prompt: str, key: str) -> dict:
+        v = [r[key] for r in rows if r["prompt"] == prompt and r[key] is not None]
+        if not v:
+            return {"n": 0}
+        mean = statistics.mean(v)
+        return {"n": len(v), "mean": round(mean, 2), "min": round(min(v), 2), "max": round(max(v), 2),
+                "range_pct_of_mean": round(100 * (max(v) - min(v)) / mean, 1) if mean else None}
+
+    spreads = {p: {k: spread(p, k) for k in ("prefill_tps", "decode_tps", "ttft_s")} for p in ("P8K", "P32K", "D1500")}
+    for p, ks in spreads.items():
+        if ks["decode_tps"].get("n") == 1:
+            print(f"[{a.label}] NOTE {p}: one request only - it cannot show a difference smaller than the spread "
+                  f"between repeats; do not compare setups on it", flush=True)
     out = {
         "label": a.label,
         "base": a.base,
@@ -248,6 +263,7 @@ def main() -> int:
         "requests_with_reasoning": sum(1 for r in rows if r["reasoning_chars"]),
         "prompts_file": a.prompts,
         "summary": summary,
+        "spread": spreads,
         "requests": rows,
     }
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
