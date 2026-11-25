@@ -1,6 +1,8 @@
-# Who said what (r5.19)
+# Who said what (r6.0)
 
 Tagging each line of a transcript with who said it.
+
+**Against the frontier:** Not compared with a frontier service yet. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

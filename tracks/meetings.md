@@ -1,4 +1,4 @@
-# Meetings (r5.19)
+# Meetings (r6.0)
 
 **The question:** Can it turn a private call into a usable record?
 

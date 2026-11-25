@@ -75,3 +75,22 @@ on the easier ones." Ling is run up the ladder from the easiest bank, same serve
 - **P9** (`pass_count`, E156 bank): Ling >= 2/10.
 - **P10** (`pass_count`): Ling's E154 share > its E156 share > its hard-bank share (0/10), i.e. the ladder orders it.
 Raw records: `results/e176/raw-e154/LG/`, `results/e176/raw-e156/LG/`.
+- 2026-11-25 ~01:17Z: A1's E154 leg was stopped during task 4 (clearmail-12bddf4d0) to start a settings sweep; the
+  owner then asked to finish the easy bank as configured and report it. The interrupted task's record (status
+  "killed") is removed and the leg resumes with that task re-run from scratch; tasks 1-3 are kept. The E156 leg is
+  held until the easy bank is reported (owner decides it alongside the settings sweep).
+
+## Amendment A2 (2026-11-25 ~01:45Z, before any A2 run): thinking off
+
+Owner 2026-11-25: "make changes to the Ling setup to get it to run properly". On the easy bank Ling spent 52-100 s per
+turn and changed no file in 20 minutes (tasks 1-3, A1). A2 changes ONE thing: arm LGN = LG with
+`chat_template_kwargs: {"enable_thinking": false}` sent per request (inclusionAI's card documents this switch; the
+template then says "detailed thinking off"). Same server, build, quant, context, sampling and harness. Bank: the first
+5 tasks of results/e154/bank.jsonl (results/e176/bank-e154-first5.jsonl), 1,200 s per task, podman isolation.
+Runs after A1's E154 leg finishes (owner: finish the easy bank as configured).
+
+- P11: median `wall_time / turns` across the 5 records is under 30 s (A1 tasks 1-3: 52, 71, 100 s).
+- P12: `passed` is true on at least 1 of 5 (A1 so far: 0 of 3 on the same tasks).
+- P13: `diff` is non-empty on at least 3 of 5 (A1: empty on all 3).
+- Check, not a prediction: the server log shows no reasoning content on LGN requests; if it does, the switch did not
+  take and A2 is void.

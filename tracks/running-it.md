@@ -1,4 +1,4 @@
-# Running it (r5.19)
+# Running it (r6.0)
 
 **The question:** How fast is it, how many people can share it, what does it cost, and what breaks?
 

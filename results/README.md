@@ -176,6 +176,7 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E175 | chat-template pair negative control | [data](e175/) · [pre-registration](e175-prereg.md) · [results](e175-results.md) |
 | E176 | Ling-3.2-air on benchhost (2026-11-24) | [data](e176/) · [pre-registration](e176-prereg.md) · [results](e176-results.md) |
 | E177 | Flash-Next on HTR vs production Halogen (2026-11-24) | [data](e177/) · [pre-registration](e177-prereg.md) · [results](e177-results.md) |
+| E178 | Anthropic models on the hard coding bank, as subagents (2026-11-25) | [pre-registration](e178-prereg.md) · [results](e178-results.md) |
 
 ## Other evidence
 

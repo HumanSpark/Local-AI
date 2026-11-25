@@ -14,12 +14,12 @@ I can't publish. The plain-English version is at
 number yourself (five minutes, Python only).
 
 **What works best right now, for each kind of job** (text, coding, office tools, speech, voice, images, music, memory)
-and for engines: [capabilities/](capabilities/README.md).
+and for engines: [capabilities/](capabilities/README.md). How it compares with frontier models: [FRONTIER.md](FRONTIER.md).
 
 > [!NOTE]
 > **The machine:** GMKtec EVO-X2 · AMD Ryzen AI Max+ 395 with Radeon 8060S · 128 GB
 > unified memory (about 105 GB usable by the graphics) · 81-87 W while generating
-> ([F180](FINDINGS.md#f180)) · measured July to 24 November 2026.
+> ([F180](FINDINGS.md#f180)) · measured July to 25 November 2026.
 
 ### What production runs now
 
@@ -31,6 +31,10 @@ and for engines: [capabilities/](capabilities/README.md).
 
 ## What changed recently
 
+- **25 Nov 2026 - Claude on the ten large changes.** Claude Sonnet 5.5, Opus 5.5 and Fable 5.2 each solved all ten,
+  at a median 3.3 to 7.1 min a change; production solves five at 11.4 min. Large, multi-step changes are frontier work
+  ([Claude on the large changes, E178](results/e178-results.md), [F204](FINDINGS.md#f204),
+  [how it compares](FRONTIER.md)).
 - **24 Nov 2026 - two challengers; production kept.** Flash-Next compressed with the community HTR method, on its own
   vLLM build: 6/10 on ten large changes against production's 5/10, but slower (47.8 against 62.5 tok/s writing, 924
   against 1,462 tok/s reading a 32K prompt) ([HTR against Halogen, E177](results/e177-results.md), [F202](FINDINGS.md#f202)).
@@ -47,11 +51,11 @@ and for engines: [capabilities/](capabilities/README.md).
 - **18 Nov 2026 - where local falls short.** Ten large real changes: GPT-6.1 Sol 10/10 (about 2 min each, USD 1.95 in
   total), production 5/10 (about 11 min each) ([Large changes, E167](results/e167-results.md), [F194](FINDINGS.md#f194)).
 
-## Current release: r5.19 (findings through 24 November 2026)
+## Current release: r6.0 (findings through 25 November 2026)
 
-r5.19 adds [What works best, by capability](capabilities/README.md): one page per kind of job with the setup in production, the best alternative and why, and the experiments behind it, best results first, plus [a page comparing engines](capabilities/engines.md). The same information is machine-readable in `setups.json` and `experiments.json`. No finding or claim changes. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r6.0 adds [how it compares with frontier models](FRONTIER.md), with quality and speed kept apart, and the Claude results on the ten large coding changes: Claude Sonnet 5.5, Opus 5.5 and Fable 5.2 each solved all ten, where production solves five ([F204](FINDINGS.md#f204)). Each [capability page](capabilities/README.md) now says in one line how it compares with the frontier.
 
-- **Every claim carries a status and dates.** 23 current, 17 qualified, 18 historical and 3 superseded as of the 24 November review; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
+- **Every claim carries a status and dates.** 26 current, 17 qualified, 18 historical and 3 superseded: the 24 November review plus three frontier comparisons added on 25 November; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
 - **Not everything is here.** Verbose server logs, internal design documents and files with private content are withheld, among them the per-task records of the coding tests, which quote private repositories. [WITHHELD.md](WITHHELD.md) lists each with the reason.
 
 ## Five research tracks
@@ -106,6 +110,6 @@ task mix; review time per approved output; the data path end to end.
 
 ## Navigating the record
 
-[By capability](capabilities/README.md) · [Engines](capabilities/engines.md) · [Glossary](GLOSSARY.md) (every code and model name) · [Findings register](FINDINGS.md) ·
+[By capability](capabilities/README.md) · [Engines](capabilities/engines.md) · [Against the frontier](FRONTIER.md) · [Glossary](GLOSSARY.md) (every code and model name) · [Findings register](FINDINGS.md) ·
 [Experiments index](results/README.md) · [Claims](claims.md) ([claims.json](claims.json)) ·
 [Release history](RELEASE-NOTES.md) · [Licence](LICENSE) and [citation](CITATION.cff)

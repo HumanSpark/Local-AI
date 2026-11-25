@@ -1,6 +1,6 @@
 {
  "meta": {
-  "release": "r5.19",
+  "release": "r6.0",
   "statuses": [
    "production",
    "runner-up",
@@ -34,12 +34,26 @@
    "memory": "Keeping an assistant's notes about a person up to date without inventing or keeping rejected facts.",
    "fine-tuning": "Training a model on the box on your own examples."
   },
+  "capability_frontier": {
+   "text": "Level with Anthropic's models on routine document work; clearly behind on client drafting.",
+   "coding-agent": "Level with Claude on everyday and medium fixes, much slower; Claude solved all ten large changes, the local model half.",
+   "tool-use": "Not compared with a frontier model yet.",
+   "vision": "Not tested yet.",
+   "speech-to-text": "Not compared with a frontier service yet.",
+   "speaker-labelling": "Not compared with a frontier service yet.",
+   "voice-output": "Not compared with a frontier service yet.",
+   "images": "Not compared with a frontier service yet.",
+   "music": "Not compared with a frontier service yet.",
+   "memory": "Not compared with a frontier model yet.",
+   "fine-tuning": "Not comparable: frontier models cannot be trained on this machine."
+  },
   "engines": {
    "halogen": {
     "name": "Halogen",
     "runs": "language-models",
     "standing": "production",
     "why": "Fastest of five engines on production's model (86 tok/s on code, 18.7 s to first word at 32K, 4 Nov); closed source.",
+    "why_plain": "The fastest engine we found for our everyday model; it runs production.",
     "capabilities": [
      "coding-agent",
      "memory",
@@ -52,6 +66,7 @@
     "runs": "language-models",
     "standing": "fallback",
     "why": "Community build with its own compression: same coding quality as production (6/10 vs 5/10), about 25% slower writing.",
+    "why_plain": "A community engine that runs a compressed copy of our model; same quality, a little slower. Our backup.",
     "capabilities": [
      "coding-agent",
      "text"
@@ -62,6 +77,7 @@
     "runs": "language-models",
     "standing": "tried",
     "why": "AMD's engine in development: 2.7 times llama.cpp on long prompts, but not faster than Halogen.",
+    "why_plain": "AMD's engine, still in development; quick on long documents but not faster overall.",
     "capabilities": [
      "text"
     ]
@@ -71,6 +87,7 @@
     "runs": "language-models",
     "standing": "baseline",
     "why": "The open-source standard; runs almost any model, so most model tests use it. About a third of Halogen's speed on production's model.",
+    "why_plain": "The standard open-source engine. It runs almost any model, so most comparisons use it, but it is slower.",
     "capabilities": [
      "coding-agent",
      "fine-tuning",
@@ -84,6 +101,7 @@
     "runs": "language-models",
     "standing": "compared",
     "why": "Community engine for this chip: 2.5 times llama.cpp on code; runs the 27B runner-up.",
+    "why_plain": "A community engine built for this kind of machine; much faster than the standard one.",
     "capabilities": [
      "coding-agent",
      "text"
@@ -94,6 +112,7 @@
     "runs": "language-models",
     "standing": "compared",
     "why": "Community engine: second fastest on code in the 4 Nov comparison.",
+    "why_plain": "A community engine; second fastest in our comparison.",
     "capabilities": []
    },
    "strata": {
@@ -101,6 +120,7 @@
     "runs": "language-models",
     "standing": "compared",
     "why": "Community engine (MIT): 2.2 times llama.cpp on code; ran Hy4-Flash.",
+    "why_plain": "A community engine; ran a very large model reliably.",
     "capabilities": [
      "coding-agent",
      "text"
@@ -111,6 +131,7 @@
     "runs": "language-models",
     "standing": "compared",
     "why": "Community engine: about 27% faster than llama.cpp here, slower than published; one mode unusable.",
+    "why_plain": "A community engine; somewhat faster than the standard one, but slower than its makers claimed.",
     "capabilities": []
    },
    "ciru": {
@@ -118,6 +139,7 @@
     "runs": "language-models",
     "standing": "compared",
     "why": "Community vLLM packaging for this chip; ran Inkling-2-Mini.",
+    "why_plain": "A community engine packaged for this machine.",
     "capabilities": []
    },
    "whisper.cpp": {
@@ -125,6 +147,7 @@
     "runs": "other",
     "standing": "production",
     "why": "Runs production speech to text.",
+    "why_plain": "Runs our transcription.",
     "capabilities": [
      "speech-to-text"
     ]
@@ -134,6 +157,7 @@
     "runs": "other",
     "standing": "production",
     "why": "Runs production speaker labelling.",
+    "why_plain": "Runs our speaker labelling.",
     "capabilities": [
      "speaker-labelling"
     ]
@@ -143,6 +167,7 @@
     "runs": "other",
     "standing": "tried",
     "why": "Better general diarisation, slower; not needed for host-or-other.",
+    "why_plain": "A well-known speaker tool; better at many speakers, slower.",
     "capabilities": [
      "speaker-labelling"
     ]
@@ -152,6 +177,7 @@
     "runs": "other",
     "standing": "production",
     "why": "Runs the production narration voice.",
+    "why_plain": "Runs our narration voice.",
     "capabilities": [
      "voice-output"
     ]
@@ -161,6 +187,7 @@
     "runs": "other",
     "standing": "fallback",
     "why": "Fixed voices; the opt-in narration fallback.",
+    "why_plain": "Runs the backup voice.",
     "capabilities": [
      "voice-output"
     ]
@@ -170,6 +197,7 @@
     "runs": "other",
     "standing": "production",
     "why": "Runs production image generation.",
+    "why_plain": "Runs our picture generation.",
     "capabilities": [
      "images"
     ]
@@ -179,6 +207,7 @@
     "runs": "other",
     "standing": "tried",
     "why": "Runs Qwen-Image-2.1, only with the gateway down.",
+    "why_plain": "Runs a stronger picture model that needs the machine to itself.",
     "capabilities": [
      "images"
     ]
@@ -188,6 +217,7 @@
     "runs": "other",
     "standing": "tried",
     "why": "Runs the three song models tested.",
+    "why_plain": "Runs the song models we tried.",
     "capabilities": [
      "music"
     ]
@@ -197,6 +227,7 @@
     "runs": "other",
     "standing": "compared",
     "why": "Cloud models used as comparisons and judges only.",
+    "why_plain": "Cloud models, used only for comparison.",
     "capabilities": []
    }
   },
@@ -234,7 +265,9 @@
     "E167",
     "E170"
    ],
-   "role": "the everyday local model"
+   "role": "the everyday local model",
+   "setting_plain": "low thinking setting, the fastest engine we found",
+   "reason_plain": "Best local result on my coding tests and fast on everyday office work."
   },
   {
    "id": "flash-next-htr",
@@ -248,11 +281,13 @@
    "status": "tried",
    "since": "2026-11-24",
    "until": "",
-   "reason": "Same model, community compression: 6/10 on the hard coding bank against production's 5/10, but slower. The known-good fallback engine.",
+   "reason": "The fallback engine for production's model: same model, community compression, 6/10 on the hard coding bank against production's 5/10, but slower.",
    "evidence": [
     "E177"
    ],
-   "role": "the everyday model on the fallback engine"
+   "role": "the everyday model on the fallback engine",
+   "setting_plain": "the same model, compressed by the community",
+   "reason_plain": "The fallback engine for the everyday model: same quality on hard coding work, but slower."
   },
   {
    "id": "qwen38-27b-talus",
@@ -271,7 +306,9 @@
     "E154",
     "E156"
    ],
-   "role": "the dense local alternative"
+   "role": "the dense local alternative",
+   "setting_plain": "standard setting",
+   "reason_plain": "Nearly as good as the everyday model on coding and knowledge work, but slower."
   },
   {
    "id": "ornith-15-35b",
@@ -289,7 +326,9 @@
     "E158",
     "E167"
    ],
-   "role": "the coding alternative"
+   "role": "the coding alternative",
+   "setting_plain": "standard setting",
+   "reason_plain": "Matched the everyday model on medium coding fixes, took longer, and did worse on large changes."
   },
   {
    "id": "inkling-2-mini-llamacpp",
@@ -306,7 +345,9 @@
    "evidence": [
     "E170"
    ],
-   "role": "the careful but slow memory keeper"
+   "role": "the careful but slow memory keeper",
+   "setting_plain": "standard setting",
+   "reason_plain": "Made no mistakes keeping an assistant's notes, but was much slower and sometimes gave no answer."
   },
   {
    "id": "whisper-turbo",
@@ -324,7 +365,9 @@
     "E41A",
     "E45A"
    ],
-   "role": "the local transcriber"
+   "role": "the local transcriber",
+   "setting_plain": "with silence detection",
+   "reason_plain": "Accurate transcription, fast enough for daily use, and it stops inventing words during silences."
   },
   {
    "id": "whisper-small",
@@ -341,7 +384,9 @@
    "evidence": [
     "E45A"
    ],
-   "role": "the smaller transcriber"
+   "role": "the smaller transcriber",
+   "setting_plain": "with silence detection",
+   "reason_plain": "Faster but noticeably less accurate on real speech."
   },
   {
    "id": "wespeaker-target",
@@ -358,7 +403,9 @@
    "evidence": [
     "E50A"
    ],
-   "role": "the speaker tagger"
+   "role": "the speaker tagger",
+   "setting_plain": "trained on one short sample of my voice",
+   "reason_plain": "Labels almost every line of a call correctly as me or someone else."
   },
   {
    "id": "pyannote-31",
@@ -375,7 +422,9 @@
    "evidence": [
     "E46A"
    ],
-   "role": "the general diarisation pipeline"
+   "role": "the general diarisation pipeline",
+   "setting_plain": "standard setting",
+   "reason_plain": "Better at telling many speakers apart, but slower, and not needed to separate me from others."
   },
   {
    "id": "chatterbox-p239",
@@ -392,7 +441,9 @@
    "evidence": [
     "W3"
    ],
-   "role": "the narration voice"
+   "role": "the narration voice",
+   "setting_plain": "a natural British female voice",
+   "reason_plain": "Won the voice tests: the most natural narration we produced locally."
   },
   {
    "id": "kokoro-emma",
@@ -409,7 +460,9 @@
    "evidence": [
     "W3"
    ],
-   "role": "the fallback voice"
+   "role": "the fallback voice",
+   "setting_plain": "a built-in British voice",
+   "reason_plain": "Fast and clear but less natural; kept as a backup voice."
   },
   {
    "id": "flux-schnell-sdcpp",
@@ -426,7 +479,9 @@
    "evidence": [
     "P3.2"
    ],
-   "role": "the image generator"
+   "role": "the image generator",
+   "setting_plain": "compressed to fit beside the language model",
+   "reason_plain": "Produces usable pictures on the same machine, at the same time as everything else."
   },
   {
    "id": "qwen-image-21",
@@ -443,7 +498,9 @@
    "evidence": [
     "E136"
    ],
-   "role": "the image editor"
+   "role": "the image editor",
+   "setting_plain": "full quality",
+   "reason_plain": "Better at editing pictures and text in them, but needs the machine to itself."
   },
   {
    "id": "ace-step-15",
@@ -460,7 +517,9 @@
    "evidence": [
     "E173"
    ],
-   "role": "the fast song model"
+   "role": "the fast song model",
+   "setting_plain": "standard setting",
+   "reason_plain": "The only fast song model; clear words, but none of its styles suited us yet."
   },
   {
    "id": "yue2",
@@ -477,7 +536,9 @@
    "evidence": [
     "E173"
    ],
-   "role": "the slow song model"
+   "role": "the slow song model",
+   "setting_plain": "standard setting",
+   "reason_plain": "Clear words but slow, and its licence rules out commercial use."
   },
   {
    "id": "minimax-music3",
@@ -494,7 +555,9 @@
    "evidence": [
     "E173"
    ],
-   "role": "the slowest song model"
+   "role": "the slowest song model",
+   "setting_plain": "standard setting",
+   "reason_plain": "Far too slow for regular use."
   },
   {
    "id": "lora-house-style",
@@ -511,7 +574,9 @@
    "evidence": [
     "FT1"
    ],
-   "role": "the house-style fine-tune"
+   "role": "the house-style fine-tune",
+   "setting_plain": "trained on a handful of our own examples",
+   "reason_plain": "Teaches the house tone reliably, but does not make drafts ready to send."
   },
   {
    "id": "loom-flash-next",
@@ -528,7 +593,9 @@
    "evidence": [
     "E163"
    ],
-   "role": "the everyday model on AMD Loom"
+   "role": "the everyday model on AMD Loom",
+   "setting_plain": "AMD's new engine",
+   "reason_plain": "Quick on long documents but not faster than our engine overall."
   },
   {
    "id": "flash-next-llamacpp",
@@ -547,7 +614,9 @@
     "E153",
     "E174"
    ],
-   "role": "the everyday model on llama.cpp"
+   "role": "the everyday model on llama.cpp",
+   "setting_plain": "the standard open-source engine",
+   "reason_plain": "Same model, about a third of the speed of our engine."
   },
   {
    "id": "ling-32-air",
@@ -565,7 +634,9 @@
    "evidence": [
     "E176"
    ],
-   "role": "a fast challenger model"
+   "role": "a fast challenger model",
+   "setting_plain": "standard setting",
+   "reason_plain": "Fast, but failed every large coding change it was given."
   },
   {
    "id": "hy4-flash-strata",
@@ -583,7 +654,9 @@
    "evidence": [
     "E171"
    ],
-   "role": "a very large challenger model"
+   "role": "a very large challenger model",
+   "setting_plain": "standard setting",
+   "reason_plain": "A very large model that ran reliably but far too slowly for the work."
   },
   {
    "id": "qwen3-30b-workhorse",
@@ -602,7 +675,9 @@
     "E31",
     "E33A"
    ],
-   "role": "the July everyday model (retired)"
+   "role": "the July everyday model (retired)",
+   "setting_plain": "standard setting",
+   "reason_plain": "The everyday model from July, replaced in November by a better one."
   },
   {
    "id": "qwen3-coder-30b",
@@ -619,7 +694,9 @@
    "evidence": [
     "E156"
    ],
-   "role": "the earlier coding pick (retired)"
+   "role": "the earlier coding pick (retired)",
+   "setting_plain": "standard setting",
+   "reason_plain": "The earlier coding choice, replaced after it solved few of the harder fixes."
   }
  ]
 }

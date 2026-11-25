@@ -2149,3 +2149,24 @@ logged sha256 is the provenance record).
 - **Runtime:** `ghcr.io/hawgauto/vllm-htr@sha256:cbd537589cc7f2e6e9d73940d5da49a9d956ffbfd795277f54b15787284eeab5`
   (the card's pinned digest for v0.2.4), pulled with rootless podman as bench; run with the card's hardening
   (no-new-privileges, read-only model mount, loopback port only).
+
+## 2026-11-25 - HTR engine image v0.2.5 (E179)
+
+- `ghcr.io/hawgauto/vllm-htr@sha256:daa6b2847bf9678e2de39b8b216105ffe13313e50db889f002f5f918e581d193`, release
+  htr-v0.2.5 (github.com/HawgAuto/vllm-htr, published 2026-11-24T21:13:46Z), 43.6 GB, pulled by digest (podman
+  verifies the digest). Model files unchanged from the E177 entry. Pre-run check: results/e179/security-scan.md.
+
+## 2026-11-25 - TML-d24-varloop-research (Thinking Machines), for the loop-count test (owner: download overnight)
+
+- **thinkingmachines/TML-d24-varloop-research** @ 91a57fe2b779bbd12c0f74d1f518cbd5b84e8d0d, Apache-2.0, not gated,
+  safetensors only, no custom Python code. Same `inkling2_loop` architecture as Inkling-2-Mini with
+  `is_varloop: true` (passes 1-5, default 3). Scouting: scouting/varloop-research/REPORT.md.
+- Pinned from the HF API before fetch (bytes, LFS sha256):
+  - `model-00001-of-00001.safetensors` 19,526,019,168 `79e60b65c4f2a2a5acdb8e3c7b6994bf00da5477f45d18027afbfad752a64595`
+  - `mtp.safetensors` 635,801,416 `905d548692b1eb1d1aa278b8798db66ff88d94d0fc7609bf77baab90e99c76c7`
+  - `tokenizer.json` 26,178,678 `7f332727f9a3f093dd452a39cc978e6757627e5dad1b0673aa4e75174f236dd6`
+  - `tiktoken/tokenizer.model` 3,386,494 `f170372dd655728909228220d77cf6b8104a59f38a91262a7d2c4027906ec0d8`
+  - small configs (sizes in the HF API at that revision): config.json, generation_config.json, hf_quant_config.json,
+    model.safetensors.index.json, chat_template.jinja, tokenizer_config.json, special_tokens_map.json,
+    processor_config.json, README.md.
+- Fetched with tools/fetch_hf_model.sh; sha256 verified on arrival (results/e181-fetch.log). Not converted or run yet.

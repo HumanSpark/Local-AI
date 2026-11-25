@@ -53,6 +53,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [e163_smoke.py](e163_smoke.py) | E163 transport smoke - learn which request shapes an engine accepts before any scored prompt is sent. |
 | [e163_speed.py](e163_speed.py) | E163 speed block - time E139's fixed prompts against ANY OpenAI-compatible server with one client-side ruler. |
 | [e175_template_pairs.py](e175_template_pairs.py) | Send gbench's four chat-template pair cases to a local OpenAI-compatible server and score each one. |
+| [e178_subagent_bank.py](e178_subagent_bank.py) | E178 - prepare hard-bank task trees for Claude Code subagents and grade them with the bank's own tests. |
 | [evict_page_cache.py](evict_page_cache.py) | Evict the page cache held by files under given paths, without root, and report how much Cached fell. |
 | [fetch_hf_model.sh](fetch_hf_model.sh) | Resumable, size-verified download of HF model file(s) to staging. |
 | [finetune_smoke.py](finetune_smoke.py) | DEFINITIVE proof that gfx1151 (Ryzen AI Max+ 395) can TRAIN, not just infer - the check that settles whether F35/Q6's "no ROCm training stack" wall is real. Runs the full training loop (forward -> loss -> backward -> optimizer step) with a PEFT LoRA adapter on the GPU, using a TINY model built from config (no download, no memory-edge risk). If loss goes down over a few steps, on-box training works. |

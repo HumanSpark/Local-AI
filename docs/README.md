@@ -9,6 +9,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [DEFERRED-REGISTER.md](DEFERRED-REGISTER.md) | Every piece of registered sparkbench work that was NOT run, why, what would justify running it, and which kind of question it is. |
 | [FROZEN-BASELINE.md](FROZEN-BASELINE.md) | The exact models, quantisations, provenance, build and runtime settings every sparkbench headline figure was measured on. |
 | [HARNESS-RULES.md](HARNESS-RULES.md) | Harness hard rules (Phase B design constraints) |
+| [IMPROVEMENT-BANK.md](IMPROVEMENT-BANK.md) | Improvement bank |
 | [REPORT-STANDARD.md](REPORT-STANDARD.md) | Report standard: who writes what |
 | [TOOLCHAIN.md](TOOLCHAIN.md) | Record of user-level toolchain installs on benchhost - what, where, why, how to remove or make permanent. |
 | [W3-STAGE2-SWEEP.md](W3-STAGE2-SWEEP.md) | W3 Stage-2 quality-first sweep - engine spike records |

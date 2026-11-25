@@ -20,14 +20,14 @@
 
 ## Findings index
 
-203 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+204 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
 - **PLATFORM (74):** [F3](#f3) [F4](#f4) [F5](#f5) [F6](#f6) [F7](#f7) [F8](#f8) [F9](#f9) [F10](#f10) [F11](#f11) [F12](#f12) [F13](#f13) [F14](#f14) [F16](#f16) [F17](#f17) [F18](#f18) [F21](#f21) [F22](#f22) [F23](#f23) [F24](#f24) [F25](#f25) [F27](#f27) [F28](#f28) [F31](#f31) [F40](#f40) [F41](#f41) [F42](#f42) [F43](#f43) [F47](#f47) [F48](#f48) [F49](#f49) [F53](#f53) [F57](#f57) [F58](#f58) [F62](#f62) [F63](#f63) [F72](#f72) [F84](#f84) [F57](#f57-2) [F97](#f97) [F98](#f98) [F101](#f101) [F103](#f103) [F104](#f104) [F105](#f105) [F106](#f106) [F107](#f107) [F108](#f108) [F109](#f109) [F110](#f110) [F111](#f111) [F112](#f112) [F129](#f129) [F131](#f131) [F135](#f135) [F136](#f136) [F138](#f138) [F147](#f147) [F154](#f154) [F155](#f155) [F156](#f156) [F160](#f160) [F165](#f165) [F166](#f166) [F168](#f168) [F169](#f169) [F172](#f172) [F175](#f175) [F176](#f176) [F177](#f177) [F178](#f178) [F179](#f179) [F180](#f180) [F190](#f190) [F193](#f193)
 - **METHOD (63):** [F1](#f1) [F2](#f2) [F15](#f15) [F20](#f20) [F26](#f26) [F29](#f29) [F33](#f33) [F34](#f34) [F39](#f39) [F51](#f51) [F54](#f54-2) [F59](#f59) [F60](#f60) [F61](#f61) [F64](#f64) [F65](#f65) [F66](#f66) [F68](#f68) [F70](#f70) [F73](#f73) [F75](#f75) [F76](#f76) [F78](#f78) [F79](#f79) [F85](#f85) [F86](#f86) [F87](#f87) [F88](#f88) [F90](#f90) [F91](#f91) [F95](#f95) [F96](#f96) [F99](#f99) [F100](#f100) [F113](#f113) [F117](#f117) [F118](#f118) [F120](#f120) [F121](#f121) [F123](#f123) [F124](#f124) [F125](#f125) [F126](#f126) [F127](#f127) [F128](#f128) [F132](#f132) [F133](#f133) [F134](#f134) [F137](#f137) [F139](#f139) [F142](#f142) [F145](#f145) [F150](#f150) [F151](#f151) [F152](#f152) [F153](#f153) [F158](#f158) [F170](#f170) [F171](#f171) [F174](#f174) [F182](#f182) [F184](#f184) [F200](#f200)
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
-- **CAPABILITY (12):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195) [F196](#f196) [F197](#f197) [F201](#f201) [F202](#f202) [F203](#f203)
+- **CAPABILITY (13):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195) [F196](#f196) [F197](#f197) [F201](#f201) [F202](#f202) [F203](#f203) [F204](#f204)
 - **QUALITY (2):** [F189](#f189) [F191](#f191)
 - **INSTRUMENT (1):** [F192](#f192)
 - **PERFORMANCE (1):** [F199](#f199)
@@ -242,6 +242,7 @@
 | [F201](#f201) | three local music models run here; ACE-Step is the only fast one and ties for clearest words, but none matched the owner's taste in style | CAPABILITY | 2026-11-24 | E173 | MEASURED |
 | [F202](#f202) | Flash-Next compressed with HTR (Halo Trellis) keeps production's coding quality but is slower than Halogen | CAPABILITY | 2026-11-24 | E177 | ESTABLISHED |
 | [F203](#f203) | Ling-3.2-air writes fast here but solves none of the hard coding fixes | CAPABILITY | 2026-11-24 | E176 | ESTABLISHED |
+| [F204](#f204) | Anthropic's models solve all ten large coding changes that production solves half of | CAPABILITY | 2026-11-25 | E178 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -9451,3 +9452,29 @@ at 131,072 tokens, 2 time-limit stops, 3 false "done"; tool calls parsed cleanly
 
 **Evidence.** `results/e176-results.md`, `results/e176/` (bench-*.md, raw/LG/).
 
+
+<a id="f204"></a>
+
+## F204 - Anthropic's models solve all ten large coding changes that production solves half of
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-25 | **Experiment:** E178 | **Status:** ESTABLISHED on 10 tasks per model (one sample each)
+
+**Kind: CAPABILITY**
+
+**Plain English.** Given the same ten large real changes, with the same task text and the same tests deciding pass or
+fail, Claude Sonnet 5.5, Claude Opus 5.5 and Claude Fable 5.2 each solved all ten. Production on this machine solves
+five, and GPT-6.1 Sol also solved ten. Sonnet was the quickest at about 3.3 min per change against production's 11.4.
+The Claude runs used Claude Code's own working setup, so part of the gap may be the setup rather than the model;
+testing production's model under a stronger setup is the first improvement experiment.
+
+**Claim.** Hard bank (E167 bank, tests visible), one attempt per task, Claude Code subagents on the owner's
+subscription: pass_count Sonnet 5.5 10/10 (median 198s), Opus 5.5 10/10 (407s), Fable 5.2 10/10 (427s); production
+5/10 (685s), GPT-6.1 Sol 10/10 (125s, E167). Declared differences: Claude Code's tools and prompts instead of the
+harness loop, no 3,600s cut-off, host execution, ten runs per model in parallel.
+
+**What it changes.** Large, multi-step coding changes are frontier work (the routing guide already says so); the
+frontier page gets an Anthropic row. Opens improvement-bank entry 1 (production's model under a stronger agent setup).
+
+**Evidence.** `results/e178-results.md`, `results/e178/raw/`.

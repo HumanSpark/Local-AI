@@ -1,6 +1,8 @@
-# Fine-tuning (r5.19)
+# Fine-tuning (r6.0)
 
 Training a model on the box on your own examples.
+
+**Against the frontier:** Not comparable: frontier models cannot be trained on this machine. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

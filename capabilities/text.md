@@ -1,6 +1,8 @@
-# Text and reasoning (r5.19)
+# Text and reasoning (r6.0)
 
 Answering questions, summarising and pulling facts from documents, everyday writing.
+
+**Against the frontier:** Level with Anthropic's models on routine document work; clearly behind on client drafting. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 
@@ -13,7 +15,7 @@ Answering questions, summarising and pulling facts from documents, everyday writ
 
 | Setup | Engine | Where it stands | Why |
 |---|---|---|---|
-| Qwen3.8-Flash-Next (HTR Htr5Core v0.2.4) (MTP3, 131K context) | HTR on vLLM | tried | Same model, community compression: 6/10 on the hard coding bank against production's 5/10, but slower. The known-good fallback engine. |
+| Qwen3.8-Flash-Next (HTR Htr5Core v0.2.4) (MTP3, 131K context) | HTR on vLLM | tried | The fallback engine for production's model: same model, community compression, 6/10 on the hard coding bank against production's 5/10, but slower. |
 | Qwen3.8-Flash-Next (loom-serve 0.2) | AMD Loom | tried | 2.7 times llama.cpp on long prompts, but not faster than Halogen overall. |
 | Qwen3.8-Flash-Next (UD-Q4_K_XL) (Vulkan) | llama.cpp | tried | About a third of Halogen's writing speed on the same model. |
 | Ling-3.2-air (Q3_K_M) (Vulkan) | llama.cpp | rejected | Writes 37% faster than production's model on llama.cpp but solved 0 of 10 hard coding changes. |

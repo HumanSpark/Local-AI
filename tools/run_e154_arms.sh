@@ -45,6 +45,8 @@
 # cache_control), own ledger, hard ceiling E154_GS_CEILING (default 5, owner 2026-11-18). Arm NM = Nemotron-3.5-Super
 # 120B-A12B UD-Q4_K_XL on upstream llama.cpp 5297534 (2026-11-18), card sampling, -c 131072 (E166 and E167).
 #
+# E176 A2 (2026-11-25): arm LGN = LG with chat_template_kwargs enable_thinking=false per request (owner: tune Ling).
+# E179 (2026-11-25): E154_HTR_IMG picks the HTR image (default the E177 v0.2.4 digest).
 # E176 (2026-11-24): arm LG = Ling-3.2-air (inclusionAI, 124B-A5.5B, bailingmoe3) bartowski Q3_K_M on upstream llama.cpp
 # ae6a7ad2c (2026-11-24), card sampling (temperature 1.0, top_p 0.95, top_k 20), thinking = template default (on),
 # -c 131072, -np omitted (E89). Prereg results/e176-prereg.md.
@@ -104,7 +106,7 @@ FN_MTP=$M/qwen3.8-flash-next-mtp-766911a/mtp-Qwen3.8-Flash-Next-Q8_0.gguf
 LLAMA_E166=$REPO/llama.cpp/wt/5297534/build/bin/llama-server   # E166/E167, upstream 2026-11-18
 LLAMA_E176=$REPO/var/engines/llama-ae6a7ad2c/build/bin/llama-server   # E176, upstream 2026-11-24
 LING_GGUF=$M/ling-3.2-air/Ling-3.2-air-Q3_K_M-00001-of-00002.gguf
-HTR_IMG=ghcr.io/hawgauto/vllm-htr@sha256:cbd537589cc7f2e6e9d73940d5da49a9d956ffbfd795277f54b15787284eeab5
+HTR_IMG=${E154_HTR_IMG:-ghcr.io/hawgauto/vllm-htr@sha256:cbd537589cc7f2e6e9d73940d5da49a9d956ffbfd795277f54b15787284eeab5}  # E179 overrides with v0.2.5
 HTR_MODEL=$M/qwen3.8-flash-next-htr/Htr5Core
 HTR_WS=$REPO/var/e177/htr-workspace-131k
 STRATA18=$ENG/strata-0.2.18   # E171 arm HY: control 0.1.64 serve/server.py + strata-hy4 0.1.64 hip-halo
@@ -128,7 +130,7 @@ ARMS=()
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
-    S|O|GS|NM|LG|HT|HY|IQ|IM|IL|IC|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
+    S|O|GS|NM|LG|LGN|HT|HY|IQ|IM|IL|IC|H|Q|QN|T27|TL|OR35|OR122|TS45|TS4|RA|GL|DC|HX|HM|HL|HF|HFL|KFL|KM|KX|LM|LC|HS) ARMS+=("$a") ;;
     *) echo "unknown arg $a. hint: tools/run_e154_arms.sh [--dry-run] S H Q T27 TL"; exit 2 ;;
   esac
 done
@@ -167,7 +169,8 @@ sampling() {  # vendor sampling per arm (Talus MODELS.md table; Qwen3-Coder card
     DC) echo '{"temperature":1.0,"top_p":1.0}' ;;    # deepseek-ai V4.1-Flash-1017 card (the ISTA card states none)
     NM) echo '{"temperature":1.0,"top_p":0.95}' ;;
     HY) echo '{"temperature":0.9,"top_p":1.0}' ;;
-    LG|HT) echo '{"temperature":1.0,"top_p":0.95,"top_k":20}' ;;   # Ling-3.2-air card; HTR card (launch_recommended.py)
+    LG|HT) echo '{"temperature":1.0,"top_p":0.95,"top_k":20}' ;;
+    LGN) echo '{"temperature":1.0,"top_p":0.95,"top_k":20,"chat_template_kwargs":{"enable_thinking":false}}' ;;   # E176 A2: thinking off per request   # Ling-3.2-air card; HTR card (launch_recommended.py)
     IQ|IM|IL) echo '{"temperature":1.0}' ;;   # Inkling generation_config.json: do_sample, temperature 1.0   # Hy4-Flash card: 0.9 / 1.0 / top_k off   # Nemotron-3.5-Super card, text; thinking = template default
   esac
 }
@@ -318,7 +321,7 @@ start() {
     IC)  # E172 A3: CIRU single mode (one stream, DSpark K=7, as the card's B=1 default), 64K context like IQ/IM
       "$CIRU_SERVE" --model "$INK_CIRU" --mode single --context 65536 --seqs 1 --tools --host 127.0.0.1 --port "$PORT" >"$slog" 2>&1 &
       SERVER_PID=$! ;;
-    LG)  # E176: -m takes shard 1 of 2; -np omitted (auto slots keep the unified KV pool, E89)
+    LG|LGN)  # E176: -m takes shard 1 of 2; -np omitted (auto slots keep the unified KV pool, E89)
       "$LLAMA_E176" -m "$LING_GGUF" -c 131072 -fa on -ngl 999 --jinja --host 127.0.0.1 --port "$PORT" --no-webui >"$slog" 2>&1 &
       SERVER_PID=$! ;;
     HT)  # E177: evict model + container-storage page cache, then keep evicting every 20 s until the port answers

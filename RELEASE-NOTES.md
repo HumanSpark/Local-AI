@@ -1,12 +1,27 @@
-# Release Notes - sparkbench-data-r5.19
+# Release Notes - sparkbench-data-r6.0
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.19)
+## This release (r6.0)
 
-- **Findings:** 203 in FINDINGS.md, newest F203.
-- **Claims:** 61 in claims.yml (23 current, 18 historical, 17 qualified, 3 superseded).
+- **Findings:** 204 in FINDINGS.md, newest F204.
+- **Claims:** 64 in claims.yml (26 current, 18 historical, 17 qualified, 3 superseded).
+- **New page: [how it compares with frontier models](FRONTIER.md).** Quality and speed are kept apart. The box is
+  level with Anthropic's models on everyday and medium coding fixes, much slower, and clearly behind on large changes
+  and on client drafting. It does not claim to beat the labs' hardware.
+- **Claude on the ten large changes ([E178](results/e178-results.md), [F204](FINDINGS.md#f204)).** Claude Sonnet 5.5,
+  Opus 5.5 and Fable 5.2 each solved all ten (median 3.3, 6.8 and 7.1 min a change); production solves five.
+- **Three frontier claims** (`C-FRONTIER-EVERYDAY-FIXES-001`, `C-FRONTIER-LARGE-CHANGES-001`, `C-FRONTIER-DRAFTING-001`).
+- **Plain-language fields** for the website: `setups[].reason_plain`, `setups[].setting_plain`, `engines[].why_plain`
+  and `meta.capability_frontier` in `setups.json`; `claims[].experiments` in `claims.json`. All additive; nothing renamed.
+- Each capability page now opens with one line on how it compares with the frontier.
+
+
+## Earlier releases
+
+### r5.19
+
 - **What works best, by capability.** New pages under [capabilities/](capabilities/README.md): for each kind of
   job (text and reasoning, coding agents, office tools, vision, speech to text, who said what, voice output, images,
   music, memory, fine-tuning) the setup in production, the best alternative and why, what else was tried, and the
@@ -19,15 +34,13 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
   cite) carries its track, capabilities, engines, kind of test and result. The build fails on an untagged experiment
   or an unknown label.
 
-## Changed claims (old -> new)
+#### Changed claims (old -> new)
 
 - (none.)
 
-## Retracted claims
+#### Retracted claims
 
 - (none.)
-
-## Earlier releases
 
 ### r5.18
 

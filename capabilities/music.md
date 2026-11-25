@@ -1,6 +1,8 @@
-# Music (r5.19)
+# Music (r6.0)
 
 Generating songs with sung lyrics.
+
+**Against the frontier:** Not compared with a frontier service yet. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 
