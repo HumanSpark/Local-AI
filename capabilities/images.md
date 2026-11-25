@@ -1,4 +1,4 @@
-# Images (r6.2)
+# Images (r6.3)
 
 Generating and editing pictures from a description.
 

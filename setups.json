@@ -1,6 +1,6 @@
 {
  "meta": {
-  "release": "r6.2",
+  "release": "r6.3",
   "statuses": [
    "production",
    "runner-up",
@@ -53,7 +53,7 @@
     "runs": "language-models",
     "standing": "production",
     "why": "Fastest of five engines on production's model (86 tok/s on code, 18.7 s to first word at 32K, 4 Nov); closed source.",
-    "why_plain": "Starts answering a long document in about 19s, the fastest of five engines I tested. Peonist's closed-source engine runs my everyday model.",
+    "why_plain": "Made by Peonist. It runs my everyday model and was the fastest of five engines I tested.",
     "description_plain": "Peonist LLC sells this engine and keeps its code closed. It runs my everyday model in Peonist's own compressed format, tuned for this chip.",
     "strengths_plain": "The fastest of five engines on my everyday model: 86 tokens a second on code, and 18.7s to start on a long document.",
     "limits_plain": "Closed source. It runs one model at a time. Its route for other model files would not start beside my speech service.",
@@ -73,13 +73,13 @@
     ]
    },
    "htr-vllm": {
-    "name": "HTR on vLLM",
+    "name": "HTR backup engine",
     "runs": "language-models",
     "standing": "fallback",
-    "why": "Community build with its own compression: same coding quality as production (6/10 vs 5/10), about 25% slower writing.",
-    "why_plain": "My backup engine: on ten large coding changes it solved 6 to Halogen's 5, comparable on this small test, and writes about a quarter slower.",
+    "why": "Community build of vLLM with its own compression: similar coding results to production (6/10 vs 5/10), about 25% slower writing.",
+    "why_plain": "My backup engine. It's about a quarter slower, with similar results on my coding test.",
     "description_plain": "HawgAuto's fork of vLLM, the engine many cloud services are built on. It serves a copy of my everyday model shrunk by the HTR compression method.",
-    "strengths_plain": "Comparable on this small test: 6 of 10 large changes against Halogen's 5.",
+    "strengths_plain": "Similar results on my coding test: 6 of 10 large changes against Halogen's 5.",
     "limits_plain": "Slower: 47.8 against 62.5 tokens a second when writing, and about 1.6 times longer to read a long document.",
     "source": "open source (Apache-2.0; HTR method MIT)",
     "version_tested": [
@@ -99,7 +99,7 @@
     "standing": "tried",
     "why": "AMD's engine in development: 2.7 times llama.cpp on long prompts, but not faster than Halogen.",
     "why_plain": "Reads long documents as fast as Halogen but writes more slowly; AMD is still building it.",
-    "description_plain": "AMD is building Loom for its own chips, and it is not finished yet. AMD says coding agents moved 51 models onto it in four days.",
+    "description_plain": "AMD is building Loom for its own chips, and it is not finished yet.",
     "strengths_plain": "Reads long documents about 2.7 times faster than llama.cpp, about level with the everyday engine.",
     "limits_plain": "Writes more slowly than the everyday engine. It is a development release.",
     "source": "open source (Apache-2.0 with LLVM exception)",
@@ -148,7 +148,6 @@
     "description_plain": "Talus is a small community project made only for this chip. I used it for the dense runner-up model, Qwen3.8-27B.",
     "strengths_plain": "About 2.5 times llama.cpp's speed on code.",
     "limits_plain": "Slower than Halogen on my everyday model.",
-    "source": "licence not recorded here",
     "version_tested": [
      "v0.1.3"
     ],
@@ -168,7 +167,6 @@
     "description_plain": "Comes as a ready-to-run container from the gufo-org project. I tested it once, for speed, on my everyday model.",
     "strengths_plain": "Second fastest of five engines on code with my everyday model.",
     "limits_plain": "Tested for speed only, not for answer quality.",
-    "source": "licence not recorded here",
     "version_tested": [
      "0.29.0 (883f67b609b2)"
     ],
@@ -201,11 +199,11 @@
     "name": "Atlas",
     "runs": "language-models",
     "standing": "compared",
-    "why": "Community engine: about 27% faster than llama.cpp here, slower than published; one mode unusable.",
-    "why_plain": "About 27% faster than llama.cpp in my test, and slower than advertised. Two rival projects claim this name.",
-    "description_plain": "The name is disputed: two projects claim it, and I tested the older one, which is AGPL-licensed. I measured it on a standard agent workload in September.",
+    "why": "Community engine: about 27% faster than llama.cpp here; one mode unusable.",
+    "why_plain": "About 27% faster than llama.cpp in my test on a standard agent workload.",
+    "description_plain": "A community engine for this chip from Avarok, licensed AGPL. I measured it on a standard agent workload in September.",
     "strengths_plain": "About 27% faster than llama.cpp on a standard agent workload.",
-    "limits_plain": "Slower than its makers published. Its results vary slightly from run to run.",
+    "limits_plain": "Its results vary slightly from run to run.",
     "source": "open source (AGPL-3.0)",
     "version_tested": [
      "2d1aab8"
@@ -241,9 +239,6 @@
     "strengths_plain": "About 28 times faster than real time on a clean recording, with 2.4% of words wrong on a standard test.",
     "limits_plain": "It invents words in long silences unless voice detection runs first, as it does in my setup.",
     "source": "open source (MIT)",
-    "version_tested": [
-     "not recorded here"
-    ],
     "homepage": "https://github.com/ggml-org/whisper.cpp",
     "tested": "2026-07-17 to 2026-11-25",
     "capabilities": [
@@ -260,9 +255,6 @@
     "strengths_plain": "Labelled 97% of lines correctly as host or other on four real calls.",
     "limits_plain": "It tells the host from everyone else; it does not name each guest.",
     "source": "open source (toolkit Apache-2.0)",
-    "version_tested": [
-     "not recorded here"
-    ],
     "homepage": "https://huggingface.co/Wespeaker/wespeaker-voxceleb-resnet34-LM",
     "tested": "2026-07-18 to 2026-11-25",
     "capabilities": [
@@ -298,9 +290,6 @@
     "strengths_plain": "Won my voice tests for natural narration.",
     "limits_plain": "Needs a clean reference clip for the voice it copies.",
     "source": "open source (MIT)",
-    "version_tested": [
-     "not recorded here"
-    ],
     "homepage": "https://github.com/resemble-ai/chatterbox",
     "tested": "2026-07-26 to 2026-11-25",
     "capabilities": [
@@ -336,9 +325,6 @@
     "strengths_plain": "Makes usable images in seconds on this machine.",
     "limits_plain": "I have not compared its image quality in depth.",
     "source": "open source (MIT)",
-    "version_tested": [
-     "not recorded here"
-    ],
     "homepage": "https://github.com/leejet/stable-diffusion.cpp",
     "tested": "2026-07-04 to 2026-11-25",
     "capabilities": [
@@ -374,9 +360,6 @@
     "strengths_plain": "ACE-Step made songs faster than real time; the other two were much slower.",
     "limits_plain": "No model here matched the musical style I wanted.",
     "source": "open source (MIT)",
-    "version_tested": [
-     "not recorded here"
-    ],
     "homepage": "https://huggingface.co/audio-cpp/audio.cpp-gguf",
     "tested": "2026-11-23 to 2026-11-24",
     "capabilities": [
@@ -454,13 +437,13 @@
    "status": "tried",
    "since": "2026-11-24",
    "until": "",
-   "reason": "The fallback engine for production's model: same model, community compression; 6/10 against production's 5/10 on the hard coding bank, comparable on this small test; slower.",
+   "reason": "The fallback engine for production's model: same model, community compression; 6/10 against production's 5/10 on the hard coding bank; slower.",
    "evidence": [
     "E177"
    ],
-   "role": "the everyday model on the fallback engine",
+   "role": "the everyday model on the backup engine",
    "setting_plain": "the same model, compressed by the community",
-   "reason_plain": "The fallback engine for my everyday model: 6 of 10 large changes against 5, comparable on this small test, but slower."
+   "reason_plain": "My backup engine for the everyday model: similar results on my coding test, about a quarter slower."
   },
   {
    "id": "qwen38-27b-talus",
@@ -479,7 +462,7 @@
     "E154",
     "E156"
    ],
-   "role": "the dense local alternative",
+   "role": "a slower alternative",
    "setting_plain": "standard setting",
    "reason_plain": "Nearly as good as the everyday model on coding and knowledge work, but slower."
   },
@@ -595,7 +578,7 @@
    "evidence": [
     "E46A"
    ],
-   "role": "the general diarisation pipeline",
+   "role": "a general speaker-separation tool",
    "setting_plain": "standard setting",
    "reason_plain": "Better at telling many speakers apart, but slower, and not needed to separate me from others."
   },
@@ -747,7 +730,7 @@
    "evidence": [
     "FT1"
    ],
-   "role": "the house-style fine-tune",
+   "role": "a model trained on my house style",
    "setting_plain": "trained on a handful of our own examples",
    "reason_plain": "Teaches the house tone reliably, but does not make drafts ready to send."
   },

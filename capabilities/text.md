@@ -1,4 +1,4 @@
-# Text and reasoning (r6.2)
+# Text and reasoning (r6.3)
 
 Answering questions, summarising and pulling facts from documents, everyday writing.
 
@@ -15,7 +15,7 @@ Answering questions, summarising and pulling facts from documents, everyday writ
 
 | Setup | Engine | Where it stands | Why |
 |---|---|---|---|
-| Qwen3.8-Flash-Next (HTR Htr5Core v0.2.4) (MTP3, 131K context) | HTR on vLLM | tried | The fallback engine for production's model: same model, community compression; 6/10 against production's 5/10 on the hard coding bank, comparable on this small test; slower. |
+| Qwen3.8-Flash-Next (HTR Htr5Core v0.2.4) (MTP3, 131K context) | HTR backup engine | tried | The fallback engine for production's model: same model, community compression; 6/10 against production's 5/10 on the hard coding bank; slower. |
 | Qwen3.8-Flash-Next (loom-serve 0.2) | AMD Loom | tried | 2.7 times llama.cpp on long prompts, but not faster than Halogen overall. |
 | Qwen3.8-Flash-Next (UD-Q4_K_XL) (Vulkan) | llama.cpp | tried | About a third of Halogen's writing speed on the same model. |
 | Ling-3.2-air (Q3_K_M) (Vulkan) | llama.cpp | rejected | Writes 37% faster than production's model on llama.cpp but solved 0 of 10 hard coding changes. |
@@ -45,7 +45,7 @@ Answering questions, summarising and pulling facts from documents, everyday writ
 | How long a document the box can handle interactively (E30) | 2026-07-11 | informational | Accuracy held past 80K tokens; first-answer time was the limit on the July engine. | [experiments/E30.md](../experiments/E30.md) |
 | Energy cost per million tokens (E12) | 2026-07-04 | informational | About EUR 0.09 per million tokens generated, single user, at the July tariff. | [experiments/E12.md](../experiments/E12.md) |
 | Ling-3.2-air on the box (E176) | 2026-11-24 | did not work | Writes 37% faster than production's model on llama.cpp, but solved 1 of 15 everyday fixes and 0 of 10 large changes; thinking off made it loop. | [results/e176-results.md](../results/e176-results.md) |
-| Production's model on the HTR engine (E177) | 2026-11-24 | not adopted | 6/10 against Halogen's 5/10 on large changes, comparable on this small test, but slower; kept as a fallback. | [results/e177-results.md](../results/e177-results.md) |
+| Production's model on the HTR engine (E177) | 2026-11-24 | not adopted | 6/10 against Halogen's 5/10 on large changes, but slower; kept as a fallback. | [results/e177-results.md](../results/e177-results.md) |
 | An 8-bit conversation memory on llama.cpp (E174) | 2026-11-23 | not adopted | Never helped production's model: up to 10% slower. | [results/e174-results.md](../results/e174-results.md) |
 | Hy4-Flash on the Strata engine (E171) | 2026-11-22 | did not work | Stable but slow; 3/10 with every task at its hour limit. | [results/e171-results.md](../results/e171-results.md) |
 | AMD's Loom against Halogen and llama.cpp (E163) | 2026-11-16 | not adopted | Loom reads long prompts 2.7 times faster than llama.cpp but is not faster than Halogen. | [results/e163-results.md](../results/e163-results.md) |

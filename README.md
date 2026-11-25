@@ -43,9 +43,9 @@ model, or have a person check them.
 [How it compares with frontier models](FRONTIER.md) · [What works best for each job](capabilities/README.md) ·
 [What changed in each release](RELEASE-NOTES.md)
 
-## Current release: r6.2 (findings through 25 November 2026)
+## Current release: r6.3 (findings through 25 November 2026)
 
-r6.2 adds [energy per answer](results/energy-per-answer.md), measured at the wall and compared with a fridge-freezer, the final Ling-3.2-air coding results, the newer HTR release, and a card for each engine with a project link. No earlier result changed.
+r6.3 gives every claim one plain sentence, labels what each bar on the cost chart covers, restates the memory limits (models using up to about 113 GB have loaded and run on a clean box; the freezes needed a trigger), and makes the engine wording plainer. No measured result changed.
 
 - **Every claim carries a status and dates.** 26 current, 17 qualified, 18 historical and 3 superseded; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
 - **Not everything is here.** Verbose server logs, internal design documents and files with private content are withheld, among them the per-task records of the coding tests, which quote private repositories. [WITHHELD.md](WITHHELD.md) lists each with the reason.

@@ -40,7 +40,7 @@ correct answer cost about 70 Wh at the wall, roughly what a fridge-freezer uses 
   average over a year.
 - The earlier estimate (chip power plus 10-25 W) understated the wall draw: measured overhead is nearer 30 W.
 
-## Whole months, from the Tapo app (socket assumed to be benchhost; owner to confirm)
+## Whole months, from the Tapo app (socket 4 is benchhost, owner confirmed 2026-11-25)
 
 Screenshots of the Tapo app's Energy Monitoring screen, taken 2026-11-25 07:45-07:46, cropped to the totals and
 charts: `results/energy/tapo-app-2026-11-25/`. The figures below are copied from them exactly.

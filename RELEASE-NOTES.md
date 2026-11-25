@@ -1,12 +1,30 @@
-# Release Notes - sparkbench-data-r6.2
+# Release Notes - sparkbench-data-r6.3
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r6.2)
+## This release (r6.3)
 
 - **Findings:** 204 in FINDINGS.md, newest F204.
 - **Claims:** 64 in claims.yml (26 current, 18 historical, 17 qualified, 3 superseded).
+- **One plain sentence for every claim** (`claims.json`, `statement_plain`): all 64 claims, written for a business
+  reader, with sample size and limits kept.
+- **The cost chart says what each bar covers** (`includes` on each bar).
+- **Memory limits restated** (C-CAPACITY-TIERING-001): on a clean, freshly restarted box, models using up to about
+  113 GB of memory have loaded and run ([F109](FINDINGS.md#f109)). The July freezes needed a trigger: heavy disk
+  activity beside the load, or a retry after a crash ([F24](FINDINGS.md#f24), [F28](FINDINGS.md#f28),
+  [F193](FINDINGS.md#f193)). Size alone did not cause them.
+- **HTR's maker on v0.2.5:** single-user speed is about the same, as measured here; he reports gains with several users
+  at once ([E179](results/e179-results.md)). Not yet measured here.
+- **Plainer engine wording** (`setups.json`): HTR is now "HTR backup engine"; side notes about name disputes and makers'
+  own figures are gone from the engine cards; optional fields with nothing on record are omitted rather than saying
+  "not recorded here"; setup roles use plain words.
+
+
+## Earlier releases
+
+### r6.2
+
 - **Energy per answer, against a fridge-freezer** ([results/energy-per-answer.md](results/energy-per-answer.md)): the
   box draws about 120 W at the wall while working and about 7 W idle (measured on a Tapo smart plug; the plug's export
   and app screenshots are in results/energy/). An everyday coding fix uses about 20 Wh, what a fridge-freezer uses in
@@ -18,8 +36,6 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
 - **Engine cards** for each engine: who makes it, what sets it apart, licence, versions tested, test dates and a project
   link, in `setups.json` (`meta.engines`). Each claim's review date is now never earlier than its test date.
 
-
-## Earlier releases
 
 ### r6.1
 

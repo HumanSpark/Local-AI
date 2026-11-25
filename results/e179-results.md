@@ -23,6 +23,13 @@ compared one request on each release. Repeats of the same prompt on the same rel
 (a spread of 38% of the mean at 8K, 11% at 32K; draft acceptance changes per request), so a single request cannot
 show a 7.6% change.
 
+## Maker's reply (2026-11-25, relayed by the owner; not measured here)
+
+HTR's maker agreed that single-stream speed is about the same on v0.2.5. He reported the gains at several users at once:
+total output went from about 70 to 100 tokens a second at four users, and from about 100 to 130 at eight. We have not
+tested several users on this release. Four users at once is the small-team load we measured as this box's best point in
+July, so a four-user test on v0.2.5 is the next step for HTR (docs/IMPROVEMENT-BANK.md, entry #11).
+
 ## Speed (one request at a time, thinking off, client-timed; tokens a second, seconds to first token)
 
 | Engine | Short prompt: writing | 8K prompt: writing / reading / first token | 32K prompt: writing / reading / first token |
