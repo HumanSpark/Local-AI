@@ -1,0 +1,625 @@
+{
+ "meta": {
+  "release": "r5.19",
+  "statuses": [
+   "production",
+   "runner-up",
+   "tried",
+   "rejected",
+   "retired"
+  ],
+  "capabilities": {
+   "text": "Text and reasoning",
+   "coding-agent": "Coding agents",
+   "tool-use": "Office tools",
+   "vision": "Vision",
+   "speech-to-text": "Speech to text",
+   "speaker-labelling": "Who said what",
+   "voice-output": "Voice output",
+   "images": "Images",
+   "music": "Music",
+   "memory": "Memory",
+   "fine-tuning": "Fine-tuning"
+  },
+  "capability_descriptions": {
+   "text": "Answering questions, summarising and pulling facts from documents, everyday writing.",
+   "coding-agent": "Fixing and changing real software on its own, checked by each project's tests.",
+   "tool-use": "Calling office tools: create a document, send an email, look up a client.",
+   "vision": "Understanding images and scanned pages.",
+   "speech-to-text": "Turning recordings into text.",
+   "speaker-labelling": "Tagging each line of a transcript with who said it.",
+   "voice-output": "Reading text aloud in a natural voice (narration).",
+   "images": "Generating and editing pictures from a description.",
+   "music": "Generating songs with sung lyrics.",
+   "memory": "Keeping an assistant's notes about a person up to date without inventing or keeping rejected facts.",
+   "fine-tuning": "Training a model on the box on your own examples."
+  },
+  "engines": {
+   "halogen": {
+    "name": "Halogen",
+    "runs": "language-models",
+    "standing": "production",
+    "why": "Fastest of five engines on production's model (86 tok/s on code, 18.7 s to first word at 32K, 4 Nov); closed source.",
+    "capabilities": [
+     "coding-agent",
+     "memory",
+     "text",
+     "tool-use"
+    ]
+   },
+   "htr-vllm": {
+    "name": "HTR on vLLM",
+    "runs": "language-models",
+    "standing": "fallback",
+    "why": "Community build with its own compression: same coding quality as production (6/10 vs 5/10), about 25% slower writing.",
+    "capabilities": [
+     "coding-agent",
+     "text"
+    ]
+   },
+   "loom": {
+    "name": "AMD Loom",
+    "runs": "language-models",
+    "standing": "tried",
+    "why": "AMD's engine in development: 2.7 times llama.cpp on long prompts, but not faster than Halogen.",
+    "capabilities": [
+     "text"
+    ]
+   },
+   "llama.cpp": {
+    "name": "llama.cpp",
+    "runs": "language-models",
+    "standing": "baseline",
+    "why": "The open-source standard; runs almost any model, so most model tests use it. About a third of Halogen's speed on production's model.",
+    "capabilities": [
+     "coding-agent",
+     "fine-tuning",
+     "memory",
+     "text",
+     "tool-use"
+    ]
+   },
+   "talus": {
+    "name": "Talus",
+    "runs": "language-models",
+    "standing": "compared",
+    "why": "Community engine for this chip: 2.5 times llama.cpp on code; runs the 27B runner-up.",
+    "capabilities": [
+     "coding-agent",
+     "text"
+    ]
+   },
+   "gufo": {
+    "name": "gufo",
+    "runs": "language-models",
+    "standing": "compared",
+    "why": "Community engine: second fastest on code in the 4 Nov comparison.",
+    "capabilities": []
+   },
+   "strata": {
+    "name": "Strata",
+    "runs": "language-models",
+    "standing": "compared",
+    "why": "Community engine (MIT): 2.2 times llama.cpp on code; ran Hy4-Flash.",
+    "capabilities": [
+     "coding-agent",
+     "text"
+    ]
+   },
+   "atlas": {
+    "name": "Atlas",
+    "runs": "language-models",
+    "standing": "compared",
+    "why": "Community engine: about 27% faster than llama.cpp here, slower than published; one mode unusable.",
+    "capabilities": []
+   },
+   "ciru": {
+    "name": "CIRU runtime",
+    "runs": "language-models",
+    "standing": "compared",
+    "why": "Community vLLM packaging for this chip; ran Inkling-2-Mini.",
+    "capabilities": []
+   },
+   "whisper.cpp": {
+    "name": "whisper.cpp",
+    "runs": "other",
+    "standing": "production",
+    "why": "Runs production speech to text.",
+    "capabilities": [
+     "speech-to-text"
+    ]
+   },
+   "wespeaker": {
+    "name": "WeSpeaker + Silero",
+    "runs": "other",
+    "standing": "production",
+    "why": "Runs production speaker labelling.",
+    "capabilities": [
+     "speaker-labelling"
+    ]
+   },
+   "pyannote": {
+    "name": "pyannote",
+    "runs": "other",
+    "standing": "tried",
+    "why": "Better general diarisation, slower; not needed for host-or-other.",
+    "capabilities": [
+     "speaker-labelling"
+    ]
+   },
+   "chatterbox": {
+    "name": "Chatterbox",
+    "runs": "other",
+    "standing": "production",
+    "why": "Runs the production narration voice.",
+    "capabilities": [
+     "voice-output"
+    ]
+   },
+   "kokoro": {
+    "name": "Kokoro",
+    "runs": "other",
+    "standing": "fallback",
+    "why": "Fixed voices; the opt-in narration fallback.",
+    "capabilities": [
+     "voice-output"
+    ]
+   },
+   "sd.cpp": {
+    "name": "stable-diffusion.cpp",
+    "runs": "other",
+    "standing": "production",
+    "why": "Runs production image generation.",
+    "capabilities": [
+     "images"
+    ]
+   },
+   "diffusers": {
+    "name": "diffusers on ROCm PyTorch",
+    "runs": "other",
+    "standing": "tried",
+    "why": "Runs Qwen-Image-2.1, only with the gateway down.",
+    "capabilities": [
+     "images"
+    ]
+   },
+   "audio.cpp": {
+    "name": "audio.cpp",
+    "runs": "other",
+    "standing": "tried",
+    "why": "Runs the three song models tested.",
+    "capabilities": [
+     "music"
+    ]
+   },
+   "cloud-api": {
+    "name": "cloud API",
+    "runs": "other",
+    "standing": "compared",
+    "why": "Cloud models used as comparisons and judges only.",
+    "capabilities": []
+   }
+  },
+  "engine_standings": [
+   "production",
+   "fallback",
+   "tried",
+   "compared",
+   "baseline"
+  ]
+ },
+ "setups": [
+  {
+   "id": "flash-next-halogen",
+   "model": "Qwen3.8-Flash-Next",
+   "engine": "halogen",
+   "setting": "Halogen's own checkpoint, community template, effort low",
+   "capabilities": [
+    "text",
+    "coding-agent",
+    "tool-use",
+    "memory"
+   ],
+   "status": "production",
+   "since": "2026-11-04",
+   "until": "",
+   "reason": "Best local result on all three coding banks (15/15, 9/10, 5/10), passed the everyday-work tests at effort low in a third of the time, and runs fastest on Halogen.",
+   "evidence": [
+    "E153",
+    "E154",
+    "E156",
+    "E159",
+    "E160",
+    "E165",
+    "E167",
+    "E170"
+   ],
+   "role": "the everyday local model"
+  },
+  {
+   "id": "flash-next-htr",
+   "model": "Qwen3.8-Flash-Next (HTR Htr5Core v0.2.4)",
+   "engine": "htr-vllm",
+   "setting": "MTP3, 131K context",
+   "capabilities": [
+    "text",
+    "coding-agent"
+   ],
+   "status": "tried",
+   "since": "2026-11-24",
+   "until": "",
+   "reason": "Same model, community compression: 6/10 on the hard coding bank against production's 5/10, but slower. The known-good fallback engine.",
+   "evidence": [
+    "E177"
+   ],
+   "role": "the everyday model on the fallback engine"
+  },
+  {
+   "id": "qwen38-27b-talus",
+   "model": "Qwen3.8-27B",
+   "engine": "talus",
+   "setting": "Q4",
+   "capabilities": [
+    "text",
+    "coding-agent"
+   ],
+   "status": "runner-up",
+   "since": "2026-11-06",
+   "until": "",
+   "reason": "8/10 on the bigger-fixes bank and stronger than the July model on hard knowledge work; slower than production.",
+   "evidence": [
+    "E154",
+    "E156"
+   ],
+   "role": "the dense local alternative"
+  },
+  {
+   "id": "ornith-15-35b",
+   "model": "Ornith 1.5 35B",
+   "engine": "llama.cpp",
+   "setting": "Q8_0",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "status": "runner-up",
+   "since": "2026-11-07",
+   "until": "",
+   "reason": "Tied production at 9/10 on the bigger-fixes bank at 30.4 minutes a task; 3/10 on the hard bank.",
+   "evidence": [
+    "E158",
+    "E167"
+   ],
+   "role": "the coding alternative"
+  },
+  {
+   "id": "inkling-2-mini-llamacpp",
+   "model": "Inkling-2-Mini",
+   "engine": "llama.cpp",
+   "setting": "Q8_0, our conversion",
+   "capabilities": [
+    "memory"
+   ],
+   "status": "runner-up",
+   "since": "2026-11-21",
+   "until": "",
+   "reason": "No mistakes on fifty memory jobs, but 6.5 times slower than production and no answer on 5 of 20 updates.",
+   "evidence": [
+    "E170"
+   ],
+   "role": "the careful but slow memory keeper"
+  },
+  {
+   "id": "whisper-turbo",
+   "model": "Whisper large-v3-turbo",
+   "engine": "whisper.cpp",
+   "setting": "Silero voice detection",
+   "capabilities": [
+    "speech-to-text"
+   ],
+   "status": "production",
+   "since": "2026-07-18",
+   "until": "",
+   "reason": "2.40% word error rate on LibriSpeech, about 28 times real time on a clean clip; voice detection stops invented words over silence.",
+   "evidence": [
+    "E41A",
+    "E45A"
+   ],
+   "role": "the local transcriber"
+  },
+  {
+   "id": "whisper-small",
+   "model": "Whisper small",
+   "engine": "whisper.cpp",
+   "setting": "Silero voice detection",
+   "capabilities": [
+    "speech-to-text"
+   ],
+   "status": "tried",
+   "since": "2026-07-17",
+   "until": "",
+   "reason": "Faster but less accurate on real speech (3.35% against 2.40% word error rate).",
+   "evidence": [
+    "E45A"
+   ],
+   "role": "the smaller transcriber"
+  },
+  {
+   "id": "wespeaker-target",
+   "model": "WeSpeaker + Silero, one enrolled speaker",
+   "engine": "wespeaker",
+   "setting": "host-or-someone-else labelling",
+   "capabilities": [
+    "speaker-labelling"
+   ],
+   "status": "production",
+   "since": "2026-07-18",
+   "until": "",
+   "reason": "97.2% of lines correctly tagged host or someone else on four real calls; sidesteps guessing how many speakers there are.",
+   "evidence": [
+    "E50A"
+   ],
+   "role": "the speaker tagger"
+  },
+  {
+   "id": "pyannote-31",
+   "model": "pyannote 3.1 full pipeline",
+   "engine": "pyannote",
+   "setting": "default",
+   "capabilities": [
+    "speaker-labelling"
+   ],
+   "status": "tried",
+   "since": "2026-07-17",
+   "until": "",
+   "reason": "Better at general diarisation (6.5% against our 20.3% error on close-talk audio) but much slower; not needed for host-or-other.",
+   "evidence": [
+    "E46A"
+   ],
+   "role": "the general diarisation pipeline"
+  },
+  {
+   "id": "chatterbox-p239",
+   "model": "Chatterbox, voice cloned from VCTK speaker p239",
+   "engine": "chatterbox",
+   "setting": "British female voice",
+   "capabilities": [
+    "voice-output"
+   ],
+   "status": "production",
+   "since": "2026-08-01",
+   "until": "",
+   "reason": "Won the voice tests: natural British female narration, cloned on the box.",
+   "evidence": [
+    "W3"
+   ],
+   "role": "the narration voice"
+  },
+  {
+   "id": "kokoro-emma",
+   "model": "Kokoro bf_emma",
+   "engine": "kokoro",
+   "setting": "built-in voice",
+   "capabilities": [
+    "voice-output"
+   ],
+   "status": "runner-up",
+   "since": "2026-07-26",
+   "until": "",
+   "reason": "Fast and clean, a fixed voice; kept as the opt-in fallback.",
+   "evidence": [
+    "W3"
+   ],
+   "role": "the fallback voice"
+  },
+  {
+   "id": "flux-schnell-sdcpp",
+   "model": "FLUX.1-schnell (Q4_0)",
+   "engine": "sd.cpp",
+   "setting": "served on request by the gateway's image service",
+   "capabilities": [
+    "images"
+   ],
+   "status": "production",
+   "since": "2026-08-10",
+   "until": "",
+   "reason": "Passed the image probe and a 50-image style gallery the owner assessed; runs beside the language model.",
+   "evidence": [
+    "P3.2"
+   ],
+   "role": "the image generator"
+  },
+  {
+   "id": "qwen-image-21",
+   "model": "Qwen-Image-2.1",
+   "engine": "diffusers",
+   "setting": "BF16, tiled VAE decode",
+   "capabilities": [
+    "images"
+   ],
+   "status": "runner-up",
+   "since": "2026-09-21",
+   "until": "",
+   "reason": "Runs and edits text well, but only with the gateway down; edits are local changes only.",
+   "evidence": [
+    "E136"
+   ],
+   "role": "the image editor"
+  },
+  {
+   "id": "ace-step-15",
+   "model": "ACE-Step 1.5 Turbo",
+   "engine": "audio.cpp",
+   "setting": "BF16",
+   "capabilities": [
+    "music"
+   ],
+   "status": "runner-up",
+   "since": "2026-11-24",
+   "until": "",
+   "reason": "The only fast song model here and ties for clearest words; the owner liked none of the styles yet. No production pick.",
+   "evidence": [
+    "E173"
+   ],
+   "role": "the fast song model"
+  },
+  {
+   "id": "yue2",
+   "model": "YuE2-3B",
+   "engine": "audio.cpp",
+   "setting": "BF16",
+   "capabilities": [
+    "music"
+   ],
+   "status": "tried",
+   "since": "2026-11-23",
+   "until": "",
+   "reason": "Clear words but slow, and its licence is non-commercial.",
+   "evidence": [
+    "E173"
+   ],
+   "role": "the slow song model"
+  },
+  {
+   "id": "minimax-music3",
+   "model": "MiniMax Music 3",
+   "engine": "audio.cpp",
+   "setting": "BF16",
+   "capabilities": [
+    "music"
+   ],
+   "status": "tried",
+   "since": "2026-11-23",
+   "until": "",
+   "reason": "About 18 times slower than real time; one render failed to play.",
+   "evidence": [
+    "E173"
+   ],
+   "role": "the slowest song model"
+  },
+  {
+   "id": "lora-house-style",
+   "model": "House-style LoRA on the July model",
+   "engine": "llama.cpp",
+   "setting": "trained on the box",
+   "capabilities": [
+    "fine-tuning"
+   ],
+   "status": "tried",
+   "since": "2026-07-13",
+   "until": "",
+   "reason": "Teaches the firm's tone reliably; does not make drafts send-ready.",
+   "evidence": [
+    "FT1"
+   ],
+   "role": "the house-style fine-tune"
+  },
+  {
+   "id": "loom-flash-next",
+   "model": "Qwen3.8-Flash-Next",
+   "engine": "loom",
+   "setting": "loom-serve 0.2",
+   "capabilities": [
+    "text"
+   ],
+   "status": "tried",
+   "since": "2026-11-16",
+   "until": "",
+   "reason": "2.7 times llama.cpp on long prompts, but not faster than Halogen overall.",
+   "evidence": [
+    "E163"
+   ],
+   "role": "the everyday model on AMD Loom"
+  },
+  {
+   "id": "flash-next-llamacpp",
+   "model": "Qwen3.8-Flash-Next (UD-Q4_K_XL)",
+   "engine": "llama.cpp",
+   "setting": "Vulkan",
+   "capabilities": [
+    "text",
+    "coding-agent"
+   ],
+   "status": "tried",
+   "since": "2026-11-04",
+   "until": "",
+   "reason": "About a third of Halogen's writing speed on the same model.",
+   "evidence": [
+    "E153",
+    "E174"
+   ],
+   "role": "the everyday model on llama.cpp"
+  },
+  {
+   "id": "ling-32-air",
+   "model": "Ling-3.2-air (Q3_K_M)",
+   "engine": "llama.cpp",
+   "setting": "Vulkan",
+   "capabilities": [
+    "text",
+    "coding-agent"
+   ],
+   "status": "rejected",
+   "since": "2026-11-24",
+   "until": "",
+   "reason": "Writes 37% faster than production's model on llama.cpp but solved 0 of 10 hard coding changes.",
+   "evidence": [
+    "E176"
+   ],
+   "role": "a fast challenger model"
+  },
+  {
+   "id": "hy4-flash-strata",
+   "model": "Hy4-Flash (220B)",
+   "engine": "strata",
+   "setting": "SQ-96",
+   "capabilities": [
+    "text",
+    "coding-agent"
+   ],
+   "status": "rejected",
+   "since": "2026-11-22",
+   "until": "",
+   "reason": "Stable but about 24 tok/s; 3/10 on the hard bank with every task at its hour limit.",
+   "evidence": [
+    "E171"
+   ],
+   "role": "a very large challenger model"
+  },
+  {
+   "id": "qwen3-30b-workhorse",
+   "model": "Qwen3-30B-A3B",
+   "engine": "llama.cpp",
+   "setting": "Q4_K_M, Vulkan",
+   "capabilities": [
+    "text",
+    "tool-use"
+   ],
+   "status": "retired",
+   "since": "2026-07-03",
+   "until": "2026-11-04",
+   "reason": "The July everyday model; replaced by Flash-Next.",
+   "evidence": [
+    "E31",
+    "E33A"
+   ],
+   "role": "the July everyday model (retired)"
+  },
+  {
+   "id": "qwen3-coder-30b",
+   "model": "Qwen3-Coder-30B",
+   "engine": "llama.cpp",
+   "setting": "Q4",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "status": "retired",
+   "since": "2026-08-15",
+   "until": "2026-11-06",
+   "reason": "The earlier coding pick; solved 2 of the bigger fixes.",
+   "evidence": [
+    "E156"
+   ],
+   "role": "the earlier coding pick (retired)"
+  }
+ ]
+}

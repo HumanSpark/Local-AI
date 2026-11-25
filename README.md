@@ -13,6 +13,9 @@ I can't publish. The plain-English version is at
 **If a colleague sent you here:** start with what production runs now, then check one
 number yourself (five minutes, Python only).
 
+**What works best right now, for each kind of job** (text, coding, office tools, speech, voice, images, music, memory)
+and for engines: [capabilities/](capabilities/README.md).
+
 > [!NOTE]
 > **The machine:** GMKtec EVO-X2 · AMD Ryzen AI Max+ 395 with Radeon 8060S · 128 GB
 > unified memory (about 105 GB usable by the graphics) · 81-87 W while generating
@@ -44,9 +47,9 @@ number yourself (five minutes, Python only).
 - **18 Nov 2026 - where local falls short.** Ten large real changes: GPT-6.1 Sol 10/10 (about 2 min each, USD 1.95 in
   total), production 5/10 (about 11 min each) ([Large changes, E167](results/e167-results.md), [F194](FINDINGS.md#f194)).
 
-## Current release: r5.18 (findings through 24 November 2026)
+## Current release: r5.19 (findings through 24 November 2026)
 
-r5.18 rewrites this README for IT readers and adds a page per research track under [tracks/](tracks/), each listing its claims with status, dates and evidence. It adds [F203](FINDINGS.md#f203): Ling-3.2-air writes fast here but solved none of ten hard coding changes. Production is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+r5.19 adds [What works best, by capability](capabilities/README.md): one page per kind of job with the setup in production, the best alternative and why, and the experiments behind it, best results first, plus [a page comparing engines](capabilities/engines.md). The same information is machine-readable in `setups.json` and `experiments.json`. No finding or claim changes. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
 
 - **Every claim carries a status and dates.** 23 current, 17 qualified, 18 historical and 3 superseded as of the 24 November review; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
 - **Not everything is here.** Verbose server logs, internal design documents and files with private content are withheld, among them the per-task records of the coding tests, which quote private repositories. [WITHHELD.md](WITHHELD.md) lists each with the reason.
@@ -103,6 +106,6 @@ task mix; review time per approved output; the data path end to end.
 
 ## Navigating the record
 
-[Glossary](GLOSSARY.md) (every code and model name) · [Findings register](FINDINGS.md) ·
+[By capability](capabilities/README.md) · [Engines](capabilities/engines.md) · [Glossary](GLOSSARY.md) (every code and model name) · [Findings register](FINDINGS.md) ·
 [Experiments index](results/README.md) · [Claims](claims.md) ([claims.json](claims.json)) ·
 [Release history](RELEASE-NOTES.md) · [Licence](LICENSE) and [citation](CITATION.cff)

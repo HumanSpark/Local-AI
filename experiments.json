@@ -1,0 +1,1482 @@
+{
+ "meta": {
+  "release": "r5.19",
+  "tracks": [
+   "documents",
+   "drafting",
+   "meetings",
+   "unattended",
+   "running",
+   "media"
+  ],
+  "kinds": [
+   "capability",
+   "speed-platform",
+   "method",
+   "stability"
+  ],
+  "verdicts": [
+   "in-production",
+   "works-with-caveats",
+   "did-not-work",
+   "inconclusive"
+  ],
+  "outcomes": [
+   "adopted",
+   "not-adopted",
+   "informational",
+   "correction"
+  ],
+  "capabilities": {
+   "text": "Text and reasoning",
+   "coding-agent": "Coding agents",
+   "tool-use": "Office tools",
+   "vision": "Vision",
+   "speech-to-text": "Speech to text",
+   "speaker-labelling": "Who said what",
+   "voice-output": "Voice output",
+   "images": "Images",
+   "music": "Music",
+   "memory": "Memory",
+   "fine-tuning": "Fine-tuning"
+  }
+ },
+ "experiments": [
+  {
+   "id": "E12",
+   "title": "Energy cost per million tokens",
+   "date": "2026-07-04",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "About EUR 0.09 per million tokens generated, single user, at the July tariff.",
+   "record": "experiments/E12.md",
+   "findings": [],
+   "claims": [
+    "C-COST-MARGINAL-P1",
+    "C-POWER-DRAW-P1"
+   ],
+   "setups": [
+    "qwen3-30b-workhorse"
+   ],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/experiments/E12.md"
+  },
+  {
+   "id": "E31",
+   "title": "Document summarising and instruction following, local against cloud",
+   "date": "2026-07-11",
+   "track": "documents",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp",
+    "cloud-api"
+   ],
+   "kind": "capability",
+   "summary": "The July local model (since retired) matched cloud models on fact-checkable document tasks; these suites no longer separate strong models.",
+   "record": "experiments/E31.md",
+   "findings": [],
+   "claims": [
+    "C-LOCAL-SUMM-001",
+    "C-LOCAL-IF-001"
+   ],
+   "setups": [
+    "qwen3-30b-workhorse"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/experiments/E31.md"
+  },
+  {
+   "id": "E30",
+   "title": "How long a document the box can handle interactively",
+   "date": "2026-07-11",
+   "track": "documents",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "Accuracy held past 80K tokens; first-answer time was the limit on the July engine.",
+   "record": "experiments/E30.md",
+   "findings": [
+    "F31"
+   ],
+   "claims": [
+    "C-LONGCTX-FIRST-ANSWER"
+   ],
+   "setups": [
+    "qwen3-30b-workhorse"
+   ],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/experiments/E30.md"
+  },
+  {
+   "id": "E33A",
+   "title": "Office tool use (create a document, send an email, look up a client)",
+   "date": "2026-07-14",
+   "track": "unattended",
+   "capabilities": [
+    "tool-use"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "The July model called the right tool 91% of the time; judgement inside a call needed a human check.",
+   "record": "results/tool-use/E33-results.md",
+   "findings": [
+    "F38"
+   ],
+   "claims": [
+    "C-TOOLUSE-DOC-001"
+   ],
+   "setups": [
+    "qwen3-30b-workhorse"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/tool-use/E33-results.md"
+  },
+  {
+   "id": "E41A",
+   "title": "Whisper inventing words over silence",
+   "date": "2026-07-17",
+   "track": "meetings",
+   "capabilities": [
+    "speech-to-text"
+   ],
+   "engines": [
+    "whisper.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Without voice detection Whisper invents about two utterances a minute of silence.",
+   "record": "results/transcription/e41-silence-hallucination.md",
+   "findings": [
+    "F44"
+   ],
+   "claims": [
+    "C-TRANSCRIPTION-SILENCE-VAD-001"
+   ],
+   "setups": [
+    "whisper-turbo"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/transcription/e41-silence-hallucination.md"
+  },
+  {
+   "id": "E45A",
+   "title": "Transcription accuracy against human transcripts",
+   "date": "2026-07-17",
+   "track": "meetings",
+   "capabilities": [
+    "speech-to-text"
+   ],
+   "engines": [
+    "whisper.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Whisper large-v3-turbo 2.40% word error rate; the small model 3.35%.",
+   "record": "results/transcription/e45-true-wer.md",
+   "findings": [
+    "F45"
+   ],
+   "claims": [
+    "C-TRANSCRIPTION-WER-001"
+   ],
+   "setups": [
+    "whisper-turbo",
+    "whisper-small"
+   ],
+   "log": false,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/transcription/e45-true-wer.md"
+  },
+  {
+   "id": "E46A",
+   "title": "pyannote against our speaker pipeline",
+   "date": "2026-07-17",
+   "track": "meetings",
+   "capabilities": [
+    "speaker-labelling"
+   ],
+   "engines": [
+    "pyannote",
+    "wespeaker"
+   ],
+   "kind": "capability",
+   "summary": "pyannote is about three times better at general diarisation; ours is faster.",
+   "record": "results/diarisation/e46-pyannote-headtohead.md",
+   "findings": [
+    "F46"
+   ],
+   "claims": [],
+   "setups": [
+    "pyannote-31"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/diarisation/e46-pyannote-headtohead.md"
+  },
+  {
+   "id": "E50A",
+   "title": "Host or someone else: speaker labelling that a consultant needs",
+   "date": "2026-07-17",
+   "track": "meetings",
+   "capabilities": [
+    "speaker-labelling"
+   ],
+   "engines": [
+    "wespeaker"
+   ],
+   "kind": "capability",
+   "summary": "97.2% of lines correctly tagged as the host or someone else on four real calls.",
+   "record": "results/diarisation/e50-target-speaker.md",
+   "findings": [
+    "F46"
+   ],
+   "claims": [
+    "C-TARGET-SPEAKER-001"
+   ],
+   "setups": [
+    "wespeaker-target"
+   ],
+   "log": false,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/diarisation/e50-target-speaker.md"
+  },
+  {
+   "id": "P3.2",
+   "title": "Image generation probe and 50-image style gallery",
+   "date": "2026-07-04",
+   "track": "media",
+   "capabilities": [
+    "images"
+   ],
+   "engines": [
+    "sd.cpp"
+   ],
+   "kind": "capability",
+   "summary": "FLUX.1-schnell runs on the box; the owner assessed a 50-image gallery.",
+   "record": "capability-probes.md",
+   "findings": [],
+   "claims": [],
+   "setups": [
+    "flux-schnell-sdcpp"
+   ],
+   "log": false,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/capability-probes.md"
+  },
+  {
+   "id": "W3",
+   "title": "Text-to-speech engines and the narration voice",
+   "date": "2026-07-26",
+   "track": "media",
+   "capabilities": [
+    "voice-output"
+   ],
+   "engines": [
+    "chatterbox",
+    "kokoro"
+   ],
+   "kind": "capability",
+   "summary": "A British female voice cloned by Chatterbox won; Kokoro kept as the fallback.",
+   "record": "FINDINGS.md#f56",
+   "findings": [
+    "F56"
+   ],
+   "claims": [],
+   "setups": [
+    "chatterbox-p239",
+    "kokoro-emma"
+   ],
+   "log": false,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/FINDINGS.md#f56"
+  },
+  {
+   "id": "FT1",
+   "title": "House-style fine-tune trained on the box",
+   "date": "2026-07-13",
+   "track": "drafting",
+   "capabilities": [
+    "fine-tuning"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Teaches tone reliably; does not lift send-readiness.",
+   "record": "FINDINGS.md#f37-2",
+   "findings": [
+    "F37"
+   ],
+   "claims": [
+    "C-FINETUNE-VOICE-001",
+    "C-TRAINING-ONBOX-001"
+   ],
+   "setups": [
+    "lora-house-style"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/FINDINGS.md#f37-2"
+  },
+  {
+   "id": "E135",
+   "title": "Can the knowledge-work tests still separate strong models?",
+   "date": "2026-09-11",
+   "track": "documents",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "cloud-api"
+   ],
+   "kind": "method",
+   "summary": "No: three models across a 40x price range scored within one item.",
+   "record": "results/e135-results.md",
+   "findings": [
+    "F153",
+    "F154"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e135-results.md"
+  },
+  {
+   "id": "E136",
+   "title": "Qwen-Image-2.1 on the box",
+   "date": "2026-09-21",
+   "track": "media",
+   "capabilities": [
+    "images"
+   ],
+   "engines": [
+    "diffusers",
+    "sd.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Runs, but only with the gateway down and the image decode tiled.",
+   "record": "results/e136-results.md",
+   "findings": [
+    "F155",
+    "F156",
+    "F157",
+    "F158"
+   ],
+   "claims": [],
+   "setups": [
+    "qwen-image-21"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e136-results.md"
+  },
+  {
+   "id": "E137",
+   "title": "Upscaling a cover image",
+   "date": "2026-09-22",
+   "track": "media",
+   "capabilities": [
+    "images"
+   ],
+   "engines": [
+    "diffusers"
+   ],
+   "kind": "capability",
+   "summary": "A one-off upscaling job for a cover image.",
+   "record": "results/e137-results.md",
+   "findings": [],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "verdict": "inconclusive",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e137-results.md"
+  },
+  {
+   "id": "E138",
+   "title": "Checking a public speed claim for Ternary Bonsai",
+   "date": "2026-09-23",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "The claimed ~73 tok/s did not reproduce; 34.16 was the best of nine configurations.",
+   "record": "results/e138-results.md",
+   "findings": [
+    "F159",
+    "F160",
+    "F173",
+    "F174"
+   ],
+   "claims": [
+    "C-CLAIM-BONSAI-SPEED-001"
+   ],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e138-results.md"
+  },
+  {
+   "id": "E139",
+   "title": "Checking Halogen's published long-prompt speed",
+   "date": "2026-09-24",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "halogen",
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "1,152 tok/s at 32K, 5.3 times llama.cpp, short of the published 1,424.",
+   "record": "results/e139-results.md",
+   "findings": [
+    "F165",
+    "F166"
+   ],
+   "claims": [
+    "C-CLAIM-HALOGEN-PREFILL-001"
+   ],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "same_model": true,
+   "workload": "documents",
+   "conditions": "idle",
+   "numbers": [
+    {
+     "arm": "Halogen",
+     "metric": "prefill at 32K",
+     "value": 1152,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "llama.cpp",
+     "metric": "prefill at 32K",
+     "value": 216.5,
+     "unit": "tok/s"
+    }
+   ],
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e139-results.md"
+  },
+  {
+   "id": "E140",
+   "title": "A cheap-then-expensive model cascade",
+   "date": "2026-09-24",
+   "track": "documents",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Safe, but slower than a fixed setting.",
+   "record": "results/e140-results.md",
+   "findings": [
+    "F161"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "verdict": "did-not-work",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e140-results.md"
+  },
+  {
+   "id": "E141",
+   "title": "Choosing the reasoning effort per question",
+   "date": "2026-09-24",
+   "track": "documents",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "No cheap decision beat a fixed low effort.",
+   "record": "results/e141-results.md",
+   "findings": [
+    "F162"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "verdict": "did-not-work",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e141-results.md"
+  },
+  {
+   "id": "E142",
+   "title": "Letting the 27B model decide when to think harder",
+   "date": "2026-09-24",
+   "track": "documents",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "talus"
+   ],
+   "kind": "capability",
+   "summary": "It can, but the check costs what it saves.",
+   "record": "results/e142-results.md",
+   "findings": [
+    "F163"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "verdict": "did-not-work",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e142-results.md"
+  },
+  {
+   "id": "E143",
+   "title": "Four coding models on the same tasks",
+   "date": "2026-09-24",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "They tied on passes and split the tasks in opposite ways.",
+   "record": "results/e143-results.md",
+   "findings": [
+    "F164",
+    "F171"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "verdict": "inconclusive",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e143-results.md"
+  },
+  {
+   "id": "E145",
+   "title": "Coding models a comparison widget recommended",
+   "date": "2026-09-25",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "They tied with what we had already run.",
+   "record": "results/e145-results.md",
+   "findings": [
+    "F167"
+   ],
+   "claims": [
+    "C-CODING-RECOMMENDED-TIE-001"
+   ],
+   "setups": [],
+   "log": false,
+   "verdict": "inconclusive",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e145-results.md"
+  },
+  {
+   "id": "E146",
+   "title": "Atlas against llama.cpp",
+   "date": "2026-09-25",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "atlas",
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "About 27% faster than llama.cpp here, and not as fast as published.",
+   "record": "results/e146-results.md",
+   "findings": [
+    "F168",
+    "F169",
+    "F170"
+   ],
+   "claims": [
+    "C-CLAIM-ATLAS-MLPERF-001",
+    "C-CLAIM-ATLAS-DETERMINISM-001"
+   ],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "same_model": true,
+   "workload": "mixed",
+   "conditions": "idle",
+   "numbers": [
+    {
+     "arm": "Atlas",
+     "metric": "MLPerf edge-agentic, ms per turn",
+     "value": 9307,
+     "unit": "ms"
+    },
+    {
+     "arm": "llama.cpp",
+     "metric": "MLPerf edge-agentic, ms per turn",
+     "value": 12863,
+     "unit": "ms"
+    }
+   ],
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e146-results.md"
+  },
+  {
+   "id": "E147",
+   "title": "Atlas against llama.cpp with a draft model",
+   "date": "2026-09-25",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "atlas",
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "With a drafter, the open configuration beat Atlas on the MLPerf metric.",
+   "record": "results/e147-results.md",
+   "findings": [
+    "F172"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e147-results.md"
+  },
+  {
+   "id": "E148",
+   "title": "Atlas's DFlash mode",
+   "date": "2026-09-26",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "atlas"
+   ],
+   "kind": "speed-platform",
+   "summary": "Slower than its other mode and than the reference here.",
+   "record": "results/e148-results.md",
+   "findings": [
+    "F175"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "not-adopted",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e148-results.md"
+  },
+  {
+   "id": "E149",
+   "title": "Why Atlas DFlash was slow: the sliding window",
+   "date": "2026-09-26",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "atlas"
+   ],
+   "kind": "method",
+   "summary": "The sliding-window setting was inert.",
+   "record": "results/e149-results.md",
+   "findings": [
+    "F176"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e149-results.md"
+  },
+  {
+   "id": "E150",
+   "title": "Why Atlas DFlash was slow: the context cap",
+   "date": "2026-09-26",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "atlas"
+   ],
+   "kind": "method",
+   "summary": "The context cap was not the cause.",
+   "record": "results/e150-results.md",
+   "findings": [
+    "F177"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e150-results.md"
+  },
+  {
+   "id": "E151",
+   "title": "Why Atlas DFlash was slow: the prefix cache",
+   "date": "2026-09-26",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "atlas"
+   ],
+   "kind": "method",
+   "summary": "Not the cause either; left unexplained and unusable here.",
+   "record": "results/e151-results.md",
+   "findings": [
+    "F178"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "not-adopted",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e151-results.md"
+  },
+  {
+   "id": "E152",
+   "title": "Halogen under load from other work",
+   "date": "2026-09-27",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "halogen"
+   ],
+   "kind": "speed-platform",
+   "summary": "Coding turns at 44 tok/s and 4 s follow-ups under contention.",
+   "record": "results/e152-results.md",
+   "findings": [
+    "F179"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e152-results.md"
+  },
+  {
+   "id": "E153",
+   "title": "One model, five engines",
+   "date": "2026-11-04",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "halogen",
+    "llama.cpp",
+    "talus",
+    "gufo",
+    "strata"
+   ],
+   "kind": "speed-platform",
+   "summary": "Halogen fastest in every bucket (86 tok/s on code, 18.7 s to first word at 32K); it became the production engine.",
+   "record": "results/e153-results.md",
+   "findings": [
+    "F180"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-halogen",
+    "flash-next-llamacpp"
+   ],
+   "log": true,
+   "outcome": "adopted",
+   "same_model": true,
+   "workload": "mixed",
+   "conditions": "idle",
+   "numbers": [
+    {
+     "arm": "Halogen",
+     "metric": "decode on code",
+     "value": 86.0,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "gufo",
+     "metric": "decode on code",
+     "value": 69.1,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "Talus",
+     "metric": "decode on code",
+     "value": 67.9,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "Strata",
+     "metric": "decode on code",
+     "value": 60.7,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "llama.cpp",
+     "metric": "decode on code",
+     "value": 27.1,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "Halogen",
+     "metric": "decode on prose",
+     "value": 58.3,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "llama.cpp",
+     "metric": "decode on prose",
+     "value": 26.2,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "Halogen",
+     "metric": "first token at 32K",
+     "value": 18.7,
+     "unit": "s"
+    },
+    {
+     "arm": "gufo",
+     "metric": "first token at 32K",
+     "value": 21.9,
+     "unit": "s"
+    },
+    {
+     "arm": "Talus",
+     "metric": "first token at 32K",
+     "value": 26.1,
+     "unit": "s"
+    },
+    {
+     "arm": "Strata",
+     "metric": "first token at 32K",
+     "value": 47.4,
+     "unit": "s"
+    },
+    {
+     "arm": "llama.cpp",
+     "metric": "first token at 32K",
+     "value": 104.1,
+     "unit": "s"
+    }
+   ],
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e153-results.md"
+  },
+  {
+   "id": "E154",
+   "title": "Fifteen real fixes from our own projects",
+   "date": "2026-11-05",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "halogen",
+    "talus",
+    "llama.cpp",
+    "cloud-api"
+   ],
+   "kind": "capability",
+   "summary": "Two local setups solved all 15, like Claude Sonnet, at about 15 times the time.",
+   "record": "results/e154-results.md",
+   "findings": [
+    "F181",
+    "F182"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-halogen",
+    "qwen38-27b-talus"
+   ],
+   "log": true,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e154-results.md"
+  },
+  {
+   "id": "E156",
+   "title": "Ten bigger fixes",
+   "date": "2026-11-06",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "halogen",
+    "talus",
+    "llama.cpp",
+    "cloud-api"
+   ],
+   "kind": "capability",
+   "summary": "Production 9/10, the 27B 8/10, Sonnet and Opus 8/10 each.",
+   "record": "results/e156-results.md",
+   "findings": [
+    "F183",
+    "F184"
+   ],
+   "claims": [
+    "C-CODING-HARD-LOCAL-BEST-001"
+   ],
+   "setups": [
+    "flash-next-halogen",
+    "qwen38-27b-talus",
+    "qwen3-coder-30b"
+   ],
+   "log": true,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e156-results.md"
+  },
+  {
+   "id": "E158",
+   "title": "Newer local coding models on the bigger fixes",
+   "date": "2026-11-07",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Ornith 1.5 35B tied production at 9/10; nothing beat it.",
+   "record": "results/e158-results.md",
+   "findings": [
+    "F185"
+   ],
+   "claims": [
+    "C-CODING-DEFAULT"
+   ],
+   "setups": [
+    "ornith-15-35b"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e158-results.md"
+  },
+  {
+   "id": "E159",
+   "title": "A lighter reasoning setting for coding",
+   "date": "2026-11-13",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "halogen"
+   ],
+   "kind": "capability",
+   "summary": "Low effort kept 8/10 at about a third of the time; made the default.",
+   "record": "results/e159-results.md",
+   "findings": [
+    "F187"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-halogen"
+   ],
+   "log": true,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e159-results.md"
+  },
+  {
+   "id": "E160",
+   "title": "The lighter setting across eight kinds of everyday work",
+   "date": "2026-11-13",
+   "track": "documents",
+   "capabilities": [
+    "text",
+    "tool-use"
+   ],
+   "engines": [
+    "halogen"
+   ],
+   "kind": "capability",
+   "summary": "Matched maximum thinking on seven of eight at 0.41 times the time.",
+   "record": "results/e160-results.md",
+   "findings": [
+    "F186"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-halogen"
+   ],
+   "log": false,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e160-results.md"
+  },
+  {
+   "id": "E161",
+   "title": "Expert helpers on unified memory",
+   "date": "2026-11-15",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "They do not pay on this kind of memory.",
+   "record": "results/e161-results.md",
+   "findings": [
+    "F188"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "not-adopted",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e161-results.md"
+  },
+  {
+   "id": "E162",
+   "title": "Client drafting against cloud models, judged blind",
+   "date": "2026-11-15",
+   "track": "drafting",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "halogen",
+    "cloud-api"
+   ],
+   "kind": "capability",
+   "summary": "GPT-6.1 Sol won clearly; local losses were unsupported promises and omissions.",
+   "record": "results/e162-results.md",
+   "findings": [
+    "F189"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-halogen"
+   ],
+   "log": true,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e162-results.md"
+  },
+  {
+   "id": "E163",
+   "title": "AMD's Loom against Halogen and llama.cpp",
+   "date": "2026-11-16",
+   "track": "running",
+   "capabilities": [
+    "text",
+    "tool-use"
+   ],
+   "engines": [
+    "loom",
+    "halogen",
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "Loom reads long prompts 2.7 times faster than llama.cpp but is not faster than Halogen.",
+   "record": "results/e163-results.md",
+   "findings": [
+    "F190"
+   ],
+   "claims": [],
+   "setups": [
+    "loom-flash-next"
+   ],
+   "log": true,
+   "outcome": "not-adopted",
+   "same_model": true,
+   "workload": "documents",
+   "conditions": "idle",
+   "numbers": [
+    {
+     "arm": "Halogen",
+     "metric": "decode, short prompt",
+     "value": 56.3,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "AMD Loom",
+     "metric": "decode, short prompt",
+     "value": 40.8,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "llama.cpp",
+     "metric": "decode, short prompt",
+     "value": 27.4,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "Halogen",
+     "metric": "prefill at 32K",
+     "value": 879,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "AMD Loom",
+     "metric": "prefill at 32K",
+     "value": 979,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "llama.cpp",
+     "metric": "prefill at 32K",
+     "value": 364,
+     "unit": "tok/s"
+    }
+   ],
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e163-results.md"
+  },
+  {
+   "id": "E164",
+   "title": "Qwen4 Max on client drafting",
+   "date": "2026-11-17",
+   "track": "drafting",
+   "capabilities": [
+    "text",
+    "tool-use"
+   ],
+   "engines": [
+    "cloud-api"
+   ],
+   "kind": "capability",
+   "summary": "Beat production on drafting but trailed both frontier references.",
+   "record": "results/e164-results.md",
+   "findings": [
+    "F191"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e164-results.md"
+  },
+  {
+   "id": "E165",
+   "title": "Auditing our own tests",
+   "date": "2026-11-17",
+   "track": "documents",
+   "capabilities": [
+    "text",
+    "tool-use"
+   ],
+   "engines": [
+    "halogen",
+    "loom",
+    "llama.cpp"
+   ],
+   "kind": "method",
+   "summary": "Five tests marked models down for following their own instructions; corrected, every setup passed 36/36 tool tasks.",
+   "record": "results/e165-results.md",
+   "findings": [
+    "F192"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": true,
+   "outcome": "correction",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e165-results.md"
+  },
+  {
+   "id": "E167",
+   "title": "Ten large changes, tests visible",
+   "date": "2026-11-18",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "halogen",
+    "llama.cpp",
+    "cloud-api"
+   ],
+   "kind": "capability",
+   "summary": "GPT-6.1 Sol 10/10, production 5/10.",
+   "record": "results/e167-results.md",
+   "findings": [
+    "F194"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-halogen",
+    "ornith-15-35b"
+   ],
+   "log": true,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e167-results.md"
+  },
+  {
+   "id": "E168",
+   "title": "The same ten changes, tests hidden",
+   "date": "2026-11-19",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent"
+   ],
+   "engines": [
+    "halogen",
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Both local setups solved 1 of 10.",
+   "record": "results/e168-results.md",
+   "findings": [
+    "F195"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": true,
+   "verdict": "did-not-work",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e168-results.md"
+  },
+  {
+   "id": "E170",
+   "title": "Keeping an assistant's memory up to date",
+   "date": "2026-11-21",
+   "track": "documents",
+   "capabilities": [
+    "memory"
+   ],
+   "engines": [
+    "halogen",
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Production made one mistake in fifty and kept the nightly job.",
+   "record": "results/e170-results.md",
+   "findings": [
+    "F196"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-halogen",
+    "inkling-2-mini-llamacpp"
+   ],
+   "log": true,
+   "verdict": "in-production",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e170-results.md"
+  },
+  {
+   "id": "E171",
+   "title": "Hy4-Flash on the Strata engine",
+   "date": "2026-11-22",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent",
+    "text"
+   ],
+   "engines": [
+    "strata"
+   ],
+   "kind": "capability",
+   "summary": "Stable but slow; 3/10 with every task at its hour limit.",
+   "record": "results/e171-results.md",
+   "findings": [
+    "F197"
+   ],
+   "claims": [],
+   "setups": [
+    "hy4-flash-strata"
+   ],
+   "log": true,
+   "verdict": "did-not-work",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e171-results.md"
+  },
+  {
+   "id": "E173",
+   "title": "Three local song models",
+   "date": "2026-11-24",
+   "track": "media",
+   "capabilities": [
+    "music"
+   ],
+   "engines": [
+    "audio.cpp"
+   ],
+   "kind": "capability",
+   "summary": "ACE-Step is the only fast one and ties for clearest words; none matched the owner's taste in style.",
+   "record": "results/e173-results.md",
+   "findings": [
+    "F201"
+   ],
+   "claims": [],
+   "setups": [
+    "ace-step-15",
+    "yue2",
+    "minimax-music3"
+   ],
+   "log": false,
+   "verdict": "works-with-caveats",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e173-results.md"
+  },
+  {
+   "id": "E174",
+   "title": "An 8-bit conversation memory on llama.cpp",
+   "date": "2026-11-23",
+   "track": "running",
+   "capabilities": [
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "speed-platform",
+   "summary": "Never helped production's model: up to 10% slower.",
+   "record": "results/e174-results.md",
+   "findings": [
+    "F199"
+   ],
+   "claims": [],
+   "setups": [
+    "flash-next-llamacpp"
+   ],
+   "log": false,
+   "outcome": "not-adopted",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e174-results.md"
+  },
+  {
+   "id": "E175",
+   "title": "A paired question that catches a broken chat template",
+   "date": "2026-11-24",
+   "track": "running",
+   "capabilities": [
+    "text",
+    "tool-use"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "method",
+   "summary": "The pair caught a silently broken template and raised no false alarm.",
+   "record": "results/e175-results.md",
+   "findings": [
+    "F200"
+   ],
+   "claims": [],
+   "setups": [],
+   "log": false,
+   "outcome": "informational",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e175-results.md"
+  },
+  {
+   "id": "E176",
+   "title": "Ling-3.2-air on the box",
+   "date": "2026-11-24",
+   "track": "unattended",
+   "capabilities": [
+    "coding-agent",
+    "text"
+   ],
+   "engines": [
+    "llama.cpp"
+   ],
+   "kind": "capability",
+   "summary": "Writes 37% faster than production's model on llama.cpp; 0/10 on the hard coding bank.",
+   "record": "results/e176-results.md",
+   "findings": [
+    "F203"
+   ],
+   "claims": [],
+   "setups": [
+    "ling-32-air"
+   ],
+   "log": true,
+   "verdict": "did-not-work",
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e176-results.md"
+  },
+  {
+   "id": "E177",
+   "title": "Production's model on the HTR engine",
+   "date": "2026-11-24",
+   "track": "running",
+   "capabilities": [
+    "text",
+    "coding-agent"
+   ],
+   "engines": [
+    "htr-vllm",
+    "halogen"
+   ],
+   "kind": "speed-platform",
+   "summary": "Same coding quality (6/10 against 5/10) but slower than Halogen; kept as a fallback.",
+   "record": "results/e177-results.md",
+   "findings": [
+    "F202"
+   ],
+   "claims": [
+    "C-LONGCTX-FIRST-ANSWER-PROD"
+   ],
+   "setups": [
+    "flash-next-htr",
+    "flash-next-halogen"
+   ],
+   "log": true,
+   "outcome": "not-adopted",
+   "same_model": true,
+   "workload": "documents",
+   "conditions": "live",
+   "numbers": [
+    {
+     "arm": "Halogen",
+     "metric": "decode, short prompt",
+     "value": 62.5,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "HTR on vLLM",
+     "metric": "decode, short prompt",
+     "value": 47.8,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "Halogen",
+     "metric": "prefill at 32K",
+     "value": 1462,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "HTR on vLLM",
+     "metric": "prefill at 32K",
+     "value": 924,
+     "unit": "tok/s"
+    },
+    {
+     "arm": "Halogen",
+     "metric": "first token at 32K",
+     "value": 22.4,
+     "unit": "s"
+    },
+    {
+     "arm": "HTR on vLLM",
+     "metric": "first token at 32K",
+     "value": 35.5,
+     "unit": "s"
+    }
+   ],
+   "source_url": "https://github.com/HumanSpark/Local-AI/blob/r5.19/results/e177-results.md"
+  }
+ ]
+}

@@ -1,4 +1,4 @@
-# Claims (r5.18)
+# Claims (r5.19)
 
 Every published number, one row per claim. This table is generated from [claims.yml](claims.yml), which is the authoritative, machine-readable registry; the two always match because both come from the same build. 23 current, 17 qualified, 18 historical, 3 superseded. Status meanings, tracks and access levels are explained in [GLOSSARY.md](GLOSSARY.md#claim-status).
 

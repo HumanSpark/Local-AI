@@ -1,12 +1,36 @@
-# Release Notes - sparkbench-data-r5.18
+# Release Notes - sparkbench-data-r5.19
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.18)
+## This release (r5.19)
 
 - **Findings:** 203 in FINDINGS.md, newest F203.
 - **Claims:** 61 in claims.yml (23 current, 18 historical, 17 qualified, 3 superseded).
+- **What works best, by capability.** New pages under [capabilities/](capabilities/README.md): for each kind of
+  job (text and reasoning, coding agents, office tools, vision, speech to text, who said what, voice output, images,
+  music, memory, fine-tuning) the setup in production, the best alternative and why, what else was tried, and the
+  experiments behind it, best results first. Vision says plainly that it has not been tested yet.
+- **Engines compared separately** ([capabilities/engines.md](capabilities/engines.md)): Halogen in production, HTR on
+  vLLM as the fallback, every other engine with where it stands, and only same-model comparisons as evidence, each
+  with its workload and conditions.
+- **New: `setups.json` and `experiments.json`** beside `claims.json`. Every setup is a model, an engine and a setting
+  with a plain role name, a status and a one-line reason; every experiment from E135 on (and the July ones the pages
+  cite) carries its track, capabilities, engines, kind of test and result. The build fails on an untagged experiment
+  or an unknown label.
+
+## Changed claims (old -> new)
+
+- (none.)
+
+## Retracted claims
+
+- (none.)
+
+## Earlier releases
+
+### r5.18
+
 - **A new README** for IT readers: what production runs now, what changed recently, the five research tracks, how
   to check one number yourself in five minutes (tag r5.18), and what a reader can and cannot check.
 - **Five track pages** under [tracks/](tracks/): each track's question, why the test fits it, the current answer, and
@@ -21,15 +45,13 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
   varied between runs); the README's five-minute check uses tag r5.18.
 - New evidence: `results/e176-results.md`, `results/e176/`.
 
-## Changed claims (old -> new)
+#### Changed claims (old -> new)
 
 - (none.)
 
-## Retracted claims
+#### Retracted claims
 
 - (none.)
-
-## Earlier releases
 
 ### r5.17
 
