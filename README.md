@@ -1,134 +1,108 @@
-# Local AI for a Small Firm - the data
+# Local AI for a Small Firm - the research record
 
-This repository is the data package behind **[Local AI for a Small Firm: What a 128 GB Mini-PC Can Actually Do](https://humanspark.ai/local-ai/)** - independent research into what a EUR 3,680 on-premises mini-PC (GMKtec EVO-X2, Ryzen AI Max+ 395, 128 GB unified memory) can do for a small professional practice.
+I'm Alastair McDermott. I help professional firms adopt AI, and since July 2026 I've
+been testing what a EUR 3,680 mini-PC can do on the work those firms do. I also use it
+in my own work: it transcribes my calls, narrates my articles, runs a nightly memory
+job for my assistant and can run my coding agents overnight. Those production
+workflows run entirely on the machine. The research also uses cloud models, as
+comparisons and as judges, and each results file says which.
+This repository is the full record: every test, result, correction and the evidence
+I can't publish. The plain-English version is at
+[humanspark.ai/local-ai](https://humanspark.ai/local-ai/).
 
-**If you want the findings, read the report, not this repo.** The plain-English argument, the verdict, and the practical guidance live on the website:
-
-- [The Report](https://humanspark.ai/local-ai/) - the argument and the verdict
-- [In Practice](https://humanspark.ai/local-ai/in-practice/) - which model for which job, setup, media results
-- [The Evidence](https://humanspark.ai/local-ai/evidence/) - every finding, method, and correction, rendered readably
-
-This repository exists so that the numbers on those pages do not have to be taken on trust.
+**If a colleague sent you here:** start with what production runs now, then check one
+number yourself (five minutes, Python only).
 
 > [!NOTE]
-> **The machine**
-> - **Computer:** GMKtec EVO-X2 mini-PC, EUR 3,680
-> - **Processor and graphics:** AMD Ryzen AI Max+ 395 with Radeon 8060S integrated graphics
-> - **Memory:** 128 GB unified, shared by processor and graphics; about 105 GB of it usable by the graphics
-> - **Power:** 81 to 87 W package power while generating ([F180](FINDINGS.md#f180))
-> - **Measured:** one machine, July 2026 to 24 November 2026; engines include llama.cpp, Halogen, Talus, gufo and Strata
+> **The machine:** GMKtec EVO-X2 · AMD Ryzen AI Max+ 395 with Radeon 8060S · 128 GB
+> unified memory (about 105 GB usable by the graphics) · 81-87 W while generating
+> ([F180](FINDINGS.md#f180)) · measured July to 24 November 2026.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/coding-results-dark.svg">
-  <img src="assets/coding-results-light.svg" alt="Bar chart of real coding fixes solved out of 10: Qwen3.8-Flash-Next 9 (local); Ornith 1.5 35B 9 (local); Qwen3.8-27B 8 (local); Tess 4.5 27B 8 (local); Raon-1 mini (preview) 8 (local); Claude Sonnet 5.5 8 (cloud); Claude Opus 5.5 8 (cloud); Ornith 1.5 122B 6 (local); Qwen3-Coder-30B 2 (local)." width="760">
-</picture>
-
-Ten real multi-file fixes, scored by each project's own tests ([F183](FINDINGS.md#f183), [F185](FINDINGS.md#f185)). The local setups ran at each model's default reasoning effort, which for Qwen3.8-Flash-Next on its stock chat template is its highest setting. At that setting the best local setup took a median of 21.3 minutes per task against 2.5 for Claude Sonnet 5.5. A later sweep on the same ten fixes found a lower setting that keeps the score at under a third of the time ([F187](FINDINGS.md#f187)); production now runs it (below). The chart sorts by score, but a difference of one task is within noise ([F183](FINDINGS.md#f183)): a setup one fix ahead of another has not beaten it.
-
-| Setup | Runs on | Solved | Median minutes per task |
-|---|---|---|---|
-| Qwen3.8-Flash-Next | Halogen 0.18.23 (this machine) | 9/10 | 21.3 |
-| Ornith 1.5 35B | llama.cpp e14a7797 (this machine) | 9/10 | 30.4 |
-| Qwen3.8-27B | Talus v0.1.3 (this machine) | 8/10 | 23.6 |
-| Tess 4.5 27B | llama.cpp e14a7797, MTP draft (this machine) | 8/10 | 43.4 |
-| Raon-1 mini (preview) | KRAFTON llama.cpp fork fb895662d (this machine) | 8/10 | 20.0 |
-| Claude Sonnet 5.5 | Anthropic API (cloud) | 8/10 | 2.5 |
-| Claude Opus 5.5 | Anthropic API (cloud) | 8/10 | 5.3 |
-| Ornith 1.5 122B | llama.cpp e14a7797 (this machine) | 6/10 | 53.9 over 9 tasks (the 10th was stopped at the 70-minute limit and scored as a fail) |
-| Qwen3-Coder-30B | llama.cpp 5851a8e (this machine) | 2/10 | 2.5 |
-
-### Speed: one model, five engines
-
-Qwen3.8-Flash-Next on this machine, one request at a time, thinking off ([F180](FINDINGS.md#f180)). Decode is generation speed on a code prompt; prefill is how fast a 32,000-token prompt is read before the first word appears.
-
-| Engine | Decode, code (tok/s) | Prefill at 32K tokens (tok/s) | Time to first token at 32K |
-|---|---|---|---|
-| Halogen 0.18.23 | 86.0 | 1,755 | 18.7 s |
-| gufo 0.29.0, MTP | 69.1 | 1,497 | 21.9 s |
-| Talus v0.1.3 | 67.9 | 1,258 | 26.1 s |
-| Strata 0.2.10, DFlash2 | 60.7 | 691 | 47.4 s |
-| llama.cpp 5851a8e, Vulkan | 27.1 | 315 | 104.1 s |
-
-<!-- Keep this heading text unchanged: humanspark.ai links to #what-production-runs-now (webby, 2026-11-24). -->
 ### What production runs now
 
-| job | engine | model or voice | in service since | evidence |
+| Job | Engine | Model or voice | In service since | Why (evidence) |
 |---|---|---|---|---|
-| Language model | Halogen 0.18.23 | Qwen3.8-Flash-Next, community template, effort `low` by default | 13 November 2026 | [F186](FINDINGS.md#f186), [F187](FINDINGS.md#f187) |
-| Speech to text | whisper.cpp | Whisper large-v3-turbo with Silero voice-activity detection, plus host-versus-other speaker tagging | 18 July 2026 | [F44](FINDINGS.md#f44), [F45](FINDINGS.md#f45), [F46](FINDINGS.md#f46) |
-| Text to speech | Chatterbox | British female voice cloned from VCTK speaker p239; Kokoro `bf_emma` is an opt-in fallback | 1 August 2026 | [F56](FINDINGS.md#f56), [VOICES.md](VOICES.md) |
+| Language model | Halogen 0.18.23 | Qwen3.8-Flash-Next, community template, effort `low` | 13 Nov 2026 | Same 8/10 as maximum effort at 5.8 vs 19.1 min per fix; matched it on most of eight everyday work types ([Settings comparison, E159](results/e159-results.md), [Production acceptance, E160](results/e160-results.md)) |
+| Speech to text | whisper.cpp | Whisper large-v3-turbo + Silero VAD + host-versus-other tagging | 18 Jul 2026 | ([F44](FINDINGS.md#f44), [F45](FINDINGS.md#f45), [F46](FINDINGS.md#f46)) |
+| Text to speech | Chatterbox | Cloned British voice; Kokoro fallback | 1 Aug 2026 | ([F56](FINDINGS.md#f56), [VOICES.md](VOICES.md)) |
 
-Everything runs on this one machine and no audio or text leaves it. Speech to text turns a meeting recording into a transcript at about 28 times real time, with each line tagged as the host or someone else (97.2% correct across four real calls). Voice-activity detection is not optional: without it Whisper invents "Thank you." over silence. Text to speech narrates written pieces; [VOICES.md](VOICES.md) has the samples behind the choice, including the voices and engines that lost.
+## What changed recently
 
-Since 13 November 2026 the machine serves Qwen3.8-Flash-Next on Halogen with a community chat template (froggeric v22.5, recorded in [MANIFEST.md](MANIFEST.md)) and reasoning effort `low` unless a request asks for more. The template is what makes `low` take effect: on the stock template, low thinks barely less than medium.
+- **24 Nov 2026 - two challengers; production kept.** Flash-Next compressed with the community HTR method, on its own
+  vLLM build: 6/10 on ten large changes against production's 5/10, but slower (47.8 against 62.5 tok/s writing, 924
+  against 1,462 tok/s reading a 32K prompt) ([HTR against Halogen, E177](results/e177-results.md), [F202](FINDINGS.md#f202)).
+  Ling-3.2-air: 0/10 on the same changes, despite writing 37% faster than Flash-Next on llama.cpp; its results on the
+  two easier coding banks are being measured ([Ling-3.2-air, E176](results/e176-results.md), [F203](FINDINGS.md#f203)).
+- **22 Nov 2026 - a large challenger too slow for the budget.** Hy4-Flash (220B) on the Strata engine: about 24 tok/s,
+  3/10 against production's 5/10, every task at its one-hour limit ([Hy4-Flash, E171](results/e171-results.md),
+  [F197](FINDINGS.md#f197)).
+- **21 Nov 2026 - the nightly memory job stays on production.** Fifty memory-keeping jobs with traps: production made
+  1 mistake; Inkling-2-Mini none, but 6.5 times slower with no answer on 5 of 20 updates; Hy-Memory kept suggestions
+  the person had turned down ([Memory extraction, E170](results/e170-results.md), [F196](FINDINGS.md#f196)).
+- **19 Nov 2026 - tests hidden.** The same ten large changes without the tests in view: both local setups solved 1/10
+  ([Hidden tests, E168](results/e168-results.md), [F195](FINDINGS.md#f195)).
+- **18 Nov 2026 - where local falls short.** Ten large real changes: GPT-6.1 Sol 10/10 (about 2 min each, USD 1.95 in
+  total), production 5/10 (about 11 min each) ([Large changes, E167](results/e167-results.md), [F194](FINDINGS.md#f194)).
 
-| setting | coding fixes solved | median minutes per fix | eight kinds of work vs maximum effort |
+## Current release: r5.18 (findings through 24 November 2026)
+
+r5.18 rewrites this README for IT readers and adds a page per research track under [tracks/](tracks/), each listing its claims with status, dates and evidence. It adds [F203](FINDINGS.md#f203): Ling-3.2-air writes fast here but solved none of ten hard coding changes. Production is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+
+- **Every claim carries a status and dates.** 23 current, 17 qualified, 18 historical and 3 superseded as of the 24 November review; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
+- **Not everything is here.** Verbose server logs, internal design documents and files with private content are withheld, among them the per-task records of the coding tests, which quote private repositories. [WITHHELD.md](WITHHELD.md) lists each with the reason.
+
+## Five research tracks
+
+Every experiment belongs to one track. Each track page lists that track's claims with their status, dates and
+evidence; the experiment-by-experiment write-ups (why each was run, what would have changed the plan, what happened
+and what I decided) are being added track by track.
+
+| Track | The question | Why this kind of test | Current answer (date) |
 |---|---|---|---|
-| stock template, maximum effort (the chart above) | 8/10 | 19.1 | baseline, 49.9 min in total |
-| **community template, low (production)** | **8/10** | **5.8** | **within noise on 7 of 8, 20.6 min in total** |
+| [Documents](tracks/documents.md) | Can it work from what you give it? | Supplied sources make answers checkable | 25/26 on a document pack; the miss was an invented figure (17 Nov) |
+| [Drafting](tracks/drafting.md) | Would a professional send it? | Blind pairwise judging of client-style briefs | GPT-6.1 Sol clearly ahead; local losses are unsupported promises and omissions (15 Nov) |
+| [Meetings](tracks/meetings.md) | Can it make a private call into a record? | Real calls, line-level scoring | 97.2% host-vs-other lines on 4 calls; transcription about 28x real time on a clean clip (Jul) |
+| [Unattended work](tracks/unattended-work.md) | Can it finish a long job alone? | Coding, because project tests decide pass/fail | 15/15 for the best local setups and Claude on the first 15 fixes; 5/10 vs 10/10 for GPT-6.1 Sol on ten larger changes; 1/10 with tests hidden (5-19 Nov) |
+| [Running it](tracks/running-it.md) | Speed, capacity, cost, stability | Engines, concurrency, power, stress | Halogen: 86 tok/s writing code and 18.7 s to first token at 32K in the 4 Nov engine comparison; 62.5 tok/s and 22.4 s timed live on 24 Nov ([what changed between them](tracks/running-it.md#two-speed-measurements)); concurrency only measured on the July engine |
 
-Coding is [F187](FINDINGS.md#f187) (a re-run of the same ten fixes on 13 November, where maximum effort scored 8 rather than F183's 9; one fix is within noise). The eight kinds of work are [F186](FINDINGS.md#f186): hard document questions, refuse-or-comply judgement, conversations, tool use and dates matched or beat maximum effort, and writing was one draft behind on the automatic check and a near-tie with a blind judge. The one shortfall was answering from a large document pack (24 against 26 of 26): once, low worked out a figure the documents never state. Answers where an unsupported figure would be costly therefore ask for a higher effort; medium was not measured on those tests, so that routing is a judgement, not a result.
+The coding chart and the five-engine speed table are in the Unattended work and Running it pages, each with the
+harder result beside the attractive one.
 
-## Start here
+## Check one number yourself
 
-| If you want to | Go to |
-|---|---|
-| See what was found | [FINDINGS.md](FINDINGS.md) - starts with an index of every finding, each linked to its entry |
-| Check a published number | [claims.md](claims.md) - every claim with its value, status and evidence links ([claims.yml](claims.yml) is the machine-readable copy) |
-| Read an experiment | [experiments.md](experiments.md) indexes the earlier experiments, one file each; [results/](results/) lists every experiment by number with its pre-registration, results and raw data |
-| See what changed in each release | [RELEASE-NOTES.md](RELEASE-NOTES.md) |
-| Hear the production voice and the candidates it beat | [VOICES.md](VOICES.md) |
-| Know what is deliberately not here | [WITHHELD.md](WITHHELD.md) |
+The drafting comparison (E162), as published in release r5.18. Python 3 only, no
+other installs, a few seconds.
 
-## Current release: r5.17 (findings through 24 November 2026)
+    git clone https://github.com/HumanSpark/Local-AI && cd Local-AI
+    git checkout r5.18
+    python3 tools/score_e162.py
+    git diff --exit-code results/e162/score.json && echo "score.json reproduced"
 
-r5.17 makes every claim say when it was tested, whether it still holds, and where its exact evidence is: each claim in `claims.yml` (and the new `claims.json`) now carries a test date, a review date, a status (current, qualified, historical or superseded), a track, plain and technical names for the setup, the exact record pinned to this release, and how far a reader can check it. Three July experiment series get their own IDs (TU32-TU33, RT35-RT37, MT38-MT50) because their numbers clashed with August experiments. It also adds five findings, including [F202](FINDINGS.md#f202): production's model compressed with the community HTR method keeps its coding quality but runs slower than Halogen, so production is unchanged. [RELEASE-NOTES.md](RELEASE-NOTES.md) lists what each release added.
+The scorer rewrites `results/e162/score.json` from the saved judge decisions, so the
+`git diff` compares what you just produced with the committed result. Expected: the
+script prints a line beginning `agreement {'identical': 67, 'of': 100` (the two judges
+agreed on 67 of 100 comparisons), and the last command prints `score.json
+reproduced`. What that proves: the published drafting scores follow from the saved
+judgements. What it doesn't: a new model run, or a human view of draft quality.
+(Checked 2026-11-25 in a clean clone at tag r5.18.)
 
-Two things to know before relying on it:
+## What you can check, and what you can't
 
-- **Every claim was reviewed on 2026-11-24.** 23 are current, 17 qualified, 18 historical and 3 superseded; `claims.md` lists each with its status and dates, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
-- **Not everything is here.** Verbose server logs, internal design documents, and files that contain private content are withheld - among them the per-task records and task prompts of the coding tests, which quote the owner's private repositories; the scored results files are here, and four cited files do not exist anywhere. [WITHHELD.md](WITHHELD.md) lists every one with the reason.
+| Access | Meaning | Examples |
+|---|---|---|
+| Inspect | The outputs are here to read | Drafts, transcripts, scored answers |
+| Recalculate | Scores rebuild from saved records | E162 drafting scores, the cost model |
+| Rerun | Inputs are public; a new run is possible | Public benchmark suites |
+| Private | Summaries only, with the reason | Coding tasks from private projects ([WITHHELD.md](WITHHELD.md)) |
 
-## How to verify a claim
+## Planning your own pilot
 
-1. Open [claims.md](claims.md) (or [claims.yml](claims.yml)). Every published number is a claim with an id, a plain-English statement, its value, and the evidence file path(s) that back it.
-2. Follow the path. Raw benchmark outputs are in `results/`, evaluation outputs in `results/eval-pilot/` and `results/real-quality/`, text-to-speech evidence in `tts-bench/`, and the scripts that produced derived figures (such as the cost model) are in `tools/`.
-3. Cross-check provenance. [MANIFEST.md](MANIFEST.md) lists every model file used, with source repository, revision, byte size, and SHA256.
+What this record can't tell you about your firm, and what to measure: how many people
+ask at the same moment and with what size of document; acceptable queue time; your
+task mix; review time per approved output; the data path end to end.
 
-A build-time completeness check enforces that every file path cited in `FINDINGS.md`, `experiments.md`, `claims.yml`, or an evidence document under `results/` either exists in this package or is listed in `WITHHELD.md` with a reason. A release cannot ship a citation it cannot account for.
+## Navigating the record
 
-## What's here
-
-- [claims.md](claims.md) and [claims.yml](claims.yml) - the claims registry: the contract between the published prose and this data
-- [FINDINGS.md](FINDINGS.md) - the findings register (F1 onward), including negative results, retractions and lessons
-- [experiments.md](experiments.md) and [experiments/](experiments/) - pre-registrations and results for the earlier experiments, one file each (later ones have their own files in results/); predictions were written down before each test ran, and the misses are published beside the hits
-- [results/](results/) - benchmark, evaluation, tool-use, coding, and fine-tune outputs, including the pre-registration and results document for each later experiment
-- [integrated-technical-results-v2.md](integrated-technical-results-v2.md) - the compiled technical results, including the corrections log
-- [MANIFEST.md](MANIFEST.md) - model provenance (source, revision, size, SHA256 for every model file)
-- [PHASE-A-LOG.md](PHASE-A-LOG.md) - the dated execution log, kept as written
-- [tts-bench/](tts-bench/) - the text-to-speech engine evidence
-- [eval-suites/](eval-suites/) - the evaluation suite definitions and data
-- [tools/](tools/) - scripts referenced by published claims and findings
-- [docs/](docs/) - design and measurement documents cited by the findings
-- [RELEASE-NOTES.md](RELEASE-NOTES.md) - what changed in each release
-- [WITHHELD.md](WITHHELD.md) - what is cited but not shipped, and why
-- [assets/](assets/) - the chart above, generated from claims.yml at build time
-- [LICENSE](LICENSE), [tools/LICENSE](tools/LICENSE) and [CITATION.cff](CITATION.cff) - licences and how to cite this data
-
-## Method in one paragraph
-
-Single machine, run from July 2026 to 24 November 2026; the findings register in this release is current to 2026-11-24. Models served mainly with llama.cpp (Vulkan and ROCm backends), with other engines named in the findings that used them. Quality evaluation used deterministic fact-checkable suites plus a send-readiness assessment of realistic professional drafting tasks, graded by an independent judge model so no model family marks its own homework. Where a re-check showed a test itself was at fault, the correction is documented in the open rather than silently fixed, and predictions were written down before the runs that test them. Full method detail: [the Evidence page](https://humanspark.ai/local-ai/evidence/).
-
-## Versioning
-
-If a future measurement changes a claim, the claim is updated in `claims.yml` with its status field and the change is listed in `RELEASE-NOTES.md`, old value to new. On 7 November 2026 the repository's history was consolidated into a single commit at r5.2, when the public copy was cleaned of internal host names, paths and contact details from synthetic test documents; RELEASE-NOTES.md records what each earlier release added.
-
-## Licence and attribution
-
-Data, findings, and documents: CC BY 4.0. Scripts in `tools/`: MIT. Reuse freely with attribution to Alastair McDermott / HumanSpark and a link to [humanspark.ai/local-ai](https://humanspark.ai/local-ai/).
-
-## About
-
-Research by [Alastair McDermott](https://humanspark.ai/), HumanSpark - AI adoption for expertise-heavy businesses. The benchmarking was run by an AI research assistant on the box itself; the analysis and writing were produced by Alastair working with Claude - [how this was made](https://humanspark.ai/local-ai/evidence/#how-this-was-made).
-
-Questions about the research, or about what a machine like this could do in your practice: [humanspark.ai/call](https://humanspark.ai/call).
+[Glossary](GLOSSARY.md) (every code and model name) · [Findings register](FINDINGS.md) ·
+[Experiments index](results/README.md) · [Claims](claims.md) ([claims.json](claims.json)) ·
+[Release history](RELEASE-NOTES.md) · [Licence](LICENSE) and [citation](CITATION.cff)

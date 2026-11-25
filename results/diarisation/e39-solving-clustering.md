@@ -1,6 +1,6 @@
-# MT39: the diarisation failure was ONE WORD - and the sophisticated fix was the worst method (2026-07-17)
+# E39A: the diarisation failure was ONE WORD - and the sophisticated fix was the worst method (2026-07-17)
 
-_Public ID MT39; published as E39 before Local-AI r5.17, which collided with a different August experiment (experiments/E39.md). The file name is unchanged so old links keep working._
+_E39A is the July E39; experiments/E39.md is the August experiment with the same number._
 
 # File: results/diarisation/e39-solving-clustering.md
 # Purpose: Autonomous attempt to solve E38b's failures. Result: clustering SOLVED, counting NOT.

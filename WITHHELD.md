@@ -56,7 +56,7 @@ Not shipped, and not evidence the findings depend on for their numbers. Each pre
 | results/capability-index/ | 1 | monthly re-runs of the E154/E156 banks; same private-repository content |
 | results/coding-screen/real-project/ | 34 | transcripts of coding tasks run against the owner's private repositories; they quote source code and commit metadata from repositories other than this one |
 | results/e154-prereg.md | 1 | its amendments quote module, test and environment names from the owner's private repositories; the scores are in results/e154-results.md |
-| results/e154/ | 1 | task prompts, per-task records and test output from the owner's private repositories (E154 bank) |
+| results/e154/ | 2 | task prompts, per-task records and test output from the owner's private repositories (E154 bank) |
 | results/e156-prereg.md | 1 | its amendments quote module, test and environment names from the owner's private repositories (F184's evidence); the scores are in results/e156-results.md |
 | results/e156/ | 1 | task prompts, per-task records and test output from the owner's private repositories (E156 bank) |
 | results/e158/ | 1 | per-task records and test output from the owner's private repositories (E158, on the E156 bank) |
@@ -67,6 +67,7 @@ Not shipped, and not evidence the findings depend on for their numbers. Each pre
 | results/e168-prereg.md | 1 | quotes commit notes and test names from the owner's private repositories; the scores are in results/e168-results.md |
 | results/e168/ | 3 | task prompts built from private commit notes, per-task records and test output (E168 bank) |
 | results/e171/raw/ | 2 | per-task records, harness and server logs from the owner's private repositories (E171, on the E167 bank) |
+| results/e176/raw/ | 1 | per-task records and logs from the owner's private repositories (E176, coding banks) |
 | results/raw/e108/claudecode- | 2 | captured Claude Code requests; each embeds the owner's private instruction files in full |
 
 Cited by a shipped document:
@@ -75,6 +76,7 @@ Cited by a shipped document:
 |---|---|
 | results/capability-index/setups.json | results/e158-results.md |
 | results/e154-prereg.md | FINDINGS.md |
+| results/e154/bank.jsonl | results/e176-prereg.md |
 | results/e154/score.json | FINDINGS.md |
 | results/e156-prereg.md | FINDINGS.md |
 | results/e156/bank.jsonl | results/e158-prereg.md |
@@ -91,6 +93,7 @@ Cited by a shipped document:
 | results/e168/raw/window.log | results/e168-results.md |
 | results/e171/raw/HY/speed.json | results/e171-prereg.md |
 | results/e171/raw/mem_guard.log | results/e171-results.md |
+| results/e176/raw/LG/sparkforge-66de8e1d0.json | results/e176-prereg.md |
 
 ## Cited but not in the repository (4)
 

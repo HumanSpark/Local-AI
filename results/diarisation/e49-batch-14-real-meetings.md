@@ -1,6 +1,6 @@
-# MT49: 14 real meetings (11 hours) through the fast path - transcription solid, auto-k is the deployment gap (2026-07-17)
+# E49A: 14 real meetings (11 hours) through the fast path - transcription solid, auto-k is the deployment gap (2026-07-17)
 
-_Public ID MT49; published as E49 before Local-AI r5.17, which collided with a different August experiment (experiments/E49.md). The file name is unchanged so old links keep working._
+_E49A is the July E49; experiments/E49.md is the August experiment with the same number._
 
 # File: results/diarisation/e49-batch-14-real-meetings.md
 # Purpose: Batch fast-path run over Alastair's real meeting archive. Robustness + the k-in-production gap.

@@ -1,6 +1,6 @@
-# TU33 RESULTS: Extensive tool-use benchmark (2026-07-14)
+# E33A RESULTS: Extensive tool-use benchmark (2026-07-14)
 
-_Public ID TU33; published as E33 before Local-AI r5.17, which collided with a different August experiment (experiments/E33.md). The file name is unchanged so old links keep working._
+_E33A is the July E33; experiments/E33.md is the August experiment with the same number._
 
 # File: results/tool-use/E33-results.md
 # Purpose: Results of the extensive tool-use reliability benchmark. Pre-reg: E33-preregistration.md. Pilot: E32.

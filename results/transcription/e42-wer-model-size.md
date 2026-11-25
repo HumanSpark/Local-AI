@@ -1,6 +1,6 @@
-# MT42: large beats small on real speech (10.7% vs 13.7%) - but small OMITS and large FABRICATES (2026-07-17)
+# E42A: large beats small on real speech (10.7% vs 13.7%) - but small OMITS and large FABRICATES (2026-07-17)
 
-_Public ID MT42; published as E42 before Local-AI r5.17, which collided with a different August experiment (experiments/E42.md). The file name is unchanged so old links keep working._
+_E42A is the July E42; experiments/E42.md is the August experiment with the same number._
 
 # File: results/transcription/e42-wer-model-size.md
 # Purpose: The missing half of E41 - does model size change quality on actual SPEECH?

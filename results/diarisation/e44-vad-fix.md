@@ -1,6 +1,6 @@
-# MT44: a real VAD halves the error - DER 29.2% -> 20.2% held out, and far-field costs 0.9 points (2026-07-17)
+# E44A: a real VAD halves the error - DER 29.2% -> 20.2% held out, and far-field costs 0.9 points (2026-07-17)
 
-_Public ID MT44; published as E44 before Local-AI r5.17, which collided with a different August experiment (experiments/E44.md). The file name is unchanged so old links keep working._
+_E44A is the July E44; experiments/E44.md is the August experiment with the same number._
 
 # File: results/diarisation/e44-vad-fix.md
 # Purpose: Fixing E43's diagnosis - false alarm was 69% of all DER because we never built a VAD.

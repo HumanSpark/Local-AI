@@ -108,16 +108,8 @@ Every claim in `claims.yml` and `claims.json` carries these fields (added 2026-1
 | track | `documents`, `drafting`, `meetings`, `unattended` (multi-step work, tested through coding and tool use) or `running` (speed, capacity, cost, power, stability). |
 | `setup_role` / `setup_technical` | The plain-English and the technical name of the setup measured. |
 
-## Renamed experiment IDs
+## Experiment numbers used twice
 
-Three July series reused numbers that a different August experiment also used. From Local-AI r5.17 they have their own
-public IDs. File names did not change, so old links still open the right file.
-
-| New ID | Published before r5.17 as | What it is | Record |
-|---|---|---|---|
-| TU32 | E32 | July office tool-use pilot | `results/tool-use/E32-results.md` |
-| TU33 | E33 | July extensive tool-use benchmark | `results/tool-use/E33-results.md` |
-| RT35 to RT37 | E35 to E37 | July router and multi-user throughput tests | `results/router-loadtest.md`, `results/router-concurrency.md`, `results/moe-diversity.md` |
-| MT38 to MT50 | E38 to E50 | July meetings and transcription series (diarisation, silence, word error rate, speaker labelling) | `results/diarisation/e39-...` to `e50-target-speaker.md`, `results/transcription/e41-`, `e42-`, `e45-...` |
-
-`experiments/E32.md`, `E33.md` and `E35.md` to `E50.md` are the August experiments with those numbers. July E31 and E34 do not clash (E31's July files are the same experiment; there is no August E34).
+E32, E33 and E35 to E50 each name two experiments, one from July and one from August. The July ones are written with an
+A: E32A, E33A, E35A to E37A (router and multi-user tests) and E38A to E50A (meetings and transcription).
+`experiments/E32.md` and the rest are the August ones.

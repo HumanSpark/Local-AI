@@ -1,6 +1,6 @@
-# TU32 RESULTS: Tool-use / office-document creation (2026-07-14)
+# E32A RESULTS: Tool-use / office-document creation (2026-07-14)
 
-_Public ID TU32; published as E32 before Local-AI r5.17, which collided with a different August experiment (experiments/E32.md). The file name is unchanged so old links keep working._
+_E32A is the July E32; experiments/E32.md is the August experiment with the same number._
 
 # File: results/tool-use/E32-results.md
 # Purpose: Results of the tool-use / Word-doc-creation benchmark (E32). Pre-registration: E32-preregistration.md.

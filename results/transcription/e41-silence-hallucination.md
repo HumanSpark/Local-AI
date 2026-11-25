@@ -1,6 +1,6 @@
-# MT41: Whisper invents "Thank you." out of pure digital silence - ~2/min, and the BIGGER model is the DANGEROUS one (2026-07-17)
+# E41A: Whisper invents "Thank you." out of pure digital silence - ~2/min, and the BIGGER model is the DANGEROUS one (2026-07-17)
 
-_Public ID MT41; published as E41 before Local-AI r5.17, which collided with a different August experiment (experiments/E41.md). The file name is unchanged so old links keep working._
+_E41A is the July E41; experiments/E41.md is the August experiment with the same number._
 
 # File: results/transcription/e41-silence-hallucination.md
 # Purpose: Systematic silence-hallucination benchmark. Pre-reg: ../diarisation/e41-silence-hallucination-prereg.md.

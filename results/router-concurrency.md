@@ -1,6 +1,6 @@
-# RT36 RESULTS: single-model concurrency under the router (2026-07-17)
+# E36A RESULTS: single-model concurrency under the router (2026-07-17)
 
-_Public ID RT36; published as E36 before Local-AI r5.17, which collided with a different August experiment (experiments/E36.md). The file name is unchanged._
+_E36A is the July E36; experiments/E36.md is the August experiment with the same number._
 
 # File: results/router-concurrency.md
 # Purpose: Does the router's proxy hop change F17's concurrency scaling? Pre-reg: router-concurrency-prereg.md.

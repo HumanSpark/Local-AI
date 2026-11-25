@@ -94,6 +94,8 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e165.sh](run_e165.sh) | Run E165 unattended - the test audit's re-runs (tool use v3, mt-l4, mt-long, H6) on arms Q, KFL, KX, HS, LM. |
 | [run_e170.py](run_e170.py) | Run and score E170 - memory-extraction jobs (the nightly "propose memory entries" shape) across local models. |
 | [run_e173_renders.sh](run_e173_renders.sh) | Render the 15 scored E173 songs (3 music models x 5 frozen prompts) on audio.cpp Vulkan, one engine at a time. |
+| [run_e176.sh](run_e176.sh) | Run E176 end to end - verify the Ling-3.2-air shards, speed leg, then the E167 bank as arm LG. |
+| [run_e176_speed.sh](run_e176_speed.sh) | E176 speed leg - llama-bench on Ling-3.2-air Q3_K_M at depths 0/8192/32768 on two llama.cpp builds. |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |

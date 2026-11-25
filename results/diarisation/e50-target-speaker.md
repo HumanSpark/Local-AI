@@ -1,6 +1,6 @@
-# MT50: "Alastair vs Other" (target-speaker) works at ~92% and SIDESTEPS the auto-k problem (2026-07-17)
+# E50A: "Alastair vs Other" (target-speaker) works at ~92% and SIDESTEPS the auto-k problem (2026-07-17)
 
-_Public ID MT50; published as E50 before Local-AI r5.17, which collided with a different August experiment (experiments/E50.md). The file name is unchanged so old links keep working._
+_E50A is the July E50; experiments/E50.md is the August experiment with the same number._
 
 # File: results/diarisation/e50-target-speaker.md
 # Purpose: Reframe from full diarisation to target-speaker detection - the thing Alastair actually needs.

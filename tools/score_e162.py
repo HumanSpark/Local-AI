@@ -56,7 +56,7 @@ def completion(records: list[dict]) -> dict:
         "pair_tasks_resolved_first_pass": pt_first,
         "pair_tasks_resolved_after_retry": pt_final,
         "retries": len(retries),
-        "retry_finish_reasons": {f: sum(v["finish_reason"] == f for v in retries) for f in {v["finish_reason"] for v in retries}},
+        "retry_finish_reasons": {f: sum(v["finish_reason"] == f for v in retries) for f in sorted({v["finish_reason"] for v in retries})},  # sorted: set order varies per run (PYTHONHASHSEED), which broke byte-identical reproduction
     }
 
 

@@ -1,6 +1,6 @@
-# MT46: pyannote 3.1 vs our stack, like-for-like - 6.5% vs 20.3% on close-talk, and WHERE the gap lives (2026-07-17)
+# E46A: pyannote 3.1 vs our stack, like-for-like - 6.5% vs 20.3% on close-talk, and WHERE the gap lives (2026-07-17)
 
-_Public ID MT46; published as E46 before Local-AI r5.17, which collided with a different August experiment (experiments/E46.md). The file name is unchanged so old links keep working._
+_E46A is the July E46; experiments/E46.md is the August experiment with the same number._
 
 # File: results/diarisation/e46-pyannote-headtohead.md
 # Purpose: The honest head-to-head. Same AMI meetings, same metric, same collar/overlap, same k.

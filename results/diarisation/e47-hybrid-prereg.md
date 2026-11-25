@@ -1,6 +1,6 @@
 # PRE-REGISTRATION: pyannote-VAD + our embeddings - can we close the false-alarm gap at our speed? (2026-07-17)
 
-_Pre-registration for MT47 (public ID; published as E47 before Local-AI r5.17, which collided with a different August experiment, experiments/E47.md)._
+_E47A is the July E47; experiments/E47.md is the August experiment with the same number._
 
 # File: results/diarisation/e47-hybrid-prereg.md
 # Purpose: Predictions BEFORE running the hybrid (pyannote segmentation-3.0 as VAD, our clustering).

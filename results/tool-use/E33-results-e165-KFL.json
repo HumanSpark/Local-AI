@@ -1,0 +1,3497 @@
+{
+  "label": "e165-KFL",
+  "task_set_version": "v3-2026-11-17",
+  "runs": 3,
+  "thinking": "low",
+  "max_tokens": 32768,
+  "request_timeout": 5581,
+  "only": null,
+  "tasks_run": [
+    "d1-delay-letter",
+    "d2-summary",
+    "d3-extract",
+    "d4-attendance",
+    "d5-memo",
+    "n1-email",
+    "n2-reminder",
+    "n3-meeting",
+    "m1-lookup-write",
+    "m2-letter-remind",
+    "m3-lookup-email-meet",
+    "m4-extract-save-email",
+    "m5-letter-sheet",
+    "c1-urgent",
+    "c2-not-urgent",
+    "c3-vat",
+    "c4-date-before",
+    "c5-date-after",
+    "c6-cat-litigation",
+    "c7-cat-probate",
+    "c8-select-email",
+    "c9-select-no-email",
+    "c10-compound-both",
+    "c11-compound-one",
+    "c12-arith-under",
+    "c13-arith-over",
+    "c1b-urgent-onlyif",
+    "c2b-not-urgent-onlyif",
+    "c4b-date-before-onlyif",
+    "c5b-date-after-onlyif",
+    "e1-missing-client",
+    "e2-missing-then-ask",
+    "t1-definition",
+    "t2-opinion",
+    "a1-underspecified",
+    "a2-which-client"
+  ],
+  "task_set_size": 36,
+  "results": [
+    {
+      "id": "d1-delay-letter",
+      "cat": "doc",
+      "kind": "doc",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-delay.docx",
+                "title": "Client Letter - Murphy Conveyancing File",
+                "body_paragraphs": "Mr John Murphy\n14 Marley Grove\nDublin 16\n\n16 November 2026\n\nRe: Conveyancing File \u2013 Apology for Delay\n\nDear Mr Murphy,\n\nI am writing to sincerely apologise for the two-week delay in progressing your conveyancing matter. I understand that this delay is frustrating and I take full responsibility for it.\n\nPlease be assured that your file is now receiving our immediate attention and we are working to bring it back on track as quickly as possible. I will provide you with a further update on progress within the coming week.\n\nI appreciate your patience and understanding in this matter. If you have any questions or concerns in the meantime, please do not hesitate to contact me.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The letter has been saved as **murphy-delay.docx**. It's addressed to Mr John Murphy at 14 Marley Grove, Dublin 16, dated today (16 November 2026), and apologises for the two-week delay on his conveyancing file while reassuring him that the matter is now receiving immediate attention."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-delay.docx",
+                "title": "Client Letter - Murphy Conveyancing File",
+                "body_paragraphs": "Mr John Murphy\n14 Marley Grove\nDublin 16\n\n16 November 2026\n\nRe: Conveyancing File \u2013 Apology for Delay\n\nDear Mr Murphy,\n\nI am writing to sincerely apologise for the two-week delay in progressing your conveyancing matter. I understand that this delay is frustrating and I take full responsibility for it.\n\nPlease be assured that your file is now being given our full attention and we are working to bring it back on track as quickly as possible. I will provide you with a further update within the next five working days.\n\nI appreciate your patience and understanding in this matter. If you have any questions or concerns in the meantime, please do not hesitate to contact me.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The letter has been saved as **murphy-delay.docx**. It is addressed to Mr John Murphy at 14 Marley Grove, Dublin 16, apologises for the two-week delay on his conveyancing file, and commits to a further update within five working days."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-delay.docx",
+                "title": "Client Letter - Murphy Conveyancing File",
+                "body_paragraphs": "Mr John Murphy\n14 Marley Grove\nDublin 16\n\n16 November 2026\n\nRe: Conveyancing File \u2013 Apology for Delay\n\nDear Mr Murphy,\n\nI am writing to sincerely apologise for the two-week delay in progressing your conveyancing matter. I understand that this delay may have caused you inconvenience and concern, and I take full responsibility for it.\n\nPlease be assured that your file is now being given our immediate attention. We are working to bring it back on track and will keep you updated on any developments as they arise.\n\nIf you have any questions or would like to discuss the matter further, please do not hesitate to contact me.\n\nThank you for your patience and understanding.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The letter has been saved as **murphy-delay.docx**. It's addressed to Mr John Murphy at 14 Marley Grove, Dublin 16, dated today (16 November 2026), and includes a brief apology for the two-week delay along with reassurance that the file is now receiving immediate attention. Let me know if you'd like any changes to the tone or content."
+        }
+      ]
+    },
+    {
+      "id": "d2-summary",
+      "cat": "doc",
+      "kind": "doc",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "summary.docx",
+                "title": "Engagement Terms Summary",
+                "body_paragraphs": "Client: Fitzgerald Ltd\n\nWhat we will do: We will review a commercial lease on your behalf.\n\nHow much it costs: The total fee is a fixed amount of EUR 4,500. This will not change regardless of how much time the work takes.\n\nHow long the engagement lasts: This agreement runs for three months from the date it is signed.\n\nEnding the agreement early: Either party may end the agreement by giving the other party 14 days' written notice. If the agreement is ended early, Fitzgerald Ltd will still owe fees for any work that has already been completed up to the date of termination."
+              }
+            }
+          ],
+          "final_text": "The summary has been saved as **summary.docx**. Here's what it covers in plain English:\n\n- **Client:** Fitzgerald Ltd\n- **Scope:** We will review a commercial lease on their behalf.\n- **Fee:** A fixed fee of EUR 4,500 \u2014 it won't change regardless of time spent.\n- **Duration:** The engagement runs for three months.\n- **Early termination:** Either side can end the agreement with 14 days' written notice. If ended early, Fitzgerald Ltd still owes fees for work already completed."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "summary.docx",
+                "title": "Engagement Terms Summary",
+                "body_paragraphs": "Client: Fitzgerald Ltd\n\nWhat we will do: We will review a commercial lease on behalf of Fitzgerald Ltd.\n\nHow much it costs: The fee is a fixed amount of EUR 4,500. This means the total charge will not go above that figure regardless of how much time the work takes.\n\nHow long the engagement lasts: The agreement runs for three months from the date it is signed.\n\nEnding the agreement early: Either party may end the engagement by giving the other party 14 days' written notice. If the engagement is ended early, Fitzgerald Ltd will still be required to pay for any work that has already been completed up to the date of termination."
+              }
+            }
+          ],
+          "final_text": "The summary has been saved as **summary.docx**. Here's what it covers in plain English:\n\n- **Client:** Fitzgerald Ltd\n- **Scope:** We will review a commercial lease on their behalf.\n- **Fee:** A fixed fee of EUR 4,500 \u2014 the total won't exceed this regardless of time spent.\n- **Duration:** The engagement runs for 3 months from signing.\n- **Early termination:** Either side can end it with 14 days' written notice. If ended early, Fitzgerald Ltd still pays for work already completed."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "summary.docx",
+                "title": "Engagement Terms Summary",
+                "body_paragraphs": "Client: Fitzgerald Ltd\n\nWhat we will do: We will review a commercial lease on your behalf.\n\nHow much it costs: The total fee for this work is a fixed amount of EUR 4,500. This will not change regardless of how much time the work takes.\n\nHow long it lasts: This engagement runs for three months from the date of agreement.\n\nHow to end it early: Either party may end this engagement by giving the other party 14 days' written notice. If the engagement is ended early, fees will be payable for the work that has already been completed up to that point."
+              }
+            }
+          ],
+          "final_text": "Done \u2014 **summary.docx** has been saved. Here's what it covers in plain English:\n\n- **Client:** Fitzgerald Ltd\n- **What we'll do:** Review a commercial lease\n- **Fee:** Fixed at EUR 4,500 (won't change regardless of time spent)\n- **Duration:** 3 months from agreement\n- **Early termination:** Either side can end it with 14 days' notice; fees are payable for work completed up to that point"
+        }
+      ]
+    },
+    {
+      "id": "d3-extract",
+      "cat": "doc",
+      "kind": "doc",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "engagement-terms.docx",
+                "title": "Engagement Terms Summary",
+                "body_paragraphs": [
+                  "Parties",
+                  "Solicitor: Walsh & Co",
+                  "Client: Deirdre O'Brien",
+                  "",
+                  "Matter",
+                  "Sale of 14 Marley Grove",
+                  "",
+                  "Fee",
+                  "EUR 1,800 plus VAT",
+                  "",
+                  "Key Dates",
+                  "Completion: 30 September 2026",
+                  "",
+                  "Termination Terms",
+                  "Either party may terminate the engagement on notice.",
+                  "Fees for work done remain payable upon termination."
+                ]
+              }
+            }
+          ],
+          "final_text": "The document **engagement-terms.docx** has been saved with the following extracted information:\n\n- **Parties:** Walsh & Co (Solicitor) and Deirdre O'Brien (Client)\n- **Matter:** Sale of 14 Marley Grove\n- **Fee:** EUR 1,800 plus VAT\n- **Key Date:** Completion on 30 September 2026\n- **Termination Terms:** Either party may terminate on notice; fees for work done remain payable"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "engagement-terms.docx",
+                "title": "Engagement Terms Summary",
+                "body_paragraphs": [
+                  "Parties",
+                  "Solicitor: Walsh & Co",
+                  "Client: Deirdre O'Brien",
+                  "",
+                  "Matter",
+                  "Sale of 14 Marley Grove",
+                  "",
+                  "Fee",
+                  "EUR 1,800 plus VAT",
+                  "",
+                  "Key Dates",
+                  "Completion: 30 September 2026",
+                  "",
+                  "Termination Terms",
+                  "Either party may terminate the engagement on notice.",
+                  "Fees for work done up to the date of termination remain payable."
+                ]
+              }
+            }
+          ],
+          "final_text": "The document **engagement-terms.docx** has been saved with the following extracted information:\n\n- **Parties:** Walsh & Co (Solicitor) and Deirdre O'Brien (Client)\n- **Matter:** Sale of 14 Marley Grove\n- **Fee:** EUR 1,800 plus VAT\n- **Key Date:** Completion on 30 September 2026\n- **Termination Terms:** Either party may terminate on notice; fees for work done remain payable"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "engagement-terms.docx",
+                "title": "Engagement Terms Summary",
+                "body_paragraphs": [
+                  "Parties",
+                  "Solicitor: Walsh & Co",
+                  "Client: Deirdre O'Brien",
+                  "",
+                  "Matter",
+                  "Sale of 14 Marley Grove",
+                  "",
+                  "Fee",
+                  "EUR 1,800 plus VAT",
+                  "",
+                  "Key Dates",
+                  "Completion date: 30 September 2026",
+                  "",
+                  "Termination Terms",
+                  "Either party may terminate the engagement on notice.",
+                  "Fees for work already done remain payable upon termination."
+                ]
+              }
+            }
+          ],
+          "final_text": "The document **engagement-terms.docx** has been saved with the following extracted information:\n\n- **Parties:** Walsh & Co (Solicitor) and Deirdre O'Brien (Client)\n- **Matter:** Sale of 14 Marley Grove\n- **Fee:** EUR 1,800 plus VAT\n- **Key Date:** Completion on 30 September 2026\n- **Termination Terms:** Either party may terminate on notice; fees for work already done remain payable"
+        }
+      ]
+    },
+    {
+      "id": "d4-attendance",
+      "cat": "doc",
+      "kind": "doc",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "attendance-note.docx",
+                "title": "Attendance Note",
+                "body_paragraphs": [
+                  "Client: Mr Byrne",
+                  "Date of call: 14 July 2026",
+                  "Duration: 15 minutes",
+                  "Matter: Probate",
+                  "",
+                  "Summary of discussion:",
+                  "",
+                  "Telephone call with Mr Byrne to discuss the probate timeline. Mr Byrne confirmed he will send the death certificate and the will by Friday. We will apply for the grant of representation upon receipt of those documents.",
+                  "",
+                  "Mr Byrne also raised questions regarding Capital Acquisitions Tax (CAT) thresholds. He was advised to consult his accountant on this matter.",
+                  "",
+                  "Actions:",
+                  "",
+                  "1. Mr Byrne to send death certificate and will by Friday.",
+                  "2. We are to apply for the grant on receipt of the above documents.",
+                  "3. Mr Byrne to consult his accountant regarding CAT thresholds.",
+                  "",
+                  "Next review: 3 weeks from date of this note."
+                ]
+              }
+            }
+          ],
+          "final_text": "The attendance note has been saved as **attendance-note.docx**. It includes:\n\n- **Client:** Mr Byrne\n- **Date:** 14 July 2026\n- **Duration:** 15 minutes\n- **Summary:** Probate timeline discussion, documents to be received by Friday, CAT thresholds query referred to accountant\n- **Actions:** Three clear action items for both client and firm\n- **Next review:** 3 weeks from the call date"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "attendance-note.docx",
+                "title": "Attendance Note",
+                "body_paragraphs": [
+                  "Client: Mr Byrne",
+                  "Date of attendance: 14 July 2026",
+                  "Method: Telephone",
+                  "Duration: 15 minutes",
+                  "",
+                  "Note:",
+                  "Spoke with Mr Byrne regarding the probate timeline. He confirmed he will send the death certificate and the original will by Friday. We will apply for the grant of representation upon receipt of same.",
+                  "",
+                  "Mr Byrne also enquired about Capital Acquisitions Tax (CAT) thresholds. I advised that he should consult his accountant in relation to same.",
+                  "",
+                  "Action items:",
+                  "1. Client to forward death certificate and will by Friday.",
+                  "2. We to apply for grant on receipt of documents.",
+                  "3. Client to consult accountant re CAT thresholds.",
+                  "",
+                  "Next step: Review file in 3 weeks."
+                ]
+              }
+            }
+          ],
+          "final_text": "The attendance note has been saved as **attendance-note.docx**. It includes:\n\n- **Client:** Mr Byrne\n- **Date:** 14 July 2026\n- **Method:** Telephone, 15 minutes\n- **Substance:** Probate timeline discussed; client to send death cert and will by Friday; we apply for grant on receipt; CAT thresholds query referred to accountant\n- **Action items** and a **review date** in 3 weeks"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "attendance-note.docx",
+                "title": "Attendance Note",
+                "body_paragraphs": [
+                  "Client: Mr Byrne",
+                  "Date of call: 14 July 2026",
+                  "Duration: 15 minutes",
+                  "Matter: Probate",
+                  "",
+                  "Summary of discussion:",
+                  "",
+                  "Telephone call with Mr Byrne regarding the probate timeline. Mr Byrne confirmed he will forward the death certificate and the original will by Friday. We will apply for the grant of representation upon receipt of those documents.",
+                  "",
+                  "Mr Byrne also raised questions regarding Capital Acquisitions Tax (CAT) thresholds. I advised that these matters are best addressed by his accountant, and recommended he seek their guidance on the applicable thresholds and reliefs.",
+                  "",
+                  "Actions:",
+                  "",
+                  "1. Mr Byrne to send death certificate and will by Friday.",
+                  "2. We are to apply for the grant on receipt of the above documents.",
+                  "3. Mr Byrne to consult his accountant regarding CAT thresholds.",
+                  "4. Diarise review of file in 3 weeks.",
+                  "",
+                  "Next review date: 4 August 2026"
+                ]
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "Review probate file - Mr Byrne",
+                "due": "2026-08-04"
+              }
+            }
+          ],
+          "final_text": "Done. Here's what I've prepared:\n\n**attendance-note.docx** contains:\n\n- **Client:** Mr Byrne\n- **Date of call:** 14 July 2026\n- **Duration:** 15 minutes\n- **Matter:** Probate\n- **Summary:** Discussion of probate timeline; Mr Byrne to send death certificate and will by Friday; we apply for grant on receipt; CAT threshold queries referred to his accountant\n- **Actions:** Four action items as noted\n- **Next review date:** 4 August 2026\n\nI've also added a diary reminder for the file review on 4 August 2026."
+        }
+      ]
+    },
+    {
+      "id": "d5-memo",
+      "cat": "doc",
+      "kind": "doc",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-memo.docx",
+                "title": "Internal File Memo",
+                "body_paragraphs": "INTERNAL MEMORANDUM\n\nDate: 16 November 2026\nRe: Kelly \u2013 Litigation File\nStatus: File Reviewed \u2013 Counsel's Opinion Awaited\n\nThe Kelly litigation file has been reviewed. All relevant documents and correspondence on the file have been considered.\n\nCounsel's opinion has been requested and is currently awaited. No further action is required on this file until counsel's advice is received.\n\nA follow-up will be made if counsel's opinion is not received within the expected timeframe."
+              }
+            }
+          ],
+          "final_text": "The internal file memo has been saved as **kelly-memo.docx**. It records that the Kelly litigation file has been reviewed and that counsel's opinion is awaited, with a note that a follow-up will be made if the opinion is not received within the expected timeframe."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-memo.docx",
+                "title": "Internal File Memo",
+                "body_paragraphs": "INTERNAL MEMORANDUM\n\nDate: 16 November 2026\nRe: Kelly \u2013 Litigation File\nStatus: File Reviewed \u2013 Counsel's Opinion Awaited\n\nThe above matter has been reviewed. The file is in order and all relevant documentation has been considered.\n\nCounsel's opinion has been requested and is currently awaited. No further action is required at this stage pending receipt of counsel's advice.\n\nA follow-up will be diarised to confirm receipt of counsel's opinion."
+              }
+            }
+          ],
+          "final_text": "The memo has been saved as **kelly-memo.docx**. It records that the Kelly litigation file has been reviewed and that counsel's opinion is awaited, with a note that a follow-up will be diarised."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-memo.docx",
+                "title": "Internal File Memo",
+                "body_paragraphs": "INTERNAL MEMORANDUM\n\nDate: 16 November 2026\nRe: Kelly Litigation File\nStatus: File Reviewed \u2014 Counsel's Opinion Awaited\n\nThis memo records that the Kelly litigation file has been reviewed. The relevant documents and correspondence have been considered.\n\nCounsel's opinion has been requested and is awaited. No further action is required at this time pending receipt of counsel's advice.\n\nThe file will be updated upon receipt of counsel's opinion."
+              }
+            }
+          ],
+          "final_text": "The internal file memo has been saved as **kelly-memo.docx**. It records that the Kelly litigation file has been reviewed and that counsel's opinion is awaited."
+        }
+      ]
+    },
+    {
+      "id": "n1-email",
+      "cat": "nondoc",
+      "kind": "tool",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Byrne"
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "anne.byrne@example.com",
+                "subject": "Outstanding Documents \u2013 Byrne Probate File",
+                "body": "Dear Ms Byrne,\n\nI hope this email finds you well.\n\nI am writing to follow up on the outstanding documents required to progress the probate application on your file. We are keen to move matters forward and would be grateful if you could provide the outstanding items at your earliest convenience.\n\nIf you have any queries or require assistance in obtaining any of the documents, please do not hesitate to contact us and we will be happy to help.\n\nThank you for your time, and we look forward to hearing from you.\n\nKind regards,"
+              }
+            }
+          ],
+          "final_text": "The email has been sent to anne.byrne@example.com with a polite follow-up regarding the outstanding documents on the Byrne probate file."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Byrne"
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "anne.byrne@example.com",
+                "subject": "Outstanding Documents \u2013 Byrne Probate File",
+                "body": "Dear Ms Byrne,\n\nI hope this email finds you well.\n\nI am writing to follow up regarding the outstanding documents on your probate file. We are keen to progress matters and would be grateful if you could provide the outstanding items at your earliest convenience.\n\nIf you have any questions or require assistance in obtaining the documents, please do not hesitate to contact us and we will be happy to help.\n\nThank you for your time, and we look forward to hearing from you.\n\nKind regards,"
+              }
+            }
+          ],
+          "final_text": "The email has been sent to Anne Byrne at anne.byrne@example.com, politely requesting the outstanding documents on her probate file."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Byrne"
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "anne.byrne@example.com",
+                "subject": "Outstanding Documents \u2013 Byrne Probate File",
+                "body": "Dear Ms Byrne,\n\nI hope this email finds you well.\n\nI am writing to follow up regarding the outstanding documents on the Byrne probate file. We are keen to progress matters and would be grateful if you could provide the outstanding items at your earliest convenience.\n\nIf you have any questions or require clarification on what is needed, please do not hesitate to contact us.\n\nThank you for your time, and we look forward to hearing from you.\n\nKind regards,"
+              }
+            }
+          ],
+          "final_text": "The email has been sent to Anne Byrne at anne.byrne@example.com, politely requesting the outstanding documents on the probate file."
+        }
+      ]
+    },
+    {
+      "id": "n2-reminder",
+      "cat": "nondoc",
+      "kind": "tool",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "Follow up on the Murphy file",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "I've added a diary reminder to follow up on the Murphy file, due on Monday 30 November 2026 (14 days from today)."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "Follow up on the Murphy file",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done \u2014 I've added a diary reminder to follow up on the Murphy file, due Monday 30 November 2026 (14 days from today)."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "Follow up on the Murphy file",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done \u2014 I've added a diary reminder to follow up on the Murphy file, due Monday 30 November 2026 (14 days from today)."
+        }
+      ]
+    },
+    {
+      "id": "n3-meeting",
+      "cat": "nondoc",
+      "kind": "tool",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "schedule_meeting"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "schedule_meeting",
+              "args": {
+                "title": "Kelly case review",
+                "when": "Tuesday 24 November 2026 at 11:00"
+              }
+            }
+          ],
+          "final_text": "I've booked the meeting, but I want to flag a date ambiguity for you to confirm.\n\n**Booked:** \"Kelly case review\" \u2014 Tuesday 24 November 2026 at 11:00 (30 minutes)\n\nSince today is Monday 16 November, \"next Tuesday\" could mean either:\n- **Tomorrow, Tuesday 17 November**, or\n- **Tuesday of next week, 24 November** (what I booked)\n\nIf you meant tomorrow (17 November), let me know and I'll update the booking."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "schedule_meeting"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "schedule_meeting",
+              "args": {
+                "title": "Kelly case review",
+                "when": "Tuesday 24 November 2026 at 11:00"
+              }
+            }
+          ],
+          "final_text": "I've booked the meeting **'Kelly case review'** for Tuesday 24 November 2026 at 11:00."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "schedule_meeting"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "schedule_meeting",
+              "args": {
+                "title": "Kelly case review",
+                "when": "Tuesday 24 November 2026 at 11:00"
+              }
+            }
+          ],
+          "final_text": "I've booked the meeting:\n\n- **Title:** Kelly case review\n- **When:** Tuesday 24 November 2026 at 11:00\n- **Duration:** 30 minutes"
+        }
+      ]
+    },
+    {
+      "id": "m1-lookup-write",
+      "cat": "chain",
+      "kind": "multi",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-update.docx",
+                "title": "Update on Your Conveyancing Matter",
+                "body_paragraphs": [
+                  "16 November 2026",
+                  "",
+                  "Mr John Murphy",
+                  "14 Marley Grove",
+                  "Dublin 16",
+                  "",
+                  "Re: Conveyancing Matter \u2013 Progress Update",
+                  "",
+                  "Dear Mr Murphy,",
+                  "",
+                  "I am writing to confirm that completion of your conveyancing matter is progressing well.",
+                  "",
+                  "All necessary steps are being taken to ensure that completion proceeds on schedule. We will continue to keep you informed of any developments and will contact you should any further information or action be required on your part.",
+                  "",
+                  "If you have any questions or concerns in the meantime, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "Solicitor"
+                ]
+              }
+            }
+          ],
+          "final_text": "I've looked up the Murphy client record and drafted the letter. Here's a summary:\n\n**Client details found:**\n- **Name:** Mr John Murphy\n- **Address:** 14 Marley Grove, Dublin 16\n- **Matter:** Conveyancing\n- **Balance:** \u20ac0\n\n**Letter saved as `murphy-update.docx`** \u2014 addressed to Mr Murphy at his Dublin 16 address, confirming that completion of his conveyancing matter is progressing well and that we will keep him informed of any developments."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-update.docx",
+                "title": "Update on Your Conveyancing Matter",
+                "body_paragraphs": [
+                  "Mr John Murphy",
+                  "14 Marley Grove",
+                  "Dublin 16",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Dear Mr Murphy,",
+                  "",
+                  "Re: Conveyancing Matter - Update on Completion",
+                  "",
+                  "I am writing to confirm that completion of your conveyancing matter is progressing well.",
+                  "",
+                  "All necessary steps are being taken to ensure that completion proceeds on schedule. We will be in contact with you shortly with further details regarding the closing of the transaction.",
+                  "",
+                  "Should you have any queries in the meantime, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "Done. I looked up the Murphy client record and drafted the letter, saved as **murphy-update.docx**.\n\nHere's a summary of what was included:\n\n- **Client:** Mr John Murphy\n- **Address:** 14 Marley Grove, Dublin 16\n- **Matter:** Conveyancing\n- **Content:** A formal letter dated 16 November 2026 confirming that completion of the conveyancing matter is progressing well, with an offer to address any queries."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-update.docx",
+                "title": "Update on Completion of Your Conveyancing Matter",
+                "body_paragraphs": "Mr John Murphy\n14 Marley Grove\nDublin 16\n\n16 November 2026\n\nDear Mr Murphy,\n\nRe: Conveyancing Matter \u2013 Update on Completion\n\nWe write to confirm that completion of your conveyancing matter is progressing well.\n\nAll necessary steps are being taken to ensure that completion proceeds on schedule. We will continue to monitor the position closely and will contact you immediately should any further information or action be required on your part.\n\nShould you have any queries in the meantime, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "Done. I looked up the Murphy client record and drafted the letter. Here's a summary:\n\n**Client details found:**\n- **Name:** Mr John Murphy\n- **Address:** 14 Marley Grove, Dublin 16\n- **Matter:** Conveyancing\n- **Balance:** \u20ac0 (clear)\n\n**Document saved:** `murphy-update.docx`\n\nThe letter is addressed to Mr Murphy at his Dublin 16 address, dated today (16 November 2026), and confirms that completion of his conveyancing matter is progressing well, with an offer to contact him if anything further is needed."
+        }
+      ]
+    },
+    {
+      "id": "m2-letter-remind",
+      "cat": "chain",
+      "kind": "multi",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "O'Connor"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "oconnor-fee.docx",
+                "title": "Fee Reminder - O'Connor Matter",
+                "body_paragraphs": "Our Ref: O'Connor/Debt Recovery\n\n16 November 2026\n\nMr Liam O'Connor\n9 Strand Road\nBray\n\nRe: Debt Recovery Matter - Outstanding Fees\n\nDear Mr O'Connor,\n\nWe write in relation to the above matter and wish to bring to your attention that there is an outstanding balance of EUR 2,350.00 on your account.\n\nDespite previous requests, this amount remains unpaid. We would be grateful if you could arrange payment of the outstanding sum within 14 days of the date of this letter.\n\nIf you have already made payment, please disregard this correspondence. Should you wish to discuss payment arrangements or have any queries regarding the invoice, please do not hesitate to contact our office.\n\nWe look forward to hearing from you promptly.\n\nYours sincerely,\n\n[Name]\n[Solicitor]"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "Follow up on O'Connor fee reminder letter",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. Here's what I've completed:\n\n1. **Fee reminder letter** saved as `oconnor-fee.docx` \u2014 addressed to Mr Liam O'Connor at 9 Strand Road, Bray, regarding the outstanding balance of \u20ac2,350 on his debt recovery matter, requesting payment within 14 days.\n\n2. **Follow-up reminder** added for 30 November 2026 (14 days from today)."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "add_reminder",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "O'Connor"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "oconnor-fee.docx",
+                "title": "Fee Reminder - O'Connor Matter",
+                "body_paragraphs": "Our Ref: O'Connor/Debt Recovery\n\n30 November 2026\n\nMr Liam O'Connor\n9 Strand Road\nBray\n\nRe: Debt Recovery Matter - Outstanding Fees\n\nDear Mr O'Connor,\n\nWe write to remind you that there is an outstanding balance of EUR 2,350.00 on the above matter.\n\nDespite previous requests, we have not yet received payment of this amount. We would be grateful if you could arrange payment at your earliest convenience.\n\nIf you have already made payment, please disregard this letter and accept our thanks. If you wish to discuss payment arrangements, please do not hesitate to contact our office.\n\nFailure to settle this account may result in us being unable to continue acting on your behalf.\n\nYours sincerely,\n\n[Name]\n[Position]\n[Firm Name]"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "Follow up on O'Connor fee reminder",
+                "due": "2026-11-30"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "body_paragraphs": "Our Ref: O'Connor/Debt Recovery\n\n16 November 2026\n\nMr Liam O'Connor\n9 Strand Road\nBray\n\nRe: Debt Recovery Matter - Outstanding Fees\n\nDear Mr O'Connor,\n\nWe write to remind you that there is an outstanding balance of EUR 2,350.00 on the above matter.\n\nDespite previous requests, we have not yet received payment of this amount. We would be grateful if you could arrange payment at your earliest convenience.\n\nIf you have already made payment, please disregard this letter and accept our thanks. If you wish to discuss payment arrangements, please do not hesitate to contact our office.\n\nFailure to settle this account may result in us being unable to continue acting on your behalf.\n\nYours sincerely,\n\n[Name]\n[Position]\n[Firm Name]",
+                "filename": "oconnor-fee.docx",
+                "title": "Fee Reminder - O'Connor Matter"
+              }
+            }
+          ],
+          "final_text": "All done. Here's a summary of what was completed:\n\n1. **Fee reminder letter** \u2014 Saved as `oconnor-fee.docx`, addressed to Mr Liam O'Connor at 9 Strand Road, Bray, regarding the outstanding balance of \u20ac2,350.00 on his debt recovery matter.\n\n2. **Follow-up reminder** \u2014 Added to the practice diary with a due date of **30 November 2026** (14 days from today)."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "O'Connor"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "oconnor-fee.docx",
+                "title": "Fee Reminder - O'Connor Matter",
+                "body_paragraphs": "Our Ref: O'Connor/Debt Recovery\n\n16 November 2026\n\nMr Liam O'Connor\n9 Strand Road\nBray\n\nRe: Debt Recovery Matter - Outstanding Fees\n\nDear Mr O'Connor,\n\nI write in relation to the above matter and to remind you that your account remains outstanding in the sum of \u20ac2,350.00.\n\nDespite previous requests for payment, we have not yet received settlement of this balance. We would be grateful if you could arrange payment within 14 days of the date of this letter.\n\nIf you have already made payment, please disregard this notice and forward confirmation of same to our office.\n\nShould you wish to discuss this matter or arrange a payment plan, please do not hesitate to contact our office.\n\nFailure to settle this account may result in us being left with no alternative but to take steps to recover our fees.\n\nYours sincerely,\n\n[Name]\n[Position]\n[Firm Name]"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "Follow up on O'Connor fee reminder letter",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. Here's what I've completed:\n\n1. **Fee reminder letter** saved as `oconnor-fee.docx` \u2014 addressed to Mr Liam O'Connor at 9 Strand Road, Bray, regarding the outstanding balance of \u20ac2,350.00 on his debt recovery matter. The letter requests payment within 14 days.\n\n2. **Follow-up reminder** added for 30 November 2026 (14 days from today) to check on the O'Connor fee reminder."
+        }
+      ]
+    },
+    {
+      "id": "m3-lookup-email-meet",
+      "cat": "chain",
+      "kind": "multi",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "send_email",
+            "schedule_meeting"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "sean.kelly@example.com",
+                "subject": "Case Review Proposal",
+                "body": "Dear Mr Kelly,\n\nI hope this email finds you well. I am writing to propose a case review meeting to discuss the progress of your litigation matter.\n\nI would like to schedule this meeting for next Wednesday, 25 November 2026, at 3:00 PM. Please let me know if this time is convenient for you, or if you would prefer an alternative.\n\nI look forward to hearing from you.\n\nKind regards,"
+              }
+            },
+            {
+              "name": "schedule_meeting",
+              "args": {
+                "title": "Kelly case review",
+                "when": "2026-11-25 15:00",
+                "attendees": [
+                  "sean.kelly@example.com"
+                ]
+              }
+            }
+          ],
+          "final_text": "All done. Here's a summary of what was completed:\n\n1. **Client lookup** \u2014 Found Mr Sean Kelly, 22 Hill Road, Galway. Matter: litigation. Outstanding balance: \u20ac7,400.\n\n2. **Email sent** \u2014 Proposed a case review meeting to sean.kelly@example.com for next Wednesday at 3:00 PM.\n\n3. **Meeting booked** \u2014 \"Kelly case review\" scheduled for Wednesday 25 November 2026 at 3:00 PM, with Sean Kelly as an attendee."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "schedule_meeting",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "schedule_meeting",
+              "args": {
+                "title": "Kelly case review",
+                "when": "Wednesday 25 November 2026 at 3pm",
+                "attendees": [
+                  "sean.kelly@example.com"
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "sean.kelly@example.com",
+                "subject": "Proposed Case Review - Litigation Matter",
+                "body": "Dear Mr Kelly,\n\nI hope this email finds you well.\n\nI would like to propose a case review in relation to your ongoing litigation matter. This would be a good opportunity for us to discuss progress to date and agree on the next steps.\n\nI have provisionally booked a meeting for next Wednesday, 25 November 2026, at 3:00pm. Please let me know if this time is convenient for you, or if you would prefer an alternative.\n\nI look forward to hearing from you.\n\nKind regards,"
+              }
+            }
+          ],
+          "final_text": "All three tasks are complete:\n\n1. **Client lookup** \u2014 Mr Sean Kelly, 22 Hill Road, Galway; matter: litigation; outstanding balance: \u20ac7,400.\n\n2. **Email sent** to sean.kelly@example.com proposing a case review on his litigation matter and confirming the proposed meeting time.\n\n3. **Meeting booked** \u2014 \"Kelly case review\" for Wednesday 25 November 2026 at 3pm, with Sean Kelly added as an attendee.\n\nOne thing worth flagging: the client has an outstanding balance of \u20ac7,400. You may want to consider whether to raise this at the case review or send a separate payment reminder. Let me know if you'd like me to draft anything for that."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "schedule_meeting",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "schedule_meeting",
+              "args": {
+                "title": "Kelly case review",
+                "when": "2026-11-25 15:00",
+                "attendees": [
+                  "sean.kelly@example.com"
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "sean.kelly@example.com",
+                "subject": "Proposed Case Review Meeting",
+                "body": "Dear Mr Kelly,\n\nI hope this email finds you well. I am writing to propose a case review meeting to discuss the progress of your litigation matter.\n\nI have scheduled a meeting for next Wednesday, 25 November 2026, at 3:00 PM. Please let me know if this time is convenient for you, or if you would prefer an alternative date or time.\n\nDuring the review, we will go over the current status of your case, discuss any developments, and outline the next steps.\n\nI look forward to hearing from you.\n\nKind regards,"
+              }
+            }
+          ],
+          "final_text": "All done! Here's a summary of what was completed:\n\n1. **Client lookup** \u2014 Retrieved Mr Sean Kelly's record:\n   - **Address:** 22 Hill Road, Galway\n   - **Matter:** Litigation\n   - **Outstanding balance:** \u20ac7,400\n\n2. **Email sent** \u2014 Proposed a case review meeting to sean.kelly@example.com, referencing the litigation matter and the proposed date/time.\n\n3. **Meeting booked** \u2014 \"Kelly case review\" scheduled for **Wednesday 25 November 2026 at 3:00 PM** with Sean Kelly as an attendee."
+        }
+      ]
+    },
+    {
+      "id": "m4-extract-save-email",
+      "cat": "chain",
+      "kind": "multi",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "fitz-summary.docx",
+                "title": "Fitzgerald Engagement Summary",
+                "body_paragraphs": [
+                  "Engagement Summary - Fitzgerald",
+                  "",
+                  "Client: Fitzgerald",
+                  "Fee: EUR 4,500",
+                  "Term: 3 months",
+                  "",
+                  "This document summarises the key terms of the engagement with Mr/Ms Fitzgerald. The agreed professional fee is EUR 4,500 for a term of three months.",
+                  "",
+                  "Prepared on 16 November 2026."
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "accounts@firm.example",
+                "subject": "Fitzgerald Engagement Summary",
+                "body": "Please find below a summary of the Fitzgerald engagement for your records.\n\nClient: Fitzgerald\nFee: EUR 4,500\nTerm: 3 months\n\nThe agreed professional fee is EUR 4,500 for a term of three months.\n\nA copy of this summary has been saved as fitz-summary.docx.\n\nKind regards"
+              }
+            }
+          ],
+          "final_text": "Done. I've completed both tasks:\n\n1. **Document created** \u2014 `fitz-summary.docx` saved with a summary of the Fitzgerald engagement (fee EUR 4,500, 3-month term).\n2. **Email sent** \u2014 The summary has been emailed to accounts@firm.example."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "fitz-summary.docx",
+                "title": "Fitzgerald Engagement Summary",
+                "body_paragraph": [
+                  "Engagement Summary: Fitzgerald",
+                  "",
+                  "Fee: EUR 4,500",
+                  "Term: 3 months",
+                  "",
+                  "This document provides a summary of the engagement with the client Fitzgerald. The agreed fee for the engagement is EUR 4,500, covering a term of three months.",
+                  "",
+                  "Prepared on 16 November 2026."
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "accounts@firm.example",
+                "subject": "Fitzgerald Engagement Summary",
+                "body": "Please find below a summary of the Fitzgerald engagement:\n\nFee: EUR 4,500\nTerm: 3 months\n\nThe agreed fee for the engagement is EUR 4,500, covering a term of three months.\n\nA copy of this summary has been saved as fitz-summary.docx.\n\nPrepared on 16 November 2026."
+              }
+            }
+          ],
+          "final_text": "Done. I've:\n\n1. **Created** `fitz-summary.docx` with a summary of the Fitzgerald engagement (fee EUR 4,500, 3-month term).\n2. **Emailed** the summary to accounts@firm.example."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_word_document",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "fitz-summary.docx",
+                "title": "Fitzgerald Engagement Summary",
+                "body_paragraphs": [
+                  "Engagement Summary - Fitzgerald",
+                  "",
+                  "Fee: EUR 4,500",
+                  "Term: 3 months",
+                  "",
+                  "This document summarises the key terms of the engagement with the client Fitzgerald. The agreed professional fee is EUR 4,500 for a term of three months.",
+                  "",
+                  "Prepared: 16 November 2026"
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "accounts@firm.example",
+                "subject": "Fitzgerald Engagement Summary",
+                "body": "Dear Accounts Team,\n\nPlease find below a summary of the Fitzgerald engagement for your records:\n\n- Client: Fitzgerald\n- Fee: EUR 4,500\n- Term: 3 months\n\nA copy of this summary has also been saved as fitz-summary.docx.\n\nKind regards,\nPractice Management"
+              }
+            }
+          ],
+          "final_text": "Done. I've completed both tasks:\n\n1. **Document created:** `fitz-summary.docx` \u2014 summarising the Fitzgerald engagement (fee EUR 4,500, 3-month term).\n2. **Email sent:** Summary emailed to accounts@firm.example with the key engagement details."
+        }
+      ]
+    },
+    {
+      "id": "m5-letter-sheet",
+      "cat": "chain",
+      "kind": "multi",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee.docx",
+                "title": "Fee Reminder",
+                "body_paragraphs": "16 November 2026\n\nMr Sean Kelly\n22 Hill Road\nGalway\n\nRe: Litigation Matter - Fee Reminder\n\nDear Mr Kelly,\n\nWe write to remind you that an outstanding balance of EUR 7,400.00 remains on the above matter.\n\nThe breakdown of the outstanding amount is as follows:\n\nProfessional fee: EUR 6,000.00\nVAT: EUR 1,400.00\nTotal: EUR 7,400.00\n\nWe would be grateful if you could arrange payment of the outstanding balance at your earliest convenience. If payment has already been made, please disregard this reminder.\n\nShould you have any queries regarding this account, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            },
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "kelly-fees.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Professional fee",
+                    "6000"
+                  ],
+                  [
+                    "VAT",
+                    "1400"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "Both files have been created:\n\n1. **kelly-fee.docx** \u2014 A fee-reminder letter addressed to Mr Sean Kelly at 22 Hill Road, Galway, referencing his litigation matter and the outstanding balance of \u20ac7,400 (professional fee \u20ac6,000 + VAT \u20ac1,400).\n\n2. **kelly-fees.xlsx** \u2014 A spreadsheet with columns \"Item\" and \"Amount\" listing:\n   - Professional fee: 6000\n   - VAT: 1400"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_spreadsheet",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "kelly-fees.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Professional fee",
+                    "6000"
+                  ],
+                  [
+                    "VAT",
+                    "1400"
+                  ]
+                ]
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee.docx",
+                "title": "Fee Reminder",
+                "body_paragraphs": [
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Litigation Matter - Fee Reminder",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write to remind you that an outstanding balance of EUR 7,400 remains on the above matter.",
+                  "",
+                  "The outstanding amount comprises the following:",
+                  "Professional fee: EUR 6,000",
+                  "VAT: EUR 1,400",
+                  "Total: EUR 7,400",
+                  "",
+                  "We would be grateful if you could arrange payment of the outstanding balance at your earliest convenience. If payment has already been made, please disregard this reminder.",
+                  "",
+                  "Should you have any queries regarding this account, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "Accounts Department"
+                ]
+              }
+            }
+          ],
+          "final_text": "Both files have been created:\n\n1. **kelly-fee.docx** \u2014 A fee-reminder letter addressed to Mr Sean Kelly at 22 Hill Road, Galway, referencing his litigation matter and the outstanding balance of \u20ac7,400 (Professional fee \u20ac6,000 + VAT \u20ac1,400).\n\n2. **kelly-fees.xlsx** \u2014 A spreadsheet with columns \"Item\" and \"Amount\" listing:\n   - Professional fee: 6,000\n   - VAT: 1,400"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee.docx",
+                "title": "Fee Reminder",
+                "body_paragraph": [
+                  "16 November 2026",
+                  "",
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "Re: Litigation Matter - Fee Reminder",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write in relation to the above matter and wish to remind you that an outstanding balance of EUR 7,400.00 remains on your account.",
+                  "",
+                  "The breakdown of the outstanding amount is as follows:",
+                  "",
+                  "Professional fee: EUR 6,000.00",
+                  "VAT: EUR 1,400.00",
+                  "Total: EUR 7,400.00",
+                  "",
+                  "We would be grateful if you could arrange payment of the outstanding balance at your earliest convenience. If you have already made payment, please disregard this reminder.",
+                  "",
+                  "Should you have any queries regarding this account, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "Accounts Department"
+                ]
+              }
+            },
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "kelly-fees.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Professional fee",
+                    "6000"
+                  ],
+                  [
+                    "VAT",
+                    "1400"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "Both files are ready.\n\n**kelly-fee.docx** \u2014 Fee-reminder letter addressed to Mr Sean Kelly, 22 Hill Road, Galway (litigation matter). It states the outstanding balance of EUR 7,400.00, itemised as Professional fee EUR 6,000.00 and VAT EUR 1,400.00, and requests payment at the client's earliest convenience.\n\n**kelly-fees.xlsx** \u2014 Two-column spreadsheet (Item, Amount):\n| Item | Amount |\n|---|---|\n| Professional fee | 6000 |\n| VAT | 1400 |\n\nNote: the itemised amounts (6,000 + 1,400 = 7,400) reconcile exactly with the outstanding balance on Mr Kelly's account. Let me know if you'd like the letter sent by email or a follow-up reminder added to the diary."
+        }
+      ]
+    },
+    {
+      "id": "c1-urgent",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee2.docx",
+                "title": "URGENT - Fee Reminder",
+                "body_paragraphs": "Mr Sean Kelly\n22 Hill Road\nGalway\n\n16 November 2026\n\nDear Mr Kelly,\n\nRe: Litigation Matter - Outstanding Fees\n\nWe write to remind you that an outstanding balance of EUR 7,400 remains on your file in respect of the above matter.\n\nDespite previous reminders, this amount has not yet been received. We would be grateful if you could arrange payment of the outstanding sum within 14 days of the date of this letter.\n\nIf payment has already been made, please disregard this notice and accept our thanks. Should you wish to discuss payment arrangements or have any queries regarding the invoice, please do not hesitate to contact us.\n\nPlease note that failure to settle the outstanding balance may result in us being unable to continue acting on your behalf.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "Done. I've saved the fee-reminder letter as **kelly-fee2.docx**. Since the outstanding balance of EUR 7,400 exceeds EUR 5,000, the document title includes \"URGENT\" as requested. The letter is addressed to Mr Sean Kelly at 22 Hill Road, Galway, referencing his litigation matter and requesting payment within 14 days."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee2.docx",
+                "title": "URGENT - Fee Reminder",
+                "body_paragraphs": "16 November 2026\n\nMr Sean Kelly\n22 Hill Road\nGalway\n\nRe: Litigation Matter - Outstanding Fees\n\nDear Mr Kelly,\n\nWe write to remind you that an outstanding balance of EUR 7,400 remains on your file in respect of the above matter.\n\nDespite previous reminders, this amount has not yet been received. We would be grateful if you could arrange payment within 14 days of the date of this letter.\n\nIf you have already made payment, please disregard this notice and forward confirmation of the transaction to our accounts department.\n\nShould you wish to discuss this matter or arrange a payment plan, please do not hesitate to contact us.\n\nWe look forward to hearing from you promptly.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee2.docx**. Since the outstanding balance of EUR 7,400 exceeds EUR 5,000, the document title includes \"URGENT\" as requested. The letter is addressed to Mr Sean Kelly at 22 Hill Road, Galway, referencing his litigation matter and requesting payment within 14 days."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee2.docx",
+                "title": "URGENT - Fee Reminder",
+                "body_paragraphs": "16 November 2026\n\nMr Sean Kelly\n22 Hill Road\nGalway\n\nRe: Litigation Matter - Outstanding Fees\n\nDear Mr Kelly,\n\nWe write to remind you that an outstanding balance of EUR 7,400 remains due on the above matter.\n\nDespite our previous correspondence, we have not yet received payment of this amount. We would be grateful if you could arrange for payment within 14 days of the date of this letter.\n\nIf payment has already been made, please disregard this notice and accept our thanks.\n\nShould you wish to discuss this matter or arrange a payment plan, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee2.docx**. Since the outstanding balance of EUR 7,400 exceeds EUR 5,000, the document title includes \"URGENT\" as requested. The letter is addressed to Mr Sean Kelly at 22 Hill Road, Galway, regarding his litigation matter."
+        }
+      ]
+    },
+    {
+      "id": "c2-not-urgent",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Doyle"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "doyle-fee.docx",
+                "title": "Fee Reminder",
+                "body_paragraphs": [
+                  "Ms Mary Doyle",
+                  "41 Church Street",
+                  "Athlone",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Conveyancing Matter - Outstanding Balance",
+                  "",
+                  "Dear Ms Doyle,",
+                  "",
+                  "We write to remind you that there is an outstanding balance of EUR 300 on the above matter.",
+                  "",
+                  "We would be grateful if you could arrange payment at your earliest convenience. If you have already made payment, please disregard this reminder.",
+                  "",
+                  "Should you have any queries regarding this account, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "[Solicitor Name]"
+                ]
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **doyle-fee.docx**. Since the outstanding balance is EUR 300 (not over EUR 5,000), the title is simply \"Fee Reminder\" without \"URGENT\". The letter is addressed to Ms Mary Doyle at 41 Church Street, Athlone, referencing her conveyancing matter and the EUR 300 outstanding balance."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Doyle"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "doyle-fee.docx",
+                "title": "Fee Reminder",
+                "body_paragraph": [
+                  "Ms Mary Doyle",
+                  "41 Church Street",
+                  "Athlone",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Conveyancing Matter - Outstanding Balance",
+                  "",
+                  "Dear Ms Doyle,",
+                  "",
+                  "We are writing to remind you that there is an outstanding balance of EUR 300.00 on the above matter.",
+                  "",
+                  "We would be grateful if you could arrange payment at your earliest convenience. If you have already made payment, please disregard this reminder.",
+                  "",
+                  "Should you have any queries regarding this invoice, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **doyle-fee.docx**. Since the outstanding balance is EUR 300 (well under the EUR 5,000 threshold), the title is simply \"Fee Reminder\" without the URGENT designation. The letter is addressed to Ms Mary Doyle at 41 Church Street, Athlone, referencing her conveyancing matter."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Doyle"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "doyle-fee.docx",
+                "title": "Fee Reminder",
+                "body_paragraphs": "Ms Mary Doyle\n41 Church Street\nAthlone\n\n16 November 2026\n\nRe: Conveyancing Matter - Outstanding Fees\n\nDear Ms Doyle,\n\nWe write to remind you that there is an outstanding balance of EUR 300.00 on the above matter.\n\nWe would be grateful if you could arrange payment at your earliest convenience. If you have already sent payment, please disregard this reminder.\n\nShould you have any queries regarding this account, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **doyle-fee.docx**. Since the outstanding balance is EUR 300 (not over EUR 5,000), the title is kept as \"Fee Reminder\" without the URGENT designation."
+        }
+      ]
+    },
+    {
+      "id": "c3-vat",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "costs.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "2000"
+                  ],
+                  [
+                    "VAT at 23%",
+                    "460"
+                  ],
+                  [
+                    "Total",
+                    "2460"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "The spreadsheet **costs.xlsx** has been created with the following:\n\n| Item | Amount |\n|------|--------|\n| Fee | 2000 |\n| VAT at 23% | 460 |\n| Total | 2460 |"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "costs.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "2000"
+                  ],
+                  [
+                    "VAT at 23%",
+                    "460"
+                  ],
+                  [
+                    "Total",
+                    "2460"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "Done. I've created **costs.xlsx** with the following:\n\n| Item | Amount |\n|------|--------|\n| Fee | 2000 |\n| VAT at 23% | 460 |\n| Total | 2460 |"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "costs.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "2000"
+                  ],
+                  [
+                    "VAT at 23%",
+                    "460"
+                  ],
+                  [
+                    "Total",
+                    "2460"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "Done. The spreadsheet **costs.xlsx** has been created with the following:\n\n| Item | Amount |\n|------|--------|\n| Fee | 2000 |\n| VAT at 23% | 460 |\n| Total | 2460 |"
+        }
+      ]
+    },
+    {
+      "id": "c4-date-before",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Hanlon"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "hanlon-update.docx",
+                "title": "EXPEDITED - Completion Update",
+                "body_paragraphs": "Mr Peter Hanlon\n7 Bridge Street\nKilkenny\n\n16 November 2026\n\nRe: Conveyancing Matter - Completion Update\n\nDear Mr Hanlon,\n\nWe are writing to confirm that completion of your property transaction is scheduled for 15 September 2026.\n\nAs this date falls within the expedited timeframe, we wish to bring this matter to your immediate attention to ensure all necessary preparations are made in advance.\n\nPlease ensure that all funds required for completion are available and that you have confirmed your arrangements for collection of keys and any other matters relating to the handover of the property.\n\nShould you have any queries or require further clarification, please do not hesitate to contact our office.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **hanlon-update.docx**. Since the completion date of 15 September 2026 falls before 1 October 2026, the document title includes \"EXPEDITED\" as instructed. The letter is addressed to Mr Peter Hanlon at 7 Bridge Street, Kilkenny, and confirms the completion date along with relevant action items."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Hanlon"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "hanlon-update.docx",
+                "title": "EXPEDITED - Completion Update",
+                "body_paragraphs": "Mr Peter Hanlon\n7 Bridge Street\nKilkenny\n\n16 November 2026\n\nRe: Conveyancing Matter - Completion Update\n\nDear Mr Hanlon,\n\nWe write to confirm that completion of your property transaction is scheduled for 15 September 2026.\n\nAs this date falls within the expedited timeframe, we wish to bring this matter to your immediate attention to ensure all necessary preparations are made in advance.\n\nPlease ensure that all required funds, including the balance of the purchase price and any associated costs, are available and ready for transfer on or before the completion date. We will be in contact shortly with a final statement of account.\n\nShould you have any queries or require further clarification regarding the completion process, please do not hesitate to contact our office.\n\nWe look forward to bringing this matter to a successful conclusion.\n\nYours sincerely,\n\nSolicitor"
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **hanlon-update.docx**. Since the completion date of 15 September 2026 falls before 1 October 2026, the document title includes **EXPEDITED** as required. The letter is addressed to Mr Peter Hanlon at 7 Bridge Street, Kilkenny, and covers the key points regarding the upcoming completion of his conveyancing matter."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Hanlon"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "hanlon-update.docx",
+                "title": "EXPEDITED - Completion Update",
+                "body_paragraph": [
+                  "Mr Peter Hanlon",
+                  "7 Bridge Street",
+                  "Kilkenny",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Conveyancing Matter - Completion Update",
+                  "",
+                  "Dear Mr Hanlon,",
+                  "",
+                  "We write to confirm that completion of the above matter is scheduled for 15 September 2026.",
+                  "",
+                  "Please note that as completion falls before 1 October 2026, this matter has been flagged as EXPEDITED to ensure all necessary steps are taken in a timely manner.",
+                  "",
+                  "There is currently no outstanding balance on your file. We will be in touch closer to the completion date with further details regarding the closing statements and any final steps required on your part.",
+                  "",
+                  "Should you have any queries in the meantime, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "Solicitor"
+                ]
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **hanlon-update.docx**.\n\nHere's a summary of what was done:\n\n- **Client:** Mr Peter Hanlon, 7 Bridge Street, Kilkenny\n- **Matter:** Conveyancing\n- **Completion date:** 15 September 2026\n- **Title used:** \"EXPEDITED - Completion Update\" \u2014 since 15 September 2026 falls before 1 October 2026, the expedited title was applied as instructed.\n\nThe letter confirms the completion date, notes the expedited status, and mentions that there is no outstanding balance on the file."
+        }
+      ]
+    },
+    {
+      "id": "c5-date-after",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Reddan"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "reddan-update.docx",
+                "title": "Completion Update - Ms Claire Reddan",
+                "body_paragraphs": "Ms Claire Reddan\n18 Quay Road\nLimerick\n\n16 November 2026\n\nRe: Conveyancing Matter - Completion Update\n\nDear Ms Reddan,\n\nWe are writing to confirm that completion of your property transaction is scheduled for Friday 20 November 2026.\n\nAll necessary pre-completion searches and enquiries have been finalised, and the relevant documentation is in order. We will be in contact with the vendor's solicitors to confirm the exact time of completion closer to the date.\n\nPlease ensure that all funds required to complete the purchase are available and cleared in your account no later than Thursday 19 November 2026 to avoid any delay to the completion date.\n\nShould you have any queries in the meantime, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **reddan-update.docx**. Since the completion date of 20 November 2026 falls after 1 October 2026, a normal title was used: \"Completion Update - Ms Claire Reddan.\" The letter confirms the completion date, notes that pre-completion work is finalised, and advises Ms Reddan to ensure funds are cleared by 19 November 2026."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Reddan"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "reddan-update.docx",
+                "title": "Completion Update - Reddan",
+                "body_paragraphs": "16 November 2026\n\nMs Claire Reddan\n18 Quay Road\nLimerick\n\nRe: Conveyancing Matter - Completion Update\n\nDear Ms Reddan,\n\nWe are writing to confirm that completion of your property transaction is scheduled for Friday 20 November 2026.\n\nAll outstanding conditions have been satisfied and the balance of the purchase price has been accounted for. There is no outstanding balance on your file at this time.\n\nPlease ensure that you are available on the date of completion to sign any final documentation that may be required. We will be in contact closer to the date to confirm the time of completion and any final steps you may need to take.\n\nShould you have any queries in the interim, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **reddan-update.docx**. Since the completion date of 20 November 2026 falls after 1 October 2026, a normal title was used: \"Completion Update \u2013 Reddan.\" The letter confirms the completion date, notes that all conditions are satisfied, and advises Ms Reddan to be available on the day."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Reddan"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "reddan-update.docx",
+                "title": "Completion Update \u2013 Reddan",
+                "body_paragraphs": "Ms Claire Reddan\n18 Quay Road\nLimerick\n\n16 November 2026\n\nRe: Conveyancing Matter \u2013 Completion Update\n\nDear Ms Reddan,\n\nWe are writing to confirm that completion of your property transaction is scheduled for 20 November 2026.\n\nAll necessary pre-completion searches and enquiries have been finalised, and the balance of the purchase price is ready to be released on the completion date.\n\nPlease ensure that you are available on the day of completion to collect the keys from the selling agent. We will confirm the exact time of completion closer to the date.\n\nShould you have any queries in the meantime, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **reddan-update.docx**. Since the completion date of 20 November 2026 does not fall before 1 October 2026, the normal title \"Completion Update \u2013 Reddan\" was used."
+        }
+      ]
+    },
+    {
+      "id": "c6-cat-litigation",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "EXPEDITED REVIEW",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. Mr Sean Kelly's matter is **litigation**, so I've added a reminder titled **EXPEDITED REVIEW** due on **30 November 2026** (two weeks from today)."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "EXPEDITED REVIEW",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. Mr Sean Kelly's matter is **litigation**, so I've added a reminder titled **EXPEDITED REVIEW** due on **30 November 2026** (two weeks from today)."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "EXPEDITED REVIEW",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. Mr Sean Kelly's matter is **litigation**, so I've added a reminder titled **EXPEDITED REVIEW** due on **30 November 2026** (two weeks from today)."
+        }
+      ]
+    },
+    {
+      "id": "c7-cat-probate",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Byrne"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "ROUTINE REVIEW",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. Ms Anne Byrne's matter is probate (not litigation), so I've added a reminder titled **ROUTINE REVIEW** due on 30 November 2026."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Byrne"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "ROUTINE REVIEW",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. Ms Anne Byrne's matter is **probate** (not litigation), so I've added a reminder titled **ROUTINE REVIEW** due on **30 November 2026** (two weeks from today)."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "add_reminder"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Byrne"
+              }
+            },
+            {
+              "name": "add_reminder",
+              "args": {
+                "title": "ROUTINE REVIEW",
+                "due": "2026-11-30"
+              }
+            }
+          ],
+          "final_text": "Done. The Byrne client (Ms Anne Byrne) has a **probate** matter, which is not litigation, so I've added a reminder titled **ROUTINE REVIEW** due on **30 November 2026** (two weeks from today)."
+        }
+      ]
+    },
+    {
+      "id": "c8-select-email",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-close.docx",
+                "title": "File Closing Letter",
+                "body_paragraphs": [
+                  "16 November 2026",
+                  "Mr John Murphy",
+                  "14 Marley Grove",
+                  "Dublin 16",
+                  "",
+                  "Re: Conveyancing Matter - File Closing",
+                  "Dear Mr Murphy,",
+                  "We write to confirm that the above matter has now concluded and we are closing our file.",
+                  "We confirm that there is no outstanding balance on your account and all fees and disbursements have been settled in full.",
+                  "We trust that you found our services to your satisfaction. Should you require any further assistance in the future, please do not hesitate to contact us.",
+                  "Thank you for the opportunity to be of assistance.",
+                  "Yours sincerely,"
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "john.murphy@example.com",
+                "subject": "File Closing Confirmation - Conveyancing Matter",
+                "body": "Dear Mr Murphy,\n\nWe write to confirm that your conveyancing matter has now concluded and we are closing our file.\n\nWe confirm that there is no outstanding balance on your account and all fees and disbursements have been settled in full.\n\nWe trust that you found our services to your satisfaction. Should you require any further assistance in the future, please do not hesitate to contact us.\n\nThank you for the opportunity to be of assistance.\n\nYours sincerely"
+              }
+            }
+          ],
+          "final_text": "Done. Here's what I did:\n\n1. **Looked up the Murphy client** \u2014 Mr John Murphy, 14 Marley Grove, Dublin 16, conveyancing matter, outstanding balance: \u20ac0.\n\n2. **Created the file-closing letter** \u2014 saved as `murphy-close.docx`, confirming the matter has concluded and the account is settled in full.\n\n3. **Sent a closing confirmation email** to john.murphy@example.com, since the outstanding balance was zero."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-close.docx",
+                "title": "File Closing Letter",
+                "body_paragraph": [
+                  "16 November 2026",
+                  "Mr John Murphy",
+                  "14 Marley Grove",
+                  "Dublin 16",
+                  "",
+                  "Re: Conveyancing Matter - File Closing",
+                  "",
+                  "Dear Mr Murphy,",
+                  "",
+                  "We are writing to confirm that the above matter has now concluded and we are closing our file.",
+                  "",
+                  "We trust that you found our services to your satisfaction. Should you require any further assistance in the future, please do not hesitate to contact us.",
+                  "",
+                  "We confirm that there is no outstanding balance on your account.",
+                  "",
+                  "Thank you for the opportunity to be of assistance.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "john.murphy@example.com",
+                "subject": "File Closed - Conveyancing Matter",
+                "body": "Dear Mr Murphy,\n\nWe are writing to confirm that your conveyancing matter has now concluded and we are closing our file.\n\nWe confirm that there is no outstanding balance on your account.\n\nShould you require any further assistance in the future, please do not hesitate to contact us.\n\nThank you for the opportunity to be of assistance.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "Done. Here's what I did:\n\n1. **Looked up the Murphy client** \u2014 Mr John Murphy, 14 Marley Grove, Dublin 16. Matter: conveyancing. Outstanding balance: \u20ac0.\n\n2. **Created the file-closing letter** (`murphy-close.docx`) confirming the matter has concluded and there is no outstanding balance.\n\n3. **Sent a confirmation email** to john.murphy@example.com since the balance was zero, confirming the file is closed."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document",
+            "send_email"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Murphy"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "murphy-close.docx",
+                "title": "File Closing Letter",
+                "body_paragraph": [
+                  "16 November 2026",
+                  "Mr John Murphy",
+                  "14 Marley Grove",
+                  "Dublin 16",
+                  "",
+                  "Re: Conveyancing Matter - File Closing",
+                  "",
+                  "Dear Mr Murphy,",
+                  "",
+                  "We are writing to confirm that the above matter has now been concluded and we are closing our file.",
+                  "",
+                  "We confirm that there is no outstanding balance on your account. All fees and disbursements have been settled in full.",
+                  "",
+                  "We trust that you found our services to your satisfaction. Should you require any further assistance in the future, please do not hesitate to contact us.",
+                  "",
+                  "Thank you for the opportunity to be of assistance.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            },
+            {
+              "name": "send_email",
+              "args": {
+                "to": "john.murphy@example.com",
+                "subject": "File Closed - Conveyancing Matter",
+                "body": "Dear Mr Murphy,\n\nWe are writing to confirm that your conveyancing matter has now been concluded and our file has been closed.\n\nWe confirm that there is no outstanding balance on your account.\n\nThank you for the opportunity to be of assistance. Should you require any further assistance in the future, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "Done. Here's what I did:\n\n1. **Looked up the Murphy client** \u2014 Mr John Murphy, 14 Marley Grove, Dublin 16. Matter: conveyancing. Outstanding balance: \u20ac0.\n\n2. **Created the file-closing letter** (`murphy-close.docx`) \u2014 a formal letter confirming the matter is concluded and the file is closed, with no outstanding balance.\n\n3. **Sent a confirmation email** to john.murphy@example.com since the balance was zero, confirming the file is closed."
+        }
+      ]
+    },
+    {
+      "id": "c9-select-no-email",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-close.docx",
+                "title": "File Closing Letter",
+                "body_paragraph": [
+                  "16 November 2026",
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "Re: Litigation Matter - File Closing",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write to confirm that we are now closing our file in relation to the above matter.",
+                  "",
+                  "Please note that there remains an outstanding balance of EUR 7,400 on your account. We would be grateful if you could arrange payment of this amount at your earliest convenience.",
+                  "",
+                  "Should you require any further assistance in the future, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "I've looked up the Kelly client record and drafted the file-closing letter saved as **kelly-close.docx**.\n\n**Key details:**\n- **Client:** Mr Sean Kelly, 22 Hill Road, Galway\n- **Matter:** Litigation\n- **Outstanding balance:** \u20ac7,400\n\nSince there is an outstanding balance of \u20ac7,400, I have **not** sent an email to sean.kelly@example.com as per your instructions. The closing letter includes a note requesting payment of the outstanding amount."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-close.docx",
+                "title": "File Closing Letter",
+                "body_paragraph": [
+                  "16 November 2026",
+                  "",
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "Re: Litigation Matter - File Closing",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write to confirm that we have now concluded our involvement in the above matter and are closing our file.",
+                  "",
+                  "Please note that there remains an outstanding balance of EUR 7,400 on your account. We would be grateful if you could settle this amount at your earliest convenience.",
+                  "",
+                  "Should you require any further assistance in the future, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "",
+                  "Solicitor"
+                ]
+              }
+            }
+          ],
+          "final_text": "Done. Here's a summary of what I did:\n\n- **Looked up** the Kelly client: Mr Sean Kelly, 22 Hill Road, Galway \u2014 litigation matter with an outstanding balance of **\u20ac7,400**.\n- **Created** the file-closing letter saved as **kelly-close.docx**, which includes a note about the outstanding balance.\n- **Did not send an email** to sean.kelly@example.com, as instructed, because there is a balance outstanding."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-close.docx",
+                "title": "File Closing Letter",
+                "body_paragraph": [
+                  "16 November 2026",
+                  "",
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "Re: Litigation Matter - File Closure",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write to confirm that we are now closing our file in relation to the above matter.",
+                  "",
+                  "Please note that there remains an outstanding balance of EUR 7,400 on your account. We would be grateful if you could settle this amount at your earliest convenience.",
+                  "",
+                  "Should you require any further assistance in the future, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "Here's a summary of what I did:\n\n1. **Looked up the Kelly client** \u2014 Mr Sean Kelly, 22 Hill Road, Galway, litigation matter, outstanding balance of **\u20ac7,400**.\n\n2. **Drafted the file-closing letter** and saved it as `kelly-close.docx`. The letter acknowledges the file closure and requests payment of the outstanding balance.\n\n3. **Did not send the email** \u2014 since there is an outstanding balance of \u20ac7,400, the condition for emailing was not met."
+        }
+      ]
+    },
+    {
+      "id": "c10-compound-both",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee3.docx",
+                "title": "URGENT: Fee Reminder - Kelly Litigation File",
+                "body_paragraphs": "Mr Sean Kelly\n22 Hill Road\nGalway\n\n16 November 2026\n\nURGENT: Outstanding Fee Reminder\n\nDear Mr Kelly,\n\nWe write in relation to the above matter, in which we act for you in litigation proceedings.\n\nOur records indicate that there is an outstanding balance of EUR 7,400 on your file. Despite previous reminders, this amount remains unpaid.\n\nWe kindly request that payment of EUR 7,400 be made within 14 days of the date of this letter. Failure to settle this balance may result in us being unable to continue acting on your behalf, which could prejudice your position in the ongoing litigation.\n\nIf you have already made payment, please disregard this letter and provide us with confirmation of the transaction.\n\nShould you wish to discuss payment arrangements, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee3.docx**. Since the balance (EUR 7,400) is over EUR 5,000 **and** the matter is litigation, the title includes \"URGENT\" as required."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee3.docx",
+                "title": "URGENT - Fee Reminder: Outstanding Balance EUR 7,400",
+                "body_paragraphs": "Mr Sean Kelly\n22 Hill Road\nGalway\n\n16 November 2026\n\nURGENT - Fee Reminder\n\nDear Mr Kelly,\n\nWe write in relation to the above matter to remind you that an outstanding balance of EUR 7,400 remains unpaid on your file.\n\nDespite previous reminders, we have not yet received payment of this amount. We would be grateful if you could arrange settlement of the outstanding balance within 14 days of the date of this letter.\n\nIf payment has already been made, please disregard this notice and accept our thanks.\n\nShould you wish to discuss this matter or arrange a payment plan, please do not hesitate to contact us.\n\nPlease note that failure to settle the outstanding balance may result in us being unable to continue acting on your behalf.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee3.docx**.\n\nSince the balance (EUR 7,400) exceeds EUR 5,000 **and** the matter is litigation, the title includes \"URGENT\":\n\n**Title:** URGENT - Fee Reminder: Outstanding Balance EUR 7,400\n\nThe letter is addressed to Mr Sean Kelly at 22 Hill Road, Galway, and requests payment within 14 days."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee3.docx",
+                "title": "URGENT: Fee Reminder - Kelly Litigation File",
+                "body_paragraphs": "Mr Sean Kelly\n22 Hill Road\nGalway\n\n16 November 2026\n\nURGENT: Outstanding Fee Reminder\n\nDear Mr Kelly,\n\nWe write in relation to the above matter to remind you that an outstanding balance of EUR 7,400 remains due on your file.\n\nDespite previous reminders, we have not yet received payment of this amount. We would be grateful if you could arrange for the outstanding balance to be settled within 14 days of the date of this letter.\n\nIf payment has already been made, please disregard this notice and accept our thanks.\n\nShould you wish to discuss this matter or arrange payment by instalments, please do not hesitate to contact us.\n\nWe look forward to hearing from you promptly.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee3.docx**. Since the balance of EUR 7,400 exceeds EUR 5,000 and the matter is litigation, both conditions were met, so \"URGENT\" was included in the title."
+        }
+      ]
+    },
+    {
+      "id": "c11-compound-one",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Traynor"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "traynor-fee.docx",
+                "title": "Fee Reminder - Traynor Conveyancing File",
+                "body_paragraph": [
+                  "Mr David Traynor",
+                  "5 Main Street, Navan",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Fee Reminder - Conveyancing Matter",
+                  "",
+                  "Dear Mr Traynor,",
+                  "",
+                  "We write to remind you that there is an outstanding balance of EUR 7,400 on your conveyancing file with our office.",
+                  "",
+                  "We would be grateful if you could arrange payment of the outstanding amount at your earliest convenience. If you have already made payment, please disregard this reminder.",
+                  "",
+                  "Should you have any queries regarding this account, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **traynor-fee.docx**. \n\nI used a normal title (\"Fee Reminder - Traynor Conveyancing File\") rather than including \"URGENT\" because although the balance of EUR 7,400 exceeds EUR 5,000, the matter is **conveyancing**, not litigation. Both conditions must be met for the URGENT title to apply."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Traynor"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "traynor-fee.docx",
+                "title": "Fee Reminder - Traynor Conveyancing File",
+                "body_paragraph": [
+                  "16 November 2026",
+                  "",
+                  "Mr David Traynor",
+                  "5 Main Street",
+                  "Navan",
+                  "",
+                  "Re: Conveyancing File - Outstanding Balance",
+                  "",
+                  "Dear Mr Traynor,",
+                  "",
+                  "We write to remind you that an outstanding balance of EUR 7,400 remains on the above-referenced conveyancing matter.",
+                  "",
+                  "We would be grateful if you could arrange payment of the outstanding amount at your earliest convenience. If payment has already been made, please disregard this reminder.",
+                  "",
+                  "Should you have any queries regarding this account, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "[Solicitor Name]"
+                ]
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **traynor-fee.docx**.\n\n**Title used:** \"Fee Reminder - Traynor Conveyancing File\" (normal title)\n\n**Reasoning:** Although the balance of EUR 7,400 exceeds EUR 5,000, the matter is **conveyancing**, not litigation. Since both conditions must be met for \"URGENT\" to appear in the title, the normal title was used."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Traynor"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "traynor-fee.docx",
+                "title": "Fee Reminder - Traynor Conveyancing File",
+                "body_paragraphs": "16 November 2026\n\nMr David Traynor\n5 Main Street\nNavan\n\nDear Mr Traynor,\n\nRe: Conveyancing File - Fee Reminder\n\nWe write in relation to the above matter and wish to bring to your attention that an outstanding balance of EUR 7,400 remains on your file.\n\nDespite our previous communications, we have not yet received payment of this amount. We would be grateful if you could arrange settlement of the outstanding balance within 14 days of the date of this letter.\n\nIf payment has already been made, please disregard this notice and accept our thanks.\n\nShould you have any queries regarding the account or wish to discuss payment arrangements, please do not hesitate to contact us.\n\nWe look forward to hearing from you.\n\nYours sincerely,\n\n[Name]\n[Solicitor]\n[Firm Name]\n[Contact Details]"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **traynor-fee.docx**. \n\nI used a normal title (\"Fee Reminder - Traynor Conveyancing File\") rather than an URGENT title because, although the balance of EUR 7,400 exceeds EUR 5,000, the matter is **conveyancing**, not litigation. Both conditions must be met for the URGENT title to apply."
+        }
+      ]
+    },
+    {
+      "id": "c12-arith-under",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "quote-a.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "1850.00"
+                  ],
+                  [
+                    "VAT at 23%",
+                    "425.50"
+                  ],
+                  [
+                    "Total",
+                    "2275.50"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "The spreadsheet **quote-a.xlsx** has been created with the following data:\n\n| Item | Amount |\n|------|--------|\n| Fee | 1850.00 |\n| VAT at 23% | 425.50 |\n| Total | 2275.50 |\n\nSince the total (2,275.50) does not exceed 2,300, no \"APPROVAL REQUIRED\" row was added."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "quote-a.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "1850.00"
+                  ],
+                  [
+                    "VAT (23%)",
+                    "425.50"
+                  ],
+                  [
+                    "Total",
+                    "2275.50"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "The spreadsheet **quote-a.xlsx** has been created with the following data:\n\n| Item | Amount |\n|------|--------|\n| Fee | 1850.00 |\n| VAT (23%) | 425.50 |\n| Total | 2275.50 |\n\nSince the total (2275.50) does not exceed 2300, no \"APPROVAL REQUIRED\" row was added."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "quote-a.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "1850.00"
+                  ],
+                  [
+                    "VAT (23%)",
+                    "425.50"
+                  ],
+                  [
+                    "Total",
+                    "2275.50"
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "The spreadsheet **quote-a.xlsx** has been created with the following data:\n\n| Item | Amount |\n|------|--------|\n| Fee | 1850.00 |\n| VAT (23%) | 425.50 |\n| Total | 2275.50 |\n\nThe total is \u00a32,275.50, which does not exceed \u00a32,300, so no \"APPROVAL REQUIRED\" row was added."
+        }
+      ]
+    },
+    {
+      "id": "c13-arith-over",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "quote-b.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "1900"
+                  ],
+                  [
+                    "VAT (23%)",
+                    "437"
+                  ],
+                  [
+                    "Total",
+                    "2337"
+                  ],
+                  [
+                    "APPROVAL REQUIRED",
+                    ""
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "The spreadsheet **quote-b.xlsx** has been created with the following data:\n\n| Item | Amount |\n|------|--------|\n| Fee | 1900 |\n| VAT (23%) | 437 |\n| Total | 2337 |\n| APPROVAL REQUIRED | |\n\nThe total of 2337 exceeds 2300, so the APPROVAL REQUIRED row has been included."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "quote-b.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "1900"
+                  ],
+                  [
+                    "VAT (23%)",
+                    "437"
+                  ],
+                  [
+                    "Total",
+                    "2337"
+                  ],
+                  [
+                    "APPROVAL REQUIRED",
+                    ""
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "The spreadsheet **quote-b.xlsx** has been created with the following data:\n\n| Item | Amount |\n|------|--------|\n| Fee | 1900 |\n| VAT (23%) | 437 |\n| Total | 2337 |\n| APPROVAL REQUIRED | |\n\nThe total of 2337 exceeds 2300, so the APPROVAL REQUIRED row has been included."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "create_spreadsheet"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "create_spreadsheet",
+              "args": {
+                "filename": "quote-b.xlsx",
+                "headers": [
+                  "Item",
+                  "Amount"
+                ],
+                "rows": [
+                  [
+                    "Fee",
+                    "1900"
+                  ],
+                  [
+                    "VAT (23%)",
+                    "437"
+                  ],
+                  [
+                    "Total",
+                    "2337"
+                  ],
+                  [
+                    "APPROVAL REQUIRED",
+                    ""
+                  ]
+                ]
+              }
+            }
+          ],
+          "final_text": "The spreadsheet **quote-b.xlsx** has been created with the following data:\n\n| Item | Amount |\n|------|--------|\n| Fee | 1900 |\n| VAT (23%) | 437 |\n| Total | 2337 |\n| APPROVAL REQUIRED | |\n\nSince the total of 2337 exceeds 2300, the APPROVAL REQUIRED row has been added."
+        }
+      ]
+    },
+    {
+      "id": "c1b-urgent-onlyif",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee-oi.docx",
+                "title": "URGENT - Fee Reminder",
+                "body_paragraph": [
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Litigation Matter - Outstanding Fees",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write to remind you that an outstanding balance of EUR 7,400 remains on your file in respect of the above matter.",
+                  "",
+                  "Despite previous reminders, this amount has not yet been received. We would be grateful if you could arrange payment within 14 days of the date of this letter.",
+                  "",
+                  "If you have already made payment, please disregard this notice and provide us with confirmation of the transaction so that we may update our records.",
+                  "",
+                  "Should you wish to discuss this matter or arrange payment by instalments, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee-oi.docx**. Since the outstanding balance of EUR 7,400 exceeds EUR 5,000, the title includes \"URGENT\" \u2014 it reads **\"URGENT - Fee Reminder\"**. The letter is addressed to Mr Sean Kelly at 22 Hill Road, Galway, and requests payment within 14 days."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee-oi.docx",
+                "title": "URGENT - Fee Reminder",
+                "body_paragraph": [
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Litigation Matter - Outstanding Fees",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write to remind you that an outstanding balance of EUR 7,400 remains on your file in relation to the above matter.",
+                  "",
+                  "Despite previous reminders, this amount has not yet been received. We would be grateful if you could arrange payment at your earliest convenience to avoid any further action being taken.",
+                  "",
+                  "If you have already made payment, please disregard this letter and provide us with confirmation of the transaction.",
+                  "",
+                  "Should you wish to discuss this matter or arrange a payment plan, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee-oi.docx**. Since the outstanding balance of EUR 7,400 exceeds EUR 5,000, the title includes \"URGENT\" as instructed. The letter is addressed to Mr Sean Kelly at 22 Hill Road, Galway, regarding his litigation matter."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Kelly"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "kelly-fee-oi.docx",
+                "title": "URGENT - Fee Reminder",
+                "body_paragraph": [
+                  "Mr Sean Kelly",
+                  "22 Hill Road",
+                  "Galway",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Litigation Matter - Outstanding Fees",
+                  "",
+                  "Dear Mr Kelly,",
+                  "",
+                  "We write to remind you that an outstanding balance of EUR 7,400 remains on your file in relation to the above matter.",
+                  "",
+                  "Despite previous reminders, payment has not yet been received. We kindly request that you settle this amount within 14 days of the date of this letter.",
+                  "",
+                  "If payment is not received within this period, we may be left with no alternative but to consider our position in relation to the continuation of our retainer.",
+                  "",
+                  "If you have already made payment, please disregard this letter and accept our thanks.",
+                  "",
+                  "Should you wish to discuss payment arrangements, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **kelly-fee-oi.docx**. Since the outstanding balance of EUR 7,400 exceeds EUR 5,000, the title includes \"URGENT\" as instructed. The letter is addressed to Mr Sean Kelly at 22 Hill Road, Galway, and requests payment within 14 days."
+        }
+      ]
+    },
+    {
+      "id": "c2b-not-urgent-onlyif",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Doyle"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "doyle-fee-oi.docx",
+                "title": "Fee Reminder",
+                "body_paragraphs": "Ms Mary Doyle\n41 Church Street\nAthlone\n\n16 November 2026\n\nRe: Conveyancing Matter - Outstanding Balance\n\nDear Ms Doyle,\n\nWe write to remind you that there is an outstanding balance of EUR 300.00 on the above matter.\n\nWe would be grateful if you could arrange payment at your earliest convenience. If you have already made payment, please disregard this letter.\n\nShould you have any queries regarding this account, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **doyle-fee-oi.docx**. Since the outstanding balance is EUR 300 (well under EUR 5,000), a normal title (\"Fee Reminder\") was used rather than one marked URGENT."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Doyle"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "doyle-fee-oi.docx",
+                "title": "Fee Reminder",
+                "body_paragraphs": "Ms Mary Doyle\n41 Church Street\nAthlone\n\n16 November 2026\n\nDear Ms Doyle,\n\nRe: Conveyancing Matter - Outstanding Balance\n\nWe write to remind you that there is an outstanding balance of EUR 300.00 on the above matter.\n\nWe would be grateful if you could arrange payment at your earliest convenience. If you have already made payment, please disregard this letter.\n\nShould you have any queries regarding this invoice, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **doyle-fee-oi.docx**. Since the outstanding balance is EUR 300 (well under the EUR 5,000 threshold), a normal title (\"Fee Reminder\") was used without \"URGENT.\""
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Doyle"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "doyle-fee-oi.docx",
+                "title": "Fee Reminder - Outstanding Balance",
+                "body_paragraphs": "Ms Mary Doyle\n41 Church Street\nAthlone\n\n16 November 2026\n\nDear Ms Doyle,\n\nRe: Conveyancing Matter - Outstanding Balance of EUR 300\n\nWe write to remind you that an outstanding balance of EUR 300 remains on the above matter.\n\nWe would be grateful if you could arrange payment at your earliest convenience. If payment has already been made, please disregard this letter.\n\nShould you have any queries regarding this account, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The fee-reminder letter has been saved as **doyle-fee-oi.docx**. Since the outstanding balance is EUR 300 (well under the EUR 5,000 threshold), a normal title was used: \"Fee Reminder - Outstanding Balance\". The letter is addressed to Ms Mary Doyle at 41 Church Street, Athlone, referencing her conveyancing matter and the EUR 300 balance due."
+        }
+      ]
+    },
+    {
+      "id": "c4b-date-before-onlyif",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Hanlon"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "hanlon-update-oi.docx",
+                "title": "EXPEDITED - Completion Update",
+                "body_paragraphs": "Mr Peter Hanlon\n7 Bridge Street\nKilkenny\n\n16 November 2026\n\nRe: Conveyancing Matter - Completion Update\n\nDear Mr Hanlon,\n\nWe are writing to confirm that completion of your property transaction is scheduled for 15 September 2026.\n\nAll necessary pre-completion steps are being progressed to ensure the transaction concludes on the agreed date. We will be in contact should any further information or action be required from you in the lead-up to completion.\n\nPlease do not hesitate to contact us if you have any queries in the meantime.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The document has been saved as **hanlon-update-oi.docx**. Since completion (15 September 2026) falls before 1 October 2026, the title includes \"EXPEDITED\" as instructed. The letter is addressed to Mr Peter Hanlon at 7 Bridge Street, Kilkenny, and confirms the completion date for his conveyancing matter."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Hanlon"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "hanlon-update-oi.docx",
+                "title": "EXPEDITED - Completion Update",
+                "body_paragraphs": "Mr Peter Hanlon\n7 Bridge Street\nKilkenny\n\n16 November 2026\n\nRe: Conveyancing Matter - Completion Update\n\nDear Mr Hanlon,\n\nWe are writing to confirm that completion of your property transaction is scheduled for 15 September 2026.\n\nAll necessary pre-completion steps are being finalised to ensure a smooth and timely closing on the agreed date. We will be in contact closer to the completion date with further details regarding the transfer of funds and collection of keys.\n\nShould you have any queries in the interim, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The document has been saved as **hanlon-update-oi.docx**. Since completion (15 September 2026) falls before 1 October 2026, the title includes \"EXPEDITED\" as requested."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Hanlon"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "hanlon-update-oi.docx",
+                "title": "EXPEDITED - Completion Update",
+                "body_paragraph": [
+                  "Mr Peter Hanlon",
+                  "7 Bridge Street",
+                  "Kilkenny",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Conveyancing Matter - Completion Update",
+                  "",
+                  "Dear Mr Hanlon,",
+                  "",
+                  "We are writing to confirm that completion of your property transaction is scheduled for 15 September 2026.",
+                  "",
+                  "Please ensure that all remaining funds required to complete the purchase are received by our office no later than 12 September 2026 to allow sufficient time for the transfer of funds on completion day.",
+                  "",
+                  "We will be in contact closer to the completion date with further details regarding the collection of keys and any final documentation that may be required.",
+                  "",
+                  "Should you have any queries in the interim, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "Solicitor"
+                ]
+              }
+            }
+          ],
+          "final_text": "The document has been saved as **hanlon-update-oi.docx**. Since the completion date of 15 September 2026 falls before 1 October 2026, the title includes \"EXPEDITED\" as instructed. The letter is addressed to Mr Peter Hanlon at his Kilkenny address and covers the key completion details including the completion date, a reminder to send funds by 12 September, and next steps regarding keys and documentation."
+        }
+      ]
+    },
+    {
+      "id": "c5b-date-after-onlyif",
+      "cat": "conditional",
+      "kind": "conditional",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Reddan"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "reddan-update-oi.docx",
+                "title": "Completion Update - Reddan",
+                "body_paragraph": [
+                  "Ms Claire Reddan",
+                  "18 Quay Road",
+                  "Limerick",
+                  "",
+                  "16 November 2026",
+                  "",
+                  "Re: Conveyancing Matter - Completion Update",
+                  "",
+                  "Dear Ms Reddan,",
+                  "",
+                  "We are writing to confirm that completion of your property purchase is scheduled for Friday 20 November 2026.",
+                  "",
+                  "Please ensure that all remaining funds, including the balance of the purchase price and any applicable stamp duty, are received by our office no later than Thursday 19 November 2026 to allow for the transfer of funds on the completion date.",
+                  "",
+                  "We will prepare the necessary transfer deed and ensure all title documents are ready for release on completion. The property keys will be available for collection from the selling agent once completion has taken place.",
+                  "",
+                  "Should you have any queries in the interim, please do not hesitate to contact us.",
+                  "",
+                  "Yours sincerely,",
+                  "",
+                  "Solicitor"
+                ]
+              }
+            }
+          ],
+          "final_text": "The document has been saved as **reddan-update-oi.docx**. Since completion is set for 20 November 2026, which falls after 1 October 2026, I used a normal title (\"Completion Update - Reddan\") without the \"EXPEDITED\" designation."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Reddan"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "reddan-update-oi.docx",
+                "title": "Completion Update - Reddan",
+                "body_paragraphs": "Ms Claire Reddan\n18 Quay Road\nLimerick\n\n16 November 2026\n\nDear Ms Reddan,\n\nRe: Conveyancing Matter - Completion Update\n\nWe are pleased to confirm that completion of your property purchase is scheduled for 20 November 2026.\n\nAll necessary pre-completion searches have been carried out and no adverse results have been identified. The contract has been signed by all parties and the balance of the purchase price is ready to be remitted on the completion date.\n\nPlease ensure that you have arranged buildings insurance to commence from the date of completion. We will be in contact closer to the completion date to confirm arrangements for collection of keys.\n\nShould you have any queries in the interim, please do not hesitate to contact us.\n\nYour account is up to date with no outstanding balance.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **reddan-update-oi.docx**. Since the completion date of 20 November 2026 does not fall before 1 October 2026, a normal title was used: \"Completion Update - Reddan\"."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "create_word_document"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Reddan"
+              }
+            },
+            {
+              "name": "create_word_document",
+              "args": {
+                "filename": "reddan-update-oi.docx",
+                "title": "Completion Update - Reddan",
+                "body_paragraphs": "Ms Claire Reddan\n18 Quay Road\nLimerick\n\n16 November 2026\n\nDear Ms Reddan,\n\nRe: Conveyancing Matter - Completion Update\n\nWe are pleased to confirm that completion of your property transaction is scheduled for 20 November 2026.\n\nAll necessary pre-completion steps have been finalised, and we are now in a position to proceed on the agreed date.\n\nPlease ensure that all funds required to complete are received by our office no later than 19 November 2026 to allow for the transfer of funds on the completion date.\n\nShould you have any queries in the interim, please do not hesitate to contact us.\n\nYours sincerely,"
+              }
+            }
+          ],
+          "final_text": "The completion-update letter has been saved as **reddan-update-oi.docx**. Since completion is set for 20 November 2026, which falls after 1 October 2026, a normal title was used: \"Completion Update - Reddan.\""
+        }
+      ]
+    },
+    {
+      "id": "e1-missing-client",
+      "cat": "error",
+      "kind": "error_recovery",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Zelenko"
+              }
+            }
+          ],
+          "final_text": "I looked up the surname **Zelenko** but no client record was found on file, so I can't retrieve an address or matter details to write the letter.\n\nBefore I draft and save `zelenko.docx`, could you help me with one of the following so I write to the right person and address?\n\n- Confirm the correct spelling of the surname (e.g., is it possibly *Zelenko*, *Zelenko*, *Zelensko*, or another variant?), or\n- Provide the client's full name or matter reference.\n\nOnce I have a matching record, I'll pull their address on file and prepare the letter for you."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Zelenko"
+              }
+            }
+          ],
+          "final_text": "I wasn't able to find a client record for the surname \"Zelenko.\" Could you double-check the spelling or provide an alternative surname or first name so I can locate the correct client?"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Zelenko"
+              }
+            }
+          ],
+          "final_text": "I looked up the surname **Zelenko** but no client record was found, so I can't write the letter to an address on file.\n\nCould you double-check the spelling of the surname, or give me another detail (e.g., the matter type or first name) so I can locate the correct record? Once I have the right client, I'll draft the letter and save it as zelenko.docx."
+        }
+      ]
+    },
+    {
+      "id": "e2-missing-then-ask",
+      "cat": "error",
+      "kind": "error_recovery",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "lookup_client"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Nakamura"
+              }
+            },
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "nakamura"
+              }
+            }
+          ],
+          "final_text": "I was unable to find a client record for \"Nakamura.\" Could you please confirm the correct spelling of the client's surname?"
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client",
+            "lookup_client"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Nakamura"
+              }
+            },
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "nakamura"
+              }
+            }
+          ],
+          "final_text": "I wasn't able to find a client record under the surname \"Nakamura\" (I tried both the capitalised and lowercase forms, and both returned \"no client record found\").\n\nBecause there's no record, I don't have an email address or matter details to use for the meeting request, and I don't want to guess or fabricate those.\n\nCould you please provide one of the following so I can proceed:\n- The correct spelling of the client's surname (in case it differs), or\n- The client's email address directly, along with any details you'd like included in the meeting request (proposed date/time, purpose, etc.).\n\nOnce I have that, I'll send the meeting request email for you."
+        },
+        {
+          "ok": true,
+          "tools": [
+            "lookup_client"
+          ],
+          "leaked": false,
+          "calls": [
+            {
+              "name": "lookup_client",
+              "args": {
+                "surname": "Nakamura"
+              }
+            }
+          ],
+          "final_text": "I wasn't able to find a client record under the surname \"Nakamura.\" Could you double-check the spelling? It's possible the name is spelled differently (e.g., \"Nakamora,\" \"Nakumara,\" or another variation). Alternatively, if you have the client's first name or matter number, that might help me locate them."
+        }
+      ]
+    },
+    {
+      "id": "t1-definition",
+      "cat": "no_tool",
+      "kind": "no_tool",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "\"Without prejudice\" on a letter means that the communication is part of a genuine attempt to settle a dispute and, as a result, it cannot be shown to a court or tribunal as evidence of admissions or concessions made during those settlement negotiations. The rule protects parties so they can speak freely and make offers or compromises without fear that their words will later be used against them if the matter goes to trial."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "\"Without prejudice\" is a legal label placed on a letter (or other communication) to indicate that it forms part of a genuine attempt to settle a dispute. Its effect is that the communication generally cannot be shown to a court or tribunal as evidence of admissions or concessions made during those settlement negotiations. The purpose is to encourage parties to speak openly and make concessions in trying to resolve a matter, without fear that anything they say will later be used against them if the negotiations break down."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "\"Without prejudice\" on a letter means that the communication is part of a genuine attempt to settle a dispute and, as a general rule, cannot be shown to a court or relied upon as evidence in the proceedings. The purpose is to encourage parties to speak freely and make concessions or offers without fear that those statements will later be used against them if negotiations break down. The protection is not absolute \u2014 it can be lost if the communication is used to show that a settlement was actually reached, or if it involves improper conduct such as fraud or perjury."
+        }
+      ]
+    },
+    {
+      "id": "t2-opinion",
+      "cat": "no_tool",
+      "kind": "no_tool",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "## Main Stages of a Residential Conveyance in Ireland (Purchase)\n\n**1. Pre-contract**\n- Taking instructions, opening a file, AML/identity verification, and advising on costs.\n- Receiving the draft contract and title documents from the vendor's solicitor.\n\n**2. Review of Title & Enquiries**\n- Examining the title (ownership, boundaries, burdens, planning compliance).\n- Raising pre-contract enquiries and requisitions on title.\n\n**3. Contract**\n- Negotiating and agreeing the contract (including any special conditions).\n- Issuing the engrossed contract for signature.\n\n**4. Financing**\n- Applying for and reviewing the mortgage/loan offer and security documentation.\n- Advising the client on the loan terms.\n\n**5. Pre-completion**\n- Agreeing a completion date.\n- Drawing up the deed of transfer and closing statement.\n- Requesting loan funds and client balance.\n- Preparing the Land and Transaction Return (LDT) for stamp duty.\n\n**6. Completion**\n- Sending the balance of funds to the vendor's solicitor.\n- Receiving the executed transfer deed and title documents.\n- The client takes possession.\n\n**7. Post-completion**\n- Paying stamp duty (if applicable) and filing the LDT return.\n- Registering the transfer in the Property Registration Authority (Land Registry or Registry of Deeds).\n- Registering the mortgage (or burden) against the property.\n- Notifying the local authority (LPT) and closing the file.\n\nThe process typically takes 8\u201312 weeks from instruction to completion, though this varies considerably depending on title complexity, chain issues, and financing."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "**Main Stages of a Residential Conveyance in Ireland**\n\n**1. Pre-Contract Stage**\n- Buyer's solicitor takes instructions and reviews the draft contract and title documents supplied by the vendor's solicitor.\n- Pre-contract enquiries are raised (e.g., planning, boundaries, disputes, service charges).\n- The buyer's solicitor negotiates amendments to the contract and confirms the buyer's funding (mortgage offer, etc.).\n\n**2. Contract Stage**\n- The contract is agreed and signed by both parties.\n- Contracts are exchanged and the buyer pays the deposit (typically 10%).\n- The contract becomes legally binding on both sides.\n\n**3. Pre-Completion Stage**\n- Final searches are conducted (Land Registry / Registry of Deeds, local authority planning, rates, etc.).\n- The buyer's solicitor prepares the deed of transfer/assignment and the mortgage deed.\n- Funds are requested from the buyer's lender and the buyer's own contribution is collected.\n\n**4. Completion**\n- The balance of the purchase price is remitted to the vendor's solicitor.\n- The executed deed of transfer and any other completion documents are delivered.\n- Keys are released to the buyer.\n\n**5. Post-Completion Stage**\n- The buyer's solicitor pays stamp duty (via the Revenue Online Service) and files the deed for registration in the Property Registration Authority (Land Registry or Registry of Deeds).\n- The local authority and other relevant bodies are notified of the change of ownership.\n- The vendor's solicitor discharges any existing mortgage on the property.\n\nThe entire process typically takes 8\u201312 weeks from the point of exchange, though timelines vary considerably depending on the complexity of the title and whether the transaction is part of a chain."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "Here are the main stages of a residential conveyance in Ireland:\n\n**1. Pre-Contract Stage**\nThe seller's solicitor issues the contract, title documents, planning and building control documentation, and a property information form to the buyer's solicitor. The buyer's solicitor initiates searches (Land Registry, local authority, etc.).\n\n**2. Contract Review and Enquiries**\nThe buyer's solicitor examines the contract and title, raises pre-contract enquiries, and reports to the buyer on the legal position.\n\n**3. Loan and Mortgage**\nIf the buyer is borrowing, the loan offer is received, the mortgage deed is prepared, and the lender's requirements are addressed.\n\n**4. Signing the Contract**\nThe buyer signs the contract and remits the deposit (typically 10% of the purchase price). The contract becomes legally binding.\n\n**5. Closing (Completion)**\nThe balance of the purchase price is paid, the deed of transfer is executed, and the keys are released to the buyer.\n\n**6. Post-Completion**\nThe buyer's solicitor pays stamp duty (if applicable), registers the transfer in the Land Registry (or Registry of Deeds), and notifies the local authority of the change of ownership.\n\nThe process typically takes 8\u201312 weeks from the issuance of the contract to closing, though this varies depending on the complexity of the title, the number of parties in a chain, and the speed of the mortgage lender."
+        }
+      ]
+    },
+    {
+      "id": "a1-underspecified",
+      "cat": "ambiguous",
+      "kind": "ambiguous",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "I'd be happy to help with that, but I need a couple of details:\n\n1. **Which client?** (surname or full name)\n2. **What should the email say?** (e.g., a status update, a request for documents, a hearing date, etc.)\n\nOnce I have those, I can look up their contact details and send the message."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "I'd be happy to help send an email to a client, but I need a couple of details:\n\n1. **Which client?** (surname or full name)\n2. **What should the email say?** (e.g., a case update, a request for documents, a hearing date, etc.)\n\nOnce I have that information, I can look up their record and send the email."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "I'd be happy to help send an email to a client, but I need a couple of details:\n\n1. **Which client?** (surname so I can look up their record)\n2. **What should the email say?** (e.g., a status update, request for documents, appointment confirmation, etc.)\n\nCould you provide those details?"
+        }
+      ]
+    },
+    {
+      "id": "a2-which-client",
+      "cat": "ambiguous",
+      "kind": "ambiguous",
+      "success_rate": 1.0,
+      "leak_runs": 0,
+      "per_run": [
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "I'd be happy to help draft and save a letter, but I don't have any record of a previous discussion about a letter in our conversation. Could you provide me with the following details so I can draft it for you?\n\n- **Recipient** (name and address)\n- **Subject/matter** the letter relates to\n- **Key points** you'd like included\n- **Your name and firm details** (for the letterhead/sign-off)\n- **Any specific tone or format** you prefer\n\nOnce I have those details, I'll draft it and save it as a Word document for you."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "I'd be happy to help draft and save a letter, but I don't have any record of a previous discussion about a letter in our conversation. Could you provide me with the following details?\n\n- **Who is the letter addressed to?** (recipient name and/or firm)\n- **What is the subject/matter?** (e.g., a client matter, a demand letter, a covering letter, etc.)\n- **What should the letter say?** (key points, tone, any specific language you'd like included)\n- **Who is it from?** (your name/firm name for the sign-off)\n\nOnce I have those details, I'll draft it and save it as a Word document for you."
+        },
+        {
+          "ok": true,
+          "tools": [],
+          "leaked": false,
+          "calls": [],
+          "final_text": "I'd be happy to help draft and save a letter, but I don't have any record of a previous discussion about a letter in our conversation. Could you provide me with the following details?\n\n- **Who is the letter addressed to?** (recipient name and/or firm)\n- **What is the subject/matter?** (e.g., a client matter, a demand letter, a covering letter, etc.)\n- **What should the letter say?** (key points, tone, any specific language you'd like included)\n- **Who is it from?** (your name/firm name for the sign-off)\n\nOnce I have those details, I can draft it and save it as a Word document for you."
+        }
+      ]
+    }
+  ]
+}

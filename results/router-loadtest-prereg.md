@@ -1,6 +1,6 @@
-# RT35 PRE-REGISTRATION: router load/unload + concurrent inference (2026-07-17)
+# E35A PRE-REGISTRATION: router load/unload + concurrent inference (2026-07-17)
 
-_Public ID RT35; published as E35 before Local-AI r5.17, which collided with a different August experiment (experiments/E35.md). The file name is unchanged._
+_E35A is the July E35; experiments/E35.md is the August experiment with the same number._
 
 # File: results/router-loadtest-prereg.md
 # Purpose: Predictions registered BEFORE the E35 runs - the three things F40 listed as untested.

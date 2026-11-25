@@ -1,6 +1,6 @@
-# TU33: Extensive tool-use benchmark (pre-registration)
+# E33A: Extensive tool-use benchmark (pre-registration)
 
-_Public ID TU33; published as E33 before Local-AI r5.17, which collided with a different August experiment (experiments/E33.md). The file name is unchanged so old links keep working._
+_E33A is the July E33; experiments/E33.md is the August experiment with the same number._
 
 # File: results/tool-use/E33-preregistration.md
 # Purpose: Pre-register the EXTENSIVE tool-use benchmark (E32 was the 8-task pilot). Predictions before runs.

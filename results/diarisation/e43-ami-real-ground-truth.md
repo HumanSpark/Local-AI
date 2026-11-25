@@ -1,6 +1,6 @@
-# MT43: against REAL ground truth our DER is 29.2%, not 3.51% - and 69% of the error is a VAD we never built (2026-07-17)
+# E43A: against REAL ground truth our DER is 29.2%, not 3.51% - and 69% of the error is a VAD we never built (2026-07-17)
 
-_Public ID MT43; published as E43 before Local-AI r5.17, which collided with a different August experiment (experiments/E43.md). The file name is unchanged so old links keep working._
+_E43A is the July E43; experiments/E43.md is the August experiment with the same number._
 
 # File: results/diarisation/e43-ami-real-ground-truth.md
 # Purpose: The primary config vs AMI, human annotation, standard DER. Pre-reg: e43-ami-prereg.md.

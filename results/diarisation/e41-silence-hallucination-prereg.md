@@ -1,6 +1,6 @@
 # PRE-REGISTRATION: when does Whisper invent speech out of silence? (2026-07-17)
 
-_Pre-registration for MT41 (public ID; published as E41 before Local-AI r5.17, which collided with a different August experiment, experiments/E41.md)._
+_E41A is the July E41; experiments/E41.md is the August experiment with the same number._
 
 # File: results/diarisation/e41-silence-hallucination-prereg.md
 # Purpose: Predictions registered BEFORE the silence-hallucination benchmark runs.

@@ -1,6 +1,6 @@
-# MT40: whisper INVENTS SPEECH over silence - and the diarisation residual is physics, not model (2026-07-17)
+# E40A: whisper INVENTS SPEECH over silence - and the diarisation residual is physics, not model (2026-07-17)
 
-_Public ID MT40; published as E40 before Local-AI r5.17, which collided with a different August experiment (experiments/E40.md). The file name is unchanged so old links keep working._
+_E40A is the July E40; experiments/E40.md is the August experiment with the same number._
 
 # File: results/diarisation/e40-vad-and-limits.md
 # Purpose: Continued autonomous work on E39's open items. One correctness bug found, one limit proven.

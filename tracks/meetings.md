@@ -1,0 +1,19 @@
+# Meetings (r5.18)
+
+**The question:** Can it turn a private call into a usable record?
+
+**Why this kind of test:** Real calls scored line by line, and standard corpora where a human transcript exists.
+
+**Current answer:** 97.2% of lines correctly tagged host or someone else on four real calls; Whisper large-v3-turbo at 2.40% word error rate on LibriSpeech; transcription about 28x real time on a clean clip, an estimate (July 2026).
+
+## Claims on this track (5)
+
+Status, tested and reviewed dates come from [claims.json](../claims.json); [GLOSSARY.md](../GLOSSARY.md#claim-status) explains the terms. Experiment-by-experiment write-ups (why each was run, what would have changed the plan, what was decided) are being added track by track.
+
+| Claim | Statement | Status | Tested | Evidence |
+|---|---|---|---|---|
+| C-TRANSCRIPTION-WER-001 | On the standard read-speech benchmark (LibriSpeech test-clean, human transcripts), local Whisper large-v3-turbo transcribes at a 2.40% word error rate, matching the published figure for the model - which validates the measurement harness as well as the number. The smaller model is worse (3.35%), and the larger model is about 28% more accurate on real meeting audio too: our own hypothesis that smaller models might transcribe better was tested and refuted. This is clean read speech, the easy case; it is the model comparison and a harness check, not a meeting-accuracy figure. (F45, E42A/E45A.) | current | 2026-07-17 | [FINDINGS.md#f45](../FINDINGS.md#f45) |
+| C-TRANSCRIPTION-SILENCE-VAD-001 | Voice-activity detection is mandatory, not optional, for Whisper transcription: without it the model fabricates about two invented utterances per minute of silence (97% of them the phrase 'Thank you.'), and voice-activity detection removes them completely (zero across 72 test conditions). This is a well-documented failure mode in the literature, reproduced here, not a discovery. One reframing is ours: counted by volume the smaller model hallucinates more, but counted by HARM the larger model is about five times worse, because it invents grammatical speech a reader cannot distinguish from a real utterance while the smaller model labels the gap as blank. (F44, E41A.) | current | 2026-07-17 | [FINDINGS.md#f44](../FINDINGS.md#f44) |
+| C-TARGET-SPEAKER-001 | Asking 'is this the host speaking or someone else' - a binary question - is far more tractable than full speaker diarisation and is what meeting intelligence actually needs. From a single ~4-minute voiceprint of the host, the system tags 97.2% of transcript lines correctly as host-versus-other across four real calls (a separate enrollment recording, so genuine cross-session performance). The difficulty inverts against general diarisation: more people in the room makes the binary question easier, not harder. General diarisation is the harder problem and a specialist tool (pyannote) still beats ours roughly three-to-one on it; the reframe to the host-versus-other question is what makes the product work. (F46, E50A.) | current | 2026-07-17 | [FINDINGS.md#f46](../FINDINGS.md#f46) |
+| C-DIARISATION-FARFIELD-001 | An on-prem meeting box does not need a headset per person: on the standard meeting corpus a single distant table microphone came within about one diarisation-error point of close-talk headsets (21.1% versus 20.2%), against a predicted eight-point penalty. Replacing a naive energy gate with a real voice-activity detector was what closed most of the gap, nearly halving the error. (F46, E44A.) | current | 2026-07-17 | [FINDINGS.md#f46](../FINDINGS.md#f46) |
+| C-CAPABILITY-TRANSCRIPTION-001 | Meeting transcription (Whisper) runs at about 28 times real time - a one-hour meeting in roughly two minutes. | qualified | 2026-07-04 | [capability-probes.md](../capability-probes.md) |

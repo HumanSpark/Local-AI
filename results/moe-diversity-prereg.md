@@ -1,6 +1,6 @@
-# RT37 PRE-REGISTRATION: is F43 batched expert-sharing? (2026-07-17)
+# E37A PRE-REGISTRATION: is F43 batched expert-sharing? (2026-07-17)
 
-_Public ID RT37; published as E37 before Local-AI r5.17, which collided with a different August experiment (experiments/E37.md). The file name is unchanged._
+_E37A is the July E37; experiments/E37.md is the August experiment with the same number._
 
 # File: results/moe-diversity-prereg.md
 # Purpose: Predictions registered BEFORE the E37 runs - the two controls that settle F43's mechanism.

@@ -1,6 +1,6 @@
-# MT45: true WER says large-v3-turbo 2.40%, small 3.35% - and the BROKEN harness had said the opposite (2026-07-17)
+# E45A: true WER says large-v3-turbo 2.40%, small 3.35% - and the BROKEN harness had said the opposite (2026-07-17)
 
-_Public ID MT45; published as E45 before Local-AI r5.17, which collided with a different August experiment (experiments/E45.md). The file name is unchanged so old links keep working._
+_E45A is the July E45; experiments/E45.md is the August experiment with the same number._
 
 # File: results/transcription/e45-true-wer.md
 # Purpose: E42's model-size question, settled against real human ground truth.

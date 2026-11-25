@@ -1,12 +1,38 @@
-# Release Notes - sparkbench-data-r5.17
+# Release Notes - sparkbench-data-r5.18
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r5.17)
+## This release (r5.18)
 
-- **Findings:** 202 in FINDINGS.md, newest F202.
+- **Findings:** 203 in FINDINGS.md, newest F203.
 - **Claims:** 61 in claims.yml (23 current, 18 historical, 17 qualified, 3 superseded).
+- **A new README** for IT readers: what production runs now, what changed recently, the five research tracks, how
+  to check one number yourself in five minutes (tag r5.18), and what a reader can and cannot check.
+- **Five track pages** under [tracks/](tracks/): each track's question, why the test fits it, the current answer, and
+  every claim on that track with its status, dates and exact evidence. The coding chart is on the Unattended work page;
+  the five-engine speed table and the two speed measurements of production, with what differs between them, are on
+  the Running it page.
+- **New finding F203** (E176): Ling-3.2-air writes about 37% faster than production's model on llama.cpp but solved
+  0 of 10 hard coding changes, against production's 5. Its runs on the two easier coding banks are under way.
+- July experiments whose numbers an August experiment also uses are now written with an A (E32A, E35A to E50A);
+  [GLOSSARY.md](GLOSSARY.md#experiment-numbers-used-twice) says which is which.
+- `tools/score_e162.py` now writes byte-identical `results/e162/score.json` on every run (one field's key order
+  varied between runs); the README's five-minute check uses tag r5.18.
+- New evidence: `results/e176-results.md`, `results/e176/`.
+
+## Changed claims (old -> new)
+
+- (none.)
+
+## Retracted claims
+
+- (none.)
+
+## Earlier releases
+
+### r5.17
+
 - **Every claim now says when it was tested, whether it still holds, and where its exact evidence is.** Each of the
   61 claims carries `tested`, `reviewed`, `status`, `track`, a plain and a technical name for the setup, its exact
   `record` (file and anchor, replacing whole-index sources) with a `source_url` pinned to this release, and an
@@ -16,7 +42,7 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
 - **Unique experiment IDs.** Three July series reused numbers that different August experiments also use: the July
   tool-use tests are now TU32 and TU33, the July router and multi-user tests RT35 to RT37, and the July
   meetings and transcription series MT38 to MT50. File names are
-  unchanged and each record says what it was published as. [GLOSSARY.md](GLOSSARY.md#renamed-experiment-ids).
+  unchanged and each record says what it was published as. [GLOSSARY.md](GLOSSARY.md#experiment-numbers-used-twice).
 - **`tools/cost_model.py` recalculates from a clean checkout** (it read a fixed path on our machine); output unchanged.
 - **Full release history** below, from r4.0.
 - **New findings.** [F198](FINDINGS.md#f198): starting a GPU engine a second after another exits can crash the
@@ -28,7 +54,7 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
 - New evidence: `results/e173-results.md`, `results/e174-results.md`, `results/e175-results.md`,
   `results/e177-results.md` and their folders.
 
-## Changed claims (old -> new)
+#### Changed claims (old -> new)
 
 - C-TOOLUSE-CONDITIONAL-001 rewritten: "Mistral was the exception" was overturned by the 13-task expansion (F73). Now:
   every model tested also flags the case where the condition is false; Mistral was the worst on 13 tasks.
@@ -38,11 +64,9 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
   since 13 November.
 - Every other claim keeps its number and text; its status says whether it still supports today's advice.
 
-## Retracted claims
+#### Retracted claims
 
 - (none.)
-
-## Earlier releases
 
 ### r5.16
 

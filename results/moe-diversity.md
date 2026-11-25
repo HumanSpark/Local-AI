@@ -1,6 +1,6 @@
-# RT37 RESULTS: MoE concurrency is stream-diversity-bound - F17's headline is a same-question artifact (2026-07-17)
+# E37A RESULTS: MoE concurrency is stream-diversity-bound - F17's headline is a same-question artifact (2026-07-17)
 
-_Public ID RT37; published as E37 before Local-AI r5.17, which collided with a different August experiment (experiments/E37.md). The file name is unchanged._
+_E37A is the July E37; experiments/E37.md is the August experiment with the same number._
 
 # File: results/moe-diversity.md
 # Purpose: The controls that settled F43's mechanism. Pre-registration: moe-diversity-prereg.md.

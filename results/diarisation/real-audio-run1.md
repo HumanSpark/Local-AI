@@ -1,6 +1,6 @@
-# MT38: real audio breaks the synthetic verdict - the margin was measured in the wrong universe (2026-07-17)
+# E38A: real audio breaks the synthetic verdict - the margin was measured in the wrong universe (2026-07-17)
 
-_Public ID MT38; published as E38 before Local-AI r5.17, which collided with a different August experiment (experiments/E38.md). The file name is unchanged._
+_E38A is the July E38; experiments/E38.md is the August experiment with the same number._
 
 # File: results/diarisation/real-audio-run1.md
 # Purpose: First diarisation run on REAL meeting audio. Predictions + findings. R&D record.

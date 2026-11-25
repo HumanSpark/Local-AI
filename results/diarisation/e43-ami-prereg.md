@@ -1,6 +1,6 @@
 # PRE-REGISTRATION: the primary config against REAL ground truth (AMI) (2026-07-17)
 
-_Pre-registration for MT43 (public ID; published as E43 before Local-AI r5.17, which collided with a different August experiment, experiments/E43.md)._
+_E43A is the July E43; experiments/E43.md is the August experiment with the same number._
 
 # File: results/diarisation/e43-ami-prereg.md
 # Purpose: Predictions registered BEFORE the first run against human-annotated ground truth.

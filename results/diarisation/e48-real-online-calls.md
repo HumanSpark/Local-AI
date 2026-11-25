@@ -1,6 +1,6 @@
-# MT48: on REAL online calls, ours and hybrid tie on attribution (~95%) - the AMI hybrid win shrinks (2026-07-17)
+# E48A: on REAL online calls, ours and hybrid tie on attribution (~95%) - the AMI hybrid win shrinks (2026-07-17)
 
-_Public ID MT48; published as E48 before Local-AI r5.17, which collided with a different August experiment (experiments/E48.md). The file name is unchanged so old links keep working._
+_E48A is the July E48; experiments/E48.md is the August experiment with the same number._
 
 # File: results/diarisation/e48-real-online-calls.md
 # Purpose: ours vs hybrid on Alastair's actual 4 Otter-referenced online calls. The deployment check.
