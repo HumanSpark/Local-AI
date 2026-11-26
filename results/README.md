@@ -178,6 +178,7 @@ Every experiment in this package by number, then the other evidence. Titles are 
 | E177 | Flash-Next on HTR vs production Halogen (2026-11-24) | [data](e177/) · [pre-registration](e177-prereg.md) · [results](e177-results.md) |
 | E178 | Anthropic models on the hard coding bank, as subagents (2026-11-25) | [pre-registration](e178-prereg.md) · [results](e178-results.md) |
 | E179 | HTR v0.2.5: same model, newer engine release (prereg, 2026-11-25) | [data](e179/) · [pre-registration](e179-prereg.md) · [results](e179-results.md) |
+| E183 | Pre-registration for E183 - does stock llama.cpp get DSpark's speed-up on Inkling-2-Mini without an experimental engine? | [data](e183/) · [pre-registration](e183-prereg.md) · [results](e183-results.md) |
 
 ## Other evidence
 

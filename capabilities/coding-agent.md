@@ -1,8 +1,8 @@
-# Coding agents (r6.3)
+# Coding agents (r6.4)
 
 Fixing and changing real software on its own, checked by each project's tests.
 
-**Against the frontier:** Level with Claude on everyday and medium fixes, much slower; Claude solved all ten large changes, the local model half. ([how it compares](../FRONTIER.md))
+**Against the frontier:** Level on everyday and medium fixes, but much slower; Claude solved all ten large changes, mine half. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

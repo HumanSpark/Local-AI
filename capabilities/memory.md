@@ -1,8 +1,8 @@
-# Memory (r6.3)
+# Memory (r6.4)
 
 Keeping an assistant's notes about a person up to date without inventing or keeping rejected facts.
 
-**Against the frontier:** Not compared with a frontier model yet. ([how it compares](../FRONTIER.md))
+**Against the frontier:** Not compared yet. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

@@ -1,12 +1,28 @@
-# Release Notes - sparkbench-data-r6.3
+# Release Notes - sparkbench-data-r6.4
 
 Data package for the Local AI resource. sparkbench ships evidence, findings, and the claims registry;
 reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-STANDARD.md).
 
-## This release (r6.3)
+## This release (r6.4)
 
-- **Findings:** 204 in FINDINGS.md, newest F204.
+- **Findings:** 205 in FINDINGS.md, newest F205.
 - **Claims:** 64 in claims.yml (26 current, 18 historical, 17 qualified, 3 superseded).
+- **New finding F205** ([E183](results/e183-results.md)): on stock llama.cpp, Inkling's small DSpark helper model makes
+  it about 16% faster at writing short answers when it guesses 3 words ahead (33.5 vs 28.9 tokens a second), with no
+  gain in long conversations; guessing 7 ahead makes it slower. Through AMD Loom or the CIRU runtime the same helper gave
+  2-2.5x (E172, speed records in [results/e172/raw/](results/e172/raw/)), so the big speed-up still needs one of those engines.
+- **The helper file must match the model's layout:** unsloth publishes two layouts of Inkling, and the helper used with
+  Loom does not load in llama.cpp. unsloth's llama.cpp version came out three days later.
+- **Newer llama.cpp is faster:** with the same model file and settings, the 2026-11-26 build writes 7-9% faster than
+  the 2026-11-22 build used in E172.
+- **Frontier page wording:** the capability cells now read correctly under the site's "Compared with the best cloud AI"
+  column.
+
+
+## Earlier releases
+
+### r6.3
+
 - **One plain sentence for every claim** (`claims.json`, `statement_plain`): all 64 claims, written for a business
   reader, with sample size and limits kept.
 - **The cost chart says what each bar covers** (`includes` on each bar).
@@ -20,8 +36,6 @@ reader-facing prose is the owner's and webby renders it (sparkbench docs/REPORT-
   own figures are gone from the engine cards; optional fields with nothing on record are omitted rather than saying
   "not recorded here"; setup roles use plain words.
 
-
-## Earlier releases
 
 ### r6.2
 

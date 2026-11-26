@@ -1,8 +1,8 @@
-# Office tools (r6.3)
+# Office tools (r6.4)
 
 Calling office tools: create a document, send an email, look up a client.
 
-**Against the frontier:** Not compared with a frontier model yet. ([how it compares](../FRONTIER.md))
+**Against the frontier:** Not compared yet. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

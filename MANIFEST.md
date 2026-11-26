@@ -2170,3 +2170,26 @@ logged sha256 is the provenance record).
     model.safetensors.index.json, chat_template.jinja, tokenizer_config.json, special_tokens_map.json,
     processor_config.json, README.md.
 - Fetched with tools/fetch_hf_model.sh; sha256 verified on arrival (results/e181-fetch.log). Not converted or run yet.
+
+## E182 (2026-11-26) - ERNIE 5.5 Flash Preview in HTR format + vllm-htr v0.2.7, entered BEFORE fetch
+
+- **hstolte/ERNIE-5.5-Flash-Preview-HTR @ `6e58e889d4b70f893e1fa1df0d00099da610407e`** (lastModified 2026-11-26T08:19:24Z)
+  -> `/opt/models/staging/ernie55-flash-htr/` (folder layout kept: root 44 shards, `draft/`, `flashindexer/`, `assets/`).
+  67 files, 114,955,419,573 B (107.1 GiB); every path, size and LFS sha256 from the HF API is in `results/e182/ernie-files.json`,
+  verified on arrival (plus the repo's own RELEASE-SHA256SUMS). **VERIFIED 2026-11-26 ~12:40Z:** `results/e182/verify_ernie.py`
+  -> `RESULT bad=0 files=67` (`results/e182/verify.log`; size for all 67, sha256 against API oid + SHA256SUMS for every file that has one). Base: baidu/ERNIE-5.5-Flash-Preview-BF16 @ 50239b9b (280B MoE,
+  14B active, 1M context). Licence: Apache-2.0 (base), HTR toolchain MIT. Format HTR-W1 (K3 routed experts, K5 trunk); loads only in vllm-htr.
+- **Runtime:** `ghcr.io/hawgauto/vllm-htr@sha256:ac7d31a9fcf22da19c412f3d2db2192d163a2e0a06d9a40de7f4697542186e5b` (tag v0.2.7,
+  per the model card), pulled by digest.
+- **Why:** owner 2026-11-26, "please download and test this if you can"; the request is a failure-mode test (loops, tool calling)
+  to feed back into the quantizer's calibration. Load is 107 GiB: over the F193 60 GiB line, so the load needs the owner reachable.
+
+## E183 (2026-11-26) - mainline DSpark draft for Inkling-2-Mini
+
+- **unsloth/Inkling-2-Mini-GGUF @ `8078d149286eec7193795413b9e0643da6d11fa1`** (lastModified 2026-11-23T16:29Z; newer than
+  E172's pin `45fd0876`) -> `/opt/models/staging/inkling-2-mini-unsloth/`
+  - `Mainline_Support/dspark-Inkling-2-Mini-Q8_0.gguf_file` (stored flat) 503,889,952 B, sha256 (HF LFS oid)
+    `3da00cf7c31bbe5662b3c0d373ecf782d74d32ef43990acc158ce60c2add72e0`.
+  - Why: the E172 draft (`dspark-Inkling-2-Mini-Q8_0.gguf`, 402,278,560 B) is now unsloth's `Old_Support` file and has
+    the Loom-layout vocabulary (markov_w1 256 x 201,024); mainline llama.cpp b671865c7 refuses it beside the mainline
+    target (expects 200,058). E183 A3.

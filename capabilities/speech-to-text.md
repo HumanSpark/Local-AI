@@ -1,8 +1,8 @@
-# Speech to text (r6.3)
+# Speech to text (r6.4)
 
 Turning recordings into text.
 
-**Against the frontier:** Not compared with a frontier service yet. ([how it compares](../FRONTIER.md))
+**Against the frontier:** Not compared yet. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

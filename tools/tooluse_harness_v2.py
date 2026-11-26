@@ -285,7 +285,7 @@ def _apply_thinking(payload: dict[str, Any], thinking: str) -> None:
 
 def run_once(base_url: str, task: dict[str, Any], run_dir: Path, max_rounds: int,
              thinking: str = "default", max_tokens: int = 1200,
-             timeout: int = 180) -> dict[str, Any]:
+             timeout: int = 180, sampling: dict[str, Any] | None = None) -> dict[str, Any]:
     messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": task["prompt"]}]
     inject = task.get("inject", {})
     called: list[dict[str, Any]] = []
@@ -298,6 +298,10 @@ def run_once(base_url: str, task: dict[str, Any], run_dir: Path, max_rounds: int
         # would break the like-for-like comparison the benchmark exists for.
         payload = {"model": "x", "messages": messages, "tools": TOOLS,
                    "tool_choice": "auto", "temperature": 0.2, "max_tokens": max_tokens}
+        # E182 (2026-11-26): --sampling-json overrides the fixed 0.2 for sampling-arm experiments ONLY.
+        # Results with it set are not comparable with E33 numbers; the label and output record it.
+        if sampling:
+            payload.update(sampling)
         _apply_thinking(payload, thinking)
         msg = _post(base_url, payload, timeout=timeout)["choices"][0]["message"]
         tcs = msg.get("tool_calls") or []
@@ -418,7 +422,14 @@ def main() -> None:
                     help="comma-separated task ids or categories to run "
                          "(e.g. 'conditional' or 'c2-not-urgent'). Omit to run all. "
                          "A name matching nothing is an error, not a smaller run")
+    ap.add_argument("--sampling-json", default=None,
+                    help="JSON object merged into every request, e.g. '{\"temperature\":1.0,\"top_p\":0.95}'. "
+                         "Omit for the fixed E33 temperature 0.2 (comparable runs)")
     args = ap.parse_args()
+    sampling = json.loads(args.sampling_json) if args.sampling_json else None
+    if sampling is not None and not isinstance(sampling, dict):
+        raise ValueError(f"--sampling-json must be a JSON object, got {type(sampling).__name__}. "
+                         f"hint: wrap it in braces, e.g. '{{\"temperature\":1.0}}'")
 
     tasks = TASKS
     if args.only:
@@ -452,7 +463,7 @@ def main() -> None:
         for _ in range(args.runs):
             try:
                 rec = run_once(args.base_url, task, run_dir, args.max_rounds,
-                               args.thinking, args.max_tokens, timeout)
+                               args.thinking, args.max_tokens, timeout, sampling)
             except RuntimeError as e:
                 print(f"  {task['id']}: RUN ERROR {e}", file=sys.stderr)
                 rec = {"called": [], "json_ok": False, "leaked": False, "final_text": f"ERROR {e}"}
@@ -466,6 +477,7 @@ def main() -> None:
                         "success_rate": rate, "leak_runs": leak_ct, "per_run": per_run})
         out.write_text(json.dumps({"label": args.label, "task_set_version": TASK_SET_VERSION, "runs": args.runs,
                                    "thinking": args.thinking, "max_tokens": args.max_tokens,
+                                   "sampling": sampling,
                                    "request_timeout": timeout, "only": args.only,
                                    "tasks_run": [t["id"] for t in tasks],
                                    "task_set_size": len(TASKS),

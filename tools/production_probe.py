@@ -9,6 +9,10 @@
 #   code   - local_code, writes merge_intervals(); pass = the function passes 6 asserts run in a subprocess
 #   needle - local_smart, ~30K-token synthetic record list (re-seeded EVERY run, retries included, so no prefix cache can serve it); pass =
 #            exact record code returned. This is the prefill measurement.
+#   tmpl_tool / tmpl_twin - E175's gbench chat-template pair (results/e175/cases, Apache-2.0): a prebuilt conversation
+#            whose tool turn carries tracking code QX7R2M, and its plain-text twin. pass = QX7R2M and "delayed" in the
+#            answer and none of production's template control strings (LEAKS, from the served froggeric v22.5 template).
+#            tool FAIL + twin pass = the TEMPLATE dropped the tool result (E175/F200), noted on the tool row.
 # Speed comes from the engine's own `timings` block (decode = predicted_per_second, prefill = prompt_per_second).
 # A probe is FLAGGED when it fails its check or decodes >10% below the median of its last 14 good runs; a flagged
 # probe is retried once after 5 min so a busy client is not reported as a regression. Appends one row per probe to
@@ -16,7 +20,7 @@
 # unit shows failed. Skips (exit 0, row recorded) when the guard is not "serving" - a bench window or vision pause.
 # No alert is SENT: outbound mail is approved for the monthly capability key only.
 #
-# Usage: tools/production_probe.py [--dry-run] [--only prose,code,needle]
+# Usage: tools/production_probe.py [--dry-run] [--only prose,code,needle,tmpl_tool,tmpl_twin]
 from __future__ import annotations
 
 import argparse
@@ -80,6 +84,33 @@ print("PASS")
 """
 
 
+TMPL_CASES = REPO / "results" / "e175" / "cases"
+# Control strings of the SERVED template (/opt/sparkrouter/templates/qwen38-flash-next-froggeric-v22.5.jinja, since
+# 2026-11-13) plus gbench's two plain strings. Any of them in the answer content = a template leak.
+LEAKS = (
+    "<|im_start|>",
+    "<|im_end|>",
+    "<|think_",
+    "<tool_call>",
+    "</tool_call>",
+    "<tool_response>",
+    "</tool_response>",
+    "<tools>",
+    "<function=",
+    "</parameter>",
+    "<think>",
+    "</think>",
+    "tool_call_id",
+)
+
+
+def tmpl_case(name: str) -> dict:
+    """Load one gbench case; a missing or reshaped file is a harness error, never a skipped probe."""
+    case = json.loads((TMPL_CASES / f"{name}.json").read_text())
+    _ = case["conversation"]["messages"], case["golden_truth"]["expected_outputs"]
+    return case
+
+
 def needle_prompt(day: str) -> tuple[str, str]:
     """~30K tokens of records seeded per run: a same-day seed let the prefix cache serve 59,648 of 59,695 tokens (2026-11-08)."""
     rng = random.Random(day)
@@ -115,23 +146,27 @@ def http_json(url: str, body: dict | None, timeout: float) -> dict:
         return json.load(r)
 
 
-def chat(model: str, prompt: str, max_tokens: int) -> tuple[dict, float]:
+def chat(
+    model: str,
+    prompt: str,
+    max_tokens: int,
+    messages: list | None = None,
+    extra: dict | None = None,
+) -> tuple[dict, float]:
     t0 = time.monotonic()
-    r = http_json(
-        f"{GUARD}/v1/chat/completions",
-        {
-            "model": model,
-            "max_tokens": max_tokens,
-            "temperature": 0,
-            # Pinned (2026-11-13): production's default effort became low (sparkrouter halogen_effort.sh, F186/F187),
-            # which shrank the prose answer from ~2,155 to ~450 tokens and its decode rate with it. This probe measures
-            # the ENGINE against baselines recorded at xhigh, so it asks for xhigh explicitly (F39/Rule 8: a benchmark
-            # measures a config - name it).
-            "reasoning_effort": "xhigh",
-            "messages": [{"role": "user", "content": prompt}],
-        },
-        timeout=900,
-    )
+    body = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "temperature": 0,
+        # Pinned (2026-11-13): production's default effort became low (sparkrouter halogen_effort.sh, F186/F187),
+        # which shrank the prose answer from ~2,155 to ~450 tokens and its decode rate with it. This probe measures
+        # the ENGINE against baselines recorded at xhigh, so it asks for xhigh explicitly (F39/Rule 8: a benchmark
+        # measures a config - name it).
+        "reasoning_effort": "xhigh",
+        "messages": messages or [{"role": "user", "content": prompt}],
+    }
+    body.update(extra or {})
+    r = http_json(f"{GUARD}/v1/chat/completions", body, timeout=900)
     return r, time.monotonic() - t0
 
 
@@ -162,6 +197,20 @@ def run_probe(name: str, day: str) -> dict:
         r, wall = chat("local_smart", PROSE, 3000)
     elif name == "code":
         r, wall = chat("local_code", CODE, 4000)
+    elif name in ("tmpl_tool", "tmpl_twin"):
+        case = tmpl_case(
+            "template_tool_response"
+            if name == "tmpl_tool"
+            else "template_tool_response_twin"
+        )
+        extra = {k: case[k] for k in ("tools", "tool_choice") if k in case}
+        r, wall = chat(
+            "local_smart",
+            "",
+            3000,
+            messages=case["conversation"]["messages"],
+            extra=extra,
+        )
     else:
         prompt, expect = needle_prompt(f"{day}-{time.time_ns()}")
         r, wall = chat("local_smart", prompt, 2000)
@@ -179,6 +228,16 @@ def run_probe(name: str, day: str) -> dict:
         )
     elif name == "code":
         ok, note = check_code(content)
+    elif name in ("tmpl_tool", "tmpl_twin"):
+        missing = [w for w in ("QX7R2M", "delayed") if w.lower() not in content.lower()]
+        leaked = [w for w in LEAKS if w in content]
+        called = bool(choice["message"].get("tool_calls"))
+        ok = not missing and not leaked and not called
+        note = (
+            ""
+            if ok
+            else f"missing {missing} leaked {leaked} tool_call={called} finish={choice['finish_reason']}"
+        )
     else:
         ok = expect in content and len(content.strip()) < 40
         note = "" if ok else f"expected {expect}, got {content.strip()[:40]!r}"
@@ -223,8 +282,8 @@ def main() -> int:
     )
     ap.add_argument(
         "--only",
-        default="prose,code,needle",
-        help="comma list of probes (default: all three)",
+        default="prose,code,needle,tmpl_tool,tmpl_twin",
+        help="comma list of probes (default: all five)",
     )
     a = ap.parse_args()
     probes = a.only.split(",")
@@ -289,6 +348,15 @@ def main() -> int:
                 )
             )
 
+    by = {r["probe"]: r for r in rows}
+    if (
+        by.get("tmpl_tool", {}).get("check") == "FAIL"
+        and by.get("tmpl_twin", {}).get("check") == "pass"
+    ):
+        by["tmpl_tool"]["note"] = (
+            "TEMPLATE suspect: twin passed, tool turn lost (E175). "
+            + by["tmpl_tool"]["note"]
+        ).strip()
     if a.dry_run:
         # Bench runners call --dry-run as their "relay restored" gate, so a skip or a failed check must not exit 0
         # (until 2026-11-23 it did, and every runner logged VERIFIED on a 503 skip).

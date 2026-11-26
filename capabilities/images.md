@@ -1,8 +1,8 @@
-# Images (r6.3)
+# Images (r6.4)
 
 Generating and editing pictures from a description.
 
-**Against the frontier:** Not compared with a frontier service yet. ([how it compares](../FRONTIER.md))
+**Against the frontier:** Not compared yet. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

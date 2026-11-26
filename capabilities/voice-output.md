@@ -1,8 +1,8 @@
-# Voice output (r6.3)
+# Voice output (r6.4)
 
 Reading text aloud in a natural voice (narration).
 
-**Against the frontier:** Not compared with a frontier service yet. ([how it compares](../FRONTIER.md))
+**Against the frontier:** Not compared yet. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 

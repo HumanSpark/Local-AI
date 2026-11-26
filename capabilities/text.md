@@ -1,8 +1,8 @@
-# Text and reasoning (r6.3)
+# Text and reasoning (r6.4)
 
 Answering questions, summarising and pulling facts from documents, everyday writing.
 
-**Against the frontier:** Level with Anthropic's models on routine document work; clearly behind on client drafting. ([how it compares](../FRONTIER.md))
+**Against the frontier:** Level on routine document work; clearly behind on client drafting. ([how it compares](../FRONTIER.md))
 
 ## What works best now
 
@@ -44,6 +44,7 @@ Answering questions, summarising and pulling facts from documents, everyday writ
 | Can the knowledge-work tests still separate strong models? (E135) | 2026-09-11 | informational | No: three models across a 40x price range scored within one item. | [results/e135-results.md](../results/e135-results.md) |
 | How long a document the box can handle interactively (E30) | 2026-07-11 | informational | Accuracy held past 80K tokens; first-answer time was the limit on the July engine. | [experiments/E30.md](../experiments/E30.md) |
 | Energy cost per million tokens (E12) | 2026-07-04 | informational | About EUR 0.09 per million tokens generated, single user, at the July tariff. | [experiments/E12.md](../experiments/E12.md) |
+| Inkling's DSpark helper on plain llama.cpp (E183) | 2026-11-26 | not adopted | About 16% faster short answers with 3 draft words, no gain in long conversations, slower with 7; Loom and CIRU gave 2-2.5x. | [results/e183-results.md](../results/e183-results.md) |
 | Ling-3.2-air on the box (E176) | 2026-11-24 | did not work | Writes 37% faster than production's model on llama.cpp, but solved 1 of 15 everyday fixes and 0 of 10 large changes; thinking off made it loop. | [results/e176-results.md](../results/e176-results.md) |
 | Production's model on the HTR engine (E177) | 2026-11-24 | not adopted | 6/10 against Halogen's 5/10 on large changes, but slower; kept as a fallback. | [results/e177-results.md](../results/e177-results.md) |
 | An 8-bit conversation memory on llama.cpp (E174) | 2026-11-23 | not adopted | Never helped production's model: up to 10% slower. | [results/e174-results.md](../results/e174-results.md) |

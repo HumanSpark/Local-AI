@@ -20,7 +20,7 @@
 
 ## Findings index
 
-204 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
+205 findings, oldest first. Each links to its section below. Kind, date, experiment and status are copied from the finding itself; a blank cell means the finding does not state it.
 
 **By kind** (each finding's own tag):
 
@@ -29,9 +29,9 @@
 - **MODEL (51):** [F19](#f19) [F30](#f30) [F32](#f32) [F35](#f35) [F36](#f36) [F37](#f37) [F37](#f37-2) [F38](#f38) [F44](#f44) [F45](#f45) [F46](#f46) [F50](#f50) [F52](#f52) [F54](#f54) [F55](#f55) [F56](#f56) [F67](#f67) [F69](#f69) [F71](#f71) [F74](#f74) [F77](#f77) [F80](#f80) [F81](#f81) [F82](#f82) [F83](#f83) [F89](#f89) [F92](#f92) [F93](#f93) [F94](#f94) [F102](#f102) [F114](#f114) [F115](#f115) [F116](#f116) [F119](#f119) [F122](#f122) [F130](#f130) [F140](#f140) [F141](#f141) [F143](#f143) [F144](#f144) [F146](#f146) [F148](#f148) [F149](#f149) [F157](#f157) [F159](#f159) [F161](#f161) [F162](#f162) [F163](#f163) [F164](#f164) [F167](#f167) [F173](#f173)
 - **CAPABILITY (13):** [F181](#f181) [F183](#f183) [F185](#f185) [F186](#f186) [F187](#f187) [F194](#f194) [F195](#f195) [F196](#f196) [F197](#f197) [F201](#f201) [F202](#f202) [F203](#f203) [F204](#f204)
 - **QUALITY (2):** [F189](#f189) [F191](#f191)
+- **SPEED (2):** [F188](#f188) [F205](#f205)
 - **INSTRUMENT (1):** [F192](#f192)
 - **PERFORMANCE (1):** [F199](#f199)
-- **SPEED (1):** [F188](#f188)
 - **STABILITY (1):** [F198](#f198)
 
 | Finding | Title | Kind | Date | Experiment | Status |
@@ -243,6 +243,7 @@
 | [F202](#f202) | Flash-Next compressed with HTR (Halo Trellis) keeps production's coding quality but is slower than Halogen | CAPABILITY | 2026-11-24 | E177 | ESTABLISHED |
 | [F203](#f203) | Ling-3.2-air writes fast here but solves none of the hard coding fixes | CAPABILITY | 2026-11-24 | E176 | ESTABLISHED |
 | [F204](#f204) | Anthropic's models solve all ten large coding changes that production solves half of | CAPABILITY | 2026-11-25 | E178 | ESTABLISHED |
+| [F205](#f205) | On stock llama.cpp, the DSpark helper speeds Inkling up 16%, not 2-2.5x | SPEED | 2026-11-26 | E183 | ESTABLISHED |
 
 ## How to read this register: the `Kind:` line
 
@@ -9483,3 +9484,28 @@ harness loop, no 3,600s cut-off, host execution, ten runs per model in parallel.
 frontier page gets an Anthropic row. Opens improvement-bank entry 1 (production's model under a stronger agent setup).
 
 **Evidence.** `results/e178-results.md`, `results/e178/raw/`.
+
+<a id="f205"></a>
+
+## F205 - On stock llama.cpp, the DSpark helper speeds Inkling up 16%, not 2-2.5x
+
+[Back to index](#findings-index)
+
+**Date:** 2026-11-26 | **Experiment:** E183 | **Status:** ESTABLISHED on one prompt set, two draft lengths
+
+**Kind: SPEED**
+
+**Plain English.** Inkling's small DSpark helper model makes it about 16% faster at writing short answers on plain
+llama.cpp when it guesses 3 words ahead, with no gain in long conversations; guessing 7 ahead makes it slower. Through
+AMD Loom or the CIRU runtime the same helper gave 2-2.5x (E172). The helper file must match the main model's layout:
+the one used with Loom does not load in llama.cpp, and unsloth published a llama.cpp version later.
+
+**Claim.** llama.cpp b671865c7 Vulkan, unsloth Mainline_Support UD-Q4_K_XL + mainline DSpark Q8_0, `-c 65536 -np 1`,
+e163_speed ruler, thinking off: decode D1500 no draft 28.86, DSpark n-max 3 33.51 (1.16x, acceptance 49%), n-max 7
+24.35 (0.84x, 28%); P32K 24.23 / ~24.5 / 20.09. Prefill unchanged within 6%. No-draft decode is 7-9% faster than
+E172's llama.cpp arm on build 94f3af3d0 (same file and flags).
+
+**What it changes.** DSpark's large speed-up on this box still needs Loom or CIRU. Inkling on llama.cpp, if ever
+served: 3 draft tokens. The E172 draft (Loom layout, now unsloth `Old_Support`) is not usable on mainline.
+
+**Evidence.** `results/e183-results.md`, `results/e183/raw/`, prereg amendments A1-A3.

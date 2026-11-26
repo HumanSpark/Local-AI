@@ -32,7 +32,7 @@ evidence, and are withheld from the public package by the owner's decision.
 | docs/plans/2026-08-28-inference-architecture-slice-1.md | experiments.md |
 | docs/plans/2026-09-06-serving-reasoning-effort-proposal.md | experiments.md |
 
-## Files git does not track (6)
+## Files git does not track (7)
 
 Regenerable outputs, mostly verbose llama-server logs (hundreds of MB each), which the source
 repository keeps out of git. The experiment's own results files, which the findings quote,
@@ -40,6 +40,7 @@ are shipped.
 
 | Path | Cited by |
 |---|---|
+| results/e183/build.log | results/e183-prereg.md |
 | results/raw/e113/worktrees/T3-multifile-optional-dep-aider.log | FINDINGS.md |
 | results/raw/e146/M1/server.serverlog | FINDINGS.md |
 | results/raw/e148/M3p/server.serverlog | results/e148-results.md |

@@ -99,6 +99,7 @@ Every file in this folder with its own one-line description (a document's title,
 | [run_e176.sh](run_e176.sh) | Run E176 end to end - verify the Ling-3.2-air shards, speed leg, then the E167 bank as arm LG. |
 | [run_e176_speed.sh](run_e176_speed.sh) | E176 speed leg - llama-bench on Ling-3.2-air Q3_K_M at depths 0/8192/32768 on two llama.cpp builds. |
 | [run_e179_htr025.sh](run_e179_htr025.sh) | E179 speed leg - E177 speed leg unchanged except the HTR image (v0.2.5). |
+| [run_e183_dspark.sh](run_e183_dspark.sh) | E183 - Inkling-2-Mini UD-Q4_K_XL on stock llama.cpp b671865c7, no draft vs DSpark draft (3 and 7 tokens). |
 | [run_eval_pilot.sh](run_eval_pilot.sh) | Run the eval-pilot promptfoo suite against each model via a managed llama-server lifecycle. |
 | [run_finetune_eval.sh](run_finetune_eval.sh) | Phase 3 - eval the house-style fine-tuned Mistral-24B on the held-out 10 tasks vs the SAME base at the SAME quant (Q8, so only the LoRA differs, not quant), frontier-judged. The F37 verdict: does the on-box fine-tune move usability off ~3.0? |
 | [run_h6_date_arm.py](run_h6_date_arm.py) | the H6 arm - run a graded question set with and without a deterministic date tool, and account for BOTH directions. |

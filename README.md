@@ -19,7 +19,7 @@ voice, images, music, coding) and for engines: [capabilities/](capabilities/READ
 > [!NOTE]
 > **The machine:** GMKtec EVO-X2 · AMD Ryzen AI Max+ 395 with Radeon 8060S · 128 GB
 > unified memory (about 105 GB usable by the graphics) · 81-87 W while generating
-> ([F180](FINDINGS.md#f180)) · measured July to 25 November 2026.
+> ([F180](FINDINGS.md#f180)) · measured July to 26 November 2026.
 
 ### What production runs now
 
@@ -43,9 +43,9 @@ model, or have a person check them.
 [How it compares with frontier models](FRONTIER.md) · [What works best for each job](capabilities/README.md) ·
 [What changed in each release](RELEASE-NOTES.md)
 
-## Current release: r6.3 (findings through 25 November 2026)
+## Current release: r6.4 (findings through 26 November 2026)
 
-r6.3 gives every claim one plain sentence, labels what each bar on the cost chart covers, restates the memory limits (models using up to about 113 GB have loaded and run on a clean box; the freezes needed a trigger), and makes the engine wording plainer. No measured result changed.
+r6.4 adds one speed finding: on plain llama.cpp, Inkling's DSpark helper gives about 16% faster short answers, not the 2-2.5x it gives through AMD Loom or the CIRU runtime ([E183](results/e183-results.md), [F205](FINDINGS.md#f205)). No earlier result changed.
 
 - **Every claim carries a status and dates.** 26 current, 17 qualified, 18 historical and 3 superseded; [claims.md](claims.md) lists each, and [GLOSSARY.md](GLOSSARY.md#claim-status) explains the terms.
 - **Not everything is here.** Verbose server logs, internal design documents and files with private content are withheld, among them the per-task records of the coding tests, which quote private repositories. [WITHHELD.md](WITHHELD.md) lists each with the reason.
